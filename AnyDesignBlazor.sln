@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnyDesignBlazor.Components.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentBuilder", "..\ComponentBuilder\src\ComponentBuilder\ComponentBuilder.csproj", "{502AEE4D-9D07-4C22-98AA-74E3C8F1DDE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyDesignBlazor.Components.TDesign.Docs.Shared", "src\AnyDesignBlazor.Components.TDesign.Docs.Shared\AnyDesignBlazor.Components.TDesign.Docs.Shared.csproj", "{A94CCEF2-D6FD-4FDA-84E0-F535DE530CA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnyDesignBlazor.Components.TDesign.Docs.Shared", "src\AnyDesignBlazor.Components.TDesign.Docs.Shared\AnyDesignBlazor.Components.TDesign.Docs.Shared.csproj", "{A94CCEF2-D6FD-4FDA-84E0-F535DE530CA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnyDesignBlazor.Components.TDesign.Docs.ServerSide", "src\AnyDesignBlazor.Components.TDesign.Docs.ServerSide\AnyDesignBlazor.Components.TDesign.Docs.ServerSide.csproj", "{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnyDesignBlazor.Components.TDesign.Docs.ServerSide", "src\AnyDesignBlazor.Components.TDesign.Docs.ServerSide\AnyDesignBlazor.Components.TDesign.Docs.ServerSide.csproj", "{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

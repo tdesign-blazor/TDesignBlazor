@@ -1,5 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
-<NavMenu/>
-
-@Body
+<Layout>
+    <HeaderContent>
+        <NavMenu/>
+    </HeaderContent>
+    <LeftSideContent>
+        左侧边栏
+    </LeftSideContent>
+    <ChildContent>
+        @Body
+    </ChildContent>
+    <FooterContent>
+        底部
+    </FooterContent>
+</Layout>

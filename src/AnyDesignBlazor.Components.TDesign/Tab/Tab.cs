@@ -1,4 +1,6 @@
-﻿using ComponentBuilder;
+﻿using AnyDesignBlazor.Components.TDesign.Enum;
+
+using ComponentBuilder;
 using ComponentBuilder.Parameters;
 
 using Microsoft.AspNetCore.Components;
