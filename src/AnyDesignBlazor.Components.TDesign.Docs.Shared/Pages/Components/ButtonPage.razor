@@ -1,6 +1,24 @@
 ﻿@page "/components/button"
 
+<PageHeader Title="Button 按钮">
+    按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。
+</PageHeader>
+
+<Example Title="示例">
+    <RunContent>
 <Button>普通按钮</Button>
 <Button Variant="ButtonVariant.Outline">边框按钮</Button>
 <Button Variant="ButtonVariant.Dashed">虚框按钮</Button>
 <Button Variant="ButtonVariant.Text">文本按钮</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button>普通按钮</Button>
+<Button Variant=""ButtonVariant.Outline"">边框按钮</Button>
+<Button Variant=""ButtonVariant.Dashed"">虚框按钮</Button>
+<Button Variant=""ButtonVariant.Text"">文本按钮</Button>
+```
+")
+    </CodeContent>
+</Example>

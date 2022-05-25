@@ -13,6 +13,7 @@ public class Menu : BlazorComponentBase, IHasChildContent
 
     [Parameter] public RenderFragment? LogoContent { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? OperationContent { get; set; }
 
     protected override void OnParametersSet()
     {
@@ -38,6 +39,7 @@ public class Menu : BlazorComponentBase, IHasChildContent
                                 .Append("t-menu--scroll narrow-scrollbar", Type == MenuType.Aside)
             });
 
+            builder.CreateElement(2, "div", OperationContent, new { @class = "t-menu__operations" });
         },
         new
         {

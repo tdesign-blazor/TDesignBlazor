@@ -1,0 +1,11 @@
+﻿<h1>@Title</h1>
+@if(ChildContent is not null)
+{
+    <small>@ChildContent</small>
+}
+<Divider/>
+
+@code {
+    [Parameter]public string Title{ get; set; }
+    [Parameter]public RenderFragment ChildContent{ get; set; }
+}

@@ -17,7 +17,6 @@ public class MenuItem : AnchorComponentBase, IHasDisabled
     [Parameter] public string? Link { get; set; }
 
     internal bool CanNavigationChanged { get; set; } = true;
-    internal bool HasActived => IsActive;
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

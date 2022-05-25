@@ -2,13 +2,20 @@
 
 <Layout>
     <HeaderContent>
-        <NavMenu/>
+        <Menu>
+            <LogoContent>Logo</LogoContent>
+            <OperationContent>
+                <a href="/">主页</a>
+            </OperationContent>
+        </Menu>
     </HeaderContent>
     <LeftSideContent>
-        左侧边栏
+        <NavMenu/>
     </LeftSideContent>
     <ChildContent>
+        <div style="padding:24px;background:#fff">
         @Body
+        </div>
     </ChildContent>
     <FooterContent>
         底部
