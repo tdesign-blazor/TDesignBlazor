@@ -7,17 +7,172 @@
 <Example Title="示例">
     <RunContent>
 <Button>普通按钮</Button>
-<Button Variant="ButtonVariant.Outline">边框按钮</Button>
-<Button Variant="ButtonVariant.Dashed">虚框按钮</Button>
-<Button Variant="ButtonVariant.Text">文本按钮</Button>
+<Button Type="ButtonType.Outline">边框按钮</Button>
+<Button Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Type="ButtonType.Text">文本按钮</Button>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 <Button>普通按钮</Button>
-<Button Variant=""ButtonVariant.Outline"">边框按钮</Button>
-<Button Variant=""ButtonVariant.Dashed"">虚框按钮</Button>
-<Button Variant=""ButtonVariant.Text"">文本按钮</Button>
+<Button Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Type=""ButtonType.Text"">文本按钮</Button>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="幽灵按钮">
+    <Description>
+        幽灵按钮将按钮的内容反色，背景变为透明，一般是底色透明。常用于有色背景上，例如 banner 图等。
+    </Description>
+    <RunContent>
+        <div style="background:#000;padding:50px;">
+<Button Type="ButtonType.Outline" Ghost>边框按钮</Button>
+<Button Type="ButtonType.Dashed" Ghost>虚框按钮</Button>
+<Button Type="ButtonType.Text" Ghost>文本按钮</Button>
+</div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button Type=""ButtonType.Outline"" Ghost>边框按钮</Button>
+<Button Type=""ButtonType.Dashed"" Ghost>虚框按钮</Button>
+<Button Type=""ButtonType.Text"" Ghost>文本按钮</Button>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="Block 按钮">
+    <Description>
+        幽灵按钮将按钮的内容反色，背景变为透明，一般是底色透明。常用于有色背景上，例如 banner 图等。
+    </Description>
+    <RunContent>
+        <div style="margin:0 auto; width:30%">
+        <Button Block>普通按钮</Button>
+        <br />
+<Button Type="ButtonType.Outline" Block>边框按钮</Button>
+<br />
+<Button Type="ButtonType.Dashed" Block>虚框按钮</Button>
+<br />
+<Button Type="ButtonType.Text" Block>文本按钮</Button>
+</div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button Block>普通按钮</Button>
+<Button Type=""ButtonType.Outline"" Block>边框按钮</Button>
+<Button Type=""ButtonType.Dashed"" Block>虚框按钮</Button>
+<Button Type=""ButtonType.Text"" Block>文本按钮</Button>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同颜色主题按钮">
+    <Description>提供浅灰色、蓝色、红色、黄色和绿色为主题的按钮。</Description>
+    <RunContent>        
+<Button Theme="Theme.Primary">普通按钮</Button>
+<Button Theme="Theme.Primary" Type="ButtonType.Outline">边框按钮</Button>
+<Button Theme="Theme.Primary" Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Theme="Theme.Primary" Type="ButtonType.Text">文本按钮</Button>
+<br />
+<Button Theme="Theme.Success">普通按钮</Button>
+<Button Theme="Theme.Success" Type="ButtonType.Outline">边框按钮</Button>
+<Button Theme="Theme.Success" Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Theme="Theme.Success" Type="ButtonType.Text">文本按钮</Button>
+<br />
+
+<Button Theme="Theme.Warning">普通按钮</Button>
+<Button Theme="Theme.Warning" Type="ButtonType.Outline">边框按钮</Button>
+<Button Theme="Theme.Warning" Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Theme="Theme.Warning" Type="ButtonType.Text">文本按钮</Button>
+<br />
+
+<Button Theme="Theme.Danger">普通按钮</Button>
+<Button Theme="Theme.Danger" Type="ButtonType.Outline">边框按钮</Button>
+<Button Theme="Theme.Danger" Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Theme="Theme.Danger" Type="ButtonType.Text">文本按钮</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button Theme=""Theme.Primary"">普通按钮</Button>
+<Button Theme=""Theme.Primary"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Theme=""Theme.Primary"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Theme=""Theme.Primary"" Type=""ButtonType.Text"">文本按钮</Button>
+<br />
+<Button Theme=""Theme.Success"">普通按钮</Button>
+<Button Theme=""Theme.Success"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Theme=""Theme.Success"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Theme=""Theme.Success"" Type=""ButtonType.Text"">文本按钮</Button>
+<br />
+
+<Button Theme=""Theme.Warning"">普通按钮</Button>
+<Button Theme=""Theme.Warning"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Theme=""Theme.Warning"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Theme=""Theme.Warning"" Type=""ButtonType.Text"">文本按钮</Button>
+<br />
+
+<Button Theme=""Theme.Danger"">普通按钮</Button>
+<Button Theme=""Theme.Danger"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Theme=""Theme.Danger"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Theme=""Theme.Danger"" Type=""ButtonType.Text"">文本按钮</Button>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="不同状态的按钮">
+    <Description>
+        提供加载、禁用两种状态。
+    </Description>
+    <RunContent>
+        <Button Loading>加载中...</Button>
+        <Button Disabled>禁止状态</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button Loading>加载中...</Button>
+<Button Disabled>禁止状态</Button>
+``` 
+")
+    </CodeContent>
+</Example>
+<Example Title="不同尺寸的按钮">
+    <Description>提供大、中（默认）、小三种尺寸。</Description>
+    <RunContent>
+        <Button Size="Size.Large">大按钮</Button>
+        <Button Size="Size.Medium">中按钮</Button>
+        <Button Size="Size.Small">小按钮</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button Size=""Size.Large"">大按钮</Button>
+<Button Size=""Size.Medium"">中按钮</Button>
+<Button Size=""Size.Small"">小按钮</Button>
+```
+")
+    </CodeContent>
+</Example>
+不同形状的按钮
+<Example Title="不同形状的按钮">
+    <Description>提供长方形、正方形、圆角长方形、圆形四种形状。</Description>
+    <RunContent>
+        <Button>长方形</Button>
+        <Button Shape="ButtonShape.Squre">方形</Button>
+        <Button Shape="ButtonShape.Circle">圆形</Button>
+        <Button Shape="ButtonShape.Round">椭圆</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button>长方形</Button>
+<Button Shape=""ButtonShape.Squre"">方形</Button>
+<Button Shape=""ButtonShape.Circle"">圆形</Button>
+<Button Shape=""ButtonShape.Round"">椭圆</Button>
 ```
 ")
     </CodeContent>

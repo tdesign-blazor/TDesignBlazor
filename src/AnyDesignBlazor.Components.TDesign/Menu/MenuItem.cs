@@ -7,7 +7,7 @@ namespace AnyDesignBlazor.Components.TDesign;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(SubMenu), Optional = true)]
 [ChildComponent(typeof(Menu))]
-public class MenuItem : AnchorComponentBase, IHasDisabled
+public class MenuItem : BlazorAnchorComponentBase, IHasDisabled
 {
     [CascadingParameter] public Menu CascadingMenu { get; set; }
     [CascadingParameter] public SubMenu? CascadingSubMenu { get; set; }
