@@ -11,15 +11,24 @@ namespace AnyDesignBlazor.Components.TDesign;
 [CssClass("t-divider")]
 public class Divider : BlazorComponentBase, IHasChildContent
 {
+    /// <summary>
+    /// 分割线的文本。
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    [Parameter][CssClass("t-divider--")] public Orientation Orientation { get; set; } = Orientation.Horizontal;
+    /// <summary>
+    /// 垂直分割线。
+    /// </summary>
+    [Parameter][CssClass("t-divider--vertical")] public bool Vertical { get; set; }
 
     /// <summary>
     /// 是否为虚线。
     /// </summary>
     [Parameter][CssClass("t-divider-dashed")] public bool Dashed { get; set; }
 
+    /// <summary>
+    /// 文字对齐方式。
+    /// </summary>
     [Parameter][CssClass("t-divider--with-text-")] public HorizontalAlignment Alignment { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
