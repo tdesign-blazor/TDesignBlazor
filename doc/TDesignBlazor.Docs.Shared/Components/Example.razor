@@ -1,0 +1,23 @@
+﻿
+<div>
+    <h2>@Title</h2>
+    @if (Description is not null)
+    {
+        <small>@Description</small>
+    }
+
+    <Tab Position="TDesignBlazor.Position.Top" >
+        <TabItem Title="效果">
+            @RunContent
+        </TabItem>
+        <TabItem Title="代码">
+            @CodeContent
+        </TabItem>
+    </Tab>
+</div>
+@code {
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment Description { get; set; }
+    [Parameter] public RenderFragment CodeContent { get; set; }
+    [Parameter] public RenderFragment RunContent { get; set; }
+}
