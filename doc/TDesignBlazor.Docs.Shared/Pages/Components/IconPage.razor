@@ -1,5 +1,32 @@
 ﻿@page "/components/icon"
 
-<h1>Icon 图标</h1>
+<PageHeader Title="Icon 图标">
+    Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。
+</PageHeader>
 
-<Icon Name="add-circle"/>
+<h2>手动引入图标的样式</h2>
+@Code.Create(@"
+```html
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-icons.css"" />
+```
+")
+
+<Example Title="使用图标">
+    <Description></Description>
+    <RunContent>
+        <Icon Name="IconName.CheckCircleFilled" Size="12px" />
+        <Icon Name="IconName.CheckCircleFilled" />
+        <Icon Name="IconName.CheckCircleFilled" Size="2.5rem"/>
+        <br />
+        <Icon Name="IconName.Loading"/>
+        <Icon Name="IconName.Loading" Color="red" Size="22px"/>
+        <Icon Name="IconName.Loading" Color="#00ff00" Size="34px"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Icon Name=""IconName.CheckCircleFilled""/>
+```
+")
+    </CodeContent>
+</Example>

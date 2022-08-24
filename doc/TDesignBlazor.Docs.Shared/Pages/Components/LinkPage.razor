@@ -46,6 +46,42 @@
 ")
     </CodeContent>
 </Example>
+<Example Title="带图标的链接">
+    <Description>最简单的文字链接形式，点击后直接跳转到对应链接。</Description>
+    <RunContent>
+        <Link><Icon Name="IconName.Edit"/> 跳转链接</Link>
+        <Link Theme="Theme.Primary"><Icon Name="IconName.Edit" /> 跳转链接</Link>
+        <Link Theme="Theme.Warning"><Icon Name="IconName.Edit"/> 跳转链接</Link>
+        <Link Theme="Theme.Success">跳转链接 <Icon Name="IconName.Home" /></Link>
+        <Link Theme="Theme.Danger">跳转链接 <Icon Name="IconName.Gift" /></Link>
+        <br />
+
+        <Link Underline><Icon Name="IconName.Edit" /> 跳转链接</Link>
+        <Link Underline Theme="Theme.Primary"><Icon Name="IconName.Edit" /> 跳转链接</Link>
+        <Link Underline Theme="Theme.Warning"><Icon Name="IconName.Edit" /> 跳转链接</Link>
+        <Link Underline Theme="Theme.Success">跳转链接 <Icon Name="IconName.Home" /></Link>
+        <Link Underline Theme="Theme.Danger">跳转链接 <Icon Name="IconName.Gift" /></Link>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Link><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Theme=""Theme.Primary""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Theme=""Theme.Warning""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Theme=""Theme.Success"">跳转链接 <Icon Name=""IconName.Home"" /></Link>
+<Link Theme=""Theme.Danger"">跳转链接 <Icon Name=""IconName.Gift"" /></Link>
+
+<br />
+
+<Link Underline><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Underline Theme=""Theme.Primary""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Underline Theme=""Theme.Warning""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
+<Link Underline Theme=""Theme.Success"">跳转链接 <Icon Name=""IconName.Home"" /></Link>
+<Link Underline Theme=""Theme.Danger"">跳转链接 <Icon Name=""IconName.Gift"" /></Link>
+```
+")
+    </CodeContent>
+</Example>
 <Example Title="链接悬浮态样式的链接">
     <Description>悬浮状态包含 2 种状态：文本颜色变化 和 添加下划线。</Description>
     <RunContent>
