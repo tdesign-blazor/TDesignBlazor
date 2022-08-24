@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesignBlazor.Components;
 /// <summary>
 /// 选项卡的项。
 /// </summary>

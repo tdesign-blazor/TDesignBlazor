@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesignBlazor.Components;
 [CssClass("t-submenu")]
 [HtmlTag("li")]
 [ParentComponent]
@@ -9,7 +9,8 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 {
     [CascadingParameter] public Menu CascadingValue { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public RenderFragment ToggleContent { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public object? Icon { get; set; }
 
     internal bool IsOpened { get; set; }
 
@@ -52,7 +53,15 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 
         BuildCallbackAttributes(callbackAttributes);
 
-        builder.CreateElement(sequence, "div", ToggleContent, callbackAttributes);
+        builder.CreateElement(sequence, "div", content =>
+        {
+            content.CreateComponent<MenuItem>(0, Title, new
+            {
+                IconPrefix = Icon,
+                IconSuffix = IsOpened ? IconName.ChevronUp : IconName.ChevronDown,
+            });
+
+        }, callbackAttributes);
 
 
         Dictionary<string, object> htmlAttributes = new()

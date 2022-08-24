@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using TDesignBlazor.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesignBlazor.Components;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(SubMenu), Optional = true)]
 [ChildComponent(typeof(Menu))]
@@ -12,6 +13,10 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled
 
     [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
     [Parameter] public string? Link { get; set; }
+
+    [Parameter] public object? IconPrefix { get; set; }
+    [Parameter] public object? IconSuffix { get; set; }
+
 
     internal bool CanNavigationChanged { get; set; } = true;
 
@@ -34,7 +39,17 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
+        if (IconPrefix is not null)
+        {
+            builder.CreateComponent<Icon>(sequence, attributes: new { Name = IconPrefix });
+        }
+
         builder.CreateElement(sequence, "span", ChildContent, new { @class = "t-menu__content" });
+
+        if (IconSuffix is not null)
+        {
+            builder.CreateComponent<Icon>(sequence, attributes: new { Name = IconSuffix });
+        }
     }
 
     protected override void BuildAttributes(IDictionary<string, object> attributes)

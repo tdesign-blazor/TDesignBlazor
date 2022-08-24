@@ -1,32 +1,20 @@
 ﻿
 <Menu Type="MenuType.Aside" ExpandType="MenuExpandType.Default">
         <MenuItem Link="/">主页</MenuItem>
-        <SubMenu>
-            <ToggleContent>
-                <MenuItem>基础</MenuItem>
-            </ToggleContent>
-            <ChildContent>
+        <SubMenu Title="基础">
                 <MenuItem Link="/components/button">Button 按钮</MenuItem>
             <MenuItem Link="/components/link">Link 链接</MenuItem>
-            <MenuItem Link="/components/icon">Icon 图标</MenuItem>
-            </ChildContent>
+            <MenuItem Link="/components/icon">Icon 图标</MenuItem>            
     </SubMenu>
-    <SubMenu>
-        <ToggleContent>
-            <MenuItem>布局</MenuItem>
-        </ToggleContent>
-        <ChildContent>
+    <SubMenu Title="布局">
             <MenuItem Link="/components/divider">Divider 分割线</MenuItem>
             <MenuItem Link="/components/grid">Grid 栅格</MenuItem>
-        </ChildContent>
+            <MenuItem Link="/components/layout">Layout 布局</MenuItem>
+            <MenuItem Link="/components/space">Space 间距</MenuItem>
     </SubMenu>
-    <SubMenu>
-        <ToggleContent>
-            <MenuItem>导航</MenuItem>
-        </ToggleContent>
-        <ChildContent>
+    <SubMenu Title="导航">
             <MenuItem Link="/components/tab">Tab 选项卡</MenuItem>
-        </ChildContent>
+        
     </SubMenu>
 </Menu>
 
