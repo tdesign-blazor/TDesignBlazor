@@ -22,9 +22,9 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
     /// </summary>
     [Parameter] public Position Position { get; set; } = Position.Top;
     /// <summary>
-    /// 选项卡风格。
+    /// 卡片模式。
     /// </summary>
-    [Parameter][CssClass("t-tabs__nav--")] public TabTheme? Theme { get; set; }
+    [Parameter] public bool Card { get; set; }
     /// <summary>
     /// 选项卡的尺寸。
     /// </summary>
@@ -71,7 +71,7 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
             {
                 @class = HtmlHelper.CreateCssBuilder()
                             .Append("t-tabs__nav-container")
-                            .Append(Theme?.GetCssClass(), Theme.HasValue)
+                            .Append(CardCss, Card)
                             .Append(Position.GetCssClass("t-is-"))
             });
 
@@ -105,7 +105,7 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
     {
         for (int i = 0; i < ChildComponents.Count; i++)
         {
-            var tabItem = ChildComponents[i] as TabItem;
+            var tabItem = (TabItem)ChildComponents[i];
             var index = i;
             if (i == SwitchIndex)
             {
@@ -114,9 +114,9 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                     @class = HtmlHelper.CreateCssBuilder()
                                     .Append("t-tabs__bar")
                                     .Append(Position.GetCssClass("t-is-")),
-                    style = HtmlHelper.CreateStyleBuilder()
-                                    .Append("left:0px")
-                                    .Append($"{tabItem?.Width}px", tabItem.Width.HasValue)
+                    //style = HtmlHelper.CreateStyleBuilder()
+                    //                .Append($"left:{tabItem.Width * SwitchIndex}px")
+                    //                .Append($"width:{tabItem?.Width}px", tabItem!.Width.HasValue)
                 });
             }
             builder.CreateElement(index + 1, "div", content =>
@@ -125,7 +125,8 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                 {
                     wrapper.CreateElement(0, "span", title =>
                     {
-                        title.AddContent(0, tabItem.Title);
+                        title.CreateComponent<Icon>(0, attributes: new { Name = tabItem.Icon, style = "margin-right:4px" }, condition: tabItem!.Icon is not null);
+                        title.AddContent(0, tabItem!.Title);
                     }, new { @class = "t-tabs__nav-item-text-wrapper" });
                 }, new
                 {
@@ -137,9 +138,17 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
             {
                 @class = HtmlHelper.CreateCssBuilder()
                                 .Append("t-tabs__nav-item")
+                                .Append(CardCss, Card)
                                 .Append(GetActiveCss(index))
+                                .Append("t-is-disabled", tabItem!.Disabled)
                                 .Append(Size.GetCssClass("t-size-")),
-                onclick = HtmlHelper.CreateCallback(this, () => this.SwitchTo(index))
+                onclick = HtmlHelper.CreateCallback(this, () =>
+                {
+                    if (!tabItem!.Disabled)
+                    {
+                        this.SwitchTo(index);
+                    }
+                })
             }, appendFunc: (b, s) =>
             {
                 b.SetKey(index);
@@ -151,16 +160,8 @@ public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
     string GetLeftOrRightString(bool leftOrRight) => leftOrRight ? "left" : "right";
 
     string GetActiveCss(int index) => index == SwitchIndex ? "t-is-active" : string.Empty;
-}
-/// <summary>
-/// 选项卡的风格。
-/// </summary>
-public enum TabTheme
-{
-    /// <summary>
-    /// 卡片模式。
-    /// </summary>
-    Card
+
+    string CardCss => "t-tabs__nav--card";
 }
 /// <summary>
 /// 选项卡尺寸。
