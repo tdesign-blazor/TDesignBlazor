@@ -7,18 +7,32 @@ namespace TDesignBlazor;
 /// </summary>
 [ParentComponent]
 [CssClass("t-tabs")]
-public class Tab : BlazorComponentBase, IHasChildContent, IHasOnSwitch
+public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
 {
     public Tab()
     {
         SwitchIndex = 0;
     }
-
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    /// <summary>
+    /// 选项卡标题呈现的位置。
+    /// </summary>
     [Parameter] public Position Position { get; set; } = Position.Top;
+    /// <summary>
+    /// 选项卡风格。
+    /// </summary>
     [Parameter][CssClass("t-tabs__nav--")] public TabTheme? Theme { get; set; }
+    /// <summary>
+    /// 选项卡的尺寸。
+    /// </summary>
     [Parameter] public TabSize Size { get; set; } = TabSize.Medium;
-    public EventCallback<int?> OnSwitch { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [Parameter] public EventCallback<int?> OnSwitch { get; set; }
     public int? SwitchIndex { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -138,13 +152,27 @@ public class Tab : BlazorComponentBase, IHasChildContent, IHasOnSwitch
 
     string GetActiveCss(int index) => index == SwitchIndex ? "t-is-active" : string.Empty;
 }
-
+/// <summary>
+/// 选项卡的风格。
+/// </summary>
 public enum TabTheme
 {
+    /// <summary>
+    /// 卡片模式。
+    /// </summary>
     Card
 }
+/// <summary>
+/// 选项卡尺寸。
+/// </summary>
 public enum TabSize
 {
+    /// <summary>
+    /// 中等尺寸。
+    /// </summary>
     [CssClass("m")] Medium,
+    /// <summary>
+    /// 大型尺寸。
+    /// </summary>
     [CssClass("l")] Large
 }

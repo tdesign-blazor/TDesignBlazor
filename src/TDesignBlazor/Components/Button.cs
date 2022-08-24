@@ -7,11 +7,20 @@ namespace TDesignBlazor.Components;
 /// </summary>
 [HtmlTag("button")]
 [CssClass("t-button")]
-public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
+public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
 {
-    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [Parameter] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// 设置按钮的 HTML 类型。默认时 <see cref="ButtonHtmlType.Button"/> 类型。
+    /// </summary>
     [Parameter] public ButtonHtmlType HtmlType { get; set; } = ButtonHtmlType.Button;
     /// <summary>
     /// 
@@ -62,6 +71,9 @@ public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
     }
 }
 
+/// <summary>
+/// 按钮风格。
+/// </summary>
 public enum ButtonType
 {
     Base,
@@ -70,14 +82,18 @@ public enum ButtonType
     Text
 }
 
-
+/// <summary>
+/// 按钮形状。
+/// </summary>
 public enum ButtonShape
 {
     Squre,
     Round,
     Circle
 }
-
+/// <summary>
+/// 按钮的 HTML 类型。
+/// </summary>
 public enum ButtonHtmlType
 {
     Button,

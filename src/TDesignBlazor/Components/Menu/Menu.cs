@@ -1,9 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesignBlazor;
+/// <summary>
+/// 菜单。
+/// </summary>
 [ParentComponent]
-public class Menu : BlazorComponentBase, IHasChildContent
+public class Menu : TDesignComponentBase, IHasChildContent
 {
     [Parameter] public MenuType Type { get; set; } = MenuType.Header;
     [Parameter][CssClass("t-menu--")] public MenuTheme Theme { get; set; } = MenuTheme.Light;
