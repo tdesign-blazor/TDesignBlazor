@@ -1,15 +1,35 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesignBlazor.Components;
+
+/// <summary>
+/// 布局组件。
+/// </summary>
 [CssClass("t-layout")]
 [HtmlTag("section")]
 [ParentComponent]
-public class Layout : BlazorChildContentComponentBase
+public class Layout : TDesignComponentBase, IHasChildContent
 {
+    /// <summary>
+    /// 布局的顶部内容。
+    /// </summary>
     [Parameter] public RenderFragment? HeaderContent { get; set; }
+    /// <summary>
+    /// 布局的右侧内容。
+    /// </summary>
     [Parameter] public RenderFragment? LeftSideContent { get; set; }
+    /// <summary>
+    /// 布局的左侧部分。
+    /// </summary>
     [Parameter] public RenderFragment? RightSideContent { get; set; }
+    /// <summary>
+    /// 布局的底部部分。
+    /// </summary>
     [Parameter] public RenderFragment? FooterContent { get; set; }
+    /// <summary>
+    /// 布局的主体部分。
+    /// </summary>
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
