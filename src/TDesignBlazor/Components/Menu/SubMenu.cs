@@ -1,15 +1,28 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesignBlazor.Components;
+
+/// <summary>
+/// 表示具备下级菜单项的二级菜单。
+/// </summary>
 [CssClass("t-submenu")]
 [HtmlTag("li")]
 [ParentComponent]
 [ChildComponent(typeof(Menu))]
-public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
+public class SubMenu : TDesignComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
 {
     [CascadingParameter] public Menu CascadingValue { get; set; }
+    /// <summary>
+    /// 菜单内容。
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public string Title { get; set; }
+    /// <summary>
+    /// 显示下级菜单的当前菜单标题。
+    /// </summary>
+    [Parameter] public string? Title { get; set; }
+    /// <summary>
+    /// 图标名称。
+    /// </summary>
     [Parameter] public object? Icon { get; set; }
 
     internal bool IsOpened { get; set; }
@@ -34,7 +47,7 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        if (CascadingValue.ExpandType == MenuExpandType.Popup)
+        if (CascadingValue.Popup)
         {
             attributes["onmouseleave"] = HtmlHelper.CreateCallback(this, async () =>
             {
@@ -73,7 +86,7 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 
         var eventAttribute = new Dictionary<string, object>();
 
-        if (CascadingValue.ExpandType == MenuExpandType.Popup)
+        if (CascadingValue.Popup)
         {
             htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, () =>
             {
@@ -88,7 +101,7 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 
         builder.CreateElement(sequence + 1, "div", content =>
         {
-            if (CascadingValue.ExpandType == MenuExpandType.Popup)
+            if (CascadingValue.Popup)
             {
                 eventAttribute["class"] = "t-menu__popup-wrapper";
                 builder.CreateElement(0, "ul", ChildContent, eventAttribute);
@@ -102,7 +115,7 @@ public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasCh
 
     private void BuildCallbackAttributes(Dictionary<string, object> htmlAttributes)
     {
-        if (CascadingValue.ExpandType == MenuExpandType.Popup)
+        if (CascadingValue.Popup)
         {
             htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, ExpandSubMenuItem);
         }

@@ -1,20 +1,24 @@
 ﻿@inherits LayoutComponentBase
 
-<Layout >
+<Layout>
     <HeaderContent>
         <Menu>
-            <LogoContent>TDesignBlazor</LogoContent>
+            <LogoContent>
+                <h1><storng>TDesignBlazor</storng></h1>
+            </LogoContent>
             <OperationContent>
-                <a href="/">主页</a>
+                <a href="/" title="源码">
+                    <Icon Name="IconName.LogoGithubFilled" />
+                </a>
             </OperationContent>
         </Menu>
     </HeaderContent>
     <LeftSideContent>
-        <NavMenu/>
+        <NavMenu />
     </LeftSideContent>
     <ChildContent>
         <div style="padding:24px;background:#fff">
-        @Body
+            @Body
         </div>
     </ChildContent>
     <FooterContent>

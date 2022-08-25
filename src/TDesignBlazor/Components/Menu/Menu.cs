@@ -2,30 +2,74 @@
 
 namespace TDesignBlazor.Components;
 /// <summary>
-/// 菜单。
+/// 导航菜单。
 /// </summary>
 [ParentComponent]
 public class Menu : TDesignComponentBase, IHasChildContent
 {
-    [Parameter] public MenuType Type { get; set; } = MenuType.Header;
-    [Parameter][CssClass("t-menu--")] public MenuTheme Theme { get; set; } = MenuTheme.Light;
+    /// <summary>
+    /// 设置 <c>true</c> 表示侧边菜单栏。
+    /// </summary>
+    [Parameter] public bool Aside { get; set; }
 
-    [Parameter] public MenuExpandType ExpandType { get; set; } = MenuExpandType.Popup;
-
+    /// <summary>
+    /// 是否暗色主题。
+    /// </summary>
+    [Parameter][BooleanCssClass("t-menu--dark", "t-menu--light")] public bool Dark { get; set; }
+    /// <summary>
+    /// 设置 <c>true</c> 表示下级菜单的展开模式为【弹出】方式，即鼠标悬停后展开下级菜单。否则是【鼠标点击】后展开下级菜单。
+    /// </summary>
+    [Parameter][BooleanCssClass("popup", "sub")] public bool Popup { get; set; }
+    /// <summary>
+    /// Logo 部分的内容。
+    /// </summary>
     [Parameter] public RenderFragment? LogoContent { get; set; }
+    /// <summary>
+    /// 主体部分的内容。
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
+    /// <summary>
+    /// 右侧操作部分的内容。
+    /// </summary>
     [Parameter] public RenderFragment? OperationContent { get; set; }
+    /// <summary>
+    /// 折叠菜单，侧边菜单有效。
+    /// </summary>
+    [Parameter][CssClass("t-is-collapsed")] public bool Collapse { get; set; }
+    /// <summary>
+    /// 侧边菜单的宽度。
+    /// </summary>
+    [Parameter] public int? Width { get; set; }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        if (Type == MenuType.Header && ExpandType == MenuExpandType.Default)
+        /* 顶部导航二级菜单问题
+        * ***强制设成 popup 的模式显示二级菜单。
+        * 原因：如果是二层导航，则布局会完全不一样，暂时无法做到在不改变现有组件调用的情况下该改写布局
+        * 腾讯说实话：蛋疼的很
+        */
+
+        if (!Aside && !Popup)
         {
-            ExpandType = MenuExpandType.Popup;
+            Popup = true;
+        }
+
+        if (!Width.HasValue && Collapse)
+        {
+            Width = 64;
         }
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         builder.CreateElement(sequence, "div", inner =>
@@ -37,7 +81,7 @@ public class Menu : TDesignComponentBase, IHasChildContent
             {
                 @class = HtmlHelper.CreateCssBuilder()
                                 .Append("t-menu")
-                                .Append("t-menu--scroll narrow-scrollbar", Type == MenuType.Aside)
+                                .Append("t-menu--scroll narrow-scrollbar", Aside)
             });
 
             builder.CreateElement(2, "div", OperationContent, new { @class = "t-menu__operations" });
@@ -48,9 +92,13 @@ public class Menu : TDesignComponentBase, IHasChildContent
         });
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        if (Type == MenuType.Header)
+        if (!Aside)
         {
             builder.Append("t-menu");
         }
@@ -63,38 +111,20 @@ public class Menu : TDesignComponentBase, IHasChildContent
     /// </summary>
     /// <param name="css">用'{0}'占位可变的头部还是边</param>
     /// <returns></returns>
-    string GetMenuSpecificClass(string css) => string.Format(css, (Type == MenuType.Header ? "head" : "default"));
+    string GetMenuSpecificClass(string css) => string.Format(css, (!Aside ? "head" : "default"));
 
-    internal string GetMenuExpandClass() => $"t-menu__{(ExpandType.GetCssClass())}";
+    internal string GetMenuExpandClass() => $"t-menu__{(Popup ? "popup" : "sub")}";
     internal string GetMenuExapndStyle()
     {
-        switch (ExpandType)
+        if (Popup)
         {
-            case MenuExpandType.Default:
-                return "--padding-left:44px;";
-            case MenuExpandType.Popup:
-                return "--popup-max-height:144px; --popup-width:110.703px;";
-            default:
-                throw new IndexOutOfRangeException($"No such enum member of '{nameof(MenuExpandType)}'");
+            return "--popup-max-height:144px; --popup-width:110.703px;";
         }
+        return "--padding-left:44px;";
     }
 
-}
-
-public enum MenuTheme
-{
-    Light,
-    Dark
-}
-
-public enum MenuType
-{
-    [CssClass("default")] Aside,
-    Header
-}
-
-public enum MenuExpandType
-{
-    [CssClass("sub")] Default,
-    [CssClass("popup")] Popup
+    protected override void BuildStyle(IStyleBuilder builder)
+    {
+        builder.Append($"width:{Width}px", Width.HasValue);
+    }
 }

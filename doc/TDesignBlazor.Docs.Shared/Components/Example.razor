@@ -1,5 +1,5 @@
 ﻿
-<div>
+<div class="example">
     <h2>@Title</h2>
     @if (Description is not null)
     {
@@ -7,7 +7,7 @@
     }
 
     <Tab Position="TDesignBlazor.Position.Top" >
-        <TabItem Title="效果">
+        <TabItem Title="效果" AdditionalStyle="@RunStyle">
             @RunContent
         </TabItem>
         <TabItem Title="代码">
@@ -20,4 +20,5 @@
     [Parameter] public RenderFragment Description { get; set; }
     [Parameter] public RenderFragment CodeContent { get; set; }
     [Parameter] public RenderFragment RunContent { get; set; }
+    [Parameter]public string? RunStyle{ get; set; }
 }

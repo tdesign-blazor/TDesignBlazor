@@ -4,8 +4,33 @@
 /// </summary>
 [HtmlTag("i")]
 [CssClass("t-icon")]
+[ChildComponent(typeof(Menu), Optional = true)]
+[ChildComponent(typeof(SubMenu), Optional = true)]
 public class Icon : TDesignComponentBase
 {
+    /// <summary>
+    /// 初始化 <see cref="Icon"/> 类的新实例。
+    /// </summary>
+    public Icon()
+    {
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (IsInMenuOperation)
+        {
+            Size = "25px";
+        }
+    }
+
+    /// <summary>
+    /// 图标放在 <see cref="Menu"/> 组件中会有特定样式。
+    /// </summary>
+    [CascadingParameter] public Menu? CascadingMenu { get; set; }
+    [CascadingParameter] public SubMenu? CascadingSubMenu { get; set; }
+
     /// <summary>
     /// 图标名称。参见 https://tdesign.tencent.com/vue/components/icon 。
     /// <para>可使用 <see cref="IconName"/> 枚举。</para>
@@ -22,6 +47,8 @@ public class Icon : TDesignComponentBase
 
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
+        builder.Append("t-menu__operations-icon", IsInMenuOperation);
+
         if (Name is IconName iconName)
         {
             builder.Append($"t-icon-{iconName.GetCssClass()}");
@@ -31,6 +58,11 @@ public class Icon : TDesignComponentBase
             builder.Append(Name?.ToString());
         }
     }
+
+    /// <summary>
+    /// 判断 Icon 是否在 <see cref="Menu"/> 组件的 <see cref="Menu.OperationContent"/> 内。
+    /// </summary>
+    private bool IsInMenuOperation => CascadingMenu is not null && CascadingMenu.OperationContent is not null && CascadingSubMenu is null;
 
     protected override void BuildStyle(IStyleBuilder builder)
     {

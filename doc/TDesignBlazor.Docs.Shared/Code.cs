@@ -1,5 +1,4 @@
 ﻿using Markdig;
-
 using Microsoft.AspNetCore.Components;
 
 namespace TDesignBlazor.Docs.Shared;
@@ -14,4 +13,5 @@ public static class Code
             .Build());
         return new MarkupString(content);
     }
+    public const string BgRun = "background:#ccc";
 }
