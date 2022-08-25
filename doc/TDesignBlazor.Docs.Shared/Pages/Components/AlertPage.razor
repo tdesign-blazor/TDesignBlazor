@@ -1,0 +1,85 @@
+﻿@page "/components/alert"
+<PageHeader Title="Alert 警告消息">
+    警告条用于承载需要用户注意的信息。
+</PageHeader>
+
+<Example Title="基础警告">
+    <Description>使用简洁文字提示的最基础警告条，包含 4 种情况的提示：普通消息，成功，警示，失败。</Description>
+    <RunContent>
+        <Alert>这是一条默认消息</Alert>
+        <br />
+        <Alert Theme="Theme.Primary">这是一条普通消息提示</Alert>
+        <br />
+        <Alert Theme="Theme.Success">这是一条成功消息提示</Alert>
+        <br />
+        <Alert Theme="Theme.Warning">这是一条警示消息提示</Alert>
+        <br />
+        <Alert Theme="Theme.Danger">这是一条失败消息提示</Alert>
+        
+    </RunContent>
+    <CodeContent>
+
+    </CodeContent>
+</Example>
+
+<Example Title="带操作的警告">
+    <Description>当需要对此警告做操作，需要显示地设置 <code>OperationContent</code> 代码片段</Description>
+    <RunContent>
+        <Alert Theme="Theme.Primary">
+            <ChildContent>
+                这是一条普通的消息提示
+            </ChildContent>
+            <OperationContent>
+                这里是相关操作
+            </OperationContent>
+        </Alert>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Alert Theme=""Theme.Primary"">
+    <ChildContent>
+        这是一条普通的消息提示
+    </ChildContent>
+    <OperationContent>
+        这里是相关操作
+    </OperationContent>
+</Alert>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带标题的警告">
+    <Description>当信息内容较复杂时，可使用相关描述文字辅助说明。</Description>
+    <RunContent>
+        <Alert Theme="Theme.Primary">
+            <TitleContent>
+                这里是消息提示的标题
+            </TitleContent>
+            <ChildContent>
+                这是一条普通的消息提示内容
+            </ChildContent>
+            <OperationContent>
+                这里是相关操作
+            </OperationContent>
+        </Alert>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Alert Theme=""Theme.Primary"">
+    <TitleContent>
+        这里是消息提示的标题
+    </TitleContent>
+    <ChildContent>
+        这是一条普通的消息提示
+    </ChildContent>
+    <OperationContent>
+        这里是相关操作
+    </OperationContent>
+</Alert>
+```
+")
+    </CodeContent>
+</Example>

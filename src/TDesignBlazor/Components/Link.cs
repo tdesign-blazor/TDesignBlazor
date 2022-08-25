@@ -17,7 +17,7 @@ public class Link : TDesignComponentBase, IHasChildContent, IHasDisabled
     /// <summary>
     /// 颜色。
     /// </summary>
-    [Parameter][CssClass("t-link--theme-")] public Theme Theme { get; set; } = Theme.Default;
+    [Parameter][CssClass("t-link--theme-")] public Theme? Theme { get; set; }
     /// <summary>
     /// 显示超链接的下划线。
     /// </summary>

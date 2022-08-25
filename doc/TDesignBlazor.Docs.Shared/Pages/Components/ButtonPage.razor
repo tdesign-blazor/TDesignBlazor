@@ -28,17 +28,66 @@
     </Description>
     <RunContent>
         <div style="background:#000;padding:50px;">
-<Button Type="ButtonType.Outline" Ghost>边框按钮</Button>
-<Button Type="ButtonType.Dashed" Ghost>虚框按钮</Button>
-<Button Type="ButtonType.Text" Ghost>文本按钮</Button>
+
+            <Button Ghost>普通按钮</Button>
+            <Button Ghost Type="ButtonType.Outline">边框按钮</Button>
+            <Button Ghost Type="ButtonType.Dashed">虚框按钮</Button>
+            <Button Ghost Type="ButtonType.Text">文本按钮</Button>
+            <br />
+            <br />
+            <Button Ghost Theme="Theme.Primary">普通按钮</Button>
+            <Button Ghost Theme="Theme.Primary" Type="ButtonType.Outline">边框按钮</Button>
+            <Button Ghost Theme="Theme.Primary" Type="ButtonType.Dashed">虚框按钮</Button>
+            <Button Ghost Theme="Theme.Primary" Type="ButtonType.Text">文本按钮</Button>
+            <br />
+            <br />
+            <Button Ghost Theme="Theme.Success">普通按钮</Button>
+            <Button Ghost Theme="Theme.Success" Type="ButtonType.Outline">边框按钮</Button>
+            <Button Ghost Theme="Theme.Success" Type="ButtonType.Dashed">虚框按钮</Button>
+            <Button Ghost Theme="Theme.Success" Type="ButtonType.Text">文本按钮</Button>
+            <br />
+            <br />
+
+            <Button Ghost Theme="Theme.Warning">普通按钮</Button>
+            <Button Ghost Theme="Theme.Warning" Type="ButtonType.Outline">边框按钮</Button>
+            <Button Ghost Theme="Theme.Warning" Type="ButtonType.Dashed">虚框按钮</Button>
+            <Button Ghost Theme="Theme.Warning" Type="ButtonType.Text">文本按钮</Button>
+            <br />
+            <br />
+
+            <Button Ghost Theme="Theme.Danger">普通按钮</Button>
+            <Button Ghost Theme="Theme.Danger" Type="ButtonType.Outline">边框按钮</Button>
+            <Button Ghost Theme="Theme.Danger" Type="ButtonType.Dashed">虚框按钮</Button>
+            <Button Ghost Theme="Theme.Danger" Type="ButtonType.Text">文本按钮</Button>
 </div>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Button Type=""ButtonType.Outline"" Ghost>边框按钮</Button>
-<Button Type=""ButtonType.Dashed"" Ghost>虚框按钮</Button>
-<Button Type=""ButtonType.Text"" Ghost>文本按钮</Button>
+<Button Ghost>普通按钮</Button>
+<Button Ghost Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Ghost Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Ghost Type=""ButtonType.Text"">文本按钮</Button>
+
+<Button Ghost Theme=""Theme.Primary"">普通按钮</Button>
+<Button Ghost Theme=""Theme.Primary"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Ghost Theme=""Theme.Primary"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Ghost Theme=""Theme.Primary"" Type=""ButtonType.Text"">文本按钮</Button>
+
+<Button Ghost Theme=""Theme.Success"">普通按钮</Button>
+<Button Ghost Theme=""Theme.Success"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Ghost Theme=""Theme.Success"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Ghost Theme=""Theme.Success"" Type=""ButtonType.Text"">文本按钮</Button>
+
+<Button Ghost Theme=""Theme.Warning"">普通按钮</Button>
+<Button Ghost Theme=""Theme.Warning"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Ghost Theme=""Theme.Warning"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Ghost Theme=""Theme.Warning"" Type=""ButtonType.Text"">文本按钮</Button>
+
+<Button Ghost Theme=""Theme.Danger"">普通按钮</Button>
+<Button Ghost Theme=""Theme.Danger"" Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Ghost Theme=""Theme.Danger"" Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Ghost Theme=""Theme.Danger"" Type=""ButtonType.Text"">文本按钮</Button>
 ```
 ")
     </CodeContent>
@@ -72,22 +121,31 @@
 <Example Title="不同颜色主题按钮">
     <Description>提供浅灰色、蓝色、红色、黄色和绿色为主题的按钮。</Description>
     <RunContent>        
+<Button>普通按钮</Button>
+<Button Type="ButtonType.Outline">边框按钮</Button>
+<Button Type="ButtonType.Dashed">虚框按钮</Button>
+<Button Type="ButtonType.Text">文本按钮</Button>
+        <br />
+        <br />
 <Button Theme="Theme.Primary">普通按钮</Button>
 <Button Theme="Theme.Primary" Type="ButtonType.Outline">边框按钮</Button>
 <Button Theme="Theme.Primary" Type="ButtonType.Dashed">虚框按钮</Button>
 <Button Theme="Theme.Primary" Type="ButtonType.Text">文本按钮</Button>
-<br />
+        <br />
+        <br />
 <Button Theme="Theme.Success">普通按钮</Button>
 <Button Theme="Theme.Success" Type="ButtonType.Outline">边框按钮</Button>
 <Button Theme="Theme.Success" Type="ButtonType.Dashed">虚框按钮</Button>
 <Button Theme="Theme.Success" Type="ButtonType.Text">文本按钮</Button>
+<br />
 <br />
 
 <Button Theme="Theme.Warning">普通按钮</Button>
 <Button Theme="Theme.Warning" Type="ButtonType.Outline">边框按钮</Button>
 <Button Theme="Theme.Warning" Type="ButtonType.Dashed">虚框按钮</Button>
 <Button Theme="Theme.Warning" Type="ButtonType.Text">文本按钮</Button>
-<br />
+        <br />
+        <br />
 
 <Button Theme="Theme.Danger">普通按钮</Button>
 <Button Theme="Theme.Danger" Type="ButtonType.Outline">边框按钮</Button>
@@ -97,22 +155,25 @@
     <CodeContent>
         @Code.Create(@"
 ```html
+<Button>普通按钮</Button>
+<Button Type=""ButtonType.Outline"">边框按钮</Button>
+<Button Type=""ButtonType.Dashed"">虚框按钮</Button>
+<Button Type=""ButtonType.Text"">文本按钮</Button>
+
 <Button Theme=""Theme.Primary"">普通按钮</Button>
 <Button Theme=""Theme.Primary"" Type=""ButtonType.Outline"">边框按钮</Button>
 <Button Theme=""Theme.Primary"" Type=""ButtonType.Dashed"">虚框按钮</Button>
 <Button Theme=""Theme.Primary"" Type=""ButtonType.Text"">文本按钮</Button>
-<br />
+
 <Button Theme=""Theme.Success"">普通按钮</Button>
 <Button Theme=""Theme.Success"" Type=""ButtonType.Outline"">边框按钮</Button>
 <Button Theme=""Theme.Success"" Type=""ButtonType.Dashed"">虚框按钮</Button>
 <Button Theme=""Theme.Success"" Type=""ButtonType.Text"">文本按钮</Button>
-<br />
 
 <Button Theme=""Theme.Warning"">普通按钮</Button>
 <Button Theme=""Theme.Warning"" Type=""ButtonType.Outline"">边框按钮</Button>
 <Button Theme=""Theme.Warning"" Type=""ButtonType.Dashed"">虚框按钮</Button>
 <Button Theme=""Theme.Warning"" Type=""ButtonType.Text"">文本按钮</Button>
-<br />
 
 <Button Theme=""Theme.Danger"">普通按钮</Button>
 <Button Theme=""Theme.Danger"" Type=""ButtonType.Outline"">边框按钮</Button>

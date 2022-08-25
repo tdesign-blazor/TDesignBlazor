@@ -7,10 +7,6 @@
 public enum Theme
 {
     /// <summary>
-    /// 默认。
-    /// </summary>
-    Default,
-    /// <summary>
     /// 主要的。
     /// </summary>
     Primary,
