@@ -15,7 +15,7 @@ jobs:
     
     # sets up .NET Core SDK 6.0
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
+      uses: xt0rted/setup-dotnet@v1.4.0
       with:
         dotnet-version: 6.0
 
