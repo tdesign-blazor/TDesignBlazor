@@ -1,0 +1,56 @@
+﻿@page "/"
+
+<PageHeader Title="快速开始">
+    基于 TDesign 的 Blazor 组件库
+</PageHeader>
+
+<h2>环境</h2>
+@Code.Create(@"
+* .NET 6
+* VS 2022
+")
+
+<h2>安装</h2>
+<h3>Nuget 管理</h3>
+@Code.Create(@"
+```ps
+> Install-Package TDesignBlazor
+```
+")
+
+<h3>PackageReference</h3>
+@Code.Create(@"
+```html
+<PackageReference Include=""TDesignBlzor""/>
+```
+")
+
+<h3>引入必要文件</h3>
+
+@Code.Create(@"
+```html
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/reset.css"" /> <!--重置 HTML 默认样式-->
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign.min.css"" /> <!--tdesign 核心样式-->
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-icons.css"" /><!--图标样式-->
+```
+
+```js
+//tdesign 核心 js
+<script src=""_content/TDesignBlazor/tdesign.min.js""></script>
+```
+")
+
+<h3>在 <code>_Import.razor</code> 引入命名空间</h3>
+@Code.Create(@"
+```
+@using TDesignBlazor
+@using TDesignBlazor.Components
+```
+")
+
+<h3>注册服务</h3>
+@Code.Create(@"
+```
+builder.Services.AddTDesignBlazor();
+```
+")
