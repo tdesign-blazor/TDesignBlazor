@@ -8,13 +8,6 @@
 [ChildComponent(typeof(SubMenu), Optional = true)]
 public class Icon : TDesignComponentBase
 {
-    /// <summary>
-    /// 初始化 <see cref="Icon"/> 类的新实例。
-    /// </summary>
-    public Icon()
-    {
-    }
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
