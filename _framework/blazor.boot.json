@@ -65,8 +65,8 @@
       "System.Threading.dll": "sha256-CPVUBr70Xz6JCsem8ZgaSDl8xu4GBSIiHyFKf4pFnIw=",
       "System.Threading.Tasks.Parallel.dll": "sha256-AXglBa9xHEYufHeZGoWsweIFNMYwk\/we\/dtmObPefBA=",
       "TDesignBlazor.dll": "sha256-U0TNShGUgqWjnct1iczbQROgMdCk\/3HbdKZKoWsJsBk=",
-      "TDesignBlazor.Docs.Shared.dll": "sha256-wgvuH6ysCNUksRgjcUmyh0Xpd0U4lprmodofiLmHESA=",
-      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-MDezyHu5jUuBg8rYCoSwKByEON9tJMw5rwM6OrVDFDo="
+      "TDesignBlazor.Docs.Shared.dll": "sha256-zCbfKqabyUC5MaTjKvxXnU9ZUQ2gaVR+XsmPzFxNZ88=",
+      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-eA+sTrbKEXIqzgWqdmirYu7dGYj4u90ZEgw+vFADUsQ="
     },
     "extensions": null,
     "lazyAssembly": null,
