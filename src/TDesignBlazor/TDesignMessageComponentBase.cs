@@ -26,23 +26,46 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
     /// </summary>
     [Parameter] public object? Icon { get; set; }
 
-    protected string GetThemeClass => Theme switch
+    protected string? GetThemeClass
     {
-        TDesignBlazor.Theme.Danger => "error",
-        TDesignBlazor.Theme.Primary => "info",
-        not null => Theme.GetCssClass(),
-        null => ""
-    };
+        get
+        {
+            if (Theme is null)
+            {
+                return string.Empty;
+            }
+            if (Theme == TDesignBlazor.Theme.Primary)
+            {
+                return "info";
+            }
+            if (Theme == TDesignBlazor.Theme.Danger)
+            {
+                return "error";
+            }
+            return Theme.Value;
+        }
+    }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        Icon ??= Theme switch
+        Icon ??= GetIconByTheme;
+    }
+
+    protected virtual IconName? GetIconByTheme
+    {
+        get
         {
-            TDesignBlazor.Theme.Success => IconName.CheckCircleFilled,
-            TDesignBlazor.Theme.Danger => IconName.CloseCircleFilled,
-            _ => IconName.InfoCircleFilled,
-        };
+            if (Theme == TDesignBlazor.Theme.Success)
+            {
+                return IconName.CheckCircleFilled;
+            }
+            if (Theme == TDesignBlazor.Theme.Danger)
+            {
+                return IconName.CloseCircleFilled;
+            }
+            return IconName.InfoCircleFilled;
+        }
     }
 }

@@ -1,25 +1,25 @@
 ﻿namespace TDesignBlazor;
 
-
-/// <summary>
-/// 主题风格。
-/// </summary>
-public enum Theme
+public class Theme : Enumeration
 {
-    /// <summary>
-    /// 主要的。
-    /// </summary>
-    Primary,
-    /// <summary>
-    /// 危险的。
-    /// </summary>
-    Danger,
-    /// <summary>
-    /// 警告的。
-    /// </summary>
-    Warning,
-    /// <summary>
-    /// 成功的。
-    /// </summary>
-    Success
+    protected Theme(string value) : base(value)
+    {
+    }
+
+    public static readonly Theme Primary = nameof(Primary);
+    public static readonly Theme Danger = nameof(Danger);
+    public static readonly Theme Warning = nameof(Warning);
+    public static readonly Theme Success = nameof(Success);
+
+    public static implicit operator Theme(string name) => new(name.ToLower());
+}
+
+public class MessageTheme : Theme
+{
+    protected MessageTheme(string value) : base(value)
+    {
+    }
+
+    public static readonly Theme Question = nameof(Question);
+    public static readonly Theme Loading = nameof(Loading);
 }
