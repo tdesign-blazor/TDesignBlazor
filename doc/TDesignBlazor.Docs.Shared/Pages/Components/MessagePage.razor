@@ -1,0 +1,62 @@
+﻿@page "/components/message"
+
+<PageHeader Title="Message 全局提示">
+    对用户的操作作出轻量的全局反馈。
+</PageHeader>
+
+<Example Title="全局提示">
+    <Description>使用简洁文字描述操作反馈。常规全局提示包含：普通信息、成功信息、警示信息、错误信息、帮助信息和加载中。</Description>
+    <RunContent>
+        <Message>默认信息提示</Message>
+        <br />
+        <Message Theme="MessageTheme.Primary">用于表示普通操作信息提示</Message>
+        <br />
+        <Message Theme="MessageTheme.Success">用于表示操作顺利达成</Message>
+        <br />
+        <Message Theme="MessageTheme.Warning">用于表示操作引起一定后果</Message>
+        <br />
+        <Message Theme="MessageTheme.Danger">用于表示操作引起严重的后果</Message>
+        <br />
+        <Message Theme="MessageTheme.Question">用于帮助用户操作的信息提示</Message>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Message>默认信息提示</Message>
+<Message Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</Message>
+<Message Theme=""MessageTheme.Success"">用于表示操作顺利达成</Message>
+<Message Theme=""MessageTheme.Warning"">用于表示操作引起一定后果</Message>
+<Message Theme=""MessageTheme.Danger"">用于表示操作引起严重的后果</Message>
+<Message Theme=""MessageTheme.Question"">用于帮助用户操作的信息提示</Message>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="加载中信息提示">
+    <Description></Description>
+    <RunContent>
+        <Message Loading>用于表示操作正在生效的过程</Message>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Message Loading>用于表示操作正在生效的过程</Message>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="可关闭的信息提示">
+    <Description></Description>
+    <RunContent>
+        <Message Theme="MessageTheme.Primary" Closable>用于表示普通操作信息提示</Message>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Message Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</Message>
+```
+")
+    </CodeContent>
+</Example>
+<h2>通过服务调用</h2>
+代码建设中...

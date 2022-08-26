@@ -21,5 +21,4 @@ public class MessageTheme : Theme
     }
 
     public static readonly Theme Question = nameof(Question);
-    public static readonly Theme Loading = nameof(Loading);
 }

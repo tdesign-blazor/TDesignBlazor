@@ -8,15 +8,6 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
     /// <inheritdoc/>
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    /// <summary>
-    /// 显示的标题。
-    /// </summary>
-    [Parameter] public string? Title { get; set; }
-    /// <summary>
-    /// 具备标题的 UI 内容。
-    /// </summary>
-    [Parameter] public RenderFragment? TitleContent { get; set; }
     /// <summary>
     /// 提醒主题。
     /// </summary>
@@ -57,6 +48,10 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
     {
         get
         {
+            if (Theme is null)
+            {
+                return IconName.InfoCircle;
+            }
             if (Theme == TDesignBlazor.Theme.Success)
             {
                 return IconName.CheckCircleFilled;

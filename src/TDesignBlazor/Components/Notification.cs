@@ -11,6 +11,15 @@ public class Notification : TDesignMessageComponentBase, IHasChildContent
 {
 
     /// <summary>
+    /// 显示的标题。
+    /// </summary>
+    [Parameter] public string? Title { get; set; }
+    /// <summary>
+    /// 具备标题的 UI 内容。
+    /// </summary>
+    [Parameter] public RenderFragment? TitleContent { get; set; }
+
+    /// <summary>
     /// 具备操作部分的 UI 内容。
     /// </summary>
     [Parameter] public RenderFragment? OperationContent { get; set; }

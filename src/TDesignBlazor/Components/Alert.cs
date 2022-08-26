@@ -8,6 +8,15 @@ namespace TDesignBlazor.Components;
 [CssClass("t-alert")]
 public class Alert : TDesignMessageComponentBase
 {
+
+    /// <summary>
+    /// 显示的标题。
+    /// </summary>
+    [Parameter] public string? Title { get; set; }
+    /// <summary>
+    /// 具备标题的 UI 内容。
+    /// </summary>
+    [Parameter] public RenderFragment? TitleContent { get; set; }
     /// <summary>
     /// 具备操作部分的 UI 内容。
     /// </summary>
