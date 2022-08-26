@@ -1,5 +1,5 @@
 /**
- * tdesign v0.46.1
+ * tdesign v0.46.2
  * (c) 2022 tdesign
  * @license MIT
  */
@@ -35,6 +35,41 @@
     keys.forEach(function (key) {
       el.style[key] = styles[key];
     });
+  }
+
+  function _arrayLikeToArray$1(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray$1(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
   }
 
   function _objectWithoutPropertiesLoose$2(source, excluded) {
@@ -105,25 +140,6 @@
     return _arr;
   }
 
-  function _arrayLikeToArray$1(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-
-    for (var i = 0, arr2 = new Array(len); i < len; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-
-  function _unsupportedIterableToArray$1(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray$1(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray$1(o, minLen);
-  }
-
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -171,8 +187,9 @@
 
     var ua = (_window2 = window) === null || _window2 === void 0 ? void 0 : (_window2$navigator = _window2.navigator) === null || _window2$navigator === void 0 ? void 0 : _window2$navigator.userAgent;
     var isSafari = /Safari/.test(ua) && !/Chrome/.test(ua);
+    var isIosWechat = /(?=.*iPhone)[?=.*MicroMessenger]/.test(ua) && !/Chrome/.test(ua);
 
-    if (isSafari) {
+    if (isSafari || isIosWechat) {
       basicStyle = {
         transformOrigin: "-1px -1px",
         transform: "scale(".concat(parseInt(fontSize, 10) / 14, ")")
@@ -14357,7 +14374,7 @@
             });
 
             if (getIEVersion() < 11) {
-              _this3.handleDocumentClick();
+              _this3.handleDocumentClick(e);
             }
           });
         } else if (hasTrigger["context-menu"]) {
@@ -15881,22 +15898,6 @@
   });
 
   var Jumper = withInstall(TJumper, VueCompositionAPI__default["default"]);
-
-  function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
-  }
-
-  function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-  }
-
-  function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread();
-  }
 
   var props$T = {
     collapsed: Boolean,
@@ -17797,7 +17798,7 @@
       ripple: Ripple
     },
     props: props$Q,
-    setup: function setup(props2, ctx) {
+    setup: function setup(props2) {
       var menu = VueCompositionAPI.inject("TdMenu");
       var theme = menu.theme,
           activeValues = menu.activeValues,
@@ -17873,13 +17874,6 @@
         });
         var instance = VueCompositionAPI.getCurrentInstance();
         isNested.value = /submenu/i.test((_instance$parent$vnod = instance.parent.vnode) === null || _instance$parent$vnod === void 0 ? void 0 : _instance$parent$vnod.tag);
-
-        if (ctx.refs.popup) {
-          var rect = ctx.refs.popupInner.getBoundingClientRect();
-          var $popup = ctx.refs.popup;
-          $popup.style.setProperty("--popup-max-height", "".concat(rect.height, "px"));
-          $popup.style.setProperty("--popup-width", "".concat(rect.width, "px"));
-        }
       });
       return {
         mode: mode,
@@ -23884,7 +23878,7 @@
       _iterator.f();
     }
 
-    return value;
+    return value !== void 0 ? String(value) : void 0;
   };
   var getMultipleContent$1 = function getMultipleContent(value, options) {
     var res = [];
@@ -24725,7 +24719,7 @@
         return h("div", {
           "class": ["".concat(this.componentName, "__dropdown-inner"), "".concat(this.componentName, "__dropdown-inner--size-").concat(sizeClassMap[size])],
           "style": innerStyle
-        }, [renderTNode("panelTopContent"), isEmpty && this.renderEmptyContent(), isCreateOptionShown && this.renderCreateOption(), !isEmpty && loading && this.renderLoadingContent(), !isEmpty && !loading && this.renderOptionsContent(isVirtual && visibleData ? visibleData : displayOptions), renderTNode("panelBottomContent")]);
+        }, [renderTNode("panelTopContent"), isCreateOptionShown && this.renderCreateOption(), loading && this.renderLoadingContent(), !loading && isEmpty && this.renderEmptyContent(), !loading && !isEmpty && this.renderOptionsContent(isVirtual && visibleData ? visibleData : displayOptions), renderTNode("panelBottomContent")]);
       }
     },
     render: function render() {
@@ -24969,14 +24963,21 @@
       var setInnerValue = function setInnerValue(newVal, e) {
         if (valueType.value === "object") {
           var _keys$value = keys.value,
-              value2 = _keys$value.value,
-              label = _keys$value.label;
+              valueOfKeys = _keys$value.value,
+              labelOfKeys = _keys$value.label;
+          var oldValueMap = /* @__PURE__ */new Map();
+
+          if (multiple.value) {
+            value.value.forEach(function (option) {
+              oldValueMap.set(option[valueOfKeys], option);
+            });
+          }
 
           var getOption = function getOption(val) {
             var _ref;
 
-            var option = optionsMap.value.get(val);
-            return _ref = {}, _defineProperty$3(_ref, value2, get_1(option, value2)), _defineProperty$3(_ref, label, get_1(option, label)), _ref;
+            var option = optionsMap.value.get(val) || oldValueMap.get(val);
+            return _ref = {}, _defineProperty$3(_ref, valueOfKeys, get_1(option, valueOfKeys)), _defineProperty$3(_ref, labelOfKeys, get_1(option, labelOfKeys)), _ref;
           };
 
           newVal = multiple.value ? newVal.map(function (val) {
@@ -25019,10 +25020,24 @@
       var placeholderText = VueCompositionAPI.computed(function () {
         var _ref2;
 
-        return (_ref2 = !multiple.value && innerPopupVisible.value && getSingleContent$1(innerValue.value, optionsList.value) || placeholder.value) !== null && _ref2 !== void 0 ? _ref2 : t(global.value.placeholder);
+        return (_ref2 = !multiple.value && innerPopupVisible.value && (valueType.value === "object" && value.value[keys.value.label] || getSingleContent$1(innerValue.value, optionsList.value)) || placeholder.value) !== null && _ref2 !== void 0 ? _ref2 : t(global.value.placeholder);
       });
       var displayText = VueCompositionAPI.computed(function () {
-        return multiple.value ? getMultipleContent$1(innerValue.value, optionsList.value) : getSingleContent$1(innerValue.value, optionsList.value);
+        if (multiple.value) {
+          if (valueType.value === "object") {
+            return value.value.map(function (v) {
+              return v[keys.value.label];
+            });
+          }
+
+          return getMultipleContent$1(innerValue.value, optionsList.value);
+        }
+
+        if (valueType.value === "object" && value.value[keys.value.label]) {
+          return value.value[keys.value.label];
+        }
+
+        return getSingleContent$1(innerValue.value, optionsList.value);
       });
       var valueDisplayParams = VueCompositionAPI.computed(function () {
         var val = multiple.value ? innerValue.value.map(function (value2) {
@@ -26506,6 +26521,8 @@
     return value.map(function (item) {
       var node2 = treeStore.getNodes(item);
       return showAllLevels ? getFullPathLabel(node2[0]) : node2[0].label;
+    }).filter(function (item) {
+      return !!item;
     });
   }
   function getPanels(treeNodes) {
@@ -26521,7 +26538,7 @@
   }
   function getFullPathLabel(node) {
     var separator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
-    return node.getPath().map(function (node2) {
+    return node === null || node === void 0 ? void 0 : node.getPath().map(function (node2) {
       return node2.label;
     }).join(separator);
   }
@@ -29805,7 +29822,10 @@
       var options = props.options,
           _props$keys = props.keys,
           keys = _props$keys === void 0 ? {} : _props$keys,
-          checkStrictly = props.checkStrictly;
+          checkStrictly = props.checkStrictly,
+          lazy = props.lazy,
+          load = props.load,
+          valueMode = props.valueMode;
       var treeStore = statusContext.treeStore;
       if (!options.length && !treeStore) return;
 
@@ -29818,6 +29838,9 @@
           expandMutex: true,
           expandParent: true,
           checkStrictly: checkStrictly,
+          lazy: lazy,
+          load: load,
+          valueMode: valueMode,
           onLoad: function onLoad() {
             VueCompositionAPI.nextTick(function () {
               store.refreshNodes();
@@ -61777,7 +61800,8 @@
     var resizeLineParams = {
       isDragging: false,
       draggingCol: null,
-      draggingStart: 0
+      draggingStart: 0,
+      effectCol: null
     };
     var resizeLineStyle = VueCompositionAPI.reactive({
       display: "none",
@@ -61801,18 +61825,32 @@
         if (targetBoundRect.right - e.pageX <= distance) {
           target.style.cursor = "col-resize";
           resizeLineParams.draggingCol = target;
+          resizeLineParams.effectCol = "next";
+        } else if (e.pageX - targetBoundRect.left <= distance) {
+          var prevEl = target.previousElementSibling;
+
+          if (prevEl) {
+            target.style.cursor = "col-resize";
+            resizeLineParams.draggingCol = prevEl;
+            resizeLineParams.effectCol = "prev";
+          } else {
+            target.style.cursor = "";
+            resizeLineParams.draggingCol = null;
+            resizeLineParams.effectCol = null;
+          }
         } else {
           target.style.cursor = "";
           resizeLineParams.draggingCol = null;
+          resizeLineParams.effectCol = null;
         }
       }
     };
 
-    var onColumnMousedown = function onColumnMousedown(e, col, nearCol) {
+    var onColumnMousedown = function onColumnMousedown(e, col, effectNextCol, effectPrevCol) {
       var _tableContentRef$valu, _col$resize, _col$resize2;
 
       if (!resizeLineParams.draggingCol) return;
-      var target = e.target.closest("th");
+      var target = resizeLineParams.draggingCol;
       var targetBoundRect = target.getBoundingClientRect();
       var tableBoundRect = (_tableContentRef$valu = tableContentRef.value) === null || _tableContentRef$valu === void 0 ? void 0 : _tableContentRef$valu.getBoundingClientRect();
       var resizeLinePos = targetBoundRect.right - tableBoundRect.left;
@@ -61832,16 +61870,16 @@
         resizeLineStyle.bottom = "".concat(parent.bottom - tableBoundRect.bottom, "px");
       }
 
-      var setThWidthListByColumnDrag = function setThWidthListByColumnDrag(dragCol, dragWidth, nearCol2) {
-        var _nearCol2$resize, _updateThWidthList;
+      var setThWidthListByColumnDrag = function setThWidthListByColumnDrag(dragCol, dragWidth, nearCol) {
+        var _nearCol$resize, _updateThWidthList;
 
         var thWidthList = getThWidthList();
         var propColWidth = isNumber_1(dragCol.width) ? dragCol.width : parseFloat(dragCol.width);
-        var propNearColWidth = isNumber_1(nearCol2.width) ? nearCol2.width : parseFloat(nearCol2.width);
+        var propNearColWidth = isNumber_1(nearCol.width) ? nearCol.width : parseFloat(nearCol.width);
         var oldWidth = thWidthList[dragCol.colKey] || propColWidth;
-        var oldNearWidth = thWidthList[nearCol2.colKey] || propNearColWidth;
-        updateThWidthList((_updateThWidthList = {}, _defineProperty$3(_updateThWidthList, dragCol.colKey, dragWidth), _defineProperty$3(_updateThWidthList, nearCol2.colKey, Math.max(((_nearCol2$resize = nearCol2.resize) === null || _nearCol2$resize === void 0 ? void 0 : _nearCol2$resize.minWidth) || DEFAULT_MIN_WIDTH, oldWidth + oldNearWidth - dragWidth)), _updateThWidthList));
-        setNotCalculateWidthCols([dragCol.colKey, nearCol2.colKey]);
+        var oldNearWidth = thWidthList[nearCol.colKey] || propNearColWidth;
+        updateThWidthList((_updateThWidthList = {}, _defineProperty$3(_updateThWidthList, dragCol.colKey, dragWidth), _defineProperty$3(_updateThWidthList, nearCol.colKey, Math.max(((_nearCol$resize = nearCol.resize) === null || _nearCol$resize === void 0 ? void 0 : _nearCol$resize.minWidth) || DEFAULT_MIN_WIDTH, oldWidth + oldNearWidth - dragWidth)), _updateThWidthList));
+        setNotCalculateWidthCols([dragCol.colKey, nearCol.colKey]);
       };
 
       var onDragEnd = function onDragEnd() {
@@ -61854,9 +61892,15 @@
             width = maxColWidth;
           }
 
-          setThWidthListByColumnDrag(col, width, nearCol);
+          if (resizeLineParams.effectCol === "next") {
+            setThWidthListByColumnDrag(col, width, effectNextCol);
+          } else if (resizeLineParams.effectCol === "prev") {
+            setThWidthListByColumnDrag(effectPrevCol, width, col);
+          }
+
           resizeLineParams.isDragging = false;
           resizeLineParams.draggingCol = null;
+          resizeLineParams.effectCol = null;
           target.style.cursor = "";
           resizeLineStyle.display = "none";
           resizeLineStyle.left = "0";
@@ -62887,15 +62931,6 @@
 
     return customClasses;
   }
-  function filterDataByIds() {
-    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var ids = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-    var byId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "id";
-    return data.filter(function () {
-      var d = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      return ids.includes(d[byId]);
-    });
-  }
   function isRowSelectedDisabled(selectColumn, row, rowIndex) {
     var disabled = isFunction_1(selectColumn.disabled) ? selectColumn.disabled({
       row: row,
@@ -62949,6 +62984,36 @@
     }
 
     return map;
+  }
+  function getColumnDataByKey(columns, colKey) {
+    for (var i = 0, len = columns.length; i < len; i++) {
+      var _columns$i$children2;
+
+      if (columns[i].colKey === colKey) return columns[i];
+
+      if ((_columns$i$children2 = columns[i].children) !== null && _columns$i$children2 !== void 0 && _columns$i$children2.length) {
+        var t = getColumnDataByKey(columns[i].children, colKey);
+        if (t) return t;
+      }
+    }
+
+    return null;
+  }
+  function getColumnIndexByKey(columns, colKey) {
+    for (var i = 0, len = columns.length; i < len; i++) {
+      var _columns$i$children3;
+
+      if (columns[i].colKey === colKey) {
+        return i;
+      }
+
+      if ((_columns$i$children3 = columns[i].children) !== null && _columns$i$children3 !== void 0 && _columns$i$children3.length) {
+        var t = getColumnDataByKey(columns[i].children, colKey);
+        if (t) return i;
+      }
+    }
+
+    return -1;
   }
 
   function getCellKey(row, rowKey, colKey, colIndex) {
@@ -63614,7 +63679,7 @@
               mousedown: function mousedown(e) {
                 var _this$columnResizePar, _this$columnResizePar2;
 
-                return (_this$columnResizePar = _this.columnResizeParams) === null || _this$columnResizePar === void 0 ? void 0 : (_this$columnResizePar2 = _this$columnResizePar.onColumnMousedown) === null || _this$columnResizePar2 === void 0 ? void 0 : _this$columnResizePar2.call(_this$columnResizePar, e, col, index < row.length - 1 ? row[index + 1] : row[index - 1]);
+                return (_this$columnResizePar = _this.columnResizeParams) === null || _this$columnResizePar === void 0 ? void 0 : (_this$columnResizePar2 = _this$columnResizePar.onColumnMousedown) === null || _this$columnResizePar2 === void 0 ? void 0 : _this$columnResizePar2.call(_this$columnResizePar, e, col, index < row.length - 1 ? row[index + 1] : row[index - 1], index > 0 ? row[index - 1] : row[index + 1]);
               },
               mousemove: function mousemove(e) {
                 var _this$columnResizePar3, _this$columnResizePar4;
@@ -63915,6 +63980,8 @@
 
         (_props2$onLeafColumns = props2.onLeafColumnsChange) === null || _props2$onLeafColumns === void 0 ? void 0 : _props2$onLeafColumns.call(props2, spansAndLeafNodes.value.leafColumns);
         context.emit("LeafColumnsChange", spansAndLeafNodes.value.leafColumns);
+      }, {
+        immediate: true
       });
 
       var onFixedChange = function onFixedChange() {
@@ -64389,11 +64456,14 @@
       type: String,
       validator: function validator(val) {
         if (!val) return true;
-        return ["row", "row-handler", "col", "drag-col"].includes(val);
+        return ["row", "row-handler", "col", "row-handler-col", "drag-col"].includes(val);
       }
     },
     dragSortOptions: {
       type: Object
+    },
+    editableCellState: {
+      type: Function
     },
     editableRowKeys: {
       type: Array
@@ -64624,6 +64694,7 @@
       type: [String, Object, Function],
       "default": ""
     },
+    confirmOnEnter: Boolean,
     "default": {
       type: [String, Function]
     },
@@ -64690,6 +64761,26 @@
     onOverlayClick: Function
   };
 
+  var data = [];
+
+  var push = function push(value) {
+    data.push(value);
+  };
+
+  var pop = function pop() {
+    data.pop();
+  };
+
+  var stack = {
+    push: push,
+    pop: pop,
+
+    get top() {
+      return data[data.length - 1];
+    }
+
+  };
+
   function ownKeys$o(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
   function _objectSpread$n(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys$o(Object(source), !0).forEach(function (key) { _defineProperty$3(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$o(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -64721,6 +64812,7 @@
     },
     data: function data() {
       return {
+        uid: 0,
         scrollWidth: 0,
         disX: 0,
         disY: 0,
@@ -64799,11 +64891,14 @@
               }
             });
           }
+
+          document.activeElement.blur();
         } else {
           document.body.style.cssText = "";
           removeClass(document.body, "".concat(this.componentName, "--lock"));
         }
 
+        this.storeUid(value);
         this.addKeyboardEvent(value);
 
         if (this.isModeLess && this.draggable) {
@@ -64827,6 +64922,8 @@
       if (this.visible && this.isModal && this.preventScrollThrough) {
         addClass(document.body, "".concat(this.componentName, "--lock"));
       }
+
+      this.uid = this._uid;
     },
     beforeDestroy: function beforeDestroy() {
       this.addKeyboardEvent(false);
@@ -64835,15 +64932,24 @@
       TransferDom: TransferDom
     },
     methods: {
+      storeUid: function storeUid(flag) {
+        if (flag) {
+          stack.push(this.uid);
+        } else {
+          stack.pop();
+        }
+      },
       addKeyboardEvent: function addKeyboardEvent(status) {
         if (status) {
           document.addEventListener("keydown", this.keyboardEvent);
+          this.confirmOnEnter && document.addEventListener("keydown", this.keyboardEnterEvent);
         } else {
           document.removeEventListener("keydown", this.keyboardEvent);
+          this.confirmOnEnter && document.removeEventListener("keydown", this.keyboardEnterEvent);
         }
       },
       keyboardEvent: function keyboardEvent(e) {
-        if (e.code === "Escape") {
+        if (e.code === "Escape" && stack.top === this.uid) {
           var _this$closeOnEscKeydo;
 
           emitEvent(this, "esc-keydown", {
@@ -64856,6 +64962,15 @@
               trigger: "esc"
             });
           }
+        }
+      },
+      keyboardEnterEvent: function keyboardEnterEvent(e) {
+        var code = e.code;
+
+        if ((code === "Enter" || code === "NumpadEnter") && stack.top === this.uid) {
+          emitEvent(this, "confirm", {
+            e: e
+          });
         }
       },
       overlayAction: function overlayAction(e) {
@@ -65487,7 +65602,8 @@
       setTExpandedRowKeys(newKeys, {
         expandedRowData: props.data.filter(function (t2) {
           return newKeys.includes(get_1(t2, props.rowKey || "id"));
-        })
+        }),
+        currentRowData: row
       });
     };
 
@@ -65581,6 +65697,7 @@
         tSelectedRowKeys = _useDefaultValue2[0],
         setTSelectedRowKeys = _useDefaultValue2[1];
 
+    var selectedRowDataMap = VueCompositionAPI.ref( /* @__PURE__ */new Map());
     var selectColumn = VueCompositionAPI.computed(function () {
       return props.columns.find(function (_ref) {
         var type = _ref.type;
@@ -65588,7 +65705,7 @@
       });
     });
     var canSelectedRows = VueCompositionAPI.computed(function () {
-      return props.data.filter(function (row, rowIndex) {
+      return data.value.filter(function (row, rowIndex) {
         return !isDisabled(row, rowIndex);
       });
     });
@@ -65691,6 +65808,7 @@
 
       var reRowKey = props.rowKey || "id";
       var id = get_1(row, reRowKey);
+      selectedRowDataMap.value.set(id, row);
       var selectedRowIndex = selectedRowKeys2.indexOf(id);
       var isExisted = selectedRowIndex !== -1;
 
@@ -65704,7 +65822,9 @@
       }
 
       setTSelectedRowKeys(selectedRowKeys2, {
-        selectedRowData: filterDataByIds(props.data, selectedRowKeys2, reRowKey),
+        selectedRowData: selectedRowKeys2.map(function (t) {
+          return selectedRowDataMap.value.get(t);
+        }),
         currentRowKey: id,
         currentRowData: row,
         type: isExisted ? "uncheck" : "check"
@@ -65722,8 +65842,15 @@
         return !canSelectedRowKeys.includes(id);
       })) || [];
       var allIds = checked ? [].concat(_toConsumableArray(disabledSelectedRowKeys), _toConsumableArray(canSelectedRowKeys)) : _toConsumableArray(disabledSelectedRowKeys);
+
+      for (var i = 0, len = data.value.length; i < len; i++) {
+        selectedRowDataMap.value.set(get_1(data.value[i], rowKey.value || "id"), data.value[i]);
+      }
+
       setTSelectedRowKeys(allIds, {
-        selectedRowData: checked ? filterDataByIds(props.data, allIds, reRowKey) : [],
+        selectedRowData: checked ? allIds.map(function (t) {
+          return selectedRowDataMap.value.get(t);
+        }) : [],
         type: checked ? "check" : "uncheck",
         currentRowKey: "CHECK_ALL_BOX"
       });
@@ -69546,10 +69673,10 @@
       return sortOnRowDraggable.value || dragSort.value === "row";
     });
     var isRowHandlerDraggable = VueCompositionAPI.computed(function () {
-      return ["drag-col", "row-handler"].includes(dragSort.value) && !!dragCol.value;
+      return ["drag-col", "row-handler", "row-handler-col"].includes(dragSort.value) && !!dragCol.value;
     });
     var isColDraggable = VueCompositionAPI.computed(function () {
-      return dragSort.value === "col";
+      return ["col", "row-handler-col"].includes(dragSort.value);
     });
     var lastRowList = VueCompositionAPI.ref([]);
     var lastColList = VueCompositionAPI.ref([]);
@@ -69570,7 +69697,9 @@
       immediate: true
     });
     VueCompositionAPI.watch(columns, function (columns2) {
-      lastColList.value = columns2 || [];
+      lastColList.value = columns2 ? columns2.map(function (t) {
+        return t.colKey;
+      }) : [];
     }, {
       immediate: true
     });
@@ -69635,10 +69764,7 @@
       lastRowList.value = dragInstanceTmp.toArray();
     };
 
-    var registerColDragEvent = function registerColDragEvent(tableElement) {
-      var _dragInstanceTmp3;
-
-      if (!isColDraggable.value || !tableElement) return;
+    var registerOneLevelColDragEvent = function registerOneLevelColDragEvent(container, recover) {
       var dragInstanceTmp = null;
 
       var options = _objectSpread$g(_objectSpread$g({
@@ -69651,13 +69777,23 @@
         dragClass: tableDraggableClasses.dragging,
         handle: ".".concat(tableBaseClass.thCellInner),
         onEnd: function onEnd(evt) {
-          var _dragInstanceTmp2, _props$onDragSort2;
+          var _props$onDragSort2;
 
-          (_dragInstanceTmp2 = dragInstanceTmp) === null || _dragInstanceTmp2 === void 0 ? void 0 : _dragInstanceTmp2.sort(_toConsumableArray(lastColList.value));
-          var currentIndex = evt.oldIndex,
-              targetIndex = evt.newIndex;
-          var current = columns.value[currentIndex];
-          var target = columns.value[targetIndex];
+          if (recover) {
+            var _dragInstanceTmp2;
+
+            (_dragInstanceTmp2 = dragInstanceTmp) === null || _dragInstanceTmp2 === void 0 ? void 0 : _dragInstanceTmp2.sort(_toConsumableArray(lastColList.value));
+          }
+
+          var oldIndex = evt.oldIndex,
+              newIndex = evt.newIndex,
+              targetElement = evt.target;
+          var currentIndex = recover ? oldIndex : newIndex;
+          var targetIndex = recover ? newIndex : oldIndex;
+          var oldElement = targetElement.children[currentIndex];
+          var newElement = targetElement.children[targetIndex];
+          var current = getColumnDataByKey(columns.value, oldElement.dataset.colkey);
+          var target = getColumnDataByKey(columns.value, newElement.dataset.colkey);
 
           if (!current || !current.colKey) {
             log.error("Table", "colKey is missing in ".concat(JSON.stringify(current)));
@@ -69667,12 +69803,8 @@
             log.error("Table", "colKey is missing in ".concat(JSON.stringify(target)));
           }
 
-          currentIndex = props.columns.findIndex(function (t) {
-            return t.colKey === current.colKey;
-          });
-          targetIndex = props.columns.findIndex(function (t) {
-            return t.colKey === target.colKey;
-          });
+          currentIndex = getColumnIndexByKey(props.columns, current.colKey);
+          targetIndex = getColumnIndexByKey(props.columns, target.colKey);
           var params = {
             data: columns.value,
             currentIndex: currentIndex,
@@ -69689,9 +69821,25 @@
         }
       });
 
-      var container = tableElement.querySelector("thead > tr");
       dragInstanceTmp = new Sortable(container, options);
-      lastColList.value = (_dragInstanceTmp3 = dragInstanceTmp) === null || _dragInstanceTmp3 === void 0 ? void 0 : _dragInstanceTmp3.toArray();
+      return dragInstanceTmp;
+    };
+
+    var registerColDragEvent = function registerColDragEvent(tableElement) {
+      if (!isColDraggable.value || !tableElement) return;
+      var trList = tableElement.querySelectorAll("thead > tr");
+
+      if (trList.length <= 1) {
+        var _trList = _slicedToArray(trList, 1),
+            container = _trList[0];
+
+        var dragInstanceTmp = registerOneLevelColDragEvent(container, true);
+        lastColList.value = dragInstanceTmp === null || dragInstanceTmp === void 0 ? void 0 : dragInstanceTmp.toArray();
+      } else {
+        trList.forEach(function (container) {
+          registerOneLevelColDragEvent(container, false);
+        });
+      }
     };
 
     function setDragSortPrimaryTableRef(primaryTableElement) {
@@ -69812,6 +69960,9 @@
         type: Boolean,
         "default": void 0
       },
+      readonly: {
+        type: Boolean
+      },
       errors: {
         type: Array,
         "default": void 0
@@ -69821,12 +69972,14 @@
       onRuleChange: Function
     },
     setup: function setup(props, context) {
+      var _props$col$edit;
+
       var _toRefs = VueCompositionAPI.toRefs(props),
           row = _toRefs.row,
           col = _toRefs.col;
 
       var tableEditableCellRef = VueCompositionAPI.ref(null);
-      var isEdit = VueCompositionAPI.ref(false);
+      var isEdit = VueCompositionAPI.ref(((_props$col$edit = props.col.edit) === null || _props$col$edit === void 0 ? void 0 : _props$col$edit.defaultEditable) || false);
       var editValue = VueCompositionAPI.ref();
       var errorList = VueCompositionAPI.ref();
 
@@ -69988,7 +70141,8 @@
           rowIndex: props.rowIndex,
           value: val,
           col: props.col,
-          colIndex: props.colIndex
+          colIndex: props.colIndex,
+          editedRow: _objectSpread$f(_objectSpread$f({}, props.row), {}, _defineProperty$3({}, props.col.colKey, val))
         };
         (_props$onChange = props.onChange) === null || _props$onChange === void 0 ? void 0 : _props$onChange.call(props, params);
         (_props$onRuleChange = props.onRuleChange) === null || _props$onRuleChange === void 0 ? void 0 : _props$onRuleChange.call(props, params);
@@ -70059,6 +70213,8 @@
         } else {
           document.removeEventListener("click", documentClickHandler);
         }
+      }, {
+        immediate: true
       });
       VueCompositionAPI.watch(function () {
         return props.editable;
@@ -70073,7 +70229,8 @@
             row: row.value,
             rowIndex: props.rowIndex,
             colIndex: props.colIndex,
-            value: cellValue.value
+            value: cellValue.value,
+            editedRow: row.value
           });
         }
       }, {
@@ -70107,6 +70264,10 @@
           _this$errorList2$;
 
       var h = arguments[0];
+
+      if (this.readonly) {
+        return h("div", [this.cellNode]);
+      }
 
       if (this.editable === void 0 && !this.isEdit || this.editable === false) {
         var _this$tableBaseClass, _this$col$edit;
@@ -70210,7 +70371,7 @@
       if (!rowRules) return;
       var list = rowRules.map(function (item) {
         return new Promise(function (resolve) {
-          var value = item.value,
+          var editedRow = item.editedRow,
               col = item.col;
 
           if (!col.edit || !col.edit.rules || !col.edit.rules.length) {
@@ -70220,7 +70381,7 @@
             return;
           }
 
-          validate(value, col.edit.rules).then(function (r) {
+          validate(editedRow[col.colKey], col.edit.rules).then(function (r) {
             resolve(_objectSpread$e(_objectSpread$e({}, item), {}, {
               errorList: r.filter(function (t) {
                 return !t.result;
@@ -70311,7 +70472,7 @@
           if (index === -1) {
             rules.push(context2);
           } else {
-            rules[index].value = context2.value;
+            rules[index] = context2;
           }
 
           cellRuleMap.set(rowValue, rules);
@@ -70452,7 +70613,6 @@
       VueCompositionAPI.onMounted(function () {
         setFilterPrimaryTableRef(primaryTableRef.value);
         setDragSortPrimaryTableRef(primaryTableRef.value);
-        setDragSortColumns(props.columns);
       });
       VueCompositionAPI.watch(primaryTableRef, function () {
         setFilterPrimaryTableRef(primaryTableRef.value);
@@ -70509,6 +70669,10 @@
                 var key = [rowValue, p.col.colKey].join("__");
                 var errorList = (_errorListMap$value = errorListMap.value) === null || _errorListMap$value === void 0 ? void 0 : _errorListMap$value[key];
                 errorList && (cellProps.errors = errorList);
+              }
+
+              if (props.editableCellState) {
+                cellProps.readonly = props.editableCellState(p);
               }
 
               return renderEditableCell(h2, cellProps);
@@ -72817,22 +72981,30 @@
       handleMousemove: function handleMousemove(e) {
         var x = e.x,
             y = e.y;
+        var maxHeight = document.documentElement.clientHeight;
+        var maxWidth = document.documentElement.clientWidth;
+        var offsetHeight = 8;
+        var offsetWidth = 8;
 
         if (this.isSizeDragging && this.sizeDraggable) {
           if (this.placement === "right") {
-            this.draggedSizeValue = "".concat(document.documentElement.clientWidth - x + 8, "px");
+            var moveLeft = Math.min(Math.max(maxWidth - x + offsetWidth, offsetWidth), maxWidth);
+            this.draggedSizeValue = "".concat(moveLeft, "px");
           }
 
           if (this.placement === "left") {
-            this.draggedSizeValue = "".concat(x + 8, "px");
+            var moveRight = Math.min(Math.max(x + offsetWidth, offsetWidth), maxWidth);
+            this.draggedSizeValue = "".concat(moveRight, "px");
           }
 
           if (this.placement === "top") {
-            this.draggedSizeValue = "".concat(y + 8, "px");
+            var moveBottom = Math.min(Math.max(y + offsetHeight, offsetHeight), maxHeight);
+            this.draggedSizeValue = "".concat(moveBottom, "px");
           }
 
           if (this.placement === "bottom") {
-            this.draggedSizeValue = "".concat(document.documentElement.clientHeight - y + 8, "px");
+            var moveTop = Math.min(Math.max(maxHeight - y + offsetHeight, offsetHeight), maxHeight);
+            this.draggedSizeValue = "".concat(moveTop, "px");
           }
         }
       },
@@ -74052,7 +74224,8 @@
       trigger: Function,
       remove: Function,
       upload: Function,
-      autoUpload: Boolean
+      autoUpload: Boolean,
+      locale: props.locale
     },
     data: function data() {
       return {
@@ -74108,11 +74281,13 @@
         event.preventDefault();
       },
       renderDefaultDragElement: function renderDefaultDragElement() {
+        var _this$locale, _this$locale$triggerU, _this$locale2, _this$locale2$dragger, _this$locale3, _this$locale3$dragger;
+
         var h = this.$createElement;
         var unActiveElement = h("div", [h("span", {
           "class": "".concat(this.componentName, "--highlight")
-        }, [this.global.triggerUploadText.normal]), h("span", ["\xA0\xA0/\xA0\xA0", this.global.dragger.draggingText])]);
-        var activeElement = h("div", [this.global.dragger.dragDropText]);
+        }, [((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$triggerU = _this$locale.triggerUploadText) === null || _this$locale$triggerU === void 0 ? void 0 : _this$locale$triggerU.normal) || this.global.triggerUploadText.normal]), h("span", ["\xA0\xA0/\xA0\xA0", ((_this$locale2 = this.locale) === null || _this$locale2 === void 0 ? void 0 : (_this$locale2$dragger = _this$locale2.dragger) === null || _this$locale2$dragger === void 0 ? void 0 : _this$locale2$dragger.draggingText) || this.global.dragger.draggingText])]);
+        var activeElement = h("div", [((_this$locale3 = this.locale) === null || _this$locale3 === void 0 ? void 0 : (_this$locale3$dragger = _this$locale3.dragger) === null || _this$locale3$dragger === void 0 ? void 0 : _this$locale3$dragger.dragDropText) || this.global.dragger.dragDropText]);
         return this.dragActive ? activeElement : unActiveElement;
       },
       renderImage: function renderImage() {
@@ -74146,13 +74321,27 @@
         }
       },
       reUpload: function reUpload(e) {
-        this.remove(e);
+        this.remove({
+          e: e,
+          file: this.file
+        });
         this.trigger(e);
       },
       renderProgress: function renderProgress() {
-        var _this$loadingFile2,
+        var _this$locale4,
+            _this$locale4$file,
+            _this$locale5,
+            _this$locale5$file,
+            _this$loadingFile2,
+            _this$locale6,
             _this$loadingFile3,
-            _this = this;
+            _this = this,
+            _this$locale7,
+            _this$locale7$trigger,
+            _this$locale8,
+            _this$locale8$trigger,
+            _this$locale9,
+            _this$locale9$trigger;
 
         var h = this.$createElement;
 
@@ -74171,9 +74360,9 @@
           "class": "".concat(this.componentName, "__single-name")
         }, [abridgeName(this.inputName)]), this.loadingFile && this.renderUploading(), !this.loadingFile && !!this.file && h(CheckCircleFilledIcon)]), h("small", {
           "class": "".concat(this.classPrefix, "-size-s")
-        }, [this.global.file.fileSizeText, "\uFF1A", returnFileSize(this.size)]), h("small", {
+        }, [((_this$locale4 = this.locale) === null || _this$locale4 === void 0 ? void 0 : (_this$locale4$file = _this$locale4.file) === null || _this$locale4$file === void 0 ? void 0 : _this$locale4$file.fileSizeText) || this.global.file.fileSizeText, "\uFF1A", returnFileSize(this.size)]), h("small", {
           "class": "".concat(this.classPrefix, "-size-s")
-        }, [this.global.file.fileOperationDateText, "\uFF1A", getCurrentDate()]), h("div", {
+        }, [((_this$locale5 = this.locale) === null || _this$locale5 === void 0 ? void 0 : (_this$locale5$file = _this$locale5.file) === null || _this$locale5$file === void 0 ? void 0 : _this$locale5$file.fileOperationDateText) || this.global.file.fileOperationDateText, "\uFF1A", getCurrentDate()]), h("div", {
           "class": "".concat(this.componentName, "__dragger-btns")
         }, [["progress", "waiting"].includes((_this$loadingFile2 = this.loadingFile) === null || _this$loadingFile2 === void 0 ? void 0 : _this$loadingFile2.status) && h(Button, {
           "attrs": {
@@ -74184,7 +74373,7 @@
           "on": {
             "click": this.cancel
           }
-        }, [this.global.cancelUploadText]), !this.autoUpload && ((_this$loadingFile3 = this.loadingFile) === null || _this$loadingFile3 === void 0 ? void 0 : _this$loadingFile3.status) === "waiting" && h(Button, {
+        }, [((_this$locale6 = this.locale) === null || _this$locale6 === void 0 ? void 0 : _this$locale6.cancelUploadText) || this.global.cancelUploadText]), !this.autoUpload && ((_this$loadingFile3 = this.loadingFile) === null || _this$loadingFile3 === void 0 ? void 0 : _this$loadingFile3.status) === "waiting" && h(Button, {
           "attrs": {
             "theme": "primary",
             "variant": "text"
@@ -74194,7 +74383,7 @@
               return _this.upload(_objectSpread$1({}, _this.loadingFile), e);
             }
           }
-        }, [this.global.triggerUploadText.normal])]), this.showResultOperate && h("div", {
+        }, [((_this$locale7 = this.locale) === null || _this$locale7 === void 0 ? void 0 : (_this$locale7$trigger = _this$locale7.triggerUploadText) === null || _this$locale7$trigger === void 0 ? void 0 : _this$locale7$trigger.normal) || this.global.triggerUploadText.normal])]), this.showResultOperate && h("div", {
           "class": "".concat(this.componentName, "__dragger-btns")
         }, [h(Button, {
           "attrs": {
@@ -74205,7 +74394,7 @@
           "on": {
             "click": this.reUpload
           }
-        }, [this.global.triggerUploadText.reupload]), h(Button, {
+        }, [((_this$locale8 = this.locale) === null || _this$locale8 === void 0 ? void 0 : (_this$locale8$trigger = _this$locale8.triggerUploadText) === null || _this$locale8$trigger === void 0 ? void 0 : _this$locale8$trigger.reupload) || this.global.triggerUploadText.reupload]), h(Button, {
           "attrs": {
             "theme": "primary",
             "variant": "text"
@@ -74213,7 +74402,7 @@
           "on": {
             "click": this.remove
           }
-        }, [this.global.triggerUploadText["delete"]])])])]);
+        }, [((_this$locale9 = this.locale) === null || _this$locale9 === void 0 ? void 0 : (_this$locale9$trigger = _this$locale9.triggerUploadText) === null || _this$locale9$trigger === void 0 ? void 0 : _this$locale9$trigger["delete"]) || this.global.triggerUploadText["delete"]])])])]);
       }
     },
     render: function render() {
@@ -74287,7 +74476,9 @@
     render: function render() {
       var _this = this,
           _this$locale,
-          _this$locale$triggerU;
+          _this$locale$progress,
+          _this$locale2,
+          _this$locale2$trigger;
 
       var h = arguments[0];
 
@@ -74359,11 +74550,11 @@
         }
       }, [this.showUploadProgress && this.loadingFile && this.loadingFile.status === "progress" ? h("div", {
         "class": "".concat(this.componentName, "__card-container ").concat(this.componentName, "__card-box")
-      }, [h(Loading), h("p", [this.global.progress.uploadingText, " ", Math.min(this.loadingFile.percent, 99), "%"])]) : h("div", {
+      }, [h(Loading), h("p", [((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$progress = _this$locale.progress) === null || _this$locale$progress === void 0 ? void 0 : _this$locale$progress.uploadingText) || this.global.progress.uploadingText, " ", Math.min(this.loadingFile.percent, 99), "%"])]) : h("div", {
         "class": "".concat(this.componentName, "__card-container ").concat(this.componentName, "__card-box")
       }, [h(AddIcon), h("p", {
         "class": "".concat(this.classPrefix, "-size-s")
-      }, [((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$triggerU = _this$locale.triggerUploadText) === null || _this$locale$triggerU === void 0 ? void 0 : _this$locale$triggerU.image) || this.global.triggerUploadText.image])])])]);
+      }, [((_this$locale2 = this.locale) === null || _this$locale2 === void 0 ? void 0 : (_this$locale2$trigger = _this$locale2.triggerUploadText) === null || _this$locale2$trigger === void 0 ? void 0 : _this$locale2$trigger.image) || this.global.triggerUploadText.image])])])]);
     }
   });
 
@@ -74390,7 +74581,8 @@
         validator: function validator(val) {
           return ["file-flow", "image-flow"].includes(val);
         }
-      }
+      },
+      locale: props.locale
     },
     data: function data() {
       return {
@@ -74443,8 +74635,13 @@
         return Boolean(this.waitingUploadFiles && this.waitingUploadFiles.length) && !this.isUploading;
       },
       uploadText: function uploadText() {
-        if (this.isUploading) return "".concat(this.global.progress.uploadingText, "...");
-        return this.failedList && this.failedList.length ? this.global.triggerUploadText.reupload : this.global.triggerUploadText.normal;
+        var _this$locale, _this$locale$progress, _this$locale2, _this$locale2$trigger, _this$locale3, _this$locale3$trigger;
+
+        var uploadingText = ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$progress = _this$locale.progress) === null || _this$locale$progress === void 0 ? void 0 : _this$locale$progress.uploadingText) || this.global.progress.uploadingText;
+        var reuploadText = ((_this$locale2 = this.locale) === null || _this$locale2 === void 0 ? void 0 : (_this$locale2$trigger = _this$locale2.triggerUploadText) === null || _this$locale2$trigger === void 0 ? void 0 : _this$locale2$trigger.reupload) || this.global.triggerUploadText.reupload;
+        var normalText = ((_this$locale3 = this.locale) === null || _this$locale3 === void 0 ? void 0 : (_this$locale3$trigger = _this$locale3.triggerUploadText) === null || _this$locale3$trigger === void 0 ? void 0 : _this$locale3$trigger.normal) || this.global.triggerUploadText.normal;
+        if (this.isUploading) return "".concat(uploadingText, "...");
+        return this.failedList && this.failedList.length ? reuploadText : normalText;
       },
       batchRemoveRow: function batchRemoveRow() {
         return this.batchUpload && this.files.length > 0;
@@ -74452,6 +74649,8 @@
     },
     methods: {
       renderStatus: function renderStatus(file) {
+        var _this$locale4, _this$locale4$progres, _this$locale5, _this$locale5$progres, _this$locale6, _this$locale6$progres, _this$locale7, _this$locale7$progres;
+
         var h = this.$createElement;
         var status = null;
 
@@ -74468,25 +74667,25 @@
           case "success":
             status = h("div", {
               "class": "".concat(this.componentName, "__flow-status")
-            }, [h(CheckCircleFilledIcon), h("span", [this.global.progress.successText])]);
+            }, [h(CheckCircleFilledIcon), h("span", [((_this$locale4 = this.locale) === null || _this$locale4 === void 0 ? void 0 : (_this$locale4$progres = _this$locale4.progress) === null || _this$locale4$progres === void 0 ? void 0 : _this$locale4$progres.successText) || this.global.progress.successText])]);
             break;
 
           case "fail":
             status = h("div", {
               "class": "".concat(this.componentName, "__flow-status")
-            }, [h(ErrorCircleFilledIcon), h("span", [this.global.progress.failText])]);
+            }, [h(ErrorCircleFilledIcon), h("span", [((_this$locale5 = this.locale) === null || _this$locale5 === void 0 ? void 0 : (_this$locale5$progres = _this$locale5.progress) === null || _this$locale5$progres === void 0 ? void 0 : _this$locale5$progres.failText) || this.global.progress.failText])]);
             break;
 
           case "progress":
             this.showUploadProgress && (status = h("div", {
               "class": "".concat(this.componentName, "__flow-status")
-            }, [h(Loading), h("span", ["".concat(this.global.progress.uploadingText, " ").concat(Math.min(file.percent, 99), "%")])]));
+            }, [h(Loading), h("span", ["".concat(((_this$locale6 = this.locale) === null || _this$locale6 === void 0 ? void 0 : (_this$locale6$progres = _this$locale6.progress) === null || _this$locale6$progres === void 0 ? void 0 : _this$locale6$progres.uploadingText) || this.global.progress.uploadingText, " ").concat(Math.min(file.percent, 99), "%")])]));
             break;
 
           case "waiting":
             status = h("div", {
               "class": "".concat(this.componentName, "__flow-status")
-            }, [h(TimeFilledIcon), h("span", [this.global.progress.waitingText])]);
+            }, [h(TimeFilledIcon), h("span", [((_this$locale7 = this.locale) === null || _this$locale7 === void 0 ? void 0 : (_this$locale7$progres = _this$locale7.progress) === null || _this$locale7$progres === void 0 ? void 0 : _this$locale7$progres.waitingText) || this.global.progress.waitingText])]);
             break;
         }
 
@@ -74517,7 +74716,11 @@
         this.$emit("imgPreview", event, file);
       },
       renderDragger: function renderDragger() {
+        var _this$locale8, _this$locale8$dragger, _this$locale9, _this$locale9$dragger;
+
         var h = this.$createElement;
+        var dragDropText = ((_this$locale8 = this.locale) === null || _this$locale8 === void 0 ? void 0 : (_this$locale8$dragger = _this$locale8.dragger) === null || _this$locale8$dragger === void 0 ? void 0 : _this$locale8$dragger.dragDropText) || this.global.dragger.dragDropText;
+        var clickAndDragText = ((_this$locale9 = this.locale) === null || _this$locale9 === void 0 ? void 0 : (_this$locale9$dragger = _this$locale9.dragger) === null || _this$locale9$dragger === void 0 ? void 0 : _this$locale9$dragger.clickAndDragText) || this.global.dragger.clickAndDragText;
         return h("div", {
           "class": "".concat(this.componentName, "__flow-empty"),
           "on": {
@@ -74526,15 +74729,23 @@
             "dragover": this.handleDragover,
             "dragleave": this.handleDragleave
           }
-        }, [this.dragActive ? this.global.dragger.dragDropText : this.global.dragger.clickAndDragText]);
+        }, [this.dragActive ? dragDropText : clickAndDragText]);
       },
       renderFileList: function renderFileList() {
-        var _this2 = this;
+        var _this$locale10,
+            _this$locale10$file,
+            _this$locale11,
+            _this$locale11$file,
+            _this$locale12,
+            _this$locale12$file,
+            _this$locale13,
+            _this$locale13$file,
+            _this2 = this;
 
         var h = this.$createElement;
         return h("table", {
           "class": "".concat(this.componentName, "__flow-table")
-        }, [h("tr", [h("th", [this.global.file.fileNameText]), h("th", [this.global.file.fileSizeText]), h("th", [this.global.file.fileStatusText]), h("th", [this.global.file.fileOperationText])]), this.showInitial && h("tr", [h("td", {
+        }, [h("tr", [h("th", [((_this$locale10 = this.locale) === null || _this$locale10 === void 0 ? void 0 : (_this$locale10$file = _this$locale10.file) === null || _this$locale10$file === void 0 ? void 0 : _this$locale10$file.fileNameText) || this.global.file.fileNameText]), h("th", [((_this$locale11 = this.locale) === null || _this$locale11 === void 0 ? void 0 : (_this$locale11$file = _this$locale11.file) === null || _this$locale11$file === void 0 ? void 0 : _this$locale11$file.fileSizeText) || this.global.file.fileSizeText]), h("th", [((_this$locale12 = this.locale) === null || _this$locale12 === void 0 ? void 0 : (_this$locale12$file = _this$locale12.file) === null || _this$locale12$file === void 0 ? void 0 : _this$locale12$file.fileStatusText) || this.global.file.fileStatusText]), h("th", [((_this$locale13 = this.locale) === null || _this$locale13 === void 0 ? void 0 : (_this$locale13$file = _this$locale13.file) === null || _this$locale13$file === void 0 ? void 0 : _this$locale13$file.fileOperationText) || this.global.file.fileOperationText])]), this.showInitial && h("tr", [h("td", {
           "attrs": {
             "colspan": 4
           }
@@ -74544,7 +74755,9 @@
         })]);
       },
       renderNormalActionCol: function renderNormalActionCol(file, index) {
-        var _this3 = this;
+        var _this3 = this,
+            _this$locale14,
+            _this$locale14$trigge;
 
         var h = this.$createElement;
         return h("td", [h("span", {
@@ -74558,10 +74771,12 @@
               });
             }
           }
-        }, [this.global.triggerUploadText["delete"]])]);
+        }, [((_this$locale14 = this.locale) === null || _this$locale14 === void 0 ? void 0 : (_this$locale14$trigge = _this$locale14.triggerUploadText) === null || _this$locale14$trigge === void 0 ? void 0 : _this$locale14$trigge["delete"]) || this.global.triggerUploadText["delete"]])]);
       },
       renderBatchActionCol: function renderBatchActionCol(index) {
-        var _this4 = this;
+        var _this4 = this,
+            _this$locale15,
+            _this$locale15$trigge;
 
         var h = this.$createElement;
         return index === 0 ? h("td", {
@@ -74580,7 +74795,7 @@
               });
             }
           }
-        }, [this.global.triggerUploadText["delete"]])]) : "";
+        }, [((_this$locale15 = this.locale) === null || _this$locale15 === void 0 ? void 0 : (_this$locale15$trigge = _this$locale15.triggerUploadText) === null || _this$locale15$trigge === void 0 ? void 0 : _this$locale15$trigge["delete"]) || this.global.triggerUploadText["delete"]])]) : "";
       },
       renderImgList: function renderImgList() {
         var _this5 = this;
@@ -74601,15 +74816,17 @@
         }, [this.showInitial && this.renderDragger(), !!this.listFiles.length && h("ul", {
           "class": "".concat(this.componentName, "__card clearfix")
         }, [this.listFiles.map(function (file, index) {
+          var _this5$locale, _this5$locale$progres, _this5$locale2, _this5$locale2$progre;
+
           return h("li", {
             "class": "".concat(_this5.componentName, "__card-item")
           }, [h("div", {
             "class": ["".concat(_this5.componentName, "__card-content"), _defineProperty$3({}, "".concat(_this5.classPrefix, "-is-bordered"), file.status !== "waiting")]
           }, [file.status === "fail" && h("div", {
             "class": "".concat(_this5.componentName, "__card-status-wrap")
-          }, [h(ErrorCircleFilledIcon), h("p", [_this5.global.progress.failText])]), file.status === "progress" && h("div", {
+          }, [h(ErrorCircleFilledIcon), h("p", [((_this5$locale = _this5.locale) === null || _this5$locale === void 0 ? void 0 : (_this5$locale$progres = _this5$locale.progress) === null || _this5$locale$progres === void 0 ? void 0 : _this5$locale$progres.failText) || _this5.global.progress.failText])]), file.status === "progress" && h("div", {
             "class": "".concat(_this5.componentName, "__card-status-wrap")
-          }, [h(Loading), h("p", [_this5.global.progress.uploadingText, " ", Math.min(file.percent, 99)])]), (["waiting", "success"].includes(file.status) || !file.status && file.url) && h("img", {
+          }, [h(Loading), h("p", [((_this5$locale2 = _this5.locale) === null || _this5$locale2 === void 0 ? void 0 : (_this5$locale2$progre = _this5$locale2.progress) === null || _this5$locale2$progre === void 0 ? void 0 : _this5$locale2$progre.uploadingText) || _this5.global.progress.uploadingText, " ", Math.min(file.percent, 99)])]), (["waiting", "success"].includes(file.status) || !file.status && file.url) && h("img", {
             "class": "".concat(_this5.componentName, "__card-image"),
             "attrs": {
               "src": file.url || "//tdesign.gtimg.com/tdesign-default-img.png"
@@ -74644,7 +74861,8 @@
       }
     },
     render: function render() {
-      var _this6 = this;
+      var _this$locale16,
+          _this6 = this;
 
       var h = arguments[0];
       return h("div", {
@@ -74662,7 +74880,7 @@
         "on": {
           "click": this.cancel
         }
-      }, [this.global.cancelUploadText]), h(Button, {
+      }, [((_this$locale16 = this.locale) === null || _this$locale16 === void 0 ? void 0 : _this$locale16.cancelUploadText) || this.global.cancelUploadText]), h(Button, {
         "attrs": {
           "disabled": !this.allowUpload,
           "theme": "primary"
@@ -74790,7 +75008,11 @@
         validator: function validator(val) {
           return ["file", "file-input"].includes(val);
         }
-      }
+      },
+      fileListDisplay: {
+        type: Function
+      },
+      locale: props.locale
     },
     computed: {
       percent: function percent() {
@@ -74875,7 +75097,6 @@
 
         var h = this.$createElement;
         if (!this.inputName) return;
-        var fileListDisplay = renderTNodeJSX(this, "fileListDisplay");
 
         var _this$useGlobalIcon4 = this.useGlobalIcon({
           CloseCircleFilledIcon: CloseCircleFilled
@@ -74884,13 +75105,16 @@
 
         return h("div", {
           "class": ["".concat(this.componentName, "__single-display-text"), "".concat(this.componentName, "__display-text--margin")]
-        }, [fileListDisplay || h("span", {
+        }, [this.fileListDisplay() || h("span", {
           "class": "".concat(this.componentName, "__single-name")
         }, [this.inputName]), this.showProgress ? this.renderProgress() : h(CloseCircleFilledIcon, {
           "class": "".concat(this.componentName, "__icon-delete"),
           "nativeOn": {
             "click": function click(e) {
-              return _this.remove(e);
+              return _this.remove({
+                e: e,
+                file: _this.file
+              });
             }
           }
         })]);
@@ -74907,7 +75131,9 @@
       }
     },
     render: function render() {
-      var _this2 = this;
+      var _this2 = this,
+          _this$locale,
+          _this$locale$triggerU;
 
       var h = arguments[0];
       return h("div", {
@@ -74916,10 +75142,13 @@
         "class": "".concat(this.componentName, "__single-input-delete"),
         "on": {
           "click": function click(e) {
-            return _this2.remove(e);
+            return _this2.remove({
+              e: e,
+              file: _this2.file
+            });
           }
         }
-      }, ["\u5220\u9664"])]);
+      }, [((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$triggerU = _this$locale.triggerUploadText) === null || _this$locale$triggerU === void 0 ? void 0 : _this$locale$triggerU["delete"]) || this.t(this.global.triggerUploadText["delete"])])]);
     }
   });
 
@@ -75001,17 +75230,21 @@
         return this.uploadInOneRequest && this.isBatchUpload;
       },
       uploadListTriggerText: function uploadListTriggerText() {
-        var _this$toUploadFiles, _this$files;
+        var _this$locale, _this$locale$triggerU, _this$toUploadFiles, _this$files;
 
-        var uploadText = this.global.triggerUploadText.fileInput;
+        var uploadText = ((_this$locale = this.locale) === null || _this$locale === void 0 ? void 0 : (_this$locale$triggerU = _this$locale.triggerUploadText) === null || _this$locale$triggerU === void 0 ? void 0 : _this$locale$triggerU.fileInput) || this.global.triggerUploadText.fileInput;
 
         if (((_this$toUploadFiles = this.toUploadFiles) === null || _this$toUploadFiles === void 0 ? void 0 : _this$toUploadFiles.length) > 0 || ((_this$files = this.files) === null || _this$files === void 0 ? void 0 : _this$files.length) > 0) {
           var _this$files2;
 
           if (this.theme === "file-input" || ((_this$files2 = this.files) === null || _this$files2 === void 0 ? void 0 : _this$files2.length) > 0 && this.canBatchUpload) {
-            uploadText = this.global.triggerUploadText.reupload;
+            var _this$locale2, _this$locale2$trigger;
+
+            uploadText = ((_this$locale2 = this.locale) === null || _this$locale2 === void 0 ? void 0 : (_this$locale2$trigger = _this$locale2.triggerUploadText) === null || _this$locale2$trigger === void 0 ? void 0 : _this$locale2$trigger.reupload) || this.global.triggerUploadText.reupload;
           } else {
-            uploadText = this.global.triggerUploadText.continueUpload;
+            var _this$locale3, _this$locale3$trigger;
+
+            uploadText = ((_this$locale3 = this.locale) === null || _this$locale3 === void 0 ? void 0 : (_this$locale3$trigger = _this$locale3.triggerUploadText) === null || _this$locale3$trigger === void 0 ? void 0 : _this$locale3$trigger.continueUpload) || this.global.triggerUploadText.continueUpload;
           }
         }
 
@@ -75047,7 +75280,9 @@
         this.uploadFiles(files);
         emitEvent(this, "select-change", formatFiles(Array.from(files), this.format));
       },
-      handleSingleRemove: function handleSingleRemove(e) {
+      handleSingleRemove: function handleSingleRemove(_ref) {
+        var e = _ref.e,
+            file = _ref.file;
         var changeCtx = {
           trigger: "remove"
         };
@@ -75055,12 +75290,9 @@
         this.errorMsg = "";
         this.emitChangeEvent([], changeCtx);
         this.emitRemoveEvent({
-          e: e
+          e: e,
+          file: file
         });
-      },
-      handleFileInputRemove: function handleFileInputRemove(e) {
-        e === null || e === void 0 ? void 0 : e.stopPropagation();
-        this.handleSingleRemove(e);
       },
       handleMultipleRemove: function handleMultipleRemove(options) {
         var changeCtx = _objectSpread({
@@ -75344,15 +75576,15 @@
         };
         emitEvent(this, "fail", context);
       },
-      handleProgress: function handleProgress(_ref) {
+      handleProgress: function handleProgress(_ref2) {
         var _this7 = this;
 
-        var event = _ref.event,
-            file = _ref.file,
-            currentFiles = _ref.files,
-            percent = _ref.percent,
-            _ref$type = _ref.type,
-            type = _ref$type === void 0 ? "real" : _ref$type;
+        var event = _ref2.event,
+            file = _ref2.file,
+            currentFiles = _ref2.files,
+            percent = _ref2.percent,
+            _ref2$type = _ref2.type,
+            type = _ref2$type === void 0 ? "real" : _ref2$type;
         var innerFiles = Array.isArray(currentFiles) ? currentFiles : [file];
         if ((innerFiles === null || innerFiles === void 0 ? void 0 : innerFiles.length) <= 0) return log.error("Uploader", "Progress Error files");
         innerFiles.forEach(function (file2) {
@@ -75368,13 +75600,13 @@
         };
         emitEvent(this, "progress", progressCtx);
       },
-      handleSuccess: function handleSuccess(_ref2) {
+      handleSuccess: function handleSuccess(_ref3) {
         var _res2, _this$files4;
 
-        var event = _ref2.event,
-            file = _ref2.file,
-            currentFiles = _ref2.files,
-            response = _ref2.response;
+        var event = _ref3.event,
+            file = _ref3.file,
+            currentFiles = _ref3.files,
+            response = _ref3.response;
         var innerFiles = Array.isArray(currentFiles) ? currentFiles : [file];
         if ((innerFiles === null || innerFiles === void 0 ? void 0 : innerFiles.length) <= 0) return log.error("Uploader", "success no files");
         innerFiles.forEach(function (file2) {
@@ -75428,9 +75660,9 @@
         emitEvent(this, "success", sContext);
         this.loadingFile = null;
       },
-      handlePreview: function handlePreview(_ref3) {
-        var file = _ref3.file,
-            event = _ref3.event;
+      handlePreview: function handlePreview(_ref4) {
+        var file = _ref4.file,
+            event = _ref4.event;
         return {
           file: file,
           event: event
@@ -75523,7 +75755,7 @@
         }, 500);
       },
       getDefaultTrigger: function getDefaultTrigger() {
-        var _this$files5;
+        var _this$locale4, _this$locale4$trigger, _this$locale5, _this$locale5$trigger, _this$files5;
 
         var h = this.$createElement;
 
@@ -75540,13 +75772,19 @@
         }),
             UploadIcon = _this$useGlobalIcon.UploadIcon;
 
+        var reuploadText = ((_this$locale4 = this.locale) === null || _this$locale4 === void 0 ? void 0 : (_this$locale4$trigger = _this$locale4.triggerUploadText) === null || _this$locale4$trigger === void 0 ? void 0 : _this$locale4$trigger.reupload) || this.global.triggerUploadText.reupload;
+        var normalText = ((_this$locale5 = this.locale) === null || _this$locale5 === void 0 ? void 0 : (_this$locale5$trigger = _this$locale5.triggerUploadText) === null || _this$locale5$trigger === void 0 ? void 0 : _this$locale5$trigger.normal) || this.global.triggerUploadText.normal;
         return h(Button, {
           "attrs": {
             "variant": "outline"
           }
         }, [h(UploadIcon, {
           "slot": "icon"
-        }), (_this$files5 = this.files) !== null && _this$files5 !== void 0 && _this$files5.length ? this.global.triggerUploadText.reupload : this.global.triggerUploadText.normal]);
+        }), (_this$files5 = this.files) !== null && _this$files5 !== void 0 && _this$files5.length ? reuploadText : normalText]);
+      },
+      renderFileListDisplay: function renderFileListDisplay() {
+        var fileListDisplay = renderTNodeJSX(this, "fileListDisplay");
+        return fileListDisplay;
       },
       renderInput: function renderInput() {
         var h = this.$createElement;
@@ -75574,7 +75812,8 @@
             "remove": this.handleSingleRemove,
             "showUploadProgress": this.showUploadProgress,
             "placeholder": this.placeholder,
-            "fileListDisplay": this.fileListDisplay
+            "fileListDisplay": this.renderFileListDisplay,
+            "locale": this.locale
           }
         }, [h("div", {
           "class": "".concat(this.componentName, "__trigger"),
@@ -75602,7 +75841,8 @@
             "trigger": this.triggerUpload,
             "remove": this.handleSingleRemove,
             "upload": this.upload,
-            "autoUpload": this.autoUpload
+            "autoUpload": this.autoUpload,
+            "locale": this.locale
           },
           "on": {
             "change": this.handleDragChange,
@@ -75658,7 +75898,8 @@
           "upload": this.multipleUpload,
           "cancel": this.cancelUpload,
           "display": this.theme,
-          "batchUpload": this.canBatchUpload
+          "batchUpload": this.canBatchUpload,
+          "locale": this.locale
         },
         "on": {
           "imgPreview": this.handlePreviewImg,
@@ -75862,7 +76103,7 @@
   }
   var tdesign = {
     install: install,
-    version: "0.46.1"
+    version: "0.46.2"
   };
 
   if (typeof console !== "undefined" && console.warn && typeof window !== "undefined") {
