@@ -28,6 +28,12 @@ public class Alert : TDesignComponentBase, IHasChildContent
     /// 图标。
     /// </summary>
     [Parameter] public object? Icon { get; set; }
+    /// <summary>
+    /// 是否可以关闭。
+    /// </summary>
+    [Parameter] public bool Closable { get; set; }
+
+    bool Closed { get; set; }
 
     public string GetTheme => Theme switch
     {
@@ -49,6 +55,15 @@ public class Alert : TDesignComponentBase, IHasChildContent
         };
     }
 
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        if (Closed)
+        {
+            return;
+        }
+        base.BuildRenderTree(builder);
+    }
+
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         builder.CreateElement(sequence, "div", icon =>
@@ -66,6 +81,12 @@ public class Alert : TDesignComponentBase, IHasChildContent
                     message.CreateElement(1, "div", OperationContent, new { @class = "t-alert__operation" }, OperationContent is not null);
                 }, new { @class = "t-alert__message" });
             }, new { @class = "t-alert__content" });
+
+        builder.CreateElement(sequence + 2, "div", icon => icon.CreateComponent<Icon>(0, attributes: new { Name = IconName.Close }), new
+        {
+            @class = "t-alert__close",
+            onclick = HtmlHelper.CreateCallback(this, () => { Closed = true; StateHasChanged(); }, Closable)
+        }, Closable);
     }
 
     protected override void BuildCssClass(ICssClassBuilder builder)

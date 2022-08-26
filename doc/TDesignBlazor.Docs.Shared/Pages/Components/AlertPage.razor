@@ -83,3 +83,37 @@
 ")
     </CodeContent>
 </Example>
+
+<Example Title="可关闭的警告">
+    <Description>设置 <code>Cloasable</code> 使警告消息可以被关闭。</Description>
+    <RunContent>
+        <Alert Theme="Theme.Primary" Closable>
+            <TitleContent>
+                这里是消息提示的标题
+            </TitleContent>
+            <ChildContent>
+                这是一条普通的消息提示内容
+            </ChildContent>
+            <OperationContent>
+                这里是相关操作
+            </OperationContent>
+        </Alert>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Alert Theme=""Theme.Primary"" Closable>
+    <TitleContent>
+        这里是消息提示的标题
+    </TitleContent>
+    <ChildContent>
+        这是一条普通的消息提示
+    </ChildContent>
+    <OperationContent>
+        这里是相关操作
+    </OperationContent>
+</Alert>
+```
+")
+    </CodeContent>
+</Example>
