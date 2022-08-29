@@ -5,7 +5,7 @@
 /// </summary>
 [CssClass("t-row")]
 [ParentComponent]
-public class Row : BlazorChildContentComponentBase
+public class Row : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 间隔，单位 px。
@@ -19,6 +19,10 @@ public class Row : BlazorChildContentComponentBase
     /// 垂直对齐方式。
     /// </summary>
     [Parameter][CssClass("t-row--")] public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Top;
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     protected override void BuildStyle(IStyleBuilder builder)
     {

@@ -7,7 +7,7 @@ namespace TDesignBlazor.Components;
 /// </summary>
 [ChildComponent(typeof(Row))]
 [CssClass("t-col")]
-public class Column : BlazorChildContentComponentBase, IHasCascadingParameter<Row>
+public class Column : BlazorComponentBase, IHasChildContent, IHasCascadingParameter<Row>
 {
     /// <summary>
     /// 获取或设置父组件 <see cref="Row"/> 的级联参数的值。
@@ -33,6 +33,10 @@ public class Column : BlazorChildContentComponentBase, IHasCascadingParameter<Ro
     /// 获取或设置单元格的排序。
     /// </summary>
     [Parameter][CssClass("t-col-order-")] public ColumnSize? Order { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
 
     /// <summary>
