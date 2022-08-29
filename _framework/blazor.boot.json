@@ -9,7 +9,7 @@
     "assembly": {
       "ColorCode.Core.dll": "sha256-\/gkB5Mr2tBXhbYOQzd\/O\/E8irhJ54MvURTC258mVMXE=",
       "ColorCode.HTML.dll": "sha256-F9P1kBN9u74oqggH8ti4ocDdmAwXr0Awi+FSVNo+O4U=",
-      "ComponentBuilder.dll": "sha256-wNObvW5EOjqroUaEi7Xoh+x4Oen8OivxGqbCh85pQNI=",
+      "ComponentBuilder.dll": "sha256-sR1+LGnhQaBLeUGU9+hu2XYm4TGMUypZKKIjDnl\/Hwc=",
       "FSharp.Core.dll": "sha256-K\/uXuEeiR6k91qWaAd\/4XiQ39cMTMnek8Qo5wZCdY\/I=",
       "Markdig.dll": "sha256-\/qKhOo2ZbkSd56j45qUCUGYRyBMnR0dmDkWfZfLJKeo=",
       "MarkdigExtensions.SyntaxHighlighting.dll": "sha256-HlLIDA8CUxM5uMyr8kFH8ISWx8Sb+Oj8q0NtKUpomC8=",
@@ -54,7 +54,7 @@
       "System.Private.Runtime.InteropServices.JavaScript.dll": "sha256-rEOOEPZFgkL4stYgvFAqnb0qiuP+vrkD7A18sxJNGEQ=",
       "System.Private.Uri.dll": "sha256-KoUT+p5o0MYFLsa5iAyS2DAMu6RIGvHseLWvUHmtabE=",
       "System.Runtime.CompilerServices.Unsafe.dll": "sha256-XkqD23WugynXXdkxLPSeueWqcV68xJvWkIc7ZdkC2sc=",
-      "System.Runtime.dll": "sha256-WHQh5175uP6Yv1SeKWJwOQHaqIcytrfv79j+5WrdUgE=",
+      "System.Runtime.dll": "sha256-vTLoA8yP\/9O5YjYm1hxPpF+QaTfesIKiGlbRxAvppjE=",
       "System.Runtime.Extensions.dll": "sha256-I\/XR4RyBSFdv3iQxlSodoPgvmorrZYacbYJLCY27seI=",
       "System.Runtime.InteropServices.dll": "sha256-0NZ2xJlqaUJ+UmsfuOiehs\/yIXhTqsJhc2bfM13sAeo=",
       "System.Runtime.Intrinsics.dll": "sha256-73S8UZq\/VjlTL0neuTtcfqb3cn5oNe\/vQ8Wu1AQPbk4=",
@@ -64,9 +64,9 @@
       "System.Text.RegularExpressions.dll": "sha256-CP95jSa+NL8C4c4VMjmTM8y7kNDJ3cbwv2X6qLBbcM0=",
       "System.Threading.dll": "sha256-CPVUBr70Xz6JCsem8ZgaSDl8xu4GBSIiHyFKf4pFnIw=",
       "System.Threading.Tasks.Parallel.dll": "sha256-AXglBa9xHEYufHeZGoWsweIFNMYwk\/we\/dtmObPefBA=",
-      "TDesignBlazor.dll": "sha256-U0TNShGUgqWjnct1iczbQROgMdCk\/3HbdKZKoWsJsBk=",
-      "TDesignBlazor.Docs.Shared.dll": "sha256-zCbfKqabyUC5MaTjKvxXnU9ZUQ2gaVR+XsmPzFxNZ88=",
-      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-eA+sTrbKEXIqzgWqdmirYu7dGYj4u90ZEgw+vFADUsQ="
+      "TDesignBlazor.dll": "sha256-sI1HM0FLAN3X+Wgt9MicFjZKrSER6ZnVCiN4wBk38Ho=",
+      "TDesignBlazor.Docs.Shared.dll": "sha256-Zf\/k6SV3FmgaogaDlNEronvdtPRM4WgI7L6cRPlGfrI=",
+      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-1IGWANz3eqGHjnaEJctVIC1bgj8Xju2lzGp5QmSN9CU="
     },
     "extensions": null,
     "lazyAssembly": null,
