@@ -1,0 +1,123 @@
+﻿@page "/components/breadcrumb"
+<PageHeader Title="Breadcrumb 面包屑">
+    显示当前页面在系统层级结构的位置，并能返回之前任意层级的页面。
+</PageHeader>
+
+<Example Title="基础面包屑">
+    <Description>适用于广泛的基础用法，系统拥有超过两级以上的层级结构，用于切换向上任意层级的内容。</Description>
+    <RunContent>
+        <Breadcrumb>
+            <BreadcrumbItem>页面1</BreadcrumbItem>
+            <BreadcrumbItem>页面2，超长的文案显示不下</BreadcrumbItem>
+            <BreadcrumbItem>超长的文案显示不下哦</BreadcrumbItem>
+        </Breadcrumb>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Breadcrumb>
+    <BreadcrumbItem>页面1</BreadcrumbItem>
+    <BreadcrumbItem>页面2，超长的文案显示不下</BreadcrumbItem>
+    <BreadcrumbItem>超长的文案显示不下哦</BreadcrumbItem>
+</Breadcrumb>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带图标的面包屑">
+    <Description>可自定义每项内容，统一图标加文字，图标。</Description>
+    <RunContent>
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <Icon Name="IconName.Books"/> 文案
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+                选择列表 <Icon Name="IconName.ViewList"/>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+                没有图标
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Breadcrumb>
+    <BreadcrumbItem>
+        <Icon Name=""IconName.Books""/> 文案
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+        选择列表 <Icon Name=""IconName.ViewList""/>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+        没有图标
+    </BreadcrumbItem>
+</Breadcrumb>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义分隔符">
+    <Description>设置 <code>SeperatorContent</code> 自定义分隔符。</Description>
+    <RunContent>
+        <Breadcrumb>
+            <BreadcrumbItem>
+                <ChildContent>页面1</ChildContent>
+                <SeperatorContent>--</SeperatorContent>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+                <ChildContent>页面2</ChildContent>
+                <SeperatorContent><Icon Name="IconName.ImageError"/></SeperatorContent>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+                页面3
+            </BreadcrumbItem>
+        </Breadcrumb>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Breadcrumb>
+    <BreadcrumbItem>
+        <ChildContent>页面1</ChildContent>
+        <SeperatorContent>--</SeperatorContent>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+        <ChildContent>页面2</ChildContent>
+        <SeperatorContent><Icon Name=""IconName.ImageError""/></SeperatorContent>
+    </BreadcrumbItem>
+    <BreadcrumbItem>
+        页面3
+    </BreadcrumbItem>
+</Breadcrumb>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带跳转/点击的面包屑">
+    <Description></Description>
+    <RunContent>
+        <Breadcrumb>
+            <BreadcrumbItem>首页</BreadcrumbItem>
+            <BreadcrumbItem Link="...">页面1</BreadcrumbItem>
+            <BreadcrumbItem Link="..." target="_blank">页面2</BreadcrumbItem>
+            <BreadcrumbItem Disabled>页面3(禁用)</BreadcrumbItem>
+            <BreadcrumbItem @onclick="@(e=>JS.InvokeVoidAsync("alert","点击了链接"))">自定义点击</BreadcrumbItem>
+        </Breadcrumb>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Breadcrumb>
+    <BreadcrumbItem>首页</BreadcrumbItem>
+    <BreadcrumbItem Link=""..."">页面1</BreadcrumbItem>
+    <BreadcrumbItem Link=""..."" target=""_blank"">页面2</BreadcrumbItem>
+    <BreadcrumbItem Disabled>页面3(禁用)</BreadcrumbItem>
+    <BreadcrumbItem @onclick=""@(e=>JS.InvokeVoidAsync(""alert"",""点击了链接""))"">自定义点击</BreadcrumbItem>
+</Breadcrumb>
+```
+")
+    </CodeContent>
+</Example>
+
+@inject IJSRuntime JS
