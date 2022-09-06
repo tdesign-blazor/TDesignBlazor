@@ -1,0 +1,208 @@
+﻿@page "/components/step"
+
+<PageHeader Title="Steps 步骤条">
+    提示用户进度以及当前的步骤，用于引导用户按照步骤完成任务的导航条。
+</PageHeader>
+
+<Example Title="带序号的水平步骤条">
+    <Description>适用于步骤数较多时，让用户更明确的了解步骤数量。</Description>
+    <RunContent>
+        <StepGroup>
+            <StepItem Status="StepStatus.Finish">已完成的步骤</StepItem>
+            <StepItem Status="StepStatus.Process">进行中的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+        </StepGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup>
+    <StepItem Status=""StepStatus.Finish"">已完成的步骤</StepItem>
+    <StepItem Status=""StepStatus.Process"">进行中的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="不带序的水平步骤条">
+    <Description>适用于步骤数较少时，主要引导用户按步骤完成操作。</Description>
+    <RunContent>
+        <StepGroup Dot>
+            <StepItem Status="StepStatus.Finish">已完成的步骤</StepItem>
+            <StepItem Status="StepStatus.Process">进行中的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+        </StepGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup Dot>
+    <StepItem Status=""StepStatus.Finish"">已完成的步骤</StepItem>
+    <StepItem Status=""StepStatus.Process"">进行中的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
+
+
+<Example Title="垂直步骤条">
+    <Description>设置 <code>Vertical</code> 即可垂直显示。</Description>
+    <RunContent>
+        <Space Gap="100px">
+            <SpaceItem>
+                <StepGroup Vertical>
+                    <StepItem Status="StepStatus.Finish">已完成的步骤</StepItem>
+                    <StepItem Status="StepStatus.Process">进行中的步骤</StepItem>
+                    <StepItem>未进行的步骤</StepItem>
+                    <StepItem>未进行的步骤</StepItem>
+                </StepGroup>
+            </SpaceItem>
+            <SpaceItem>
+                <StepGroup Vertical Dot>
+                    <StepItem Status="StepStatus.Finish">已完成的步骤</StepItem>
+                    <StepItem Status="StepStatus.Process">进行中的步骤</StepItem>
+                    <StepItem>未进行的步骤</StepItem>
+                    <StepItem>未进行的步骤</StepItem>
+                </StepGroup>
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup Vertical>
+    <StepItem Status=""StepStatus.Finish"">已完成的步骤</StepItem>
+    <StepItem Status=""StepStatus.Process"">进行中的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+</StepGroup>
+
+<StepGroup Vertical Dot>
+    <StepItem Status=""StepStatus.Finish"">已完成的步骤</StepItem>
+    <StepItem Status=""StepStatus.Process"">进行中的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+    <StepItem>未进行的步骤</StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义图标的步骤条">
+    <Description>设置 <code>Icon</code> 图标名称即可。</Description>
+    <RunContent>
+        <StepGroup>
+            <StepItem Icon="IconName.Login" Status="StepStatus.Finish">登录</StepItem>
+            <StepItem Icon="IconName.Cart" Status="StepStatus.Process">购物车</StepItem>
+            <StepItem Icon="IconName.Wallet">支付订单</StepItem>
+            <StepItem Icon="IconName.Check">完成</StepItem>
+        </StepGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup>
+    <StepItem Icon=""IconName.Login"" Status=""StepStatus.Finish"">登录</StepItem>
+    <StepItem Icon=""IconName.Cart"" Status=""StepStatus.Process"">购物车</StepItem>
+    <StepItem Icon=""IconName.Wallet"">支付订单</StepItem>
+    <StepItem Icon=""IconName.Check"">完成</StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="错误状态的步骤条">
+    <Description>状态是 <code>Error</code> 会呈现错误的图标</Description>
+    <RunContent>
+        <StepGroup>
+            <StepItem Icon="IconName.Login" Status="StepStatus.Finish">登录</StepItem>
+            <StepItem Icon="IconName.Cart" Status="StepStatus.Finish">购物车</StepItem>
+            <StepItem Icon="IconName.Wallet" Status="StepStatus.Error">支付订单</StepItem>
+            <StepItem Icon="IconName.Check">完成</StepItem>
+        </StepGroup>
+        <br />
+        <StepGroup>
+            <StepItem Status="StepStatus.Finish">已完成的步骤</StepItem>
+            <StepItem Status="StepStatus.Error">错误的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+            <StepItem>未进行的步骤</StepItem>
+        </StepGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup>
+    <StepItem Icon=""IconName.Login"" Status=""StepStatus.Finish"">登录</StepItem>
+    <StepItem Icon=""IconName.Cart"" Status=""StepStatus.Process"">购物车</StepItem>
+    <StepItem Icon=""IconName.Wallet"" Status=""StepStatus.Error"">支付订单</StepItem>
+    <StepItem Icon=""IconName.Check"">完成</StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带额外内容的步骤条">
+    <Description>显示地设置 <code>DescriptionContent</code> 和 <code>ExtraContent</code> 来定义额外的内容。</Description>
+    <RunContent>
+        <StepGroup>
+            <StepItem Status="StepStatus.Finish">
+                <ChildContent>步骤1</ChildContent>
+                <DescriptionContent>步骤1的描述</DescriptionContent>                
+            </StepItem>
+            <StepItem Status="StepStatus.Finish">
+                <ChildContent>步骤2</ChildContent>
+                <DescriptionContent>步骤2的描述</DescriptionContent>
+            </StepItem>
+
+            <StepItem Status="StepStatus.Process">
+                <ChildContent>步骤3</ChildContent>
+                <DescriptionContent>步骤3的描述</DescriptionContent>
+                <ExtraContent>
+                    <Button>上一步</Button>
+                    <Button Theme="Theme.Primary">下一步</Button>
+                </ExtraContent>
+            </StepItem>
+            <StepItem>
+                <ChildContent>步骤4</ChildContent>
+                <DescriptionContent>步骤4的描述</DescriptionContent>
+            </StepItem>
+        </StepGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<StepGroup>
+    <StepItem Status=""StepStatus.Finish"">
+        <ChildContent>步骤1</ChildContent>
+        <DescriptionContent>步骤1的描述</DescriptionContent>                
+    </StepItem>
+    <StepItem Status=""StepStatus.Finish"">
+        <ChildContent>步骤2</ChildContent>
+        <DescriptionContent>步骤2的描述</DescriptionContent>
+    </StepItem>
+
+    <StepItem Status=""StepStatus.Process"">
+        <ChildContent>步骤3</ChildContent>
+        <DescriptionContent>步骤3的描述</DescriptionContent>
+        <ExtraContent>
+            <Button>上一步</Button>
+            <Button Theme=""Theme.Primary"">下一步</Button>
+        </ExtraContent>
+    </StepItem>
+    <StepItem>
+        <ChildContent>步骤4</ChildContent>
+        <DescriptionContent>步骤4的描述</DescriptionContent>
+    </StepItem>
+</StepGroup>
+```
+")
+    </CodeContent>
+</Example>
