@@ -1,8 +1,7 @@
 ## TDesignBlazor
 一套基于 TDesign 的 Blazor 企业级组件库
 
->[TDesign](https://tdesign.tencent.com/) 是腾讯各业务团队在服务业务过程中沉淀的一套企业级设计体系。
->TDesign 具有统一的 价值观，一致的设计语言和视觉风格，帮助用户形成连续、统一的体验认知。在此基础上，TDesign 提供了开箱即用的 UI 组件库、设计指南 和相关 设计资产，以优雅高效的方式将设计和研发从重复劳动中解放出来，同时方便大家在 TDesign 的基础上扩展，更好的的贴近业务需求。
+![TDesign](https://user-images.githubusercontent.com/88708072/147124305-fbb74f9f-65b2-44f9-9f1c-e812ce63a547.gif)
 
 ## ✨ 特性
 
@@ -58,12 +57,10 @@ builder.Service.AddTDesignBlazor();
 @using TDesignBlazor
 @using TDesignBlazor.Components
 ```
-## 🔗 链接
 
-- [ISSUE 链接](https://github.com/AchievedOwner/TDesignBlazor/issues)
+## :dart: 问题反馈
+有任何问题，建议通过 [Github issues](https://github.com/AchievedOwner/TDesignBlazor/issues) 反馈
+
+## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
 - [MS Learn 平台 Blazor 教程](https://docs.microsoft.com/zh-cn/learn/modules/build-blazor-webassembly-visual-studio-code/?WT.mc_id=DT-MVP-5003987)
-
-## 🗺 里程碑
-
-查看[这个 issue](https://github.com/AchievedOwner/TDesignBlazor/milestone/) 来了解我们的开发计划
