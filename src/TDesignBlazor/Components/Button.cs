@@ -12,7 +12,7 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+    [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -51,7 +51,7 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 禁用状态。
     /// </summary>
-    [Parameter][CssClass("t-is-disabled")][HtmlAttribute] public bool Disabled { get; set; }
+    [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
     /// <summary>
     /// 加载状态。
     /// </summary>
@@ -68,6 +68,14 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
         {
             base.AddContent(content, sequence);
         }, new { @class = "t-button__text" });
+    }
+
+    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    {
+        if (Disabled)
+        {
+            attributes["disabled"] = true;
+        }
     }
 }
 
