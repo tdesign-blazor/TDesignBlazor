@@ -1,0 +1,165 @@
+﻿@page "/components/input"
+<PageHeader Title="Input 输入框">
+    用于承载用户信息录入的文本框，常用于表单、对话框等场景，对不同内容的信息录入，可拓展形成多种信息录入形式。
+</PageHeader>
+<Alert Theme="Theme.Primary" Icon="IconName.InfoCircleFilled">
+    为了代码高亮，在代码预览中去掉了 <code>@@bind-Value</code> 的 <code>@@</code> 字符
+</Alert>
+<Example Title="基础输入框">
+    <Description>
+        最基础的单行输入框，按状态可分为正常、禁用、错误、带额外提示。通常在需要输入少量内容（20个字以内）的场景下使用。</Description>
+    <RunContent>
+        <Input @bind-Value="BasicText" Placeholder="文本框"/>
+        <br />
+        <Input @bind-Value="DefaultText" Placeholder="默认值" />
+        <br />
+        <Input @bind-Value="PrefixText" PrefixText="价格：" SuffixText="元" Type="InputType.Number" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input bind-Value=""BasicText"" Placeholder=""文本框""/>
+<Input bind-Value=""DefaultText"" Placeholder=""默认值""/>
+<Input bind-Value=""PrefixText"" PrefixText=""价格："" SuffixText=""元"" Type=""InputType.Number"" />
+```
+```cs
+string BasicText{ get; set; }
+string PrefixText{ get; set; }
+```
+")
+    </CodeContent>
+</Example>
+@code {
+    string BasicText { get; set; }
+    string DefaultText{ get; set; }="默认值";
+    string PrefixText { get; set; }
+}
+<Example Title="组合输入框">
+    <Description>多个输入框相组合，或与其他控件（如下拉）相组合，以方便识别。用于一些固定组合或者固定格式输入的场景，如输入电话号码。</Description>
+    <RunContent>
+        <InputGroup Seperate>
+            <Input @bind-Value="InputGroup1" />
+            <Input @bind-Value="InputGroup2" />
+        </InputGroup>
+        <br />
+        <br />
+        <InputGroup>
+            <Input @bind-Value="InputGroup1" />
+            <Input @bind-Value="InputGroup2" />
+        </InputGroup>
+        <br />
+        <br />
+        <InputGroup Seperate>
+            <Input @bind-Value="InputGroup1" Placeholder="区号"/>
+            <span style="line-height:32px">-</span>
+            <Input @bind-Value="InputGroup2" Placeholder="电话"/>
+        </InputGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<InputGroup Seperate>
+    <Input bind-Value=""InputGroup1"" />
+    <Input bind-Value=""InputGroup2"" />
+</InputGroup>
+
+<InputGroup>
+    <Input bind-Value=""InputGroup1"" />
+    <Input bind-Value=""InputGroup2"" />
+</InputGroup>
+
+<InputGroup Seperate>
+    <Input bind-Value=""InputGroup1"" Placeholder=""区号""/>
+    <span style=""line-height:32px"">-</span>
+    <Input bind-Value=""InputGroup2"" Placeholder=""电话""/>
+</InputGroup>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string InputGroup1{ get; set; }
+    string InputGroup2{ get; set; }
+}
+<Example Title="密码输入框">
+    <Description>由符号代替输入内容的输入框，并可通过操作展示原文信息。用于强安全信息输入的场景。</Description>
+    <RunContent>
+        <Input Type="InputType.Password" @bind-Value="InputPassword"/>
+        <br />
+        <br />
+        <Input Type="InputType.Password" @bind-Value="InputPassword" PrefixIcon="@IconName.LockOn"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input Type=""InputType.Password"" bind-Value=""InputPassword""/>
+
+<Input Type=""InputType.Password"" bind-Value=""InputPassword"" PrefixIcon=""IconName.LockOn""/>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string InputPassword { get; set; } = "123456";
+}
+<Example Title="不同尺寸的输入框">
+    <Description>有大中小三种不同高度、宽度的输入框，以适应不同尺寸布局。</Description>
+    <RunContent>
+        <Input @bind-Value="SizeText" Size="Size.Small"/>
+        <br /><br />
+        <Input @bind-Value="SizeText" Size="Size.Medium" /><br /><br />
+        <Input @bind-Value="SizeText" Size="Size.Large"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input bind-Value=""SizeText"" Size=""Size.Small""/>
+<Input bind-Value=""SizeText"" Size=""Size.Medium"" />
+<Input bind-Value=""SizeText"" Size=""Size.Large""/>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string SizeText { get; set; } = "尺寸";
+}
+<Example Title="不同对齐方式的输入框">
+    <Description></Description>
+    <RunContent>
+        <Input @bind-Value="AlignmentText"/><br/><br />
+        <Input @bind-Value="AlignmentText" Alignment="HorizontalAlignment.Center" /><br /><br />
+        <Input @bind-Value="AlignmentText" Alignment="HorizontalAlignment.Right" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input bind-Value=""AlignmentText""/>
+<Input bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Center""/>
+<Input bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Right"" />
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string AlignmentText { get; set; } = "对齐方式";
+}
+<Example Title="自适应宽度">
+    <Description>宽度随着文本框内容的宽度而自适应</Description>
+    <RunContent>
+        <div style="width:300px;border:blue 1px solid;padding:10px">
+            <Input @bind-Value="AutoWidthText" AutoWidth/>
+        </div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<div style=""width:300px"">
+    <Input @bind-Value=""AutoWidthText"" AutoWidth/>
+</div>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string AutoWidthText { get; set; } = "这个宽度自适应文字的长度";
+}
