@@ -1,0 +1,75 @@
+﻿@page "/components/form"
+
+<PageHeader Title="Form 表单">
+    用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。
+</PageHeader>
+
+<Example Title="基本表单">
+    <Description></Description>
+    <RunContent>
+        <Form Model="basicForm">
+            <FormItem Label="姓名">
+                <Input @bind-Value="basicForm.Name"/>
+            </FormItem>
+            <FormItem Label="密码">
+                <Input @bind-Value="basicForm.Password" Type="InputType.Password"/>
+            </FormItem>
+            <FormItem>
+                <Space>
+                    <SpaceItem>
+                        <Button Theme="Theme.Primary">提价</Button>
+                    </SpaceItem>
+                    <SpaceItem>
+                        <Button HtmlType="ButtonHtmlType.Reset">重置</Button>
+                    </SpaceItem>
+                </Space>
+            </FormItem>
+        </Form>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Form Model=""basicForm"">
+    <FormItem Label=""姓名"">
+        <Input @bind-Value=""basicForm.Name""/>
+    </FormItem>
+    <FormItem Label=""密码"">
+        <Input @bind-Value=""basicForm.Password"" Type=""InputType.Password""/>
+    </FormItem>
+    <FormItem>
+        <Space>
+            <SpaceItem>
+                <Button Theme=""Theme.Primary"">提价</Button>
+            </SpaceItem>
+            <SpaceItem>
+                <Button HtmlType=""ButtonHtmlType.Reset"">重置</Button>
+            </SpaceItem>
+        </Space>
+    </FormItem>
+</Form>
+```
+
+```cs
+@code{
+    class BasicForm
+    {
+        public string Name { get; set; }
+        public string Password { get; set; }
+    }
+
+    BasicForm basicForm = new();
+}
+```
+")
+    </CodeContent>
+</Example>
+
+@code{
+    class BasicForm
+    {
+        public string Name { get; set; }
+        public string Password { get; set; }
+    }
+
+    BasicForm basicForm = new();
+}
