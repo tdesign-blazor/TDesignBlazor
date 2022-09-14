@@ -8,6 +8,9 @@ public class FormItem : BlazorComponentBase, IHasChildContent
 {
     [CascadingParameter] public Form CascadingForm { get; set; }
     [CascadingParameter] EditContext CascadingEditContext { get; set; }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
@@ -18,6 +21,14 @@ public class FormItem : BlazorComponentBase, IHasChildContent
     /// 设置表单项文本的宽度，默认是 60px 。
     /// </summary>
     [Parameter] public string? LabelWidth { get; set; } = "60px";
+    /// <summary>
+    /// 设置文本自动加上冒号。
+    /// </summary>
+    [Parameter] public bool LabelColon { get; set; }
+    /// <summary>
+    /// 设置必填时自动加上红色的 “*” 符号。
+    /// </summary>
+    [Parameter] public bool Required { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
@@ -34,7 +45,10 @@ public class FormItem : BlazorComponentBase, IHasChildContent
         {
             @class = HtmlHelper.CreateCssBuilder()
                                 .Append("t-form__label")
-                                .Append($"t-form__label--{CascadingForm.Alignment.GetCssClass()}"),
+                                .Append($"t-form__label--{CascadingForm.Alignment.GetCssClass()}")
+                                .Append("t-form__label--colon", LabelColon)
+                                .Append("t-form__label--required", Required)
+                                ,
             style = HtmlHelper.CreateStyleBuilder().Append($"width:{LabelWidth}", !string.IsNullOrEmpty(LabelWidth) && CascadingForm.Alignment != FormAlignment.Top)
         });
     }
