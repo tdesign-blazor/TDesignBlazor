@@ -3,20 +3,41 @@
 namespace TDesignBlazor.Components;
 
 /// <summary>
-/// 输入空间的基类。
+/// 输入控件的基类。
 /// </summary>
 /// <typeparam name="TValue">双向绑定值的类型。</typeparam>
 public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBase<TValue>
 {
+    /// <summary>
+    /// 设置只读模式。
+    /// </summary>
     [Parameter] public bool Readonly { get; set; }
+    /// <summary>
+    /// 设置禁用状态。
+    /// </summary>
     [Parameter] public bool Disabled { get; set; }
+    /// <summary>
+    /// 自适应宽度。
+    /// </summary>
     [Parameter] public bool AutoWidth { get; set; }
+    /// <summary>
+    /// 尺寸。
+    /// </summary>
     [Parameter] public Size Size { get; set; } = Size.Medium;
+    /// <summary>
+    /// 自动聚焦。
+    /// </summary>
     [Parameter] public bool AutoFocus { get; set; }
+    /// <summary>
+    /// 状态。
+    /// </summary>
     [Parameter] public Status Status { get; set; } = Status.Default;
+    /// <summary>
+    /// 对齐方式。
+    /// </summary>
     [Parameter] public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.Left;
 
-    protected void BuildInputWrapper(RenderTreeBuilder builder, int sequence, RenderFragment content, string? otherCss = default)
+    protected virtual void BuildInputWrapper(RenderTreeBuilder builder, int sequence, RenderFragment content, string? otherCss = default)
     {
         builder.CreateElement(sequence, "div", wrap =>
         {
