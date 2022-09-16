@@ -161,3 +161,89 @@ string PrefixText{ get; set; }
 @code{
     string AutoWidthText { get; set; } = "这个宽度自适应文字的长度";
 }
+<Example Title="输入框的状态">
+    <Description></Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Disabled Placeholder="禁用"/>
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Readonly Placeholder="只读" />
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Default" Placeholder="默认" />
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Success" Placeholder="成功" />
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Warning" Placeholder="警告" />
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Error" Placeholder="错误" />
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input bind-Value=""StatusText"" Disabled Placeholder=""禁用""/>
+<Input bind-Value=""StatusText"" Readonly Placeholder=""只读"" />
+<Input bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"" />
+<Input bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"" />
+<Input bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"" />
+<Input bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"" />
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string StatusText{ get; set; }
+}
+
+<Example Title="输入框的提示">
+    <Description>设置 <code>TipContent</code> 作为输入框的提示</Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Default" Placeholder="默认">
+                    <TipContent>默认的提示</TipContent>
+                </Input>
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Success" Placeholder="成功">
+                    <TipContent>成功的提示</TipContent>
+                </Input>
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Warning" Placeholder="警告">
+                    <TipContent>警告的提示</TipContent>
+                </Input>
+            </SpaceItem>
+            <SpaceItem>
+                <Input @bind-Value="StatusText" Status="Status.Error" Placeholder="错误">
+                    <TipContent>错误的提示</TipContent>
+                </Input>
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Input bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"">
+    <TipContent>默认的提示</TipContent>
+</Input>
+<Input bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"">
+    <TipContent>成功的提示</TipContent>
+</Input>
+<Input bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"">
+    <TipContent>警告的提示</TipContent>
+</Input>
+<Input bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"">
+    <TipContent>错误的提示</TipContent>
+</Input>
+```
+")
+    </CodeContent>
+</Example>

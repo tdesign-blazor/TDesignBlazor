@@ -31,7 +31,11 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
     /// <summary>
     /// 状态。
     /// </summary>
-    [Parameter] public Status Status { get; set; } = Status.Default;
+    [Parameter][CssClass("t-is-")] public Status Status { get; set; } = Status.Default;
+    /// <summary>
+    /// 输入框提示的内容。
+    /// </summary>
+    [Parameter] public RenderFragment? TipContent { get; set; }
     /// <summary>
     /// 对齐方式。
     /// </summary>
@@ -48,11 +52,17 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
                             .Append("t-is-disabled", Disabled)
                             .Append("t-input--auto-width", AutoWidth)
                             .Append("t-is-focused t-input--focused", AutoFocus)
-                            .Append(Status.GetCssClass())
+                            .Append($"t-is-{Status.GetCssClass()}")
                             .Append($"t-align-{Alignment.GetCssClass()}")
                             .Append(Size.GetCssClass())
                             .Append(otherCss, !string.IsNullOrEmpty(otherCss))
             });
+
+            wrap.CreateElement(1, "div", TipContent, new
+            {
+                @class = HtmlHelper.CreateCssBuilder().Append("t-input__tips")
+                .Append($"t-input__tips--{Status.GetCssClass()}")
+            }, TipContent is not null);
         }, new
         {
             @class = HtmlHelper.CreateCssBuilder().Append("t-input__wrap")
@@ -63,17 +73,8 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
     {
         base.BuildAttributes(attributes);
         base.AddValueChangedAttribute(attributes);
-        if (Disabled)
-        {
-            attributes["disabled"] = true;
-        }
-        if (Readonly)
-        {
-            attributes["readonly"] = true;
-        }
-        if (AutoFocus)
-        {
-            attributes["autofocus"] = true;
-        }
+        attributes["disabled"] = Disabled;
+        attributes["readonly"] = Readonly;
+        attributes["autofocus"] = AutoFocus;
     }
 }

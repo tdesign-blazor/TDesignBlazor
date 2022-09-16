@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
+﻿using System.Linq.Expressions;
+
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesignBlazor.Components;
@@ -29,11 +31,24 @@ public class FormItem : BlazorComponentBase, IHasChildContent
     /// 设置必填时自动加上红色的 “*” 符号。
     /// </summary>
     [Parameter] public bool Required { get; set; }
+    /// <summary>
+    /// 帮助的提示文字。
+    /// </summary>
+    [Parameter] public string? HelpText { get; set; }
+    /// <summary>
+    /// 表单字段的状态。
+    /// </summary>
+    [Parameter] public Status? Status { get; set; }
+    /// <summary>
+    /// 表单字段对应的文本。
+    /// </summary>
+    [Parameter] public string? StatusText { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         BuildLabel(builder, sequence);
         BuildControl(builder, sequence + 1);
+
     }
 
     void BuildLabel(RenderTreeBuilder builder, int sequence)
@@ -58,10 +73,21 @@ public class FormItem : BlazorComponentBase, IHasChildContent
         builder.CreateElement(sequence, "div", content =>
         {
             content.CreateElement(0, "div", ChildContent, new { @class = "t-form__controls-content" });
+            content.CreateElement(1, "div", tip => tip.AddContent(0, HelpText), new { @class = "t-input__help" }, !string.IsNullOrEmpty(HelpText));
+            content.CreateElement(1, "div", extra => extra.AddContent(0, StatusText), new { @class = "t-input__extra" }, !string.IsNullOrEmpty(StatusText));
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-form__controls"),
+            @class = HtmlHelper.CreateCssBuilder().Append("t-form__controls")
+                                                .Append($"t-is-{Status?.GetCssClass()}", Status.HasValue)
+                                                .Append($"t-form--success-border", Status == TDesignBlazor.Status.Success),
             style = HtmlHelper.CreateStyleBuilder().Append("margin-left:60px", CascadingForm.Alignment != FormAlignment.Top)
         });
+    }
+
+    protected override void BuildCssClass(ICssClassBuilder builder)
+    {
+        builder.Append("t-form__item-with-help", !string.IsNullOrEmpty(HelpText))
+            .Append("t-form__item-with-extra", !string.IsNullOrEmpty(StatusText))
+            ;
     }
 }

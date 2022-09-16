@@ -21,7 +21,7 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 设置按钮的 HTML 类型。默认时 <see cref="ButtonHtmlType.Button"/> 类型。
     /// </summary>
-    [Parameter] public ButtonHtmlType HtmlType { get; set; } = ButtonHtmlType.Button;
+    [Parameter][HtmlAttribute("type")] public ButtonHtmlType HtmlType { get; set; } = ButtonHtmlType.Button;
     /// <summary>
     /// 
     /// </summary>
@@ -51,7 +51,7 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 禁用状态。
     /// </summary>
-    [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
+    [Parameter][CssClass("t-is-disabled")][HtmlAttribute] public bool Disabled { get; set; }
     /// <summary>
     /// 加载状态。
     /// </summary>
@@ -70,13 +70,6 @@ public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
         }, new { @class = "t-button__text" });
     }
 
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        if (Disabled)
-        {
-            attributes["disabled"] = true;
-        }
-    }
 }
 
 /// <summary>
