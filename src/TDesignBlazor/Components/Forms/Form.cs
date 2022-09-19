@@ -9,7 +9,7 @@ public class Form : BlazorFormComponentBase<Form>
     /// <summary>
     /// 设置作为行内布局。
     /// </summary>
-    [Parameter] public bool Inline { get; set; }
+    [Parameter][CssClass("t-form-inline")] public bool Inline { get; set; }
 
     /// <summary>
     /// 表单的对齐方式。默认时 <see cref="FormAlignment.Right"/> 。
@@ -22,7 +22,16 @@ public class Form : BlazorFormComponentBase<Form>
 /// </summary>
 public enum FormAlignment
 {
+    /// <summary>
+    /// 居顶对齐。
+    /// </summary>
     Top,
+    /// <summary>
+    /// 居左对齐。
+    /// </summary>
     Left,
+    /// <summary>
+    /// 居右对齐。
+    /// </summary>
     Right,
 }

@@ -19,7 +19,7 @@ public class TextArea : BlazorInputComponentBase<string>
     /// <summary>
     /// 状态。
     /// </summary>
-    [Parameter][CssClass] public Status Status { get; set; } = Status.Default;
+    [Parameter][CssClass("t-is-")] public Status Status { get; set; } = Status.Default;
     /// <summary>
     /// 设置是否自动聚焦。
     /// </summary>

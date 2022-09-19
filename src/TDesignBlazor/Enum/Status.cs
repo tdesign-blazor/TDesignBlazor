@@ -2,7 +2,6 @@
 /// <summary>
 /// 表示状态的候选值。
 /// </summary>
-[CssClass("t-is-")]
 public enum Status
 {
     /// <summary>
