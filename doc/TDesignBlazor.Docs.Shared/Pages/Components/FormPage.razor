@@ -200,30 +200,83 @@
     </CodeContent>
 </Example>
 
-<Example Title="表单状态">
-    <Description><code>Status</code> 设置状态，<code>StatusText</code> 设置状态显示的文本</Description>
+<Example Title="表单验证">
+    <Description>
+        用法与 <code>EditForm</code> 组件一致，支持 <code>System.ComponentModel.DataAnnotations</code> 的特性验证。要设置 提交按钮的 <code>HtmlType="ButtonHtmlType.Submit"</code> 类型。
+    </Description>
     <RunContent>
-        <Form Model="basicForm">
-            <FormItem Label="账号" Status="Status.Error" StatusText="该字段是必填的">
-                <Input @bind-Value="basicForm.Name" />
+        <Form Model="validationForm" OnValidSubmit="Submit">
+            <DataAnnotationsValidator/>            
+            <FormItem For="()=>validationForm.UserName">
+                <Input @bind-Value="validationForm.UserName" />
             </FormItem>
-            <FormItem Label="密码" Status="Status.Success">
-                <Input @bind-Value="basicForm.Password" Type="InputType.Password" />
+            <FormItem For="()=>validationForm.Password">
+                <Input @bind-Value="validationForm.Password" Type="InputType.Password" />
+            </FormItem>
+            <FormItem>
+                <Button Theme="Theme.Primary" HtmlType="ButtonHtmlType.Submit">提交</Button>
             </FormItem>
         </Form>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Form Model=""basicForm"">
-    <FormItem Label=""账号"" Status=""Status.Error"" StatusText=""该字段是必填的"">
-        <Input bind-Value=""basicForm.Name"" />
+<Form Model=""validationForm"" OnValidSubmit=""Submit"">
+    <DataAnnotationsValidator/>            
+    <FormItem For=""()=>validationForm.UserName"">
+        <Input bind-Value=""validationForm.UserName"" />
     </FormItem>
-    <FormItem Label=""密码"" Status=""Status.Success"">
-        <Input bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+    <FormItem For=""()=>validationForm.Password"">
+        <Input bind-Value=""validationForm.Password"" Type=""InputType.Password"" />
+    </FormItem>
+    <FormItem>
+        <Button Theme=""Theme.Primary"" HtmlType=""ButtonHtmlType.Submit"">提交</Button>
     </FormItem>
 </Form>
+```
+```cs
+@using System.ComponentModel.DataAnnotations
+@code{
+    ValidationForm validationForm = new();
+    class ValidationForm
+    {
+        [Display(Name=""用户名"")]
+        [Required(ErrorMessage =""{0}是必填的"")]
+        public string UserName{get;set;}
+
+        [Display(Name =""密码"")]
+        [Required(ErrorMessage =""{0}不能为空"")]
+        [StringLength(10)]
+        public string Password{ get; set; }
+    }
+
+    void Submit(EditContext context)
+    {
+
+    }
+}
 ```
 ")
     </CodeContent>
 </Example>
+@using System.ComponentModel.DataAnnotations
+@code{
+
+    ValidationForm validationForm = new();
+    class ValidationForm
+    {
+        [Display(Name="用户名")]
+        [Required(ErrorMessage ="{0}是必填的")]
+        public string UserName{get;set;}
+
+        [Display(Name ="密码")]
+        [Required(ErrorMessage ="{0}不能为空")]
+        [StringLength(10)]
+        public string Password{ get; set; }
+    }
+
+    void Submit(EditContext context)
+    {
+
+    }
+}

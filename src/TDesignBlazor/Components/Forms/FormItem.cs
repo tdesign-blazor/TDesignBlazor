@@ -1,15 +1,26 @@
-﻿using System.Linq.Expressions;
-
+﻿using System.Reflection;
+using System.Linq.Expressions;
+using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesignBlazor.Components;
+/// <summary>
+/// 表示作为表单的项。必须在 <see cref="Form"/> 组件中。
+/// </summary>
 [CssClass("t-form__item")]
 [ChildComponent(typeof(Form))]
-public class FormItem : BlazorComponentBase, IHasChildContent
+public class FormItem : BlazorComponentBase, IHasChildContent, IDisposable
 {
-    [CascadingParameter] public Form CascadingForm { get; set; }
-    [CascadingParameter] EditContext CascadingEditContext { get; set; }
+    /// <summary>
+    /// 级联 <see cref="Form"/> 组件的实例。
+    /// </summary>
+    [CascadingParameter][NotNull] public Form CascadingForm { get; set; }
+    /// <summary>
+    /// 级联 <see cref="EditContext"/> 实例。
+    /// </summary>
+    [CascadingParameter][NotNull] EditContext CascadingEditContext { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -36,19 +47,56 @@ public class FormItem : BlazorComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public string? HelpText { get; set; }
     /// <summary>
-    /// 表单字段的状态。
+    /// 设置一个委托，表示具备表单验证的字段。
     /// </summary>
-    [Parameter] public Status? Status { get; set; }
-    /// <summary>
-    /// 表单字段对应的文本。
-    /// </summary>
-    [Parameter] public string? StatusText { get; set; }
+    [Parameter] public Expression<Func<dynamic>>? For { get; set; }
+
+    FieldIdentifier? Identifier { get; set; }
+
+
+    string? StatusCssClass { get; set; }
+    IEnumerable<string> ErrorMessages { get; set; } = Array.Empty<string>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        CascadingEditContext.OnValidationStateChanged += CascadingEditContext_ValidationStateChanged;
+        CascadingEditContext.SetFieldCssClassProvider(new FormFieldCssClassProvider());
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (For is not null)
+        {
+            Identifier = FieldIdentifier.Create(For);
+
+            var member = GetMember(For.Body);
+
+            if (member.TryGetCustomAttribute<RequiredAttribute>(out var requiredAttribute))
+            {
+                Required = !requiredAttribute!.AllowEmptyStrings;
+            }
+
+            if (member.TryGetCustomAttribute<DisplayAttribute>(out var displayAttribute) && string.IsNullOrEmpty(Label))
+            {
+                Label = displayAttribute?.Name;
+            }
+        }
+    }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
+        if (Identifier.HasValue)
+        {
+            StatusCssClass = CascadingEditContext.FieldCssClass(Identifier.Value);
+            ErrorMessages = CascadingEditContext.GetValidationMessages(Identifier.Value);
+        }
+
         BuildLabel(builder, sequence);
         BuildControl(builder, sequence + 1);
-
     }
 
     void BuildLabel(RenderTreeBuilder builder, int sequence)
@@ -73,13 +121,20 @@ public class FormItem : BlazorComponentBase, IHasChildContent
         builder.CreateElement(sequence, "div", content =>
         {
             content.CreateElement(0, "div", ChildContent, new { @class = "t-form__controls-content" });
+
             content.CreateElement(1, "div", tip => tip.AddContent(0, HelpText), new { @class = "t-input__help" }, !string.IsNullOrEmpty(HelpText));
-            content.CreateElement(1, "div", extra => extra.AddContent(0, StatusText), new { @class = "t-input__extra" }, !string.IsNullOrEmpty(StatusText));
+
+            int index = 0;
+            foreach (var error in ErrorMessages)
+            {
+                content.CreateElement(index + 2, "div", extra => extra.AddContent(0, error), new { @class = "t-input__extra" });
+                index++;
+            }
         }, new
         {
             @class = HtmlHelper.CreateCssBuilder().Append("t-form__controls")
-                                                .Append($"t-is-{Status?.GetCssClass()}", Status.HasValue)
-                                                .Append($"t-form--success-border", Status == TDesignBlazor.Status.Success),
+                                                .Append($"t-is-{StatusCssClass}", Identifier.HasValue)
+                                                .Append($"t-form--success-border", StatusCssClass == Status.Success.GetCssClass()),
             style = HtmlHelper.CreateStyleBuilder().Append("margin-left:60px", CascadingForm.Alignment != FormAlignment.Top)
         });
     }
@@ -87,7 +142,40 @@ public class FormItem : BlazorComponentBase, IHasChildContent
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append("t-form__item-with-help", !string.IsNullOrEmpty(HelpText))
-            .Append("t-form__item-with-extra", !string.IsNullOrEmpty(StatusText))
+            .Append("t-form__item-with-extra", ErrorMessages.Any())
             ;
     }
+
+    /// <summary>
+    /// Gets the member.
+    /// </summary>
+    /// <param name="expression">The expression.</param>
+    /// <returns></returns>
+    private MemberInfo GetMember(Expression expression)
+    {
+        switch (expression.NodeType)
+        {
+            case ExpressionType.MemberAccess:
+                return ((MemberExpression)expression).Member;
+            case ExpressionType.Convert:
+                return GetMember(((UnaryExpression)expression).Operand);
+            default:
+                break;
+        }
+        return default;
+    }
+
+    /// <summary>
+    /// Cleanup of component
+    /// </summary>
+    public void Dispose()
+    {
+        if (CascadingEditContext != null)
+        {
+            CascadingEditContext.OnValidationStateChanged -= CascadingEditContext_ValidationStateChanged;
+        }
+    }
+
+    private void CascadingEditContext_ValidationStateChanged(object? sender, ValidationStateChangedEventArgs? e)
+        => StateHasChanged();
 }
