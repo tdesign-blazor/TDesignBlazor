@@ -7,7 +7,7 @@ namespace TDesignBlazor;
 /// </summary>
 [HtmlTag("button")]
 [CssClass("t-button")]
-public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
+public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

@@ -6,7 +6,7 @@ namespace TDesignBlazor;
 /// 卡片组件。
 /// </summary>
 [CssClass("t-card")]
-public class Card : TDesignComponentBase, IHasChildContent
+public class Card : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

@@ -42,21 +42,18 @@
 > Install-Package TDesignBlazor
 ```
 
-- 在项目中注册
+- 在项目中注册服务
 ```cs
 builder.Service.AddTDesignBlazor();
 ```
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
 ```html
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/reset.css"" /> <!--重置 HTML 默认样式-->
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign.min.css"" /> <!--tdesign 核心样式-->
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-icons.css"" /><!--图标样式-->
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/TDeignBlazor.css"" />
 ```
 - 在 `_Imports.razor` 中加入命名空间
 ```cs
 @using TDesignBlazor
-@using TDesignBlazor.Components
 ```
 
 ## :dart: 问题反馈

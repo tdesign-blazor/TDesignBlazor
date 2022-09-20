@@ -9,7 +9,7 @@ namespace TDesignBlazor;
 [HtmlTag("li")]
 [ParentComponent]
 [ChildComponent(typeof(Menu))]
-public class SubMenu : TDesignComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
+public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
 {
     [CascadingParameter] public Menu CascadingValue { get; set; }
     /// <summary>

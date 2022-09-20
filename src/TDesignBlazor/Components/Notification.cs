@@ -52,7 +52,7 @@ public class Notification : TDesignMessageComponentBase, IHasChildContent
 /// </summary>
 [ChildComponent(typeof(Notification))]
 [CssClass("t-notification__detail-item")]
-public class NotificationDetailItem : TDesignComponentBase, IHasChildContent
+public class NotificationDetailItem : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

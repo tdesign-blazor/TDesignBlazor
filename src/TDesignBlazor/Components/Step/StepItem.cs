@@ -9,7 +9,7 @@ namespace TDesignBlazor;
 /// </summary>
 [CssClass("t-steps-item")]
 [ChildComponent(typeof(StepGroup))]
-public class StepItem : TDesignComponentBase, IHasChildContent
+public class StepItem : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联参数。

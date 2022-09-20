@@ -5,7 +5,7 @@
 /// </summary>
 [ParentComponent]
 [CssClass("t-avatar-group")]
-public class AvatarGroup : TDesignComponentBase, IHasChildContent
+public class AvatarGroup : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 头像排列的方向。

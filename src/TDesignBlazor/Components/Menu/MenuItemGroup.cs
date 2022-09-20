@@ -8,7 +8,7 @@ namespace TDesignBlazor;
 /// </summary>
 [ChildComponent(typeof(Menu))]
 [CssClass("t-menu-group")]
-public class MenuItemGroup : TDesignComponentBase, IHasChildContent
+public class MenuItemGroup : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

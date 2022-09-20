@@ -5,7 +5,7 @@ namespace TDesignBlazor;
 /// 徽章组件，出现在图标或文字右上角的徽标标识。
 /// </summary>
 [CssClass("t-badge")]
-public class Badge : TDesignComponentBase, IHasChildContent
+public class Badge : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

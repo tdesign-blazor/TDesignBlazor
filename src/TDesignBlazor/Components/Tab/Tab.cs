@@ -7,7 +7,7 @@ namespace TDesignBlazor;
 /// </summary>
 [ParentComponent]
 [CssClass("t-tabs")]
-public class Tab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
+public class Tab : BlazorComponentBase, IHasChildContent, IHasOnSwitch
 {
     public Tab()
     {
