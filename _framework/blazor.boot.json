@@ -13,7 +13,7 @@
       "FSharp.Core.dll": "sha256-K\/uXuEeiR6k91qWaAd\/4XiQ39cMTMnek8Qo5wZCdY\/I=",
       "Markdig.dll": "sha256-\/qKhOo2ZbkSd56j45qUCUGYRyBMnR0dmDkWfZfLJKeo=",
       "MarkdigExtensions.SyntaxHighlighting.dll": "sha256-HlLIDA8CUxM5uMyr8kFH8ISWx8Sb+Oj8q0NtKUpomC8=",
-      "Microsoft.AspNetCore.Components.dll": "sha256-Xrb1wE53r8J9WDoQv1cbMbXEEJ\/+JstgppX8bP+VOZM=",
+      "Microsoft.AspNetCore.Components.dll": "sha256-qOnLe62v\/hbxij0CZrBfXc8BCcdkkfmrb+VqGE0T5Oo=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-9r\/a7ZhFnqrg8fp9vgWbUs+bY8a5P5BDxpZT5m9N7yI=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-B094dUFMbiQaq8q8df9IvVQbthXU64VnJDahGChxxAw=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-OfawION\/UfFO75U4pMPDVhHt71EbKuF3qxDeiPFGqKo=",
@@ -64,9 +64,9 @@
       "System.Text.RegularExpressions.dll": "sha256-CP95jSa+NL8C4c4VMjmTM8y7kNDJ3cbwv2X6qLBbcM0=",
       "System.Threading.dll": "sha256-CPVUBr70Xz6JCsem8ZgaSDl8xu4GBSIiHyFKf4pFnIw=",
       "System.Threading.Tasks.Parallel.dll": "sha256-AXglBa9xHEYufHeZGoWsweIFNMYwk\/we\/dtmObPefBA=",
-      "TDesignBlazor.dll": "sha256-\/4VzlOSKQRwXgD2bYCsb6iZ2DMNHE0FWxWcnsLdFDJs=",
-      "TDesignBlazor.Docs.Shared.dll": "sha256-oDrZKakDkP1VAHElMjiFvjmzvMs93\/T0L8e+2VuJ7rU=",
-      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-SKjz3Npz8piU+DaKucktZQN0WcMcTZIhkXY2knndgnc="
+      "TDesignBlazor.dll": "sha256-pn\/1O8Fgz6LwJNMAN1MezxGK3+I6RG1HKBlcMAp2BOc=",
+      "TDesignBlazor.Docs.Shared.dll": "sha256-vfW931bKZxf80TS4q2qLiWEghVlMOrzEcgN\/pCvPU00=",
+      "TDesignBlazor.Docs.WebAssembly.dll": "sha256-morHSvgAELUtl3VEAVqbL2LWvZkvP+DnkcGASXiMYDQ="
     },
     "extensions": null,
     "lazyAssembly": null,
