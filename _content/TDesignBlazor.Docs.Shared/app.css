@@ -4,11 +4,11 @@
 code {
     color: red;
     display: inline-block;
-    background-color: #f8f8f8;    
-    padding-top:2px;
-    padding-bottom:2px;
-    padding-left:10px;
-    padding-right:10px;
+    background-color: #f8f8f8;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 [class*=tdesign-demo-item--grid] .t-col:nth-of-type(2n) > div {
@@ -98,4 +98,69 @@ code {
 
     .blazor-error-boundary::after {
         content: "An error has occurred."
+    }
+
+.demo-wrapper {
+    min-height: calc(100vh - var(--footer-height));
+    color: var(--text-primary);
+    padding-right: var(--content-padding-right);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+    .demo-wrapper > .content {
+        min-height: 150px;
+        padding: 40px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        overflow: auto;
+    }
+
+        .demo-wrapper > .content.code-collapse {
+            transition-duration: .8s;
+            max-height: 0px;
+            transition-timing-function: ease;
+            overflow: hidden;
+        }
+
+        .demo-wrapper > .content.code-expand {
+            transition-duration: .8s;
+            max-height: 560px;
+            transition-timing-function: cubic-bezier(0.82, 0, 1, 0.9);
+        }
+
+    .demo-wrapper > .footer {
+        border-radius: 0px 0px 5px 5px;
+    }
+
+    .demo-wrapper .footer > .btn {
+        height: 48px;
+        padding: 8px;
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 8px;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+        .demo-wrapper .footer > .btn > .action {
+            height: 32px;
+            width: 32px;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s ease 0s;
+            display: inline-flex;
+            color: var(--text-secondary);
+        }
+
+            .demo-wrapper .footer > .btn > .action.active {
+                color: var(--text-primary);
+                background-color: #ddd;
+            }
+
+    .demo-wrapper .code, .demo-wrapper .code pre {
+        background-color: #efefef !important;
     }
