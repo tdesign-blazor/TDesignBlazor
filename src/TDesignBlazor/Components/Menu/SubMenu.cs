@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 表示具备下级菜单项的二级菜单。

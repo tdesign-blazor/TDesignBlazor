@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 标签。

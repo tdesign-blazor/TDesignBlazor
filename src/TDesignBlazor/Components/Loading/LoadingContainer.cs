@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 用于包裹其他内容和 <see cref="Loading"/> 的容器。

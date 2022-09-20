@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 /// <summary>
 /// 徽章组件，出现在图标或文字右上角的徽标标识。
 /// </summary>

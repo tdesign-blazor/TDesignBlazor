@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示具备折叠面板的组容器，并使用 <see cref="CollapsePanel"/> 展现折叠面板的项。

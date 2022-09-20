@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 步骤组件的容器。配合 <see cref="StepItem"/> 组件使用步骤项。
