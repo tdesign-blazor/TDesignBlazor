@@ -1,5 +1,5 @@
 ---
-name: 缺陷
+name: Bug Report
 about: 帮助改进和提升的缺陷
 title: "【缺陷】"
 labels: 缺陷
