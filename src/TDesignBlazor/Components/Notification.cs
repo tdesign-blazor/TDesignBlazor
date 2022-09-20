@@ -7,7 +7,7 @@ namespace TDesignBlazor;
 /// </summary>
 [ParentComponent]
 [CssClass("t-notification")]
-public class Notification : TDesignMessageComponentBase, IHasChildContent
+public class Notification : MessageComponentBase, IHasChildContent
 {
 
     /// <summary>

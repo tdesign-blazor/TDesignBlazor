@@ -6,7 +6,7 @@ namespace TDesignBlazor;
 /// 警告提醒。
 /// </summary>
 [CssClass("t-alert")]
-public class Alert : TDesignMessageComponentBase
+public class Alert : MessageComponentBase
 {
 
     /// <summary>

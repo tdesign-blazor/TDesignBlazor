@@ -6,7 +6,7 @@ namespace TDesignBlazor;
 /// 全局提示。
 /// </summary>
 [CssClass("t-message")]
-public class Message : TDesignMessageComponentBase
+public class Message : MessageComponentBase
 {
     /// <summary>
     /// 加载中的状态。
