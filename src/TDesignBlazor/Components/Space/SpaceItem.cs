@@ -1,11 +1,11 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示间距排版的项。
 /// </summary>
 [ChildComponent(typeof(Space))]
 [CssClass("t-space-item")]
-public class SpaceItem : TDesignComponentBase, IHasChildContent
+public class SpaceItem : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

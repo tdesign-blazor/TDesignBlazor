@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 表示步骤的项。必须在 <see cref="StepGroup"/> 组件中使用。
 /// </summary>
 [CssClass("t-steps-item")]
 [ChildComponent(typeof(StepGroup))]
-public class StepItem : TDesignComponentBase, IHasChildContent
+public class StepItem : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联参数。

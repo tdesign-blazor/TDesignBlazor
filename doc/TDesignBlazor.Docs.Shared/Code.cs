@@ -8,7 +8,7 @@ public static class Code
     {
         var content = Markdown.ToHtml(value, new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
-            .UseEmojiAndSmiley()
+            //.UseEmojiAndSmiley()
             .UseSyntaxHighlighting()
             .Build());
         return new MarkupString(content);

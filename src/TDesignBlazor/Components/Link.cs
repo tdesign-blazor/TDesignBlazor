@@ -1,10 +1,10 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 超链接文本。
 /// </summary>
 [CssClass("t-link")]
 [HtmlTag("a")]
-public class Link : TDesignComponentBase, IHasChildContent, IHasDisabled
+public class Link : BlazorComponentBase, IHasChildContent, IHasDisabled
 {
     /// <summary>
     /// <inheritdoc/>

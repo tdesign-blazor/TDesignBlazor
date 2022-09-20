@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 internal class FormFieldCssClassProvider : FieldCssClassProvider
 {
     public override string GetFieldCssClass(EditContext editContext, in FieldIdentifier fieldIdentifier)

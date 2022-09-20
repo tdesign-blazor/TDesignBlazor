@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 图标组件。内置图标要手动引入样式 <c>tdesign-icons.css</c>
 /// </summary>
@@ -6,7 +6,7 @@
 [CssClass("t-icon")]
 [ChildComponent(typeof(Menu), Optional = true)]
 [ChildComponent(typeof(SubMenu), Optional = true)]
-public class Icon : TDesignComponentBase
+public class Icon : BlazorComponentBase
 {
     protected override void OnParametersSet()
     {

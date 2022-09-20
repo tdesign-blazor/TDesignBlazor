@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 表示用于开启一个闭环的操作任务的按钮。
 /// </summary>
 [HtmlTag("button")]
 [CssClass("t-button")]
-public class Button : TDesignComponentBase, IHasOnClick, IHasChildContent
+public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 可以将表单输入组件进行组合。
