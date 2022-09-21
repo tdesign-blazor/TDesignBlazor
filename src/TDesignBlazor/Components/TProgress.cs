@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Components.Rendering;
 
 using System.Reflection.PortableExecutable;
+using System.Security.Claims;
 
 namespace TDesignBlazor;
 
@@ -55,23 +56,52 @@ public class TProgress : BlazorComponentBase, IHasChildContent
     {
 
         var background = GetBackGround();
-
-        builder.CreateElement(sequence, "div", a =>
+        var s = Percentage<10 && Percentage>0? "t-progress--under-ten": "t-progress--over-ten";
+        switch (Theme)
         {
-            a.CreateElement(0, "div", b =>
-            {
-                b.CreateElement(0, "div", c =>
+            case ProgressTheme.line:
+                builder.CreateElement(sequence, "div", a =>
                 {
-                    c.CreateElement(0, "div", c => { }, new { @class = $"t-progress__inner {Theme.GetCssClass} {Status.GetCssClass}", style = $"width: {Percentage}%;{background}" });
+                    a.CreateElement(sequence+1, "div", b =>
+                    {
+                        b.CreateElement(sequence+2, "div", c =>
+                        {
+                            c.CreateElement(sequence+3, "div", c => { }, new { @class = $"t-progress__inner {Theme.GetCssClass} {Status.GetCssClass}", style = $"width: {Percentage}%;{background}" });
+                        },
+                        new { @class = "t-progress__bar" ,style="width:720px"});
+
+                        b.CreateElement(sequence+4, "div", Percentage.ToString() + "%", new { @class = "t-progress__info" }, true);
+                    },
+                    new { @class = "t-progress--thin t-progress--status--undefined" });
+
                 },
-                new { @class = "t-progress__bar" });
+                new { @class = "t-progress" });
+                break;
+            case ProgressTheme.plump:
+                builder.CreateElement(sequence, "div", a =>
+                {
+                    a.CreateElement(sequence+1, "div", b =>
+                    {
+                        b.CreateElement(sequence + 2, "div", c =>
+                        {
+                            c.CreateElement(sequence + 3, "div", Percentage.ToString() + "%", 
+                                new { @class = "t-progress__info" }, Percentage>10);
+                        }, 
+                        new { @class = "t-progress__inner", style = $"width: {Percentage}%;" });
 
-                b.CreateElement(0, "div", Percentage.ToString() + "%", new { @class = "t-progress__info" }, true);
-            },
-            new { @class = "t-progress--thin t-progress--status--undefined" });
+                        b.CreateElement(sequence + 3, "div", Percentage.ToString() + "%", new { @class = "t-progress__info" }, Percentage < 10 && Percentage > 0);
+                        
+                    }, 
+                    new { @class = $"t-progress__bar t-progress--plump  {s}", style = "width:720px" });
+                },
+                new { @class = "t-progress" });
+                break;
+            case ProgressTheme.circle:
+                break;
+            default:
+                break;
+        }
 
-        },
-        new { @class = "t-progress" });
     }
 
     protected override void BuildCssClass(ICssClassBuilder builder)
@@ -83,7 +113,7 @@ public class TProgress : BlazorComponentBase, IHasChildContent
     /// <returns></returns>
     public string GetBackGround()
     {
-        
+
         var background = Color.Match<string>(
               a =>
               {
