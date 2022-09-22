@@ -57,85 +57,13 @@ public class TProgress : BlazorComponentBase, IHasChildContent
 
         var background = GetBackGround();
         var progressTypeClass = Percentage < 10 && Percentage > 0 ? "t-progress--under-ten" : "t-progress--over-ten";
-        int cx = 0, cy = 0, r = 0;
-        var icon = "";
-        switch (Status)
-        {
-            case TDesignBlazor.Status.Default:
-                //icon = "check";
-                break;
-            case TDesignBlazor.Status.Warning:
-                icon = "error";
-                break;
-            case TDesignBlazor.Status.Error:
-                icon = "close";
-                break;
-            case TDesignBlazor.Status.Success:
-                icon = "check";
-                break;
-            case TDesignBlazor.Status.None:
-                break;
-            default:
-                //icon = "check";
-                break;
-        }
-        var isLable = Label.Match<bool>(a => a != "",
-        b => b);
-        var lableText = Label.Match<string>(a => a,
-        b => Percentage.ToString() + "%");
-        var size = Size.Match<int>(
-    a =>
-    {
-        switch (a)
-        {
-            case 72:
-                cx = 36;
-                cy = 36;
-                r = 33;
-                return 72;
-            case 112:
-                cx = 56;
-                cy = 56;
-                r = 53;
-                return 112;
-            case 160:
-                cx = 80;
-                cy = 80;
-                r = 77;
-                return 160;
-            default:
-                cx = 56;
-                cy = 56;
-                r = 53;
-                return 112;
-        }
-    },
-    b =>
-    {
-        switch (b)
-        {
-            case TDesignBlazor.Size.Small:
-                cx = 36;
-                cy = 36;
-                r = 33;
-                return 72;
-            case TDesignBlazor.Size.Medium:
-                cx = 56;
-                cy = 56;
-                r = 53;
-                return 112;
-            case TDesignBlazor.Size.Large:
-                cx = 80;
-                cy = 80;
-                r = 77;
-                return 160;
-            default:
-                cx = 56;
-                cy = 56;
-                r = 53;
-                return 112;
-        }
-    });
+
+        var icon = GetIcon();
+        var isLable = GetIsLabel();
+        var lableText = GetLable();
+        var size = GetSize();
+        var circle = GetCircle();
+
         switch (Theme)
         {
             case ProgressTheme.line:
@@ -198,9 +126,9 @@ public class TProgress : BlazorComponentBase, IHasChildContent
                         {
                             c.CreateElement(sequence + 4, "circle", d => { }, new
                             {
-                                cx = cx,
-                                cy = cy,
-                                r = r,
+                                cx = circle.CX,
+                                cy = circle.CY,
+                                r = circle.R,
                                 stroke_width = "6",
                                 stroke = "",
                                 fill = "none",
@@ -209,9 +137,9 @@ public class TProgress : BlazorComponentBase, IHasChildContent
 
                             c.CreateElement(sequence + 5, "circle", d => { }, new
                             {
-                                cx = cx,
-                                cy = cy,
-                                r = r,
+                                cx = circle.CX,
+                                cy = circle.CY,
+                                r = circle.R,
                                 stroke_width = "6",
                                 fill = "none",
                                 strokeLinecap = "round",
@@ -238,7 +166,7 @@ public class TProgress : BlazorComponentBase, IHasChildContent
     /// 获取背景色
     /// </summary>
     /// <returns></returns>
-    public string GetBackGround()
+    private string GetBackGround()
     {
 
         var background = Color.Match<string>(
@@ -261,11 +189,130 @@ public class TProgress : BlazorComponentBase, IHasChildContent
               });
         return background;
     }
-
-
+    /// <summary>
+    /// 获取大小
+    /// </summary>
+    /// <returns></returns>
+    private int GetSize()
+    {
+        return Size.Match<int>(
+        a =>
+        {
+            switch (a)
+            {
+                case 72:
+                    return 72;
+                case 112:
+                    return 112;
+                case 160:
+                    return 160;
+                default:
+                    return 112;
+            }
+        },
+        b =>
+        {
+            switch (b)
+            {
+                case TDesignBlazor.Size.Small:
+                    return 72;
+                case TDesignBlazor.Size.Medium:
+                    return 112;
+                case TDesignBlazor.Size.Large:
+                    return 160;
+                default:
+                    return 112;
+            }
+        });
+    }
+    /// <summary>
+    /// 获取是否显示Lable
+    /// </summary>
+    /// <returns></returns>
+    private bool GetIsLabel()
+    {
+        return Label.Match<bool>(
+            a => a != "",
+            b => b);
+    }
+    /// <summary>
+    /// 获取Lable文本
+    /// </summary>
+    /// <returns></returns>
+    private string GetLable()
+    {
+        return Label.Match<string>(
+            a => a,
+            b => Percentage.ToString() + "%");
+    }
+    /// <summary>
+    /// 获取状态图标
+    /// </summary>
+    /// <returns></returns>
+    private string GetIcon()
+    {
+        switch (Status)
+        {
+            case TDesignBlazor.Status.Default:
+                return "";
+            case TDesignBlazor.Status.Warning:
+                return "error";
+            case TDesignBlazor.Status.Error:
+                return "close";
+            case TDesignBlazor.Status.Success:
+                return "check";
+            case TDesignBlazor.Status.None:
+                return "";
+            default:
+                return "";
+        }
+    }
+    /// <summary>
+    /// 获取svg圆形对象配置
+    /// </summary>
+    /// <returns></returns>
+    private Circle GetCircle()
+    {
+        return Size.Match<Circle>(
+        a =>
+        {
+            switch (a)
+            {
+                case 72:
+                    return new() { CX = 36, CY = 36, R = 33 };
+                case 112:
+                    return new() { CX = 56, CY = 56, R = 53 };
+                case 160:
+                    return new() { CX = 80, CY = 80, R = 77 };
+                default:
+                    return new() { CX = 56, CY = 56, R = 53 };
+            }
+        },
+        b =>
+        {
+            switch (b)
+            {
+                case TDesignBlazor.Size.Small:
+                    return new() { CX = 36, CY = 36, R = 33 };
+                case TDesignBlazor.Size.Medium:
+                    return new() { CX = 56, CY = 56, R = 53 };
+                case TDesignBlazor.Size.Large:
+                    return new() { CX = 80, CY = 80, R = 77 };
+                default:
+                    return new() { CX = 56, CY = 56, R = 53 };
+            }
+        });
+    }
 }
 public class LinearGradient
 {
     public string From { get; set; }
     public string To { get; set; }
+}
+
+public class Circle
+{
+    public int CX { get; set; }
+    public int CY { get; set; }
+    public int R { get; set; }
 }
