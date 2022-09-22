@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<LangVersion>10</LangVersion>
 		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>TDesignBlazor</RootNamespace>
 		<Version>0.1</Version>
@@ -58,6 +57,10 @@
 
 	<ItemGroup>
 		<Folder Include="Parameters\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\ComponentBuilder\src\ComponentBuilder\ComponentBuilder.csproj" />
 	</ItemGroup>
 
 </Project>
