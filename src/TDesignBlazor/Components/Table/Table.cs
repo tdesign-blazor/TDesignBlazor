@@ -43,7 +43,10 @@ public class Table<TItem> : BlazorComponentBase
     /// 设置固定底部。
     /// </summary>
     [Parameter] public bool FixedFooter { get; set; }
-
+    /// <summary>
+    /// 当固定头部或底部时，表格内容部分的固定高度，单位是 px。
+    /// </summary>
+    [Parameter] public int? FixedHeight { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -86,7 +89,11 @@ public class Table<TItem> : BlazorComponentBase
             {
                 @class = HtmlHelper.CreateCssBuilder().Append(AutoWidth, "t-table--layout-auto", "t-table--layout-fixed")
             });
-        }, new { @class = "t-table__content" });
+        }, new
+        {
+            @class = "t-table__content",
+            style = HtmlHelper.CreateStyleBuilder().Append($"max-height:{FixedHeight}px", FixedHeight.HasValue)
+        });
     }
 
     /// <summary>

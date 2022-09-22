@@ -9,7 +9,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5041",
       "nativeDebugging": false,
-      "hotReloadEnabled": false
+      "hotReloadEnabled": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
