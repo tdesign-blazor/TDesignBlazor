@@ -29,8 +29,8 @@
                  <SpaceItem>
                       <div class="TProgress-domo-margin">渐变色</div>
                 @{
-                    LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
-                }
+          LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
+        }
                 <TProgress Theme="ProgressTheme.line" Color="@linearGradient" Percentage="60"></TProgress>
             </SpaceItem>
             <SpaceItem>
@@ -47,7 +47,7 @@
         </Space>
     </RunContent>
     <CodeContent>
-        @Code.Create(@"
+    @Code.Create(@"
 ```html
 <Space Vertical>
     <SpaceItem>
@@ -108,7 +108,10 @@
                 </Space>
                 <Space Vertical>
                     <div>自定义内容</div>
-                    <TProgress Theme="ProgressTheme.circle" Label="'75day'" Percentage="50" Status="Status.Success"></TProgress>
+          @{
+            var _label = "75day";
+          }
+                    <TProgress Theme="ProgressTheme.circle" Label="@_label" Percentage="50" Status="Status.Success"></TProgress>
                 </Space>
             </Space>
 
@@ -131,72 +134,74 @@
             <Space>
                 <Space Vertical>
                     <div>小尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="small"></TProgress>
+                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="Size.Small"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>默认尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="medium"></TProgress>
+                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="Size.Medium"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>大尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Size="large"></TProgress>
+                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Size="Size.Large"></TProgress>
                 </Space>
             </Space>
         </Space>
-@*         <Space Vertical Size="36">
+    </RunContent>
+    <CodeContent>
+    @Code.Create(@"
+```html
+        <Space Vertical>
             <div>默认</div>
             <!-- 重要：strokeWidth 大小不能超过 size 的一半，否则无法渲染出环形 -->
-            <Space Size="78" class="ml-36px">
-                        <Space Vertical align="center" Size="10">
-                            <div>默认样式</div>
-                            <TProgress Theme="ProgressTheme.circle" Percentage="30"></TProgress>
-                        </Space>
-                <Space Vertical  Size="10">
-                    <div>不显示数字</div>
-                    <TProgress Theme="ProgressTheme.circle" Label="false" Percentage="100" Status="Status.Success"></TProgress>
+            <Space>
+                <Space Vertical>
+                    <div>默认样式</div>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""30""></TProgress>
                 </Space>
-                <Space Vertical align="center" Size="10">
+                <Space Vertical>
+                    <div>不显示数字</div>
+                    <TProgress Theme=""ProgressTheme.circle"" Label=""false"" Percentage=""100"" Status=""Status.Success""></TProgress>
+                </Space>
+                <Space Vertical>
                     <div>自定义内容</div>
-                    <TProgress Theme="ProgressTheme.circle" Label="'75day'" Percentage="50" Status="Status.Success"></TProgress>
+            @{
+                var _label = ""75day"";
+            }
+                    <TProgress Theme=""ProgressTheme.circle"" Label=""@_label"" Percentage=""50"" Status=""Status.Success""></TProgress>
                 </Space>
             </Space>
 
-            <Space Size="78" class="ml-36px">
-                <Space Vertical align="center" Size="10">
+            <Space>
+                <Space Vertical>
                     <div>进度完成</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="100" Status="Status.Success"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""100"" Status=""Status.Success""></TProgress>
                 </Space>
-                <Space Vertical align="center" Size="10">
+                <Space Vertical>
                     <div>进度状态发生错误</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Status="Status.Error"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""75"" Status=""Status.Error""></TProgress>
                 </Space>
-                <Space Vertical align="center" Size="10">
+                <Space Vertical>
                     <div>进度被中断</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="50" Status="Status.Warning"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""50"" Status=""Status.Warning""></TProgress>
                 </Space>
             </Space>
 
             <div>默认不同尺寸</div>
-            <Space Size="110" class="ml-44px">
-                <Space Vertical align="center" Size="10">
+            <Space>
+                <Space Vertical>
                     <div>小尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="small"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Small""></TProgress>
                 </Space>
-                <Space Vertical align="center" Size="10">
+                <Space Vertical>
                     <div>默认尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="medium"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Medium""></TProgress>
                 </Space>
-                <Space Vertical align="center" Size="10">
+                <Space Vertical>
                     <div>大尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Size="large"></TProgress>
+                    <TProgress Theme=""ProgressTheme.circle"" Percentage=""75"" Size=""Size.Large""></TProgress>
                 </Space>
             </Space>
-        </Space>*@
-    </RunContent>
-    <CodeContent>
-        @Code.Create(@"
-```html
-<Tag Icon=""IconName.Discount"">默认标签</Tag>
+        </Space>
 ```
 ")
     </CodeContent>
@@ -205,6 +210,6 @@
 
 @inject IJSRuntime JS
 @code {
-    bool Checked1;
+  bool Checked1;
 }
 

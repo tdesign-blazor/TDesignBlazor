@@ -19,5 +19,10 @@ public enum Status
     /// <summary>
     /// 警告的状态。
     /// </summary>
-    Warning
+    Warning,
+    /// <summary>
+    /// 空
+    /// </summary>
+    [CssClass("undefined")]
+    None
 }
