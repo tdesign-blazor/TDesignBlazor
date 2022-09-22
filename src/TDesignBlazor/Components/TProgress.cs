@@ -14,36 +14,36 @@ public class TProgress : BlazorComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条颜色。示例：'#ED7B2F' 或 'orange' 或 ['#f00', '#0ff', '#f0f'] 或 { '0%': '#f00', '100%': '#0ff' } 或 { from: '#000', to: '#000' } 等。
     /// </summary>
     [Parameter] public OneOf<string, LinearGradient> Color { get; set; }
 
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度百分比
     /// </summary>
     [Parameter] public OneOf<string, bool> Label { get; set; } = true;
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条百分比
     /// </summary>
     [Parameter] public int? Percentage { get; set; } = 0;
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条尺寸
     /// </summary>
     [Parameter] public OneOf<int, Size> Size { get; set; } = 112;
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条状态
     /// </summary>
     [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesignBlazor.Status.Default;// [
     /// <summary>
-    /// <inheritdoc/>
+    ///进度条线宽。宽度数值不能超过 size 的一半，否则不能输出环形进度
     /// </summary>
     [Parameter] public string? StrokeWidth { get; set; }
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条风格。值为 line，标签（label）显示在进度条右侧；值为 plump，标签（label）显示在进度条里面；值为 circle，标签（label）显示在进度条正中间。可选项：line/plump/circle。
     /// </summary>
-    [Parameter] public ProgressTheme? Theme { get; set; } = ProgressTheme.line;
+    [Parameter] public ProgressTheme? Theme { get; set; } = ProgressTheme.Line;
     /// <summary>
-    /// <inheritdoc/>
+    /// 进度条未完成部分颜色
     /// </summary>
     [Parameter] public string? TrackColor { get; set; }
 
@@ -64,11 +64,11 @@ public class TProgress : BlazorComponentBase, IHasChildContent
         var size = GetSize();
         var circle = GetCircle();
 
-        switch (Theme)
+        builder.CreateElement(sequence, "div", a =>
         {
-            case ProgressTheme.line:
-                builder.CreateElement(sequence, "div", a =>
-                {
+            switch (Theme)
+            {
+                case ProgressTheme.Line:
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 2, "div", c =>
@@ -84,13 +84,8 @@ public class TProgress : BlazorComponentBase, IHasChildContent
                         }, new { @class = "t-progress__info" }, Status != TDesignBlazor.Status.Default && Status != TDesignBlazor.Status.None);
                     },
                     new { @class = $"t-progress--thin {Status.GetCssClass} " });
-
-                },
-                new { @class = "t-progress" });
-                break;
-            case ProgressTheme.plump:
-                builder.CreateElement(sequence, "div", a =>
-                {
+                    break;
+                case ProgressTheme.Plump:
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 2, "div", c =>
@@ -104,13 +99,8 @@ public class TProgress : BlazorComponentBase, IHasChildContent
 
                     },
                     new { @class = $"t-progress__bar t-progress--plump  {progressTypeClass}", style = "width:720px" });
-                },
-                new { @class = "t-progress" });
-                break;
-            case ProgressTheme.circle:
-
-                builder.CreateElement(sequence, "div", a =>
-                {
+                    break;
+                case ProgressTheme.Circle:
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 3, "div", lableText,
@@ -149,13 +139,15 @@ public class TProgress : BlazorComponentBase, IHasChildContent
                             });
                         }, new { width = $"{size}", height = $"{size}", viewBox = $"0 0 {size} {size}" });
                     },
-                    new { @class = $"t-progress--circle {Status.GetCssClass} ", style = $"width: {size}px; height: {size}px; font-size: 20px" });
-                },
-                new { @class = "t-progress" });
-                break;
-            default:
-                break;
-        }
+                   new { @class = $"t-progress--circle {Status.GetCssClass} ", style = $"width: {size}px; height: {size}px; font-size: 20px" });
+                    break;
+                default:
+                    break;
+            }
+        },
+        new { @class = "t-progress" });
+
+
 
     }
 

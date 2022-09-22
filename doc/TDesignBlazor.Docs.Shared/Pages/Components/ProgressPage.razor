@@ -8,39 +8,39 @@
         <Space Vertical>
             <SpaceItem>
                 <div class="TProgress-domo-margin">默认样式</div>
-                <TProgress Theme="ProgressTheme.line" Percentage="30"></TProgress>
+                <TProgress Theme="ProgressTheme.Line" Percentage="30"></TProgress>
             </SpaceItem>
             <SpaceItem>
                 <div class="TProgress-domo-margin">100%</div>
-                <TProgress Theme="ProgressTheme.line"  Percentage="100"></TProgress>
+                <TProgress Theme="ProgressTheme.Line"  Percentage="100"></TProgress>
             </SpaceItem>
             <SpaceItem>
                  <div class="TProgress-domo-margin">进度完成</div>
-                <TProgress Theme="ProgressTheme.line" Status="Status.Success" Percentage="60"></TProgress>
+                <TProgress Theme="ProgressTheme.Line" Status="Status.Success" Percentage="60"></TProgress>
             </SpaceItem>
             <SpaceItem>
                  <div class="TProgress-domo-margin">进度状态发生重大错误</div>
-                <TProgress Theme="ProgressTheme.line" Status="Status.Error" Percentage="60"></TProgress>
+                <TProgress Theme="ProgressTheme.Line" Status="Status.Error" Percentage="60"></TProgress>
             </SpaceItem>
                 <SpaceItem>
                    <div class="TProgress-domo-margin">进度被中断</div>
-                <TProgress Theme="ProgressTheme.line" Status="Status.Warning" Percentage="60"></TProgress>
+                <TProgress Theme="ProgressTheme.Line" Status="Status.Warning" Percentage="60"></TProgress>
             </SpaceItem>
                  <SpaceItem>
                       <div class="TProgress-domo-margin">渐变色</div>
                 @{
           LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
         }
-                <TProgress Theme="ProgressTheme.line" Color="@linearGradient" Percentage="60"></TProgress>
+                <TProgress Theme="ProgressTheme.Line" Color="@linearGradient" Percentage="60"></TProgress>
             </SpaceItem>
             <SpaceItem>
                 <h3>可以在线形内展示进度信息</h3>
                 <div class="TProgress-domo-margin">默认样式</div>
-                <TProgress Theme="ProgressTheme.plump" Percentage="30" />
+                <TProgress Theme="ProgressTheme.Plump" Percentage="30" />
             </SpaceItem>
             <SpaceItem>
                 <div class="TProgress-domo-margin">进度0-10%时数字位置出现在目前进度的右边区域</div>
-                <TProgress Theme="ProgressTheme.plump" Percentage="5" />
+                <TProgress Theme="ProgressTheme.Plump" Percentage="5" />
             </SpaceItem>
 
 
@@ -100,33 +100,33 @@
             <Space>
                 <Space Vertical>
                     <div>默认样式</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="30"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>不显示数字</div>
-                    <TProgress Theme="ProgressTheme.circle" Label="false" Percentage="100" Status="Status.Success"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Label="false" Percentage="100" Status="Status.Success"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>自定义内容</div>
           @{
             var _label = "75day";
           }
-                    <TProgress Theme="ProgressTheme.circle" Label="@_label" Percentage="50" Status="Status.Success"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Label="@_label" Percentage="50" Status="Status.Success"></TProgress>
                 </Space>
             </Space>
 
             <Space>
                 <Space Vertical>
                     <div>进度完成</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="100" Status="Status.Success"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="100" Status="Status.Success"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>进度状态发生错误</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Status="Status.Error"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="75" Status="Status.Error"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>进度被中断</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="50" Status="Status.Warning"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="50" Status="Status.Warning"></TProgress>
                 </Space>
             </Space>
 
@@ -134,15 +134,15 @@
             <Space>
                 <Space Vertical>
                     <div>小尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="Size.Small"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="30" Size="Size.Small"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>默认尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="30" Size="Size.Medium"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="30" Size="Size.Medium"></TProgress>
                 </Space>
                 <Space Vertical>
                     <div>大尺寸</div>
-                    <TProgress Theme="ProgressTheme.circle" Percentage="75" Size="Size.Large"></TProgress>
+                    <TProgress Theme="ProgressTheme.Circle" Percentage="75" Size="Size.Large"></TProgress>
                 </Space>
             </Space>
         </Space>

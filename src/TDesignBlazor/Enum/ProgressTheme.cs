@@ -9,11 +9,20 @@ namespace TDesignBlazor
     [CssClass("t-progress--")]
     public enum ProgressTheme
     {
+        /// <summary>
+        /// 横线
+        /// </summary>
         [CssClass("line")]
-        line,
+        Line,
+        /// <summary>
+        /// 行内
+        /// </summary>
         [CssClass("plump")]
-        plump,
+        Plump,
+        /// <summary>
+        /// 圆环
+        /// </summary>
         [CssClass("circle")]
-        circle,
+        Circle,
     }
 }
