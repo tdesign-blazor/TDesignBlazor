@@ -21,7 +21,7 @@ public class LinearGradient
 /// <summary>
 /// 进度条
 /// </summary>
-public class TProgress : BlazorComponentBase, IHasChildContent
+public class Progress : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

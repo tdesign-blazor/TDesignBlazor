@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDesignBlazor.Components
 {
-    public class TJumper : BlazorComponentBase, IHasChildContent
+    public class Jumper : BlazorComponentBase, IHasChildContent
     {
         public RenderFragment? ChildContent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
