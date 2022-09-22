@@ -1,21 +1,15 @@
 {
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:9653",
-      "sslPort": 0
-    }
-  },
   "profiles": {
     "TDsignBlazor.Docs.ServerSide": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5041",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5041",
+      "nativeDebugging": false,
+      "hotReloadEnabled": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -23,6 +17,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:9653",
+      "sslPort": 0
     }
   }
 }

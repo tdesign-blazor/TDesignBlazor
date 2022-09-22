@@ -1,0 +1,310 @@
+﻿@page "/components/table"
+<PageHeader Title="Table 表格">
+    表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
+</PageHeader>
+
+<h2>表格分类</h2>
+<p>随着表格功能越来越多，如果把所有的功能都集中在一个组件里面，代码文件会越来越臃肿。既不利于维护，也不利于按需引入必要功能的业务。</p>
+<p>
+    因此，表格组件有三个：BaseTable（基础表格）、PrimaryTable（主表格）、EnhancedTable（增强型表格）。
+</p>
+
+<Example Title="基础表格">
+    <Description>简单表格，使用边框线、斑马纹等清晰呈现各数据单元格边界线，辅助信息区隔。</Description>
+    <RunContent>
+        <Table TItem="User" Data="UserList">
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <Tag Theme="Theme.Primary">男</Tag>
+                    }
+                    else
+                    {
+                        <Tag Theme="Theme.Danger">女</Tag>
+                    }
+                }
+                </FieldColumn>
+        </Table>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Table TItem=""User"" Data=""UserList"">
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <Tag Theme=""Theme.Primary"">男</Tag>
+            }
+            else
+            {
+                <Tag Theme=""Theme.Danger"">女</Tag>
+            }
+        }
+        </FieldColumn>
+</Table>
+```
+```cs
+@code{
+    List<User> UserList => new()
+    {
+        new User{ Id=1, Name=""张三"",Age=35,Gender=true},
+        new User{ Id=2, Name=""李四"",Age=22,Gender=false},
+        new User{ Id=3, Name=""王五"",Age=35,Gender=true},
+        new User{ Id=4, Name=""赵六"",Age=18,Gender=false},
+        new User{ Id=5, Name=""韩七"",Age=65,Gender=true},
+    };
+
+    class User
+    {
+        public int Id{ get; set; }
+        public string? Name{ get; set; }
+        public int? Age{ get; set; }
+        public bool Gender{ get; set; }
+    }
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    List<User> UserList => new()
+    {
+        new User{ Id=1, Name="张三",Age=35,Gender=true},
+        new User{ Id=2, Name="李四",Age=22,Gender=false},
+        new User{ Id=3, Name="王五",Age=35,Gender=true},
+        new User{ Id=4, Name="赵六",Age=18,Gender=false},
+        new User{ Id=5, Name="韩七",Age=65,Gender=true},
+    };
+
+    class User
+    {
+        public int Id{ get; set; }
+        public string? Name{ get; set; }
+        public int? Age{ get; set; }
+        public bool Gender{ get; set; }
+    }
+}
+<Example Title="斑马纹表格">
+    <Description>设置 <code>Striped</code> 让表格具备颜色间隔</Description>
+    <RunContent>
+        <Table TItem="User" Data="UserList" Striped>
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <Tag Theme="Theme.Primary">男</Tag>
+                    }
+                    else
+                    {
+                        <Tag Theme="Theme.Danger">女</Tag>
+                    }
+                }
+            </FieldColumn>
+        </Table>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Table TItem=""User"" Data=""UserList"" Striped>
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <Tag Theme=""Theme.Primary"">男</Tag>
+            }
+            else
+            {
+                <Tag Theme=""Theme.Danger"">女</Tag>
+            }
+        }
+    </FieldColumn>
+</Table>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="边框表格">
+    <Description>设置 <code>Bordered</code> 让表格每个列都显示边框</Description>
+    <RunContent>
+        <Table TItem="User" Data="UserList" Bordered>
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <Tag Theme="Theme.Primary">男</Tag>
+                    }
+                    else
+                    {
+                        <Tag Theme="Theme.Danger">女</Tag>
+                    }
+                }
+            </FieldColumn>
+        </Table>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        <Table TItem=""User"" Data=""UserList"" Bordered>
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <Tag Theme=""Theme.Primary"">男</Tag>
+            }
+            else
+            {
+                <Tag Theme=""Theme.Danger"">女</Tag>
+            }
+        }
+    </FieldColumn>
+</Table>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="鼠标悬浮行">
+    <Description>设置 <code>Hoverable</code> 鼠标悬停行会有颜色高亮</Description>
+    <RunContent>
+        <Table TItem="User" Data="UserList" Hoverable>
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <Tag Theme="Theme.Primary">男</Tag>
+                    }
+                    else
+                    {
+                        <Tag Theme="Theme.Danger">女</Tag>
+                    }
+                }
+            </FieldColumn>
+        </Table>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Table TItem=""User"" Data=""UserList"" Hoverable>
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <Tag Theme=""Theme.Primary"">男</Tag>
+            }
+            else
+            {
+                <Tag Theme=""Theme.Danger"">女</Tag>
+            }
+        }
+    </FieldColumn>
+</Table>
+```
+")
+    </CodeContent>
+</Example>
+
+    
+<Example Title="固定顶部">
+    <Description>设置 <code>FixedHeader</code> 可以固定顶部列，但同时要设置 <code>FixedHeight</code> 定义内容部分的高度</Description>
+    <RunContent>
+        <Table TItem="User" Data="ManyUserList" FixedHeader FixedHeight="200">
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <Tag Theme="Theme.Primary">男</Tag>
+                    }
+                    else
+                    {
+                        <Tag Theme="Theme.Danger">女</Tag>
+                    }
+                }
+            </FieldColumn>
+        </Table>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Table TItem=""User"" Data=""ManyUserList"" FixedHeader FixedHeight=""200"">
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <Tag Theme=""Theme.Primary"">男</Tag>
+            }
+            else
+            {
+                <Tag Theme=""Theme.Danger"">女</Tag>
+            }
+        }
+    </FieldColumn>
+</Table>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+
+    List<User> ManyUserList => new()
+    {
+        new User{ Id=1, Name="张三",Age=35,Gender=true},
+        new User{ Id=2, Name="李四",Age=22,Gender=false},
+        new User{ Id=3, Name="王五",Age=35,Gender=true},
+        new User{ Id=4, Name="赵六",Age=18,Gender=false},
+        new User{ Id=5, Name="韩七",Age=65,Gender=true},
+        new User{ Id=6, Name="储八",Age=65,Gender=true},
+        new User{ Id=7, Name="刘九",Age=65,Gender=true},
+        new User{ Id=8, Name="尚十",Age=35,Gender=false},
+        new User{ Id=9, Name="贺大帅",Age=45,Gender=false},
+        new User{ Id=10, Name="毛大壮",Age=47,Gender=false},
+        new User{ Id=11, Name="胡彪",Age=85,Gender=true},
+        new User{ Id=12, Name="张大大",Age=13,Gender=false},
+        new User{ Id=13, Name="刘邦",Age=59,Gender=true},
+        new User{ Id=14, Name="项羽",Age=63,Gender=true},
+        new User{ Id=15, Name="韩信",Age=41,Gender=true},
+        new User{ Id=16, Name="张良",Age=38,Gender=true},
+    };
+}
