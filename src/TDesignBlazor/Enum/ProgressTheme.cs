@@ -12,7 +12,7 @@ namespace TDesignBlazor
         /// <summary>
         /// 横线
         /// </summary>
-        [CssClass("line")]
+        [CssClass("thin")]
         Line,
         /// <summary>
         /// 行内
