@@ -1,7 +1,6 @@
-﻿using System.Linq.Expressions;
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 只具备一些基本功能的数据表格。

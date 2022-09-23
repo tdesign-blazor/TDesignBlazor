@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 风格主题的配色方案。

@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示组件的边框形状。

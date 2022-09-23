@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 全局提示。
@@ -69,7 +69,7 @@ public class Message : MessageComponentBase
     {
         get
         {
-            if (Theme == TDesign.MessageTheme.Question)
+            if (Theme == TDesignBlazor.MessageTheme.Question)
             {
                 return IconName.HelpCircleFilled;
             }

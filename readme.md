@@ -43,7 +43,7 @@
 
 - 在项目中注册服务
     ```cs
-    builder.Service.AddTDesign();
+    builder.Service.AddTDesignBlazor();
     ```
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
@@ -52,7 +52,7 @@
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs
-    @using TDesign
+    @using TDesignBlazor
     ```
 
 ## :pencil: 参与贡献
