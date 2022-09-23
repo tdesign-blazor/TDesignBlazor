@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 表示作为表单的组件。

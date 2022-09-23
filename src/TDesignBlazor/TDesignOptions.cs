@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 /// <summary>
 /// TDesign 的配置项。
 /// </summary>

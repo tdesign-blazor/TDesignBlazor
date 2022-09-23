@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 
 /// <summary>
 /// 表示栅格的列。

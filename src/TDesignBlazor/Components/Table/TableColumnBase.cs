@@ -1,8 +1,7 @@
 ﻿using ComponentBuilder;
-
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 
 /// <summary>
 /// 表示表格的单元格的基类。
