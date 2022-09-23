@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 
 /// <summary>
 /// 表示用于开启一个闭环的操作任务的按钮。

@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 表示间距排版的项。

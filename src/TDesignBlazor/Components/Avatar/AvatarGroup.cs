@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 表示头像组的容器。

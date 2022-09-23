@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<BlazorCacheBootResources>false</BlazorCacheBootResources>
+		<RootNamespace>TDesign.Docs.WebAssembly</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

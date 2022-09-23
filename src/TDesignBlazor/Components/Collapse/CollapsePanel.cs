@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 /// <summary>
 /// 表示作为折叠面板的内容。必须放在 <see cref="Collapse"/> 组件中。
 /// </summary>
