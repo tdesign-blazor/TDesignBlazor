@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 输入控件的基类。

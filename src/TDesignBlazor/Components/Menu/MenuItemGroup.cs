@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 表示菜单项的分组。只能适配侧边菜单。

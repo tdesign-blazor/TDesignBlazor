@@ -1,11 +1,12 @@
-﻿using System.Reflection;
-using System.Linq.Expressions;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
-using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Reflection;
+
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 /// <summary>
 /// 表示作为表单的项。必须在 <see cref="Form"/> 组件中。
 /// </summary>

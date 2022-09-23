@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 /// <summary>
 /// 表示列表项。必须放在 <see cref="List"/> 组件中。
 /// </summary>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace TDesign;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示可以输出数据的表格列。必须在 <see cref="Table{TItem}"/> 组件中使用。

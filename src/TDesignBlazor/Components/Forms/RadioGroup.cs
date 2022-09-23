@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 单选按钮的组容器，支持双向绑定。
