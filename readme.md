@@ -61,10 +61,12 @@
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出
-<a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
-</a>
 
+<div>
+    <a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
+    </a>
+</div>
 ## :house: 社区支持
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
 * 作者邮箱：[william-zzh@outlook.com]
