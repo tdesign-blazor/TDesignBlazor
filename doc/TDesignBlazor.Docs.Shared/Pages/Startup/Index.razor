@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 <PageHeader Title="快速开始">
-    基于 TDesign 的 Blazor 组件库
+    基于 TDesignBlazor 的 Blazor 组件库
 </PageHeader>
 
 <h2>环境</h2>
@@ -29,20 +29,20 @@
 
 @Code.Create(@"
 ```html
-<link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" /> <!--必要样式-->
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-blazor.css"" /> <!--必要样式-->
 ```
 ")
 
 <h3>在 <code>_Import.razor</code> 引入命名空间</h3>
 @Code.Create(@"
 ```
-@using TDesign
+@using TDesignBlazor
 ```
 ")
 
 <h3>注册服务</h3>
 @Code.Create(@"
 ```
-builder.Services.AddTDesign();
+builder.Services.AddTDesignBlazor();
 ```
 ")

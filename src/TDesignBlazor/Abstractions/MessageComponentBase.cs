@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 消息组件的基类。
 /// </summary>

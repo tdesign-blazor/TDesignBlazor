@@ -1,7 +1,8 @@
 ﻿using System.Linq.Expressions;
+
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 显示程序正在处理的加载提示。

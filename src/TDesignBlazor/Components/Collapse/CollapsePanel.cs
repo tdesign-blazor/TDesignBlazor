@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 /// <summary>
 /// 表示作为折叠面板的内容。必须放在 <see cref="Collapse"/> 组件中。
 /// </summary>
