@@ -60,8 +60,4 @@
     <Folder Include="Parameters\" />
   </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\ComponentBuilder\src\ComponentBuilder\ComponentBuilder.csproj" />
-	</ItemGroup>
-
 </Project>
