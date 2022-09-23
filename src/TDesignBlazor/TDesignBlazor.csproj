@@ -4,46 +4,50 @@
 		<LangVersion>10</LangVersion>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>TDesignBlazor</RootNamespace>
+		<RootNamespace>TDesign</RootNamespace>
+		<PackageId>TDesign</PackageId>
 		<Version>0.1</Version>
-		<Description>基于 TDesign 的 Blazor 企业级组件库。</Description>
+		<Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
 		<Authors>William Zhou</Authors>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
-		<Nullable>annotations</Nullable>
 		<OutputPath>.\bin\$(Configuration)</OutputPath>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<RepositoryUrl>https://github.com/AchievedOwner/ComponentBuilder</RepositoryUrl>
+		<RepositoryUrl>https://github.com/AchievedOwner/TDesign</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
-		<PackageProjectUrl>https://github.com/AchievedOwner/ComponentBuilder</PackageProjectUrl>
-		<Copyright>TDesignBlazor © William 2022</Copyright>
+		<PackageProjectUrl>https://github.com/AchievedOwner/TDesign</PackageProjectUrl>
+		<Copyright>TDesign © William 2022</Copyright>
+
 	</PropertyGroup>
 
-  <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <LangVersion>10.0</LangVersion>
-    <FileAlignment>1024</FileAlignment>
-  </PropertyGroup>
-  <Choose>
-    <When Condition="'$(Configuration)' == 'Debug'">
-      <PropertyGroup>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(Configuration)'=='Release' ">
-      <PropertyGroup>
-        <DebugSymbols>false</DebugSymbols>
-        <Optimize>true</Optimize>
-        <DefineConstants>TRACE</DefineConstants>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageOutputPath>..\..\pack</PackageOutputPath>
-      </PropertyGroup>
-    </When>
-  </Choose>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>10.0</LangVersion>
+		<FileAlignment>1024</FileAlignment>
+		<Title>TDesign</Title>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+	</PropertyGroup>
+	<Choose>
+		<When Condition="'$(Configuration)' == 'Debug'">
+			<PropertyGroup>
+				<DebugSymbols>true</DebugSymbols>
+				<DebugType>full</DebugType>
+				<Optimize>false</Optimize>
+				<DefineConstants>DEBUG;TRACE</DefineConstants>
+			</PropertyGroup>
+		</When>
+		<When Condition=" '$(Configuration)'=='Release' ">
+			<PropertyGroup>
+				<DebugSymbols>false</DebugSymbols>
+				<Optimize>true</Optimize>
+				<DefineConstants>TRACE</DefineConstants>
+				<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+				<PackageOutputPath>..\..\pack</PackageOutputPath>
+			</PropertyGroup>
+		</When>
+	</Choose>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -59,5 +63,16 @@
   <ItemGroup>
     <Folder Include="Parameters\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\asset\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>

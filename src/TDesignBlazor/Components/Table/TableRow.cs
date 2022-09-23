@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 用于渲染 tr 元素的组件。

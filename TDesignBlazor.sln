@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDesignBlazor", "src\TDesignBlazor\TDesignBlazor.csproj", "{F721D6E4-47B2-40C4-A978-F010DEF54447}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,10 +36,10 @@ Global
 		{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F721D6E4-47B2-40C4-A978-F010DEF54447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F721D6E4-47B2-40C4-A978-F010DEF54447}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F721D6E4-47B2-40C4-A978-F010DEF54447}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F721D6E4-47B2-40C4-A978-F010DEF54447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
