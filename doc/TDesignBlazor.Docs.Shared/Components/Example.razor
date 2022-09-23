@@ -22,7 +22,7 @@
         </Div>
         <Div class="footer">
             <Div class="btn">
-                <Icon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px" style="display: flex; flex-direction: row;flex-wrap: wrap;align-content: center;justify-content: center;" @onclick="e=>ToogleCode()" />
+                <Icon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px" @onclick="e=>ToogleCode()" />
             </Div>
         </Div>
         <Div class="@CodeClass" style="@GetStyle()">
@@ -56,12 +56,3 @@
     }
 }
 
-<style>
-    .doc-icon-center {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: center;
-        justify-content: center;
-    }
-</style>
