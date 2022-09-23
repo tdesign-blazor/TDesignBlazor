@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using TDesignBlazor.Extension;
 
-namespace TDesignBlazor;
+namespace TDesign;
 
 /// <summary>
 /// 渐变色
@@ -51,7 +50,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 进度条状态
     /// </summary>
-    [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesignBlazor.Status.Default;// [
+    [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesign.Status.Default;// [
 
     /// <summary>
     ///进度条线宽。宽度数值不能超过 size 的一半，否则不能输出环形进度
@@ -109,7 +108,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
                             "div",
                             Percentage.ToSuffix("%"),
                             new { @class = "t-progress__info" },
-                            Status == TDesignBlazor.Status.Default || Status == TDesignBlazor.Status.None);
+                            Status == TDesign.Status.Default || Status == TDesign.Status.None);
 
                         b.CreateElement(sequence + 5, "div", c =>
                         {
@@ -120,7 +119,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
                                 });
                         },
                         new { @class = "t-progress__info" },
-                        Status != TDesignBlazor.Status.Default && Status != TDesignBlazor.Status.None);
+                        Status != TDesign.Status.Default && Status != TDesign.Status.None);
                     },
                     new { @class = $"{Theme.GetCssClass()} {Status.GetCssClass()} ", style = $"width:100%" });
                     break;
@@ -144,13 +143,13 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 3, "div", lableText,
-                        new { @class = "t-progress__info" }, Percentage > 10 && isLable && Status == TDesignBlazor.Status.Default);
+                        new { @class = "t-progress__info" }, Percentage > 10 && isLable && Status == TDesign.Status.Default);
 
                         b.CreateElement(sequence + 4, "div", c =>
                         {
                             c.CreateComponent<Icon>(0, attributes: new { Class = $"t-icon t-icon-{icon} t-progress__icon" });
                         },
-                        new { @class = "t-progress__info" }, Percentage > 10 && Status != TDesignBlazor.Status.Default);
+                        new { @class = "t-progress__info" }, Percentage > 10 && Status != TDesign.Status.Default);
 
                         b.CreateElement(sequence + 5, "svg", c =>
                         {
@@ -243,13 +242,13 @@ public class Progress : BlazorComponentBase, IHasChildContent
         {
             switch (b)
             {
-                case TDesignBlazor.Size.Small:
+                case TDesign.Size.Small:
                     return new() { CX = 36, CY = 36, R = 33 };
 
-                case TDesignBlazor.Size.Medium:
+                case TDesign.Size.Medium:
                     return new() { CX = 56, CY = 56, R = 53 };
 
-                case TDesignBlazor.Size.Large:
+                case TDesign.Size.Large:
                     return new() { CX = 80, CY = 80, R = 77 };
 
                 default:
@@ -266,19 +265,19 @@ public class Progress : BlazorComponentBase, IHasChildContent
     {
         switch (Status)
         {
-            case TDesignBlazor.Status.Default:
+            case TDesign.Status.Default:
                 return "";
 
-            case TDesignBlazor.Status.Warning:
+            case TDesign.Status.Warning:
                 return "error";
 
-            case TDesignBlazor.Status.Error:
+            case TDesign.Status.Error:
                 return "close";
 
-            case TDesignBlazor.Status.Success:
+            case TDesign.Status.Success:
                 return "check";
 
-            case TDesignBlazor.Status.None:
+            case TDesign.Status.None:
                 return "";
 
             default:
@@ -347,13 +346,13 @@ public class Progress : BlazorComponentBase, IHasChildContent
         {
             switch (b)
             {
-                case TDesignBlazor.Size.Small:
+                case TDesign.Size.Small:
                     return 72;
 
-                case TDesignBlazor.Size.Medium:
+                case TDesign.Size.Medium:
                     return 112;
 
-                case TDesignBlazor.Size.Large:
+                case TDesign.Size.Large:
                     return 160;
 
                 default:

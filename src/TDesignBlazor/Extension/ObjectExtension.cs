@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDesignBlazor.Extension
+namespace TDesign
 {
     public static class ObjectExtension
     {

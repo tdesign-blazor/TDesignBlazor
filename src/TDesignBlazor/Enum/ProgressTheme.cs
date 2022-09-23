@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDesignBlazor
+namespace TDesign
 {
     [CssClass("t-progress--")]
     public enum ProgressTheme
