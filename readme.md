@@ -38,7 +38,7 @@
 ## 📦 安装使用
 - 从 Nuget 直接安装
     ```bash
-    > Install-Package TDesign
+    > Install-Package TDesignBlazor
     ```
 
 - 在项目中注册服务

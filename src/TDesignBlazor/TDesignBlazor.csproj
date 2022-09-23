@@ -5,7 +5,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>TDesign</RootNamespace>
-		<PackageId>TDesign</PackageId>
+		<PackageId>TDesignBlazor</PackageId>
+		<PackageVersion>0.1-beta</PackageVersion>
 		<Version>0.1</Version>
 		<Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
 		<Authors>William Zhou</Authors>
