@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesign;
 
 /// <summary>
 /// 表示栅格的行。

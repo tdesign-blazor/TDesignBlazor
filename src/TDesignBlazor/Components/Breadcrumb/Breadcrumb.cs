@@ -1,11 +1,11 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesign;
 
 /// <summary>
 /// 面包屑导航的容器。
 /// </summary>
 [ParentComponent]
 [CssClass("t-breadcrumb")]
-public class Breadcrumb : TDesignComponentBase, IHasChildContent
+public class Breadcrumb : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

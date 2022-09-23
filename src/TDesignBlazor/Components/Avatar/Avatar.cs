@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 /// <summary>
 /// 头像。
 /// </summary>
 [CssClass("t-avatar")]
 [ChildComponent(typeof(AvatarGroup), Optional = true)]
-public class Avatar : TDesignComponentBase, IHasChildContent
+public class Avatar : BlazorComponentBase, IHasChildContent
 {
     [CascadingParameter] public AvatarGroup? CascadingAvatarGroup { get; set; }
     /// <summary>

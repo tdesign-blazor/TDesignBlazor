@@ -1,11 +1,11 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesign;
 
 /// <summary>
 /// 步骤组件的容器。配合 <see cref="StepItem"/> 组件使用步骤项。
 /// </summary>
 [CssClass("t-steps")]
 [ParentComponent]
-public class StepGroup : TDesignComponentBase, IHasChildContent
+public class StepGroup : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

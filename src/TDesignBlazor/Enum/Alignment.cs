@@ -1,12 +1,21 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 水平对齐方式。
 /// </summary>
 public enum HorizontalAlignment
 {
+    /// <summary>
+    /// 居左。
+    /// </summary>
     Left,
+    /// <summary>
+    /// 居中。
+    /// </summary>
     Center,
+    /// <summary>
+    /// 居右。
+    /// </summary>
     Right
 }
 
@@ -15,8 +24,17 @@ public enum HorizontalAlignment
 /// </summary>
 public enum VerticalAlignment
 {
+    /// <summary>
+    /// 居上。
+    /// </summary>
     Top,
+    /// <summary>
+    /// 居中。
+    /// </summary>
     Middle,
+    /// <summary>
+    /// 居下。
+    /// </summary>
     Bottom
 }
 

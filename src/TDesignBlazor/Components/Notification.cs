@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 
 /// <summary>
 /// 消息通知。
 /// </summary>
 [ParentComponent]
 [CssClass("t-notification")]
-public class Notification : TDesignMessageComponentBase, IHasChildContent
+public class Notification : MessageComponentBase, IHasChildContent
 {
 
     /// <summary>
@@ -52,7 +52,7 @@ public class Notification : TDesignMessageComponentBase, IHasChildContent
 /// </summary>
 [ChildComponent(typeof(Notification))]
 [CssClass("t-notification__detail-item")]
-public class NotificationDetailItem : TDesignComponentBase, IHasChildContent
+public class NotificationDetailItem : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

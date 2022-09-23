@@ -14,14 +14,14 @@
 <h3>Nuget 管理</h3>
 @Code.Create(@"
 ```ps
-> Install-Package TDesignBlazor
+> Install-Package TDesign
 ```
 ")
 
 <h3>PackageReference</h3>
 @Code.Create(@"
 ```html
-<PackageReference Include=""TDesignBlzor""/>
+<PackageReference Include=""TDesign""/>
 ```
 ")
 
@@ -29,28 +29,20 @@
 
 @Code.Create(@"
 ```html
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/reset.css"" /> <!--重置 HTML 默认样式-->
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign.min.css"" /> <!--tdesign 核心样式-->
-<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-icons.css"" /><!--图标样式-->
-```
-
-```js
-//tdesign 核心 js
-<script src=""_content/TDesignBlazor/tdesign.min.js""></script>
+<link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-blazor.css"" /> <!--必要样式-->
 ```
 ")
 
 <h3>在 <code>_Import.razor</code> 引入命名空间</h3>
 @Code.Create(@"
 ```
-@using TDesignBlazor
-@using TDesignBlazor.Components
+@using TDesign
 ```
 ")
 
 <h3>注册服务</h3>
 @Code.Create(@"
 ```
-builder.Services.AddTDesignBlazor();
+builder.Services.AddTDesign();
 ```
 ")

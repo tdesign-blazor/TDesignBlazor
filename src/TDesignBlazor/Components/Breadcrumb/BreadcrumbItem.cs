@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 
 /// <summary>
 /// 表示面包屑导航的项。必须在 <see cref="Breadcrumb"/> 组件中使用。

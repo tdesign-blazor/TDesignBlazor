@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 
 /// <summary>
 /// 表示具备下级菜单项的二级菜单。
@@ -9,7 +9,7 @@ namespace TDesignBlazor.Components;
 [HtmlTag("li")]
 [ParentComponent]
 [ChildComponent(typeof(Menu))]
-public class SubMenu : TDesignComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
+public class SubMenu : BlazorComponentBase, IHasCascadingParameter<Menu>, IHasChildContent
 {
     [CascadingParameter] public Menu CascadingValue { get; set; }
     /// <summary>

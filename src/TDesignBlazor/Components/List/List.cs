@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 /// <summary>
 /// 表示一个列表容器。配合 <see cref="ListItem"/> 组件使用。
 /// </summary>
 [ParentComponent]
 [CssClass("t-list")]
-public class List : TDesignComponentBase, IHasChildContent
+public class List : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

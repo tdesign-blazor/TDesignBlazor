@@ -1,8 +1,8 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 /// <summary>
 /// 消息组件的基类。
 /// </summary>
-public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasChildContent
+public abstract class MessageComponentBase : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
@@ -17,6 +17,9 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
     /// </summary>
     [Parameter] public object? Icon { get; set; }
 
+    /// <summary>
+    /// 获取对应的主题样式。
+    /// </summary>
     protected string? GetThemeClass
     {
         get
@@ -25,11 +28,11 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
             {
                 return string.Empty;
             }
-            if (Theme == TDesignBlazor.Theme.Primary)
+            if (Theme == Theme.Primary)
             {
                 return "info";
             }
-            if (Theme == TDesignBlazor.Theme.Danger)
+            if (Theme == Theme.Danger)
             {
                 return "error";
             }
@@ -37,6 +40,9 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
         }
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -44,6 +50,9 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
         Icon ??= GetIconByTheme;
     }
 
+    /// <summary>
+    /// 获取主题对应的图标。
+    /// </summary>
     protected virtual IconName? GetIconByTheme
     {
         get
@@ -52,11 +61,11 @@ public abstract class TDesignMessageComponentBase : TDesignComponentBase, IHasCh
             {
                 return IconName.InfoCircle;
             }
-            if (Theme == TDesignBlazor.Theme.Success)
+            if (Theme == Theme.Success)
             {
                 return IconName.CheckCircleFilled;
             }
-            if (Theme == TDesignBlazor.Theme.Danger)
+            if (Theme == Theme.Danger)
             {
                 return IconName.CloseCircleFilled;
             }

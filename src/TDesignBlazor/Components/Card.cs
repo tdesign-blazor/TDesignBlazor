@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesign;
 
 /// <summary>
 /// 卡片组件。
 /// </summary>
 [CssClass("t-card")]
-public class Card : TDesignComponentBase, IHasChildContent
+public class Card : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
