@@ -1,24 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <LangVersion>10</LangVersion>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TDesignBlazor</RootNamespace>
-    <Version>0.1</Version>
-    <Description>基于 TDesign 的 Blazor 企业级组件库。</Description>
-    <Authors>William Zhou</Authors>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <Nullable>annotations</Nullable>
-    <OutputPath>.\bin\$(Configuration)</OutputPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <RepositoryUrl>https://github.com/AchievedOwner/ComponentBuilder</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <PackageProjectUrl>https://github.com/AchievedOwner/ComponentBuilder</PackageProjectUrl>
-    <Copyright>TDesignBlazor © William 2022</Copyright>
-  </PropertyGroup>
+	<PropertyGroup>
+		<LangVersion>10</LangVersion>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>TDesignBlazor</RootNamespace>
+		<Version>0.1</Version>
+		<Description>基于 TDesign 的 Blazor 企业级组件库。</Description>
+		<Authors>William Zhou</Authors>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
+		<Nullable>annotations</Nullable>
+		<OutputPath>.\bin\$(Configuration)</OutputPath>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<RepositoryUrl>https://github.com/AchievedOwner/ComponentBuilder</RepositoryUrl>
+		<RepositoryType>Github</RepositoryType>
+		<PackageProjectUrl>https://github.com/AchievedOwner/ComponentBuilder</PackageProjectUrl>
+		<Copyright>TDesignBlazor © William 2022</Copyright>
+	</PropertyGroup>
 
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -60,5 +59,9 @@
   <ItemGroup>
     <Folder Include="Parameters\" />
   </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\ComponentBuilder\src\ComponentBuilder\ComponentBuilder.csproj" />
+	</ItemGroup>
 
 </Project>
