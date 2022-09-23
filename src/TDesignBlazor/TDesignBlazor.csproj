@@ -14,10 +14,10 @@
 		<FileVersion>$(Version)</FileVersion>
 		<OutputPath>.\bin\$(Configuration)</OutputPath>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<RepositoryUrl>https://github.com/AchievedOwner/TDesign</RepositoryUrl>
+		<RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
-		<PackageProjectUrl>https://github.com/AchievedOwner/TDesign</PackageProjectUrl>
-		<Copyright>TDesign © William 2022</Copyright>
+		<PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
+		<Copyright>TDesignBlazor © William 2022</Copyright>
 
 	</PropertyGroup>
 
@@ -26,7 +26,7 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
 		<FileAlignment>1024</FileAlignment>
-		<Title>TDesign</Title>
+		<Title>TDesignBlazor</Title>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
