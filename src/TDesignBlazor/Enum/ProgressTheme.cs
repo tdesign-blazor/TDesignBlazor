@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TDesign
 {
     [CssClass("t-progress--")]
-    public enum ProgressTheme
+    public enum ProgressThemeType
     {
         /// <summary>
         /// 横线

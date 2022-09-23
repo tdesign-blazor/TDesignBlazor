@@ -28,7 +28,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// 进度条颜色。示例：'#ED7B2F' 或 'orange' 或 ['#f00', '#0ff', '#f0f'] 或 { '0%': '#f00', '100%': '#0ff' } 或 { from: '#000', to: '#000' } 等。
+    /// 进度条颜色
     /// </summary>
     [Parameter] public OneOf<string, LinearGradient> Color { get; set; }
 
@@ -50,17 +50,17 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 进度条状态
     /// </summary>
-    [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesign.Status.Default;// [
+    [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesign.Status.Default;
 
     /// <summary>
-    ///进度条线宽。宽度数值不能超过 size 的一半，否则不能输出环形进度
+    ///进度条线宽
     /// </summary>
     [Parameter] public string? StrokeWidth { get; set; }
 
     /// <summary>
-    /// 进度条风格。值为 line，标签（label）显示在进度条右侧；值为 plump，标签（label）显示在进度条里面；值为 circle，标签（label）显示在进度条正中间。可选项：line/plump/circle。
+    /// 进度条风格
     /// </summary>
-    [Parameter] public ProgressTheme? Theme { get; set; } = ProgressTheme.Line;
+    [Parameter] public ProgressThemeType? Theme { get; set; } = ProgressThemeType.Line;
 
     /// <summary>
     /// 进度条未完成部分颜色
@@ -81,50 +81,56 @@ public class Progress : BlazorComponentBase, IHasChildContent
         var lableText = GetLable();
         var size = GetSize();
         var circle = GetCircle();
+        var isDefaultOrNone = IsDefaultOrNone();
 
         builder.CreateElement(sequence, "div", a =>
         {
             switch (Theme)
             {
-                case ProgressTheme.Line:
-                    a.CreateElement(sequence + 1, "div", b =>
+                case ProgressThemeType.Line:
+                    //a.CreateElement(sequence + 1, "div", b =>
+                    //{
+                    //    //b.CreateElement(sequence + 2, "div", c =>
+                    //    //{
+                    //    //    c.CreateElement(sequence + 3, "div", c => { }, new
+                    //    //    {
+                    //    //        @class = $"t-progress__inner",
+                    //    //        style = $"width:{Percentage.ToSuffix("%")};{background}"
+                    //    //    });
+                    //    //},
+                    //    //new
+                    //    //{
+                    //    //    @class = $"{progressTypeClass}",
+                    //    //    style = "width:720px"
+                    //    //});
+
+                    //    //b.CreateElement(
+                    //    //    sequence + 4,
+                    //    //    "div",
+                    //    //    Percentage.ToSuffix("%"),
+                    //    //    new { @class = "t-progress__info" }, isDefaultOrNone
+                    //    //    );
+
+                    //    //b.CreateElement(sequence + 5, "div", c =>
+                    //    //{
+                    //    //    c.CreateComponent<Icon>(sequence + 6,
+                    //    //        attributes: new
+                    //    //        {
+                    //    //            Class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon"
+                    //    //        });
+                    //    //},
+                    //    //new { @class = "t-progress__info" },
+                    //    //!isDefaultOrNone);
+                    //},
+                    //new { @class = $"{Theme.GetCssClass()} {Status.GetCssClass()} ", style = $"width:100%" });
+
+
+                    a.CreateComponent<ProgressTheme>(0, tr =>
                     {
-                        b.CreateElement(sequence + 2, "div", c =>
-                        {
-                            c.CreateElement(sequence + 3, "div", c => { }, new
-                            {
-                                @class = $"t-progress__inner",
-                                style = $"width:{Percentage.ToSuffix("%")};{background}"
-                            });
-                        },
-                        new
-                        {
-                            @class = $"{progressTypeClass}",
-                            style = "width:720px"
-                        });
-
-                        b.CreateElement(
-                            sequence + 4,
-                            "div",
-                            Percentage.ToSuffix("%"),
-                            new { @class = "t-progress__info" },
-                            Status == TDesign.Status.Default || Status == TDesign.Status.None);
-
-                        b.CreateElement(sequence + 5, "div", c =>
-                        {
-                            c.CreateComponent<Icon>(sequence + 6,
-                                attributes: new
-                                {
-                                    Class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon"
-                                });
-                        },
-                        new { @class = "t-progress__info" },
-                        Status != TDesign.Status.Default && Status != TDesign.Status.None);
-                    },
-                    new { @class = $"{Theme.GetCssClass()} {Status.GetCssClass()} ", style = $"width:100%" });
+                    });
                     break;
 
-                case ProgressTheme.Plump:
+                case ProgressThemeType.Plump:
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 2, "div", c =>
@@ -139,17 +145,17 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     new { @class = $" {Theme.GetCssClass()} {Status.GetCssClass()} {progressTypeClass}", style = "width:720px" });
                     break;
 
-                case ProgressTheme.Circle:
+                case ProgressThemeType.Circle:
                     a.CreateElement(sequence + 1, "div", b =>
                     {
                         b.CreateElement(sequence + 3, "div", lableText,
-                        new { @class = "t-progress__info" }, Percentage > 10 && isLable && Status == TDesign.Status.Default);
+                        new { @class = "t-progress__info" }, Percentage > 10 && isLable && isDefaultOrNone);
 
                         b.CreateElement(sequence + 4, "div", c =>
                         {
                             c.CreateComponent<Icon>(0, attributes: new { Class = $"t-icon t-icon-{icon} t-progress__icon" });
                         },
-                        new { @class = "t-progress__info" }, Percentage > 10 && Status != TDesign.Status.Default);
+                        new { @class = "t-progress__info" }, Percentage > 10 && !isDefaultOrNone);
 
                         b.CreateElement(sequence + 5, "svg", c =>
                         {
@@ -186,6 +192,11 @@ public class Progress : BlazorComponentBase, IHasChildContent
             }
         },
         new { @class = "t-progress" });
+    }
+
+    private bool IsDefaultOrNone()
+    {
+        return Status == TDesign.Status.Default || Status == TDesign.Status.None;
     }
 
     /// <summary>

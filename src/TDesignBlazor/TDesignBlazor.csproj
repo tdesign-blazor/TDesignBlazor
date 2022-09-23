@@ -25,9 +25,6 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
 		<FileAlignment>1024</FileAlignment>
-		<Title>TDesign</Title>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
