@@ -1,0 +1,112 @@
+﻿@page "/components/jumper"
+<PageHeader Title="Jumper 跳转">定义：用于上下翻页，适用于监控视图实例切换等。</PageHeader>
+
+<Example Title="基础">
+    <Description></Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper/>
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper/>
+            </SpaceItem>
+        </Space>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="切换箭头方向">
+    <Description>使用 layout='vertical' 切换成上下箭头模式。</Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper Layout="JumperLayout.Vertical" />
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper Layout=""JumperLayout.Vertical"" />
+            </SpaceItem>
+        </Space>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="不同的尺寸">
+    <Description>默认提供大、中（默认）、小三种不同的尺寸。</Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper Size="Size.Small" />
+                <Jumper Size="Size.Medium" />
+                <Jumper Size="Size.Large" />
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        <Space Vertical>
+            <SpaceItem>
+                <Jumper Size=""Size.Small"" />
+                <Jumper Size=""Size.Medium"" />
+                <Jumper Size=""Size.Large"" />
+            </SpaceItem>
+        </Space>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="配置提示文本">
+    <Description>通过 tips 控制按钮 hover 提示文案。</Description>
+    <RunContent>
+        <Space Vertical>
+            <SpaceItem>
+                @{
+                    JumperTipsConfig jumperTipsConfig = new JumperTipsConfig()
+                        {
+                            Prev = "左",
+                            Current = "中",
+                            Next = "右"
+                        };
+                }
+                <Jumper Tips="jumperTipsConfig"/>
+            </SpaceItem>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        <Space Vertical>
+            <SpaceItem>
+                @{
+                    JumperTipsConfig jumperTipsConfig = new JumperTipsConfig()
+                        {
+                            Prev = ""左"",
+                            Current = ""中"",
+                            Next = ""右""
+                        };
+                }
+                <Jumper Tips=""jumperTipsConfig""/>
+            </SpaceItem>
+        </Space>
+```
+")
+    </CodeContent>
+</Example>
+
+@inject IJSRuntime JS
