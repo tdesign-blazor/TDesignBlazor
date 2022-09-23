@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 [CssClass("t-dialog__ctx")]
 public class Dialog : BlazorComponentBase, IHasChildContent, IHasOnActive
 {

@@ -38,21 +38,21 @@
 ## 📦 安装使用
 - 从 Nuget 直接安装
     ```bash
-    > Install-Package TDesignBlazor
+    > Install-Package TDesign
     ```
 
 - 在项目中注册服务
     ```cs
-    builder.Service.AddTDesignBlazor();
+    builder.Service.AddTDesign();
     ```
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
     ```html
-    <link rel=""stylesheet"" href=""_content/TDesignBlazor/TDeignBlazor.css"" />
+    <link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" />
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs
-    @using TDesignBlazor
+    @using TDesign
     ```
 
 ## :pencil: 参与贡献
@@ -61,9 +61,12 @@
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出
-<a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
-</a>
+
+<div>
+    <a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
+    </a>
+</div>
 
 ## :house: 社区支持
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
@@ -74,7 +77,7 @@
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
 
 ## :newspaper: 许可证（License）
-[![TDesignBlazor](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesignBlazor/blob/master/LICENSE.md)
+[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesignBlazor/blob/master/LICENSE.md)
 
 ## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
