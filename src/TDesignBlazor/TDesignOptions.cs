@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-
-namespace TDesignBlazor;
+﻿namespace TDesignBlazor;
+/// <summary>
+/// TDesign 的配置项。
+/// </summary>
 public class TDesignOptions
 {
+    /// <summary>
+    /// 获取或设置使用暗色主题。
+    /// </summary>
     public bool Dark { get; set; }
 }

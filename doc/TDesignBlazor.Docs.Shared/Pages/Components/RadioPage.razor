@@ -1,0 +1,260 @@
+﻿@page "/components/radio"
+<PageHeader Title="Radio 单选框">
+    单选框代表从一组互斥的选项中仅选择一个选项。
+</PageHeader>
+<HighlightAlert/>
+<Example Title="基本单选框">
+    <Description></Description>
+    <RunContent>
+        <RadioGroup @bind-Value="Fruit">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <p>
+            您的选择：@Fruit
+        </p>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<RadioGroup bind-Value=""Fruit"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+```
+```cs
+@code{
+    int Fruit{ get; set; }
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    int Fruit{ get; set; }
+}
+            
+<Example Title="单选框按钮的不同样式">
+    <Description>@Code.Create("设置 `ButtonStyle` 可使单选框呈现按钮的样式")</Description>
+    <RunContent>
+        <RadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.Outline">
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.Outline" Disabled>
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+        <br/>
+        <br/>
+        <RadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.Filled">
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.Filled" Disabled>
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.PrimaryFilled" Disabled>
+            <Radio Value="0">男</Radio>
+            <Radio Value="1">女</Radio>
+            <Radio Value="2">其他</Radio>
+        </RadioGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<RadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.Outline"" Disabled>
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.Filled"" Disabled>
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"" Disabled>
+    <Radio Value=""0"">男</Radio>
+    <Radio Value=""1"">女</Radio>
+    <Radio Value=""2"">其他</Radio>
+</RadioGroup>
+```
+```cs
+@code{
+    int Gender{ get; set; }
+    int DisabledGender { get; set; } = 1;
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    int Gender{ get; set; }
+    int DisabledGender { get; set; } = 1;
+}
+<Example Title="不同尺寸">
+    <Description>提供大、中（默认）、小三种单选框。</Description>
+    <RunContent>
+        <RadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.Outline">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Outline">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.Outline">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.Filled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Filled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.Filled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+        <br />
+        <br />
+        <RadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <Radio Value="1">苹果</Radio>
+            <Radio Value="2">香蕉</Radio>
+            <Radio Value="3">葡萄</Radio>
+        </RadioGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+
+<RadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <Radio Value=""1"">苹果</Radio>
+    <Radio Value=""2"">香蕉</Radio>
+    <Radio Value=""3"">葡萄</Radio>
+</RadioGroup>
+```
+")
+    </CodeContent>
+</Example>

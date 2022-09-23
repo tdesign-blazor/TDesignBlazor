@@ -238,3 +238,17 @@
 ")
     </CodeContent>
 </Example>
+<Example Title="OnClick 点击事件">
+    <Description>@Code.Create("设置 `OnClick` 点击事件的触发函数")</Description>
+    <RunContent>
+        <Button OnClick="@(e=>JS.InvokeVoidAsync("alert","按钮被点击"))">点击我</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Button OnClick=""@(e=>JS.InvokeVoidAsync(""alert"",""按钮被点击""))"">点击我</Button>
+```
+")
+    </CodeContent>
+</Example>
+@inject IJSRuntime JS

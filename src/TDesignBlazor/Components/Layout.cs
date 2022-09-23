@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor.Components;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 布局组件。
@@ -8,7 +8,7 @@ namespace TDesignBlazor.Components;
 [CssClass("t-layout")]
 [HtmlTag("section")]
 [ParentComponent]
-public class Layout : TDesignComponentBase, IHasChildContent
+public class Layout : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 布局的顶部内容。

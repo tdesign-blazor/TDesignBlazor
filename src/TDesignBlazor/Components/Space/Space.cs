@@ -1,11 +1,11 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 组件之间具备一定间距的布局组件。
 /// </summary>
 [ParentComponent]
 [CssClass("t-space")]
-public class Space : TDesignComponentBase, IHasChildContent
+public class Space : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

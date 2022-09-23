@@ -1,11 +1,11 @@
-﻿namespace TDesignBlazor.Components;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示头像组的容器。
 /// </summary>
 [ParentComponent]
 [CssClass("t-avatar-group")]
-public class AvatarGroup : TDesignComponentBase, IHasChildContent
+public class AvatarGroup : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// 头像排列的方向。
