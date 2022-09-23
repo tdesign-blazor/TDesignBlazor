@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 /// <summary>
 /// 主题模式。
 /// </summary>

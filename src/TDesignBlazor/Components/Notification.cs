@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 
 /// <summary>
 /// 消息通知。

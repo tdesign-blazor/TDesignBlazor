@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 /// <summary>
 /// 栅格列的跨度。
 /// </summary>

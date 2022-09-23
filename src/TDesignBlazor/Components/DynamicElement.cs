@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 
 /// <summary>
 /// 表示动态的 HTML 元素。

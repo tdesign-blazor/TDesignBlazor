@@ -1,4 +1,4 @@
-﻿namespace TDesignBlazor;
+﻿namespace TDesign;
 /// <summary>
 /// 图标组件。内置图标要手动引入样式 <c>tdesign-icons.css</c>
 /// </summary>
