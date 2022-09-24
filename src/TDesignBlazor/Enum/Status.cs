@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 表示状态的候选值。
 /// </summary>

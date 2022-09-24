@@ -38,21 +38,21 @@
 ## 📦 安装使用
 - 从 Nuget 直接安装
     ```bash
-    > Install-Package TDesign
+    > Install-Package TDesignBlazor
     ```
 
 - 在项目中注册服务
     ```cs
-    builder.Service.AddTDesign();
+    builder.Service.AddTDesignBlazor();
     ```
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
     ```html
-    <link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" />
+    <link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-blazor.css"" />
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs
-    @using TDesign
+    @using TDesignBlazor
     ```
 
 ## :pencil: 参与贡献

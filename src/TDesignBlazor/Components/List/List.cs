@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 /// <summary>
 /// 表示一个列表容器。配合 <see cref="ListItem"/> 组件使用。
 /// </summary>

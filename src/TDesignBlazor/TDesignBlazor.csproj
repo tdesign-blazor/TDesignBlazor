@@ -4,19 +4,20 @@
 		<LangVersion>10</LangVersion>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>TDesign</RootNamespace>
-		<PackageId>TDesign</PackageId>
+		<RootNamespace>TDesignBlazor</RootNamespace>
+		<PackageId>TDesignBlazor</PackageId>
+		<PackageVersion>0.1-beta</PackageVersion>
 		<Version>0.1</Version>
-		<Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
+		<Description>基于腾讯 TDesignBlazor 的 Blazor 企业级组件库。腾讯 TDesignBlazor 官方地址：https://tdesign.tencent.com/</Description>
 		<Authors>William Zhou</Authors>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 		<OutputPath>.\bin\$(Configuration)</OutputPath>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<RepositoryUrl>https://github.com/AchievedOwner/TDesign</RepositoryUrl>
+		<RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
-		<PackageProjectUrl>https://github.com/AchievedOwner/TDesign</PackageProjectUrl>
-		<Copyright>TDesign © William 2022</Copyright>
+		<PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
+		<Copyright>TDesignBlazor © William 2022</Copyright>
 
 	</PropertyGroup>
 
@@ -25,6 +26,9 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
 		<FileAlignment>1024</FileAlignment>
+		<Title>TDesignBlazor For Blazor</Title>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">

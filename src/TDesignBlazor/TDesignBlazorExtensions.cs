@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
-namespace TDesign;
+namespace TDesignBlazor;
 /// <summary>
-/// TDesign 的扩展。
+/// TDesignBlazor 的扩展。
 /// </summary>
 public static class TDesignBlazorExtensions
 {

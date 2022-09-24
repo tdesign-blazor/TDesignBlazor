@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 超链接文本。
 /// </summary>

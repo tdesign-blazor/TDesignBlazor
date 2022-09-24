@@ -1,4 +1,4 @@
-﻿namespace TDesign;
+﻿namespace TDesignBlazor;
 /// <summary>
 /// 图标名称。
 /// </summary>

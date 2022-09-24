@@ -1,7 +1,7 @@
 ﻿using Markdig;
 using Microsoft.AspNetCore.Components;
 
-namespace TDesign.Docs.Shared;
+namespace TDesignBlazor.Docs.Shared;
 public static class Code
 {
     public static MarkupString Create(string value)

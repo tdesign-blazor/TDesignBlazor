@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 单选框选项，必须应用于 <see cref="RadioGroup{TValue}"/> 组件中。
