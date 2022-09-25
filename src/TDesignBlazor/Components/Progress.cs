@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using TDesignBlazor.Components.Progress;
 
-namespace TDesign;
+namespace TDesignBlazor;
 
 /// <summary>
 /// 渐变色
@@ -11,6 +12,7 @@ public class LinearGradient
     /// 起始色
     /// </summary>
     public string? From { get; set; }
+
     /// <summary>
     /// 渐变色
     /// </summary>
@@ -22,6 +24,10 @@ public class LinearGradient
 /// </summary>
 public class Progress : BlazorComponentBase, IHasChildContent
 {
+    private Circle _circle;
+
+    private int _size;
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -45,12 +51,13 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 进度条尺寸
     /// </summary>
-    [Parameter] public OneOf<int, Size> Size { get; set; } = 112;
+    [Parameter]
+    public OneOf<int, Size> Size { get; set; } = TDesignBlazor.Size.Medium;
 
     /// <summary>
     /// 进度条状态
     /// </summary>
-    [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesign.Status.Default;
+    [Parameter] public Status? Status { get; set; } = TDesignBlazor.Status.None;
 
     /// <summary>
     ///进度条线宽
@@ -75,7 +82,6 @@ public class Progress : BlazorComponentBase, IHasChildContent
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         var background = GetBackGround();
-        var progressTypeClass = GetLineClass();
         var icon = GetIcon();
         var isLable = GetIsLabel();
         var lableText = GetLable();
@@ -83,120 +89,153 @@ public class Progress : BlazorComponentBase, IHasChildContent
         var circle = GetCircle();
         var isDefaultOrNone = IsDefaultOrNone();
 
-        builder.CreateElement(sequence, "div", a =>
+        builder.CreateElement(sequence, "div", progress =>
         {
             switch (Theme)
             {
                 case ProgressThemeType.Line:
-                    //a.CreateElement(sequence + 1, "div", b =>
-                    //{
-                    //    //b.CreateElement(sequence + 2, "div", c =>
-                    //    //{
-                    //    //    c.CreateElement(sequence + 3, "div", c => { }, new
-                    //    //    {
-                    //    //        @class = $"t-progress__inner",
-                    //    //        style = $"width:{Percentage.ToSuffix("%")};{background}"
-                    //    //    });
-                    //    //},
-                    //    //new
-                    //    //{
-                    //    //    @class = $"{progressTypeClass}",
-                    //    //    style = "width:720px"
-                    //    //});
-
-                    //    //b.CreateElement(
-                    //    //    sequence + 4,
-                    //    //    "div",
-                    //    //    Percentage.ToSuffix("%"),
-                    //    //    new { @class = "t-progress__info" }, isDefaultOrNone
-                    //    //    );
-
-                    //    //b.CreateElement(sequence + 5, "div", c =>
-                    //    //{
-                    //    //    c.CreateComponent<Icon>(sequence + 6,
-                    //    //        attributes: new
-                    //    //        {
-                    //    //            Class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon"
-                    //    //        });
-                    //    //},
-                    //    //new { @class = "t-progress__info" },
-                    //    //!isDefaultOrNone);
-                    //},
-                    //new { @class = $"{Theme.GetCssClass()} {Status.GetCssClass()} ", style = $"width:100%" });
-
-
-                    a.CreateComponent<ProgressTheme>(0, tr =>
-                    {
-                    });
+                    BuildProgressLine(progress, 1);
                     break;
 
                 case ProgressThemeType.Plump:
-                    a.CreateElement(sequence + 1, "div", b =>
-                    {
-                        b.CreateElement(sequence + 2, "div", c =>
-                        {
-                            c.CreateElement(sequence + 3, "div", Percentage.ToSuffix("%"),
-                                new { @class = "t-progress__info" }, Percentage > 10);
-                        },
-                        new { @class = "t-progress__inner", style = $"width: {Percentage.ToSuffix("%")};" });
-
-                        b.CreateElement(sequence + 3, "div", Percentage.ToSuffix("%"), new { @class = "t-progress__info" }, Percentage < 10 && Percentage > 0);
-                    },
-                    new { @class = $" {Theme.GetCssClass()} {Status.GetCssClass()} {progressTypeClass}", style = "width:720px" });
+                    BuildProgressPlump(progress, 1);
                     break;
 
                 case ProgressThemeType.Circle:
-                    a.CreateElement(sequence + 1, "div", b =>
-                    {
-                        b.CreateElement(sequence + 3, "div", lableText,
-                        new { @class = "t-progress__info" }, Percentage > 10 && isLable && isDefaultOrNone);
-
-                        b.CreateElement(sequence + 4, "div", c =>
-                        {
-                            c.CreateComponent<Icon>(0, attributes: new { Class = $"t-icon t-icon-{icon} t-progress__icon" });
-                        },
-                        new { @class = "t-progress__info" }, Percentage > 10 && !isDefaultOrNone);
-
-                        b.CreateElement(sequence + 5, "svg", c =>
-                        {
-                            c.CreateElement(sequence + 4, "circle", d => { }, new
-                            {
-                                cx = circle.CX,
-                                cy = circle.CY,
-                                r = circle.R,
-                                stroke_width = "6",
-                                stroke = "",
-                                fill = "none",
-                                @class = "t-progress__circle-outer"
-                            });
-
-                            c.CreateElement(sequence + 5, "circle", d => { }, new
-                            {
-                                cx = circle.CX,
-                                cy = circle.CY,
-                                r = circle.R,
-                                stroke_width = "6",
-                                fill = "none",
-                                strokeLinecap = "round",
-                                transform = $"matrix(0,-1,1,0,0,{size})",
-                                strokeDasharray = "99.90264638415542  233.10617489636263",
-                                @class = "t-progress__circle-inner"
-                            });
-                        }, new { width = $"{size}", height = $"{size}", viewBox = $"0 0 {size} {size}" });
-                    },
-                    new { @class = $"{Theme.GetCssClass()} {Status.GetCssClass()}", style = $"width: {size}px; height: {size}px; font-size: 20px" });
-                    break;
-
-                default:
+                    BuildProgressCircle(progress, 1);
                     break;
             }
         },
-        new { @class = "t-progress" });
+        new
+        {
+            @class = HtmlHelper.CreateCssBuilder()
+                               .Append("t-progress").ToString()
+        });
     }
 
-    private bool IsDefaultOrNone()
+    private void BuildProgressCircle(RenderTreeBuilder builder, int sequence)
     {
-        return Status == TDesign.Status.Default || Status == TDesign.Status.None;
+        _size = GetSize();
+        _circle = GetCircle();
+
+        builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
+        {
+            theme.CreateComponent<ProgressInfo>(sequence + 2, Percentage.ToSuffix("%"), attributes: new { Percentage,Status,Theme, Label });
+            theme.CreateElement(sequence + 5, "svg", c =>
+            {
+                c.CreateElement(sequence + 4, "circle", d => { }, new
+                {
+                    cx = _circle.CX,
+                    cy = _circle.CY,
+                    r = _circle.R,
+                    stroke_width = "6",
+                    stroke = "",
+                    fill = "none",
+                    @class = "t-progress__circle-outer"
+                });
+
+                c.CreateElement(sequence + 5, "circle", d => { }, new
+                {
+                    cx = _circle.CX,
+                    cy = _circle.CY,
+                    r = _circle.R,
+                    stroke_width = "6",
+                    fill = "none",
+                    strokeLinecap = "round",
+                    transform = $"matrix(0,-1,1,0,0,{_size})",
+                    strokeDasharray = "99.90264638415542  233.10617489636263",
+                    @class = "t-progress__circle-inner"
+                });
+            }, new { width = $"{_size}", height = $"{_size}", viewBox = $"0 0 {_size} {_size}" });
+        },
+        attributes: new
+        {
+            @class = HtmlHelper.CreateCssBuilder()
+                                           .Append(Theme.GetCssClass())
+                                           .Append("t-progress--status--" + Status.GetCssClass()).ToString(),
+            style = HtmlHelper.CreateStyleBuilder()
+                                          .Append($"width:{_size}px")
+                                          .Append($"height:{_size}px").ToString(),
+            ChildContent = ChildContent
+        });
+    }
+
+    private void BuildProgressLine(RenderTreeBuilder builder, int sequence)
+    {
+        builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
+        {
+            theme.CreateComponent<ProgressBar>(sequence + 1, bar =>
+            {
+                bar.CreateComponent<ProgressInner>(sequence + 1,
+                    attributes: new
+                    {
+                        @style = HtmlHelper.CreateStyleBuilder()
+                                           .Append($"width:{Percentage.ToSuffix("%")}").ToString()
+                    });
+            },
+            attributes: new
+            {
+                Percentage = Percentage,
+                ChildContent = ChildContent
+            });
+
+            theme.CreateComponent<ProgressInfo>(sequence + 2,
+                attributes: new
+                {
+                    Percentage = Percentage,
+                    Status = Status,
+                    ChildContent = ChildContent
+                });
+        },
+                    attributes: new
+                    {
+                        @class = HtmlHelper.CreateCssBuilder()
+                                           .Append(Theme.GetCssClass())
+                                           .Append("t-progress--status--" + Status.GetCssClass()).ToString(),
+                        style = HtmlHelper.CreateStyleBuilder()
+                                          .Append("width:100%").ToString(),
+                        ChildContent = ChildContent
+                    });
+    }
+
+    private void BuildProgressPlump(RenderTreeBuilder builder, int sequence)
+    {
+        builder.CreateComponent<ProgressBar>(sequence + 1, bar =>
+        {
+            bar.CreateComponent<ProgressInner>(sequence + 1, info =>
+            {
+                info.CreateComponent<ProgressInfo>(sequence + 2,
+                    attributes: new
+                    {
+                        Percentage = Percentage,
+                        Status = Status,
+                        ChildContent = ChildContent
+                    },
+                    condition: Percentage > 10);
+            },
+            attributes: new
+            {
+                @style = HtmlHelper.CreateCssBuilder()
+                                   .Append($"width:{Percentage.ToSuffix("%")}").ToString()
+            });
+            bar.CreateComponent<ProgressInfo>(sequence + 2,
+                attributes: new
+                {
+                    Percentage = Percentage,
+                    Status = Status,
+                    ChildContent = ChildContent
+                },
+                condition: Percentage < 10 && Percentage > 0);
+        },
+                    attributes: new
+                    {
+                        @class = HtmlHelper.CreateCssBuilder()
+                                           .Append(Theme.GetCssClass())
+                                           .Append(" t-progress--status--" + Status.GetCssClass())
+                                           .Append(Percentage < 10, "t-progress--under-ten", "t-progress--over-ten").ToString(),
+                        Percentage = Percentage,
+                        ChildContent = ChildContent
+                    }); ;
     }
 
     /// <summary>
@@ -232,40 +271,26 @@ public class Progress : BlazorComponentBase, IHasChildContent
     private Circle GetCircle()
     {
         return Size.Match<Circle>(
-        a =>
-        {
-            switch (a)
-            {
-                case 72:
-                    return new() { CX = 36, CY = 36, R = 33 };
-
-                case 112:
-                    return new() { CX = 56, CY = 56, R = 53 };
-
-                case 160:
-                    return new() { CX = 80, CY = 80, R = 77 };
-
-                default:
-                    return new() { CX = 56, CY = 56, R = 53 };
-            }
-        },
-        b =>
-        {
-            switch (b)
-            {
-                case TDesign.Size.Small:
-                    return new() { CX = 36, CY = 36, R = 33 };
-
-                case TDesign.Size.Medium:
-                    return new() { CX = 56, CY = 56, R = 53 };
-
-                case TDesign.Size.Large:
-                    return new() { CX = 80, CY = 80, R = 77 };
-
-                default:
-                    return new() { CX = 56, CY = 56, R = 53 };
-            }
-        });
+                                         a =>
+                                         {
+                                             return a switch
+                                             {
+                                                 72 => new() { CX = 36, CY = 36, R = 33 },
+                                                 112 => new() { CX = 56, CY = 56, R = 53 },
+                                                 160 => new() { CX = 80, CY = 80, R = 77 },
+                                                 _ => new() { CX = 56, CY = 56, R = 53 },
+                                             };
+                                         },
+                                         b =>
+                                         {
+                                             return b switch
+                                             {
+                                                 TDesignBlazor.Size.Small => new() { CX = 36, CY = 36, R = 33 },
+                                                 TDesignBlazor.Size.Medium => new() { CX = 56, CY = 56, R = 53 },
+                                                 TDesignBlazor.Size.Large => new() { CX = 80, CY = 80, R = 77 },
+                                                 _ => new() { CX = 56, CY = 56, R = 53 },
+                                             };
+                                         });
     }
 
     /// <summary>
@@ -276,19 +301,19 @@ public class Progress : BlazorComponentBase, IHasChildContent
     {
         switch (Status)
         {
-            case TDesign.Status.Default:
+            case TDesignBlazor.Status.Default:
                 return "";
 
-            case TDesign.Status.Warning:
+            case TDesignBlazor.Status.Warning:
                 return "error";
 
-            case TDesign.Status.Error:
+            case TDesignBlazor.Status.Error:
                 return "close";
 
-            case TDesign.Status.Success:
+            case TDesignBlazor.Status.Success:
                 return "check";
 
-            case TDesign.Status.None:
+            case TDesignBlazor.Status.None:
                 return "";
 
             default:
@@ -322,12 +347,6 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// 获取线型进度条的Class
     /// </summary>
     /// <returns></returns>
-    private string GetLineClass()
-    {
-        var progressTypeClass = "t-progress__bar ";
-        progressTypeClass += Percentage < 10 && Percentage > 0 ? "t-progress--under-ten" : "t-progress--over-ten";
-        return progressTypeClass;
-    }
 
     /// <summary>
     /// 获取大小
@@ -336,40 +355,22 @@ public class Progress : BlazorComponentBase, IHasChildContent
     private int GetSize()
     {
         return Size.Match<int>(
-        a =>
-        {
-            switch (a)
-            {
-                case 72:
-                    return 72;
+                                    a => a,
+                                    b =>
+                                    {
+                                        return b switch
+                                        {
+                                            TDesignBlazor.Size.Small => 72,
+                                            TDesignBlazor.Size.Medium => 112,
+                                            TDesignBlazor.Size.Large => 60,
+                                            _ => 112,
+                                        };
+                                    });
+    }
 
-                case 112:
-                    return 112;
-
-                case 160:
-                    return 160;
-
-                default:
-                    return a;
-            }
-        },
-        b =>
-        {
-            switch (b)
-            {
-                case TDesign.Size.Small:
-                    return 72;
-
-                case TDesign.Size.Medium:
-                    return 112;
-
-                case TDesign.Size.Large:
-                    return 160;
-
-                default:
-                    return 112;
-            }
-        });
+    private bool IsDefaultOrNone()
+    {
+        return Status == TDesignBlazor.Status.Default || Status == TDesignBlazor.Status.None;
     }
 }
 
@@ -382,10 +383,12 @@ public class Circle
     /// 中心点坐标X
     /// </summary>
     public int? CX { get; set; }
+
     /// <summary>
     /// 中心点坐标Y
     /// </summary>
     public int? CY { get; set; }
+
     /// <summary>
     /// 半径
     /// </summary>
