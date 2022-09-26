@@ -1,30 +1,26 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-using OneOf;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TDesignBlazor
 {
     [HtmlTag("div")]
     [CssClass("t-progress__info")]
     internal class ProgressInfo : BlazorComponentBase, IHasChildContent
     {
-        /// <summary>
-        /// 进度条风格
-        /// </summary>
-        [Parameter] public ProgressThemeType? Theme { get; set; } = ProgressThemeType.Line;
-        [Parameter] public Status? Status { get; set; }
-         public RenderFragment? ChildContent { get; set; }
-        [Parameter] public int? Percentage { get; set; } = 0;
+        public RenderFragment? ChildContent { get; set; }
+
         /// <summary>
         /// 进度百分比
         /// </summary>
         [Parameter] public OneOf<string, bool> Label { get; set; } = true;
+
+        [Parameter] public int? Percentage { get; set; } = 0;
+
+        [Parameter] public Status? Status { get; set; }
+
+        /// <summary>
+        /// 进度条风格
+        /// </summary>
+        [Parameter] public ProgressThemeType? Theme { get; set; } = ProgressThemeType.Line;
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
             var icon = GetIcon();
@@ -34,46 +30,34 @@ namespace TDesignBlazor
             {
                 builder.AddContent(sequence + 1, lableText);
             }
-            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable && Theme != ProgressThemeType.Circle)
+            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable)
             {
-                builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon" });
-            }
-            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable && Theme == ProgressThemeType.Circle)
-            {
-                if (!lableText.EndsWith("%"))
-                {
-                    builder.AddContent(sequence + 1, lableText);
-                }
+                if (Theme != ProgressThemeType.Circle)
+                    builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon" });
                 else
                 {
-                    builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon} t-progress__icon" });
+                    if (!lableText.EndsWith("%"))
+                        builder.AddContent(sequence + 1, lableText);
+                    else
+                        builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon} t-progress__icon" });
                 }
-
-
             }
         }
+
         /// <summary>
         /// 获取状态图标
         /// </summary>
         /// <returns></returns>
         private string GetIcon()
         {
-            switch (Status)
+            return Status switch
             {
-                case TDesignBlazor.Status.Default:
-                case TDesignBlazor.Status.None:
-                    return "";
-                case TDesignBlazor.Status.Warning:
-                    return "error";
-
-                case TDesignBlazor.Status.Error:
-                    return "close";
-
-                case TDesignBlazor.Status.Success:
-                    return "check";
-                default:
-                    return "";
-            }
+                TDesignBlazor.Status.Default or TDesignBlazor.Status.None => "",
+                TDesignBlazor.Status.Warning => "error",
+                TDesignBlazor.Status.Error => "close",
+                TDesignBlazor.Status.Success => "check",
+                _ => "",
+            };
         }
 
         /// <summary>

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
-using OneOf;
-
-
 namespace TDesignBlazor;
 
 /// <summary>
@@ -27,9 +24,15 @@ public class LinearGradient
 public class Progress : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
+    /// 背景色
+    /// </summary>
+    private string? _background;
+
+    /// <summary>
     /// 圆环配置
     /// </summary>
     private Circle? _circle;
+
     /// <summary>
     /// 大小
     /// </summary>
@@ -88,6 +91,9 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <param name="sequence"></param>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
+        _background = GetBackGround();
+        _size = GetSize();
+        _circle = GetCircle();
         builder.CreateElement(sequence, "div", progress =>
         {
             switch (Theme)
@@ -112,12 +118,14 @@ public class Progress : BlazorComponentBase, IHasChildContent
         });
     }
 
+    /// <summary>
+    /// 圆环
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
     private void BuildProgressCircle(RenderTreeBuilder builder, int sequence)
     {
-        _size = GetSize();
-        _circle = GetCircle();
         var circlePerimeter = GetCirclePerimeter((decimal)_circle.R);
-        var s = (circlePerimeter * ((decimal)Percentage / 100M));
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
             theme.CreateComponent<ProgressInfo>(sequence + 2, Percentage.ToSuffix("%"), attributes: new { Percentage, Status, Theme, Label });
@@ -160,8 +168,14 @@ public class Progress : BlazorComponentBase, IHasChildContent
         });
     }
 
+    /// <summary>
+    /// 普通线状
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
     private void BuildProgressLine(RenderTreeBuilder builder, int sequence)
     {
+        var background = GetBackGround();
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
             theme.CreateComponent<ProgressBar>(sequence + 1, bar =>
@@ -170,7 +184,8 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     attributes: new
                     {
                         @style = HtmlHelper.CreateStyleBuilder()
-                                           .Append($"width:{Percentage.ToSuffix("%")}").ToString()
+                                           .Append($"width:{Percentage.ToSuffix("%")}")
+                                           .Append(_background).ToString()
                     });
             },
             attributes: new
@@ -198,6 +213,11 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     });
     }
 
+    /// <summary>
+    /// 加粗线状
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
     private void BuildProgressPlump(RenderTreeBuilder builder, int sequence)
     {
         builder.CreateComponent<ProgressBar>(sequence + 1, bar =>
@@ -216,7 +236,8 @@ public class Progress : BlazorComponentBase, IHasChildContent
             attributes: new
             {
                 @style = HtmlHelper.CreateCssBuilder()
-                                   .Append($"width:{Percentage.ToSuffix("%")}").ToString()
+                                   .Append($"width:{Percentage.ToSuffix("%")}")
+                                   .Append(_background).ToString()
             });
             bar.CreateComponent<ProgressInfo>(sequence + 2,
                 attributes: new
@@ -230,6 +251,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     attributes: new
                     {
                         @class = HtmlHelper.CreateCssBuilder()
+                                           .Append("t-progress__bar")
                                            .Append(Theme.GetCssClass())
                                            .Append(" t-progress--status--" + Status.GetCssClass())
                                            .Append(Percentage < 10, "t-progress--under-ten", "t-progress--over-ten").ToString(),
@@ -237,6 +259,55 @@ public class Progress : BlazorComponentBase, IHasChildContent
                         ChildContent = ChildContent
                     }); ;
     }
+
+    /// <summary>
+    /// 获取背景色
+    /// </summary>
+    /// <returns></returns>
+    private string GetBackGround()
+    {
+        var background = Color.Match<string>(
+              a =>
+              {
+                  if (a != null && !a.Equals(""))
+                      return $"background:{a};";
+                  else
+                      return "";
+              },
+              b =>
+              {
+                  if (b is not null)
+                  {
+                      return $"background:linear-gradient(to right, {b.From}, {b.To});";
+                  }
+                  else
+                      return "";
+              });
+        return background;
+    }
+
+    /// <summary>
+    /// 获取svg圆形对象配置
+    /// </summary>
+    /// <returns></returns>
+    private Circle GetCircle()
+    {
+        return Size.Match<Circle>(a =>
+                                  {
+                                      return new() { CX = a / 2, CY = a / 2, R = a / 2 - 3 };
+                                  },
+                                  b =>
+                                  {
+                                      return b switch
+                                      {
+                                          TDesignBlazor.Size.Small => new() { CX = 36, CY = 36, R = 33 },
+                                          TDesignBlazor.Size.Medium => new() { CX = 56, CY = 56, R = 53 },
+                                          TDesignBlazor.Size.Large => new() { CX = 80, CY = 80, R = 77 },
+                                          _ => new() { CX = 56, CY = 56, R = 53 },
+                                      };
+                                  });
+    }
+
     /// <summary>
     /// 获取圆的周长
     /// </summary>
@@ -248,111 +319,23 @@ public class Progress : BlazorComponentBase, IHasChildContent
         return 2 * circumferenceRatio * r;
     }
 
-    ///// <summary>
-    ///// 获取背景色
-    ///// </summary>
-    ///// <returns></returns>
-    //private string GetBackGround()
-    //{
-    //    var background = Color.Match<string>(
-    //          a =>
-    //          {
-    //              if (a != null && !a.Equals(""))
-    //                  return $"background:{a};";
-    //              else
-    //                  return "";
-    //          },
-    //          b =>
-    //          {
-    //              if (b is not null)
-    //              {
-    //                  return $"background:linear-gradient(to right, {b.From}, {b.To});";
-    //              }
-    //              else
-    //                  return "";
-    //          });
-    //    return background;
-    //}
-
-    /// <summary>
-    /// 获取svg圆形对象配置
-    /// </summary>
-    /// <returns></returns>
-    private Circle GetCircle()
-    {
-        return Size.Match<Circle>(
-                                         a =>
-                                         {
-                                             return new() { CX=a/2,CY=a/2,R=a/2-3 };
-                                         },
-                                         b =>
-                                         {
-                                             return b switch
-                                             {
-                                                 TDesignBlazor.Size.Small => new() { CX = 36, CY = 36, R = 33 },
-                                                 TDesignBlazor.Size.Medium => new() { CX = 56, CY = 56, R = 53 },
-                                                 TDesignBlazor.Size.Large => new() { CX = 80, CY = 80, R = 77 },
-                                                 _ => new() { CX = 56, CY = 56, R = 53 },
-                                             };
-                                         });
-    }
-
-    ///// <summary>
-    ///// 获取状态图标
-    ///// </summary>
-    ///// <returns></returns>
-    //private string GetIcon()
-    //{
-    //    switch (Status)
-    //    {
-    //        case TDesignBlazor.Status.Default:
-    //            return "";
-
-    //        case TDesignBlazor.Status.Warning:
-    //            return "error";
-
-    //        case TDesignBlazor.Status.Error:
-    //            return "close";
-
-    //        case TDesignBlazor.Status.Success:
-    //            return "check";
-
-    //        case TDesignBlazor.Status.None:
-    //            return "";
-
-    //        default:
-    //            return "";
-    //    }
-    //}
-
-    /// <summary>
-    /// 获取线型进度条的Class
-    /// </summary>
-    /// <returns></returns>
-
     /// <summary>
     /// 获取大小
     /// </summary>
     /// <returns></returns>
     private int GetSize()
     {
-        return Size.Match<int>(
-                                    a => a,
-                                    b =>
-                                    {
-                                        return b switch
-                                        {
-                                            TDesignBlazor.Size.Small => 72,
-                                            TDesignBlazor.Size.Medium => 112,
-                                            TDesignBlazor.Size.Large => 160,
-                                            _ => 112,
-                                        };
-                                    });
-    }
-
-    private bool IsDefaultOrNone()
-    {
-        return Status == TDesignBlazor.Status.Default || Status == TDesignBlazor.Status.None;
+        return Size.Match<int>(a => a,
+                               b =>
+                               {
+                                   return b switch
+                                   {
+                                       TDesignBlazor.Size.Small => 72,
+                                       TDesignBlazor.Size.Medium => 112,
+                                       TDesignBlazor.Size.Large => 160,
+                                       _ => 112,
+                                   };
+                               });
     }
 }
 
