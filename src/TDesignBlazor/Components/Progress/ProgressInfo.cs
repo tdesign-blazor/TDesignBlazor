@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,13 +32,22 @@ namespace TDesignBlazor
             {
                 builder.AddContent(sequence + 1, lableText);
             }
-            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable&&Theme != ProgressThemeType.Circle)
+            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable && Theme != ProgressThemeType.Circle)
             {
                 builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon" });
             }
-            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable&& Theme== ProgressThemeType.Circle)
+            if ((Status != TDesignBlazor.Status.None && Status != TDesignBlazor.Status.Default) && isLable && Theme == ProgressThemeType.Circle)
             {
-                builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon}-circle-filled t-progress__icon" });
+                if (!lableText.EndsWith("%"))
+                {
+                    builder.AddContent(sequence + 1, lableText);
+                }
+                else
+                {
+                    builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon} t-progress__icon" });
+                }
+
+               
             }
         }
         /// <summary>

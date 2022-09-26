@@ -362,7 +362,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
                                         {
                                             TDesignBlazor.Size.Small => 72,
                                             TDesignBlazor.Size.Medium => 112,
-                                            TDesignBlazor.Size.Large => 60,
+                                            TDesignBlazor.Size.Large => 160,
                                             _ => 112,
                                         };
                                     });
