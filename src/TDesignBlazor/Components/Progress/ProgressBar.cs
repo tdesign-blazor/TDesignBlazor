@@ -12,7 +12,6 @@ namespace TDesignBlazor
     internal class ProgressBar : BlazorComponentBase, IHasChildContent
     {
         [Parameter] public RenderFragment? ChildContent { get; set; }
-        [Parameter] public int? Percentage { get; set; } = 0;
     }
 
 }
