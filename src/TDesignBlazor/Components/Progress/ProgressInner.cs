@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDesignBlazor.Components.Progress
+namespace TDesignBlazor
 {
     [HtmlTag("div")]
     [CssClass("t-progress__inner")]
