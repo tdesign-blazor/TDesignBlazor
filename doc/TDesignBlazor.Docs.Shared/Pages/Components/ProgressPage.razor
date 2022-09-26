@@ -29,8 +29,8 @@
                  <SpaceItem>
                       <div class="Progress-domo-margin">渐变色</div>
                 @{
-          LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
-        }
+                    LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
+                }
                 <Progress Theme="ProgressThemeType.Line" Color="@linearGradient" Percentage="60"></Progress>
             </SpaceItem>
             <SpaceItem>
@@ -48,7 +48,7 @@
         </Space>
     </RunContent>
     <CodeContent>
-    @Code.Create(@"
+        @Code.Create(@"
 ```html
 <Space Vertical>
     <SpaceItem>
@@ -101,7 +101,7 @@
             <Space>
                 <Space Vertical>
                     <div>默认样式</div>
-                    <Progress Theme="ProgressThemeType.Circle" Percentage="30"></Progress>
+                    <Progress Theme="ProgressThemeType.Circle" Percentage="30" style="width:400px"></Progress>
                 </Space>
                 <Space Vertical>
                     <div>不显示数字</div>
@@ -109,9 +109,9 @@
                 </Space>
                 <Space Vertical>
                     <div>自定义内容</div>
-          @{
-            var _label = "75day";
-          }
+                    @{
+                        var _label = "75day";
+                    }
                     <Progress Theme="ProgressThemeType.Circle" Label="@_label" Percentage="50" Status="Status.Success"></Progress>
                 </Space>
             </Space>
@@ -149,7 +149,7 @@
         </Space>
     </RunContent>
     <CodeContent>
-    @Code.Create(@"
+        @Code.Create(@"
 ```html
         <Space Vertical>
             <div>默认</div>
@@ -211,6 +211,6 @@
 
 @inject IJSRuntime JS
 @code {
-  bool Checked1;
+    bool Checked1;
 }
 

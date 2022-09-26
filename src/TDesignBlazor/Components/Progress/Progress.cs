@@ -26,9 +26,14 @@ public class LinearGradient
 /// </summary>
 public class Progress : BlazorComponentBase, IHasChildContent
 {
-    private Circle _circle;
-
-    private int _size;
+    /// <summary>
+    /// 圆环配置
+    /// </summary>
+    private Circle? _circle;
+    /// <summary>
+    /// 大小
+    /// </summary>
+    private int? _size;
 
     /// <summary>
     /// <inheritdoc/>
@@ -83,14 +88,6 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <param name="sequence"></param>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        var background = GetBackGround();
-        var icon = GetIcon();
-        var isLable = GetIsLabel();
-        var lableText = GetLable();
-        var size = GetSize();
-        var circle = GetCircle();
-        var isDefaultOrNone = IsDefaultOrNone();
-
         builder.CreateElement(sequence, "div", progress =>
         {
             switch (Theme)
@@ -119,10 +116,11 @@ public class Progress : BlazorComponentBase, IHasChildContent
     {
         _size = GetSize();
         _circle = GetCircle();
-
+        var circlePerimeter = GetCirclePerimeter((decimal)_circle.R);
+        var s = (circlePerimeter * ((decimal)Percentage / 100M));
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
-            theme.CreateComponent<ProgressInfo>(sequence + 2, Percentage.ToSuffix("%"), attributes: new { Percentage,Status,Theme, Label });
+            theme.CreateComponent<ProgressInfo>(sequence + 2, Percentage.ToSuffix("%"), attributes: new { Percentage, Status, Theme, Label });
             theme.CreateElement(sequence + 5, "svg", c =>
             {
                 c.CreateElement(sequence + 4, "circle", d => { }, new
@@ -143,9 +141,9 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     r = _circle.R,
                     stroke_width = "6",
                     fill = "none",
-                    strokeLinecap = "round",
+                    stroke_linecap = "round",
                     transform = $"matrix(0,-1,1,0,0,{_size})",
-                    strokeDasharray = "99.90264638415542  233.10617489636263",
+                    stroke_dasharray = $"{(circlePerimeter * ((decimal)Percentage / 100M))}  {circlePerimeter + 1}",
                     @class = "t-progress__circle-inner"
                 });
             }, new { width = $"{_size}", height = $"{_size}", viewBox = $"0 0 {_size} {_size}" });
@@ -239,32 +237,42 @@ public class Progress : BlazorComponentBase, IHasChildContent
                         ChildContent = ChildContent
                     }); ;
     }
-
     /// <summary>
-    /// 获取背景色
+    /// 获取圆的周长
     /// </summary>
+    /// <param name="r">半径</param>
     /// <returns></returns>
-    private string GetBackGround()
+    private decimal GetCirclePerimeter(decimal r)
     {
-        var background = Color.Match<string>(
-              a =>
-              {
-                  if (a != null && !a.Equals(""))
-                      return $"background:{a};";
-                  else
-                      return "";
-              },
-              b =>
-              {
-                  if (b is not null)
-                  {
-                      return $"background:linear-gradient(to right, {b.From}, {b.To});";
-                  }
-                  else
-                      return "";
-              });
-        return background;
+        decimal circumferenceRatio = 3.1415926m;
+        return 2 * circumferenceRatio * r;
     }
+
+    ///// <summary>
+    ///// 获取背景色
+    ///// </summary>
+    ///// <returns></returns>
+    //private string GetBackGround()
+    //{
+    //    var background = Color.Match<string>(
+    //          a =>
+    //          {
+    //              if (a != null && !a.Equals(""))
+    //                  return $"background:{a};";
+    //              else
+    //                  return "";
+    //          },
+    //          b =>
+    //          {
+    //              if (b is not null)
+    //              {
+    //                  return $"background:linear-gradient(to right, {b.From}, {b.To});";
+    //              }
+    //              else
+    //                  return "";
+    //          });
+    //    return background;
+    //}
 
     /// <summary>
     /// 获取svg圆形对象配置
@@ -275,13 +283,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
         return Size.Match<Circle>(
                                          a =>
                                          {
-                                             return a switch
-                                             {
-                                                 72 => new() { CX = 36, CY = 36, R = 33 },
-                                                 112 => new() { CX = 56, CY = 56, R = 53 },
-                                                 160 => new() { CX = 80, CY = 80, R = 77 },
-                                                 _ => new() { CX = 56, CY = 56, R = 53 },
-                                             };
+                                             return new() { CX=a/2,CY=a/2,R=a/2-3 };
                                          },
                                          b =>
                                          {
@@ -295,55 +297,33 @@ public class Progress : BlazorComponentBase, IHasChildContent
                                          });
     }
 
-    /// <summary>
-    /// 获取状态图标
-    /// </summary>
-    /// <returns></returns>
-    private string GetIcon()
-    {
-        switch (Status)
-        {
-            case TDesignBlazor.Status.Default:
-                return "";
+    ///// <summary>
+    ///// 获取状态图标
+    ///// </summary>
+    ///// <returns></returns>
+    //private string GetIcon()
+    //{
+    //    switch (Status)
+    //    {
+    //        case TDesignBlazor.Status.Default:
+    //            return "";
 
-            case TDesignBlazor.Status.Warning:
-                return "error";
+    //        case TDesignBlazor.Status.Warning:
+    //            return "error";
 
-            case TDesignBlazor.Status.Error:
-                return "close";
+    //        case TDesignBlazor.Status.Error:
+    //            return "close";
 
-            case TDesignBlazor.Status.Success:
-                return "check";
+    //        case TDesignBlazor.Status.Success:
+    //            return "check";
 
-            case TDesignBlazor.Status.None:
-                return "";
+    //        case TDesignBlazor.Status.None:
+    //            return "";
 
-            default:
-                return "";
-        }
-    }
-
-    /// <summary>
-    /// 获取是否显示Lable
-    /// </summary>
-    /// <returns></returns>
-    private bool GetIsLabel()
-    {
-        return Label.Match<bool>(
-            a => a != "",
-            b => b);
-    }
-
-    /// <summary>
-    /// 获取Lable文本
-    /// </summary>
-    /// <returns></returns>
-    private string GetLable()
-    {
-        return Label.Match<string>(
-            a => a,
-            b => Percentage.ToString() + "%");
-    }
+    //        default:
+    //            return "";
+    //    }
+    //}
 
     /// <summary>
     /// 获取线型进度条的Class

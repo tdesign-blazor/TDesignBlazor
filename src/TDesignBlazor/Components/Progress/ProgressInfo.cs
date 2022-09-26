@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using OneOf;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,7 @@ namespace TDesignBlazor
         /// </summary>
         [Parameter] public ProgressThemeType? Theme { get; set; } = ProgressThemeType.Line;
         [Parameter] public Status? Status { get; set; }
-        public RenderFragment? ChildContent { get; set; }
+         public RenderFragment? ChildContent { get; set; }
         [Parameter] public int? Percentage { get; set; } = 0;
         /// <summary>
         /// 进度百分比
@@ -47,7 +49,7 @@ namespace TDesignBlazor
                     builder.CreateComponent<Icon>(sequence + 1, attributes: new { @class = $"t-icon t-icon-{icon} t-progress__icon" });
                 }
 
-               
+
             }
         }
         /// <summary>
