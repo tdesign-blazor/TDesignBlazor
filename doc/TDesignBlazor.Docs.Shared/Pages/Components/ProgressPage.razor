@@ -4,92 +4,84 @@
 
 <Example Title="线形进度条">
     <Description>以线形表示进度的组件，可以选择性地配有文字或图标补充显示进度和状态。多用于信息量较为丰富的情况。</Description>
-    <RunContent >
-        <Space Vertical style="width:500px"  >
+    <RunContent>
+        <Space Vertical style="width:500px">
             <SpaceItem>
                 <div class="Progress-domo-margin">默认样式</div>
                 <Progress Theme="ProgressThemeType.Line" Percentage="30"></Progress>
-            </SpaceItem>
-            <SpaceItem>
+
                 <div class="Progress-domo-margin">100%</div>
-                <Progress Theme="ProgressThemeType.Line"  Percentage="100"></Progress>
-            </SpaceItem>
-            <SpaceItem>
-                 <div class="Progress-domo-margin">进度完成</div>
+                <Progress Theme="ProgressThemeType.Line" Percentage="100"></Progress>
+
+                <div class="Progress-domo-margin">进度完成</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Success" Percentage="60"></Progress>
-            </SpaceItem>
-            <SpaceItem>
-                 <div class="Progress-domo-margin">进度状态发生重大错误</div>
+
+                <div class="Progress-domo-margin">进度状态发生重大错误</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Error" Percentage="60"></Progress>
-            </SpaceItem>
-                <SpaceItem>
-                   <div class="Progress-domo-margin">进度被中断</div>
+
+                <div class="Progress-domo-margin">进度被中断</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Warning" Percentage="60"></Progress>
-            </SpaceItem>
-                 <SpaceItem>
-                      <div class="Progress-domo-margin">渐变色</div>
+
+                <div class="Progress-domo-margin">渐变色</div>
                 @{
                     LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
                 }
                 <Progress Theme="ProgressThemeType.Line" Color="@linearGradient" Percentage="60"></Progress>
-            </SpaceItem>
-            <SpaceItem>
+                </SpaceItem>
+                <SpaceItem>
                 <h3>可以在线形内展示进度信息</h3>
                 <div class="Progress-domo-margin">默认样式</div>
                 <Progress Theme="ProgressThemeType.Plump" Percentage="30" />
 
-            </SpaceItem>
-            <SpaceItem>
+
                 <div class="Progress-domo-margin">进度0-10%时数字位置出现在目前进度的右边区域</div>
                 <Progress Theme="ProgressThemeType.Plump" Percentage="5" />
             </SpaceItem>
-
-
         </Space>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<Space Vertical>
-    <SpaceItem>
+        ```html
+        <Space Vertical>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">默认样式</div>
         <Progress Theme=""ProgressTheme.line"" Percentage=""30""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">100%</div>
         <Progress Theme=""ProgressTheme.line"" Percentage=""100""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">进度完成</div>
         <Progress Theme=""ProgressTheme.line"" Status=""Status.Success"" Percentage=""60""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">进度状态发生重大错误</div>
         <Progress Theme=""ProgressTheme.line"" Status=""Status.Error"" Percentage=""60""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">进度被中断</div>
         <Progress Theme=""ProgressTheme.line"" Status=""Status.Warning"" Percentage=""60""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">渐变色</div>
         @{
         LinearGradient linearGradient = new LinearGradient() { From = ""#0052D9"", To = ""#00A870"" };
         }
         <Progress Theme=""ProgressTheme.line"" Color=""@linearGradient"" Percentage=""60""></Progress>
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <h3>可以在线形内展示进度信息</h3>
         <div class=""Progress-domo-margin"">默认样式</div>
         <Progress Theme=""ProgressTheme.plump"" Percentage=""30"" />
-    </SpaceItem>
-    <SpaceItem>
+        </SpaceItem>
+        <SpaceItem>
         <div class=""Progress-domo-margin"">进度0-10%时数字位置出现在目前进度的右边区域</div>
         <Progress Theme=""ProgressTheme.plump"" Percentage=""5"" />
-    </SpaceItem>
-</Space>
-```
-")
+        </SpaceItem>
+        </Space>
+        ```
+        ")
     </CodeContent>
 </Example>
 <Example Title="带图标的标签">
@@ -150,61 +142,61 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+        ```html
         <Space Vertical>
-            <div>默认</div>
-            <!-- 重要：strokeWidth 大小不能超过 size 的一半，否则无法渲染出环形 -->
-            <Space>
-                <Space Vertical>
-                    <div>默认样式</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""30""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>不显示数字</div>
-                    <Progress Theme=""ProgressTheme.circle"" Label=""false"" Percentage=""100"" Status=""Status.Success""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>自定义内容</div>
-            @{
-                var _label = ""75day"";
-            }
-                    <Progress Theme=""ProgressTheme.circle"" Label=""@_label"" Percentage=""50"" Status=""Status.Success""></Progress>
-                </Space>
-            </Space>
-
-            <Space>
-                <Space Vertical>
-                    <div>进度完成</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""100"" Status=""Status.Success""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>进度状态发生错误</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""75"" Status=""Status.Error""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>进度被中断</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""50"" Status=""Status.Warning""></Progress>
-                </Space>
-            </Space>
-
-            <div>默认不同尺寸</div>
-            <Space>
-                <Space Vertical>
-                    <div>小尺寸</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Small""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>默认尺寸</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Medium""></Progress>
-                </Space>
-                <Space Vertical>
-                    <div>大尺寸</div>
-                    <Progress Theme=""ProgressTheme.circle"" Percentage=""75"" Size=""Size.Large""></Progress>
-                </Space>
-            </Space>
+        <div>默认</div>
+        <!-- 重要：strokeWidth 大小不能超过 size 的一半，否则无法渲染出环形 -->
+        <Space>
+        <Space Vertical>
+        <div>默认样式</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""30""></Progress>
         </Space>
-```
-")
+        <Space Vertical>
+        <div>不显示数字</div>
+        <Progress Theme=""ProgressTheme.circle"" Label=""false"" Percentage=""100"" Status=""Status.Success""></Progress>
+        </Space>
+        <Space Vertical>
+        <div>自定义内容</div>
+        @{
+        var _label = ""75day"";
+        }
+        <Progress Theme=""ProgressTheme.circle"" Label=""@_label"" Percentage=""50"" Status=""Status.Success""></Progress>
+        </Space>
+        </Space>
+
+        <Space>
+        <Space Vertical>
+        <div>进度完成</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""100"" Status=""Status.Success""></Progress>
+        </Space>
+        <Space Vertical>
+        <div>进度状态发生错误</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""75"" Status=""Status.Error""></Progress>
+        </Space>
+        <Space Vertical>
+        <div>进度被中断</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""50"" Status=""Status.Warning""></Progress>
+        </Space>
+        </Space>
+
+        <div>默认不同尺寸</div>
+        <Space>
+        <Space Vertical>
+        <div>小尺寸</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Small""></Progress>
+        </Space>
+        <Space Vertical>
+        <div>默认尺寸</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""30"" Size=""Size.Medium""></Progress>
+        </Space>
+        <Space Vertical>
+        <div>大尺寸</div>
+        <Progress Theme=""ProgressTheme.circle"" Percentage=""75"" Size=""Size.Large""></Progress>
+        </Space>
+        </Space>
+        </Space>
+        ```
+        ")
     </CodeContent>
 </Example>
 
