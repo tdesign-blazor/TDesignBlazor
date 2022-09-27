@@ -30,12 +30,12 @@
                 var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
                 foreach (var item in fits)
                 {
-                        <SpaceItem>
-                            <div class="t-image__wrapper t-image__wrapper--shape-square" style="width: 120px; height: 120px;">
-                                <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
-                            </div>
-                            <span>@item.ToString()</span>
-                        </SpaceItem>
+                    <SpaceItem>
+                        <div class="t-image__wrapper t-image__wrapper--shape-square" style="width: 120px; height: 120px;">
+                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
+                        </div>
+                        <span>@item.ToString()</span>
+                    </SpaceItem>
                 }
             }
         </Space>
@@ -44,18 +44,18 @@
         @Code.Create(@"
         ```html
         <Space BreakLine=true>
-            @{
-                var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
-                foreach (var item in fits)
-                {
-                    <SpaceItem>
-                        <div class=""t-image__wrapper t-image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
-                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
-                        </div>
-                        <span>@item.ToString()</span>
-                    </SpaceItem>
-                }
-            }
+        @{
+        var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
+        foreach (var item in fits)
+        {
+        <SpaceItem>
+        <div class=""t-image__wrapper t-image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
+        </div>
+        <span>@item.ToString()</span>
+        </SpaceItem>
+        }
+        }
         </Space>
         ```
         ")
@@ -68,79 +68,79 @@
     <RunContent>
         <Space Vertical style="width: 100%">
             <Space BreakLine>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
-                             Position="center"
-                             style="width:120px;height:120px" />
+                           Position="center"
+                           style="width:120px;height:120px" />
                     <span>cover center</span>
                 </Space>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
-                             style="width:120px;height:120px"
-                             Position="left" />
+                           style="width:120px;height:120px"
+                           Position="left" />
                     <span>cover left</span>
                 </Space>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
-                             style="width:120px;height:120px"
-                             Position="right" />
+                           style="width:120px;height:120px"
+                           Position="right" />
                     <span>cover right</span>
                 </Space>
             </Space>
-            <Space style="{ marginTop: 20 }" BreakLine>
-                <Space Vertical >
+            <Space style="margin-top: 20" BreakLine>
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
                            style="width:120px;height:120px"
-                             Position="top" />
+                           Position="top" />
                     <span>cover top</span>
                 </Space>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
                            style="width:120px;height:120px"
-                             Position="bottom" />
+                           Position="bottom" />
                     <span>cover bottom</span>
                 </Space>
             </Space>
             <Space style="{ marginTop: 20 }" BreakLine>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Contain"
                            style="width:120px;height:120px"
-                             Position="top" />
+                           Position="top" />
                     <span>contain top</span>
                 </Space>
-                <Space Vertical >
-                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
-                           Fit="FitType.Contain"
-                             style="width:120px;height:120px"
-                             Position="bottom" />
-                    <span>contain bottom</span>
-                </Space>
-                <Space Vertical >
+                <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Contain"
                            style="width:120px;height:120px"
-                             Position="center" />
+                           Position="bottom" />
+                    <span>contain bottom</span>
+                </Space>
+                <Space Vertical>
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Contain"
+                           style="width:120px;height:120px"
+                           Position="center" />
                     <span>contain center</span>
                 </Space>
-                <Space style="{ marginTop: 20 }" BreakLine>
-                    <Space Vertical >
+                <Space style="margin-top:20" BreakLine>
+                    <Space Vertical>
                         <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="FitType.Contain"
                                style="width:120px;height:120px"
-                                 Position="left" />
+                               Position="left" />
                         <span>contain left</span>
                     </Space>
-                    <Space Vertical >
+                    <Space Vertical>
                         <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
-                                 Fit="FitType.Contain"
+                               Fit="FitType.Contain"
                                style="width:120px;height:120px"
-                                 Position="right" />
+                               Position="right" />
                         <span>contain right</span>
                     </Space>
                 </Space>
