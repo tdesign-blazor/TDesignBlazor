@@ -4,7 +4,7 @@ namespace TDesignBlazor
 {
     [HtmlTag("div")]
     [CssClass("t-progress__info")]
-    internal class ProgressInfo : BlazorComponentBase, IHasChildContent
+    internal class ProgressContent : BlazorComponentBase, IHasChildContent
     {
         public RenderFragment? ChildContent { get; set; }
 

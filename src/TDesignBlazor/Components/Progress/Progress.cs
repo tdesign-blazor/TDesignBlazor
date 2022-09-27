@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using System.Security.Cryptography.X509Certificates;
+
 namespace TDesignBlazor;
 
 /// <summary>
@@ -122,7 +124,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
         var circlePerimeter = GetCirclePerimeter((decimal)_circle.R);
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
-            theme.CreateComponent<ProgressInfo>(sequence + 2, $"{Percentage}%", attributes: new { Percentage, Status, Theme, Label });
+            theme.CreateComponent<ProgressContent>(sequence + 2, $"{Percentage}%", attributes: new { Percentage, Status, Theme, Label });
             theme.CreateElement(sequence + 5, "svg", c =>
             {
                 c.CreateElement(sequence + 4, "circle", d => { }, new
@@ -172,23 +174,24 @@ public class Progress : BlazorComponentBase, IHasChildContent
         var background = GetBackGround();
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
-            theme.CreateComponent<ProgressBar>(sequence + 1, bar =>
+            theme.CreateElement(sequence + 1, "div", bar =>
             {
-                bar.CreateComponent<ProgressInner>(sequence + 1,
-                    attributes: new
-                    {
-                        @style = HtmlHelper.CreateStyleBuilder()
+                bar.CreateElement(sequence + 1, "div", attributes: new
+                {
+                    @class = "t-progress__inner",
+                    style = HtmlHelper.CreateStyleBuilder()
                                            .Append($"width:{Percentage}%")
                                            .Append(_background).ToString()
-                    });
+                });
             },
             attributes: new
             {
+                @class = "t-progress__bar",
                 Percentage = Percentage,
                 ChildContent = ChildContent
             });
 
-            theme.CreateComponent<ProgressInfo>(sequence + 2,
+            theme.CreateComponent<ProgressContent>(sequence + 2,
                 attributes: new
                 {
                     Percentage = Percentage,
@@ -213,11 +216,11 @@ public class Progress : BlazorComponentBase, IHasChildContent
     /// <param name="sequence"></param>
     private void BuildProgressPlump(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateComponent<ProgressBar>(sequence + 1, bar =>
+        builder.CreateElement(sequence + 1, "div", bar =>
         {
-            bar.CreateComponent<ProgressInner>(sequence + 1, info =>
+            bar.CreateElement(sequence + 1, "div", info =>
             {
-                info.CreateComponent<ProgressInfo>(sequence + 2,
+                info.CreateComponent<ProgressContent>(sequence + 2,
                     attributes: new
                     {
                         Percentage = Percentage,
@@ -226,13 +229,15 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     },
                     condition: Percentage > 10);
             },
-            attributes: new
+            new
             {
-                @style = HtmlHelper.CreateCssBuilder()
-                                   .Append($"width:{Percentage}%")
-                                   .Append(_background).ToString()
+                @class = "t-progress__inner",
+                style = HtmlHelper.CreateStyleBuilder()
+                           .Append($"width:{Percentage}%")
+                           .Append(_background).ToString()
             });
-            bar.CreateComponent<ProgressInfo>(sequence + 2,
+
+            bar.CreateComponent<ProgressContent>(sequence + 2,
                 attributes: new
                 {
                     Percentage = Percentage,
@@ -241,16 +246,16 @@ public class Progress : BlazorComponentBase, IHasChildContent
                 },
                 condition: Percentage < 10 && Percentage > 0);
         },
-                    attributes: new
-                    {
-                        @class = HtmlHelper.CreateCssBuilder()
-                                           .Append("t-progress__bar")
-                                           .Append(Theme.GetCssClass())
-                                           .Append(" t-progress--status--" + Status.GetCssClass())
-                                           .Append(Percentage < 10, "t-progress--under-ten", "t-progress--over-ten").ToString(),
-                        Percentage = Percentage,
-                        ChildContent = ChildContent
-                    }); ;
+        attributes: new
+        {
+            @class = HtmlHelper.CreateCssBuilder()
+                               .Append("t-progress__bar")
+                               .Append(Theme.GetCssClass())
+                               .Append(" t-progress--status--" + Status.GetCssClass())
+                               .Append(Percentage < 10, "t-progress--under-ten", "t-progress--over-ten").ToString(),
+            Percentage = Percentage,
+            ChildContent = ChildContent
+        });
     }
 
     /// <summary>
