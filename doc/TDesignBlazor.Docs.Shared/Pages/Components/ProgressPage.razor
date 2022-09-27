@@ -9,19 +9,14 @@
             <SpaceItem>
                 <div class="Progress-domo-margin">默认样式</div>
                 <Progress Theme="ProgressThemeType.Line" Percentage="30"></Progress>
-
                 <div class="Progress-domo-margin">100%</div>
                 <Progress Theme="ProgressThemeType.Line" Percentage="100"></Progress>
-
                 <div class="Progress-domo-margin">进度完成</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Success" Percentage="60"></Progress>
-
                 <div class="Progress-domo-margin">进度状态发生重大错误</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Error" Percentage="60"></Progress>
-
                 <div class="Progress-domo-margin">进度被中断</div>
                 <Progress Theme="ProgressThemeType.Line" Status="Status.Warning" Percentage="60"></Progress>
-
                 <div class="Progress-domo-margin">渐变色</div>
                 @{
                     LinearGradient linearGradient = new LinearGradient() { From = "#0052D9", To = "#00A870" };
@@ -32,8 +27,6 @@
                 <h3>可以在线形内展示进度信息</h3>
                 <div class="Progress-domo-margin">默认样式</div>
                 <Progress Theme="ProgressThemeType.Plump" Percentage="30" />
-
-
                 <div class="Progress-domo-margin">进度0-10%时数字位置出现在目前进度的右边区域</div>
                 <Progress Theme="ProgressThemeType.Plump" Percentage="5" />
             </SpaceItem>
@@ -42,43 +35,31 @@
     <CodeContent>
         @Code.Create(@"
         ```html
-        <Space Vertical>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">默认样式</div>
-        <Progress Theme=""ProgressTheme.line"" Percentage=""30""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">100%</div>
-        <Progress Theme=""ProgressTheme.line"" Percentage=""100""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">进度完成</div>
-        <Progress Theme=""ProgressTheme.line"" Status=""Status.Success"" Percentage=""60""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">进度状态发生重大错误</div>
-        <Progress Theme=""ProgressTheme.line"" Status=""Status.Error"" Percentage=""60""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">进度被中断</div>
-        <Progress Theme=""ProgressTheme.line"" Status=""Status.Warning"" Percentage=""60""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">渐变色</div>
-        @{
-        LinearGradient linearGradient = new LinearGradient() { From = ""#0052D9"", To = ""#00A870"" };
-        }
-        <Progress Theme=""ProgressTheme.line"" Color=""@linearGradient"" Percentage=""60""></Progress>
-        </SpaceItem>
-        <SpaceItem>
-        <h3>可以在线形内展示进度信息</h3>
-        <div class=""Progress-domo-margin"">默认样式</div>
-        <Progress Theme=""ProgressTheme.plump"" Percentage=""30"" />
-        </SpaceItem>
-        <SpaceItem>
-        <div class=""Progress-domo-margin"">进度0-10%时数字位置出现在目前进度的右边区域</div>
-        <Progress Theme=""ProgressTheme.plump"" Percentage=""5"" />
-        </SpaceItem>
+        <Space Vertical style=""width:500px"">
+            <SpaceItem>
+                <div class=""Progress-domo-margin"">默认样式</div>
+                <Progress Theme=""ProgressThemeType.Line"" Percentage=""30""></Progress>
+                <div class=""Progress-domo-margin"">100%</div>
+                <Progress Theme=""ProgressThemeType.Line"" Percentage=""100""></Progress>
+                <div class=""Progress-domo-margin"">进度完成</div>
+                <Progress Theme=""ProgressThemeType.Line"" Status=""Status.Success"" Percentage=""60""></Progress>
+                <div class=""Progress-domo-margin"">进度状态发生重大错误</div>
+                <Progress Theme=""ProgressThemeType.Line"" Status=""Status.Error"" Percentage=""60""></Progress>
+                <div class=""Progress-domo-margin"">进度被中断</div>
+                <Progress Theme=""ProgressThemeType.Line"" Status=""Status.Warning"" Percentage=""60""></Progress>
+                <div class=""Progress-domo-margin"">渐变色</div>
+            @{
+                LinearGradient linearGradient = new LinearGradient() { From = ""#0052D9"", To = ""#00A870"" };
+            }
+                <Progress Theme=""ProgressThemeType.Line"" Color=""@linearGradient"" Percentage=""60""></Progress>
+                </SpaceItem>
+                <SpaceItem>
+                <h3>可以在线形内展示进度信息</h3>
+                <div class=""Progress-domo-margin"">默认样式</div>
+                <Progress Theme=""ProgressThemeType.Plump"" Percentage=""30"" />
+                <div class=""Progress-domo-margin"">进度0-10%时数字位置出现在目前进度的右边区域</div>
+                <Progress Theme=""ProgressThemeType.Plump"" Percentage=""5"" />
+            </SpaceItem>
         </Space>
         ```
         ")
