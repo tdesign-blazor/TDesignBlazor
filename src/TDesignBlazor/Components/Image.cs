@@ -83,12 +83,17 @@ namespace TDesignBlazor
         protected override void BuildAttributes(IDictionary<string, object> attributes)
         {
             attributes.Add("src", Src);
-            //base.BuildAttributes(attributes);
         }
         protected override void BuildCssClass(ICssClassBuilder builder)
         {
             builder.Append("t-image t-image--fit-cover t-image--position-center");
 
+        }
+        protected override void BuildStyle(IStyleBuilder builder)
+        {
+            builder.Append("width: 100%;");
+            builder.Append("height: 100%;");
+            base.BuildStyle(builder);
         }
     }
 
