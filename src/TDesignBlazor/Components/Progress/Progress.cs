@@ -122,7 +122,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
         var circlePerimeter = GetCirclePerimeter((decimal)_circle.R);
         builder.CreateComponent<ProgressTheme>(sequence + 1, theme =>
         {
-            theme.CreateComponent<ProgressInfo>(sequence + 2, Percentage.ToSuffix("%"), attributes: new { Percentage, Status, Theme, Label });
+            theme.CreateComponent<ProgressInfo>(sequence + 2, $"{Percentage}%", attributes: new { Percentage, Status, Theme, Label });
             theme.CreateElement(sequence + 5, "svg", c =>
             {
                 c.CreateElement(sequence + 4, "circle", d => { }, new
@@ -178,7 +178,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     attributes: new
                     {
                         @style = HtmlHelper.CreateStyleBuilder()
-                                           .Append($"width:{Percentage.ToSuffix("%")}")
+                                           .Append($"width:{Percentage}%")
                                            .Append(_background).ToString()
                     });
             },
@@ -229,7 +229,7 @@ public class Progress : BlazorComponentBase, IHasChildContent
             attributes: new
             {
                 @style = HtmlHelper.CreateCssBuilder()
-                                   .Append($"width:{Percentage.ToSuffix("%")}")
+                                   .Append($"width:{Percentage}%")
                                    .Append(_background).ToString()
             });
             bar.CreateComponent<ProgressInfo>(sequence + 2,
