@@ -12,5 +12,10 @@ namespace TDesignBlazor
     internal class ProgressTheme : BlazorComponentBase, IHasChildContent
     {
         [Parameter] public RenderFragment? ChildContent { get; set; }
+        /// <summary>
+        /// 进度条状态
+        /// </summary>
+        [Parameter][CssClass("t-progress--status--")] public Status? Status { get; set; } = TDesignBlazor.Status.None;
+        [Parameter][CssClass("t-progress--")] public ProgressThemeType? Theme { get; set; } = ProgressThemeType.Line;
     }
 }

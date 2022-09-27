@@ -21,6 +21,7 @@ public class LinearGradient
 /// <summary>
 /// 进度条
 /// </summary>
+[CssClass("t-progress")]
 public class Progress : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
@@ -94,28 +95,21 @@ public class Progress : BlazorComponentBase, IHasChildContent
         _background = GetBackGround();
         _size = GetSize();
         _circle = GetCircle();
-        builder.CreateElement(sequence, "div", progress =>
-        {
-            switch (Theme)
-            {
-                case ProgressThemeType.Line:
-                    BuildProgressLine(progress, 1);
-                    break;
 
-                case ProgressThemeType.Plump:
-                    BuildProgressPlump(progress, 1);
-                    break;
-
-                case ProgressThemeType.Circle:
-                    BuildProgressCircle(progress, 1);
-                    break;
-            }
-        },
-        new
+        switch (Theme)
         {
-            @class = HtmlHelper.CreateCssBuilder()
-                               .Append("t-progress").ToString()
-        });
+            case ProgressThemeType.Line:
+                BuildProgressLine(builder, 1);
+                break;
+
+            case ProgressThemeType.Plump:
+                BuildProgressPlump(builder, 1);
+                break;
+
+            case ProgressThemeType.Circle:
+                BuildProgressCircle(builder, 1);
+                break;
+        }
     }
 
     /// <summary>
@@ -202,15 +196,14 @@ public class Progress : BlazorComponentBase, IHasChildContent
                     ChildContent = ChildContent
                 });
         },
-                    attributes: new
-                    {
-                        @class = HtmlHelper.CreateCssBuilder()
-                                           .Append(Theme.GetCssClass())
-                                           .Append("t-progress--status--" + Status.GetCssClass()).ToString(),
-                        style = HtmlHelper.CreateStyleBuilder()
-                                          .Append("width:100%").ToString(),
-                        ChildContent = ChildContent
-                    });
+        attributes: new
+        {
+            style = HtmlHelper.CreateStyleBuilder()
+                              .Append("width:100%").Append("width:100%;display: flex;flex-direction: row;align-items: center;").ToString(),
+            ChildContent = ChildContent,
+            Status = Status,
+            Theme = Theme
+        });
     }
 
     /// <summary>
