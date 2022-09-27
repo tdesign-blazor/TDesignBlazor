@@ -12,6 +12,7 @@ namespace TDesignBlazor
     /// 图片
     /// </summary>
     [HtmlTag("img")]
+    [CssClass("t-image")]
     public class Image : BlazorComponentBase
     {
         /// <summary>
@@ -29,7 +30,7 @@ namespace TDesignBlazor
         /// <summary>
         /// 填充模式
         /// </summary>
-        [Parameter] public FitType Fit { get; set; }
+        [Parameter][CssClass("t-image--fit-")]public FitType Fit { get; set; }
         /// <summary>
         /// 是否展示为图集样式
         /// </summary>
@@ -57,7 +58,7 @@ namespace TDesignBlazor
         /// <summary>
         /// 定位
         /// </summary>
-        [Parameter] public string Position { get; set; }
+        [Parameter][CssClass("t-image--position-")] public string Position { get; set; } = "center";
         /// <summary>
         /// 图片圆角类型
         /// </summary>
@@ -78,31 +79,32 @@ namespace TDesignBlazor
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            base.AddContent(builder, sequence);
+            //base.AddContent(builder, sequence);
+            //builder.CreateElement(sequence + 1, "img");
         }
         protected override void BuildAttributes(IDictionary<string, object> attributes)
         {
             attributes.Add("src", Src);
         }
-        protected override void BuildCssClass(ICssClassBuilder builder)
-        {
-            builder.Append("t-image t-image--fit-cover t-image--position-center");
-
-        }
         protected override void BuildStyle(IStyleBuilder builder)
         {
-            builder.Append("width: 100%;");
-            builder.Append("height: 100%;");
-            base.BuildStyle(builder);
+            //builder.Append("width: 100%");
+            //builder.Append("height: 100%");
+            //base.BuildStyle(builder);
         }
     }
 
     public enum FitType
     {
+        [CssClass("contain")]
         Contain,
+        [CssClass("cover")]
         Cover,
+        [CssClass("fill")]
         Fill,
+        [CssClass("none")]
         None,
+        [CssClass("scale-down")]
         ScaleDown
     }
     public enum OverlayTriggerType

@@ -1,16 +1,159 @@
 ﻿@page "/components/image"
-<PageHeader Title="Alert 警告消息">
-    警告条用于承载需要用户注意的信息。
+<PageHeader Title="Image 图片">
+    用于展示图片素材。
 </PageHeader>
 
-<Example Title="基础警告">
-    <Description>使用简洁文字提示的最基础警告条，包含 4 种情况的提示：普通消息，成功，警示，失败。</Description>
+<Example Title="示例">
+    <Description></Description>
     <RunContent>
         <div style="width: 120px; height: 120px;">
-            <Image src="https://tdesign.gtimg.com/demo/demo-image-1.png" />
+            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"></Image>
         </div>
     </RunContent>
     <CodeContent>
+        @Code.Create(@"
+        ```html
+        <div style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""></Image>
+        </div>
+        ```
+        ")
+    </CodeContent>
+</Example>
 
+
+<Example Title="基础图片">
+    <Description>不同填充模式的图片,提供 fill、contain、cover、none、scale-down 5 种填充类型。</Description>
+    <RunContent>
+        <Space BreakLine=true>
+            @{
+                var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
+                foreach (var item in fits)
+                {
+                        <SpaceItem>
+                            <div class="t-image__wrapper t-image__wrapper--shape-square" style="width: 120px; height: 120px;">
+                                <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
+                            </div>
+                            <span>@item.ToString()</span>
+                        </SpaceItem>
+                }
+            }
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+        ```html
+        <Space BreakLine=true>
+            @{
+                var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
+                foreach (var item in fits)
+                {
+                    <SpaceItem>
+                        <div class=""t-image__wrapper t-image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
+                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
+                        </div>
+                        <span>@item.ToString()</span>
+                    </SpaceItem>
+                }
+            }
+        </Space>
+        ```
+        ")
+    </CodeContent>
+</Example>
+
+
+<Example Title="">
+    <Description>不同填充位置的图片。图片相对于容器的位置。当图片过大时，提供显示图片的局部左侧对齐、或右侧对齐的不同位置。</Description>
+    <RunContent>
+        <Space Vertical style="width: 100%">
+            <Space BreakLine>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Cover"
+                             Position="center"
+                             style="width:120px;height:120px" />
+                    <span>cover center</span>
+                </Space>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Cover"
+                             style="width:120px;height:120px"
+                             Position="left" />
+                    <span>cover left</span>
+                </Space>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Cover"
+                             style="width:120px;height:120px"
+                             Position="right" />
+                    <span>cover right</span>
+                </Space>
+            </Space>
+            <Space style="{ marginTop: 20 }" BreakLine>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Cover"
+                           style="width:120px;height:120px"
+                             Position="top" />
+                    <span>cover top</span>
+                </Space>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Cover"
+                           style="width:120px;height:120px"
+                             Position="bottom" />
+                    <span>cover bottom</span>
+                </Space>
+            </Space>
+            <Space style="{ marginTop: 20 }" BreakLine>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Contain"
+                           style="width:120px;height:120px"
+                             Position="top" />
+                    <span>contain top</span>
+                </Space>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Contain"
+                             style="width:120px;height:120px"
+                             Position="bottom" />
+                    <span>contain bottom</span>
+                </Space>
+                <Space Vertical >
+                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                           Fit="FitType.Contain"
+                           style="width:120px;height:120px"
+                             Position="center" />
+                    <span>contain center</span>
+                </Space>
+                <Space style="{ marginTop: 20 }" BreakLine>
+                    <Space Vertical >
+                        <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                               Fit="FitType.Contain"
+                               style="width:120px;height:120px"
+                                 Position="left" />
+                        <span>contain left</span>
+                    </Space>
+                    <Space Vertical >
+                        <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                 Fit="FitType.Contain"
+                               style="width:120px;height:120px"
+                                 Position="right" />
+                        <span>contain right</span>
+                    </Space>
+                </Space>
+            </Space>
+        </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+        ```html
+        <div style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""></Image>
+        </div>
+        ```
+        ")
     </CodeContent>
 </Example>
