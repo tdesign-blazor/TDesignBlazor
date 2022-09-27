@@ -75,13 +75,13 @@ public class Menu : BlazorComponentBase, IHasChildContent
         builder.CreateElement(sequence, "div", inner =>
         {
             //logo
-            inner.CreateElement(0, "div", LogoContent, new { @class = "t-menu__logo" });
+            inner.CreateElement(0, "div", LogoContent, new { @class = "t-menu__logo" },LogoContent!=default(RenderFragment));
 
             builder.CreateElement(1, "ul", ChildContent, new
             {
                 @class = HtmlHelper.CreateCssBuilder()
                                 .Append("t-menu")
-                                .Append("t-menu--scroll narrow-scrollbar", Aside)
+                                .Append("t-menu--scroll narrow-scrollbar", Aside),
             });
 
             builder.CreateElement(2, "div", OperationContent, new { @class = "t-menu__operations" });
