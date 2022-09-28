@@ -6,9 +6,7 @@
 <Example Title="示例">
     <Description></Description>
     <RunContent>
-        <div style="width: 120px; height: 120px;">
-            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"></Image>
-        </div>
+            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="FitType.Cover" style="width: 120px; height: 120px;"></Image>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
@@ -30,12 +28,12 @@
                 var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
                 foreach (var item in fits)
                 {
-                    <SpaceItem>
-                        <div class="t-image__wrapper t-image__wrapper--shape-square" style="width: 120px; height: 120px;">
-                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
-                        </div>
-                        <span>@item.ToString()</span>
-                    </SpaceItem>
+                                                                                                        <SpaceItem>
+                                                                                                            <div class="Image__wrapper Image__wrapper--shape-square" style="width: 120px; height: 120px;">
+                                                                                                                <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
+                                                                                                            </div>
+                                                                                                            <span>@item.ToString()</span>
+                                                                                                        </SpaceItem>
                 }
             }
         </Space>
@@ -49,7 +47,7 @@
         foreach (var item in fits)
         {
         <SpaceItem>
-        <div class=""t-image__wrapper t-image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
+        <div class=""Image__wrapper Image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
         <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
         </div>
         <span>@item.ToString()</span>
@@ -90,61 +88,61 @@
                     <span>cover right</span>
                 </Space>
             </Space>
-            <Space style="margin-top: 20" BreakLine>
+            <Space BreakLine>
                 <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
-                           style="width:120px;height:120px"
+                           style="width:280px;height:120px"
                            Position="top" />
                     <span>cover top</span>
                 </Space>
                 <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Cover"
-                           style="width:120px;height:120px"
+                           style="width:280px;height:120px"
                            Position="bottom" />
                     <span>cover bottom</span>
                 </Space>
             </Space>
-            <Space style="{ marginTop: 20 }" BreakLine>
+            <Space BreakLine>
                 <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Contain"
-                           style="width:120px;height:120px"
+                           style="width:120px;height:200px"
                            Position="top" />
                     <span>contain top</span>
                 </Space>
                 <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Contain"
-                           style="width:120px;height:120px"
+                           style="width:120px;height:200px"
                            Position="bottom" />
                     <span>contain bottom</span>
                 </Space>
                 <Space Vertical>
                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="FitType.Contain"
-                           style="width:120px;height:120px"
+                           style="width:120px;height:200px"
                            Position="center" />
                     <span>contain center</span>
                 </Space>
-                <Space style="margin-top:20" BreakLine>
+            </Space>
+            <Space BreakLine>
                     <Space Vertical>
                         <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="FitType.Contain"
-                               style="width:120px;height:120px"
+                               style="width:280px;height:120px"
                                Position="left" />
                         <span>contain left</span>
                     </Space>
                     <Space Vertical>
                         <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="FitType.Contain"
-                               style="width:120px;height:120px"
+                               style="width:280px;height:120px"
                                Position="right" />
                         <span>contain right</span>
                     </Space>
                 </Space>
-            </Space>
         </Space>
     </RunContent>
     <CodeContent>
@@ -157,3 +155,86 @@
         ")
     </CodeContent>
 </Example>
+
+<Example Title="不同形状的图片">
+    <Description>提供方形、圆角方形、圆角 3 种形状。当图片长宽不相等时，无法使用 circle 展示一个正圆。</Description>
+    <RunContent>
+            <Space>
+    <Space Vertical>
+      <Image
+        Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+        Shape="ShapeType.Square"
+        style="width:160px;height:160px;"
+        Fit="FitType.Cover"
+      />
+      <span>square</span>
+    </Space>
+    <Space Vertical>
+      <Image
+        Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+        style="width:160px;height:160px;"
+        Fit="FitType.Cover"
+        Shape="ShapeType.Round"
+      />
+      <span>round</span>
+    </Space>
+    <Space Vertical>
+      <Image
+        Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+        style="width:160px;height:160px;"
+        Shape="ShapeType.Circle"
+        Fit="FitType.Cover"
+      />
+      <span>circle</span>
+    </Space>
+  </Space>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+        ```html
+        <div style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""></Image>
+        </div>
+        ```
+        ")
+    </CodeContent>
+</Example>
+
+<Example Title="图集样式的图片">
+    <Description>图片呈现图集样式的效果。</Description>
+    <RunContent>
+            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                style=" width:284px;height:160px;"
+                Gallery="true"
+                OverlayContent="label"
+                />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+        ```html
+        <div style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""></Image>
+        </div>
+        ```
+        ")
+    </CodeContent>
+</Example>
+<Example Title="hover 显示">
+    <Description>默认不显示悬浮层，hover 到图片区域后悬浮层出现。</Description>
+    <RunContent>
+            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                style=" width:284px;height:160px;"
+                OverlayTrigger="OverlayTriggerType.Hover"
+                />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+        ```html
+        <div style=""width: 120px; height: 120px;"">
+        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""></Image>
+        </div>
+        ```
+        ")
+    </CodeContent>
+</Example>
+@inject IJSRuntime JS
