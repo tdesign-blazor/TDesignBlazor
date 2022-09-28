@@ -130,16 +130,11 @@ namespace TDesignBlazor
     [CssClass("t-image--fit-")]
     public enum FitType
     {
-        [CssClass("contain")]
-        Contain,
-        [CssClass("cover")]
-        Cover,
-        [CssClass("fill")]
-        Fill,
-        [CssClass("none")]
-        None,
-        [CssClass("scale-down")]
-        ScaleDown
+        [CssClass("contain")] Contain,
+        [CssClass("cover")] Cover,
+        [CssClass("fill")] Fill,
+        [CssClass("none")] None,
+        [CssClass("scale-down")] ScaleDown
     }
     /// <summary>
     /// 浮层出现时机类型
@@ -147,10 +142,8 @@ namespace TDesignBlazor
     [CssClass("t-image__wrapper--need-hover")]
     public enum OverlayTriggerType
     {
-        [CssClass("always")]
-        Always,
-        [CssClass("thover")]
-        Hover
+        [CssClass("always")]Always,
+        [CssClass("thover")]Hover
     }
 
     /// <summary>
@@ -158,11 +151,9 @@ namespace TDesignBlazor
     /// </summary>
     public enum ShapeType
     {
-        [CssClass("circle")]
-        Circle,
-        [CssClass("round")]
-        Round,
-        [CssClass("square")]
-        Square
+
+        [CssClass("circle")]Circle,
+        [CssClass("round")]Round,
+        [CssClass("square")]Square
     }
 }
