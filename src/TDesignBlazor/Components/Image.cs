@@ -18,16 +18,7 @@ namespace TDesignBlazor
     [CssClass("t-image__wrapper")]
     public class Image : BlazorComponentBase
     {
-        private IJSRuntime _jS;
 
-        public Image(IJSRuntime js=null)
-        {
-            _jS = js;
-        }
-        public Image()
-        {
-
-        }
         /// <summary>
         /// 图片描述
         /// </summary>
@@ -91,11 +82,9 @@ namespace TDesignBlazor
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            var s1 = s;
-            if (Gallery)
-            {
-                builder.CreateElement(sequence + 1, "div", attributes: new { @class = "t-image__gallery-shadow" });
-            }
+
+            builder.CreateElement(sequence + 1, "div", attributes: new { @class = "t-image__gallery-shadow" }, condition: Gallery);
+
             builder.CreateElement(sequence + 2, "img", attributes: new
             {
                 src = Src,
@@ -104,42 +93,40 @@ namespace TDesignBlazor
                                  .Append(Fit.GetCssClass())
                                  .Append("t-image--position-" + Position),
                 style = "z-index:3;",
-                onmouseenter= s1
+                onmouseenter = JS.Value.InvokeAsync<object>("alert", "1")
             });
-            if (Gallery|| OverlayTrigger!=null)
-            {
-                builder.CreateElement(sequence + 3, "div", x =>
-                {
-                    x.CreateElement(sequence + 1, "span", span =>
-                    {
-                        span.CreateElement(sequence + 2, "span", OverlayContent);
-                    },
-                    attributes: new
-                    {
-                        @class = "t-tag t-tag--warning t-size-m t-tag--dark t-tag--mark",
-                        style = "margin: 8px;border-radius: 3px;background: rgb(236, 242, 254);color: rgb(0, 82, 217);"
-                    }, Gallery);
 
-                    x.CreateElement(sequence + 1, "div", "预览", new { style = "background: rgba(0, 0, 0, 0.4); color: rgb(255, 255, 255); height: 100%; display: flex; align-items: center; justify-content: center;" }, OverlayTrigger != null);
-                }, attributes: new
+            builder.CreateElement(sequence + 3, "div", x =>
+            {
+                x.CreateElement(sequence + 1, "span", span =>
                 {
-                    @class =  HtmlHelper.CreateCssBuilder()
-                                        .Append("t-image__overlay-content")
-                                        .Append("t-image__overlay-content--hidden", OverlayTrigger != null)
-                });
-            }
+                    span.CreateElement(sequence + 2, "span", OverlayContent);
+                },
+                attributes: new
+                {
+                    @class = "t-tag t-tag--warning t-size-m t-tag--dark t-tag--mark",
+                    style = "margin: 8px;border-radius: 3px;background: rgb(236, 242, 254);color: rgb(0, 82, 217);"
+                }, Gallery);
+
+                //x.CreateElement(sequence + 1, "div", "预览", new { style = "background: rgba(0, 0, 0, 0.4); color: rgb(255, 255, 255); height: 100%; display: flex; align-items: center; justify-content: center;" }, OverlayTrigger != null);
+            }, attributes: new
+            {
+                @class = HtmlHelper.CreateCssBuilder()
+                                    .Append("t-image__overlay-content")
+                                    .Append("t-image__overlay-content--hidden", OverlayTrigger != null)
+            }, Gallery || OverlayTrigger != null);
         }
+
 
         protected override void BuildCssClass(ICssClassBuilder builder)
         {
             builder.Append(OverlayTrigger?.GetCssClass());
         }
-        void s()
-        {
-            _jS.InvokeVoidAsync("alert", "1");
-            var s = "";
-        }
     }
+
+    /// <summary>
+    /// 填充模式
+    /// </summary>
     [CssClass("t-image--fit-")]
     public enum FitType
     {
@@ -154,6 +141,9 @@ namespace TDesignBlazor
         [CssClass("scale-down")]
         ScaleDown
     }
+    /// <summary>
+    /// 浮层出现时机类型
+    /// </summary>
     [CssClass("t-image__wrapper--need-hover")]
     public enum OverlayTriggerType
     {
@@ -162,6 +152,10 @@ namespace TDesignBlazor
         [CssClass("thover")]
         Hover
     }
+
+    /// <summary>
+    /// 圆角类型
+    /// </summary>
     public enum ShapeType
     {
         [CssClass("circle")]
