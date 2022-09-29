@@ -70,7 +70,7 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
 
         builder.CreateElement(sequence, "span", Link is not { Length: > 0 } ? ChildContent : buider =>
         {
-            builder.CreateComponent<NavLink>(sequence, ChildContent, attributes: new { href = Link, Match });
+            builder.CreateComponent<NavLink>(0, ChildContent, attributes: new { href = Link, Match });
         },
         new { @class = "t-menu__content" });
 
