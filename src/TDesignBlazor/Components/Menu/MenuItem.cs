@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace TDesignBlazor;
 
@@ -12,31 +13,36 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
 {
     [CascadingParameter] public Menu CascadingMenu { get; set; }
     [CascadingParameter] public SubMenu? CascadingSubMenu { get; set; }
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     protected override string TagName => CascadingSubMenu is not null ? "div" : "li";
+
     /// <summary>
     /// 禁用状态。
     /// </summary>
     [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
+
     /// <summary>
     /// 导航的超链接。
     /// </summary>
     [Parameter] public string? Link { get; set; }
+
     /// <summary>
     /// 前缀图标的名称。
     /// </summary>
     [Parameter] public object? IconPrefix { get; set; }
+
     /// <summary>
     /// 后缀图标的名称。
     /// </summary>
     [Parameter] public object? IconSuffix { get; set; }
+
     /// <summary>
     /// 选中状态。若为 <c>false</c> 则根据导航自动判断。
     /// </summary>
     [Parameter] public bool Active { get; set; }
-
 
     internal bool CanNavigationChanged { get; set; } = true;
 
@@ -48,7 +54,6 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
             await CascadingSubMenu?.Active();
         }
     }
-
 
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
@@ -63,7 +68,11 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
             builder.CreateComponent<Icon>(sequence, attributes: new { Name = IconPrefix });
         }
 
-        builder.CreateElement(sequence, "span", ChildContent, new { @class = "t-menu__content" });
+        builder.CreateElement(sequence, "span", Link is not { Length: > 0 } ? ChildContent : buider =>
+        {
+            builder.CreateComponent<NavLink>(sequence, ChildContent, attributes: new { href = Link, Match });
+        },
+        new { @class = "t-menu__content" });
 
         if (IconSuffix is not null)
         {
@@ -80,9 +89,8 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
         }
     }
 
-    void NavigateTo()
+    private void NavigateTo()
     {
-        NavigationManger.NavigateTo(Link);
         CascadingSubMenu?.CollapseSubMenuItem();
     }
 }
