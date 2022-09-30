@@ -17,8 +17,7 @@
 		<RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
 		<RepositoryType>Github</RepositoryType>
 		<PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
-		<Copyright>TDesignBlazor © William 2022</Copyright>
-
+		<Copyright>TDesignBlazor © William 2022</Copyright>		    
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -26,9 +25,10 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>10.0</LangVersion>
 		<FileAlignment>1024</FileAlignment>
-		<Title>TDesignBlazor For Blazor</Title>
+		<Title>TDesign For Blazor</Title>
 		<PackageIcon>logo.png</PackageIcon>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
 	</PropertyGroup>
 	<Choose>
 		<When Condition="'$(Configuration)' == 'Debug'">
