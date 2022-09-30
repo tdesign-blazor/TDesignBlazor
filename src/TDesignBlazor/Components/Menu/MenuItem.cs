@@ -79,18 +79,4 @@ public class MenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
             builder.CreateComponent<Icon>(sequence, attributes: new { Name = IconSuffix });
         }
     }
-
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        if (CanNavigationChanged && !string.IsNullOrWhiteSpace(Link))
-        {
-            attributes["href"] = Link;
-            attributes["onclick"] = HtmlHelper.CreateCallback(this, NavigateTo);
-        }
-    }
-
-    private void NavigateTo()
-    {
-        CascadingSubMenu?.CollapseSubMenuItem();
-    }
 }
