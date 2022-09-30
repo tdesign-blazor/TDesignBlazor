@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using System;
+
 namespace TDesignBlazor
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace TDesignBlazor
         /// <summary>
         /// 填充模式
         /// </summary>
-        [Parameter] public FitType Fit { get; set; } = FitType.Fill;//[CssClass("t-image--fit-")]
+        [Parameter] public FitType Fit { get; set; } = FitType.Fill;
 
         /// <summary>
         /// 是否展示为图集样式
@@ -62,7 +64,7 @@ namespace TDesignBlazor
         /// <summary>
         /// 定位
         /// </summary>
-        [Parameter] public Position Position { get; set; } = TDesignBlazor.Position.Center; //[CssClass("t-image--position-")]
+        [Parameter] public Position Position { get; set; } = TDesignBlazor.Position.Center;
 
         /// <summary>
         /// 图片圆角类型
@@ -94,23 +96,21 @@ namespace TDesignBlazor
                 @class = HtmlHelper.CreateCssBuilder()
                                  .Append("t-image")
                                  .Append(Fit.GetCssClass())
-                                 .Append("t-image--position-" + Position),
+                                 .Append("t-image--position-" + Position.GetCssClass()),
                 style = "z-index:3;",
             });
 
             builder.CreateElement(sequence + 3, "div", x =>
             {
-                x.CreateElement(sequence + 1, "span", span =>
+                x.CreateComponent<Tag>(sequence + 1, tag =>
                 {
-                    span.CreateElement(sequence + 2, "span", OverlayContent);
-                },
-                attributes: new
-                {
-                    @class = "t-tag t-tag--warning t-size-m t-tag--dark t-tag--mark",
-                    style = "margin: 8px;border-radius: 3px;background: rgb(236, 242, 254);color: rgb(0, 82, 217);"
-                }, Gallery);
 
-                //x.CreateElement(sequence + 1, "div", "预览", new { style = "background: rgba(0, 0, 0, 0.4); color: rgb(255, 255, 255); height: 100%; display: flex; align-items: center; justify-content: center;" }, OverlayTrigger != null);
+                    tag.CreateElement(sequence + 2, "span", OverlayContent);
+                }, attributes: new
+                {
+                    style = "margin: 8px;border-radius: 3px;background: rgb(236, 242, 254);color: rgb(0, 82, 217);"
+                });
+
             }, attributes: new
             {
                 @class = HtmlHelper.CreateCssBuilder()
