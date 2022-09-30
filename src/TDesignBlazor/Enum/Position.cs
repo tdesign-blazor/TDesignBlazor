@@ -19,5 +19,9 @@ public enum Position
     /// <summary>
     /// 底部。
     /// </summary>
-    Bottom
+    Bottom,
+    /// <summary>
+    /// 居中
+    /// </summary>
+    Center
 }
