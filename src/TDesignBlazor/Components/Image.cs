@@ -1,13 +1,4 @@
-﻿using ComponentBuilder;
-
-using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.JSInterop;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesignBlazor
 {
@@ -18,71 +9,83 @@ namespace TDesignBlazor
     [CssClass("t-image__wrapper")]
     public class Image : BlazorComponentBase
     {
-
         /// <summary>
         /// 图片描述
         /// </summary>
         [Parameter] public string Alt { get; set; }
+
         /// <summary>
         /// 禁用状态
         /// </summary>
         [Parameter] public bool Disabled { get; set; } = false;
+
         /// <summary>
         /// 错误内容
         /// </summary>
-        [Parameter] public string Error { get; set; }
+        [Parameter] public RenderFragment? Error { get; set; }
+
         /// <summary>
         /// 填充模式
         /// </summary>
         [Parameter] public FitType Fit { get; set; } = FitType.Fill;//[CssClass("t-image--fit-")]
+
         /// <summary>
         /// 是否展示为图集样式
         /// </summary>
-        [Parameter] public bool Gallery { get; set; } = false;
+        [Parameter] public bool Gallery { get; set; }
+
         /// <summary>
         /// 是否开启图片懒加载
         /// </summary>
         [Parameter] public bool Lazy { get; set; } = false;
+
         /// <summary>
         /// 加载中状态的图片内容
         /// </summary>
-        [Parameter] public string Loading { get; set; }
+        [Parameter] public string? Loading { get; set; }
+
         /// <summary>
         /// 图片上方的浮层内容
         /// </summary>
-        [Parameter] public string OverlayContent { get; set; }
+        [Parameter] public string? OverlayContent { get; set; }
+
         /// <summary>
         /// 浮层 overlayContent 出现的时机
         /// </summary>
         [Parameter] public OverlayTriggerType? OverlayTrigger { get; set; }
+
         /// <summary>
         /// 占位元素
         /// </summary>
-        [Parameter] public string Placeholder { get; set; }
+        [Parameter] public string? Placeholder { get; set; }
+
         /// <summary>
         /// 定位
         /// </summary>
-        [Parameter] public string Position { get; set; } = "center"; //[CssClass("t-image--position-")]
+        [Parameter] public Position Position { get; set; } = TDesignBlazor.Position.Center; //[CssClass("t-image--position-")]
+
         /// <summary>
         /// 图片圆角类型
         /// </summary>
         [Parameter][CssClass("t-image__wrapper--shape-")] public ShapeType Shape { get; set; } = ShapeType.Square;
+
         /// <summary>
         /// 图片链接
         /// </summary>
-        [Parameter] public string Src { get; set; }
+        [Parameter] public string? Src { get; set; }
+
         /// <summary>
         /// 加载失败
         /// </summary>
-        [Parameter] public Action OnError { get; set; }
+        [Parameter] public Action? OnError { get; set; }
+
         /// <summary>
         /// 加载完成
         /// </summary>
-        [Parameter] public Action OnLoad { get; set; }
+        [Parameter] public Action? OnLoad { get; set; }
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-
             builder.CreateElement(sequence + 1, "div", attributes: new { @class = "t-image__gallery-shadow" }, condition: Gallery);
 
             builder.CreateElement(sequence + 2, "img", attributes: new
@@ -93,7 +96,6 @@ namespace TDesignBlazor
                                  .Append(Fit.GetCssClass())
                                  .Append("t-image--position-" + Position),
                 style = "z-index:3;",
-                onmouseenter = JS.Value.InvokeAsync<object>("alert", "1")
             });
 
             builder.CreateElement(sequence + 3, "div", x =>
@@ -117,7 +119,6 @@ namespace TDesignBlazor
             }, Gallery || OverlayTrigger != null);
         }
 
-
         protected override void BuildCssClass(ICssClassBuilder builder)
         {
             builder.Append(OverlayTrigger?.GetCssClass());
@@ -130,20 +131,47 @@ namespace TDesignBlazor
     [CssClass("t-image--fit-")]
     public enum FitType
     {
-        [CssClass("contain")] Contain,
-        [CssClass("cover")] Cover,
-        [CssClass("fill")] Fill,
+        /// <summary>
+        /// 保持原有尺寸
+        /// </summary>
         [CssClass("none")] None,
+
+        /// <summary>
+        /// 原比例缩放，全部可见
+        /// </summary>
+        [CssClass("contain")] Contain,
+
+        /// <summary>
+        /// 原比例缩放，部分可见
+        /// </summary>
+        [CssClass("cover")] Cover,
+
+        /// <summary>
+        /// 填充
+        /// </summary>
+        [CssClass("fill")] Fill,
+
+        /// <summary>
+        /// 保持原有尺寸比例,如果容器尺寸大于图片内容尺寸，保持图片的原有尺寸，不会放大失真；容器尺寸小于图片内容尺寸，用法跟contain一样。
+        /// </summary>
         [CssClass("scale-down")] ScaleDown
     }
+
     /// <summary>
     /// 浮层出现时机类型
     /// </summary>
     [CssClass("t-image__wrapper--need-hover")]
     public enum OverlayTriggerType
     {
-        [CssClass("always")]Always,
-        [CssClass("thover")]Hover
+        /// <summary>
+        /// 总是出现
+        /// </summary>
+        [CssClass("always")] Always,
+
+        /// <summary>
+        /// 浮动
+        /// </summary>
+        [CssClass("hover")] Hover
     }
 
     /// <summary>
@@ -151,9 +179,19 @@ namespace TDesignBlazor
     /// </summary>
     public enum ShapeType
     {
+        /// <summary>
+        /// 圆形
+        /// </summary>
+        [CssClass("circle")] Circle,
 
-        [CssClass("circle")]Circle,
-        [CssClass("round")]Round,
-        [CssClass("square")]Square
+        /// <summary>
+        /// 圆角
+        /// </summary>
+        [CssClass("round")] Round,
+
+        /// <summary>
+        /// 正方形
+        /// </summary>
+        [CssClass("square")] Square
     }
 }
