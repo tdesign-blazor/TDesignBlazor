@@ -1,9 +1,11 @@
 name: 自动打包部署到 nuget 并生成 release note
 
 on:
-  push:
-    tags:
-      - 'v*'
+  pull_request:
+        branches:
+          - 'master'
+    # tags:
+    # - 'v*'
 
 jobs:
   build:
