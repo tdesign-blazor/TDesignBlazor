@@ -13,12 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Simple Version
-        # You may pin to the exact commit or the version.
-        # uses: xom9ikk/version-by-tag@51cd8322dc728ecbe50f6281e0dcbe626089562f
-        uses: xom9ikk/version-by-tag@v1
-      - name: 输出版本
-        run: echo {{env.semver}}
+      - uses: actions/checkout@v1
+      - name: Process version of the tag
+        id: version
+        uses: ncipollo/semantic-version-action@v1
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps.version.outputs) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump previous tag
+        env:
+          PREVIOUS_TAG: ${{ steps.version.outputs.previous_tag }}
+        run: echo "$PREVIOUS_TAG"
     #- uses: actions/checkout@v3
     #- name: Setup .NET
     #  uses: actions/setup-dotnet@v2
