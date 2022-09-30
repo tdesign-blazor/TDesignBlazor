@@ -95,7 +95,7 @@ public class Image : BlazorComponentBase
             @class = HtmlHelper.CreateCssBuilder()
                              .Append("t-image")
                              .Append(Fit.GetCssClass())
-                             .Append("t-image--position-" + Position.GetCssClass()),
+                             .Append($"t-image--position-{Position.GetCssClass()}"),
             style = "z-index:3;",
         });
 
