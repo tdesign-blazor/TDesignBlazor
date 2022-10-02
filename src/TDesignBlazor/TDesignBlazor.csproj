@@ -8,7 +8,7 @@
     <PackageId>TDesignBlazor</PackageId>
     <Version>0.2</Version>
     <Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesignBlazor 官方地址：https://tdesign.tencent.com/</Description>
-    <Authors>William Zhou</Authors>
+    <Authors>William Zhou and Contributors</Authors>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <OutputPath>.\bin\$(Configuration)</OutputPath>
@@ -65,10 +65,6 @@
 
   <ItemGroup>
     <None Include="..\..\asset\logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
