@@ -15,6 +15,9 @@
 
 ### 关于技术问题
 对于项目贡献相关的技术问题，你可以直接联系贡献者团队或其他的常规技术询问站点：
+
+<img src="./asset/tdesign-blazor.jpg" width="50%" height="50%"/>
+
 * 项目创始人邮箱 [william-zzh@outlook.com](mailto:william-zzh@outlook.com)
 * QQ群：1012762441
 * [StackOverflow](http://www.stackoverflow.com)
@@ -23,10 +26,10 @@
 
 **请不要使用 Github Issue** ，因为这是留给用户对本项目的使用反馈，比如缺陷报告、新功能、新点子搜集的地方。
 
-### 有缺陷（BUG）
+### 缺陷（BUG）
 如果你在源代码中发现了一个错误，你可以通过向我们的 GitHub 库提交一个问题]()来帮助我们。更好的是，您可以提交一个带有修复程序的 Pull Request。
 
-### 缺失的功能（Feature）
+### 功能（Feature）
 你可以通过向我们的 GitHub 库提交一个问题来请求一个新功能。如果你想实现一个新功能，请提交一个使用场景的问题，使它易于使用。也请考虑它是什么样的变化:
 
 * 对于一个主要功能，首先打开一个问题，并概述你的建议，以便讨论。这也将允许我们更好地协调我们的工作，防止工作的重复，并帮助您精心设计变更，以便它被成功地接受到项目中。
@@ -52,10 +55,10 @@
 * Scope 范围：
   * component：组件
   * doc：文档
-  * test：单元测试
+  * test：测试
   * refactor：重构
   * ci：持续集成
-  * extensions：扩展
+  * extension：扩展
   * other：其他
 * 分支名称：使用简短且和本次提交的内容相关的短语，多个单词使用下划线，例如 `update_button_theme`
 
@@ -97,9 +100,10 @@
   ```
   **注意：** 可选的 `commit -a` 命令行选项将自动 “添加” 和 “rm” 编辑过的文件。
 * 必要的持续集成（CI）已经完成并通过；
+* PR 标题格式：**【新增|更新|移除|修复】摘要描述**；
 * 根据 PR 模板，完善信息；
 
-**合并需要时间验证和思考，请保持耐心**
+**合并需要时间阅读代码、验证并讨论，请保持耐心**
 
 ## 代码规范
 为了确保整个源代码的一致性，在工作时请记住以下规则：
@@ -118,6 +122,6 @@
 
 目前用到的第三方库：
 * [ComponentBuilder](https://github.com/AchievedOwner/ComponentBuilder)：由作者亲自维护，并持续保持更新；
-* [OneOf](https://github.com/mcintyre321/OneOf)：考虑中
+* [OneOf](https://github.com/mcintyre321/OneOf)
 
 > 文档将不定期更新，请随时关注。
