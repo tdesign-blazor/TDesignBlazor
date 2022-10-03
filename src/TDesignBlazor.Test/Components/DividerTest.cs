@@ -30,5 +30,10 @@ public class DividerTest : TestBase<Divider>
         GetComponent(m => m.Add(p => p.Alignment, alignment)).Should().HaveClass($"t-divider--with-text-{alignment.GetCssClass()}");
     }
 
-
+    [Fact(DisplayName = "Divider - ChildContent 赋值后会嵌套一层")]
+    public void Test_ChildContent_Has_Inner_Span()
+    {
+        GetComponent(m => m.AddChildContent("test")).Should().HaveChildMarkup("<span class=\"t-divider__inner-text\">test</span>")
+            .And.HaveClass("t-divider--with-text");
+    }
 }
