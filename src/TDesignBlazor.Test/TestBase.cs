@@ -1,5 +1,4 @@
-﻿using Bunit;
-
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TDesignBlazor.Test;
@@ -25,4 +24,12 @@ public class TestBase
     protected TestContext TestContext => _testContext;
 
     protected TService? GetService<TService>() => _provider.GetService<TService>();
+}
+
+public class TestBase<TComponent> : TestBase where TComponent : IComponent
+{
+    protected IRenderedComponent<TComponent> GetComponent(Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) => TestContext.RenderComponent(parameterBuilder);
+
+    protected IRenderedComponent<TComponent> GetComponent(params ComponentParameter[] parameters) => TestContext.RenderComponent<TComponent>(parameters);
+
 }
