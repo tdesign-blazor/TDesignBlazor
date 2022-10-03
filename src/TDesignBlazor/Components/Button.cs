@@ -23,7 +23,7 @@ public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
     /// </summary>
     [Parameter][HtmlAttribute("type")] public ButtonHtmlType HtmlType { get; set; } = ButtonHtmlType.Button;
     /// <summary>
-    /// 
+    /// 按钮类型的风格。
     /// </summary>
     [Parameter][CssClass("t-button--variant-")] public ButtonType Type { get; set; } = ButtonType.Base;
 
