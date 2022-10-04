@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using ComponentBuilder;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TDesignBlazor.Test;
@@ -13,12 +15,10 @@ public class TestBase
 
     public TestBase()
     {
-        var services = new ServiceCollection();
-        services.AddTDesignBlazor();
-        _provider = services.BuildServiceProvider();
 
         _testContext = new TestContext();
-        _testContext.Services.AddTDesignBlazor();
+        _testContext.Services.AddTDesignBlazor().AddComponentBuilder();
+        _provider = _testContext.Services.BuildServiceProvider();
     }
 
     protected TestContext TestContext => _testContext;
