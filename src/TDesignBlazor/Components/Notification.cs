@@ -36,8 +36,7 @@ public class Notification : MessageComponentBase, IHasChildContent
             {
                 content.CreateElement(0, "div", title =>
                 {
-                    title.CreateElement(0, "div", TitleContent, new { @class = "t-notification__title" }, TitleContent is not null);
-                    title.CreateElement(0, "div", Title!, new { @class = "t-notification__title" }, Title is not null);
+                    title.CreateElement(0, "div", TitleContent ??= builder => builder.AddContent(0, Title), new { @class = "t-notification__title" });
                 }
                 , new { @class = "t-notification__title__wrap" });
 

@@ -1,3 +1,63 @@
 ﻿@import 'reset.css';
 @import 'tdesign.min.css';
 @import 'tdesign-icons.css';
+
+
+.placement-top-center {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.placement-top-left {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+}
+
+.placement-top-right {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+}
+
+.placement-bottom-center {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.placement-bottom-left {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+}
+
+.placement-bottom-right {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+}
+
+.placement-middle-left {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.placement-middle-right {
+    position: absolute;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.placement-middle-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
