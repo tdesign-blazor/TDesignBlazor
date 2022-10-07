@@ -54,6 +54,24 @@
     ```cs
     @using TDesignBlazor
     ```
+- 在 `App.razor` 增加 `TDesignContainer` 组件，用于动态组件的渲染
+    ```html
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+
+    <!--增加组件-->
+    <TDesignContainer/>
+    ```
 
 ## :pencil: 参与贡献
 * 如果你有意向参与贡献，请先阅读[贡献指南](./Contributing.md)
@@ -72,6 +90,9 @@
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
 * 作者邮箱：[william-zzh@outlook.com]
 * QQ 群：1012762441
+* 微信群
+
+    <img src="./asset/tdesign-blazor.jpg" width="50%" height="50%"/>
 
 ## :triangular_flag_on_post: 行为准则
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。

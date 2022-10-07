@@ -58,5 +58,30 @@
 ")
     </CodeContent>
 </Example>
-<h2>通过服务调用</h2>
-代码建设中...
+<Example Title="通过服务调用">
+    <Description>注入 <code>IMessageService</code> 接口动态调用消息</Description>
+    <RunContent>
+        <Button OnClick="@(e=>MessageService.Show(new MessageConfiguration{ Content="这是全局提示"}))">自定义提示</Button>
+        <Button Theme="Theme.Primary" OnClick="@(e=>MessageService.Info("普通的提示"))">普通</Button>
+        <Button Theme="Theme.Success" OnClick="@(e=>MessageService.Success("成功的提示"))">成功</Button>
+        <Button Theme="Theme.Warning" OnClick="@(e=>MessageService.Warning("警告的提示"))">警告</Button>
+        <Button Theme="Theme.Danger" OnClick="@(e=>MessageService.Danger("失败的提示"))">失败</Button>
+        <Button OnClick="@(e=>MessageService.Question("有问题的提示"))">疑问</Button>
+        <Button Theme="Theme.Primary" OnClick="@(e=>MessageService.Loading("系统加载中"))">加载</Button>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cs
+@inject IMessageService MessageService
+
+MessageService.Info(...)
+MessageService.Success(...)
+MessageService.Danger(...)
+MessageService.Warning(...)
+MessageService.Loading(...)
+MessageService.Question(...)
+```
+")
+    </CodeContent>
+</Example>
+@inject IMessageService MessageService

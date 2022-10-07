@@ -36,11 +36,6 @@ public class BreadcrumbItem : BlazorComponentBase, IHasChildContent
     /// </summary>
     protected bool HasLink => !string.IsNullOrEmpty(Link);
 
-    /// <summary>
-    /// 获取元素名称是 a 或 span。
-    /// </summary>
-    protected override string TagName => HasLink ? "a" : "span";
-
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append("dark", Options.Value.Dark).Append("light", !Options.Value.Dark);
@@ -48,7 +43,7 @@ public class BreadcrumbItem : BlazorComponentBase, IHasChildContent
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, TagName, overflow =>
+        builder.CreateElement(sequence, !string.IsNullOrEmpty(Link) ? "a" : "span", overflow =>
         {
             overflow.CreateElement(0, "span", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:120px" });
         }, new
