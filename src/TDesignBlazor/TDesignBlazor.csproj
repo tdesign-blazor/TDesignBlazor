@@ -54,13 +54,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="1.4.1.1" />
+    <PackageReference Include="ComponentBuilder" Version="1.5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Parameters\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

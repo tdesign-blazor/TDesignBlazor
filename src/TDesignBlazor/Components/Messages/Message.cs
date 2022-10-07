@@ -3,7 +3,8 @@
 namespace TDesignBlazor;
 
 /// <summary>
-/// 全局提示。
+/// 对用户的操作作出轻量的全局反馈。
+/// 请使用 <see cref="IMessageService"/> 进行动态调用。
 /// </summary>
 [CssClass("t-message")]
 public class Message : MessageComponentBase
@@ -22,6 +23,10 @@ public class Message : MessageComponentBase
     /// </summary>
     public bool Closed { get; private set; }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <param name="builder"></param>
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         if (Closed)
@@ -65,17 +70,23 @@ public class Message : MessageComponentBase
             }, condition: Closable);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     protected override IconName? GetIconByTheme
     {
         get
         {
-            if (Theme == TDesignBlazor.MessageTheme.Question)
+            if (Theme == MessageTheme.Question)
             {
                 return IconName.HelpCircleFilled;
             }
             return base.GetIconByTheme;
         }
     }
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
