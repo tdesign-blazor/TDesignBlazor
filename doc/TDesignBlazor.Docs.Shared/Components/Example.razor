@@ -3,7 +3,7 @@
     <h2>@Title</h2>
     @if (Description is not null)
     {
-        <p>@Description</p>
+            <p>@Description</p>
     }
 
     @*<Tab Position="TDesignBlazor.Position.Top" >
@@ -18,11 +18,11 @@
 
     <Div AdditionalCssClass="demo-wrapper">
         <Div AdditionalCssClass="content" AdditionalStyle="@RunStyle">
-                @RunContent
+            @RunContent
         </Div>
         <Div class="footer">
             <Div class="btn">
-                <Icon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px" @onclick="e=>ToogleCode()"  style="display: flex;align-content: center;justify-content: center;align-items: center;flex-wrap: nowrap;"/>
+                <Icon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" />
             </Div>
         </Div>
         <Div class="@CodeClass" style="@GetStyle()">
@@ -37,11 +37,11 @@
     [Parameter] public RenderFragment Description { get; set; }
     [Parameter] public RenderFragment CodeContent { get; set; }
     [Parameter] public RenderFragment RunContent { get; set; }
-    [Parameter]public string? RunStyle{ get; set; }
+    [Parameter] public string? RunStyle { get; set; }
 
     bool Active = false;
 
-    string GetStyle() =>Active?"": "display:none";
+    string GetStyle() => Active ? "" : "display:none";
     string CodeClass => HtmlHelper.CreateCssBuilder().Append("content code")
     //.Append(Active, "code-collapse", "code-expand")
     .ToString()
@@ -55,3 +55,4 @@
         StateHasChanged();
     }
 }
+
