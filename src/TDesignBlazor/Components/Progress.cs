@@ -144,7 +144,7 @@ public class Progress : BlazorComponentBase,IHasActive
         (int? size, int? fontSize) = GetSizeStyle();
         builder.CreateElement(0, "div", circle =>
         {
-            BuildProgressInfo(circle,0);
+            BuildProgressInfo(circle,0,true);
             circle.CreateElement(1, "svg", svg =>
             {
                 var param = GetCircleParameter();
@@ -227,7 +227,7 @@ public class Progress : BlazorComponentBase,IHasActive
     /// <summary>
     /// 构建 <c>&lt;div class="t-progress__info">xx&lt;/div></c> 这段代码
     /// </summary>
-    private void BuildProgressInfo(RenderTreeBuilder builder, int sequence)
+    private void BuildProgressInfo(RenderTreeBuilder builder, int sequence,bool circle=false)
     {
         builder.CreateElement(sequence, "div", content =>
             {
@@ -244,7 +244,7 @@ public class Progress : BlazorComponentBase,IHasActive
                 {
                     content.CreateComponent<Icon>(0, attributes: new
                     {
-                        Name = Status?.GetStatusIconName(s => s switch
+                        Name = Status?.GetStatusIconName(!circle?default: s => s switch
                         {
                             TDesignBlazor.Status.Success => IconName.Check,
                             TDesignBlazor.Status.Error => IconName.Close,
