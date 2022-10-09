@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{FE
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
-		.github\workflows\dotnet-code-analysis.yml = .github\workflows\dotnet-code-analysis.yml
+		.github\workflows\sonar-code.yml = .github\workflows\sonar-code.yml
 	EndProjectSection
 EndProject
 Global
