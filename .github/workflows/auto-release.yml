@@ -1,11 +1,9 @@
 name: 自动打包部署到 nuget 并生成 release note
 
 on:
-  pull_request:
+   workflow_run:
         branches:
-          - 'master'
-    # tags:
-    # - 'v*'
+         - 'master'
 
 jobs:
   build:
@@ -25,5 +23,4 @@ jobs:
           echo "${{ steps.version.outputs.build }}"
           echo "${{ steps.version.outputs.full }}"
           echo "${{ steps.version.outputs.tag }}"
-
     
