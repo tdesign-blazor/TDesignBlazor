@@ -17,7 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{C4664E1D-880
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{13ED86A3-CF19-4A3E-9A7C-B463221D6D1F}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDesignBlazor.Test", "src\TDesignBlazor.Test\TDesignBlazor.Test.csproj", "{231C5268-E45C-4465-81A4-7A84B1DAC589}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{FEABD8B3-4FD3-4159-8EC0-2050BF60CE41}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\sonar-code.yml = .github\workflows\sonar-code.yml
 	EndProjectSection
 EndProject
 Global
@@ -42,6 +52,10 @@ Global
 		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +65,8 @@ Global
 		{A94CCEF2-D6FD-4FDA-84E0-F535DE530CA5} = {C4664E1D-880F-4C50-81E9-E33BBC3F1655}
 		{6AA163CE-AF7A-4CCC-9AD8-DD30EFD1A459} = {C4664E1D-880F-4C50-81E9-E33BBC3F1655}
 		{78D4C3FA-D3CB-430A-9903-24D22B03CAF6} = {42986F5C-3389-494B-8E72-A2A3CE808EBA}
+		{231C5268-E45C-4465-81A4-7A84B1DAC589} = {42986F5C-3389-494B-8E72-A2A3CE808EBA}
+		{FEABD8B3-4FD3-4159-8EC0-2050BF60CE41} = {13ED86A3-CF19-4A3E-9A7C-B463221D6D1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BAFEEB6-A6C0-47DF-B99A-F1CB9F181D62}

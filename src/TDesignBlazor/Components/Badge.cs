@@ -40,7 +40,7 @@ public class Badge : BlazorComponentBase, IHasChildContent
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, "div", ChildContent, new { @class = "badge-black" });
+        builder.CreateElement(sequence, "div", ChildContent, new { @class = "badge-block" });
         builder.CreateElement(sequence + 1, "div", Text, new
         {
             @class = HtmlHelper.CreateCssBuilder()

@@ -22,6 +22,8 @@ public static class DependencyInjectionExtensions
     {
         services.Configure(configure);
         services.AddComponentBuilder();
+
+        services.AddScoped<IMessageService, MessageService>();
         return services;
     }
 }

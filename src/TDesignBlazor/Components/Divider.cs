@@ -22,7 +22,7 @@ public class Divider : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 是否为虚线。
     /// </summary>
-    [Parameter][CssClass("t-divider-dashed")] public bool Dashed { get; set; }
+    [Parameter][CssClass("t-divider--dashed")] public bool Dashed { get; set; }
 
     /// <summary>
     /// 文字对齐方式。
