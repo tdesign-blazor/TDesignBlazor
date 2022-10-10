@@ -6,18 +6,18 @@
 
 <h2>环境</h2>
 <Card style="100%">
-        @Code.Create(@"
- * .NET 6
- * VS 2022
- ")
+@Code.Create(@"
+* .NET 6
+* VS 2022
+")
 </Card>
 
 
 <h2>安装</h2>
 <h3>Nuget 管理</h3>
 <Card style="100%">
-    @Code.Create(@"
-```html
+@Code.Create(@"
+```cmd
 > Install-Package TDesignBlazor
 ```
 ")
@@ -26,7 +26,7 @@
 
 <h3>PackageReference</h3>
 <Card style="100%">
-    @Code.Create(@"
+@Code.Create(@"
 ```html
 <PackageReference Include=""TDesignBlazor""/>
 ```
@@ -36,7 +36,7 @@
 
 <h3>引入必要文件</h3>
 <Card style="100%">
-    @Code.Create(@"
+@Code.Create(@"
 ```html
 <link rel=""stylesheet"" href=""_content/TDesignBlazor/tdesign-blazor.css"" /> <!--必要样式-->
 ```
@@ -46,8 +46,8 @@
 
 <h3>在 <code>_Import.razor</code> 引入命名空间</h3>
 <Card style="100%">
-    @Code.Create(@"
-```html
+@Code.Create(@"
+```csharp
 @using TDesignBlazor
 ```
 ")
@@ -56,8 +56,8 @@
 
 <h3>注册服务</h3>
 <Card style="100%">
-    @Code.Create(@"
-```c#
+@Code.Create(@"
+```csharp
 builder.Services.AddTDesignBlazor();
 ```
 ")
@@ -69,18 +69,17 @@ builder.Services.AddTDesignBlazor();
 @Code.Create(@"
 ```html
 <Router AppAssembly=""@typeof(App).Assembly"">
-    <Found Context=""routeData"">
-        <RouteView RouteData=""@routeData"" DefaultLayout=""@typeof(MainLayout)"" />
-        <FocusOnNavigate RouteData=""@routeData"" Selector=""h1"" />
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout=""@typeof(MainLayout)"">
-            <p role=""alert"">Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
+<Found Context=""routeData"">
+<RouteView RouteData=""@routeData"" DefaultLayout=""@typeof(MainLayout)"" />
+<FocusOnNavigate RouteData=""@routeData"" Selector=""h1"" />
+</Found>
+<NotFound>
+<PageTitle>Not found</PageTitle>
+<LayoutView Layout=""@typeof(MainLayout)"">
+<p role=""alert"">Sorry, there's nothing at this address.</p>
+</LayoutView>
+</NotFound>
 </Router>
-
 <!--增加组件-->
 <TDesignContainer/>
 ```
