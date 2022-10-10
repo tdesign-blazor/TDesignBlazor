@@ -13,17 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Git Version
-        uses: codacy/git-version@2.5.4
-    #- uses: actions/checkout@v3
-    #- name: Setup .NET
-    #  uses: actions/setup-dotnet@v2
-    #  with:
-    #    dotnet-version: 6.0.x
-    #- name: 还原
-    #  run: dotnet restore
-    #- name: 编译
-    #  run: dotnet build --no-restore
-    #- name: 打包
-    #  run: dotnet 
+        - id: get_version
+          uses: battila7/get-version-action@v2
+
+        - run: echo ${{ steps.get_version.outputs.version }}
+
+        - run: echo ${{ steps.get_version.outputs.version-without-v }}
     
