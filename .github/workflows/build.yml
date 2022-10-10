@@ -1,4 +1,5 @@
-name: 编译 & 测试
+name: 编译
+run-name: 编译并测试
 
 on:
   push:
