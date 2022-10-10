@@ -1,26 +1,40 @@
-name: 自动打包部署到 nuget 并生成 release note
+name: 发布
+run-name: 打包并推送到 nuget
 
 on:
-   workflow_run:
-        branches:
-         - 'master'
+  push:
+    tag:
+      - "v*"
 
 jobs:
-  build:
-
+  pack-push-nuget-package:
     runs-on: ubuntu-latest
-
+    if: github.repository_owner == 'AchievedOwner'
     steps:
-      - name: Semver Parse
-        uses: release-kit/semver@v1.0.10
-      - name: Use parsed version
+      - name: 迁出代码
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.101
+
+      - name: 转换 tag
+        id: version
+        uses: release-kit/semver@v1
+
+      - name: 发布 nuget 包
         run: |
-          echo "----------output-----------"
-          echo "${{ steps.version.outputs.major }}"
-          echo "${{ steps.version.outputs.minor }}"
-          echo "${{ steps.version.outputs.patch }}"
-          echo "${{ steps.version.outputs.prerelease }}"
-          echo "${{ steps.version.outputs.build }}"
-          echo "${{ steps.version.outputs.full }}"
-          echo "${{ steps.version.outputs.tag }}"
+        Version=${{steps.version.outputs.full}}
+        echo "The version {$Version}"
+        dotnet build
+        dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
+        dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+
+      - name: 上传工件
+      uses: actions/upload-artifact@v2
+      with:
+        name: package
+        path: publish/
+        retention-days: 5
     
