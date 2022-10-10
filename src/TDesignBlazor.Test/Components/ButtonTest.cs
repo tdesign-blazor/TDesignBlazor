@@ -2,13 +2,13 @@ namespace TDesignBlazor.Test.Components;
 
 public class ButtonTest : TestBase
 {
-    [Fact(DisplayName = "°´Å¥ - äÖÈ¾ button ÔªËØ±ê¼Ç")]
+    [Fact(DisplayName = "æŒ‰é’® - æ¸²æŸ“ button å…ƒç´ æ ‡è®°")]
     public void Test_Render_Button_Tag()
     {
         TestContext.RenderComponent<Button>().Should().HaveTag("button");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Theme ²ÎÊı ")]
+    [Fact(DisplayName = "æŒ‰é’® - Theme å‚æ•° ")]
     public void Test_Theme_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Theme, Theme.Primary)).Should().HaveClass("t-button--theme-primary");
@@ -20,7 +20,7 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Theme, Theme.Warning)).Should().HaveClass("t-button--theme-warning");
     }
 
-    [Fact(DisplayName = "°´Å¥ - HtmlType ²ÎÊıäÖÈ¾ HTML µÄ type ÊôĞÔ")]
+    [Fact(DisplayName = "æŒ‰é’® - HtmlType å‚æ•°æ¸²æŸ“ HTML çš„ type å±æ€§")]
     public void Test_HtmlType_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.HtmlType, ButtonHtmlType.Button)).Should().HaveAttribute("type", "button");
@@ -30,7 +30,7 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<Button>(m => m.Add(p => p.HtmlType, ButtonHtmlType.Reset)).Should().HaveAttribute("type", "reset");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Type ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Type å‚æ•°")]
     public void Test_Type_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Type, ButtonType.Dashed)).Should().HaveClass("t-button--variant-dashed");
@@ -42,13 +42,13 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Type, ButtonType.Text)).Should().HaveClass("t-button--variant-text");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Ghost ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Ghost å‚æ•°")]
     public void Test_Ghost_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Ghost, true)).Should().HaveClass("t-button--ghost");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Size ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Size å‚æ•°")]
     public void Test_Size_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Size, Size.Small)).Should().HaveClass("t-size-s");
@@ -56,13 +56,13 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Size, Size.Large)).Should().HaveClass("t-size-l");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Block ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Block å‚æ•°")]
     public void Test_Block_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Block, true)).Should().HaveClass("t-size-full-width");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Shape ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Shape å‚æ•°")]
     public void Test_Shape_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Rectangle)).Should().HaveClass("t-button--shape-rectangle");
@@ -71,14 +71,14 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Round)).Should().HaveClass("t-button--shape-round");
     }
 
-    [Fact(DisplayName = "°´Å¥ - Disabled ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Disabled å‚æ•°")]
     public void Test_Disabled_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Disabled, true)).Should().HaveClass("t-is-disabled");
     }
 
 
-    [Fact(DisplayName = "°´Å¥ - Loading ²ÎÊı")]
+    [Fact(DisplayName = "æŒ‰é’® - Loading å‚æ•°")]
     public void Test_Loading_Parameter()
     {
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Loading, true)).Should().HaveClass("t-is-loading");
