@@ -47,7 +47,7 @@ public class Button : BlazorComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 按钮形状。
     /// </summary>
-    [Parameter][CssClass("t-button--shape-")] public ButtonShape? Shape { get; set; }
+    [Parameter][CssClass("t-button--shape-")] public ButtonShape Shape { get; set; } = ButtonShape.Rectangle;
     /// <summary>
     /// 禁用状态。
     /// </summary>
@@ -92,8 +92,21 @@ public enum ButtonType
 /// </summary>
 public enum ButtonShape
 {
-    Squre,
+    /// <summary>
+    /// 长方形。
+    /// </summary>
+    Rectangle,
+    /// <summary>
+    /// 正方形。
+    /// </summary>
+    Square,
+    /// <summary>
+    /// 圆角长方形。
+    /// </summary>
     Round,
+    /// <summary>
+    /// 圆形。
+    /// </summary>
     Circle
 }
 /// <summary>

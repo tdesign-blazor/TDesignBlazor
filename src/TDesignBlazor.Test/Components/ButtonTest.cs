@@ -65,7 +65,8 @@ public class ButtonTest : TestBase
     [Fact(DisplayName = "°´Å¥ - Shape ²ÎÊý")]
     public void Test_Shape_Parameter()
     {
-        TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Squre)).Should().HaveClass("t-button--shape-squre");
+        TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Rectangle)).Should().HaveClass("t-button--shape-rectangle");
+        TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Square)).Should().HaveClass("t-button--shape-square");
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Circle)).Should().HaveClass("t-button--shape-circle");
         TestContext.RenderComponent<Button>(m => m.Add(p => p.Shape, ButtonShape.Round)).Should().HaveClass("t-button--shape-round");
     }
