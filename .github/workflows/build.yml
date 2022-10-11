@@ -24,9 +24,15 @@ jobs:
     - name: 测试
       run: |
         dotnet test --collect:"XPlat Code Coverage"
-    - name: Codacy Coverage Reporter
-      uses: codacy/codacy-coverage-reporter-action@v1.3.0
+    #- name: Codacy Coverage Reporter
+    #  uses: codacy/codacy-coverage-reporter-action@v1.3.0
+    #  with:
+    #    api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
+    #    coverage-reports: 'coverage.cobertura.xml'
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
       with:
-        api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
-        coverage-reports: 'coverage.cobertura.xml'
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage.cobertura.xml,./cobertura-coverage.xml
+        fail_ci_if_error: false
 
