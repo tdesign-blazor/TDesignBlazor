@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <LangVersion>10</LangVersion>
@@ -26,9 +26,12 @@
     <FileAlignment>1024</FileAlignment>
     <Title>TDesign For Blazor</Title>
     <PackageIcon>logo.png</PackageIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
   </PropertyGroup>
+  <PropertyGroup>
+	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
+	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug'">
       <PropertyGroup>
@@ -57,12 +60,15 @@
     <PackageReference Include="ComponentBuilder" Version="1.5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+	  <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+	  </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Parameters\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Parameters\" />
+	</ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\asset\logo.png">

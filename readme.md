@@ -4,6 +4,9 @@
 
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
 
+[![Build](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml)
+
+
 ## ✨ 特性
 
 - 🌈 提炼自企业级中后台产品的交互语言和视觉风格
@@ -90,9 +93,7 @@
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
 * 作者邮箱：[william-zzh@outlook.com]
 * QQ 群：1012762441
-* 微信群
-
-    <img src="./asset/tdesign-blazor.jpg" width="50%" height="50%"/>
+* 微信群：TDesignBlazor 贡献者交流
 
 ## :triangular_flag_on_post: 行为准则
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
