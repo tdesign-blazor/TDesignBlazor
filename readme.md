@@ -4,8 +4,9 @@
 
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
 
-[![Build](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml)
 
+[![Build](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/build.yml)
+[![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml)
 
 ## ✨ 特性
 
