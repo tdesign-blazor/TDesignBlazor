@@ -6,8 +6,7 @@ on:
   pull_request:
     branches: [ "master" ]
 jobs:
-  build:
-    name: SonarCloud
+  SonarCloud:
     runs-on: windows-latest
     steps:
       - name: Set up JDK 11
@@ -46,7 +45,8 @@ jobs:
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-    name: Codacy
+
+  Codacy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
