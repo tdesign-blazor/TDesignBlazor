@@ -1,4 +1,4 @@
-name: "SonarCloud"
+name: "PR"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 jobs:
   build:
-    name: Build
+    name: SonarCloud
     runs-on: windows-latest
     steps:
       - name: Set up JDK 11
@@ -46,3 +46,21 @@ jobs:
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    name: Codacy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Version
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Build & Test
+        run: |
+          dotnet build
+          dotnet test --collect:"XPlat Code Coverage"
+          find ./src/TDesignBlazor.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
+      - name: Codacy Coverage Reporter
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
+          coverage-reports: 'coverage.cobertura.xml'
