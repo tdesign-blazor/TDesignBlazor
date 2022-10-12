@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace TDesignBlazor;
 /// 滑块（滑动型输入器），是帮助用户在连续或间断的区间内，通过滑动来选择合适数值（一个数值或范围数值）的控件。
 /// </summary>
 [CssClass("t-slider__container")]
-public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (double min,double max)>>,IHasDisabled
+public class Slider : BlazorComponentBase, IHasDisabled
 {
     /// <summary>
     /// 设置滑块的最小值。
@@ -53,26 +54,26 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
     /// </summary>
     [Parameter] public Dictionary<double, OneOf<string?,RenderFragment?,MarkupString?>> Marks { get; set; } = new();
     /// <summary>
-    /// 设置绑定值，支持单值和双值。
+    /// 支持单值和双值。
     /// </summary>
-    [Parameter]public OneOf<double, (double min, double max)> Value { get; set; }
-    /// <inheritdoc/>
-    [Parameter]public Expression<Func<OneOf<double, (double min, double max)>>>? ValueExpression { get; set; }
-    /// <inheritdoc/>
+    [Parameter] public OneOf<double, (double min, double max)> Value { get; set; } = new();
+    /// <summary>
+    /// 当值被改变执行的回调。
+    /// </summary>
     [Parameter]public EventCallback<OneOf<double, (double min, double max)>>? ValueChanged { get; set; }
     /// <summary>
     /// 获取进度条的宽度百分比。
     /// </summary>
-    double Width
+    double Percent
     {
         get
         {
-            var width = MaxValue - MinValue;
-            if ( width <= 0 )
+            var percent = MaxValue - MinValue;
+            if ( percent <= 0 )
             {
                 return MinValue;
             }
-            return width;
+            return percent;
         }
     }
 
@@ -110,6 +111,7 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
     /// </summary>
     bool IsSingleNumer => Value.IsT0;
 
+
     /// <inheritdoc/>
 
     protected override void OnParametersSet()
@@ -122,7 +124,7 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
 
         if ( IsSingleNumer )
         {
-            var value=Value.AsT0;
+            var value= Value.AsT0;
             if(value<Min || value > Max )
             {
                 throw new InvalidOperationException($"参数 {nameof(Value)} 的值({value})必须在{Min}-{Max}之间");
@@ -157,8 +159,36 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
         }
     }
 
-    /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        if ( Vertical )
+        {
+            builder.CreateElement(0, "div", content => BuildSliderContainer(content, 0), new { @class = "vertical-block" });
+        }
+        else
+        {
+            BuildSliderContainer(builder, 0);
+        }
+    }
+
+    /// <summary>
+    /// 构建 Slider 容器。
+    /// </summary>
+    private void BuildSliderContainer(RenderTreeBuilder builder,int sequence)
+    {
+        builder.CreateElement(sequence, "div", BuildSlider, new
+        {
+            @class = HtmlHelper.CreateCssBuilder()
+            .Append("t-slider__container").Append("is-vertical", Vertical),
+            aria_valuetext= GetValueString()
+        });
+    }
+
+    /// <summary>
+    /// 构建 Slider 核心代码
+    /// </summary>
+    /// <param name="builder"></param>
+    private void BuildSlider(RenderTreeBuilder builder)
     {
         builder.CreateElement(0, "div", slider =>
         {
@@ -167,7 +197,9 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
                 rail.CreateElement(0, "div", attributes: new
                 {
                     @class = "t-slider__track",
-                    style = HtmlHelper.CreateStyleBuilder().Append($"width:{Width}%").Append($"left:{MinValue}%")
+                    style = HtmlHelper.CreateStyleBuilder()
+                    .Append($"height:{Percent}%;bottom:{MinValue}%;", Vertical)
+                    .Append($"width:{Percent}%;left:{MinValue}%;", !Vertical)
                 });
 
                 if ( !IsSingleNumer )
@@ -178,41 +210,65 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
                 BuildButtonWarpper(rail, 1, MaxValue);
 
                 BuildMarks(rail, 2);
-            }, 
+            },
             new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append("t-slider__rail").Append("t-is-disabled", Disabled)
+                @class = HtmlHelper.CreateCssBuilder().Append("t-slider__rail")
+                .Append("t-is-disabled", Disabled),
+                style = HtmlHelper.CreateStyleBuilder().Append("height:100%", Vertical)
             });
-        }, 
-        new { 
-            role="slider",
-            aria_valuemin= Min,
-            aria_valuemax= Max,
-            aria_orientation= Vertical ? "vertical": "horizontal",
-            @class = HtmlHelper.CreateCssBuilder().Append("t-slider").Append("is-vertical t-slider--vertical",Vertical).Append("t-is-disabled",Disabled),
-        });
+        },
+                new
+                {
+                    role = "slider",
+                    aria_valuemin = Min,
+                    aria_valuemax = Max,
+                    aria_orientation = Vertical ? "vertical" : "horizontal",
+                    @class = HtmlHelper.CreateCssBuilder().Append("t-slider").Append("is-vertical t-slider--vertical", Vertical).Append("t-is-disabled", Disabled),
+                });
     }
 
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    /// <summary>
+    /// 获取 <see cref="Value"/> 的字符串形式。
+    /// </summary>
+    private string GetValueString()
     {
-        attributes["aria-valuetext"] = Value.Match(value => value.ToString(), value => $"{value.min}-{value.max}");
+        return Value.Match(value => value.ToString(), value => $"{value.min}-{value.max}");
     }
 
+    /// <summary>
+    /// 构建拖拽的按钮。
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
+    /// <param name="value">宽度百分比。</param>
     private void BuildButtonWarpper(RenderTreeBuilder builder,int sequence,double value)
     {
         builder.CreateElement(sequence, "div", content =>
         {
-            content.CreateElement(0, "div", attributes: new { @class = "t-slider__button" });
+            content.CreateElement(0, "div", attributes: new
+            {
+                @class = "t-slider__button",
+            });
         }, new
         {
             tabindex = 0,
             show_tooltip = "true",
             @class = "t-slider__button-wrapper",
-            style = $"left:{value}%",
+            style = $"{(Vertical?"bottom":"left")}:{value}%;",
             disabled = Disabled,
+            onmousedown = HtmlHelper.CreateCallback<MouseEventArgs>(this, e =>
+            {
+
+            })
         });
     }
 
+    /// <summary>
+    /// 构建刻度。
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
     private void BuildMarks(RenderTreeBuilder builder,int sequence)
     {
         if ( !Marks.Any() )

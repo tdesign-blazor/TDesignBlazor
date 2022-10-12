@@ -8,10 +8,6 @@
 
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Content Remove="Pages\Components\SliderPage.razor" />
-	</ItemGroup>
-
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
@@ -25,18 +21,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\TDesignBlazor\TDesignBlazor.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Components\SliderPage.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Pages\Components\SliderPage.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Pages\Components\SliderPage.razor" />
 	</ItemGroup>
 
 </Project>

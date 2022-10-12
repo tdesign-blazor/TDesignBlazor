@@ -7,6 +7,8 @@
 
 [![PR](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/pull-request.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/pull-request.yml)
 [![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml)
+[![Quality](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AchievedOwner/TDesignBlazor&amp;utm_campaign=Badge_Grade)
+[![Coverage](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=AchievedOwner/TDesignBlazor&utm_campaign=Badge_Coverage)
 
 ## ✨ 特性
 

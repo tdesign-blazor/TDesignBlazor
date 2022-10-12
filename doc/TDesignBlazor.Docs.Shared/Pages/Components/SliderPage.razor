@@ -1,3 +1,45 @@
 ﻿@page "/components/slider"
 
-<PageHeader Title="Slider 滑块">滑块（滑动型输入器），是帮助用户在连续或间断的区间内，通过滑动来选择合适数值（一个数值或范围数值）的控件。</PageHeader>
+<PageHeader Title="Slider 滑块">
+    滑块（滑动型输入器），是帮助用户在连续或间断的区间内，通过滑动来选择合适数值（一个数值或范围数值）的控件。
+</PageHeader>
+
+<HighlightAlert/>
+<h3>基础滑块</h3>
+<p>由游标和滑动轴组成的基础滑块，有单游标滑块和双游标两种类型。布局方向可分为横向滑块和纵向滑块。</p>
+<Example Title="横向滑块">
+    <Description></Description>
+    <RunContent>
+        <Slider Value="20"/>
+        <br />
+        <br />
+        <Slider Value="(20,70)"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Slider Value=""20""/>
+<Slider Value=""(20,70)""/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="纵向滑块">
+    <Description></Description>
+    <RunContent>
+        <Slider Value="20" Vertical/>
+        <br />
+        <br />
+        <Slider Value="(20,70)" Vertical />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Slider Value=""20"" Vertical/>
+<Slider Value=""(20,70)"" Vertical/>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+}

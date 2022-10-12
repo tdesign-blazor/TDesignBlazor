@@ -12,7 +12,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""12"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:12%;left:0%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:12%"">
                 <div class=""t-slider__button""></div>
@@ -30,7 +30,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""30-70"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:40%;left:30%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%"">
                 <div class=""t-slider__button""></div>
@@ -49,12 +49,14 @@ namespace TDesignBlazor.Test.Components
         public void Test_Vertical()
         {
             var markup1 = @"
-<div class=""t-slider__container is-vertical"" aria-valuetext=""12"">
-    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
-        <div class=""t-slider__rail"">
-            <div class=""t-slider__track"" style=""width:12%;left:0%;""></div>
-            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:12%;"">
-                <div class=""t-slider__button""></div>
+<div class=""vertical-block"">
+    <div class=""t-slider__container is-vertical"" aria-valuetext=""12"">
+        <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
+            <div class=""t-slider__rail"" style=""height:100%"">
+                <div class=""t-slider__track"" style=""height:12%;bottom:0%;""></div>
+                <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:12%;"">
+                    <div class=""t-slider__button""></div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,15 +66,17 @@ namespace TDesignBlazor.Test.Components
 
 
             var markup2 = @"
-<div class=""t-slider__container is-vertical"" aria-valuetext=""30-70"">
-    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
-        <div class=""t-slider__rail"">
-            <div class=""t-slider__track"" style=""width:40%;left:30%;""></div>
-            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%;"">
-                <div class=""t-slider__button""></div>
-            </div>
-            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:70%;"">
-                <div class=""t-slider__button""></div>
+<div class=""vertical-block"">
+    <div class=""t-slider__container is-vertical"" aria-valuetext=""30-70"">
+        <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
+            <div class=""t-slider__rail"" style=""height:100%"">
+                <div class=""t-slider__track"" style=""height:40%;bottom:30%;""></div>
+                <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:30%;"">
+                    <div class=""t-slider__button""></div>
+                </div>
+                <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:70%;"">
+                    <div class=""t-slider__button""></div>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +91,7 @@ namespace TDesignBlazor.Test.Components
             var markup1 = @"
 <div class=""t-slider__container"" aria-valuetext=""12"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider t-is-disabled"">
-        <div class=""t-slider__rail t-is-disabled"">
+        <div class=""t-slider__rail t-is-disabled"" style="""">
             <div class=""t-slider__track"" style=""width:12%;left:0%;""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" disabled=""disabled"" style=""left:12%;"">
                 <div class=""t-slider__button""></div>
@@ -102,7 +106,7 @@ namespace TDesignBlazor.Test.Components
             var markup2 = @"
 <div class=""t-slider__container"" aria-valuetext=""30-70"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider  t-is-disabled"">
-        <div class=""t-slider__rail t-is-disabled"">
+        <div class=""t-slider__rail t-is-disabled"" style="""">
             <div class=""t-slider__track"" style=""width:40%;left:30%;""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" disabled=""disabled"" style=""left:30%;"">
                 <div class=""t-slider__button""></div>
@@ -123,7 +127,7 @@ namespace TDesignBlazor.Test.Components
             var markup1 = @"
 <div class=""t-slider__container"" aria-valuetext=""12"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:12%;left:0%;""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:12%;"">
                 <div class=""t-slider__button""></div>
@@ -170,7 +174,7 @@ namespace TDesignBlazor.Test.Components
             var markup2 = @"
 <div class=""t-slider__container"" aria-valuetext=""30-70"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider "">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:40%;left:30%;""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%;"">
                 <div class=""t-slider__button""></div>
@@ -218,7 +222,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""50"">
     <div role=""slider"" aria-valuemin=""30"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:50%;left:0%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:50%"">
                 <div class=""t-slider__button""></div>
@@ -235,7 +239,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""50"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""70"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:50%;left:0%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:50%"">
                 <div class=""t-slider__button""></div>
@@ -253,7 +257,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""30-70"">
     <div role=""slider"" aria-valuemin=""20"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:40%;left:30%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%"">
                 <div class=""t-slider__button""></div>
@@ -274,7 +278,7 @@ namespace TDesignBlazor.Test.Components
             var markup = @"
 <div class=""t-slider__container"" aria-valuetext=""30-70"">
     <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""80"" aria-orientation=""horizontal"" class=""t-slider"">
-        <div class=""t-slider__rail"">
+        <div class=""t-slider__rail"" style="""">
             <div class=""t-slider__track"" style=""width:40%;left:30%""></div>
             <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%"">
                 <div class=""t-slider__button""></div>
