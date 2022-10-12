@@ -1,4 +1,4 @@
-namespace TDesignBlazor.Test.Components;
+﻿namespace TDesignBlazor.Test.Components;
 
 public class ButtonTest : TestBase
 {
