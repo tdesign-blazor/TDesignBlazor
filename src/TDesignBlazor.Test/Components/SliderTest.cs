@@ -45,7 +45,6 @@ namespace TDesignBlazor.Test.Components
             GetComponent(m => m.Add(p => p.Value, (30, 70))).MarkupMatches(markup);
         }
 
-
         [Fact(DisplayName = "Slider - 垂直显示")]
         public void Test_Vertical()
         {
@@ -151,7 +150,7 @@ namespace TDesignBlazor.Test.Components
     </div>
 </div>
 ";
-            GetComponent(m => m.Add(p => p.Value, 12).Add(p => p.Marks, new Dictionary<double, OneOf<string?, RenderFragment?, MarkupString?>>
+            GetComponent(m => m.Add(p => p.Value, 12).Add(p => p.Marks, new ()
             {
                 [0D] = "0°C",
                 [20D] = "20°C",
@@ -201,7 +200,7 @@ namespace TDesignBlazor.Test.Components
     </div>
 </div>
 ";
-            GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Marks, new Dictionary<double, OneOf<string?, RenderFragment?, MarkupString?>>
+            GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Marks, new ()
             {
                 [0D] = "0°C",
                 [20D] = "20°C",
@@ -210,6 +209,141 @@ namespace TDesignBlazor.Test.Components
                 [80D] = "80°C",
                 [100D] = "100°C"
             })).MarkupMatches(markup2);
+        }
+
+
+        [Fact(DisplayName = "Slider - 单个值 Min 参数")]
+        public void Given_Single_Value_When_Set_Min()
+        {
+            var markup = @"
+<div class=""t-slider__container"" aria-valuetext=""50"">
+    <div role=""slider"" aria-valuemin=""30"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
+        <div class=""t-slider__rail"">
+            <div class=""t-slider__track"" style=""width:50%;left:0%""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:50%"">
+                <div class=""t-slider__button""></div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, 50).Add(p=>p.Min,30)).MarkupMatches(markup);
+        }
+        [Fact(DisplayName = "Slider - 单个值 Max 参数")]
+        public void Given_Single_Value_When_Set_Max()
+        {
+            var markup = @"
+<div class=""t-slider__container"" aria-valuetext=""50"">
+    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""70"" aria-orientation=""horizontal"" class=""t-slider"">
+        <div class=""t-slider__rail"">
+            <div class=""t-slider__track"" style=""width:50%;left:0%""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:50%"">
+                <div class=""t-slider__button""></div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, 50).Add(p => p.Max, 70)).MarkupMatches(markup);
+        }
+
+        [Fact(DisplayName = "Slider - 单个值 Min 参数")]
+        public void Given_Multiple_Value_When_Set_Min()
+        {
+            var markup = @"
+<div class=""t-slider__container"" aria-valuetext=""30-70"">
+    <div role=""slider"" aria-valuemin=""20"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider"">
+        <div class=""t-slider__rail"">
+            <div class=""t-slider__track"" style=""width:40%;left:30%""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%"">
+                <div class=""t-slider__button""></div>
+            </div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:70%"">
+                <div class=""t-slider__button""></div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Min, 20)).MarkupMatches(markup);
+        }
+
+        [Fact(DisplayName = "Slider - 单个值 Max 参数")]
+        public void Given_Multiple_Value_When_Set_Max()
+        {
+            var markup = @"
+<div class=""t-slider__container"" aria-valuetext=""30-70"">
+    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""80"" aria-orientation=""horizontal"" class=""t-slider"">
+        <div class=""t-slider__rail"">
+            <div class=""t-slider__track"" style=""width:40%;left:30%""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:30%"">
+                <div class=""t-slider__button""></div>
+            </div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""left:70%"">
+                <div class=""t-slider__button""></div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Max, 80)).MarkupMatches(markup);
+        }
+
+
+        [Fact(DisplayName = "Slider - 单个 Value 值大于 100 抛出 InvalidOperationException")]
+        public void When_Value_More_Than_100_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, 200)));
+        }
+
+        [Fact(DisplayName = "Slider - 单个 Value 值小于 0 抛出 InvalidOperationException")]
+        public void When_Value_Less_Than_0_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, -50)));
+        }
+
+        [Fact(DisplayName = "Slider - 2个 Value 值，最大值大于 100 抛出 InvalidOperationException")]
+        public void Given_2_Value_When_Max_Value_More_Than_100_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, (50, 200))));
+        }
+
+        [Fact(DisplayName = "Slider - 2个 Value 值，最小值小于 0 抛出 InvalidOperationException")]
+        public void Given_2_Value_When_Min_Value_Less_Than_0_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, (-50, 50))));
+        }
+
+        [Fact(DisplayName = "Slider - 2个 Value 值，最小值大于最大值，抛出 InvalidOperationException")]
+        public void Given_2_Value_When_Min_Value_More_Than_Max_Value_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, (80, 50))));
+        }
+
+        [Fact(DisplayName ="Slider - 单个值，Value 小于 Min 抛出 InvalidOperationException")]
+        public void Given_Single_Value_When_Value_Less_Than_Min_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, 10).Add(p => p.Min, 30)));
+        }
+        [Fact(DisplayName = "Slider - 单个值，Value 大于 Max 抛出 InvalidOperationException")]
+        public void Given_Single_Value_When_Value_More_Than_Max_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, 60).Add(p => p.Max, 30)));
+        }
+        [Fact(DisplayName = "Slider - 多个值，Value 的 MinValue 小于 Min 抛出 InvalidOperationException")]
+        public void Given_Multiple_Value_When_MinValue_Less_Than_Min_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, (10,80)).Add(p => p.Min, 30)));
+        }
+        [Fact(DisplayName = "Slider - 多个值，Value 的 MaxValue 大于 Max 抛出 InvalidOperationException")]
+        public void Given_Multiple_Value_When_MaxValue_More_Than_Max_Then_Throw_InvalidOperationException()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Value, (10, 80)).Add(p => p.Max, 30)));
+        }
+        [Fact(DisplayName = "Slider - Min 大于 Max 抛出 InvalidOperationException")]
+        public void When_Max_Less_Than_Min_Then_Throw()
+        {
+            Throws<InvalidOperationException>(() => GetComponent(m => m.Add(p => p.Max, 30).Add(p=>p.Min,50)));
         }
     }
 }

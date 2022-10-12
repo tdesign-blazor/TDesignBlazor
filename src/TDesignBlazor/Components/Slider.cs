@@ -26,17 +26,40 @@ public class Slider : BlazorComponentBase, IHasTwoWayBinding<OneOf<double, (doub
     /// 是否垂直显示。
     /// </summary>
     [Parameter][CssClass("is-vertical")]public bool Vertical { get; set; }
-
+    /// <summary>
+    /// 设置滑块每次变动的步长偏移量。
+    /// </summary>
+    [Parameter] public double Step { get; set; }
     /// <inheritdoc/>
     [Parameter]public bool Disabled { get; set; }
+    /// <summary>
+    /// 设置显示进度条的刻度。
+    /// <para>
+    /// 至少设置最小刻度和最大刻度，即 0 和 100 的刻度值
+    /// </para>
+    /// <para>
+    /// 代码示例：
+    /// <code language="cs">
+    /// new()
+    /// {
+    ///     [0]="0%",
+    ///     [5]="5%",
+    ///     ...
+    ///     [90]="90%",
+    ///     [100]="100%"
+    /// }
+    /// </code>
+    /// </para>
+    /// </summary>
     [Parameter] public Dictionary<double, OneOf<string?,RenderFragment?,MarkupString?>> Marks { get; set; } = new();
-    /// <inheritdoc/>
+    /// <summary>
+    /// 设置绑定值，支持单值和双值。
+    /// </summary>
     [Parameter]public OneOf<double, (double min, double max)> Value { get; set; }
     /// <inheritdoc/>
     [Parameter]public Expression<Func<OneOf<double, (double min, double max)>>>? ValueExpression { get; set; }
     /// <inheritdoc/>
     [Parameter]public EventCallback<OneOf<double, (double min, double max)>>? ValueChanged { get; set; }
-
     /// <summary>
     /// 获取进度条的宽度百分比。
     /// </summary>
