@@ -49,7 +49,6 @@ namespace TDesignBlazor.Test.Components
         public void Test_Vertical()
         {
             var markup1 = @"
-<div class=""vertical-block"">
     <div class=""t-slider__container is-vertical"" aria-valuetext=""12"">
         <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
             <div class=""t-slider__rail"" style=""height:100%"">
@@ -60,13 +59,13 @@ namespace TDesignBlazor.Test.Components
             </div>
         </div>
     </div>
-</div>
+
 ";
             GetComponent(m => m.Add(p => p.Value, 12).Add(p => p.Vertical, true)).MarkupMatches(markup1);
 
 
             var markup2 = @"
-<div class=""vertical-block"">
+
     <div class=""t-slider__container is-vertical"" aria-valuetext=""30-70"">
         <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""vertical"" class=""t-slider is-vertical t-slider--vertical"">
             <div class=""t-slider__rail"" style=""height:100%"">
@@ -80,7 +79,7 @@ namespace TDesignBlazor.Test.Components
             </div>
         </div>
     </div>
-</div>
+
 ";
             GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Vertical, true)).MarkupMatches(markup2);
         }

@@ -159,38 +159,24 @@ public class Slider : BlazorComponentBase, IHasDisabled
         }
     }
 
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        if ( Vertical )
-        {
-            builder.CreateElement(0, "div", content => BuildSliderContainer(content, 0), new { @class = "vertical-block" });
-        }
-        else
-        {
-            BuildSliderContainer(builder, 0);
-        }
+        BuildSlider(builder,sequence);
+
+    }
+    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    {
+        attributes["aria-valuetext"] = GetValueString();
     }
 
-    /// <summary>
-    /// 构建 Slider 容器。
-    /// </summary>
-    private void BuildSliderContainer(RenderTreeBuilder builder,int sequence)
-    {
-        builder.CreateElement(sequence, "div", BuildSlider, new
-        {
-            @class = HtmlHelper.CreateCssBuilder()
-            .Append("t-slider__container").Append("is-vertical", Vertical),
-            aria_valuetext= GetValueString()
-        });
-    }
 
     /// <summary>
     /// 构建 Slider 核心代码
     /// </summary>
     /// <param name="builder"></param>
-    private void BuildSlider(RenderTreeBuilder builder)
+    private void BuildSlider(RenderTreeBuilder builder,int sequence)
     {
-        builder.CreateElement(0, "div", slider =>
+        builder.CreateElement(sequence, "div", slider =>
         {
             slider.CreateElement(0, "div", rail =>
             {
