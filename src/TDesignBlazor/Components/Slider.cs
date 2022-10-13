@@ -15,6 +15,9 @@ namespace TDesignBlazor;
 [CssClass("t-slider__container")]
 public class Slider : BlazorComponentBase, IHasDisabled
 {
+    private double _currentClientX;
+    private double _currentClientY;
+
     /// <summary>
     /// 设置滑块的最小值。
     /// </summary>
@@ -91,6 +94,7 @@ public class Slider : BlazorComponentBase, IHasDisabled
             return Value.AsT1.min;
         }
     }
+
     /// <summary>
     /// 表示最大值的百分比
     /// </summary>
@@ -107,7 +111,7 @@ public class Slider : BlazorComponentBase, IHasDisabled
     }
 
     /// <summary>
-    /// 获取一个布尔值，表示 Value 只有一个数
+    /// 获取一个布尔值，表示 Value 只有一个数，MinValue 是 0，MaxValue 决定了左右的宽度。
     /// </summary>
     bool IsSingleNumer => Value.IsT0;
 
@@ -159,11 +163,13 @@ public class Slider : BlazorComponentBase, IHasDisabled
         }
     }
 
+    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         BuildSlider(builder,sequence);
 
     }
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         attributes["aria-valuetext"] = GetValueString();
@@ -176,11 +182,11 @@ public class Slider : BlazorComponentBase, IHasDisabled
     /// <param name="builder"></param>
     private void BuildSlider(RenderTreeBuilder builder,int sequence)
     {
-        builder.CreateElement(sequence, "div", slider =>
+        builder.CreateDiv(sequence, slider =>
         {
-            slider.CreateElement(0, "div", rail =>
+            slider.CreateDiv(0, rail =>
             {
-                rail.CreateElement(0, "div", attributes: new
+                rail.CreateDiv(0, _ => { }, attributes: new
                 {
                     @class = "t-slider__track",
                     style = HtmlHelper.CreateStyleBuilder()
@@ -230,9 +236,9 @@ public class Slider : BlazorComponentBase, IHasDisabled
     /// <param name="value">宽度百分比。</param>
     private void BuildButtonWarpper(RenderTreeBuilder builder,int sequence,double value)
     {
-        builder.CreateElement(sequence, "div", content =>
+        builder.CreateDiv(sequence, content =>
         {
-            content.CreateElement(0, "div", attributes: new
+            content.CreateDiv(0, _ => { }, attributes: new
             {
                 @class = "t-slider__button",
             });
@@ -243,7 +249,18 @@ public class Slider : BlazorComponentBase, IHasDisabled
             @class = "t-slider__button-wrapper",
             style = $"{(Vertical?"bottom":"left")}:{value}%;",
             disabled = Disabled,
+            //按下鼠标
             onmousedown = HtmlHelper.CreateCallback<MouseEventArgs>(this, e =>
+            {
+                _currentClientX = e.ClientX;
+                _currentClientY = e.ClientY;
+            }),
+            //按着移动
+            onmousemove = HtmlHelper.CreateCallback<MouseEventArgs>(this, e =>
+            {
+            }),
+            //释放定值
+            onmouseup = HtmlHelper.CreateCallback<MouseEventArgs>(this, e =>
             {
 
             })
@@ -262,14 +279,14 @@ public class Slider : BlazorComponentBase, IHasDisabled
             return;
         }
 
-        builder.CreateElement(sequence, "div", content =>
+        builder.CreateDiv(sequence, content =>
         {
-            content.CreateElement(0, "div", value =>
+            content.CreateDiv(0, value =>
             {
                 int index = 0;
                 foreach ( var item in Marks.Keys )
                 {
-                    value.CreateElement(index, "div", attributes: new
+                    value.CreateDiv(index,_=> { }, attributes: new
                     {
                         @class = "t-slider__stop t-slider__mark-stop",
                         style = $"left:{item}%;"
@@ -278,12 +295,12 @@ public class Slider : BlazorComponentBase, IHasDisabled
                 }
             });
 
-            content.CreateElement(1, "div", text =>
+            content.CreateDiv(1, text =>
             {
                 int index = 0;
                 foreach ( var item in Marks )
                 {
-                    text.CreateElement(index, "div",item.Value, attributes: new
+                    text.CreateDiv(index, item.Value, new
                     {
                         @class = "t-slider__mark-text",
                         style = $"left:{item.Key}%;"
