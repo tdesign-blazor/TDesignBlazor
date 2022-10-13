@@ -194,13 +194,23 @@ public class Slider : BlazorComponentBase, IHasDisabled
                     .Append($"width:{Percent}%;left:{MinValue}%;", !Vertical)
                 });
 
-                if ( !IsSingleNumer )
-                {
-                    BuildButtonWarpper(rail, 0, MinValue);
-                }
+                //if ( Vertical )
+                //{
+                //    BuildButtonWarpper(rail, 0, MaxValue);
+                //    if ( !IsSingleNumer )
+                //    {
+                //        BuildButtonWarpper(rail, 1, MinValue);
+                //    }
+                //}
+                //else
+                //{
+                    if ( !IsSingleNumer )
+                    {
+                        BuildButtonWarpper(rail, 0, MinValue);
+                    }
 
-                BuildButtonWarpper(rail, 1, MaxValue);
-
+                    BuildButtonWarpper(rail, 1, MaxValue);
+                //}
                 BuildMarks(rail, 2);
             },
             new
@@ -281,15 +291,17 @@ public class Slider : BlazorComponentBase, IHasDisabled
 
         builder.CreateDiv(sequence, content =>
         {
+            var marks = Vertical ? Marks.OrderByDescending(m => m.Key) : Marks.OrderBy(m => m.Key);
+
             content.CreateDiv(0, value =>
             {
                 int index = 0;
-                foreach ( var item in Marks.Keys )
+                foreach ( var item in marks )
                 {
                     value.CreateDiv(index,_=> { }, attributes: new
                     {
                         @class = "t-slider__stop t-slider__mark-stop",
-                        style = $"left:{item}%;"
+                        style = HtmlHelper.CreateStyleBuilder().Append($"left:{item.Key}%;",!Vertical).Append($"top:calc({item.Key}% - 1px);",Vertical)
                     });
                     index++;
                 }
@@ -298,12 +310,12 @@ public class Slider : BlazorComponentBase, IHasDisabled
             content.CreateDiv(1, text =>
             {
                 int index = 0;
-                foreach ( var item in Marks )
+                foreach ( var item in marks )
                 {
                     text.CreateDiv(index, item.Value, new
                     {
                         @class = "t-slider__mark-text",
-                        style = $"left:{item.Key}%;"
+                        style = HtmlHelper.CreateStyleBuilder().Append($"left:{item.Key}%;", !Vertical).Append($"top:calc({item.Key}% - 1px);", Vertical)
                     });
                     index++;
                 }

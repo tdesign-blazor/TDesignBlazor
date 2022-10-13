@@ -205,6 +205,100 @@ namespace TDesignBlazor.Test.Components
 ";
             GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Marks, new ()
             {
+                [100D] = "100°C",
+                [80D] = "80°C",
+                [60D] = "60°C",
+                [40D] = "40°C",
+                [20D] = "20°C",
+                [0D] = "0°C",
+            })).MarkupMatches(markup2);
+        }
+
+        [Fact(DisplayName = "Slider - 纵向带刻度 1 个 Value 值")]
+        public void Test_Vertical_Marks_With_Single_Value()
+        {
+            var markup1 = @"
+<div class=""t-slider__container is-vertical"" aria-valuetext=""12"">
+    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider  is-vertical t-slider--vertical"">
+        <div class=""t-slider__rail"" style=""height:100%"">
+            <div class=""t-slider__track"" style=""height:12%;bottom:0%;""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:12%;"">
+                <div class=""t-slider__button""></div>
+            </div>
+            <div>
+                <div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(100 - 1px)%;""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(80% - 1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(60% - 1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(40% - 1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(20% - 1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(0% - 1px);""></div>
+                </div>
+                <div class=""t-slider__mark"">
+                    <div class=""t-slider__mark-text"" style=""top:calc(100% - 1px);"">100°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(80% - 1px);"">80°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(60% - 1px);"">60°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(40% - 1px);"">40°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(20% - 1px);"">20°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(0% - 1px)"">0°C</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, 12).Add(p=>p.Vertical,true).Add(p => p.Marks, new()
+            {
+                [100D] = "100°C",
+                [80D] = "80°C",
+                [60D] = "60°C",
+                [40D] = "40°C",
+                [20D] = "20°C",
+                [0D] = "0°C",
+            })).MarkupMatches(markup1);
+
+
+        }
+
+        [Fact(DisplayName = "Slider - 纵向带刻度的 2 个 Value 值")]
+        public void Test_Vertical_Marks_With_Two_Value()
+        {
+
+            var markup2 = @"
+<div class=""t-slider__container is-vertical"" aria-valuetext=""30-70"">
+    <div role=""slider"" aria-valuemin=""0"" aria-valuemax=""100"" aria-orientation=""horizontal"" class=""t-slider  is-vertical t-slider--vertical"">
+        <div class=""t-slider__rail"" style=""height:100%"">
+            <div class=""t-slider__track"" style=""height:40%;bottom:30%;""></div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:30%;"">
+                <div class=""t-slider__button""></div>
+            </div>
+            <div tabindex=""0"" show-tooltip=""true"" class=""t-slider__button-wrapper"" style=""bottom:70%;"">
+                <div class=""t-slider__button""></div>
+            </div>
+            <div>
+                <div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(0%-1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(20%-1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(40%-1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(60%-1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(80%-1px);""></div>
+                    <div class=""t-slider__stop t-slider__mark-stop"" style=""top:calc(100-1px)%;""></div>
+                </div>
+                <div class=""t-slider__mark"">
+                    <div class=""t-slider__mark-text"" style=""top:calc(0%-1px)"">0°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(20%-1px);"">20°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(40%-1px);"">40°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(60%-1px);"">60°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(80%-1px);"">80°C</div>
+                    <div class=""t-slider__mark-text"" style=""top:calc(100%-1px);"">100°C</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";
+            GetComponent(m => m.Add(p => p.Value, (30, 70)).Add(p => p.Vertical, true).Add(p => p.Marks, new()
+            {
                 [0D] = "0°C",
                 [20D] = "20°C",
                 [40D] = "40°C",
@@ -213,7 +307,6 @@ namespace TDesignBlazor.Test.Components
                 [100D] = "100°C"
             })).MarkupMatches(markup2);
         }
-
 
         [Fact(DisplayName = "Slider - 单个值 Min 参数")]
         public void Given_Single_Value_When_Set_Min()

@@ -5,7 +5,7 @@
 </PageHeader>
 
 <HighlightAlert/>
-<h3>基础滑块</h3>
+<h2>基础滑块</h2>
 <p>由游标和滑动轴组成的基础滑块，有单游标滑块和双游标两种类型。布局方向可分为横向滑块和纵向滑块。</p>
 <Example Title="横向滑块">
     <Description></Description>
@@ -25,21 +25,149 @@
     </CodeContent>
 </Example>
 <Example Title="纵向滑块">
-    <Description></Description>
+    <Description>要自定义高度层</Description>
     <RunContent>
         <div style="display:inline-block;padding:34px 25px;height:300px">
-        <Slider Value="20" Vertical/>
+            <Slider Value="20" Vertical />
         </div>
         <br />
         <br /><div style="display:inline-block;padding:34px 25px;height:300px">
-        <Slider Value="(20,70)" Vertical />
+            <Slider Value="(20,70)" Vertical />
         </div>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Slider Value=""20"" Vertical/>
-<Slider Value=""(20,70)"" Vertical/>
+<div style=""display:inline-block;padding:34px 25px;height:300px"">
+    <Slider Value=""20"" Vertical />
+</div>
+
+<div style=""display:inline-block;padding:34px 25px;height:300px"">
+    <Slider Value=""(20,70)"" Vertical />
+</div>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="禁用状态">
+    <Description></Description>
+    <RunContent>
+        
+        <Slider Value="20" Disabled/>
+        <br />
+        <br />
+        <Slider Value="(20,70)" Disabled/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Slider Value=""20"" Disabled/>
+<Slider Value=""(20,70)"" Disabled/>
+```
+")
+    </CodeContent>
+</Example>
+<h2>带刻度的滑块</h2>
+<p>可对滑块进行刻度值的配置，对滑块有更清晰的描述。</p>
+
+<Example Title="水平刻度滑块">
+    <Description>
+        要保证刻度有一个最小值和最大值的定义
+    </Description>
+    <RunContent>
+        <Slider Value="20" Marks="@(new(){
+                                [0]="0℃",
+                                [20]="20℃",
+                                [40]="40℃",
+                                [60]="60℃",
+                                [80]="80℃",
+                                [100]="100℃",
+                            })"/>
+        <br />
+        <br />
+        <Slider Value="(20,70)" Marks="@(new(){
+                                [0]="0℃",
+                                [20]="20℃",
+                                [40]="40℃",
+                                [60]="60℃",
+                                [80]="80℃",
+                                [100]="100℃",
+                            })" />
+        
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<Slider Value=""20"" Marks=""@(new(){
+                        [0]=""0℃"",
+                        [20]=""20℃"",
+                        [40]=""40℃"",
+                        [60]=""60℃"",
+                        [80]=""80℃"",
+                        [100]=""100℃"",
+                    })""/>
+
+<Slider Value=""(20,70)"" Marks=""@(new(){
+                        [0]=""0℃"",
+                        [20]=""20℃"",
+                        [40]=""40℃"",
+                        [60]=""60℃"",
+                        [80]=""80℃"",
+                        [100]=""100℃"",
+                    })"" />
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="纵向刻度滑块">
+    <Description></Description>
+    <RunContent>
+        <div style="display:inline-block;padding:34px 25px;height:300px">
+            <Slider Value="20" Vertical Marks="@(new(){
+                                [0]="0℃",
+                                [20]="20℃",
+                                [40]="40℃",
+                                [60]="60℃",
+                                [80]="80℃",
+                                [100]="100℃",
+                            })" />
+        </div>
+        <br />
+        <br /><div style="display:inline-block;padding:34px 25px;height:300px">
+            <Slider Value="(20,70)" Vertical Marks="@(new(){
+                                [0]="0℃",
+                                [20]="20℃",
+                                [40]="40℃",
+                                [60]="60℃",
+                                [80]="80℃",
+                                [100]="100℃",
+                            })" />
+        </div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<div style=""display:inline-block;padding:34px 25px;height:300px"">
+    <Slider Value=""20"" Vertical Marks=""@(new(){
+                                    [100]=""100℃"",
+                                    [80]=""80℃"",
+                                    [60]=""60℃"",
+                                    [40]=""40℃"",
+                                    [20]=""20℃"",
+                                    [0]=""0℃"",
+                                })"" />
+</div>
+
+<div style=""display:inline-block;padding:34px 25px;height:300px"">
+    <Slider Value=""(20,70)"" Vertical Marks=""@(new(){
+                                    [100]=""100℃"",
+                                    [80]=""80℃"",
+                                    [60]=""60℃"",
+                                    [40]=""40℃"",
+                                    [20]=""20℃"",
+                                    [0]=""0℃"",
+                                        })"" />
+</div>
 ```
 ")
     </CodeContent>
