@@ -1,60 +1,60 @@
 ﻿@page "/components/layout"
 
-<PageHeader Title="Layout 布局">用于组织网页的框架结构。</PageHeader>
+<PageHeader Title="TLayout 布局">用于组织网页的框架结构。</PageHeader>
 
 <Example Title="基本用法">
     <Description>
-        组件 <code>Layout</code> 作为布局容器，可包裹 <code>HeaderContent</code>、<code>LeftSideContent</code>、<code>RightSideContent</code> 和 <code>FooterContent</code> 内容部分。
+        组件 <code>TLayout</code> 作为布局容器，可包裹 <code>HeaderContent</code>、<code>LeftSideContent</code>、<code>RightSideContent</code> 和 <code>FooterContent</code> 内容部分。
     </Description>
     <RunContent>
         <div class="tdesign-demo-item--layout">
             <div>
-                <Layout>
+                <TLayout>
                     <HeaderContent>顶部</HeaderContent>
                     <ChildContent>内容部分</ChildContent>
                     <FooterContent>底部</FooterContent>
-                </Layout>
+                </TLayout>
             </div>
             <div>
-                <Layout>
+                <TLayout>
                     <HeaderContent>顶部</HeaderContent>
                     <LeftSideContent>左部</LeftSideContent>
                     <ChildContent>内容部分</ChildContent>
                     <FooterContent>底部</FooterContent>
-                </Layout>
+                </TLayout>
             </div>
             <div>
-                <Layout>
+                <TLayout>
                     <HeaderContent>顶部</HeaderContent>
                     <RightSideContent>左部</RightSideContent>
                     <ChildContent>内容部分</ChildContent>
                     <FooterContent>底部</FooterContent>
-                </Layout>
+                </TLayout>
             </div>
         </div>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Layout>
+<TLayout>
     <HeaderContent>顶部</HeaderContent>
     <ChildContent>内容部分</ChildContent>
     <FooterContent>底部</FooterContent>
-</Layout>
+</TLayout>
 
-<Layout>
+<TLayout>
     <HeaderContent>顶部</HeaderContent>
     <LeftSideContent>左部</LeftSideContent>
     <ChildContent>内容部分</ChildContent>
     <FooterContent>底部</FooterContent>
-</Layout>
+</TLayout>
 
-<Layout>
+<TLayout>
     <HeaderContent>顶部</HeaderContent>
     <RightSideContent>左部</RightSideContent>
     <ChildContent>内容部分</ChildContent>
     <FooterContent>底部</FooterContent>
-</Layout>
+</TLayout>
 ```
 ")
     </CodeContent>

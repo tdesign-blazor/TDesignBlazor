@@ -1,7 +1,7 @@
 ﻿using ComponentBuilder;
 
 namespace TDesignBlazor.Test.Components;
-public class ProgressTest : TestBase<Progress>
+public class ProgressTest : TestBase<TProgress>
 {
     [Fact(DisplayName = "进度条 - 渲染 50% 进度的进度条和样式")]
     public void Test_Progress_Default()

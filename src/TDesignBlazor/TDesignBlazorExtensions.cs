@@ -26,7 +26,7 @@ public static class TDesignBlazorExtensions
     /// <param name="status">The status.</param>
     /// <param name="mapping">状态和图标的映射关系。</param>
     /// <returns>图标枚举。</returns>
-    public static IconName? GetStatusIconName(this Status status, Func<Status, IconName>? mapping = default)
+    public static IconName? GetStatusTIconName(this Status status, Func<Status, IconName>? mapping = default)
     {
         if (mapping is null)
         {

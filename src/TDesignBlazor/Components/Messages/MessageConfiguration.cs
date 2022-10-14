@@ -1,11 +1,9 @@
-﻿using OneOf;
-
-namespace TDesignBlazor;
+﻿namespace TDesignBlazor;
 
 /// <summary>
 /// 表示全局消息的配置。
 /// </summary>
-/// <remarks>该对象用于 <see cref="IMessageService"/> 调用时传值给 <see cref="Message"/> 组件。</remarks>
+/// <remarks>该对象用于 <see cref="IMessageService"/> 调用时传值给 <see cref="TMessage"/> 组件。</remarks>
 public class MessageConfiguration
 {
     internal Guid Key => Guid.NewGuid();

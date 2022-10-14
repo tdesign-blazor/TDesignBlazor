@@ -85,7 +85,7 @@ public enum IconName
     [CssClass("file-add")] FileAdd,
     [CssClass("file-copy")] FileCopy,
     [CssClass("file-excel")] FileExcel,
-    [CssClass("file-icon")] FileIcon,
+    [CssClass("file-icon")] FileTIcon,
     [CssClass("file-image")] FileImage,
     [CssClass("file-paste")] FilePaste,
     [CssClass("file-pdf")] FilePdf,

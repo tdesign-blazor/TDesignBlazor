@@ -6,14 +6,14 @@
             <p>@Description</p>
     }
 
-    @*<Tab Position="TDesignBlazor.Position.Top" >
-        <TabItem Title="效果" AdditionalStyle="@RunStyle">
+    @*<TTab Position="TDesignBlazor.Position.Top" >
+        <TTabItem Title="效果" AdditionalStyle="@RunStyle">
             @RunContent
-        </TabItem>
-        <TabItem Title="代码">
+        </TTabItem>
+        <TTabItem Title="代码">
             @CodeContent
-        </TabItem>
-    </Tab>*@
+        </TTabItem>
+    </TTab>*@
 
 
     <Div AdditionalCssClass="demo-wrapper">
@@ -22,7 +22,7 @@
         </Div>
         <Div class="footer">
             <Div class="btn">
-                <Icon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" />
+                <TIcon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" />
             </Div>
         </Div>
         <Div class="@CodeClass" style="@GetStyle()">

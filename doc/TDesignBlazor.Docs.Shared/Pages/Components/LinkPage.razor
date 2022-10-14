@@ -1,26 +1,26 @@
 ﻿@page "/components/link"
 
-<PageHeader Title="Link 链接">
+<PageHeader Title="TLink 链接">
     文字超链接用于跳转一个新页面，如当前项目跳转，友情链接等。
 </PageHeader>
 
 <Example Title="文字链接">
     <Description>最简单的文字链接形式，点击后直接跳转到对应链接。</Description>
     <RunContent>
-        <Link>跳转链接</Link>
-        <Link Theme="Theme.Primary">跳转链接</Link>
-        <Link Theme="Theme.Warning">跳转链接</Link>
-        <Link Theme="Theme.Success">跳转链接</Link>
-        <Link Theme="Theme.Danger">跳转链接</Link>
+        <TLink>跳转链接</TLink>
+        <TLink Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Theme="Theme.Success">跳转链接</TLink>
+        <TLink Theme="Theme.Danger">跳转链接</TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link>跳转链接</Link>
-<Link Theme=""Theme.Primary"">跳转链接</Link>
-<Link Theme=""Theme.Warning"">跳转链接</Link>
-<Link Theme=""Theme.Success"">跳转链接</Link>
-<Link Theme=""Theme.Danger"">跳转链接</Link>
+<TLink>跳转链接</TLink>
+<TLink Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Theme=""Theme.Danger"">跳转链接</TLink>
 ```
 ")
     </CodeContent>
@@ -28,20 +28,20 @@
 <Example Title="下划线文字链接">
     <Description>在文字下加横线，表明此处为链接。</Description>
     <RunContent>
-        <Link Underline>跳转链接</Link>
-        <Link Theme="Theme.Primary" Underline>跳转链接</Link>
-        <Link Theme="Theme.Warning" Underline>跳转链接</Link>
-        <Link Theme="Theme.Success" Underline>跳转链接</Link>
-        <Link Theme="Theme.Danger" Underline>跳转链接</Link>
+        <TLink Underline>跳转链接</TLink>
+        <TLink Theme="Theme.Primary" Underline>跳转链接</TLink>
+        <TLink Theme="Theme.Warning" Underline>跳转链接</TLink>
+        <TLink Theme="Theme.Success" Underline>跳转链接</TLink>
+        <TLink Theme="Theme.Danger" Underline>跳转链接</TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link Underline>跳转链接</Link>
-<Link Theme=""Theme.Primary"" Underline>跳转链接</Link>
-<Link Theme=""Theme.Warning"" Underline>跳转链接</Link>
-<Link Theme=""Theme.Success"" Underline>跳转链接</Link>
-<Link Theme=""Theme.Danger"" Underline>跳转链接</Link>
+<TLink Underline>跳转链接</TLink>
+<TLink Theme=""Theme.Primary"" Underline>跳转链接</TLink>
+<TLink Theme=""Theme.Warning"" Underline>跳转链接</TLink>
+<TLink Theme=""Theme.Success"" Underline>跳转链接</TLink>
+<TLink Theme=""Theme.Danger"" Underline>跳转链接</TLink>
 ```
 ")
     </CodeContent>
@@ -49,35 +49,35 @@
 <Example Title="带图标的链接">
     <Description>最简单的文字链接形式，点击后直接跳转到对应链接。</Description>
     <RunContent>
-        <Link><Icon Name="IconName.Edit"/> 跳转链接</Link>
-        <Link Theme="Theme.Primary"><Icon Name="IconName.Edit" /> 跳转链接</Link>
-        <Link Theme="Theme.Warning"><Icon Name="IconName.Edit"/> 跳转链接</Link>
-        <Link Theme="Theme.Success">跳转链接 <Icon Name="IconName.Home" /></Link>
-        <Link Theme="Theme.Danger">跳转链接 <Icon Name="IconName.Gift" /></Link>
+        <TLink><TIcon Name="IconName.Edit"/> 跳转链接</TLink>
+        <TLink Theme="Theme.Primary"><TIcon Name="IconName.Edit" /> 跳转链接</TLink>
+        <TLink Theme="Theme.Warning"><TIcon Name="IconName.Edit"/> 跳转链接</TLink>
+        <TLink Theme="Theme.Success">跳转链接 <TIcon Name="IconName.Home" /></TLink>
+        <TLink Theme="Theme.Danger">跳转链接 <TIcon Name="IconName.Gift" /></TLink>
         <br />
 
-        <Link Underline><Icon Name="IconName.Edit" /> 跳转链接</Link>
-        <Link Underline Theme="Theme.Primary"><Icon Name="IconName.Edit" /> 跳转链接</Link>
-        <Link Underline Theme="Theme.Warning"><Icon Name="IconName.Edit" /> 跳转链接</Link>
-        <Link Underline Theme="Theme.Success">跳转链接 <Icon Name="IconName.Home" /></Link>
-        <Link Underline Theme="Theme.Danger">跳转链接 <Icon Name="IconName.Gift" /></Link>
+        <TLink Underline><TIcon Name="IconName.Edit" /> 跳转链接</TLink>
+        <TLink Underline Theme="Theme.Primary"><TIcon Name="IconName.Edit" /> 跳转链接</TLink>
+        <TLink Underline Theme="Theme.Warning"><TIcon Name="IconName.Edit" /> 跳转链接</TLink>
+        <TLink Underline Theme="Theme.Success">跳转链接 <TIcon Name="IconName.Home" /></TLink>
+        <TLink Underline Theme="Theme.Danger">跳转链接 <TIcon Name="IconName.Gift" /></TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Theme=""Theme.Primary""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Theme=""Theme.Warning""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Theme=""Theme.Success"">跳转链接 <Icon Name=""IconName.Home"" /></Link>
-<Link Theme=""Theme.Danger"">跳转链接 <Icon Name=""IconName.Gift"" /></Link>
+<TLink><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Theme=""Theme.Primary""><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Theme=""Theme.Warning""><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Theme=""Theme.Success"">跳转链接 <TIcon Name=""IconName.Home"" /></TLink>
+<TLink Theme=""Theme.Danger"">跳转链接 <TIcon Name=""IconName.Gift"" /></TLink>
 
 <br />
 
-<Link Underline><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Underline Theme=""Theme.Primary""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Underline Theme=""Theme.Warning""><Icon Name=""IconName.Edit""/> 跳转链接</Link>
-<Link Underline Theme=""Theme.Success"">跳转链接 <Icon Name=""IconName.Home"" /></Link>
-<Link Underline Theme=""Theme.Danger"">跳转链接 <Icon Name=""IconName.Gift"" /></Link>
+<TLink Underline><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Underline Theme=""Theme.Primary""><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Underline Theme=""Theme.Warning""><TIcon Name=""IconName.Edit""/> 跳转链接</TLink>
+<TLink Underline Theme=""Theme.Success"">跳转链接 <TIcon Name=""IconName.Home"" /></TLink>
+<TLink Underline Theme=""Theme.Danger"">跳转链接 <TIcon Name=""IconName.Gift"" /></TLink>
 ```
 ")
     </CodeContent>
@@ -85,34 +85,34 @@
 <Example Title="链接悬浮态样式的链接">
     <Description>悬浮状态包含 2 种状态：文本颜色变化 和 添加下划线。</Description>
     <RunContent>
-        <Link Hover="LinkHover.Underline">跳转链接</Link>
-        <Link Hover="LinkHover.Underline" Theme="Theme.Primary">跳转链接</Link>
-        <Link Hover="LinkHover.Underline" Theme="Theme.Warning">跳转链接</Link>
-        <Link Hover="LinkHover.Underline" Theme="Theme.Success">跳转链接</Link>
-        <Link Hover="LinkHover.Underline" Theme="Theme.Danger">跳转链接</Link>
+        <TLink Hover="LinkHover.Underline">跳转链接</TLink>
+        <TLink Hover="LinkHover.Underline" Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Hover="LinkHover.Underline" Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Hover="LinkHover.Underline" Theme="Theme.Success">跳转链接</TLink>
+        <TLink Hover="LinkHover.Underline" Theme="Theme.Danger">跳转链接</TLink>
         <br />
-        <Link Hover="LinkHover.Color">跳转链接</Link>
-        <Link Hover="LinkHover.Color" Theme="Theme.Primary">跳转链接</Link>
-        <Link Hover="LinkHover.Color" Theme="Theme.Warning">跳转链接</Link>
-        <Link Hover="LinkHover.Color" Theme="Theme.Success">跳转链接</Link>
-        <Link Hover="LinkHover.Color" Theme="Theme.Danger">跳转链接</Link>
+        <TLink Hover="LinkHover.Color">跳转链接</TLink>
+        <TLink Hover="LinkHover.Color" Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Hover="LinkHover.Color" Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Hover="LinkHover.Color" Theme="Theme.Success">跳转链接</TLink>
+        <TLink Hover="LinkHover.Color" Theme="Theme.Danger">跳转链接</TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link Hover=""LinkHover.Underline"">跳转链接</Link>
-<Link Hover=""LinkHover.Underline"" Theme=""Theme.Primary"">跳转链接</Link>
-<Link Hover=""LinkHover.Underline"" Theme=""Theme.Warning"">跳转链接</Link>
-<Link Hover=""LinkHover.Underline"" Theme=""Theme.Success"">跳转链接</Link>
-<Link Hover=""LinkHover.Underline"" Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Hover=""LinkHover.Underline"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Underline"" Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Underline"" Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Underline"" Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Underline"" Theme=""Theme.Danger"">跳转链接</TLink>
 
 <br />
 
-<Link Hover=""LinkHover.Color"">跳转链接</Link>
-<Link Hover=""LinkHover.Color"" Theme=""Theme.Primary"">跳转链接</Link>
-<Link Hover=""LinkHover.Color"" Theme=""Theme.Warning"">跳转链接</Link>
-<Link Hover=""LinkHover.Color"" Theme=""Theme.Success"">跳转链接</Link>
-<Link Hover=""LinkHover.Color"" Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Hover=""LinkHover.Color"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Color"" Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Color"" Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Color"" Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Hover=""LinkHover.Color"" Theme=""Theme.Danger"">跳转链接</TLink>
 ```
 ")
     </CodeContent>
@@ -120,20 +120,20 @@
 <Example Title="禁用的链接">
     <Description>当链接不可用时，显示禁用状态。</Description>
     <RunContent>
-        <Link Disabled>跳转链接</Link>
-        <Link Disabled Theme="Theme.Primary">跳转链接</Link>
-        <Link Disabled Theme="Theme.Warning">跳转链接</Link>
-        <Link Disabled Theme="Theme.Success">跳转链接</Link>
-        <Link Disabled Theme="Theme.Danger">跳转链接</Link>
+        <TLink Disabled>跳转链接</TLink>
+        <TLink Disabled Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Disabled Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Disabled Theme="Theme.Success">跳转链接</TLink>
+        <TLink Disabled Theme="Theme.Danger">跳转链接</TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link Disabled>跳转链接</Link>
-<Link Disabled Theme=""Theme.Primary"">跳转链接</Link>
-<Link Disabled Theme=""Theme.Warning"">跳转链接</Link>
-<Link Disabled Theme=""Theme.Success"">跳转链接</Link>
-<Link Disabled Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Disabled>跳转链接</TLink>
+<TLink Disabled Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Disabled Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Disabled Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Disabled Theme=""Theme.Danger"">跳转链接</TLink>
 ```
 ")
     </CodeContent>
@@ -141,44 +141,44 @@
 <Example Title="不同尺寸的链接">
     <Description>提供大、中（默认）、小三种尺寸。</Description>
     <RunContent>
-        <Link Size="Size.Small">跳转链接</Link>
-        <Link Size="Size.Small" Theme="Theme.Primary">跳转链接</Link>
-        <Link Size="Size.Small" Theme="Theme.Warning">跳转链接</Link>
-        <Link Size="Size.Small" Theme="Theme.Success">跳转链接</Link>
-        <Link Size="Size.Small" Theme="Theme.Danger">跳转链接</Link>
+        <TLink Size="Size.Small">跳转链接</TLink>
+        <TLink Size="Size.Small" Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Size="Size.Small" Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Size="Size.Small" Theme="Theme.Success">跳转链接</TLink>
+        <TLink Size="Size.Small" Theme="Theme.Danger">跳转链接</TLink>
         <br />
-        <Link Size="Size.Medium">跳转链接</Link>
-        <Link Size="Size.Medium" Theme="Theme.Primary">跳转链接</Link>
-        <Link Size="Size.Medium" Theme="Theme.Warning">跳转链接</Link>
-        <Link Size="Size.Medium" Theme="Theme.Success">跳转链接</Link>
-        <Link Size="Size.Medium" Theme="Theme.Danger">跳转链接</Link>
+        <TLink Size="Size.Medium">跳转链接</TLink>
+        <TLink Size="Size.Medium" Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Size="Size.Medium" Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Size="Size.Medium" Theme="Theme.Success">跳转链接</TLink>
+        <TLink Size="Size.Medium" Theme="Theme.Danger">跳转链接</TLink>
         <br />
-        <Link Size="Size.Large">跳转链接</Link>
-        <Link Size="Size.Large" Theme="Theme.Primary">跳转链接</Link>
-        <Link Size="Size.Large" Theme="Theme.Warning">跳转链接</Link>
-        <Link Size="Size.Large" Theme="Theme.Success">跳转链接</Link>
-        <Link Size="Size.Large" Theme="Theme.Danger">跳转链接</Link>
+        <TLink Size="Size.Large">跳转链接</TLink>
+        <TLink Size="Size.Large" Theme="Theme.Primary">跳转链接</TLink>
+        <TLink Size="Size.Large" Theme="Theme.Warning">跳转链接</TLink>
+        <TLink Size="Size.Large" Theme="Theme.Success">跳转链接</TLink>
+        <TLink Size="Size.Large" Theme="Theme.Danger">跳转链接</TLink>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Link Size=""Size.Small"">跳转链接</Link>
-<Link Size=""Size.Small"" Theme=""Theme.Primary"">跳转链接</Link>
-<Link Size=""Size.Small"" Theme=""Theme.Warning"">跳转链接</Link>
-<Link Size=""Size.Small"" Theme=""Theme.Success"">跳转链接</Link>
-<Link Size=""Size.Small"" Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Size=""Size.Small"">跳转链接</TLink>
+<TLink Size=""Size.Small"" Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Size=""Size.Small"" Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Size=""Size.Small"" Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Size=""Size.Small"" Theme=""Theme.Danger"">跳转链接</TLink>
 <br />
-<Link Size=""Size.Medium"">跳转链接</Link>
-<Link Size=""Size.Medium"" Theme=""Theme.Primary"">跳转链接</Link>
-<Link Size=""Size.Medium"" Theme=""Theme.Warning"">跳转链接</Link>
-<Link Size=""Size.Medium"" Theme=""Theme.Success"">跳转链接</Link>
-<Link Size=""Size.Medium"" Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Size=""Size.Medium"">跳转链接</TLink>
+<TLink Size=""Size.Medium"" Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Size=""Size.Medium"" Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Size=""Size.Medium"" Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Size=""Size.Medium"" Theme=""Theme.Danger"">跳转链接</TLink>
 <br />
-<Link Size=""Size.Large"">跳转链接</Link>
-<Link Size=""Size.Large"" Theme=""Theme.Primary"">跳转链接</Link>
-<Link Size=""Size.Large"" Theme=""Theme.Warning"">跳转链接</Link>
-<Link Size=""Size.Large"" Theme=""Theme.Success"">跳转链接</Link>
-<Link Size=""Size.Large"" Theme=""Theme.Danger"">跳转链接</Link>
+<TLink Size=""Size.Large"">跳转链接</TLink>
+<TLink Size=""Size.Large"" Theme=""Theme.Primary"">跳转链接</TLink>
+<TLink Size=""Size.Large"" Theme=""Theme.Warning"">跳转链接</TLink>
+<TLink Size=""Size.Large"" Theme=""Theme.Success"">跳转链接</TLink>
+<TLink Size=""Size.Large"" Theme=""Theme.Danger"">跳转链接</TLink>
 ```
 ")
     </CodeContent>

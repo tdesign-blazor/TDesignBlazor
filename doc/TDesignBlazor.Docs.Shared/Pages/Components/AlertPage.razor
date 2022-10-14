@@ -1,20 +1,20 @@
 ﻿@page "/components/alert"
-<PageHeader Title="Alert 警告消息">
+<PageHeader Title="TAlert 警告消息">
     警告条用于承载需要用户注意的信息。
 </PageHeader>
 
 <Example Title="基础警告">
     <Description>使用简洁文字提示的最基础警告条，包含 4 种情况的提示：普通消息，成功，警示，失败。</Description>
     <RunContent>
-        <Alert>这是一条默认消息</Alert>
+        <TAlert>这是一条默认消息</TAlert>
         <br />
-        <Alert Theme="Theme.Primary">这是一条普通消息提示</Alert>
+        <TAlert Theme="Theme.Primary">这是一条普通消息提示</TAlert>
         <br />
-        <Alert Theme="Theme.Success">这是一条成功消息提示</Alert>
+        <TAlert Theme="Theme.Success">这是一条成功消息提示</TAlert>
         <br />
-        <Alert Theme="Theme.Warning">这是一条警示消息提示</Alert>
+        <TAlert Theme="Theme.Warning">这是一条警示消息提示</TAlert>
         <br />
-        <Alert Theme="Theme.Danger">这是一条失败消息提示</Alert>
+        <TAlert Theme="Theme.Danger">这是一条失败消息提示</TAlert>
         
     </RunContent>
     <CodeContent>
@@ -25,26 +25,26 @@
 <Example Title="带操作的警告">
     <Description>当需要对此警告做操作，需要显示地设置 <code>OperationContent</code> 代码片段</Description>
     <RunContent>
-        <Alert Theme="Theme.Primary">
+        <TAlert Theme="Theme.Primary">
             <ChildContent>
                 这是一条普通的消息提示
             </ChildContent>
             <OperationContent>
                 这里是相关操作
             </OperationContent>
-        </Alert>
+        </TAlert>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Alert Theme=""Theme.Primary"">
+<TAlert Theme=""Theme.Primary"">
     <ChildContent>
         这是一条普通的消息提示
     </ChildContent>
     <OperationContent>
         这里是相关操作
     </OperationContent>
-</Alert>
+</TAlert>
 ```
 ")
     </CodeContent>
@@ -53,9 +53,9 @@
 <Example Title="带标题的警告">
     <Description>可以设置 <code>Title</code> 参数作为标题，或使用 <code>TitleContent</code> 支持任意 HTML 格式的标题</Description>
     <RunContent>
-        <Alert Theme="Theme.Primary">
+        <TAlert Theme="Theme.Primary">
             <TitleContent>
-                这里是消息提示的标题 <Icon Name="IconName.Flag" Color="red"/>
+                这里是消息提示的标题 <TIcon Name="IconName.Flag" Color="red"/>
             </TitleContent>
             <ChildContent>
                 这是一条普通的消息提示内容
@@ -63,23 +63,23 @@
             <OperationContent>
                 这里是相关操作
             </OperationContent>
-        </Alert>
+        </TAlert>
         <br/>
-        <Alert Theme="Theme.Success" Title="这是成功的消息">
+        <TAlert Theme="Theme.Success" Title="这是成功的消息">
             <ChildContent>
                 这是一条成功的消息提示内容
             </ChildContent>
             <OperationContent>
                 这里是相关操作
             </OperationContent>
-        </Alert>
+        </TAlert>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Alert Theme=""Theme.Primary"">
+<TAlert Theme=""Theme.Primary"">
     <TitleContent>
-        这里是消息提示的标题 <Icon Name=""IconName.Flag"" Color=""red""/>
+        这里是消息提示的标题 <TIcon Name=""IconName.Flag"" Color=""red""/>
     </TitleContent>
     <ChildContent>
         这是一条普通的消息提示
@@ -87,16 +87,16 @@
     <OperationContent>
         这里是相关操作
     </OperationContent>
-</Alert>
+</TAlert>
 
-<Alert Theme=""Theme.Success"" Title=""这是成功的消息"">
+<TAlert Theme=""Theme.Success"" Title=""这是成功的消息"">
     <ChildContent>
         这是一条成功的消息提示内容
     </ChildContent>
     <OperationContent>
         这里是相关操作
     </OperationContent>
-</Alert>
+</TAlert>
 ```
 ")
     </CodeContent>
@@ -105,7 +105,7 @@
 <Example Title="可关闭的警告">
     <Description>设置 <code>Cloasable</code> 使警告消息可以被关闭。</Description>
     <RunContent>
-        <Alert Theme="Theme.Primary" Closable>
+        <TAlert Theme="Theme.Primary" Closable>
             <TitleContent>
                 这里是消息提示的标题
             </TitleContent>
@@ -115,12 +115,12 @@
             <OperationContent>
                 这里是相关操作
             </OperationContent>
-        </Alert>
+        </TAlert>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Alert Theme=""Theme.Primary"" Closable>
+<TAlert Theme=""Theme.Primary"" Closable>
     <TitleContent>
         这里是消息提示的标题
     </TitleContent>
@@ -130,7 +130,7 @@
     <OperationContent>
         这里是相关操作
     </OperationContent>
-</Alert>
+</TAlert>
 ```
 ")
     </CodeContent>

@@ -1,7 +1,7 @@
 ﻿using ComponentBuilder;
 
 namespace TDesignBlazor.Test.Components;
-public class BadgeTest : TestBase<Badge>
+public class BadgeTest : TestBase<TBadge>
 {
     [Fact(DisplayName = "Badge - 渲染 div 元素和默认样式")]
     public void Test_Render_Badge()

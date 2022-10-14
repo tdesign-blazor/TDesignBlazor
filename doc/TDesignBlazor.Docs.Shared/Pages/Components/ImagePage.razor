@@ -21,38 +21,38 @@
 <Example Title="基础图片">
     <Description>不同填充模式的图片,提供 fill、contain、cover、none、scale-down 5 种填充类型。</Description>
     <RunContent>
-        <Space BreakLine=true>
+        <TSpace BreakLine=true>
             @{
         var fits = new ImageFitType[] { ImageFitType.Fill, ImageFitType.Contain, ImageFitType.Cover, ImageFitType.None, ImageFitType.ScaleDown };
         foreach (var item in fits)
         {
-                                                                                                         <SpaceItem>
+                                                                                                         <TSpaceItem>
                                                                                                              <div class="Image__wrapper Image__wrapper--shape-square" style="width: 120px; height: 120px;">
                                                                                                                  <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
                                                                                                              </div>
                                                                                                              <span>@item.ToString()</span>
-                                                                                                         </SpaceItem>
+                                                                                                         </TSpaceItem>
         }
       }
-        </Space>
+        </TSpace>
     </RunContent>
     <CodeContent>
     @Code.Create(@"
 ```html
-        <Space BreakLine=true>
+        <TSpace BreakLine=true>
             @{
                 var fits = new FitType[] { FitType.Fill, FitType.Contain, FitType.Cover, FitType.None, FitType.ScaleDown };
                 foreach (var item in fits)
                 {
-                     <SpaceItem>
+                     <TSpaceItem>
                          <div class=""Image__wrapper Image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
                              <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
                          </div>
                          <span>@item.ToString()</span>
-                     </SpaceItem>
+                     </TSpaceItem>
                 }
             }
-        </Space>
+        </TSpace>
 ```
 ")
     </CodeContent>
@@ -62,214 +62,214 @@
 <Example Title="">
     <Description>不同填充位置的图片。图片相对于容器的位置。当图片过大时，提供显示图片的局部左侧对齐、或右侧对齐的不同位置。</Description>
     <RunContent>
-        <Space Vertical style="width: 100%">
-            <SpaceItem >
-                <Space Vertical >
-                    <SpaceItem>
+        <TSpace Vertical style="width: 100%">
+            <TSpaceItem >
+                <TSpace Vertical >
+                    <TSpaceItem>
                       <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            Position="Position.Center"
                            style="width:120px;height:120px" />
                     <span>cover center</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:120px;height:120px"
                            Position="Position.Left" />
                     <span>cover left</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:120px;height:120px"
                            Position="Position.Right" />
                     <span>cover right</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:280px;height:120px"
                            Position="Position.Top" />
                     <span>cover top</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:280px;height:120px"
                            Position="Position.Bottom" />
                     <span>cover bottom</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                <Space Vertical>
-                    <SpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                <TSpace Vertical>
+                    <TSpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Top" />
-                    <span>contain top</span></SpaceItem>
+                    <span>contain top</span></TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                                        <SpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                </TSpace>
+                <TSpace Vertical>
+                                        <TSpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Bottom" />
-                    <span>contain bottom</span></SpaceItem>
+                    <span>contain bottom</span></TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                                        <SpaceItem> <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                </TSpace>
+                <TSpace Vertical>
+                                        <TSpaceItem> <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Center" />
-                    <span>contain center</span></SpaceItem>
+                    <span>contain center</span></TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                    <Space Vertical>
-                        <SpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                    <TSpace Vertical>
+                        <TSpaceItem>
                                                     <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="ImageFitType.Contain"
                                style="width:280px;height:120px"
                                Position="Position.Left" />
                         <span>contain left</span>
-                        </SpaceItem>
+                        </TSpaceItem>
 
-                    </Space>
-                    <Space Vertical>
-                          <SpaceItem>                        <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                    </TSpace>
+                    <TSpace Vertical>
+                          <TSpaceItem>                        <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="ImageFitType.Contain"
                                style="width:280px;height:120px"
                                Position="Position.Right" />
-                        <span>contain right</span></SpaceItem>
+                        <span>contain right</span></TSpaceItem>
 
-                    </Space>
-                </SpaceItem>
-        </Space>
+                    </TSpace>
+                </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
     @Code.Create(@"
 ```html
-        <Space Vertical>
-            <SpaceItem >
-                <Space Vertical >
-                    <SpaceItem>
+        <TSpace Vertical>
+            <TSpaceItem >
+                <TSpace Vertical >
+                    <TSpaceItem>
                       <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            Position=""Position.Center""
                            style=""width:120px;height:120px"" />
                     <span>cover center</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:120px;height:120px""
                            Position=""Position.Left"" />
                     <span>cover left</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:120px;height:120px""
                            Position=""Position.Right"" />
                     <span>cover right</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:280px;height:120px""
                            Position=""Position.Top"" />
                     <span>cover top</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                    <SpaceItem>
+                </TSpace>
+                <TSpace Vertical>
+                    <TSpaceItem>
                                             <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:280px;height:120px""
                            Position=""Position.Bottom"" />
                     <span>cover bottom</span>
-                    </SpaceItem>
+                    </TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                <Space Vertical>
-                    <SpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                <TSpace Vertical>
+                    <TSpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Top"" />
-                    <span>contain top</span></SpaceItem>
+                    <span>contain top</span></TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                                        <SpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                </TSpace>
+                <TSpace Vertical>
+                                        <TSpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Bottom"" />
-                    <span>contain bottom</span></SpaceItem>
+                    <span>contain bottom</span></TSpaceItem>
 
-                </Space>
-                <Space Vertical>
-                                        <SpaceItem> <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                </TSpace>
+                <TSpace Vertical>
+                                        <TSpaceItem> <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Center"" />
-                    <span>contain center</span></SpaceItem>
+                    <span>contain center</span></TSpaceItem>
 
-                </Space>
-            </SpaceItem>
-            <SpaceItem >
-                    <Space Vertical>
-                        <SpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem >
+                    <TSpace Vertical>
+                        <TSpaceItem>
                                                     <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                                Fit=""FitType.Contain""
                                style=""width:280px;height:120px""
                                Position=""Position.Left"" />
                         <span>contain left</span>
-                        </SpaceItem>
+                        </TSpaceItem>
 
-                    </Space>
-                    <Space Vertical>
-                          <SpaceItem>                        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                    </TSpace>
+                    <TSpace Vertical>
+                          <TSpaceItem>                        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                                Fit=""FitType.Contain""
                                style=""width:280px;height:120px""
                                Position=""Position.Right"" />
-                        <span>contain right</span></SpaceItem>
+                        <span>contain right</span></TSpaceItem>
 
-                    </Space>
-                </SpaceItem>
-        </Space>
+                    </TSpace>
+                </TSpaceItem>
+        </TSpace>
 ```
 ")
     </CodeContent>
@@ -278,8 +278,8 @@
 <Example Title="不同形状的图片">
     <Description>提供方形、圆角方形、圆角 3 种形状。当图片长宽不相等时，无法使用 circle 展示一个正圆。</Description>
     <RunContent>
-   <Space>
-    <Space Vertical>
+   <TSpace>
+    <TSpace Vertical>
       <Image
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         Shape="ShapeType.Square"
@@ -287,8 +287,8 @@
         Fit="ImageFitType.Cover"
       />
       <span>square</span>
-    </Space>
-    <Space Vertical>
+    </TSpace>
+    <TSpace Vertical>
       <Image
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         style="width:160px;height:160px;"
@@ -296,8 +296,8 @@
         Shape="ShapeType.Round"
       />
       <span>round</span>
-    </Space>
-    <Space Vertical>
+    </TSpace>
+    <TSpace Vertical>
       <Image
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         style="width:160px;height:160px;"
@@ -305,14 +305,14 @@
         Fit="ImageFitType.Cover"
       />
       <span>circle</span>
-    </Space>
-  </Space>
+    </TSpace>
+  </TSpace>
     </RunContent>
     <CodeContent>
     @Code.Create(@"
 ```html
-   <Space>
-    <Space Vertical>
+   <TSpace>
+    <TSpace Vertical>
       <Image
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         Shape=""ShapeType.Square""
@@ -321,8 +321,8 @@
       />
       <span>square</span>
       <span>square</span>
-    </Space>
-    <Space Vertical>
+    </TSpace>
+    <TSpace Vertical>
       <Image
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         style=""width:160px;height:160px;""
@@ -330,8 +330,8 @@
         Shape=""ShapeType.Round""
       />
       <span>round</span>
-    </Space>
-    <Space Vertical>
+    </TSpace>
+    <TSpace Vertical>
       <Image
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         style=""width:160px;height:160px;""
@@ -339,8 +339,8 @@
         Fit=""FitType.Cover""
       />
       <span>circle</span>
-    </Space>
-  </Space>
+    </TSpace>
+  </TSpace>
 ```
 ")
     </CodeContent>

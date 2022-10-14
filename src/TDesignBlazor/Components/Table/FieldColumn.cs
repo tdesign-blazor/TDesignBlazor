@@ -1,11 +1,11 @@
 ﻿namespace TDesignBlazor;
 
 /// <summary>
-/// 表示可以输出数据的表格列。必须在 <see cref="Table{TItem}"/> 组件中使用。
+/// 表示可以输出数据的表格列。必须在 <see cref="TTable{TItem}"/> 组件中使用。
 /// </summary>
 public class FieldColumn<TItem> : TableColumnBase
 {
-    [CascadingParameter(Name = "Table")] protected Table<TItem>? CascadingTable { get; set; }
+    [CascadingParameter(Name = "Table")] protected TTable<TItem>? CascadingTable { get; set; }
     /// <summary>
     /// 获取或设置列中输出的值。
     /// </summary>

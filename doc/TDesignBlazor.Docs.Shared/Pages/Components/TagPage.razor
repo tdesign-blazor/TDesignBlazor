@@ -1,73 +1,73 @@
 ﻿@page "/components/tag"
-<PageHeader Title="Tag 标签">定义：标签常用于标记、分类和选择。</PageHeader>
+<PageHeader Title="TTag 标签">定义：标签常用于标记、分类和选择。</PageHeader>
 
 <Example Title="基础标签">
     <Description>基础标签为默认的标签样式。适用于常规表单。</Description>
     <RunContent>
-        <Space Vertical>
-            <SpaceItem>
-                <Tag>默认</Tag><Tag><Link Theme="Theme.Primary">超链接</Link></Tag>
-            </SpaceItem>
-            <SpaceItem>
-                <Tag Theme="Theme.Primary">标签1</Tag>
-                <Tag Theme="Theme.Success">标签2</Tag>
-                <Tag Theme="Theme.Warning">标签3</Tag>
-                <Tag Theme="Theme.Danger">标签4</Tag>
-            </SpaceItem>
-            <SpaceItem>
-                <Tag Theme="Theme.Primary" Type="TagType.Light">标签1</Tag>
-                <Tag Theme="Theme.Success" Type="TagType.Light">标签2</Tag>
-                <Tag Theme="Theme.Warning" Type="TagType.Light">标签3</Tag>
-                <Tag Theme="Theme.Danger" Type="TagType.Light">标签4</Tag>
-            </SpaceItem>
-            <SpaceItem>
-                <Tag Theme="Theme.Primary" Type="TagType.Outline">标签1</Tag>
-                <Tag Theme="Theme.Success" Type="TagType.Outline">标签2</Tag>
-                <Tag Theme="Theme.Warning" Type="TagType.Outline">标签3</Tag>
-                <Tag Theme="Theme.Danger" Type="TagType.Outline">标签4</Tag>
-            </SpaceItem>
-        </Space>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TTag>默认</TTag><TTag><TLink Theme="Theme.Primary">超链接</TLink></TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary">标签1</TTag>
+                <TTag Theme="Theme.Success">标签2</TTag>
+                <TTag Theme="Theme.Warning">标签3</TTag>
+                <TTag Theme="Theme.Danger">标签4</TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary" Type="TagType.Light">标签1</TTag>
+                <TTag Theme="Theme.Success" Type="TagType.Light">标签2</TTag>
+                <TTag Theme="Theme.Warning" Type="TagType.Light">标签3</TTag>
+                <TTag Theme="Theme.Danger" Type="TagType.Light">标签4</TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary" Type="TagType.Outline">标签1</TTag>
+                <TTag Theme="Theme.Success" Type="TagType.Outline">标签2</TTag>
+                <TTag Theme="Theme.Warning" Type="TagType.Outline">标签3</TTag>
+                <TTag Theme="Theme.Danger" Type="TagType.Outline">标签4</TTag>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Space Vertical>
-    <SpaceItem>
-        <Tag>默认</Tag>
-        <Tag><Link Theme=""Theme.Primary"">超链接</Link></Tag>
-    </SpaceItem>
-    <SpaceItem>
-        <Tag Theme=""Theme.Primary"">标签1</Tag>
-        <Tag Theme=""Theme.Success"">标签2</Tag>
-        <Tag Theme=""Theme.Warning"">标签3</Tag>
-        <Tag Theme=""Theme.Danger"">标签4</Tag>
-    </SpaceItem>
-    <SpaceItem>
-        <Tag Theme=""Theme.Primary"" Type=""TagType.Light"">标签1</Tag>
-        <Tag Theme=""Theme.Success"" Type=""TagType.Light"">标签2</Tag>
-        <Tag Theme=""Theme.Warning"" Type=""TagType.Light"">标签3</Tag>
-        <Tag Theme=""Theme.Danger"" Type=""TagType.Light"">标签4</Tag>
-    </SpaceItem>
-    <SpaceItem>
-        <Tag Theme=""Theme.Primary"" Type=""TagType.Outline"">标签1</Tag>
-        <Tag Theme=""Theme.Success"" Type=""TagType.Outline"">标签2</Tag>
-        <Tag Theme=""Theme.Warning"" Type=""TagType.Outline"">标签3</Tag>
-        <Tag Theme=""Theme.Danger"" Type=""TagType.Outline"">标签4</Tag>
-    </SpaceItem>
-</Space>
+<TSpace Vertical>
+    <TSpaceItem>
+        <TTag>默认</TTag>
+        <TTag><TLink Theme=""Theme.Primary"">超链接</TLink></TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"">标签1</TTag>
+        <TTag Theme=""Theme.Success"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"">标签4</TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"" Type=""TagType.Light"">标签1</TTag>
+        <TTag Theme=""Theme.Success"" Type=""TagType.Light"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"" Type=""TagType.Light"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"" Type=""TagType.Light"">标签4</TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"" Type=""TagType.Outline"">标签1</TTag>
+        <TTag Theme=""Theme.Success"" Type=""TagType.Outline"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"" Type=""TagType.Outline"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"" Type=""TagType.Outline"">标签4</TTag>
+    </TSpaceItem>
+</TSpace>
 ```
 ")
     </CodeContent>
 </Example>
 <Example Title="带图标的标签">
-    <Description>设置 <code>Icon</code> 图标名称会在前面加图标。</Description>
+    <Description>设置 <code>TIcon</code> 图标名称会在前面加图标。</Description>
     <RunContent>
-        <Tag Icon="IconName.Discount">默认标签</Tag>
+        <TTag TIcon="IconName.Discount">默认标签</TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Tag Icon=""IconName.Discount"">默认标签</Tag>
+<TTag TIcon=""IconName.Discount"">默认标签</TTag>
 ```
 ")
     </CodeContent>
@@ -76,16 +76,16 @@
 <Example Title="带关闭的标签">
     <Description>@Code.Create("设置 `Closable` 会自动添加可删除的图标，并且 `OnClosing` 事件会触发。")</Description>
     <RunContent>
-        <Tag Closable>默认标签</Tag>
+        <TTag Closable>默认标签</TTag>
 
-        <Tag Closable OnClosing="@(closed=>JS.InvokeVoidAsync("alert",$"关闭：{closed}"))">点击关闭</Tag>
+        <TTag Closable OnClosing="@(closed=>JS.InvokeVoidAsync("alert",$"关闭：{closed}"))">点击关闭</TTag>
     </RunContent>
     <CodeContent>
 @Code.Create(@"
 ```html
-<Tag Closable>默认标签</Tag>
+<TTag Closable>默认标签</TTag>
 
-<Tag Closable OnClosing=""@(closed=>JS.InvokeVoidAsync(""alert"",$""关闭：{closed}""))"">点击关闭</Tag>
+<TTag Closable OnClosing=""@(closed=>JS.InvokeVoidAsync(""alert"",$""关闭：{closed}""))"">点击关闭</TTag>
 ```
 ")
     </CodeContent>
@@ -94,18 +94,18 @@
 <Example Title="可选择的标签">
     <Description>@Code.Create("设置 `Checkbox` 将开启复选框模式，支持双向绑定。")</Description>
     <RunContent>
-        <Tag Checkbox @bind-Checked="Checked1">
+        <TTag Checkbox @bind-Checked="Checked1">
             <ChildContent>未选择</ChildContent>
             <CheckedContent>已选择</CheckedContent>
-        </Tag>
+        </TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Tag Checkbox @bind-Checked=""Checked1"">
+<TTag Checkbox @bind-Checked=""Checked1"">
     <ChildContent>未选择</ChildContent>
     <CheckedContent>已选择</CheckedContent>
-</Tag>
+</TTag>
 ```
 ")
     </CodeContent>
@@ -113,12 +113,12 @@
 <Example Title="超长省略文本标签">
     <Description>@Code.Create("设置 `Width` 固定宽度，超出部分自动省略")</Description>
     <RunContent>
-        <Tag Width="120" title="默认超过八个字符就省略显示">默认超过八个字符就省略显示</Tag>
+        <TTag Width="120" title="默认超过八个字符就省略显示">默认超过八个字符就省略显示</TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Tag Width=""120"" title=""默认超过八个字符就省略显示"">默认超过八个字符就省略显示</Tag>
+<TTag Width=""120"" title=""默认超过八个字符就省略显示"">默认超过八个字符就省略显示</TTag>
 ```
 ")
     </CodeContent>
@@ -126,16 +126,16 @@
 <Example Title="不同尺寸的标签">
     <Description>提供大、中（默认）、小三种尺寸。</Description>
     <RunContent>
-        <Tag Size="Size.Small">小标签</Tag>
-        <Tag>中标签</Tag>
-        <Tag Size="Size.Large">大标签</Tag>
+        <TTag Size="Size.Small">小标签</TTag>
+        <TTag>中标签</TTag>
+        <TTag Size="Size.Large">大标签</TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Tag Size=""Size.Small"">小标签</Tag>
-<Tag>中标签</Tag>
-<Tag Size=""Size.Large"">大标签</Tag>
+<TTag Size=""Size.Small"">小标签</TTag>
+<TTag>中标签</TTag>
+<TTag Size=""Size.Large"">大标签</TTag>
 ```
 ")
     </CodeContent>
@@ -143,25 +143,25 @@
 <Example Title="不同形状的标签">
     <Description>提供方形、圆角方形、标记型三种形状。</Description>
     <RunContent>
-        <Tag>方形</Tag><Tag Theme="Theme.Primary" Type="TagType.Dark">方形</Tag>
+        <TTag>方形</TTag><TTag Theme="Theme.Primary" Type="TagType.Dark">方形</TTag>
         <br />
         <br />
-        <Tag Shape="TagShape.Round">椭圆</Tag><Tag Theme="Theme.Primary" Shape="TagShape.Round">椭圆</Tag>
+        <TTag Shape="TagShape.Round">椭圆</TTag><TTag Theme="Theme.Primary" Shape="TagShape.Round">椭圆</TTag>
         <br />
         <br />
-        <Tag Shape="TagShape.Mark">半椭圆</Tag><Tag Theme="Theme.Primary" Shape="TagShape.Mark">半椭圆</Tag>
+        <TTag Shape="TagShape.Mark">半椭圆</TTag><TTag Theme="Theme.Primary" Shape="TagShape.Mark">半椭圆</TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Tag>方形</Tag>
-<Tag Theme=""Theme.Primary"">方形</Tag>
+<TTag>方形</TTag>
+<TTag Theme=""Theme.Primary"">方形</TTag>
 
-<Tag Shape=""TagShape.Round"">椭圆</Tag>
-<Tag Theme=""Theme.Primary"" Shape=""TagShape.Round"">椭圆</Tag>
+<TTag Shape=""TagShape.Round"">椭圆</TTag>
+<TTag Theme=""Theme.Primary"" Shape=""TagShape.Round"">椭圆</TTag>
 
-<Tag Shape=""TagShape.Mark"">半椭圆</Tag>
-<Tag Theme=""Theme.Primary"" Shape=""TagShape.Mark"">半椭圆</Tag>
+<TTag Shape=""TagShape.Mark"">半椭圆</TTag>
+<TTag Theme=""Theme.Primary"" Shape=""TagShape.Mark"">半椭圆</TTag>
 ```
 ")
     </CodeContent>

@@ -1,33 +1,33 @@
 ﻿@page "/components/message"
 
-<PageHeader Title="Message 全局提示">
+<PageHeader Title="TMessage 全局提示">
     对用户的操作作出轻量的全局反馈。
 </PageHeader>
 
 <Example Title="全局提示">
     <Description>使用简洁文字描述操作反馈。常规全局提示包含：普通信息、成功信息、警示信息、错误信息、帮助信息和加载中。</Description>
     <RunContent>
-        <Message>默认信息提示</Message>
+        <TMessage>默认信息提示</TMessage>
         <br />
-        <Message Theme="MessageTheme.Primary">用于表示普通操作信息提示</Message>
+        <TMessage Theme="MessageTheme.Primary">用于表示普通操作信息提示</TMessage>
         <br />
-        <Message Theme="MessageTheme.Success">用于表示操作顺利达成</Message>
+        <TMessage Theme="MessageTheme.Success">用于表示操作顺利达成</TMessage>
         <br />
-        <Message Theme="MessageTheme.Warning">用于表示操作引起一定后果</Message>
+        <TMessage Theme="MessageTheme.Warning">用于表示操作引起一定后果</TMessage>
         <br />
-        <Message Theme="MessageTheme.Danger">用于表示操作引起严重的后果</Message>
+        <TMessage Theme="MessageTheme.Danger">用于表示操作引起严重的后果</TMessage>
         <br />
-        <Message Theme="MessageTheme.Question">用于帮助用户操作的信息提示</Message>
+        <TMessage Theme="MessageTheme.Question">用于帮助用户操作的信息提示</TMessage>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Message>默认信息提示</Message>
-<Message Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</Message>
-<Message Theme=""MessageTheme.Success"">用于表示操作顺利达成</Message>
-<Message Theme=""MessageTheme.Warning"">用于表示操作引起一定后果</Message>
-<Message Theme=""MessageTheme.Danger"">用于表示操作引起严重的后果</Message>
-<Message Theme=""MessageTheme.Question"">用于帮助用户操作的信息提示</Message>
+<TMessage>默认信息提示</TMessage>
+<TMessage Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</TMessage>
+<TMessage Theme=""MessageTheme.Success"">用于表示操作顺利达成</TMessage>
+<TMessage Theme=""MessageTheme.Warning"">用于表示操作引起一定后果</TMessage>
+<TMessage Theme=""MessageTheme.Danger"">用于表示操作引起严重的后果</TMessage>
+<TMessage Theme=""MessageTheme.Question"">用于帮助用户操作的信息提示</TMessage>
 ```
 ")
     </CodeContent>
@@ -35,12 +35,12 @@
 <Example Title="加载中信息提示">
     <Description></Description>
     <RunContent>
-        <Message Loading>用于表示操作正在生效的过程</Message>
+        <TMessage TLoading>用于表示操作正在生效的过程</TMessage>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Message Loading>用于表示操作正在生效的过程</Message>
+<TMessage TLoading>用于表示操作正在生效的过程</TMessage>
 ```
 ")
     </CodeContent>
@@ -48,12 +48,12 @@
 <Example Title="可关闭的信息提示">
     <Description></Description>
     <RunContent>
-        <Message Theme="MessageTheme.Primary" Closable>用于表示普通操作信息提示</Message>
+        <TMessage Theme="MessageTheme.Primary" Closable>用于表示普通操作信息提示</TMessage>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Message Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</Message>
+<TMessage Theme=""MessageTheme.Primary"">用于表示普通操作信息提示</TMessage>
 ```
 ")
     </CodeContent>
@@ -61,13 +61,13 @@
 <Example Title="通过服务调用">
     <Description>注入 <code>IMessageService</code> 接口动态调用消息</Description>
     <RunContent>
-        <Button OnClick="@(e=>MessageService.Show(new MessageConfiguration{ Content="这是全局提示"}))">自定义提示</Button>
-        <Button Theme="Theme.Primary" OnClick="@(e=>MessageService.Info("普通的提示"))">普通</Button>
-        <Button Theme="Theme.Success" OnClick="@(e=>MessageService.Success("成功的提示"))">成功</Button>
-        <Button Theme="Theme.Warning" OnClick="@(e=>MessageService.Warning("警告的提示"))">警告</Button>
-        <Button Theme="Theme.Danger" OnClick="@(e=>MessageService.Danger("失败的提示"))">失败</Button>
-        <Button OnClick="@(e=>MessageService.Question("有问题的提示"))">疑问</Button>
-        <Button Theme="Theme.Primary" OnClick="@(e=>MessageService.Loading("系统加载中"))">加载</Button>
+        <TButton OnClick="@(e=>MessageService.Show(new MessageConfiguration{ Content="这是全局提示"}))">自定义提示</TButton>
+        <TButton Theme="Theme.Primary" OnClick="@(e=>MessageService.Info("普通的提示"))">普通</TButton>
+        <TButton Theme="Theme.Success" OnClick="@(e=>MessageService.Success("成功的提示"))">成功</TButton>
+        <TButton Theme="Theme.Warning" OnClick="@(e=>MessageService.Warning("警告的提示"))">警告</TButton>
+        <TButton Theme="Theme.Danger" OnClick="@(e=>MessageService.Danger("失败的提示"))">失败</TButton>
+        <TButton OnClick="@(e=>MessageService.Question("有问题的提示"))">疑问</TButton>
+        <TButton Theme="Theme.Primary" OnClick="@(e=>MessageService.Loading("系统加载中"))">加载</TButton>
     </RunContent>
     <CodeContent>
         @Code.Create(@"

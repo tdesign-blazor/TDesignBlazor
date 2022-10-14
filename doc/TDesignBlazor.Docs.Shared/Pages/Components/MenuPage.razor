@@ -1,5 +1,5 @@
 ﻿@page "/components/menu"
-<PageHeader Title="Menu 导航菜单">
+<PageHeader Title="TMenu 导航菜单">
     用于承载网站的架构，并提供跳转的菜单列表。
 </PageHeader>
 <h1>顶部导航</h1>
@@ -7,60 +7,60 @@
 <Example Title="单层导航" RunStyle="@Code.BgRun">
     <Description>只存在单层结构的顶部导航，点击即跳转。可在承载单一产品或单一业务线等层级结构简单的网站使用。</Description>
     <RunContent>
-        <Menu>
+        <TMenu>
             <ChildContent>
-            <MenuItem>菜单1</MenuItem>
-            <MenuItem Active>菜单2</MenuItem>
-            <MenuItem Disabled>禁用菜单</MenuItem>
+            <TMenuItem>菜单1</TMenuItem>
+            <TMenuItem Active>菜单2</TMenuItem>
+            <TMenuItem Disabled>禁用菜单</TMenuItem>
             </ChildContent>
             <OperationContent>
-                <a><Icon Name="IconName.Search" /></a>
-                <a><Icon Name="IconName.Mail" /></a>
-                <a><Icon Name="IconName.User" /></a>
+                <a><TIcon Name="IconName.Search" /></a>
+                <a><TIcon Name="IconName.Mail" /></a>
+                <a><TIcon Name="IconName.User" /></a>
             </OperationContent>
-        </Menu>
+        </TMenu>
         <br />
-        <Menu Dark>
+        <TMenu Dark>
             <ChildContent>
-                <MenuItem>菜单1</MenuItem>
-                <MenuItem Active>菜单2</MenuItem>
-                <MenuItem Disabled>禁用菜单</MenuItem>
+                <TMenuItem>菜单1</TMenuItem>
+                <TMenuItem Active>菜单2</TMenuItem>
+                <TMenuItem Disabled>禁用菜单</TMenuItem>
             </ChildContent>
             <OperationContent>
-                <a><Icon Name="IconName.Search" /></a>
-                <a><Icon Name="IconName.Mail" /></a>
-                <a><Icon Name="IconName.User" /></a>
+                <a><TIcon Name="IconName.Search" /></a>
+                <a><TIcon Name="IconName.Mail" /></a>
+                <a><TIcon Name="IconName.User" /></a>
             </OperationContent>
-        </Menu>
+        </TMenu>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu>
+<TMenu>
     <ChildContent>
-        <MenuItem>菜单1</MenuItem>
-        <MenuItem Active>菜单2</MenuItem>
-        <MenuItem Disabled>禁用菜单</MenuItem>
+        <TMenuItem>菜单1</TMenuItem>
+        <TMenuItem Active>菜单2</TMenuItem>
+        <TMenuItem Disabled>禁用菜单</TMenuItem>
     </ChildContent>
     <OperationContent>
-        <a><Icon Name=""IconName.Search"" /></a>
-        <a><Icon Name=""IconName.Mail"" /></a>
-        <a><Icon Name=""IconName.User"" /></a>
+        <a><TIcon Name=""IconName.Search"" /></a>
+        <a><TIcon Name=""IconName.Mail"" /></a>
+        <a><TIcon Name=""IconName.User"" /></a>
     </OperationContent>
-</Menu>
+</TMenu>
 
-<Menu Dark>
+<TMenu Dark>
     <ChildContent>
-        <MenuItem>菜单1</MenuItem>
-        <MenuItem Active>菜单2</MenuItem>
-        <MenuItem Disabled>禁用菜单</MenuItem>
+        <TMenuItem>菜单1</TMenuItem>
+        <TMenuItem Active>菜单2</TMenuItem>
+        <TMenuItem Disabled>禁用菜单</TMenuItem>
     </ChildContent>
     <OperationContent>
-        <a><Icon Name=""IconName.Search"" /></a>
-        <a><Icon Name=""IconName.Mail"" /></a>
-        <a><Icon Name=""IconName.User"" /></a>
+        <a><TIcon Name=""IconName.Search"" /></a>
+        <a><TIcon Name=""IconName.Mail"" /></a>
+        <a><TIcon Name=""IconName.User"" /></a>
     </OperationContent>
-</Menu>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -71,48 +71,48 @@
 
     </Description>
     <RunContent>
-        <Menu>
+        <TMenu>
             <ChildContent>
-                <MenuItem>菜单1</MenuItem>
-                <MenuItem Active>菜单2</MenuItem>
-                <SubMenu Title="菜单3">
-                    <SubMenu Title="菜单3-1">
-                        <MenuItem>菜单3-1-1</MenuItem>
-                        <MenuItem>菜单3-1-2</MenuItem>
-                    </SubMenu>
-                    <MenuItem>菜单3-2</MenuItem>
-                    <MenuItem>菜单3-3</MenuItem>
-                </SubMenu>
+                <TMenuItem>菜单1</TMenuItem>
+                <TMenuItem Active>菜单2</TMenuItem>
+                <TSubMenu Title="菜单3">
+                    <TSubMenu Title="菜单3-1">
+                        <TMenuItem>菜单3-1-1</TMenuItem>
+                        <TMenuItem>菜单3-1-2</TMenuItem>
+                    </TSubMenu>
+                    <TMenuItem>菜单3-2</TMenuItem>
+                    <TMenuItem>菜单3-3</TMenuItem>
+                </TSubMenu>
             </ChildContent>
             <OperationContent>
-                <a><Icon Name="IconName.Search" /></a>
-                <a><Icon Name="IconName.Mail" /></a>
-                <a><Icon Name="IconName.User" /></a>
+                <a><TIcon Name="IconName.Search" /></a>
+                <a><TIcon Name="IconName.Mail" /></a>
+                <a><TIcon Name="IconName.User" /></a>
             </OperationContent>
-        </Menu>
+        </TMenu>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu>
+<TMenu>
     <ChildContent>
-        <MenuItem>菜单1</MenuItem>
-        <MenuItem Active>菜单2</MenuItem>
-        <SubMenu Title=""菜单3"">
-            <SubMenu Title=""菜单3-1"">
-                <MenuItem>菜单3-1-1</MenuItem>
-                <MenuItem>菜单3-1-2</MenuItem>
-            </SubMenu>
-            <MenuItem>菜单3-2</MenuItem>
-            <MenuItem>菜单3-3</MenuItem>
-        </SubMenu>
+        <TMenuItem>菜单1</TMenuItem>
+        <TMenuItem Active>菜单2</TMenuItem>
+        <TSubMenu Title=""菜单3"">
+            <TSubMenu Title=""菜单3-1"">
+                <TMenuItem>菜单3-1-1</TMenuItem>
+                <TMenuItem>菜单3-1-2</TMenuItem>
+            </TSubMenu>
+            <TMenuItem>菜单3-2</TMenuItem>
+            <TMenuItem>菜单3-3</TMenuItem>
+        </TSubMenu>
     </ChildContent>
     <OperationContent>
-        <a><Icon Name=""IconName.Search"" /></a>
-        <a><Icon Name=""IconName.Mail"" /></a>
-        <a><Icon Name=""IconName.User"" /></a>
+        <a><TIcon Name=""IconName.Search"" /></a>
+        <a><TIcon Name=""IconName.Mail"" /></a>
+        <a><TIcon Name=""IconName.User"" /></a>
     </OperationContent>
-</Menu>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -126,48 +126,48 @@
 <Example Title="单层导航" RunStyle="@Code.BgRun">
     <Description>只存在单层结构的侧边导航，点击即跳转。一般与单层顶部导航相结合，作为二级页面的侧边导航。</Description>
     <RunContent>
-        <Space>
-            <SpaceItem>
+        <TSpace>
+            <TSpaceItem>
 
-                <Menu Aside>
-                    <MenuItem>菜单1</MenuItem>
-                    <MenuItem Active>菜单2</MenuItem>
-                    <MenuItem Disabled>禁用菜单</MenuItem>
-                    <MenuItem>个人中心</MenuItem>
-                    <MenuItem>消息</MenuItem>
-                </Menu>
-            </SpaceItem>
-            <SpaceItem>
+                <TMenu Aside>
+                    <TMenuItem>菜单1</TMenuItem>
+                    <TMenuItem Active>菜单2</TMenuItem>
+                    <TMenuItem Disabled>禁用菜单</TMenuItem>
+                    <TMenuItem>个人中心</TMenuItem>
+                    <TMenuItem>消息</TMenuItem>
+                </TMenu>
+            </TSpaceItem>
+            <TSpaceItem>
 
-                <Menu Aside Dark>
-                    <MenuItem>菜单1</MenuItem>
-                    <MenuItem Active>菜单2</MenuItem>
-                    <MenuItem Disabled>禁用菜单</MenuItem>
-                    <MenuItem>个人中心</MenuItem>
-                    <MenuItem>消息</MenuItem>
-                </Menu>
-            </SpaceItem>
-        </Space>
+                <TMenu Aside Dark>
+                    <TMenuItem>菜单1</TMenuItem>
+                    <TMenuItem Active>菜单2</TMenuItem>
+                    <TMenuItem Disabled>禁用菜单</TMenuItem>
+                    <TMenuItem>个人中心</TMenuItem>
+                    <TMenuItem>消息</TMenuItem>
+                </TMenu>
+            </TSpaceItem>
+        </TSpace>
         <br />
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu Aside>
-    <MenuItem>菜单1</MenuItem>
-    <MenuItem Active>菜单2</MenuItem>
-    <MenuItem Disabled>禁用菜单</MenuItem>
-    <MenuItem>个人中心</MenuItem>
-    <MenuItem>消息</MenuItem>
-</Menu>
+<TMenu Aside>
+    <TMenuItem>菜单1</TMenuItem>
+    <TMenuItem Active>菜单2</TMenuItem>
+    <TMenuItem Disabled>禁用菜单</TMenuItem>
+    <TMenuItem>个人中心</TMenuItem>
+    <TMenuItem>消息</TMenuItem>
+</TMenu>
 
-<Menu Aside Dark>
-    <MenuItem>菜单1</MenuItem>
-    <MenuItem Active>菜单2</MenuItem>
-    <MenuItem Disabled>禁用菜单</MenuItem>
-    <MenuItem>个人中心</MenuItem>
-    <MenuItem>消息</MenuItem>
-</Menu>
+<TMenu Aside Dark>
+    <TMenuItem>菜单1</TMenuItem>
+    <TMenuItem Active>菜单2</TMenuItem>
+    <TMenuItem Disabled>禁用菜单</TMenuItem>
+    <TMenuItem>个人中心</TMenuItem>
+    <TMenuItem>消息</TMenuItem>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -178,50 +178,50 @@
 
     </Description>
     <RunContent>
-        <Space>
-            <SpaceItem>
-                <Menu Aside>
-                    <MenuItem>菜单1</MenuItem>
-                    <MenuItem Active>菜单2</MenuItem>
-                    <SubMenu Title="菜单3">
-                        <MenuItem>菜单3-2</MenuItem>
-                        <MenuItem>菜单3-3</MenuItem>
-                    </SubMenu>
-                </Menu>
-            </SpaceItem>
-            <SpaceItem>
-                <Menu Aside Dark>
-                    <MenuItem>菜单1</MenuItem>
-                    <MenuItem Active>菜单2</MenuItem>
-                    <SubMenu Title="菜单3">
-                        <MenuItem>菜单3-2</MenuItem>
-                        <MenuItem>菜单3-3</MenuItem>
-                    </SubMenu>
-                </Menu>
-            </SpaceItem>
-        </Space>
+        <TSpace>
+            <TSpaceItem>
+                <TMenu Aside>
+                    <TMenuItem>菜单1</TMenuItem>
+                    <TMenuItem Active>菜单2</TMenuItem>
+                    <TSubMenu Title="菜单3">
+                        <TMenuItem>菜单3-2</TMenuItem>
+                        <TMenuItem>菜单3-3</TMenuItem>
+                    </TSubMenu>
+                </TMenu>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TMenu Aside Dark>
+                    <TMenuItem>菜单1</TMenuItem>
+                    <TMenuItem Active>菜单2</TMenuItem>
+                    <TSubMenu Title="菜单3">
+                        <TMenuItem>菜单3-2</TMenuItem>
+                        <TMenuItem>菜单3-3</TMenuItem>
+                    </TSubMenu>
+                </TMenu>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu Aside>
-    <MenuItem>菜单1</MenuItem>
-    <MenuItem Active>菜单2</MenuItem>
-    <SubMenu Title=""菜单3"">
-        <MenuItem>菜单3-2</MenuItem>
-        <MenuItem>菜单3-3</MenuItem>
-    </SubMenu>
-</Menu>
+<TMenu Aside>
+    <TMenuItem>菜单1</TMenuItem>
+    <TMenuItem Active>菜单2</TMenuItem>
+    <TSubMenu Title=""菜单3"">
+        <TMenuItem>菜单3-2</TMenuItem>
+        <TMenuItem>菜单3-3</TMenuItem>
+    </TSubMenu>
+</TMenu>
 
 
-<Menu Aside Dark>
-    <MenuItem>菜单1</MenuItem>
-    <MenuItem Active>菜单2</MenuItem>
-    <SubMenu Title=""菜单3"">
-        <MenuItem>菜单3-2</MenuItem>
-        <MenuItem>菜单3-3</MenuItem>
-    </SubMenu>
-</Menu>
+<TMenu Aside Dark>
+    <TMenuItem>菜单1</TMenuItem>
+    <TMenuItem Active>菜单2</TMenuItem>
+    <TSubMenu Title=""菜单3"">
+        <TMenuItem>菜单3-2</TMenuItem>
+        <TMenuItem>菜单3-3</TMenuItem>
+    </TSubMenu>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -230,30 +230,30 @@
 <Example Title="可分组的侧边导航" RunStyle="@Code.BgRun">
     <Description>针对大量页面进行分组展示，以方便用户理解及查找。一般在大量业务或者页面需要展示的网站使用。</Description>
     <RunContent>
-        <Menu Aside>
+        <TMenu Aside>
             <MenuItemGroup Title="分组1">
-                <MenuItem>菜单1</MenuItem>
+                <TMenuItem>菜单1</TMenuItem>
             </MenuItemGroup>
             <MenuItemGroup Title="分组菜单2">
-                <MenuItem>菜单2</MenuItem>
-                <MenuItem Active>菜单3</MenuItem>
-                <MenuItem>菜单4</MenuItem>
+                <TMenuItem>菜单2</TMenuItem>
+                <TMenuItem Active>菜单3</TMenuItem>
+                <TMenuItem>菜单4</TMenuItem>
             </MenuItemGroup>
-        </Menu>
+        </TMenu>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu Aside>
+<TMenu Aside>
     <MenuItemGroup Title=""分组1"">
-        <MenuItem>菜单1</MenuItem>
+        <TMenuItem>菜单1</TMenuItem>
     </MenuItemGroup>
     <MenuItemGroup Title=""分组菜单2"">
-        <MenuItem>菜单2</MenuItem>
-        <MenuItem Active>菜单3</MenuItem>
-        <MenuItem>菜单4</MenuItem>
+        <TMenuItem>菜单2</TMenuItem>
+        <TMenuItem Active>菜单3</TMenuItem>
+        <TMenuItem>菜单4</TMenuItem>
     </MenuItemGroup>
-</Menu>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -264,57 +264,57 @@
         在侧边导航上提供收起按钮，点击后可以将侧边栏最小化，常见于带有图标的侧边导航。
     </Description>
     <RunContent>
-        <Space>
-            <SpaceItem>
-                <Menu Aside Collapse>
+        <TSpace>
+            <TSpaceItem>
+                <TMenu Aside TCollapse>
                     <LogoContent>
                         <span>Logo</span>
                     </LogoContent>
                     <ChildContent>
-                    <MenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</MenuItem>
-                    <MenuItem IconPrefix="IconName.User">用户中心</MenuItem>
-                    <MenuItem IconPrefix="IconName.Mail">消息中心</MenuItem>
+                    <TMenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</TMenuItem>
+                    <TMenuItem IconPrefix="IconName.User">用户中心</TMenuItem>
+                    <TMenuItem IconPrefix="IconName.Mail">消息中心</TMenuItem>
                     </ChildContent>
-                </Menu>
-            </SpaceItem>
-            <SpaceItem>
-                <Menu Aside Dark Collapse>
+                </TMenu>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TMenu Aside Dark TCollapse>
                     <LogoContent>
                         <span>Logo</span>
                     </LogoContent>
                     <ChildContent>
-                        <MenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</MenuItem>
-                        <MenuItem IconPrefix="IconName.User">用户中心</MenuItem>
-                        <MenuItem IconPrefix="IconName.Mail">消息中心</MenuItem>
+                        <TMenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</TMenuItem>
+                        <TMenuItem IconPrefix="IconName.User">用户中心</TMenuItem>
+                        <TMenuItem IconPrefix="IconName.Mail">消息中心</TMenuItem>
                     </ChildContent>
-                </Menu>
-            </SpaceItem>
-        </Space>
+                </TMenu>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu Aside Collapse>
+<TMenu Aside TCollapse>
     <LogoContent>
         Logo
     </LogoContent>
     <ChildContent>
-        <MenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</MenuItem>
-        <MenuItem IconPrefix=""IconName.User"">用户中心</MenuItem>
-        <MenuItem IconPrefix=""IconName.Mail"">消息中心</MenuItem>
+        <TMenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.User"">用户中心</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.Mail"">消息中心</TMenuItem>
     </ChildContent>
-</Menu>
+</TMenu>
 
-<Menu Aside Dark Collapse>
+<TMenu Aside Dark TCollapse>
     <LogoContent>
         Logo
     </LogoContent>
     <ChildContent>
-        <MenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</MenuItem>
-        <MenuItem IconPrefix=""IconName.User"">用户中心</MenuItem>
-        <MenuItem IconPrefix=""IconName.Mail"">消息中心</MenuItem>
+        <TMenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.User"">用户中心</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.Mail"">消息中心</TMenuItem>
     </ChildContent>
-</Menu>
+</TMenu>
 ```
 ")
     </CodeContent>
@@ -325,57 +325,57 @@
         通过 <code>Width</code> 设置侧边导航的宽度。
     </Description>
     <RunContent>
-        <Space>
-            <SpaceItem>
-                <Menu Aside>
+        <TSpace>
+            <TSpaceItem>
+                <TMenu Aside>
                     <LogoContent>
                         <span>Logo</span>
                     </LogoContent>
                     <ChildContent>
-                    <MenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</MenuItem>
-                    <MenuItem IconPrefix="IconName.User">用户中心</MenuItem>
-                    <MenuItem IconPrefix="IconName.Mail">消息中心</MenuItem>
+                    <TMenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</TMenuItem>
+                    <TMenuItem IconPrefix="IconName.User">用户中心</TMenuItem>
+                    <TMenuItem IconPrefix="IconName.Mail">消息中心</TMenuItem>
                     </ChildContent>
-                </Menu>
-            </SpaceItem>
-            <SpaceItem>
-                <Menu Aside Width="150">
+                </TMenu>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TMenu Aside Width="150">
                     <LogoContent>
                         <span>Logo</span>
                     </LogoContent>
                     <ChildContent>
-                        <MenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</MenuItem>
-                        <MenuItem IconPrefix="IconName.User">用户中心</MenuItem>
-                        <MenuItem IconPrefix="IconName.Mail">消息中心</MenuItem>
+                        <TMenuItem IconPrefix="IconName.Dashboard" Active>仪表盘</TMenuItem>
+                        <TMenuItem IconPrefix="IconName.User">用户中心</TMenuItem>
+                        <TMenuItem IconPrefix="IconName.Mail">消息中心</TMenuItem>
                     </ChildContent>
-                </Menu>
-            </SpaceItem>
-        </Space>
+                </TMenu>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Menu Aside>
+<TMenu Aside>
     <LogoContent>
         Logo
     </LogoContent>
     <ChildContent>
-        <MenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</MenuItem>
-        <MenuItem IconPrefix=""IconName.User"">用户中心</MenuItem>
-        <MenuItem IconPrefix=""IconName.Mail"">消息中心</MenuItem>
+        <TMenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.User"">用户中心</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.Mail"">消息中心</TMenuItem>
     </ChildContent>
-</Menu>
+</TMenu>
 
-<Menu Aside Width=""150"">
+<TMenu Aside Width=""150"">
     <LogoContent>
         Logo
     </LogoContent>
     <ChildContent>
-        <MenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</MenuItem>
-        <MenuItem IconPrefix=""IconName.User"">用户中心</MenuItem>
-        <MenuItem IconPrefix=""IconName.Mail"">消息中心</MenuItem>
+        <TMenuItem IconPrefix=""IconName.Dashboard"" Active>仪表盘</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.User"">用户中心</TMenuItem>
+        <TMenuItem IconPrefix=""IconName.Mail"">消息中心</TMenuItem>
     </ChildContent>
-</Menu>
+</TMenu>
 ```
 ")
     </CodeContent>

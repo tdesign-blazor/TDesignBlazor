@@ -1,32 +1,32 @@
 ﻿@page "/components/icon"
 
-<PageHeader Title="Icon 图标">
-    Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。
+<PageHeader Title="TIcon 图标">
+    TIcon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。
 </PageHeader>
-<Alert Theme="Theme.Primary">
-    使用枚举 <code>IconName</code> 可以获取目前已有的图标名称，或使用字符串自定义图标名称。图标预览看这里 <Link Hover="LinkHover.Underline" Theme="Theme.Primary" Href="https://tdesign.tencent.com/vue/components/icon" target="_blank">https://tdesign.tencent.com/vue/components/icon</Link>
-</Alert>
+<TAlert Theme="Theme.Primary">
+    使用枚举 <code>IconName</code> 可以获取目前已有的图标名称，或使用字符串自定义图标名称。图标预览看这里 <TLink Hover="LinkHover.Underline" Theme="Theme.Primary" Href="https://tdesign.tencent.com/vue/components/icon" target="_blank">https://tdesign.tencent.com/vue/components/icon</TLink>
+</TAlert>
 <Example Title="使用图标">
     <Description></Description>
     <RunContent>
-        <Icon Name="IconName.CheckCircleFilled" Size="12px" />
-        <Icon Name="IconName.CheckCircleFilled" />
-        <Icon Name="IconName.CheckCircleFilled" Size="2.5rem"/>
+        <TIcon Name="IconName.CheckCircleFilled" Size="12px" />
+        <TIcon Name="IconName.CheckCircleFilled" />
+        <TIcon Name="IconName.CheckCircleFilled" Size="2.5rem"/>
         <br />
-        <Icon Name="IconName.Loading"/>
-        <Icon Name="IconName.Loading" Color="red" Size="22px"/>
-        <Icon Name="IconName.Loading" Color="#00ff00" Size="34px"/>
+        <TIcon Name="IconName.Loading"/>
+        <TIcon Name="IconName.Loading" Color="red" Size="22px"/>
+        <TIcon Name="IconName.Loading" Color="#00ff00" Size="34px"/>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Icon Name=""IconName.CheckCircleFilled"" Size=""12px"" />
-<Icon Name=""IconName.CheckCircleFilled"" />
-<Icon Name=""IconName.CheckCircleFilled"" Size=""2.5rem""/>
+<TIcon Name=""IconName.CheckCircleFilled"" Size=""12px"" />
+<TIcon Name=""IconName.CheckCircleFilled"" />
+<TIcon Name=""IconName.CheckCircleFilled"" Size=""2.5rem""/>
 
-<Icon Name=""IconName.Loading""/>
-<Icon Name=""IconName.Loading"" Color=""red"" Size=""22px""/>
-<Icon Name=""IconName.Loading"" Color=""#00ff00"" Size=""34px""/>
+<TIcon Name=""IconName.Loading""/>
+<TIcon Name=""IconName.Loading"" Color=""red"" Size=""22px""/>
+<TIcon Name=""IconName.Loading"" Color=""#00ff00"" Size=""34px""/>
 ```
 ")
     </CodeContent>

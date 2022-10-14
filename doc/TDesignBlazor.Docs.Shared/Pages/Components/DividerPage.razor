@@ -8,20 +8,20 @@
     <Description>水平分割线常用来对不同元素内容进行分割。</Description>
     <RunContent>
         <p>这是第一种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
-        <Divider/>
+        <TDivider/>
         <p>这是第二种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。
 
 </p>
-<Divider/>
+<TDivider/>
 <p>这是第三种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 ...
-<Divider />
+<TDivider />
 ...
-<Divider />
+<TDivider />
 ...
 ```
 ")
@@ -30,12 +30,12 @@
 <Example Title="垂直分割线">
     <Description>垂直分割线常用来做行内分割。</Description>
     <RunContent>
-        正直 <Divider Vertical /> 进取 <Divider Vertical /> xxxx <Divider Vertical /> 创新 <Divider Vertical /> 共赢
+        正直 <TDivider Vertical /> 进取 <TDivider Vertical /> xxxx <TDivider Vertical /> 创新 <TDivider Vertical /> 共赢
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-正直 <Divider Vertical /> 进取 <Divider Vertical /> xxxx <Divider Vertical /> 创新 <Divider Vertical /> 共赢
+正直 <TDivider Vertical /> 进取 <TDivider Vertical /> xxxx <TDivider Vertical /> 创新 <TDivider Vertical /> 共赢
 ```
 ")
     </CodeContent>
@@ -44,18 +44,18 @@
     <Description>带文字的分割线是在分割线中嵌入文字，在需要对分割内容进行解释说明时使用。</Description>
     <RunContent>
                 <p>这是第一种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
-        <Divider>Blazor TDesignBlazor</Divider>
+        <TDivider>Blazor TDesignBlazor</TDivider>
         <p>这是第二种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。
 
 </p>
-<Divider>Blazor TDesignBlazor</Divider>
+<TDivider>Blazor TDesignBlazor</TDivider>
 <p>这是第三种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 ...
-<Divider>显示的文字</Divider>
+<TDivider>显示的文字</TDivider>
 ...
 ```
 ")
@@ -65,20 +65,20 @@
     <Description>可以让文字拥有左、中（默认）、右三种对齐方式。</Description>
     <RunContent>
         <p>这是第一种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
-        <Divider Alignment="HorizontalAlignment.Left">Blazor TDesignBlazor</Divider>
+        <TDivider Alignment="HorizontalAlignment.Left">Blazor TDesignBlazor</TDivider>
         <p>这是第二种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。
 
 </p>
-<Divider>Blazor TDesignBlazor</Divider>
+<TDivider>Blazor TDesignBlazor</TDivider>
 <p>这是第三种类型的内容元素或信息数据，通过分割线进行分割。分割线方便用户清晰明确的读取和预览，减少信息符合，提高用户使用效率。避免大段内容的聚集、信息负荷过多，导致信息获取或内容操作效率降低。</p>
-<Divider Alignment="HorizontalAlignment.Right">Blazor TDesignBlazor</Divider>
+<TDivider Alignment="HorizontalAlignment.Right">Blazor TDesignBlazor</TDivider>
     </RunContent>
     <CodeContent>
 @Code.Create(@"
 ```html
-<Divider Alignment=""HorizontalAlignment.Left"">左对齐</Divider>
-<Divider Alignment=""HorizontalAlignment.Center"">居中对齐</Divider>
-<Divider Alignment=""HorizontalAlignment.Right"">右对齐</Divider>
+<TDivider Alignment=""HorizontalAlignment.Left"">左对齐</TDivider>
+<TDivider Alignment=""HorizontalAlignment.Center"">居中对齐</TDivider>
+<TDivider Alignment=""HorizontalAlignment.Right"">右对齐</TDivider>
 ```
 ")
 </CodeContent>
@@ -86,12 +86,12 @@
 <Example Title="虚线">
     <Description></Description>
     <RunContent>
-        <Divider Dashed/>
+        <TDivider Dashed/>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Divider Dashed/>
+<TDivider Dashed/>
 ```
 ")
     </CodeContent>

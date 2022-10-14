@@ -1,7 +1,7 @@
 ﻿using ComponentBuilder;
 
 namespace TDesignBlazor.Test.Components;
-public class DividerTest : TestBase<Divider>
+public class DividerTest : TestBase<TDivider>
 {
     [Fact(DisplayName = "Divider - 默认样式的渲染")]
     public void Test_Render_With_Default_Class()

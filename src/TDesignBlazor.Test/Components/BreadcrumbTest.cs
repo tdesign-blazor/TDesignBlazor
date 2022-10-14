@@ -1,10 +1,10 @@
 ﻿namespace TDesignBlazor.Test.Components;
-public class BreadcrumbTest : TestBase<BreadcrumbItem>
+public class BreadcrumbTest : TestBase<TBreadcrumbItem>
 {
     [Fact(DisplayName = "Breadcrumb - 渲染元素和默认样式")]
     public void Test_Render_Breadcrumb()
     {
-        TestContext.RenderComponent<Breadcrumb>().Should().HaveClass("t-breadcrumb");
+        TestContext.RenderComponent<TBreadcrumb>().Should().HaveClass("t-breadcrumb");
     }
 
     [Fact(DisplayName = "BreadcrumbItem - 渲染子项和默认样式")]

@@ -15,7 +15,7 @@ public abstract class MessageComponentBase : BlazorComponentBase, IHasChildConte
     /// <summary>
     /// 图标。
     /// </summary>
-    [Parameter] public object? Icon { get; set; }
+    [Parameter] public object? TIcon { get; set; }
 
     /// <summary>
     /// 获取对应的主题样式。
@@ -47,13 +47,13 @@ public abstract class MessageComponentBase : BlazorComponentBase, IHasChildConte
     {
         base.OnParametersSet();
 
-        Icon ??= GetIconByTheme;
+        TIcon ??= GetTIconByTheme;
     }
 
     /// <summary>
     /// 获取主题对应的图标。
     /// </summary>
-    protected virtual IconName? GetIconByTheme
+    protected virtual IconName? GetTIconByTheme
     {
         get
         {

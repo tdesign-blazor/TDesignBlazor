@@ -1,32 +1,32 @@
 ﻿@page "/components/avatar"
 
-<PageHeader Title="Avatar 头像">
+<PageHeader Title="TAvatar 头像">
     用图标、图片、字符的形式展示用户或事物信息
 </PageHeader>
 
 <Example Title="头像类型">
     <Description>头像提供了 3 种不同类型的头像：图标头像、图片头像、字符头像</Description>
     <RunContent>
-        <Space Gap="24px">
-            <SpaceItem>
-                <Avatar Url="avatar.jpg"/>
-            </SpaceItem>
-            <SpaceItem>
-                <Avatar Icon="@IconName.User"/>
-            </SpaceItem>
-            <SpaceItem>
-                <Avatar>W</Avatar>
-            </SpaceItem>
-        </Space>
+        <TSpace Gap="24px">
+            <TSpaceItem>
+                <TAvatar Url="avatar.jpg"/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TAvatar TIcon="@IconName.User"/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TAvatar>W</TAvatar>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Avatar Url=""avatar.jpg""/>
+<TAvatar Url=""avatar.jpg""/>
 
-<Avatar Icon=""@IconName.User""/>
+<TAvatar TIcon=""@IconName.User""/>
 
-<Avatar>W</Avatar>
+<TAvatar>W</TAvatar>
 ```
 ")
     </CodeContent>
@@ -34,21 +34,21 @@
 <Example Title="头像形状">
     <Description></Description>
     <RunContent>
-        <Space Gap="24px">
-            <SpaceItem>
-                <Avatar Shape="Shape.Round">王</Avatar>
-            </SpaceItem>
-            <SpaceItem>
-                <Avatar Shape="Shape.Circle">周</Avatar>
-            </SpaceItem>
-        </Space>
+        <TSpace Gap="24px">
+            <TSpaceItem>
+                <TAvatar Shape="Shape.Round">王</TAvatar>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TAvatar Shape="Shape.Circle">周</TAvatar>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Avatar Shape=""Shape.Round"">王</Avatar>
+<TAvatar Shape=""Shape.Round"">王</TAvatar>
 
-<Avatar Shape=""Shape.Circle"">周</Avatar>
+<TAvatar Shape=""Shape.Circle"">周</TAvatar>
 ```
 ")
     </CodeContent>
@@ -57,50 +57,50 @@
 <Example Title="头像尺寸">
     <Description></Description>
     <RunContent>
-        <Avatar Size="Size.Small">W</Avatar>
-        <Avatar Size="Size.Medium">W</Avatar>
-        <Avatar Size="Size.Large">W</Avatar>
+        <TAvatar Size="Size.Small">W</TAvatar>
+        <TAvatar Size="Size.Medium">W</TAvatar>
+        <TAvatar Size="Size.Large">W</TAvatar>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Avatar Size=""Size.Small"">W</Avatar>
-<Avatar Size=""Size.Medium"">W</Avatar>
-<Avatar Size=""Size.Large"">W</Avatar>
+<TAvatar Size=""Size.Small"">W</TAvatar>
+<TAvatar Size=""Size.Medium"">W</TAvatar>
+<TAvatar Size=""Size.Large"">W</TAvatar>
 ```
 ")
     </CodeContent>
 </Example>
 <Example Title="组合头像">
-    <Description>使用 <code>AvatarGroup</code> 来组合内部的 <code>Avatar</code> 组件。</Description>
+    <Description>使用 <code>TAvatarGroup</code> 来组合内部的 <code>TAvatar</code> 组件。</Description>
     <RunContent>
-        <AvatarGroup>
-            <Avatar Url="avatar.jpg"/>
-            <Avatar Icon="IconName.User"/>
-            <Avatar>W</Avatar>
-        </AvatarGroup>
+        <TAvatarGroup>
+            <TAvatar Url="avatar.jpg"/>
+            <TAvatar TIcon="IconName.User"/>
+            <TAvatar>W</TAvatar>
+        </TAvatarGroup>
         <br/>
 
-        <AvatarGroup Size="Size.Large">
-            <Avatar Url="avatar.jpg" />
-            <Avatar Icon="IconName.User" />
-            <Avatar>W</Avatar>
-        </AvatarGroup>
+        <TAvatarGroup Size="Size.Large">
+            <TAvatar Url="avatar.jpg" />
+            <TAvatar TIcon="IconName.User" />
+            <TAvatar>W</TAvatar>
+        </TAvatarGroup>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<AvatarGroup>
-    <Avatar Url=""avatar.jpg""/>
-    <Avatar Icon=""IconName.User""/>
-    <Avatar>W</Avatar>
-</AvatarGroup>
+<TAvatarGroup>
+    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar TIcon=""IconName.User""/>
+    <TAvatar>W</TAvatar>
+</TAvatarGroup>
 
-<AvatarGroup Size=""Size.Large"">
-    <Avatar Url=""avatar.jpg"" />
-    <Avatar Icon=""IconName.User"" />
-    <Avatar>W</Avatar>
-</AvatarGroup>
+<TAvatarGroup Size=""Size.Large"">
+    <TAvatar Url=""avatar.jpg"" />
+    <TAvatar TIcon=""IconName.User"" />
+    <TAvatar>W</TAvatar>
+</TAvatarGroup>
 ```
 ")
     </CodeContent>
@@ -108,32 +108,32 @@
 <Example Title="组合头像的偏移方向">
     <Description>设置 <code>Left</code> 则改变头像组的偏移方向</Description>
     <RunContent>
-        <AvatarGroup>
-            <Avatar Url="avatar.jpg" />
-            <Avatar Icon="IconName.User" />
-            <Avatar>W</Avatar>
-        </AvatarGroup>
+        <TAvatarGroup>
+            <TAvatar Url="avatar.jpg" />
+            <TAvatar TIcon="IconName.User" />
+            <TAvatar>W</TAvatar>
+        </TAvatarGroup>
         <br />
-        <AvatarGroup Left>
-            <Avatar Url="avatar.jpg" />
-            <Avatar Icon="IconName.User" />
-            <Avatar>W</Avatar>
-        </AvatarGroup>
+        <TAvatarGroup Left>
+            <TAvatar Url="avatar.jpg" />
+            <TAvatar TIcon="IconName.User" />
+            <TAvatar>W</TAvatar>
+        </TAvatarGroup>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<AvatarGroup>
-    <Avatar Url=""avatar.jpg""/>
-    <Avatar Icon=""IconName.User""/>
-    <Avatar>W</Avatar>
-</AvatarGroup>
+<TAvatarGroup>
+    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar TIcon=""IconName.User""/>
+    <TAvatar>W</TAvatar>
+</TAvatarGroup>
 
-<AvatarGroup Left>
-    <Avatar Url=""avatar.jpg""/>
-    <Avatar Icon=""IconName.User""/>
-    <Avatar>W</Avatar>
-</AvatarGroup>
+<TAvatarGroup Left>
+    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar TIcon=""IconName.User""/>
+    <TAvatar>W</TAvatar>
+</TAvatarGroup>
 ```
 ")
     </CodeContent>

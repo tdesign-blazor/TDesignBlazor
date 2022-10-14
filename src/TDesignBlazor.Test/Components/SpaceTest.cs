@@ -1,5 +1,5 @@
 ﻿namespace TDesignBlazor.Test.Components;
-public class SpaceTest : TestBase<Space>
+public class SpaceTest : TestBase<TSpace>
 {
     [Fact(DisplayName = "Space - 渲染和默认样式")]
     public void Test_Render()
@@ -24,9 +24,9 @@ public class SpaceTest : TestBase<Space>
         GetComponent(m => m.Add(p => p.BreakLine, true)).Should().HaveAttribute("style", "gap:16px;flex-wrap:wrap");
     }
 
-    [Fact(DisplayName = "SpaceItem - 渲染元素和默认样式")]
+    [Fact(DisplayName = "TSpaceItem - 渲染元素和默认样式")]
     public void Test_SpaceItem_Render()
     {
-        TestContext.RenderComponent<SpaceItem>().Should().HaveClass("t-space-item");
+        TestContext.RenderComponent<TSpaceItem>().Should().HaveClass("t-space-item");
     }
 }

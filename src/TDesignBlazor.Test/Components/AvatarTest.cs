@@ -1,7 +1,7 @@
 ﻿using ComponentBuilder;
 
 namespace TDesignBlazor.Test.Components;
-public class AvatarTest : TestBase<Avatar>
+public class AvatarTest : TestBase<TAvatar>
 {
     [Fact(DisplayName = "Avatar - 渲染 img 元素和默认样式")]
     public void Test_Render_Avatar()
@@ -43,7 +43,7 @@ public class AvatarTest : TestBase<Avatar>
     [Fact(DisplayName = "AvatarGroup - 渲染头像组")]
     public void Test_Render_AvatarGroup_With_Avatars()
     {
-        TestContext.RenderComponent<AvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<Avatar>(0)))
+        TestContext.RenderComponent<TAvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<TAvatar>(0)))
             .Should().HaveClass("t-avatar-group").And.HaveClass("t-avatar--offset-left")
             .And.HaveChildMarkup("<div class=\"t-avatar t-avatar--circle\"></div>")
             ;
@@ -52,7 +52,7 @@ public class AvatarTest : TestBase<Avatar>
     [Fact(DisplayName = "AvatarGroup - 渲染头像组统一大小")]
     public void Test_Render_AvatarGroup_Size_Parapeter_With_Avatars()
     {
-        TestContext.RenderComponent<AvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<Avatar>(0)).Add(p => p.Size, Size.Large))
+        TestContext.RenderComponent<TAvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<TAvatar>(0)).Add(p => p.Size, Size.Large))
             .Should().HaveClass("t-avatar-group")
             .And.HaveChildMarkup("<div class=\"t-avatar t-avatar--circle t-size-l\"></div>")
             ;
@@ -61,7 +61,7 @@ public class AvatarTest : TestBase<Avatar>
     [Fact(DisplayName = "AvatarGroup - Left 参数")]
     public void Test_AvatarGroup_Left_Parameter()
     {
-        TestContext.RenderComponent<AvatarGroup>(m => m.Add(p => p.Left, true))
+        TestContext.RenderComponent<TAvatarGroup>(m => m.Add(p => p.Left, true))
             .Should().HaveClass("t-avatar--offset-right");
     }
 }
