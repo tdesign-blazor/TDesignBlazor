@@ -71,6 +71,11 @@ public class Input<TValue> : TDesignInputComonentBase<TValue>
         base.BuildAttributes(attributes);
         attributes["value"] = CurrentValueAsString;
     }
+
+    protected override string? FormatValueAsString(TValue? value)
+    {
+        return BindConverter.FormatValue<TValue>(value)?.ToString();
+    }
 }
 
 public enum InputType
