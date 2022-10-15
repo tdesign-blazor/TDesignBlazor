@@ -58,7 +58,7 @@ jobs:
         run: |
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
-          find ./src/TDesignBlazor.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
+          find ./src/TDesign.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
