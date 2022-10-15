@@ -1,17 +1,17 @@
 ﻿@page "/components/image"
-<PageHeader Title="Image 图片">
+<PageHeader Title="TImage 图片">
     用于展示图片素材。
 </PageHeader>
 
 <Example Title="示例">
     <Description></Description>
     <RunContent>
-            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="ImageFitType.Cover" style="width: 120px; height: 120px;"></Image>
+            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="ImageFitType.Cover" style="width: 120px; height: 120px;"></TImage>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""FitType.Cover"" style=""width: 120px; height: 120px;""></Image>
+<TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""FitType.Cover"" style=""width: 120px; height: 120px;""></TImage>
 ```
 ")
     </CodeContent>
@@ -28,7 +28,7 @@
         {
                                                                                                          <TSpaceItem>
                                                                                                              <div class="Image__wrapper Image__wrapper--shape-square" style="width: 120px; height: 120px;">
-                                                                                                                 <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></Image>
+                                                                                                                 <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png" Fit="item" style="width:120px;height:120px"></TImage>
                                                                                                              </div>
                                                                                                              <span>@item.ToString()</span>
                                                                                                          </TSpaceItem>
@@ -46,7 +46,7 @@
                 {
                      <TSpaceItem>
                          <div class=""Image__wrapper Image__wrapper--shape-square"" style=""width: 120px; height: 120px;"">
-                             <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></Image>
+                             <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png"" Fit=""item"" style=""width:120px;height:120px""></TImage>
                          </div>
                          <span>@item.ToString()</span>
                      </TSpaceItem>
@@ -66,7 +66,7 @@
             <TSpaceItem >
                 <TSpace Vertical >
                     <TSpaceItem>
-                      <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                      <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            Position="Position.Center"
                            style="width:120px;height:120px" />
@@ -76,7 +76,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:120px;height:120px"
                            Position="Position.Left" />
@@ -86,7 +86,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:120px;height:120px"
                            Position="Position.Right" />
@@ -98,7 +98,7 @@
             <TSpaceItem >
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:280px;height:120px"
                            Position="Position.Top" />
@@ -108,7 +108,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Cover"
                            style="width:280px;height:120px"
                            Position="Position.Bottom" />
@@ -119,7 +119,7 @@
             </TSpaceItem>
             <TSpaceItem >
                 <TSpace Vertical>
-                    <TSpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                    <TSpaceItem><TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Top" />
@@ -127,7 +127,7 @@
 
                 </TSpace>
                 <TSpace Vertical>
-                                        <TSpaceItem><Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                        <TSpaceItem><TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Bottom" />
@@ -135,7 +135,7 @@
 
                 </TSpace>
                 <TSpace Vertical>
-                                        <TSpaceItem> <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                        <TSpaceItem> <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                            Fit="ImageFitType.Contain"
                            style="width:120px;height:200px"
                            Position="Position.Center" />
@@ -146,7 +146,7 @@
             <TSpaceItem >
                     <TSpace Vertical>
                         <TSpaceItem>
-                                                    <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                                                    <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="ImageFitType.Contain"
                                style="width:280px;height:120px"
                                Position="Position.Left" />
@@ -155,7 +155,7 @@
 
                     </TSpace>
                     <TSpace Vertical>
-                          <TSpaceItem>                        <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+                          <TSpaceItem>                        <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                                Fit="ImageFitType.Contain"
                                style="width:280px;height:120px"
                                Position="Position.Right" />
@@ -172,7 +172,7 @@
             <TSpaceItem >
                 <TSpace Vertical >
                     <TSpaceItem>
-                      <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                      <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            Position=""Position.Center""
                            style=""width:120px;height:120px"" />
@@ -182,7 +182,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                            <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:120px;height:120px""
                            Position=""Position.Left"" />
@@ -192,7 +192,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                            <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:120px;height:120px""
                            Position=""Position.Right"" />
@@ -204,7 +204,7 @@
             <TSpaceItem >
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                            <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:280px;height:120px""
                            Position=""Position.Top"" />
@@ -214,7 +214,7 @@
                 </TSpace>
                 <TSpace Vertical>
                     <TSpaceItem>
-                                            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                            <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Cover""
                            style=""width:280px;height:120px""
                            Position=""Position.Bottom"" />
@@ -225,7 +225,7 @@
             </TSpaceItem>
             <TSpaceItem >
                 <TSpace Vertical>
-                    <TSpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                    <TSpaceItem><TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Top"" />
@@ -233,7 +233,7 @@
 
                 </TSpace>
                 <TSpace Vertical>
-                                        <TSpaceItem><Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                        <TSpaceItem><TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Bottom"" />
@@ -241,7 +241,7 @@
 
                 </TSpace>
                 <TSpace Vertical>
-                                        <TSpaceItem> <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                        <TSpaceItem> <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                            Fit=""FitType.Contain""
                            style=""width:120px;height:200px""
                            Position=""Position.Center"" />
@@ -252,7 +252,7 @@
             <TSpaceItem >
                     <TSpace Vertical>
                         <TSpaceItem>
-                                                    <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                                                    <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                                Fit=""FitType.Contain""
                                style=""width:280px;height:120px""
                                Position=""Position.Left"" />
@@ -261,7 +261,7 @@
 
                     </TSpace>
                     <TSpace Vertical>
-                          <TSpaceItem>                        <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+                          <TSpaceItem>                        <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                                Fit=""FitType.Contain""
                                style=""width:280px;height:120px""
                                Position=""Position.Right"" />
@@ -280,7 +280,7 @@
     <RunContent>
    <TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         Shape="ShapeType.Square"
         style="width:160px;height:160px;"
@@ -289,7 +289,7 @@
       <span>square</span>
     </TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         style="width:160px;height:160px;"
         Fit="ImageFitType.Cover"
@@ -298,7 +298,7 @@
       <span>round</span>
     </TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
         style="width:160px;height:160px;"
         Shape="ShapeType.Circle"
@@ -313,7 +313,7 @@
 ```html
    <TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         Shape=""ShapeType.Square""
         style=""width:160px;height:160px;""
@@ -323,7 +323,7 @@
       <span>square</span>
     </TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         style=""width:160px;height:160px;""
         Fit=""FitType.Cover""
@@ -332,7 +332,7 @@
       <span>round</span>
     </TSpace>
     <TSpace Vertical>
-      <Image
+      <TImage
         Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
         style=""width:160px;height:160px;""
         Shape=""ShapeType.Circle""
@@ -349,7 +349,7 @@
 <Example Title="图集样式的图片">
     <Description>图片呈现图集样式的效果。</Description>
     <RunContent>
-            <Image Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
+            <TImage Src="https://tdesign.gtimg.com/demo/demo-image-1.png"
                 style=" width:284px;height:160px;"
                 Gallery="true"
                 OverlayContent="label"
@@ -358,7 +358,7 @@
     <CodeContent>
     @Code.Create(@"
 ```html
-            <Image Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
+            <TImage Src=""https://tdesign.gtimg.com/demo/demo-image-1.png""
                 style="" width:284px;height:160px;""
                 Gallery=""true""
                 OverlayContent=""label""
