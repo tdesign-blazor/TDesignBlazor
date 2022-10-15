@@ -13,10 +13,10 @@
     <FileVersion>$(Version)</FileVersion>
     <OutputPath>.\bin\$(Configuration)</OutputPath>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <RepositoryUrl>https://github.com/AchievedOwner/TDesign</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
-    <PackageProjectUrl>https://github.com/AchievedOwner/TDesign</PackageProjectUrl>
-    <Copyright>TDesign © William 2022</Copyright>
+    <PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
+    <Copyright>TDesignBlazor © William 2022</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,9 +29,9 @@
     <PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
   </PropertyGroup>
   <PropertyGroup>
-	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
-	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	</PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug'">
       <PropertyGroup>
@@ -60,15 +60,15 @@
     <PackageReference Include="ComponentBuilder" Version="1.5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
-	  <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-	  </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Parameters\" />
-	</ItemGroup>
+  <ItemGroup>
+    <Folder Include="Parameters\" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\asset\logo.png">
