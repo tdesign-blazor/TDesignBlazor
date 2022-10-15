@@ -16,10 +16,9 @@
 ### 关于技术问题
 对于项目贡献相关的技术问题，你可以直接联系贡献者团队或其他的常规技术询问站点：
 
-<img src="./asset/tdesign-blazor.jpg" width="50%" height="50%"/>
-
 * 项目创始人邮箱 [william-zzh@outlook.com](mailto:william-zzh@outlook.com)
 * QQ群：1012762441
+* 微信群：TDesignBlazor 贡献者交流
 * [StackOverflow](http://www.stackoverflow.com)
 * [谷歌](http://www.google.com)
 * [微软文档](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/)
@@ -109,6 +108,16 @@
 为了确保整个源代码的一致性，在工作时请记住以下规则：
 * 要求代码符合 C# 代码规范，参考[https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md) 和 [微软官方 C# 编码约定](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/coding-style/identifier-names)
 * 完整且清晰的注释，要求组件的参数、暴露的 public、protected 方法都必须使用 `<summary>...</summary>` 进行描述。
+
+## 组件开发规范
+* 组件名称要以 **“T”** 字母作为开头，例如 `TButton`、`TTable`、`TTab`、`TInputText` 等，以最大限度避免与其他组件的命名出现冲突（项目中可能会有多个组件框架出现）
+  > 如何判断是组件类？组件类会继承 `BlazorComponentBase` 或 `TDesignComponentBase` 以及会以 `ComponentBase` 结尾的组件基类。
+* 可输入组件要以 `Input` 开头，例如 `TInputText`、`TInputCheckBox`
+* 分组或容器组件以 `Group` 或 `Container` 作为后缀命名，如 `TAvatarGroup`、`TInputGroup`
+* 组件的参数名称，尽可能与官方定义的组件名称保持一致
+* 可选参数优先使用枚举进行定义
+* 若一个参数可具备多种数据类型，请使用 `OneOf<>` 类型，例如 `OneOf<int, (int,int)>`
+* 必须编写组件的单元测试
 
 ## 第三方库
 项目中使用了一些第三方库来帮助我们完善某些功能的开发，请确保这些库是可以被直接使用的，项目的作者有权取消使用该类库以避免不必要的版权纠纷。
