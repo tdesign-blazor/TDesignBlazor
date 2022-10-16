@@ -1,6 +1,6 @@
 ﻿@page "/components/slider"
 
-<PageHeader Title="Slider 滑块">
+<PageHeader Title="TSlider 滑块">
     滑块（滑动型输入器），是帮助用户在连续或间断的区间内，通过滑动来选择合适数值（一个数值或范围数值）的控件。
 </PageHeader>
 
@@ -10,16 +10,16 @@
 <Example Title="横向滑块">
     <Description></Description>
     <RunContent>
-        <Slider Value="20"/>
+        <TSlider Value="20"/>
         <br />
         <br />
-        <Slider Value="(20,70)"/>
+        <TSlider Value="(20,70)"/>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Slider Value=""20""/>
-<Slider Value=""(20,70)""/>
+<TSlider Value=""20""/>
+<TSlider Value=""(20,70)""/>
 ```
 ")
     </CodeContent>
@@ -28,22 +28,22 @@
     <Description>要自定义高度层</Description>
     <RunContent>
         <div style="display:inline-block;padding:34px 25px;height:300px">
-            <Slider Value="20" Vertical />
+            <TSlider Value="20" Vertical />
         </div>
         <br />
         <br /><div style="display:inline-block;padding:34px 25px;height:300px">
-            <Slider Value="(20,70)" Vertical />
+            <TSlider Value="(20,70)" Vertical />
         </div>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 <div style=""display:inline-block;padding:34px 25px;height:300px"">
-    <Slider Value=""20"" Vertical />
+    <TSlider Value=""20"" Vertical />
 </div>
 
 <div style=""display:inline-block;padding:34px 25px;height:300px"">
-    <Slider Value=""(20,70)"" Vertical />
+    <TSlider Value=""(20,70)"" Vertical />
 </div>
 ```
 ")
@@ -53,16 +53,16 @@
     <Description></Description>
     <RunContent>
         
-        <Slider Value="20" Disabled/>
+        <TSlider Value="20" Disabled/>
         <br />
         <br />
-        <Slider Value="(20,70)" Disabled/>
+        <TSlider Value="(20,70)" Disabled/>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<Slider Value=""20"" Disabled/>
-<Slider Value=""(20,70)"" Disabled/>
+<TSlider Value=""20"" Disabled/>
+<TSlider Value=""(20,70)"" Disabled/>
 ```
 ")
     </CodeContent>
@@ -75,7 +75,7 @@
         要保证刻度有一个最小值和最大值的定义
     </Description>
     <RunContent>
-        <Slider Value="20" Marks="@(new(){
+        <TSlider Value="20" Marks="@(new(){
                                 [0]="0℃",
                                 [20]="20℃",
                                 [40]="40℃",
@@ -85,7 +85,7 @@
                             })"/>
         <br />
         <br />
-        <Slider Value="(20,70)" Marks="@(new(){
+        <TSlider Value="(20,70)" Marks="@(new(){
                                 [0]="0℃",
                                 [20]="20℃",
                                 [40]="40℃",
@@ -98,7 +98,7 @@
     <CodeContent>
         @Code.Create(@"
 ```html
-<Slider Value=""20"" Marks=""@(new(){
+<TSlider Value=""20"" Marks=""@(new(){
                         [0]=""0℃"",
                         [20]=""20℃"",
                         [40]=""40℃"",
@@ -107,7 +107,7 @@
                         [100]=""100℃"",
                     })""/>
 
-<Slider Value=""(20,70)"" Marks=""@(new(){
+<TSlider Value=""(20,70)"" Marks=""@(new(){
                         [0]=""0℃"",
                         [20]=""20℃"",
                         [40]=""40℃"",
@@ -123,7 +123,7 @@
     <Description></Description>
     <RunContent>
         <div style="display:inline-block;padding:34px 25px;height:300px">
-            <Slider Value="20" Vertical Marks="@(new(){
+            <TSlider Value="20" Vertical Marks="@(new(){
                                 [0]="0℃",
                                 [20]="20℃",
                                 [40]="40℃",
@@ -134,7 +134,7 @@
         </div>
         <br />
         <br /><div style="display:inline-block;padding:34px 25px;height:300px">
-            <Slider Value="(20,70)" Vertical Marks="@(new(){
+            <TSlider Value="(20,70)" Vertical Marks="@(new(){
                                 [0]="0℃",
                                 [20]="20℃",
                                 [40]="40℃",
@@ -148,7 +148,7 @@
         @Code.Create(@"
 ```html
 <div style=""display:inline-block;padding:34px 25px;height:300px"">
-    <Slider Value=""20"" Vertical Marks=""@(new(){
+    <TSlider Value=""20"" Vertical Marks=""@(new(){
                                     [100]=""100℃"",
                                     [80]=""80℃"",
                                     [60]=""60℃"",
@@ -159,7 +159,7 @@
 </div>
 
 <div style=""display:inline-block;padding:34px 25px;height:300px"">
-    <Slider Value=""(20,70)"" Vertical Marks=""@(new(){
+    <TSlider Value=""(20,70)"" Vertical Marks=""@(new(){
                                     [100]=""100℃"",
                                     [80]=""80℃"",
                                     [60]=""60℃"",
