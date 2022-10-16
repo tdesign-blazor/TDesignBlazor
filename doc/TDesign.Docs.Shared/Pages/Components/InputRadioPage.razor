@@ -1,0 +1,260 @@
+﻿@page "/components/radio"
+<PageHeader Title="TInputRadio 单选框">
+    单选框代表从一组互斥的选项中仅选择一个选项。
+</PageHeader>
+<HighlightAlert/>
+<Example Title="基本单选框">
+    <Description></Description>
+    <RunContent>
+        <TInputRadioGroup @bind-Value="Fruit">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <p>
+            您的选择：@Fruit
+        </p>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRadioGroup bind-Value=""Fruit"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+```
+```cs
+@code{
+    int Fruit{ get; set; }
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    int Fruit{ get; set; }
+}
+            
+<Example Title="单选框按钮的不同样式">
+    <Description>@Code.Create("设置 `ButtonStyle` 可使单选框呈现按钮的样式")</Description>
+    <RunContent>
+        <TInputRadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.Outline">
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.Outline" Disabled>
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+        <br/>
+        <br/>
+        <TInputRadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.Filled">
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.Filled" Disabled>
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Gender" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="DisabledGender" ButtonStyle="RadioButtonStyle.PrimaryFilled" Disabled>
+            <TInputRadio Value="0">男</TInputRadio>
+            <TInputRadio Value="1">女</TInputRadio>
+            <TInputRadio Value="2">其他</TInputRadio>
+        </TInputRadioGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.Outline"" Disabled>
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.Filled"" Disabled>
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Gender"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""DisabledGender"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"" Disabled>
+    <TInputRadio Value=""0"">男</TInputRadio>
+    <TInputRadio Value=""1"">女</TInputRadio>
+    <TInputRadio Value=""2"">其他</TInputRadio>
+</TInputRadioGroup>
+```
+```cs
+@code{
+    int Gender{ get; set; }
+    int DisabledGender { get; set; } = 1;
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    int Gender{ get; set; }
+    int DisabledGender { get; set; } = 1;
+}
+<Example Title="不同尺寸">
+    <Description>提供大、中（默认）、小三种单选框。</Description>
+    <RunContent>
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.Outline">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Outline">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.Outline">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.Filled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Filled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.Filled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Small" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Medium" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TInputRadioGroup @bind-Value="Fruit" Size="Size.Large" ButtonStyle="RadioButtonStyle.PrimaryFilled">
+            <TInputRadio Value="1">苹果</TInputRadio>
+            <TInputRadio Value="2">香蕉</TInputRadio>
+            <TInputRadio Value="3">葡萄</TInputRadio>
+        </TInputRadioGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.Outline"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Small"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Medium"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+
+<TInputRadioGroup bind-Value=""Fruit"" Size=""Size.Large"" ButtonStyle=""RadioButtonStyle.PrimaryFilled"">
+    <TInputRadio Value=""1"">苹果</TInputRadio>
+    <TInputRadio Value=""2"">香蕉</TInputRadio>
+    <TInputRadio Value=""3"">葡萄</TInputRadio>
+</TInputRadioGroup>
+```
+")
+    </CodeContent>
+</Example>
