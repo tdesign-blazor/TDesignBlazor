@@ -1,9 +1,8 @@
-name: 发布
-run-name: 打包并推送到 nuget
+name: Release
 
 on:
   push:
-    tag:
+    tags:
       - "v*"
 
 jobs:
@@ -25,16 +24,16 @@ jobs:
 
       - name: 发布 nuget 包
         run: |
-        Version=${{steps.version.outputs.full}}
-        echo "The version {$Version}"
-        dotnet build
-        dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
-        dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          Version=${{steps.version.outputs.full}}
+          echo "The version {$Version}"
+          dotnet build
+          dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
+          dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
       - name: 上传工件
-      uses: actions/upload-artifact@v2
-      with:
-        name: package
-        path: publish/
-        retention-days: 5
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: publish/
+          retention-days: 5
     
