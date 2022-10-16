@@ -1,0 +1,185 @@
+﻿@page "/components/space"
+
+<PageHeader Title="TSpace 间距">
+    控制组件之间的间距。
+</PageHeader>
+
+<Example Title="基本用法">
+    <Description>默认为横向排列，控制相邻组件水平间距</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TSpace>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+</TSpace>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="垂直间距">
+    <Description>设置 <code>Vertical</code> 调整为竖向排列。</Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TSpace Vertical>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+</TSpace>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="间距大小">
+    <RunContent>
+        <TSpace Gap="100px">
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <TSpace Vertical Gap="30px">
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TSpace Gap=""100px"">
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+</TSpace>
+
+
+<TSpace Vertical Gap=""30px"">
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+</TSpace>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="自动换行">
+    <Description>设置 <code>BreakLine</code> 控制是否自动换行。</Description>
+    <RunContent>
+        <TRow>
+            <TColumn Span="ColumnSpan.Is4">
+                <TSpace BreakLine>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                </TSpace>
+            </TColumn>
+        </TRow>
+        <br />
+        <br />
+        <br />
+
+        <TRow>
+            <TColumn Span="ColumnSpan.Is4">
+                <TSpace>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                    <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+                </TSpace>
+            </TColumn>
+        </TRow>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TRow>
+    <TColumn Span=""ColumnSize.Is4"">
+        <TSpace BreakLine>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+    </TColumn>
+</TRow>
+
+
+<TRow>
+    <TColumn Span=""ColumnSize.Is4"">
+        <TSpace>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+            <TSpaceItem><TButton>按钮</TButton></TSpaceItem>
+        </TSpace>
+    </TColumn>
+</TRow>
+```
+")
+    </CodeContent>
+</Example>
