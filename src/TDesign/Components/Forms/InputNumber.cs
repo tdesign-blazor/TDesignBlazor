@@ -1,15 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-
-
-
-
-
-
-
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace TDesignBlazor;
+namespace TDesign;
 /// <summary>
 /// 数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
 /// <para>
@@ -18,10 +11,10 @@ namespace TDesignBlazor;
 /// </summary>
 /// <typeparam name="TValue">数字类型。</typeparam>
 [CssClass("t-input-number")]
-public class InputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue>
+public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue>
 {
     readonly static Type[] SupportTypes = new[] { typeof(int), typeof(short), typeof(long), typeof(decimal), typeof(double), typeof(float) };
-    public InputNumber()
+    public TInputNumber()
     {
         if (!SupportTypes.Contains(typeof(TValue)))
         {
@@ -38,7 +31,7 @@ public class InputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         BuildButton(builder, sequence + 1, IconName.Remove);
-        builder.CreateComponent<Input<TValue>>(sequence + 2, attributes: new
+        builder.CreateComponent<TInputText<TValue>>(sequence + 2, attributes: new
         {
             Value,
             ValueExpression,
@@ -56,9 +49,9 @@ public class InputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, Action<MouseEventArgs>? click = default)
     {
-        builder.CreateComponent<Button>(sequence + 1, content =>
+        builder.CreateComponent<TButton>(sequence + 1, content =>
         {
-            content.CreateComponent<Icon>(0, attributes: new
+            content.CreateComponent<TIcon>(0, attributes: new
             {
                 Name = iconName,
                 onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e))
@@ -66,8 +59,8 @@ public class InputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue
         },
         new
         {
-            Type = ButtonType.Outline,
-            Shape = ButtonShape.Squre
+            Varient = ButtonVarient.Outline,
+            Shape = ButtonShape.Square
         });
     }
 }
