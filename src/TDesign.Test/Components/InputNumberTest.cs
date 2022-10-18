@@ -12,16 +12,21 @@ public class InputNumberTest : TestBase
     IRenderedComponent<TInputNumber<TValue>> GetInputNumer<TValue>(params ComponentParameter[] parameters)
         => TestContext.RenderComponent<TInputNumber<TValue>>(parameters);
 
-//    [Fact(DisplayName = "InputNumber - 渲染组件")]
-//    public void Test_Render_Int()
-//    {
-//        int value = 1;
-//        GetInputNumer<int>(x =>
-//        {
-//            x.Add(c => c.Value, 1);
-//            //x.Add(c => c.ValueExpression,);
-//            //x.Add(c => c.ValueChanged,);
-//        }).MarkupMatches(@"
+    [Fact(DisplayName = "InputNumber - 渲染组件")]
+    public void Test_Render_Int()
+    {
+        int value = 1;
+        GetInputNumer<int>(x =>
+        {
+            x.Add(c => c.Value, value);
+            x.Add(p => p.ValueChanged, (s) => value = s);
+            x.Add(p => p.ValueExpression, () => value);
+        })
+        .Should()
+        .HaveClass("t-input-number")
+        .And.HaveClass("t-size-m")
+        .And.HaveClass("t-input-number--row");
+//        .MarkupMatches(@"
 //<div class=""t-input-number t-size-m t-input-number--row"">
 //    <button type=""button"" class=""t-button t-size-m t-button--variant-outline t-button--theme-default t-button--shape-square t-input-number__decrease"">
 //        <i class=""t-icon t-icon-remove"" />
@@ -34,7 +39,7 @@ public class InputNumberTest : TestBase
 //    </button>
 //</div>
 //");
-//    }
+    }
     //[Fact(DisplayName = "InputNumber - 测试")]
     //public void Test()
     //{
