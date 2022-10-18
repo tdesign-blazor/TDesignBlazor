@@ -5,46 +5,55 @@ namespace TDesign;
 /// <summary>
 /// 具备悬浮提示的弹出层。
 /// </summary>
-[CssClass("t-popup")]
-public class TPopup : BlazorComponentBase, IHasChildContent, IHasActive
+public class TPopup : BlazorComponentBase, IHasChildContent
 {
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public string Content { get; set; }
 
-    [Parameter] public Placement Placement { get; set; } = Placement.TopCenter;
-    [Parameter] public bool Active { get; set; }
+    [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Top;
+    bool Active { get; set; }
 
     ElementReference _triggerRef;
     ElementReference _tipRef;
-    object _popupRef;
+    PopperInstance _instance;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "span");
-        builder.AddAttribute(3, "onmouseover", HtmlHelper.CreateCallback<MouseEventArgs>(this, Show));
-        builder.AddAttribute(4, "onmouseout", HtmlHelper.CreateCallback<MouseEventArgs>(this, Hide));
+        builder.AddAttribute(3, "onmouseenter", HtmlHelper.CreateCallback<MouseEventArgs>(this, Show));
+        builder.AddAttribute(4, "onmouseleave", HtmlHelper.CreateCallback<MouseEventArgs>(this, Hide));
         builder.AddElementReferenceCapture(1, reference =>
         {
             _triggerRef = reference;
         });
         builder.AddContent(10, ChildContent);
 
-        builder.CloseElement();
-
-        builder.OpenRegion(10);
-        builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", "t-popup");
-        builder.AddContent(10, (RenderFragment)(content =>
+        if ( Active )
         {
-            content.OpenElement(0, "div");
-            content.AddAttribute(1, "class", "t-popup__content");
-            content.AddElementReferenceCapture(8, e => _tipRef = e);
-            content.AddContent(10, Content);
-            content.CloseElement();
-        }));
-        builder.CloseElement();
-        builder.CloseRegion();
+            builder.OpenRegion(10);
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "t-popup");
+            //builder.AddAttribute(2, "style", "position:absolute");
+            builder.AddElementReferenceCapture(8, e => _tipRef = e);
+            builder.AddContent(10, content =>
+            {
+                content.OpenElement(0, "div");
+                content.AddAttribute(1, "class", "t-popup__content");
+                //content.AddAttribute(2, "style", $"visibility:hidden");
+                content.AddContent(10, Content);
+                content.CloseElement();
+            });
+            builder.CloseElement();
+            builder.CloseRegion();
 
+        }
+
+        builder.CloseElement();
         //builder.CreateElement(0, "div", content =>
         //{
         //    content.AddContent(0, ChildContent);
@@ -73,24 +82,23 @@ public class TPopup : BlazorComponentBase, IHasChildContent, IHasActive
         //});
     }
 
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "div", Content, new { @class = "t-popup__content" });
-    }
-    protected override void BuildStyle(IStyleBuilder builder)
-    {
-        //builder.Append("position: absolute; inset: auto auto 0px 0px; margin: 8px;", Active)
-        //    .Append("display:none", !Active)
-        //    ;
-    }
-
     async Task Show(MouseEventArgs e)
     {
-        _popupRef = await JS.Value.InvokeAsync<object>("tdesign.popup.show", new object[] { _triggerRef, _tipRef, "top" });
+        _instance = await JS.Value.InvokePopupAsync(_triggerRef, _tipRef, new()
+        {
+            Placement = Placement
+        });
+        Active = true;
+        StateHasChanged();
     }
 
     async Task Hide(MouseEventArgs e)
     {
-        await JS.Value.InvokeVoidAsync("tdesign.popup.destroy", new[] { _popupRef });
+        if ( _instance is not null )
+        {
+            await _instance.Destroy();
+            //Active = false;
+            StateHasChanged();
+        }
     }
 }

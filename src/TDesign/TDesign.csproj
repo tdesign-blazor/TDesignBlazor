@@ -17,6 +17,7 @@
     <RepositoryType>Github</RepositoryType>
     <PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
     <Copyright>TDesignBlazor © William 2022</Copyright>
+	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <PropertyGroup>
