@@ -1,11 +1,4 @@
-﻿using ComponentBuilder;
-using Microsoft.AspNetCore.Components.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesign;
 
@@ -13,7 +6,6 @@ namespace TDesign;
 /// 开关组件
 /// </summary>
 [CssClass("t-switch")]
-[HtmlTag("div")]
 public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
 {
     /// <summary>
@@ -24,7 +16,7 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <summary>
     /// 是否加载中
     /// </summary>
-    [Parameter][CssClass(ICON_LOADING_NAME)] public bool Loading { get; set; }
+    [Parameter] public bool Loading { get; set; }
 
     /// <summary>
     /// 尺寸。
@@ -34,9 +26,7 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <summary>
     ///  执行当 <see cref="TSwitch"/> 触发的事件。
     /// </summary>
-    [Parameter][HtmlEvent("onchange")] public EventCallback<MouseEventArgs?> OnChange { get; set; }
-
-    private const string ICON_LOADING_NAME = "t-is-loading";
+    [Parameter] public EventCallback<MouseEventArgs?> OnChange { get; set; }
 
     /// <summary>
     /// 
@@ -49,21 +39,17 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
         builder.CreateElement(++sequence, "span",
             span =>
             {
-                span.CreateComponent<TIcon>(++sequence, attributes: new { Name = ICON_LOADING_NAME }, condition: Loading);
+                span.CreateComponent<TIcon>(++sequence, attributes: new { Name = IconName.Loading }, condition: Loading);
             },
-            attributes: new { @class = $"t-switch__handle{(Loading ? $" {ICON_LOADING_NAME}" : string.Empty)}" });
-        builder.CreateElement(++sequence, "div", attributes: new { @class = $"t-switch__content {Size.GetCssClass()}" });
-        base.AddContent(builder, sequence);
-    }
+            attributes: new
+            {
+                @class = HtmlHelper.CreateCssBuilder().Append("t-switch__handle").Append("t-is-loading", Loading)
+            });
+        builder.CreateElement(++sequence, "div", attributes: new
+        {
+            @class = HtmlHelper.CreateCssBuilder().Append("t-switch__content").Append(Size.GetCssClass())
+        });
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <exception cref="ArgumentException"></exception>
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        this.Refresh();
     }
 
     /// <summary>
@@ -74,9 +60,8 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     {
         attributes["onclick"] = HtmlHelper.CreateCallback(this, () =>
         {
-            Value = !Value;
+            CurrentValue = !Value;
         });
-        base.BuildAttributes(attributes);
     }
 
     /// <summary>
@@ -85,10 +70,13 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        if (Value)
+        if (builder.Contains("t-is-checked") && !CurrentValue)
         {
-            builder.Append("t-is-checked");
+            builder.Remove("t-is-checked");
         }
-        base.BuildCssClass(builder);
+        else
+        {
+            builder.Append("t-is-checked", CurrentValue);
+        }
     }
 }
