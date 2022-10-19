@@ -75,7 +75,7 @@ jobs:
       - name: Build
         run: dotnet build
       - name: Test
-        run: dotnet test --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
       - name: Test Reporting
         uses: phoenix-actions/test-reporting@v8
         id: test-report
@@ -87,4 +87,12 @@ jobs:
       - name: Generate Report
         run: |
           echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
+
+      - name: Dotnet Test Reporter
+        uses: bibipkins/dotnet-test-reporter@v1.0.0-beta.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-results: ./src/TDesign.Test/TestResults/test-results.trx
+          post-new-comment: true
+          comment-title: '测试结果'
 
