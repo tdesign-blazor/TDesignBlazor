@@ -9,7 +9,6 @@ on:
 jobs:
   pack-push-nuget-package:
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'AchievedOwner'
     steps:
       - name: 迁出代码
       - uses: actions/checkout@v2
