@@ -64,3 +64,20 @@ jobs:
         with:
           api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
           coverage-reports: 'coverage.cobertura.xml'
+  DotNet:
+    runs-on: unbuntu-latest
+    steps:      
+      - uses: actions/checkout@v3
+      - name: Setup .NET Version
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Build
+        run: dotnet build
+      - name: Test
+        uses: zyborg/dotnet-tests-report@v1
+        with:
+          project_path: ./src/TDesign.Test
+          report_name: TDesign_Test
+          report_title: TDesign Tests
+          github_token: ${{ secrets.GITHUB_TOKEN }}
