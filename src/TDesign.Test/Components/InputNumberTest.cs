@@ -29,8 +29,7 @@ public class InputNumberTest : TestBase
         .HaveTag("div")
         .And.HaveClass("t-input-number")
         .And.HaveClass("t-size-m")
-        .And.HaveClass("t-input-number--row")
-        .And.HaveChildMarkup("");
+        .And.HaveClass("t-input-number--row");
     }
     [Fact(DisplayName = "InputNumber - Size")]
     public void Test_Render_Parameter_Size()
