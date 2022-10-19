@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    branches: ['master']
+    tags:
+      - "v*"
+
+jobs:
+  pack-push-nuget-package:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'AchievedOwner'
+    steps:
+      - name: 迁出代码
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.101
+
+      - name: 转换 tag
+        id: version
+        uses: release-kit/semver@v1
+
+      - name: 发布 nuget 包
+        run: |
+          Version=${{steps.version.outputs.full}}
+          echo "The version {$Version}"
+          dotnet build
+          dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
+          dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+
+      - name: 上传工件
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: publish/
+          retention-days: 5
+    
