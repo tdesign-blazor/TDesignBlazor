@@ -24,11 +24,27 @@ namespace TDesign
         /// <summary>
         /// 锚点文字
         /// </summary>
-        [Parameter] public string? Target { get; set; }
+        [Parameter]public AnchorItemTarget? Target { get; set; }= AnchorItemTarget.Self;
+        [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs> OnClick { get; set; }
+        [Parameter][HtmlEvent("onchange")] public EventCallback<MouseEventArgs> OnChange { get; set; }
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            builder.CreateComponent<TLink>(sequence + 1, Title, new { Href, Title, Target });
+            builder.CreateComponent<TLink>(sequence + 1, Title, new { Href, Title, Target= Target.GetHtmlAttribute() });
         }
+    }
+    /// <summary>
+    /// TAnchorItem 目标
+    /// </summary>
+    public enum AnchorItemTarget
+    {
+        [HtmlAttribute("_self")]
+        Self,
+        [HtmlAttribute("_blank")]
+        Blank,
+        [HtmlAttribute("_parent")]
+        Parent,
+        [HtmlAttribute("_top")]
+        Top
     }
 }

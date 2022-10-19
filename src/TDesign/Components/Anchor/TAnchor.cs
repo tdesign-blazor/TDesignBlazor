@@ -16,6 +16,7 @@ namespace TDesign
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
+
             builder.CreateElement(sequence + 1, "div", line =>
             {
 
@@ -24,8 +25,10 @@ namespace TDesign
 
                     wrapper.CreateElement(sequence + 3, "div", attributes: new
                     {
+
                         @class = "t-anchor__line-cursor",
                         style = "top: 24px; height: 24px; opacity: 1;"
+
                     });
 
                 }, new { @class = "t-anchor__line-cursor-wrapper" });
@@ -33,6 +36,7 @@ namespace TDesign
             }, new { @class = "t-anchor__line" });
 
             builder.AddContent(sequence + 2, ChildContent);
+
         }
     }
 }
