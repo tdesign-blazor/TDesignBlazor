@@ -74,11 +74,25 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 标签
     /// </summary>
     [Parameter] public string? Label { get; set; }
-
-    [Parameter] public RenderFragment? TipContent { get; set; }
+    /// <summary>
+    /// tipcontent标签
+    /// </summary>
+    [Parameter] public RenderFragment? TipContent1 { get; set; }
+    /// <summary>
+    /// inputnumber tips
+    /// </summary>
+    [Parameter] public string? Tips { get; set; }
+    /// <summary>
+    /// 只读状态
+    /// </summary>
+    [Parameter] public bool Readonly { get; set; }
+    /// <summary>
+    /// 禁用状态
+    /// </summary>
+    [Parameter] public bool Disabled { get; set; }
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        //this.Refresh();
+
         dynamic _value = Value;
         dynamic _step = Step;
         dynamic _max = Max;
@@ -112,14 +126,19 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             onfocus = "@OnFocusAsync",
             onblur = "@OnBlurAsync",
             AutoWidth,
-            TipContent
+            Readonly,
+            Disabled
+            //TipContent=TipContent1
         });
 
         BuildButton(builder, sequence + 3, IconName.Add, _disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
+        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null && TipContent1 is null);
 
+        //
+        //this.Refresh();
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
@@ -137,8 +156,8 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             Shape = ButtonShape.Square,
             @Class = HtmlHelper.CreateCssBuilder()
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
-            .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString()),
-            //.Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
+            .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
+            .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
             Onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
 

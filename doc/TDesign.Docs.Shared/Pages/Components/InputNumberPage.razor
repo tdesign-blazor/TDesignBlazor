@@ -3,29 +3,23 @@
 <PageHeader Title="InputNumber 数字输入框">
     数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
 </PageHeader>
-@{
+@code {
     double a = 1;
+
+    class FormData
+    {
+        public InputTipsAlign Align { get; set; }
+    }
+    enum InputTipsAlign
+    {
+        Hide,
+        AlignLeft,
+        AlignInput
+    }
+    FormData? TestData { get; set; } = new FormData();
 }
 
-<Example Title="基本使用">
-    <Description></Description>
-    <RunContent>
-        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default"><TipContent>这是普通文本提示</TipContent></TInputNumber>
-        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success"><TipContent>校验通过文本提示</TipContent></TInputNumber>
-        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning"><TipContent>校验不通过文本提示</TipContent></TInputNumber>
-        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error"><TipContent>校验存在严重问题文本提示</TipContent></TInputNumber>
-    </RunContent>
-    <CodeContent>
-        @Code.Create(@"
-```html
-@{
-double a = 1;
-}
-<TInputNumber @bind-Value=""a"" Placeholder=""请输入""></TInputNumber>
-```
-")
-    </CodeContent>
-</Example>
+
 <Example Title="基本使用">
     <Description></Description>
     <RunContent>
@@ -42,7 +36,6 @@ double a = 1;
 ")
     </CodeContent>
 </Example>
-@*
 
 <Example Title="双侧调整的数字输入框">
     <Description>已输入的值居中展示，用户可直接在输入框内修改数值，还可以使用输入框左右的箭头按钮增大或减小数值。</Description>
@@ -108,7 +101,7 @@ double a = 1;
 <Example Title="无按钮的数字输入框">
     <Description>仅有输入框，不能用按钮进行数值调整的数字输入框。</Description>
     <RunContent>
-        <TSpace Vertical> 
+        <TSpace Vertical>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Step="1" Max="5"  Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Left" ></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Step="1" Max="5"  Label="金额" SuffixText="元" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right" ></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Step="1" Max="5"  Label="机器"  SuffixText="台" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"></TInputNumber></TSpaceItem>
@@ -120,7 +113,7 @@ double a = 1;
 @{
     double a = 1;
 }
-        <TSpace Vertical> 
+        <TSpace Vertical>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Step=""1"" Max=""5""  Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left"" ></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Step=""1"" Max=""5""  Label=""金额"" SuffixText=""元"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" ></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Step=""1"" Max=""5""  Label=""机器""  SuffixText=""台"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right""></TInputNumber></TSpaceItem>
@@ -135,7 +128,7 @@ double a = 1;
 <Example Title="不同尺寸的数字输入框">
     <Description>提供 大、中（默认）、小 3 种数字输入框。</Description>
     <RunContent>
-        <TSpace> 
+        <TSpace>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Size="Size.Small"></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Size="Size.Medium"></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Size="Size.Large"></TInputNumber></TSpaceItem>
@@ -147,7 +140,7 @@ double a = 1;
 @{
     double a = 1;
 }
-        <TSpace> 
+        <TSpace>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Size=""Size.Small""></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Size=""Size.Medium""></TInputNumber></TSpaceItem>
             <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Size=""Size.Large""></TInputNumber></TSpaceItem>
@@ -162,16 +155,16 @@ double a = 1;
 <Example Title="不同对齐方式的输入框">
     <Description></Description>
     <RunContent>
-        <TSpace> 
+        <TSpace>
             <TSpaceItem>
-                <TSpace Vertical> 
+                <TSpace Vertical>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Left"></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Center"></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Right"></TInputNumber></TSpaceItem>
                 </TSpace>
             </TSpaceItem>
             <TSpaceItem>
-                <TSpace Vertical> 
+                <TSpace Vertical>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Left"></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Center"></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value="a" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"></TInputNumber></TSpaceItem>
@@ -185,16 +178,16 @@ double a = 1;
 @{
     double a = 1;
 }
-        <TSpace> 
+        <TSpace>
             <TSpaceItem>
-                <TSpace Vertical> 
+                <TSpace Vertical>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Left""></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Center""></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Right""></TInputNumber></TSpaceItem>
                 </TSpace>
             </TSpaceItem>
             <TSpaceItem>
-                <TSpace Vertical> 
+                <TSpace Vertical>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left""></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Center""></TInputNumber></TSpaceItem>
                     <TSpaceItem><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right""></TInputNumber></TSpaceItem>
@@ -205,4 +198,129 @@ double a = 1;
 ")
     </CodeContent>
 </Example>
-*@
+
+
+<Example Title="不同状态的数字输入框">
+    <Description>除了禁用 disabled 和只读 readonly 状态之外，提供 正常（默认）、成功 success、警告 warning、错误 error 4 种状态的输入框设置。</Description>
+    <RunContent>
+        <TForm Model="@TestData">
+            <TInputRadioGroup @bind-Value="@TestData.Align" ButtonStyle="RadioButtonStyle.Outline">
+                <TInputRadio Value="InputTipsAlign.Hide">隐藏文本提示</TInputRadio>
+                <TInputRadio Value="InputTipsAlign.AlignInput">文本提示左对齐</TInputRadio>
+                <TInputRadio Value="InputTipsAlign.AlignLeft">文本提示对齐输入框</TInputRadio>
+            </TInputRadioGroup>
+            <p>
+                您的选择：@TestData.Align.ToString()
+            </p>
+            @if (TestData.Align == InputTipsAlign.Hide)
+            {
+                <TFormItem Label="禁用"><TInputNumber @bind-Value="a" Placeholder="请输入" Disabled></TInputNumber></TFormItem>
+                <TFormItem Label="只读"><TInputNumber @bind-Value="a" Placeholder="请输入" Readonly></TInputNumber></TFormItem>
+                <TFormItem Label="正常"><TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default"></TInputNumber></TFormItem>
+                <TFormItem Label="成功"><TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success"></TInputNumber></TFormItem>
+                <TFormItem Label="告警"><TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning"></TInputNumber></TFormItem>
+                <TFormItem Label="错误"><TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error"></TInputNumber></TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignInput)
+            {
+                <TFormItem Label="正常提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default"><TipContent1>这是普通文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="成功提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success"><TipContent1>校验通过文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="警告提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning"><TipContent1>校验不通过文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="错误提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error"><TipContent1>校验存在严重问题文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignLeft)
+            {
+                <TFormItem Label="正常提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default" Tips="这是普通文本提示"></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="成功提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success" Tips="校验通过文本提示"></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="警告提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning" Tips="校验不通过文本提示"></TInputNumber>
+                </TFormItem>
+                <TFormItem Label="错误提示">
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error" Tips="校验存在严重问题文本提示"></TInputNumber>
+                </TFormItem>
+            }
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+        @code {
+        double a = 1;
+
+        class FormData
+        {
+        public InputTipsAlign Align { get; set; }
+        }
+        enum InputTipsAlign
+        {
+        Hide,
+        AlignLeft,
+        AlignInput
+        }
+        FormData? TestData { get; set; } = new FormData();
+        }
+        <TForm Model=""@TestData"">
+            <TInputRadioGroup @bind-Value=""@TestData.Align"" ButtonStyle=""RadioButtonStyle.Outline"">
+                <TInputRadio Value=""InputTipsAlign.Hide"">隐藏文本提示</TInputRadio>
+                <TInputRadio Value=""InputTipsAlign.AlignInput"">文本提示左对齐</TInputRadio>
+                <TInputRadio Value=""InputTipsAlign.AlignLeft"">文本提示对齐输入框</TInputRadio>
+            </TInputRadioGroup>
+            <p>
+                您的选择：@TestData.Align.ToString()
+            </p>
+            @if (TestData.Align == InputTipsAlign.Hide)
+            {
+                <TFormItem Label=""禁用""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Disabled></TInputNumber></TFormItem>
+                <TFormItem Label=""只读""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Readonly></TInputNumber></TFormItem>
+                <TFormItem Label=""正常""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Default""></TInputNumber></TFormItem>
+                <TFormItem Label=""成功""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Success""></TInputNumber></TFormItem>
+                <TFormItem Label=""告警""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Warning""></TInputNumber></TFormItem>
+                <TFormItem Label=""错误""><TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Error""></TInputNumber></TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignInput)
+            {
+                <TFormItem Label=""正常提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Default""><TipContent1>这是普通文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""成功提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Success""><TipContent1>校验通过文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""警告提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Warning""><TipContent1>校验不通过文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""错误提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Error""><TipContent1>校验存在严重问题文本提示</TipContent1></TInputNumber>
+                </TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignLeft)
+            {
+                <TFormItem Label=""正常提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Default"" Tips=""这是普通文本提示""></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""成功提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Success"" Tips=""校验通过文本提示""></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""警告提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Warning"" Tips=""校验不通过文本提示""></TInputNumber>
+                </TFormItem>
+                <TFormItem Label=""错误提示"">
+                    <TInputNumber @bind-Value=""a"" Placeholder=""请输入"" Status=""Status.Error"" Tips=""校验存在严重问题文本提示""></TInputNumber>
+                </TFormItem>
+            }
+        </TForm>
+```
+")
+    </CodeContent>
+</Example>
