@@ -1,12 +1,6 @@
-﻿using System.Data.SqlTypes;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+
 using System.Linq.Expressions;
-using System.Net.Http;
-
-using ComponentBuilder;
-
-using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.JSInterop;
 
 namespace TDesign;
 /// <summary>
@@ -77,7 +71,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// <summary>
     /// tipcontent标签
     /// </summary>
-    [Parameter] public RenderFragment? TipContent1 { get; set; }
+    //[Parameter] public RenderFragment? TipContent { get; set; }
     /// <summary>
     /// inputnumber tips
     /// </summary>
@@ -128,17 +122,15 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled
-            //TipContent=TipContent1
+            //TipContent
         });
 
         BuildButton(builder, sequence + 3, IconName.Add, _disabled||Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
-        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null && TipContent1 is null);
-
-        //
-        //this.Refresh();
+        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null);
+        //builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null && TipContent is null);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)

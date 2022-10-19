@@ -224,16 +224,24 @@ double a = 1;
             else if (TestData.Align == InputTipsAlign.AlignInput)
             {
                 <TFormItem Label="正常提示">
-                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default"><TipContent1>这是普通文本提示</TipContent1></TInputNumber>
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default">
+                        //<TipContent>这是普通文本提示</TipContent>
+                     </TInputNumber>
                 </TFormItem>
                 <TFormItem Label="成功提示">
-                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success"><TipContent1>校验通过文本提示</TipContent1></TInputNumber>
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success">
+                        //<TipContent>校验通过文本提示</TipContent>
+                    </TInputNumber>
                 </TFormItem>
                 <TFormItem Label="警告提示">
-                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning"><TipContent1>校验不通过文本提示</TipContent1></TInputNumber>
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning">
+                        //<TipContent>校验不通过文本提示</TipContent>
+                    </TInputNumber>
                 </TFormItem>
                 <TFormItem Label="错误提示">
-                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error"><TipContent1>校验存在严重问题文本提示</TipContent1></TInputNumber>
+                    <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error">
+                        //<TipContent>校验存在严重问题文本提示</TipContent>
+                    </TInputNumber>
                 </TFormItem>
             }
             else if (TestData.Align == InputTipsAlign.AlignLeft)

@@ -1,4 +1,7 @@
 ﻿using AngleSharp.Common;
+
+using ComponentBuilder;
+
 using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
@@ -40,9 +43,97 @@ public class InputNumberTest : TestBase
 //</div>
 //");
     }
-    //[Fact(DisplayName = "InputNumber - 测试")]
-    //public void Test()
-    //{
-    //    GetInputNumer<int>().Should().HaveTag("div");
-    //}
+    [Fact(DisplayName = "InputNumber - Size")]
+    public void Test_Render_Parameter_Size()
+    {
+        int value = 1;
+        GetInputNumer<int>(x =>
+        {
+            x.Add(c => c.Value, value);
+            x.Add(p => p.ValueChanged, (s) => value = s);
+            x.Add(p => p.ValueExpression, () => value);
+            x.Add(p => p.Size,Size.Small);
+        }).Should().HaveClass(Size.Small.GetCssClass());
+
+        GetInputNumer<int>(x =>
+        {
+            x.Add(c => c.Value, value);
+            x.Add(p => p.ValueChanged, (s) => value = s);
+            x.Add(p => p.ValueExpression, () => value);
+            x.Add(p => p.Size, Size.Medium);
+        }).Should().HaveClass(Size.Medium.GetCssClass());
+
+        GetInputNumer<int>(x =>
+        {
+            x.Add(c => c.Value, value);
+            x.Add(p => p.ValueChanged, (s) => value = s);
+            x.Add(p => p.ValueExpression, () => value);
+            x.Add(p => p.Size, Size.Large);
+        }).Should().HaveClass(Size.Large.GetCssClass());
+
+    }
+
+    [Fact(DisplayName = "InputNumber - Placeholder")]
+    public void Test_Render_Parameter_Placeholder()
+    {
+        //int value = 1;
+        //GetInputNumer<int>(x =>
+        //{
+        //    x.Add(c => c.Value, value);
+        //    x.Add(p => p.ValueChanged, (s) => value = s);
+        //    x.Add(p => p.ValueExpression, () => value);
+        //    //x.Add(p => p.Placeholder,"我是占位符");
+        //}).Should().HaveClass(Size.Small.GetCssClass());
+
+    }
+
+    [Fact(DisplayName = "InputNumber - Align")]
+    public void Test_Render_Parameter_Align()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Step")]
+    public void Test_Render_Parameter_Step()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Max")]
+    public void Test_Render_Parameter_Max()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Theme")]
+    public void Test_Render_Parameter_Theme()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - AutoWidth")]
+    public void Test_Render_Parameter_AutoWidth()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Status")]
+    public void Test_Render_Parameter_Status()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - SuffixText")]
+    public void Test_Render_Parameter_SuffixText()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Label")]
+    public void Test_Render_Parameter_Label()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Tips")]
+    public void Test_Render_Parameter_Tips()
+    {
+    }
+
+    [Fact(DisplayName = "InputNumber - Disabled")]
+    public void Test_Render_Parameter_Disabled()
+    {
+    }
 }
