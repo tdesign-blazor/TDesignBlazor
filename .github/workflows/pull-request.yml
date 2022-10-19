@@ -81,6 +81,10 @@ jobs:
         id: test-report
         if: success() || failure()
         with:
-          path:'.src/TDesign.Test/TestResults'
+          name: 'Unit Test'
+          path: './src/TDesign.Test/TestResults/*'
           reporter: 'dotnet-trx'
+      - name: Generate Report
+        run: |
+          echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
 
