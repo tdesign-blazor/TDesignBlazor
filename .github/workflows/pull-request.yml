@@ -75,7 +75,7 @@ jobs:
       - name: Build
         run: dotnet build
       - name: Test
-        uses: zyborg/dotnet-tests-report@v1
+        uses: jason-edstrom/dotnet-tests-report-testing-fix@v1.4.4
         with:
           project_path: ./src/TDesign.Test
           report_name: TDesign_Test
