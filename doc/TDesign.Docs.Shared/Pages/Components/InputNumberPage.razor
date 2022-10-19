@@ -10,19 +10,39 @@
 <Example Title="基本使用">
     <Description></Description>
     <RunContent>
-        <TInputNumber @bind-Value="a" Placeholder="请输入"></TInputNumber>
+        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Default"><TipContent>这是普通文本提示</TipContent></TInputNumber>
+        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Success"><TipContent>校验通过文本提示</TipContent></TInputNumber>
+        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Warning"><TipContent>校验不通过文本提示</TipContent></TInputNumber>
+        <TInputNumber @bind-Value="a" Placeholder="请输入" Status="Status.Error"><TipContent>校验存在严重问题文本提示</TipContent></TInputNumber>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 @{
-    double a = 1;
+double a = 1;
 }
 <TInputNumber @bind-Value=""a"" Placeholder=""请输入""></TInputNumber>
 ```
 ")
     </CodeContent>
 </Example>
+<Example Title="基本使用">
+    <Description></Description>
+    <RunContent>
+        <TInputNumber @bind-Value="a" Placeholder="请输入"></TInputNumber>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+@{
+double a = 1;
+}
+<TInputNumber @bind-Value=""a"" Placeholder=""请输入""></TInputNumber>
+```
+")
+    </CodeContent>
+</Example>
+@*
 
 <Example Title="双侧调整的数字输入框">
     <Description>已输入的值居中展示，用户可直接在输入框内修改数值，还可以使用输入框左右的箭头按钮增大或减小数值。</Description>
@@ -185,3 +205,4 @@
 ")
     </CodeContent>
 </Example>
+*@

@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Net.Http;
+
 using ComponentBuilder;
+
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
@@ -72,8 +74,11 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 标签
     /// </summary>
     [Parameter] public string? Label { get; set; }
+
+    [Parameter] public RenderFragment? TipContent { get; set; }
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
+        //this.Refresh();
         dynamic _value = Value;
         dynamic _step = Step;
         dynamic _max = Max;
@@ -83,6 +88,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
         {
             Value = (TValue)(_value - _step);
         });
+
         builder.CreateComponent<TInputText<TValue>>(sequence + 2, attributes: new
         {
             Value,
@@ -92,12 +98,12 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             Placeholder,
             Alignment = Align,
             Status = _disabled ? Status.Error : Status,
-            SuffixText = SuffixText,
+            SuffixText,
             PrefixText = Label,
             oninput = "OnInput",
             onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
             {
-                if (e.Key == "ArrowUp"&&! _disabled)
+                if (e.Key == "ArrowUp" && !_disabled)
                     Value = (TValue)(_value + _step);
                 else if (e.Key == "ArrowDown")
                     Value = (TValue)(_value - _step);
@@ -106,7 +112,9 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             onfocus = "@OnFocusAsync",
             onblur = "@OnBlurAsync",
             AutoWidth,
+            TipContent
         });
+
         BuildButton(builder, sequence + 3, IconName.Add, _disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
@@ -129,15 +137,15 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             Shape = ButtonShape.Square,
             @Class = HtmlHelper.CreateCssBuilder()
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
-            .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
-            .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
+            .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString()),
+            //.Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
             Onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
-            
+
         }, condition);
     }
 
-   
+
 }
 
 public enum InputNumberTheme
