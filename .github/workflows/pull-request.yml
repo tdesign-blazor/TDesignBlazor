@@ -75,9 +75,12 @@ jobs:
       - name: Build
         run: dotnet build
       - name: Test
-        uses: jason-edstrom/dotnet-tests-report-testing-fix@v1.4.4
+        run: dotnet test --logger "trx;LogFileName=test-results.trx"
+      - name: Test Reporting
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        if: success() || failure()
         with:
-          project_path: ./src/TDesign.Test
-          report_name: TDesign_Test
-          report_title: TDesign Tests
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          path:'.src/TDesign.Test/TestResults'
+          reporter: 'dotnet-trx'
+
