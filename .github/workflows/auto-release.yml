@@ -30,11 +30,4 @@ jobs:
           dotnet build
           dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
           dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-
-      - name: 上传工件
-        uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: publish/
-          retention-days: 5
     
