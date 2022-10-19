@@ -98,7 +98,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
         dynamic _max = Max;
         var _disabled = Max != null ? (bool)(_value >= _max) : false;
 
-        BuildButton(builder, sequence + 1, IconName.Remove, false, Theme != InputNumberTheme.Normal, a =>
+        BuildButton(builder, sequence + 1, IconName.Remove, Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value - _step);
         });
@@ -131,7 +131,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             //TipContent=TipContent1
         });
 
-        BuildButton(builder, sequence + 3, IconName.Add, _disabled, Theme != InputNumberTheme.Normal, a =>
+        BuildButton(builder, sequence + 3, IconName.Add, _disabled||Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
@@ -157,6 +157,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             @Class = HtmlHelper.CreateCssBuilder()
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
             .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
+            .Append($"t-is-disabled", iconName.ToString() == IconName.Remove.ToString() && disabled)
             .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
             Onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
