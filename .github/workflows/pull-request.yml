@@ -65,7 +65,7 @@ jobs:
           api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
           coverage-reports: 'coverage.cobertura.xml'
   DotNet:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:      
       - uses: actions/checkout@v3
       - name: Setup .NET Version
