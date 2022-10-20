@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-
 using System.Linq.Expressions;
 
 namespace TDesign;
@@ -118,7 +117,6 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             Status = _disabled ? Status.Error : Status,
             SuffixText,
             PrefixText = Label,
-            oninput = "OnInput",
             onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
             {
                 if (e.Key == "ArrowUp" && !_disabled)
@@ -127,18 +125,16 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
                     Value = (TValue)(_value - _step);
 
             }),
-            onfocus = "@OnFocusAsync",
-            onblur = "@OnBlurAsync",
             AutoWidth,
             Readonly,
-            Disabled
+            Disabled,
+            TipContent=HtmlHelper.CreateContent(Tips)
         });
 
         BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
-        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
