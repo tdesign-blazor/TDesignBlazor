@@ -180,7 +180,7 @@ public enum InputNumberTheme
     /// <summary>
     /// 按钮行内纵向排列
     /// </summary>
-    [CssClass("column t-is-controls-right ")] Column,
+    [CssClass("column t-is-controls-right")] Column,
     /// <summary>
     /// 没有按钮，通过上下键控制
     /// </summary>

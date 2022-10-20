@@ -1,12 +1,15 @@
 ![TDesign](https://tdesign.gtimg.com/site/TDesign.png)
 
 ![TDesign](https://user-images.githubusercontent.com/88708072/147124305-fbb74f9f-65b2-44f9-9f1c-e812ce63a547.gif)
-
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
 
 
-[![PR](https://github.com/AchievedOwner/TDesign/actions/workflows/pull-request.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/pull-request.yml)
-[![CodeQL](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml)
+[![PR](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/pull-request.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/pull-request.yml)
+[![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AchievedOwner/TDesignBlazor&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=AchievedOwner/TDesignBlazor&utm_campaign=Badge_Coverage)
+
+![Version](https://img.shields.io/github/v/release/AchievedOwner/TDesignBlazor)
 
 ## ✨ 特性
 
@@ -20,7 +23,7 @@
 - 💴 基于 MIT 开源协议
 
 ## 🌈 在线示例
-[https://achievedowner.github.io/TDesign/](https://achievedowner.github.io/TDesign/)
+[https://achievedowner.github.io/TDesignBlazor/](https://achievedowner.github.io/TDesignBlazor/)
 
 ## 🖥 支持环境
 
@@ -85,8 +88,8 @@
 非常感谢每一个项目贡献者的辛勤付出
 
 <div>
-    <a href="https://github.com/AchievedOwner/TDesign/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesign" />
+    <a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
     </a>
 </div>
 
@@ -94,7 +97,7 @@
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
 * 作者邮箱：[william-zzh@outlook.com]
 * QQ 群：1012762441
-* 微信群：TDesign 贡献者交流
+* 微信群：TDesignBlazor 贡献者交流
 
 ## :triangular_flag_on_post: 行为准则
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
