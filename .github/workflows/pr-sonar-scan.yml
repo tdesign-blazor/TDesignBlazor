@@ -12,7 +12,7 @@ env:
   
 jobs:
   SonarCloud:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
