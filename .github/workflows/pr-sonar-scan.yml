@@ -39,8 +39,3 @@ jobs:
           dotnetTestArguments: ./src/TDesign.Test --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           # Optional extra command arguments the the SonarScanner 'begin' command
           sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="src/**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="src/**/TestResults/*.trx"
-
-
-
-      
-    
