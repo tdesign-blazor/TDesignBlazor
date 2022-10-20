@@ -85,9 +85,12 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     [Parameter] public string? Label { get; set; }
 
     /// <summary>
-    /// inputnumber tip
+    /// 提示文本
     /// </summary>
     [Parameter] public string? Tip { get; set; }
+    /// <summary>
+    /// 提示出现的位置
+    /// </summary>
     [Parameter] public TipAlign? TipAlignMode { get; set; }
     /// <summary>
     /// 只读状态
@@ -126,7 +129,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             PrefixText = Label,
             onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
             {
-                if (e.Key == "ArrowUp" && !_disabled)
+                if (e.Key == "ArrowUp" && !_disabled && !Disabled)
                     Value = (TValue)(_value + _step);
                 else if (e.Key == "ArrowDown")
                     Value = (TValue)(_value - _step);
@@ -135,12 +138,12 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent= TipAlignMode == TipAlign.InputAlign ? HtmlHelper.CreateContent(Tip):null
+            TipContent= TipAlignMode == TipAlign.InputAlign ? HtmlHelper.CreateContent(Tip): HtmlHelper.CreateContent("")
         });
         BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
-        });
+         });
         builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlignMode ==TipAlign.InputNumberAlign);
     }
 
