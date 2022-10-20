@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    branches: ["master"]
+    branches: [ "master" ]
     
 env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
         with:
           dotnet-version: 6.0.101
           
-      - name: SonarScanner for .NET 6 with pull request decoration support
+      - name: SonarScanner
         uses: highbyte/sonarscan-dotnet@v2.1.3
         with:
           # The key of the SonarQube project
