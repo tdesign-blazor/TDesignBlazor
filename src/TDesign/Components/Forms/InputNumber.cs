@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using ComponentBuilder;
+
+using Microsoft.AspNetCore.Components.Rendering;
+
 using System.Linq.Expressions;
 
 namespace TDesign;
@@ -82,9 +85,10 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     [Parameter] public string? Label { get; set; }
 
     /// <summary>
-    /// inputnumber tips
+    /// inputnumber tip
     /// </summary>
-    [Parameter] public string? Tips { get; set; }
+    [Parameter] public string? Tip { get; set; }
+    [Parameter] public TipAlign? TipAlignMode { get; set; }
     /// <summary>
     /// 只读状态
     /// </summary>
@@ -96,7 +100,6 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// <summary>
     /// 输入框提示的内容。
     /// </summary>
-    [Parameter] public RenderFragment? TipContent { get; set; }
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
 
@@ -132,14 +135,13 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled,
-            //TipContent= TipContent,
+            TipContent= TipAlignMode == TipAlign.InputAlign ? HtmlHelper.CreateContent(Tip):null
         });
-        //HtmlHelper.CreateContent(Tips)
         BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
-        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null);
+        builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlignMode ==TipAlign.InputNumberAlign);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
@@ -186,4 +188,19 @@ public enum InputNumberTheme
     /// 没有按钮，通过上下键控制
     /// </summary>
     Normal
+}
+
+/// <summary>
+/// tip对齐方式
+/// </summary>
+public enum TipAlign
+{
+    /// <summary>
+    /// 根据input左对齐
+    /// </summary>
+    InputAlign,
+    /// <summary>
+    /// 根据inputNumber左对齐
+    /// </summary>
+    InputNumberAlign
 }
