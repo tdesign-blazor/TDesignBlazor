@@ -13,8 +13,14 @@ namespace TDesign;
 [CssClass("t-input-number")]
 public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue>
 {
-
+    /// <summary>
+    /// 允许的泛型类型
+    /// </summary>
     readonly static Type[] SupportTypes = new[] { typeof(int), typeof(short), typeof(long), typeof(decimal), typeof(double), typeof(float) };
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <exception cref="NotSupportedException"></exception>
     public TInputNumber()
     {
         if (!SupportTypes.Contains(typeof(TValue)))
@@ -30,7 +36,14 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 值，仅支持 short, int, long, decimal, double 和 float 类型。
     /// </summary>
     [Parameter] public TValue? Value { get; set; }
+    /// <summary>
+    /// 获取或这是一个绑定值的表达式
+    /// </summary>
     [Parameter] public Expression<Func<TValue?>>? ValueExpression { get; set; }
+
+    /// <summary>
+    /// 设置或获取绑定值的回调
+    /// </summary>
     [Parameter] public EventCallback<TValue?>? ValueChanged { get; set; }
     /// <summary>
     /// 占位符
@@ -68,10 +81,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 标签
     /// </summary>
     [Parameter] public string? Label { get; set; }
-    /// <summary>
-    /// tipcontent标签
-    /// </summary>
-    //[Parameter] public RenderFragment? TipContent { get; set; }
+
     /// <summary>
     /// inputnumber tips
     /// </summary>
@@ -90,7 +100,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
         dynamic _value = Value;
         dynamic _step = Step;
         dynamic _max = Max;
-        var _disabled = Max != null ? (bool)(_value >= _max) : false;
+        var _disabled = Max != null && (bool)(_value >= _max);
 
         BuildButton(builder, sequence + 1, IconName.Remove, Disabled, Theme != InputNumberTheme.Normal, a =>
         {
@@ -122,15 +132,13 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled
-            //TipContent
         });
 
-        BuildButton(builder, sequence + 3, IconName.Add, _disabled||Disabled, Theme != InputNumberTheme.Normal, a =>
+        BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
         builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null);
-        //builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null && TipContent is null);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
@@ -160,6 +168,9 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
 
 }
 
+/// <summary>
+///  主题
+/// </summary>
 public enum InputNumberTheme
 {
     /// <summary>
