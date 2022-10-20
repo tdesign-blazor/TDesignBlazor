@@ -15,7 +15,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Source Code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       
