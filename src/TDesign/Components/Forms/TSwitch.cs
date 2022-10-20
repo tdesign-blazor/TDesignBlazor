@@ -26,10 +26,20 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <summary>
     ///  执行当 <see cref="TSwitch"/> 触发的事件。
     /// </summary>
-    [Parameter] public EventCallback<MouseEventArgs?> OnChange { get; set; }
+    [Parameter] public EventCallback<bool> OnChange { get; set; }
 
     /// <summary>
-    /// 
+    /// 开关打开时，需要显示的自定义内容。
+    /// </summary>
+    [Parameter] public RenderFragment? TrueContent { get; set; }
+
+    /// <summary>
+    /// 开关关闭时显示的自定义内容。
+    /// </summary>
+    [Parameter] public RenderFragment? FalseContent { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
@@ -43,17 +53,23 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
             },
             attributes: new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append("t-switch__handle").Append("t-is-loading", Loading)
+                @class = HtmlHelper.CreateCssBuilder().Append("t-switch__handle").Append(LOADING_CLASS_NAME, Loading).Append(DISABLED_CLASS_NAME, Disabled)
             });
-        builder.CreateElement(++sequence, "div", attributes: new
+        builder.CreateElement(++sequence, "div", childContent: Value ? TrueContent : FalseContent, attributes: new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-switch__content").Append(Size.GetCssClass())
+            @class = HtmlHelper.CreateCssBuilder().Append("t-switch__content").Append(Size.GetCssClass()).Append(DISABLED_CLASS_NAME, Disabled)
         });
 
     }
 
+    private const string LOADING_CLASS_NAME = "t-is-loading";
+
+    private const string DISABLED_CLASS_NAME = "t-is-disabled";
+
+    private const string CHECKED_CLASS_NAME = "t-is-checked";
+
     /// <summary>
-    /// 
+    /// <inheritdoc/>
     /// </summary>
     /// <param name="attributes"></param>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
@@ -61,22 +77,30 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
         attributes["onclick"] = HtmlHelper.CreateCallback(this, () =>
         {
             CurrentValue = !Value;
+            OnChange.InvokeAsync(CurrentValue);
         });
     }
 
     /// <summary>
-    /// 
+    /// <inheritdoc/>
     /// </summary>
     /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        if (builder.Contains("t-is-checked") && !CurrentValue)
+        AppendClass(builder,CHECKED_CLASS_NAME,CurrentValue);
+        AppendClass(builder, LOADING_CLASS_NAME, Loading);
+        AppendClass(builder, DISABLED_CLASS_NAME, Disabled);
+    }
+
+    private void AppendClass(ICssClassBuilder builder, string name, bool condition)
+    {
+        if (builder.Contains(name) && !condition)
         {
-            builder.Remove("t-is-checked");
+            builder.Remove(name);
         }
         else
         {
-            builder.Append("t-is-checked", CurrentValue);
+            builder.Append(name, condition);
         }
     }
 }
