@@ -53,7 +53,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// </summary>
     [Parameter] public HorizontalAlignment Align { get; set; } = HorizontalAlignment.Center;
     /// <summary>
-    /// 步救
+    /// 步数(跨度值)，增减幅度
     /// </summary>
     [Parameter] public TValue? Step { get; set; } = (TValue)Convert.ChangeType(1, typeof(TValue));
     /// <summary>
@@ -93,13 +93,17 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 禁用状态
     /// </summary>
     [Parameter] public bool Disabled { get; set; }
+    /// <summary>
+    /// 输入框提示的内容。
+    /// </summary>
+    [Parameter] public RenderFragment? TipContent { get; set; }
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
 
         dynamic _value = Value;
         dynamic _step = Step;
         dynamic _max = Max;
-        var _disabled = Max != null && (bool)(_value >= _max);
+        var _disabled = Max != null && (bool)(_value > _max);
 
         BuildButton(builder, sequence + 1, IconName.Remove, Disabled, Theme != InputNumberTheme.Normal, a =>
         {
@@ -128,13 +132,14 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent=HtmlHelper.CreateContent(Tips)
+            //TipContent= TipContent,
         });
-
+        //HtmlHelper.CreateContent(Tips)
         BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
         });
+        builder.CreateElement(sequence + 4, "div", Tips, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, Tips != null);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
