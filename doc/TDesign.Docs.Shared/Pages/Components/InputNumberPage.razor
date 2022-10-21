@@ -67,14 +67,14 @@
     <RunContent>
         <TSpace>
             <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Theme="InputNumberTheme.Column"/></TSpaceItem>
-            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Label="数字" Theme="InputNumberTheme.Column" AdditionalStyle="width: 150px;"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="数字" Theme="InputNumberTheme.Column" AdditionalStyle="width: 150px;" /></TSpaceItem>
         </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
 <TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Column""/>
-<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Column"" Label=""数字"" AdditionalStyle=""width: 150px;""/>
+<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Column"" PrefixText=""数字"" AdditionalStyle=""width: 150px;""/>
 ```
 ")
     </CodeContent>
@@ -86,16 +86,16 @@
     <RunContent>
         <TSpace Vertical>
             <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Left"/></TSpaceItem>
-            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Label="金额" SuffixText="元" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"/></TSpaceItem>
-            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Label="机器" SuffixText="台" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="金额" SuffixText="元" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right" /></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="机器" SuffixText="台" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"/></TSpaceItem>
         </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5""  Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left"" />
-<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5""  Label=""金额"" SuffixText=""元"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
-<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5""  Label=""机器""  SuffixText=""台"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
+<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left"" />
+<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" PrefixText=""金额"" SuffixText=""元"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
+<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" PrefixText=""机器"" SuffixText=""台"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
 
 ```
 ")

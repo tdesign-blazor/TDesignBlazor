@@ -16,11 +16,12 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// <summary>
     /// 允许的泛型类型
     /// </summary>
-    readonly static Type[] SupportTypes = new[] { typeof(int), typeof(short), typeof(long), typeof(decimal), typeof(double), typeof(float) };
+#pragma warning disable S2743 // Static fields should not be used in generic types
+    private static readonly Type[] SupportTypes = new[] { typeof(int), typeof(short), typeof(long), typeof(decimal), typeof(double), typeof(float) };
+#pragma warning restore S2743 // Static fields should not be used in generic types
     /// <summary>
-    /// 构造函数
+    /// 初始化 <see cref="TInputNumber{TValue}"/> 类的新实例。
     /// </summary>
-    /// <exception cref="NotSupportedException"></exception>
     public TInputNumber()
     {
         if (!SupportTypes.Contains(typeof(TValue)))
@@ -29,64 +30,63 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
         }
     }
     /// <summary>
-    /// 大小
+    /// 设置控件的整体大小。
     /// </summary>
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
     /// <summary>
-    /// 对齐方式
+    /// 设置输入框的文本对齐方式。
     /// </summary>
     [Parameter] public HorizontalAlignment Align { get; set; } = HorizontalAlignment.Center;
     /// <summary>
-    /// 步数(跨度值)，增减幅度
+    /// 设置每一次增减的跨度值。
     /// </summary>
     [Parameter] public TValue? Step { get; set; } = (TValue)Convert.ChangeType(1, typeof(TValue));
     /// <summary>
-    /// 最大值，
+    /// 设置输入的最大值限制。
     /// </summary>
     [Parameter] public TValue? Max { get; set; } = (TValue)Convert.ChangeType(int.MaxValue, typeof(TValue));
     /// <summary>
-    /// 类型
+    /// 设置排列形式和模式。
     /// </summary>
     [Parameter][CssClass("t-input-number--")] public InputNumberTheme Theme { get; set; } = InputNumberTheme.Row;
     /// <summary>
-    /// 自适应宽度
+    /// 设置可以自适应宽度。
     /// </summary>
     [Parameter][CssClass("t-input-number--auto-width")] public bool AutoWidth { get; set; }
     /// <summary>
-    /// 状态。
+    /// 设置控件的状态。
     /// </summary>
     [Parameter][CssClass("t-is-")] public Status Status { get; set; } = Status.Default;
     /// <summary>
-    /// 输入框后缀显示的文本。
+    /// 设置输入框后缀显示的文本。
     /// </summary>
     [Parameter] public string? SuffixText { get; set; }
     /// <summary>
-    /// 标签
+    /// 设置输入框前面显示的文本。
     /// </summary>
-    [Parameter] public string? Label { get; set; }
+    [Parameter] public string? PrefixText { get; set; }
 
     /// <summary>
-    /// 提示文本
+    /// 设置输入框出现的提示的文本。
     /// </summary>
     [Parameter] public string? Tip { get; set; }
     /// <summary>
-    /// 提示出现的位置
+    /// 表示提示的对齐方式。
     /// </summary>
     [Parameter] public TipAlign? TipAlign { get; set; }
     /// <summary>
-    /// 只读状态
+    /// 设置为只读状态。
     /// </summary>
     [Parameter] public bool Readonly { get; set; }
     /// <summary>
-    /// 禁用状态
+    /// 设置为禁用状态。
     /// </summary>
     [Parameter] public bool Disabled { get; set; }
     /// <summary>
-    /// 输入框提示的内容。
+    /// 重写以构建组件的内容。
     /// </summary>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-
         dynamic _value = Value;
         dynamic _step = Step;
         dynamic _max = Max;
@@ -107,7 +107,7 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
             Alignment = Align,
             Status = _disabled ? Status.Error : Status,
             SuffixText,
-            PrefixText = Label,
+            PrefixText,
             onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
             {
                 if (e.Key == "ArrowUp" && !_disabled && !Disabled)
@@ -130,6 +130,15 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
         builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlign == TDesign.TipAlign.Left);
     }
 
+    /// <summary>
+    /// 构建增减按钮。
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
+    /// <param name="iconName">图标名称。</param>
+    /// <param name="disabled">是否禁用。</param>
+    /// <param name="condition">组件创建的条件。</param>
+    /// <param name="click">点击事件。</param>
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
     {
         builder.CreateComponent<TButton>(sequence + 1, content =>
