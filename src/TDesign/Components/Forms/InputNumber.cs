@@ -1,7 +1,5 @@
 ﻿using ComponentBuilder;
-
 using Microsoft.AspNetCore.Components.Rendering;
-
 using System.Linq.Expressions;
 
 namespace TDesign;
@@ -13,7 +11,7 @@ namespace TDesign;
 /// </summary>
 /// <typeparam name="TValue">数字类型。</typeparam>
 [CssClass("t-input-number")]
-public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValue>
+public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
 {
     /// <summary>
     /// 允许的泛型类型
@@ -34,23 +32,6 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// 大小
     /// </summary>
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
-    /// <summary>
-    /// 值，仅支持 short, int, long, decimal, double 和 float 类型。
-    /// </summary>
-    [Parameter] public TValue? Value { get; set; }
-    /// <summary>
-    /// 获取或这是一个绑定值的表达式
-    /// </summary>
-    [Parameter] public Expression<Func<TValue?>>? ValueExpression { get; set; }
-
-    /// <summary>
-    /// 设置或获取绑定值的回调
-    /// </summary>
-    [Parameter] public EventCallback<TValue?>? ValueChanged { get; set; }
-    /// <summary>
-    /// 占位符
-    /// </summary>
-    [Parameter] public string? Placeholder { get; set; }
     /// <summary>
     /// 对齐方式
     /// </summary>
@@ -91,7 +72,7 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
     /// <summary>
     /// 提示出现的位置
     /// </summary>
-    [Parameter] public TipAlign? TipAlignMode { get; set; }
+    [Parameter] public TipAlign? TipAlign { get; set; }
     /// <summary>
     /// 只读状态
     /// </summary>
@@ -138,13 +119,15 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent= TipAlignMode == TipAlign.InputAlign ? HtmlHelper.CreateContent(Tip): HtmlHelper.CreateContent("")
+            TipContent= TipAlign is not null && TipAlign== TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent("")
         });
         BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
          });
-        builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlignMode ==TipAlign.InputNumberAlign);
+
+
+        builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlign == TDesign.TipAlign.Left);
     }
 
     private void BuildButton(RenderTreeBuilder builder, int sequence, object iconName, bool disabled, bool condition, Action<MouseEventArgs>? click = default)
@@ -160,17 +143,16 @@ public class TInputNumber<TValue> : BlazorComponentBase, IHasTwoWayBinding<TValu
         {
             Varient = ButtonVarient.Outline,
             Shape = ButtonShape.Square,
-            @Class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.CreateCssBuilder()
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
             .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
             .Append($"t-is-disabled", iconName.ToString() == IconName.Remove.ToString() && disabled)
             .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
-            Onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
+            onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
 
         }, condition);
     }
-
 
 }
 
@@ -194,16 +176,16 @@ public enum InputNumberTheme
 }
 
 /// <summary>
-/// tip对齐方式
+/// 提示的对齐方式。
 /// </summary>
 public enum TipAlign
 {
     /// <summary>
-    /// 根据input左对齐
+    /// 左对齐。
     /// </summary>
-    InputAlign,
+    Left,
     /// <summary>
-    /// 根据inputNumber左对齐
+    /// 输入框对齐。
     /// </summary>
-    InputNumberAlign
+    Input
 }
