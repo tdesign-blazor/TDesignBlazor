@@ -162,7 +162,6 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
 
         }, condition);
     }
-
 }
 
 /// <summary>
