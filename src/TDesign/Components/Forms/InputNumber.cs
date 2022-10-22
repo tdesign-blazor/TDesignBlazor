@@ -163,7 +163,7 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     private async Task ConvertNumberAsync(string? inputString)
     {
         _ = TryParseValueFromString(inputString, out TValue? num, out _);
-        await ValueChanged.Value.InvokeAsync(num);
+        await ValueChanged?.InvokeAsync(num);
     }
 
 
