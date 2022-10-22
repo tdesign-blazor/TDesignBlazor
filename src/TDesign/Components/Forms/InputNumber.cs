@@ -96,7 +96,9 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// 设置为禁用状态。
     /// </summary>
     [Parameter] public bool Disabled { get; set; }
-
+    /// <summary>
+    /// 双向绑定触发事件名称
+    /// </summary>
     protected override string EventName => "oninput";
 
     /// <summary>
