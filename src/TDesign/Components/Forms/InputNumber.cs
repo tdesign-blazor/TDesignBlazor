@@ -20,6 +20,10 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     private static readonly Type[] SupportTypes = new[] { typeof(int), typeof(short), typeof(long), typeof(decimal), typeof(double), typeof(float) };
 #pragma warning restore S2743 // Static fields should not be used in generic types
     /// <summary>
+    /// 输入框文本
+    /// </summary>
+    private string? _inputString;
+    /// <summary>
     /// 初始化 <see cref="TInputNumber{TValue}"/> 类的新实例。
     /// </summary>
     public TInputNumber()
@@ -45,6 +49,10 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// 设置输入的最大值限制。
     /// </summary>
     [Parameter] public TValue? Max { get; set; } = (TValue)Convert.ChangeType(int.MaxValue, typeof(TValue));
+    /// <summary>
+    /// 设置输入的最小值限制。
+    /// </summary>
+    [Parameter] public TValue? Min { get; set; } = (TValue)Convert.ChangeType(int.MinValue, typeof(TValue));
     /// <summary>
     /// 设置排列形式和模式。
     /// </summary>
@@ -82,17 +90,21 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// 设置为禁用状态。
     /// </summary>
     [Parameter] public bool Disabled { get; set; }
+
+
     /// <summary>
     /// 重写以构建组件的内容。
     /// </summary>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        dynamic _value = Value;
-        dynamic _step = Step;
-        dynamic _max = Max;
-        var _disabled = Max != null && (bool)(_value > _max);
+        dynamic? _value = Value;
+        dynamic? _step = Step;
+        dynamic? _max = Max;
 
-        BuildButton(builder, sequence + 1, IconName.Remove, Disabled, Theme != InputNumberTheme.Normal, a =>
+        var _arrowUpDisabled = Max != null && (bool)(_value > _max);
+        var _arrowDownDisabled = Min != null && (bool)(_value < Min);
+
+        BuildButton(builder, sequence + 1, IconName.Remove, _arrowDownDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value - _step);
         });
@@ -105,23 +117,36 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
             Size,
             Placeholder,
             Alignment = Align,
-            Status = _disabled ? Status.Error : Status,
+            Status = Disabled ? Status.Error : Status,
             SuffixText,
             PrefixText,
-            onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
-            {
-                if (e.Key == "ArrowUp" && !_disabled && !Disabled)
-                    Value = (TValue)(_value + _step);
-                else if (e.Key == "ArrowDown")
-                    Value = (TValue)(_value - _step);
-
-            }),
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent= TipAlign is not null && TipAlign== TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent("")
+            TipContent= TipAlign is not null && TipAlign== TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent(""),
+            @Type = InputType.Number,
+            onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
+            {
+                if (e.Key == "ArrowUp" && !_arrowUpDisabled)
+                    Value = (TValue)(_value + _step);
+                else if (e.Key == "ArrowUp" && _arrowUpDisabled)
+                    Tip = "超过最大值!";
+                else if (e.Key == "ArrowDown" && !_arrowDownDisabled)
+                    Value = (TValue)(_value - _step);
+                else if (e.Key == "ArrowDown" && _arrowDownDisabled)
+                    Tip = "超过最小值!";
+            }),
+            onblur = HtmlHelper.CreateCallback(this, async () =>
+            {
+               await ConvertNumberAsync(_inputString);
+            }),
+            oninput= HtmlHelper.CreateCallback<ChangeEventArgs>(this,async args =>
+            {
+                _inputString = args?.Value?.ToString()??"";
+                await ConvertNumberAsync(_inputString);
+            }),
         });
-        BuildButton(builder, sequence + 3, IconName.Add, _disabled || Disabled, Theme != InputNumberTheme.Normal, a =>
+        BuildButton(builder, sequence + 3, IconName.Add, _arrowDownDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
          });
@@ -129,6 +154,24 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
 
         builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlign == TDesign.TipAlign.Left);
     }
+
+    /// <summary>
+    /// 转换数值类型
+    /// </summary>
+    /// <param name="inputString">输入字符串</param>
+    /// <returns></returns>
+    private async Task ConvertNumberAsync(string? inputString)
+    {
+        _ = TryParseValueFromString(inputString, out TValue? num, out _);
+        if (ValueChanged is not null)
+            await ValueChanged.Value.InvokeAsync(num);
+        else {
+            ValueChanged = new EventCallback<TValue?>();
+            await ValueChanged.Value.InvokeAsync(num);
+        }
+    }
+
+
 
     /// <summary>
     /// 构建增减按钮。
