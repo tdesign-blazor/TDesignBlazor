@@ -163,12 +163,7 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     private async Task ConvertNumberAsync(string? inputString)
     {
         _ = TryParseValueFromString(inputString, out TValue? num, out _);
-        if (ValueChanged is not null)
-            await ValueChanged.Value.InvokeAsync(num);
-        else {
-            ValueChanged = new EventCallback<TValue?>();
-            await ValueChanged.Value.InvokeAsync(num);
-        }
+        await ValueChanged.Value.InvokeAsync(num);
     }
 
 
