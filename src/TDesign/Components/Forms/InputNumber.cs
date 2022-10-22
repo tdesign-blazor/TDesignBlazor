@@ -1,6 +1,7 @@
 ﻿using ComponentBuilder;
 using Microsoft.AspNetCore.Components.Rendering;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 
 namespace TDesign;
 /// <summary>
@@ -23,6 +24,11 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// 输入框文本
     /// </summary>
     private string? _inputString;
+    /// <summary>
+    /// 上一次用户设置Tip
+    /// </summary>
+    private string? _oldTip;
+    private Status? _oldStatus;
     /// <summary>
     /// 初始化 <see cref="TInputNumber{TValue}"/> 类的新实例。
     /// </summary>
@@ -81,7 +87,7 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// <summary>
     /// 表示提示的对齐方式。
     /// </summary>
-    [Parameter] public TipAlign? TipAlign { get; set; }
+    [Parameter] public TipAlign? TipAlign { get; set; } = TDesign.TipAlign.Input;
     /// <summary>
     /// 设置为只读状态。
     /// </summary>
@@ -91,6 +97,7 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// </summary>
     [Parameter] public bool Disabled { get; set; }
 
+    protected override string EventName => "oninput";
 
     /// <summary>
     /// 重写以构建组件的内容。
@@ -99,10 +106,9 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     {
         dynamic? _value = Value;
         dynamic? _step = Step;
-        dynamic? _max = Max;
-
-        var _arrowUpDisabled = Max != null && (bool)(_value > _max);
-        var _arrowDownDisabled = Min != null && (bool)(_value < Min);
+        object s = 1;
+        var _arrowUpDisabled = IsOutOfMax();
+        var _arrowDownDisabled = IsOutOfMin();
 
         BuildButton(builder, sequence + 1, IconName.Remove, _arrowDownDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
@@ -123,36 +129,94 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent= TipAlign is not null && TipAlign== TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent(""),
+            TipContent = TipAlign is not null && TipAlign == TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent(""),
             @Type = InputType.Number,
             onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
             {
-                if (e.Key == "ArrowUp" && !_arrowUpDisabled)
-                    Value = (TValue)(_value + _step);
-                else if (e.Key == "ArrowUp" && _arrowUpDisabled)
-                    Tip = "超过最大值!";
-                else if (e.Key == "ArrowDown" && !_arrowDownDisabled)
-                    Value = (TValue)(_value - _step);
-                else if (e.Key == "ArrowDown" && _arrowDownDisabled)
-                    Tip = "超过最小值!";
+                if (e.Key == "ArrowUp")
+                {
+                    if (!_arrowUpDisabled)
+                    {
+                        Value = (TValue)(_value + _step);
+                    }
+                }
+                else if (e.Key == "ArrowDown")
+                {
+                    if (!_arrowDownDisabled)
+                    {
+                        Value = (TValue)(_value - _step);
+                    }
+                }
             }),
             onblur = HtmlHelper.CreateCallback(this, async () =>
             {
-               await ConvertNumberAsync(_inputString);
-            }),
-            oninput= HtmlHelper.CreateCallback<ChangeEventArgs>(this,async args =>
-            {
-                _inputString = args?.Value?.ToString()??"";
                 await ConvertNumberAsync(_inputString);
+                SetOutTip();
+            }),
+            oninput = HtmlHelper.CreateCallback<ChangeEventArgs>(this, async args =>
+            {
+                _inputString = args?.Value?.ToString() ?? "";
+                await ConvertNumberAsync(_inputString);
+                SetOutTip();
             }),
         });
-        BuildButton(builder, sequence + 3, IconName.Add, _arrowDownDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
+        BuildButton(builder, sequence + 3, IconName.Add, _arrowUpDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
         {
             Value = (TValue)(_value + _step);
-         });
+        });
 
 
         builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlign == TDesign.TipAlign.Left);
+    }
+    /// <summary>
+    /// 设置Tip内容
+    /// </summary>
+    private void SetOutTip()
+    {
+
+        _oldTip = Tip;
+        _oldStatus = _oldStatus ?? Status;
+        var _arrowUpDisabled = IsOutOfMax();
+        var _arrowDownDisabled = IsOutOfMin();
+
+        var defaultTips = new string[] { "超出最大值！", "超出最小值！" };
+        if (_arrowUpDisabled || _arrowDownDisabled)
+        {
+            if (_arrowUpDisabled)
+            {
+                Tip = defaultTips[0];
+            }
+            if (_arrowDownDisabled)
+            {
+                Tip = defaultTips[1];
+            }
+            Status = Status.Error;
+        }
+        else
+        {
+            Tip = !defaultTips.Contains(_oldTip) ? _oldTip : default;
+            Status = _oldStatus.Value;
+        }
+
+    }
+    /// <summary>
+    /// 是否超出最大值
+    /// </summary>
+    /// <returns></returns>
+    private bool IsOutOfMax()
+    {
+        dynamic? _value = Value;
+        return Max != null && (bool)(_value >= Max);
+    }
+
+    /// <summary>
+    /// 是否超出最小值
+    /// </summary>
+    /// <returns></returns>
+    private bool IsOutOfMin()
+    {
+        dynamic? _value = Value;
+        return Min != null && (bool)(_value <= Min);
     }
 
     /// <summary>
@@ -162,7 +226,17 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// <returns></returns>
     private async Task ConvertNumberAsync(string? inputString)
     {
+        
         _ = TryParseValueFromString(inputString, out TValue? num, out _);
+        dynamic? _value = num;
+        if (IsOutOfMax())
+        {
+            num =Max;
+        }
+        if (IsOutOfMin())
+        {
+            num =Min;
+        }
         await ValueChanged?.InvokeAsync(num);
     }
 

@@ -46,7 +46,7 @@
                 <TInputNumber @bind-Value="Number" Placeholder="请输入" Step="0.5"/>
             </TSpaceItem>
                 <TSpaceItem>
-                <TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5"  SuffixText="个"/>
+                <TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Min="-5" SuffixText="个"/>
             </TSpaceItem>
         </TSpace>
     </RunContent>
@@ -55,7 +55,7 @@
 ```html
 <TInputNumber bind-Value=""Number"" Placeholder=""请输入""/>
 <TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""0.5""/>
-<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" SuffixText=""个""/>
+<TInputNumber bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5""  Min=""-5""  SuffixText=""个""/>
 
 ```
 ")
