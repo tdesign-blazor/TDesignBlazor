@@ -106,7 +106,6 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     {
         dynamic? _value = Value;
         dynamic? _step = Step;
-        object s = 1;
         var _arrowUpDisabled = IsOutOfMax();
         var _arrowDownDisabled = IsOutOfMin();
 
@@ -131,33 +130,17 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
             Disabled,
             TipContent = TipAlign is not null && TipAlign == TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent(""),
             @Type = InputType.Number,
-            onkeydown = HtmlHelper.CreateCallback<KeyboardEventArgs>(this, e =>
-            {
-                if (e.Key == "ArrowUp")
-                {
-                    if (!_arrowUpDisabled)
-                    {
-                        Value = (TValue)(_value + _step);
-                    }
-                }
-                else if (e.Key == "ArrowDown")
-                {
-                    if (!_arrowDownDisabled)
-                    {
-                        Value = (TValue)(_value - _step);
-                    }
-                }
-            }),
+            Step,
+            Min,
+            Max,
             onblur = HtmlHelper.CreateCallback(this, async () =>
             {
                 await ConvertNumberAsync(_inputString);
-                SetOutTip();
             }),
             oninput = HtmlHelper.CreateCallback<ChangeEventArgs>(this, async args =>
             {
                 _inputString = args?.Value?.ToString() ?? "";
                 await ConvertNumberAsync(_inputString);
-                SetOutTip();
             }),
         });
         BuildButton(builder, sequence + 3, IconName.Add, _arrowUpDisabled || Disabled, Theme != InputNumberTheme.Normal, a =>
@@ -167,37 +150,6 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
 
 
         builder.CreateElement(sequence + 4, "div", Tip, new { @class = $"t-input__tips t-input__tips--{Status.GetCssClass()}" }, TipAlign == TDesign.TipAlign.Left);
-    }
-    /// <summary>
-    /// 设置Tip内容
-    /// </summary>
-    private void SetOutTip()
-    {
-
-        _oldTip = Tip;
-        _oldStatus = _oldStatus ?? Status;
-        var _arrowUpDisabled = IsOutOfMax();
-        var _arrowDownDisabled = IsOutOfMin();
-
-        var defaultTips = new string[] { "超出最大值！", "超出最小值！" };
-        if (_arrowUpDisabled || _arrowDownDisabled)
-        {
-            if (_arrowUpDisabled)
-            {
-                Tip = defaultTips[0];
-            }
-            if (_arrowDownDisabled)
-            {
-                Tip = defaultTips[1];
-            }
-            Status = Status.Error;
-        }
-        else
-        {
-            Tip = !defaultTips.Contains(_oldTip) ? _oldTip : default;
-            Status = _oldStatus.Value;
-        }
-
     }
     /// <summary>
     /// 是否超出最大值
@@ -226,16 +178,15 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// <returns></returns>
     private async Task ConvertNumberAsync(string? inputString)
     {
-        
         _ = TryParseValueFromString(inputString, out TValue? num, out _);
         dynamic? _value = num;
         if (IsOutOfMax())
         {
-            num =Max;
+            num = Max;
         }
         if (IsOutOfMin())
         {
-            num =Min;
+            num = Min;
         }
         await ValueChanged?.InvokeAsync(num);
     }
