@@ -41,9 +41,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AchievedOwner_TDesignBlazor" /o:"playermaker" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
-          dotnet test --collect:"XPlat Code Coverage"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AchievedOwner_TDesignBlazor" /o:"playermaker" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          dotnet build --no-incremental
+          dotnet tool install --global dotnet-coverage
+          dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
   Codacy:
@@ -64,3 +65,42 @@ jobs:
         with:
           api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
           coverage-reports: 'coverage.cobertura.xml'
+  DotNet:
+    runs-on: ubuntu-latest
+    steps:      
+      - uses: actions/checkout@v3
+      - name: Setup .NET Version
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: Build
+        run: dotnet build
+      - name: Test
+        run: dotnet test --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
+      - name: Test Reporting
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        if: success() || failure()
+        with:
+          name: 'Unit Test'
+          path: './src/TDesign.Test/TestResults/*'
+          reporter: 'dotnet-trx'
+      - name: Generate Report
+        run: |
+          echo "url is ${{ steps.test-report.outputs.runHtmlUrl }}"
+
+      - name: Dotnet Test Reporter
+        uses: bibipkins/dotnet-test-reporter@v1.0.0-beta.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-results: ./src/TDesign.Test/TestResults/
+          test-coverage: ./src/TDesign.Test/TestResults/**/*coverage*.xml
+          min-coverage: 80
+          comment-title: 'Unit Test Results'      
+      - name: PR Comment
+        uses: github-actions-up-and-running/pr-comment@v1.0.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: 查看测试结果 ${{ steps.test-report.outputs.runHtmlUrl }}
+
+
