@@ -25,11 +25,6 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// </summary>
     private string? _inputString;
     /// <summary>
-    /// 上一次用户设置Tip
-    /// </summary>
-    private string? _oldTip;
-    private Status? _oldStatus;
-    /// <summary>
     /// 初始化 <see cref="TInputNumber{TValue}"/> 类的新实例。
     /// </summary>
     public TInputNumber()
@@ -181,7 +176,6 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     private async Task ConvertNumberAsync(string? inputString)
     {
         _ = TryParseValueFromString(inputString, out TValue? num, out _);
-        dynamic? _value = num;
         if (IsOutOfMax())
         {
             num = Max;
