@@ -21,11 +21,11 @@ jobs:
 
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish ./doc/TDesignBlazor.Docs.WebAssembly/TDesignBlazor.Docs.WebAssembly.csproj -c Release -o ./release --nologo
+      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./release --nologo
     
     # changes the base-tag in index.html from '/' to 'WebAssembly' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to WebAssembly
-      run: sed -i 's/<base href="\/" \/>/<base href="\/TDesignBlazor\/" \/>/g' release/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/TDesign\/" \/>/g' release/wwwroot/index.html
     
     # copy index.html to 404.html to serve the same file when a file is not found
     - name: copy index.html to 404.html

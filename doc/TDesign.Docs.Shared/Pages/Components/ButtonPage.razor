@@ -1,0 +1,254 @@
+﻿@page "/components/button"
+
+<PageHeader Title="TButton 按钮">
+    按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。
+</PageHeader>
+
+<Example Title="示例">
+    <RunContent>
+<TButton>普通按钮</TButton>
+<TButton Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Varient="ButtonVarient.Text">文本按钮</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton>普通按钮</TButton>
+<TButton Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Varient=""ButtonType.Text"">文本按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="幽灵按钮">
+    <Description>
+        幽灵按钮将按钮的内容反色，背景变为透明，一般是底色透明。常用于有色背景上，例如 banner 图等。
+    </Description>
+    <RunContent>
+        <div style="background:#000;padding:50px;">
+
+            <TButton Ghost>普通按钮</TButton>
+            <TButton Ghost Varient="ButtonVarient.Outline">边框按钮</TButton>
+            <TButton Ghost Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+            <TButton Ghost Varient="ButtonVarient.Text">文本按钮</TButton>
+            <br />
+            <br />
+            <TButton Ghost Theme="Theme.Primary">普通按钮</TButton>
+            <TButton Ghost Theme="Theme.Primary" Varient="ButtonVarient.Outline">边框按钮</TButton>
+            <TButton Ghost Theme="Theme.Primary" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+            <TButton Ghost Theme="Theme.Primary" Varient="ButtonVarient.Text">文本按钮</TButton>
+            <br />
+            <br />
+            <TButton Ghost Theme="Theme.Success">普通按钮</TButton>
+            <TButton Ghost Theme="Theme.Success" Varient="ButtonVarient.Outline">边框按钮</TButton>
+            <TButton Ghost Theme="Theme.Success" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+            <TButton Ghost Theme="Theme.Success" Varient="ButtonVarient.Text">文本按钮</TButton>
+            <br />
+            <br />
+
+            <TButton Ghost Theme="Theme.Warning">普通按钮</TButton>
+            <TButton Ghost Theme="Theme.Warning" Varient="ButtonVarient.Outline">边框按钮</TButton>
+            <TButton Ghost Theme="Theme.Warning" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+            <TButton Ghost Theme="Theme.Warning" Varient="ButtonVarient.Text">文本按钮</TButton>
+            <br />
+            <br />
+
+            <TButton Ghost Theme="Theme.Danger">普通按钮</TButton>
+            <TButton Ghost Theme="Theme.Danger" Varient="ButtonVarient.Outline">边框按钮</TButton>
+            <TButton Ghost Theme="Theme.Danger" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+            <TButton Ghost Theme="Theme.Danger" Varient="ButtonVarient.Text">文本按钮</TButton>
+</div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton Ghost>普通按钮</TButton>
+<TButton Ghost Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Ghost Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Ghost Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Ghost Theme=""Theme.Primary"">普通按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Ghost Theme=""Theme.Success"">普通按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Ghost Theme=""Theme.Warning"">普通按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Ghost Theme=""Theme.Danger"">普通按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Text"">文本按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="Block 按钮">
+    <Description>
+        幽灵按钮将按钮的内容反色，背景变为透明，一般是底色透明。常用于有色背景上，例如 banner 图等。
+    </Description>
+    <RunContent>
+        <div style="margin:0 auto; width:30%">
+        <TButton Block>普通按钮</TButton>
+        <br />
+<TButton Varient="ButtonVarient.Outline" Block>边框按钮</TButton>
+<br />
+<TButton Varient="ButtonVarient.Dashed" Block>虚框按钮</TButton>
+<br />
+<TButton Varient="ButtonVarient.Text" Block>文本按钮</TButton>
+</div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton Block>普通按钮</TButton>
+<TButton Varient=""ButtonType.Outline"" Block>边框按钮</TButton>
+<TButton Varient=""ButtonType.Dashed"" Block>虚框按钮</TButton>
+<TButton Varient=""ButtonType.Text"" Block>文本按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同颜色主题按钮">
+    <Description>提供浅灰色、蓝色、红色、黄色和绿色为主题的按钮。</Description>
+    <RunContent>        
+<TButton>普通按钮</TButton>
+<TButton Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Varient="ButtonVarient.Text">文本按钮</TButton>
+        <br />
+        <br />
+<TButton Theme="Theme.Primary">普通按钮</TButton>
+<TButton Theme="Theme.Primary" Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Theme="Theme.Primary" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Theme="Theme.Primary" Varient="ButtonVarient.Text">文本按钮</TButton>
+        <br />
+        <br />
+<TButton Theme="Theme.Success">普通按钮</TButton>
+<TButton Theme="Theme.Success" Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Theme="Theme.Success" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Theme="Theme.Success" Varient="ButtonVarient.Text">文本按钮</TButton>
+<br />
+<br />
+
+<TButton Theme="Theme.Warning">普通按钮</TButton>
+<TButton Theme="Theme.Warning" Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Theme="Theme.Warning" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Theme="Theme.Warning" Varient="ButtonVarient.Text">文本按钮</TButton>
+        <br />
+        <br />
+
+<TButton Theme="Theme.Danger">普通按钮</TButton>
+<TButton Theme="Theme.Danger" Varient="ButtonVarient.Outline">边框按钮</TButton>
+<TButton Theme="Theme.Danger" Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+<TButton Theme="Theme.Danger" Varient="ButtonVarient.Text">文本按钮</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton>普通按钮</TButton>
+<TButton Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Theme=""Theme.Primary"">普通按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Theme=""Theme.Success"">普通按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Theme=""Theme.Warning"">普通按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Text"">文本按钮</TButton>
+
+<TButton Theme=""Theme.Danger"">普通按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Text"">文本按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="不同状态的按钮">
+    <Description>
+        提供加载、禁用两种状态。
+    </Description>
+    <RunContent>
+        <TButton TLoading>加载中...</TButton>
+        <TButton Disabled>禁止状态</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton TLoading>加载中...</TButton>
+<TButton Disabled>禁止状态</TButton>
+``` 
+")
+    </CodeContent>
+</Example>
+<Example Title="不同尺寸的按钮">
+    <Description>提供大、中（默认）、小三种尺寸。</Description>
+    <RunContent>
+        <TButton Size="Size.Large">大按钮</TButton>
+        <TButton Size="Size.Medium">中按钮</TButton>
+        <TButton Size="Size.Small">小按钮</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton Size=""Size.Large"">大按钮</TButton>
+<TButton Size=""Size.Medium"">中按钮</TButton>
+<TButton Size=""Size.Small"">小按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+不同形状的按钮
+<Example Title="不同形状的按钮">
+    <Description>提供长方形、正方形、圆角长方形、圆形四种形状。</Description>
+    <RunContent>
+        <TButton>长方形</TButton>
+        <TButton Shape="ButtonShape.Square">方形</TButton>
+        <TButton Shape="ButtonShape.Circle">圆形</TButton>
+        <TButton Shape="ButtonShape.Round">圆角长方形</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton>长方形</TButton>
+<TButton Shape=""ButtonShape.Square"">方形</TButton>
+<TButton Shape=""ButtonShape.Circle"">圆形</TButton>
+<TButton Shape=""ButtonShape.Round"">圆角长方形</TButton>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="OnClick 点击事件">
+    <Description>@Code.Create("设置 `OnClick` 点击事件的触发函数")</Description>
+    <RunContent>
+        <TButton OnClick="@(e=>JS.InvokeVoidAsync("alert","按钮被点击"))">点击我</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TButton OnClick=""@(e=>JS.InvokeVoidAsync(""alert"",""按钮被点击""))"">点击我</TButton>
+```
+")
+    </CodeContent>
+</Example>
+@inject IJSRuntime JS

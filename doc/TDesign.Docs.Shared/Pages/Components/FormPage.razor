@@ -1,0 +1,283 @@
+﻿@page "/components/form"
+
+<PageHeader Title="TForm 表单">
+    用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。
+</PageHeader>
+<HighlightAlert/>
+<Example Title="基本表单">
+    <Description></Description>
+    <RunContent>
+        <TForm Model="basicForm">
+            <TFormItem Label="账号">
+                <TInputText @bind-Value="basicForm.Name"/>
+            </TFormItem>
+            <TFormItem Label="密码">
+                <TInputText @bind-Value="basicForm.Password" Type="InputType.Password"/>
+            </TFormItem>
+            <TFormItem Label="性别">
+                <TInputRadioGroup @bind-Value="basicForm.Gender">
+                    <TInputRadio Value="@("男")"><TIcon Name="IconName.GenderMale"/></TInputRadio>
+                    <TInputRadio Value="@("女")"><TIcon Name="IconName.GenderFemale" /></TInputRadio>
+                </TInputRadioGroup>
+            </TFormItem>
+            <TFormItem>
+                <TInputCheckBox @bind-Value="basicForm.Agree">是否同意注册协议</TInputCheckBox>
+            </TFormItem>
+            <TFormItem>
+                <TSpace>
+                    <TSpaceItem>
+                        <TButton Theme="Theme.Primary">提交</TButton>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TButton HtmlType="ButtonHtmlType.Reset">重置</TButton>
+                    </TSpaceItem>
+                </TSpace>
+            </TFormItem>
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TForm Model=""basicForm"">
+    <TFormItem Label=""账号"">
+        <TInputText bind-Value=""basicForm.Name""/>
+    </TFormItem>
+    <TFormItem Label=""密码"">
+        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password""/>
+    </TFormItem>
+    <TFormItem Label=""性别"">
+        <TInputRadioGroup bind-Value=""basicForm.Gender"">
+            <TInputRadio Value=""@(""男"")""><TIcon Name=""IconName.GenderMale""/></TInputRadio>
+            <TInputRadio Value=""@(""女"")""><TIcon Name=""IconName.GenderFemale"" /></TInputRadio>
+        </TInputRadioGroup>
+    </TFormItem>
+    <TFormItem>
+        <TInputCheckBox bind-Value=""basicForm.Agree"">是否同意注册协议</TInputCheckBox>
+    </TFormItem>
+    <TFormItem>
+        <TSpace>
+            <TSpaceItem>
+                <TButton Theme=""Theme.Primary"">提交</TButton>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TButton HtmlType=""ButtonHtmlType.Reset"">重置</TButton>
+            </TSpaceItem>
+        </TSpace>
+    </TFormItem>
+</TForm>
+```
+
+```cs
+@code{
+    class BasicForm
+    {
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Gender { get; set; } = ""男"";
+        public bool? Agree{ get; set; }
+    }
+
+    BasicForm basicForm = new();
+}
+```
+")
+    </CodeContent>
+</Example>
+
+@code{
+    class BasicForm
+    {
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Gender { get; set; } = "男";
+        public bool? Agree{ get; set; }
+    }
+
+    BasicForm basicForm = new();
+}
+
+<Example Title="表单对齐方式">
+    <Description><code>Alignment</code> 可设置表单中的 Label 文本的对齐方式</Description>
+    <RunContent>
+        <TInputRadioGroup @bind-Value="Alignment" ButtonStyle="RadioButtonStyle.Filled">
+            <TInputRadio Value="FormAlignment.Left">居左对齐</TInputRadio>
+            <TInputRadio Value="FormAlignment.Right">居右对齐</TInputRadio>
+            <TInputRadio Value="FormAlignment.Top">居顶对齐</TInputRadio>
+        </TInputRadioGroup>
+        <br />
+        <br />
+        <TForm Model="basicForm" Alignment="Alignment">
+            <TFormItem Label="账号">
+                <TInputText @bind-Value="basicForm.Name" />
+            </TFormItem>
+            <TFormItem Label="密码">
+                <TInputText @bind-Value="basicForm.Password" Type="InputType.Password" />
+            </TFormItem>
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRadioGroup bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
+    <TInputRadio Value=""FormAlignment.Left"">居左对齐</TInputRadio>
+    <TInputRadio Value=""FormAlignment.Right"">居右对齐</TInputRadio>
+    <TInputRadio Value=""FormAlignment.Top"">居顶对齐</TInputRadio>
+</TInputRadioGroup>
+
+<TForm Model=""basicForm"" Alignment=""Alignment"">
+    <TFormItem Label=""账号"">
+        <TInputText bind-Value=""basicForm.Name"" />
+    </TFormItem>
+    <TFormItem Label=""密码"">
+        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+    </TFormItem>
+</TForm>
+```
+```cs
+@code{
+    FormAlignment Alignment { get; set; } = FormAlignment.Left;
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    FormAlignment Alignment { get; set; } = FormAlignment.Left;
+}
+
+<Example Title="行内布局">
+    <Description>设置 <code>Inline</code> 使局部变成横向的</Description>
+    <RunContent>
+        <TForm Model="basicForm" Inline>
+            <TFormItem Label="账号">
+                <TInputText @bind-Value="basicForm.Name" />
+            </TFormItem>
+            <TFormItem Label="密码">
+                <TInputText @bind-Value="basicForm.Password" Type="InputType.Password" />
+            </TFormItem>
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TForm Model=""basicForm"" Inline>
+    <TFormItem Label=""账号"">
+        <TInputText bind-Value=""basicForm.Name"" />
+    </TFormItem>
+    <TFormItem Label=""密码"">
+        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+    </TFormItem>
+</TForm>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="帮助文本">
+    <Description><code>HelpText</code> 可以设置输入控件的帮助文本</Description>
+    <RunContent>
+        <TForm Model="basicForm">
+            <TFormItem Label="账号" HelpText="不能少于6个字符">
+                <TInputText @bind-Value="basicForm.Name" />
+            </TFormItem>
+            <TFormItem Label="密码" HelpText="必须包含大写、小写和数字">
+                <TInputText @bind-Value="basicForm.Password" Type="InputType.Password" />
+            </TFormItem>
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TForm Model=""basicForm"">
+    <TFormItem Label=""账号"" HelpText=""不能少于6个字符"">
+        <TInputText bind-Value=""basicForm.Name"" />
+    </TFormItem>
+    <TFormItem Label=""密码"" HelpText=""必须包含大写、小写和数字"">
+        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+    </TFormItem>
+</TForm>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="表单验证">
+    <Description>
+        用法与 <code>EditForm</code> 组件一致，支持 <code>System.ComponentModel.DataAnnotations</code> 的特性验证。要设置 提交按钮的 <code>HtmlType="ButtonHtmlType.Submit"</code> 类型。
+    </Description>
+    <RunContent>
+        <TForm Model="validationForm" OnValidSubmit="Submit">
+            <DataAnnotationsValidator/>            
+            <TFormItem For="()=>validationForm.UserName">
+                <TInputText @bind-Value="validationForm.UserName" />
+            </TFormItem>
+            <TFormItem For="()=>validationForm.Password">
+                <TInputText @bind-Value="validationForm.Password" Type="InputType.Password" />
+            </TFormItem>
+            <TFormItem>
+                <TButton Theme="Theme.Primary" HtmlType="ButtonHtmlType.Submit">提交</TButton>
+            </TFormItem>
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TForm Model=""validationForm"" OnValidSubmit=""Submit"">
+    <DataAnnotationsValidator/>            
+    <TFormItem For=""()=>validationForm.UserName"">
+        <TInputText bind-Value=""validationForm.UserName"" />
+    </TFormItem>
+    <TFormItem For=""()=>validationForm.Password"">
+        <TInputText bind-Value=""validationForm.Password"" Type=""InputType.Password"" />
+    </TFormItem>
+    <TFormItem>
+        <TButton Theme=""Theme.Primary"" HtmlType=""ButtonHtmlType.Submit"">提交</TButton>
+    </TFormItem>
+</TForm>
+```
+```cs
+@using System.ComponentModel.DataAnnotations
+@code{
+    ValidationForm validationForm = new();
+    class ValidationForm
+    {
+        [Display(Name=""用户名"")]
+        [Required(ErrorMessage =""{0}是必填的"")]
+        public string UserName{get;set;}
+
+        [Display(Name =""密码"")]
+        [Required(ErrorMessage =""{0}不能为空"")]
+        [StringLength(10)]
+        public string Password{ get; set; }
+    }
+
+    void Submit(EditContext context)
+    {
+
+    }
+}
+```
+")
+    </CodeContent>
+</Example>
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@code{
+
+    ValidationForm validationForm = new();
+    class ValidationForm
+    {
+        [Display(Name="用户名")]
+        [Required(ErrorMessage ="{0}是必填的")]
+        public string UserName{get;set;}
+
+        [Display(Name ="密码")]
+        [Required(ErrorMessage ="{0}不能为空")]
+        [StringLength(10)]
+        public string Password{ get; set; }
+    }
+
+    void Submit(EditContext context)
+    {
+
+    }
+}

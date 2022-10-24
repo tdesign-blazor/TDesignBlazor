@@ -3,20 +3,20 @@
 <PageHeader Title="Form 表单">
     用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。
 </PageHeader>
-<HighlightAlert/>
+<HighlightAlert />
 <Example Title="基本表单">
     <Description></Description>
     <RunContent>
         <Form Model="basicForm">
             <FormItem Label="账号">
-                <Input @bind-Value="basicForm.Name"/>
+                <Input @bind-Value="basicForm.Name" />
             </FormItem>
             <FormItem Label="密码">
-                <Input @bind-Value="basicForm.Password" Type="InputType.Password"/>
+                <Input @bind-Value="basicForm.Password" Type="InputType.Password" />
             </FormItem>
             <FormItem Label="性别">
                 <RadioGroup @bind-Value="basicForm.Gender">
-                    <Radio Value="@("男")"><Icon Name="IconName.GenderMale"/></Radio>
+                    <Radio Value="@("男")"><Icon Name="IconName.GenderMale" /></Radio>
                     <Radio Value="@("女")"><Icon Name="IconName.GenderFemale" /></Radio>
                 </RadioGroup>
             </FormItem>
@@ -37,60 +37,60 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<Form Model=""basicForm"">
-    <FormItem Label=""账号"">
+        ```html
+        <Form Model=""basicForm"">
+        <FormItem Label=""账号"">
         <Input bind-Value=""basicForm.Name""/>
-    </FormItem>
-    <FormItem Label=""密码"">
+        </FormItem>
+        <FormItem Label=""密码"">
         <Input bind-Value=""basicForm.Password"" Type=""InputType.Password""/>
-    </FormItem>
-    <FormItem Label=""性别"">
+        </FormItem>
+        <FormItem Label=""性别"">
         <RadioGroup bind-Value=""basicForm.Gender"">
-            <Radio Value=""@(""男"")""><Icon Name=""IconName.GenderMale""/></Radio>
-            <Radio Value=""@(""女"")""><Icon Name=""IconName.GenderFemale"" /></Radio>
+        <Radio Value=""@(""男"")""><Icon Name=""IconName.GenderMale""/></Radio>
+        <Radio Value=""@(""女"")""><Icon Name=""IconName.GenderFemale"" /></Radio>
         </RadioGroup>
-    </FormItem>
-    <FormItem>
+        </FormItem>
+        <FormItem>
         <CheckBox bind-Value=""basicForm.Agree"">是否同意注册协议</CheckBox>
-    </FormItem>
-    <FormItem>
+        </FormItem>
+        <FormItem>
         <Space>
-            <SpaceItem>
-                <Button Theme=""Theme.Primary"">提交</Button>
-            </SpaceItem>
-            <SpaceItem>
-                <Button HtmlType=""ButtonHtmlType.Reset"">重置</Button>
-            </SpaceItem>
+        <SpaceItem>
+        <Button Theme=""Theme.Primary"">提交</Button>
+        </SpaceItem>
+        <SpaceItem>
+        <Button HtmlType=""ButtonHtmlType.Reset"">重置</Button>
+        </SpaceItem>
         </Space>
-    </FormItem>
-</Form>
-```
+        </FormItem>
+        </Form>
+        ```
 
-```cs
-@code{
-    class BasicForm
-    {
+        ```cs
+        @code{
+        class BasicForm
+        {
         public string Name { get; set; }
         public string Password { get; set; }
         public string Gender { get; set; } = ""男"";
         public bool? Agree{ get; set; }
-    }
+        }
 
-    BasicForm basicForm = new();
-}
-```
-")
+        BasicForm basicForm = new();
+        }
+        ```
+        ")
     </CodeContent>
 </Example>
 
-@code{
+@code {
     class BasicForm
     {
         public string Name { get; set; }
         public string Password { get; set; }
         public string Gender { get; set; } = "男";
-        public bool? Agree{ get; set; }
+        public bool? Agree { get; set; }
     }
 
     BasicForm basicForm = new();
@@ -117,31 +117,31 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<RadioGroup bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
-    <Radio Value=""FormAlignment.Left"">居左对齐</Radio>
-    <Radio Value=""FormAlignment.Right"">居右对齐</Radio>
-    <Radio Value=""FormAlignment.Top"">居顶对齐</Radio>
-</RadioGroup>
+        ```html
+        <RadioGroup bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
+        <Radio Value=""FormAlignment.Left"">居左对齐</Radio>
+        <Radio Value=""FormAlignment.Right"">居右对齐</Radio>
+        <Radio Value=""FormAlignment.Top"">居顶对齐</Radio>
+        </RadioGroup>
 
-<Form Model=""basicForm"" Alignment=""Alignment"">
-    <FormItem Label=""账号"">
+        <Form Model=""basicForm"" Alignment=""Alignment"">
+        <FormItem Label=""账号"">
         <Input bind-Value=""basicForm.Name"" />
-    </FormItem>
-    <FormItem Label=""密码"">
+        </FormItem>
+        <FormItem Label=""密码"">
         <Input bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
-    </FormItem>
-</Form>
-```
-```cs
-@code{
-    FormAlignment Alignment { get; set; } = FormAlignment.Left;
-}
-```
-")
+        </FormItem>
+        </Form>
+        ```
+        ```cs
+        @code{
+        FormAlignment Alignment { get; set; } = FormAlignment.Left;
+        }
+        ```
+        ")
     </CodeContent>
 </Example>
-@code{
+@code {
     FormAlignment Alignment { get; set; } = FormAlignment.Left;
 }
 
@@ -159,17 +159,17 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<Form Model=""basicForm"" Inline>
-    <FormItem Label=""账号"">
+        ```html
+        <Form Model=""basicForm"" Inline>
+        <FormItem Label=""账号"">
         <Input bind-Value=""basicForm.Name"" />
-    </FormItem>
-    <FormItem Label=""密码"">
+        </FormItem>
+        <FormItem Label=""密码"">
         <Input bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
-    </FormItem>
-</Form>
-```
-")
+        </FormItem>
+        </Form>
+        ```
+        ")
     </CodeContent>
 </Example>
 <Example Title="帮助文本">
@@ -186,17 +186,17 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<Form Model=""basicForm"">
-    <FormItem Label=""账号"" HelpText=""不能少于6个字符"">
+        ```html
+        <Form Model=""basicForm"">
+        <FormItem Label=""账号"" HelpText=""不能少于6个字符"">
         <Input bind-Value=""basicForm.Name"" />
-    </FormItem>
-    <FormItem Label=""密码"" HelpText=""必须包含大写、小写和数字"">
+        </FormItem>
+        <FormItem Label=""密码"" HelpText=""必须包含大写、小写和数字"">
         <Input bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
-    </FormItem>
-</Form>
-```
-")
+        </FormItem>
+        </Form>
+        ```
+        ")
     </CodeContent>
 </Example>
 
@@ -206,7 +206,7 @@
     </Description>
     <RunContent>
         <Form Model="validationForm" OnValidSubmit="Submit">
-            <DataAnnotationsValidator/>            
+            <Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator />
             <FormItem For="()=>validationForm.UserName">
                 <Input @bind-Value="validationForm.UserName" />
             </FormItem>
@@ -220,26 +220,26 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
-<Form Model=""validationForm"" OnValidSubmit=""Submit"">
-    <DataAnnotationsValidator/>            
-    <FormItem For=""()=>validationForm.UserName"">
+        ```html
+        <Form Model=""validationForm"" OnValidSubmit=""Submit"">
+        <DataAnnotationsValidator/>
+        <FormItem For=""()=>validationForm.UserName"">
         <Input bind-Value=""validationForm.UserName"" />
-    </FormItem>
-    <FormItem For=""()=>validationForm.Password"">
+        </FormItem>
+        <FormItem For=""()=>validationForm.Password"">
         <Input bind-Value=""validationForm.Password"" Type=""InputType.Password"" />
-    </FormItem>
-    <FormItem>
+        </FormItem>
+        <FormItem>
         <Button Theme=""Theme.Primary"" HtmlType=""ButtonHtmlType.Submit"">提交</Button>
-    </FormItem>
-</Form>
-```
-```cs
-@using System.ComponentModel.DataAnnotations
-@code{
-    ValidationForm validationForm = new();
-    class ValidationForm
-    {
+        </FormItem>
+        </Form>
+        ```
+        ```cs
+        @using System.ComponentModel.DataAnnotations
+        @code{
+        ValidationForm validationForm = new();
+        class ValidationForm
+        {
         [Display(Name=""用户名"")]
         [Required(ErrorMessage =""{0}是必填的"")]
         public string UserName{get;set;}
@@ -248,34 +248,34 @@
         [Required(ErrorMessage =""{0}不能为空"")]
         [StringLength(10)]
         public string Password{ get; set; }
-    }
+        }
 
-    void Submit(EditContext context)
-    {
+        void Submit(EditContext context)
+        {
 
-    }
-}
-```
-")
+        }
+        }
+        ```
+        ")
     </CodeContent>
 </Example>
 @using System.ComponentModel.DataAnnotations
-@code{
+@code {
 
     ValidationForm validationForm = new();
     class ValidationForm
     {
-        [Display(Name="用户名")]
-        [Required(ErrorMessage ="{0}是必填的")]
-        public string UserName{get;set;}
+        [Display(Name = "用户名")]
+        [Required(ErrorMessage = "{0}是必填的")]
+        public string UserName { get; set; }
 
-        [Display(Name ="密码")]
-        [Required(ErrorMessage ="{0}不能为空")]
+        [Display(Name = "密码")]
+        [Required(ErrorMessage = "{0}不能为空")]
         [StringLength(10)]
-        public string Password{ get; set; }
+        public string Password { get; set; }
     }
 
-    void Submit(EditContext context)
+    void Submit()
     {
 
     }

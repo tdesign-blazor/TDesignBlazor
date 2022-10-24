@@ -1,0 +1,166 @@
+﻿@page "/components/badge"
+
+<PageHeader Title="TBadge 徽标">
+    出现在图标或文字右上角的徽标标识。
+</PageHeader>
+
+<Example Title="示例">
+    <Description></Description>
+    <RunContent>
+        <TBadge Text="99">
+            <TButton Theme="Theme.Primary">按钮</TButton>
+        </TBadge>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TBadge Text=""99"">
+    <TButton Theme=""Theme.Primary"">按钮</TButton>
+</TBadge>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同形状">
+    <Description></Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TBadge Shape="BadgeShape.Dot">
+                    <TButton Theme="Theme.Primary">按钮</TButton>
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Shape="BadgeShape.Circle" Text="5">
+                    <TButton Theme="Theme.Primary">按钮</TButton>
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Shape="BadgeShape.Round" Text="90">
+                    <TButton Theme="Theme.Primary">按钮</TButton>
+                </TBadge>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TBadge Shape=""BadgeShape.Dot"">
+    <TButton Theme=""Theme.Primary"">按钮</TButton>
+</TBadge>
+<TBadge Shape=""BadgeShape.Circle"" Text=""5"">
+    <TButton Theme=""Theme.Primary"">按钮</TButton>
+</TBadge>
+<TBadge Shape=""BadgeShape.Round"" Text=""90"">
+    <TButton Theme=""Theme.Primary"">按钮</TButton>
+</TBadge>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同尺寸">
+    <Description>提供标准（默认）、小两种尺寸。</Description>
+    <RunContent>
+        <TBadge Text="new">
+            <TButton Theme="Theme.Primary">标准尺寸</TButton>
+        </TBadge>
+        <br />
+        <br />
+        <TBadge Text="small" Small>
+            <TButton>小尺寸</TButton>
+        </TBadge>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TBadge Text=""new"">
+    <TButton Theme=""Theme.Primary"">标准尺寸</TButton>
+</TBadge>
+
+<TBadge Text=""small"" Small>
+    <TButton>小尺寸</TButton>
+</TBadge>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义颜色">
+    <Description>可对显示信息进行自定义配置，如展示为“热门hot”“最新new”等。</Description>
+    <RunContent>
+        <TSpace Gap="30px">
+            <TSpaceItem>
+                <TBadge Text="hot">
+                    这是一条头条新闻
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Text="new" Color="green">
+                    <TIcon Name="IconName.User"/> 新用户
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Text="99+" Color="purple">
+                    <TButton>按钮</TButton>
+                </TBadge>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TBadge Text=""hot"">
+    这是一条头条新闻
+</TBadge>
+
+<TBadge Text=""new"" Color=""green"">
+    <TIcon Name=""IconName.User""/> 新用户
+</TBadge>
+
+<TBadge Text=""99+"" Color=""purple"">
+    <TButton>按钮</TButton>
+</TBadge>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="偏移量位置">
+    <Description>
+        使用 <code>Top</code> 和 <code>Right</code> 控制徽标的偏移量位置。
+    </Description>
+    <RunContent>
+        <TSpace Gap="30px">
+            <TSpaceItem>
+                <TBadge Text="hot" Top="-5">
+                    这是一条头条新闻
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Text="new" Color="green" Top="-10" Right="50">
+                    <TIcon Name="IconName.User" /> 新用户
+                </TBadge>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TBadge Text="99+" Color="purple" Top="15" Right="-10">
+                    <TButton>按钮</TButton>
+                </TBadge>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TBadge Text=""hot"" Top=""-5"">
+    这是一条头条新闻
+</TBadge>
+
+<TBadge Text=""new"" Color=""green"" Top=""-10"" Right=""50"">
+    <TIcon Name=""IconName.User"" /> 新用户
+</TBadge>
+
+<TBadge Text=""99+"" Color=""purple"" Top=""15"" Right=""-10"">
+    <TButton>按钮</TButton>
+</TBadge>
+```
+")
+    </CodeContent>
+</Example>

@@ -1,0 +1,58 @@
+﻿
+<div class="example">
+    <h2>@Title</h2>
+    @if (Description is not null)
+    {
+            <p>@Description</p>
+    }
+
+    @*<TTab Position="TDesign.Position.Top" >
+        <TTabItem Title="效果" AdditionalStyle="@RunStyle">
+            @RunContent
+        </TTabItem>
+        <TTabItem Title="代码">
+            @CodeContent
+        </TTabItem>
+    </TTab>*@
+
+
+    <div class="demo-wrapper">
+        <div class="content" style="@RunStyle">
+            @RunContent
+        </div>
+        <div class="footer">
+            <div class="btn">
+                <TIcon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" />
+            </div>
+        </div>
+        <div class="@CodeClass" style="@GetStyle()">
+            @CodeContent
+            </div>
+    </div>
+</div>
+@using ComponentBuilder
+@code {
+
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment Description { get; set; }
+    [Parameter] public RenderFragment CodeContent { get; set; }
+    [Parameter] public RenderFragment RunContent { get; set; }
+    [Parameter] public string? RunStyle { get; set; }
+
+    bool Active = false;
+
+    string GetStyle() => Active ? "" : "display:none";
+    string CodeClass => HtmlHelper.CreateCssBuilder().Append("content code")
+    //.Append(Active, "code-collapse", "code-expand")
+    .ToString()
+    ;
+
+    string BtnClass => HtmlHelper.CreateCssBuilder().Append("action").Append("active", Active).ToString();
+
+    void ToogleCode()
+    {
+        Active = !Active;
+        StateHasChanged();
+    }
+}
+

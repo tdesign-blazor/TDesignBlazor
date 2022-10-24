@@ -1,0 +1,154 @@
+﻿@page "/components/progress"
+
+<PageHeader Title="TProgress 进度条">展示操作的当前进度。</PageHeader>
+
+
+<Example Title="线形进度条">
+    <Description>以线形表示进度的组件，可以选择性地配有文字或图标补充显示进度和状态。多用于信息量较为丰富的情况。</Description>
+    <RunContent>
+        <h3>默认在线形外展示进度和状态</h3>
+        <TSpace Vertical AdditionalStyle="width:100%" Gap="20px">
+            <TSpaceItem>
+                <span>默认样式</span>
+                <TProgress Value="50" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>100%</span>
+                <TProgress Value="100" Status="Status.Success" ShowLabel/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度完成</span>
+                <TProgress Value="100" Status="Status.Success" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度状态发生重大错误</span>
+                <TProgress Value="50" Status="Status.Error" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度被中断</span>
+                <TProgress Value="50" Status="Status.Warning" />
+            </TSpaceItem>
+        </TSpace>
+        <h3>可以在线形内展示进度信息</h3>
+        <TSpace Vertical AdditionalStyle="width:100%" Gap="20px">
+            <TSpaceItem>
+                <span>默认样式</span>
+                <TProgress Value="38" Theme="ProgressTheme.Plump" ShowLabel/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度0-10%时数字位置出现在目前进度的右边区域</span>
+                <TProgress Value="4" Theme="ProgressTheme.Plump" ShowLabel />
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<h3>默认在线形外展示进度和状态</h3>
+<span>默认样式</span>
+<TProgress Value=""50"" />
+
+<span>100%</span>
+<TProgress Value=""100"" Status=""Status.Success"" ShowLabel/>
+
+<span>进度完成</span>
+<TProgress Value=""100"" Status=""Status.Success"" />
+
+<span>进度状态发生重大错误</span>
+<TProgress Value=""50"" Status=""Status.Error"" />
+
+<span>进度被中断</span>
+<TProgress Value=""50"" Status=""Status.Warning"" />
+
+
+<h3>可以在线形内展示进度信息</h3>
+<span>默认样式</span>
+<TProgress Value=""38"" Theme=""ProgressTheme.Plump"" />
+
+<span>进度0-10%时数字位置出现在目前进度的右边区域</span>
+<TProgress Value=""4"" Theme=""ProgressTheme.Plump"" />
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="环形进度条">
+    <Description>以线形表示进度的组件，环内可选择性地配有文字或图标补充显示进度和状态。多用于需要强调进度百分比的情况。</Description>
+    <RunContent>
+        <TSpace AdditionalStyle="text-align:center" Gap="72px">
+            <TSpaceItem>
+                <span>默认样式</span>
+                <TProgress Value="30" Theme="ProgressTheme.Circle" ShowLabel/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>不显示数字</span>
+                <TProgress Value="100" Theme="ProgressTheme.Circle" Status="Status.Success" HideLabel/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>自定义内容</span>
+                <TProgress Value="50" Label="75天" Theme="ProgressTheme.Circle" Status="Status.Success" ShowLabel />
+            </TSpaceItem>
+        </TSpace>
+        <br /><br />
+        <TSpace AdditionalStyle="text-align:center" Gap="72px">
+            <TSpaceItem>
+                <span>进度完成</span>
+                <TProgress Value="30" Theme="ProgressTheme.Circle" Status="Status.Success" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度状态发生错误</span>
+                <TProgress Value="75" Theme="ProgressTheme.Circle" Status="Status.Error" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>进度被中断</span>
+                <TProgress Value="50" Theme="ProgressTheme.Circle" Status="Status.Warning" />
+            </TSpaceItem>
+        </TSpace><br /><br />
+        <TSpace AdditionalStyle="text-align:center" Gap="72px">
+            <TSpaceItem>
+                <span>小尺寸</span>
+                <TProgress Value="30" Theme="ProgressTheme.Circle" ShowLabel Size="Size.Small"/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>默认尺寸</span>
+                <TProgress Value="30" Theme="ProgressTheme.Circle" ShowLabel Size="Size.Medium" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <span>大尺寸</span>
+                <TProgress Value="30" Theme="ProgressTheme.Circle" ShowLabel Size="Size.Large"/>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<span>默认样式</span>
+<TProgress Value=""30"" Theme=""ProgressTheme.Circle"" ShowLabel/>
+
+<span>不显示数字</span>
+<TProgress Value=""100"" Theme=""ProgressTheme.Circle"" Status=""Status.Success"" HideLabel/>
+
+<span>自定义内容</span>
+<TProgress Value=""50"" Label=""75天"" Theme=""ProgressTheme.Circle"" Status=""Status.Success"" ShowLabel />
+
+<span>进度完成</span>
+<TProgress Value=""30"" Theme=""ProgressTheme.Circle"" Status=""Status.Success"" />
+
+<span>进度状态发生错误</span>
+<TProgress Value=""75"" Theme=""ProgressTheme.Circle"" Status=""Status.Error"" />
+
+<span>进度被中断</span>
+<TProgress Value=""50"" Theme=""ProgressTheme.Circle"" Status=""Status.Warning"" />
+
+<span>小尺寸</span>
+<TProgress Value=""30"" Theme=""ProgressTheme.Circle"" ShowLabel Size=""Size.Small""/>
+
+<span>默认尺寸</span>
+<TProgress Value=""30"" Theme=""ProgressTheme.Circle"" ShowLabel Size=""Size.Medium"" />
+
+<span>大尺寸</span>
+<TProgress Value=""30"" Theme=""ProgressTheme.Circle"" ShowLabel Size=""Size.Large""/>
+
+```
+")
+    </CodeContent>
+</Example>

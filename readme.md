@@ -1,8 +1,15 @@
 ![TDesign](https://tdesign.gtimg.com/site/TDesign.png)
 
 ![TDesign](https://user-images.githubusercontent.com/88708072/147124305-fbb74f9f-65b2-44f9-9f1c-e812ce63a547.gif)
-
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
+
+
+[![PR](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/pull-request.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/pull-request.yml)
+[![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AchievedOwner/TDesignBlazor&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=AchievedOwner/TDesignBlazor&utm_campaign=Badge_Coverage)
+
+![Version](https://img.shields.io/github/v/release/AchievedOwner/TDesignBlazor)
 
 ## ✨ 特性
 
@@ -38,21 +45,21 @@
 ## 📦 安装使用
 - 从 Nuget 直接安装
     ```bash
-    > Install-Package TDesignBlazor
+    > Install-Package TDesign
     ```
 
 - 在项目中注册服务
     ```cs
-    builder.Service.AddTDesignBlazor();
+    builder.Service.AddTDesign();
     ```
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
     ```html
-    <link rel="stylesheet" href="_content/TDesignBlazor/tdesign-blazor.css" />
+    <link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" />
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs
-    @using TDesignBlazor
+    @using TDesign
     ```
 - 在 `App.razor` 增加 `TDesignContainer` 组件，用于动态组件的渲染
     ```html
@@ -90,15 +97,13 @@
 如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
 * 作者邮箱：[william-zzh@outlook.com]
 * QQ 群：1012762441
-* 微信群
-
-    <img src="./asset/tdesign-blazor.jpg" width="50%" height="50%"/>
+* 微信群：TDesignBlazor 贡献者交流
 
 ## :triangular_flag_on_post: 行为准则
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
 
 ## :newspaper: 许可证（License）
-[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesignBlazor/blob/master/LICENSE.md)
+[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesign/blob/master/LICENSE.md)
 
 ## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
