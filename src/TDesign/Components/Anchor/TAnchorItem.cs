@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace TDesign
 {
@@ -24,13 +18,25 @@ namespace TDesign
         /// <summary>
         /// 锚点文字
         /// </summary>
-        [Parameter]public AnchorItemTarget? Target { get; set; }= AnchorItemTarget.Self;
+        [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
         [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs> OnClick { get; set; }
         [Parameter][HtmlEvent("onchange")] public EventCallback<MouseEventArgs> OnChange { get; set; }
 
+        [Inject] protected IJSRuntime Js { get; set; }
+
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            builder.CreateComponent<TLink>(sequence + 1, Title, new { Href, Title, Target= Target.GetHtmlAttribute() });
+            builder.CreateComponent<TLink>(sequence + 1, Title,
+                new
+                {
+                    Href,
+                    Title,
+                    Target = Target.GetHtmlAttribute(),
+                    onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, x =>
+                    {
+                        Js.ScrollToHash(Href);
+                    })
+                });
         }
     }
     /// <summary>

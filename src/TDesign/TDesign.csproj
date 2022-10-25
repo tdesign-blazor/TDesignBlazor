@@ -51,6 +51,12 @@
       </PropertyGroup>
     </When>
   </Choose>
+  <ItemGroup>
+    <Compile Remove="Parameters\**" />
+    <Content Remove="Parameters\**" />
+    <EmbeddedResource Remove="Parameters\**" />
+    <None Remove="Parameters\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -64,10 +70,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Parameters\" />
   </ItemGroup>
 
   <ItemGroup>
