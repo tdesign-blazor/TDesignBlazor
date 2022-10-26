@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 namespace TDesign
 {
     [HtmlTag("div")]
+    [ParentComponent]
     [CssClass("t-anchor")]
-    public class TAnchor : BlazorComponentBase, IHasChildContent
+    public class TAnchor : BlazorComponentBase, IHasChildContent, IHasOnSwitch
     {
         [Parameter]public RenderFragment? ChildContent { get; set; }
+        public EventCallback<int?> OnSwitch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int? SwitchIndex { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {

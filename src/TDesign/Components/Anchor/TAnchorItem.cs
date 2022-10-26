@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 
 namespace TDesign
 {
+    [ChildComponent(typeof(TAnchor))]
     [HtmlTag("div")]
     [CssClass("t-anchor__item")]
     public class TAnchorItem : BlazorComponentBase
@@ -32,13 +33,17 @@ namespace TDesign
                     Href,
                     Title,
                     Target = Target.GetHtmlAttribute(),
-                    onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, x =>
+                    onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, async x =>
                     {
-                        Js.ScrollToHash(Href);
+                       await Js.ScrollToHash("#content-2");
+                       //await Js.InvokeVoidAsync("alert","1");
                     })
                 });
         }
     }
+
+
+
     /// <summary>
     /// TAnchorItem 目标
     /// </summary>

@@ -9,11 +9,15 @@
     <RunContent>
         <div data-v-431a8206="" class="anchor-demo anchor-container-demo" style="display: flex;">
             <TAnchor container="#anchor-container">
-                <TAnchorItem Title="content-1" Href="@(s.Uri+"#content-1")"></TAnchorItem>
+@*                <TAnchorItem Title="content-1" Href="@(s.Uri+"#content-1")"></TAnchorItem>
                 <TAnchorItem Title="content-2" Href="@(s.Uri+"#content-2")"></TAnchorItem>
                 <TAnchorItem Title="content-3" Href="@(s.Uri+"#content-3")"></TAnchorItem>
                 <TAnchorItem Title="content-4" Href="@(s.Uri+"#content-4")"></TAnchorItem>
-                <TAnchorItem Title="content-5" Href="@(s.Uri+"#content-5")"></TAnchorItem>
+                <TAnchorItem Title="content-5" Href="@(s.Uri+"#content-5")"></TAnchorItem>*@
+                <TAnchorItem Title="content-1" Href="@(s.Uri+"#s1")"></TAnchorItem>
+                <TAnchorItem Title="content-2" Href="@(s.Uri+"#s2")"></TAnchorItem>
+                <TAnchorItem Title="content-3" Href="@(s.Uri+"#s3")"></TAnchorItem>
+                <TAnchorItem Title="content-4" Href="@(s.Uri+"#s4")"></TAnchorItem>
             </TAnchor>
             <div id="anchor-container" style="flex-grow: 1;height: 2000px;overflow: auto;overflow:scroll;scroll-behavior: smooth;">
                 <div id="content-1" class="anchor-content-1" style="background: #ecf2fe;text-align: center;font-size: 22px;line-height: 400px;">anchor-content-1</div>
@@ -28,3 +32,8 @@
 
     </CodeContent>
 </Example>
+
+<div id="s1" style="line-height:300px;width:100%">1</div>
+<div id="s2" style="line-height:300px;width:100%">2</div>
+<div id="s3" style="line-height:300px;width:100%">3</div>
+<div id="s4" style="line-height:300px;width:100%">4</div>

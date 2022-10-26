@@ -13,11 +13,11 @@ namespace TDesign
     {
         public static async Task ScrollToHash(this IJSRuntime js, string hash)
         {
-            var element = await js.InvokeAsync<Element>("getDomInfo", hash);
+            var element = await js.InvokeAsync<object>("window.document.getElementById", hash);
 
             var options = new
             {
-                Top = element.AbsoluteTop - 80,
+                //Top = element.AbsoluteTop - 80,
                 Left = 0,
                 Behavior = "smooth"
             };
