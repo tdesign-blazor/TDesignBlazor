@@ -107,6 +107,5 @@ public class MessageContainer : BlazorComponentBase, IDisposable
     public void Dispose()
     {
         MessageService.OnShowing -= MessageService_OnShowing;
-
     }
 }
