@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDesign.Notification;
-
-namespace TDesign.Notification;
-public interface INotifyService<TConfiguration> where TConfiguration: NotifyConfigurationBase
+﻿namespace TDesign.Notification;
+/// <summary>
+/// 提供可以弹出通知提示的服务。
+/// </summary>
+/// <typeparam name="TConfiguration">配置的类型。</typeparam>
+public interface INotifyService<TConfiguration> where TConfiguration : NotifyConfigurationBase
 {
     /// <summary>
     /// 显示指定消息配置的全局提示。

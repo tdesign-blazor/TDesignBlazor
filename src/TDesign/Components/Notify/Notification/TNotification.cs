@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+
 using TDesign.Notification;
 
 namespace TDesign;
 
 /// <summary>
-/// 消息通知。
+/// 轻量级的全局消息提示和确认机制。
 /// </summary>
 [ParentComponent]
 [CssClass("t-notification")]
@@ -14,7 +15,10 @@ public class TNotification : NotifyComponentBase
     /// 显示的标题。
     /// </summary>
     [Parameter][EditorRequired] public string? Title { get; set; }
-
+    /// <summary>
+    /// 显示的副标题。
+    /// </summary>
+    [Parameter] public string? SubTitle { get; set; }
     /// <summary>
     /// 具备操作部分的 UI 内容。
     /// </summary>
@@ -32,7 +36,16 @@ public class TNotification : NotifyComponentBase
             {
                 content.CreateElement(0, "div", title =>
                 {
-                    title.CreateElement(0, "div", Title, new { @class = "t-notification__title" });
+                    title.CreateElement(0, "div", tc =>
+                    {
+                        tc.AddContent(0, Title);
+
+                        tc.CreateElement(1, "small", sub =>
+                        {
+                            sub.AddContent(0, new MarkupString("&nbsp;"));
+                            sub.AddContent(1, SubTitle);
+                        }, condition: !string.IsNullOrEmpty(SubTitle));
+                    }, new { @class = "t-notification__title" });
                 }
                 , new { @class = "t-notification__title__wrap" });
 

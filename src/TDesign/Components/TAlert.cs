@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using TDesign.Components.Notification.Abstractions;
+
+using TDesign.Notification;
 
 namespace TDesign;
 
@@ -7,7 +8,7 @@ namespace TDesign;
 /// 警告提醒。
 /// </summary>
 [CssClass("t-alert")]
-public class TAlert : MessageComponentBase
+public class TAlert : NotifyComponentBase
 {
 
     /// <summary>

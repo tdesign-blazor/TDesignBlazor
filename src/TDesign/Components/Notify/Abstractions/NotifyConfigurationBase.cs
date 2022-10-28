@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TDesign.Notification;
+﻿namespace TDesign.Notification;
 public abstract class NotifyConfigurationBase
 {
     /// <summary>
@@ -23,6 +17,10 @@ public abstract class NotifyConfigurationBase
     /// 获取或设置消息持续多久自动关闭，单位是毫秒，默认 5 秒，即 5000 毫秒。
     /// </summary>
     public int? Delay { get; set; } = 3000;
+    /// <summary>
+    /// 获取或设置消息提示的图标。
+    /// </summary>
+    public object? Icon { get; set; }
 
     /// <summary>
     /// 获取或设置显示的位置。

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using TDesign.Abstractions;
+
 namespace TDesign;
 
 /// <summary>
@@ -8,8 +10,16 @@ namespace TDesign;
 public class TDesignContainer : BlazorComponentBase
 {
     /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.CreateComponent<MessageContainer>(0);
+        var index = 0;
+        this.GetType().Assembly.GetTypes()
+            .Where(m => typeof(IContainerComonent).IsAssignableFrom(m) && m.IsClass && !m.IsAbstract)
+
+            .ToList().ForEach(type =>
+            {
+                builder.CreateComponent(type, index);
+                index++;
+            });
     }
 }
