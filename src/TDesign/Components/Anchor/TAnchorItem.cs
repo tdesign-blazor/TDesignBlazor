@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
-
+using System.Security.Cryptography.X509Certificates;
 using static System.Net.WebRequestMethods;
 
 namespace TDesign
@@ -10,7 +10,7 @@ namespace TDesign
     [ChildComponent(typeof(TAnchor))]
     [HtmlTag("div")]
     [CssClass("t-anchor__item")]
-    public class TAnchorItem : BlazorComponentBase, IHasChildContent
+    public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive, IHasDisabled
     {
         /// <summary>
         /// 用于自动化获取父组件。
@@ -30,27 +30,69 @@ namespace TDesign
         [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
         public RenderFragment? ChildContent { get; set; }
         internal int Index { get; private set; }
-        [Parameter][CssClass("t-is-active")] public bool? Active { get; set; }
+        [Parameter][CssClass("t-is-active")] public bool Active { get; set; }
+
+        [Inject] public IJSRuntime? JS { get; set; }
+        [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+        public bool Disabled { get; set; }
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            if (CascadingAnchor.SwitchIndex.HasValue && CascadingAnchor.SwitchIndex.Value == Index)
-            {
-                builder.CreateComponent<TLink>(sequence + 1, Title,
-                               attributes: new
+            builder.CreateComponent<TLink>(sequence + 1, Title,
+                           attributes: new
+                           {
+                               Href,
+                               Title,
+                               Target = Target?.GetHtmlAttribute(),
+                               onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, async x =>
                                {
-                                   Href,
-                                   Title,
-                                   Target = Target?.GetHtmlAttribute(),
-                               });
-            }
+                                   for (int i = 0; i < CascadingAnchor.ChildComponents.Count; i++)
+                                   {
+                                       var child = CascadingAnchor.ChildComponents[i];
+                                       if (child is TAnchorItem item)
+                                       {
+                                           item.Active = false;
+                                           await item.Refresh();
+                                           
+                                       }
+                                   }
+                                   Active = true;
+                                   await this.Refresh();
+                               })
+                           });
+
         }
 
         protected override void OnInitialized()
         {
             base.OnInitialized();
             Index = CascadingAnchor.ChildComponents.Count - 1;
+
         }
+
+        //public async Task Toggle()
+        //{
+        //    if (Disabled)
+        //    {
+        //        return;
+        //    }
+
+        //    if (CascadingCollaspe.Mutex)
+        //    {
+        //        for (int i = 0; i < CascadingCollaspe.ChildComponents.Count; i++)
+        //        {
+        //            var child = CascadingCollaspe.ChildComponents[i];
+        //            if (child is TCollapsePanel panel)
+        //            {
+        //                panel.Active = false;
+        //                await panel.Refresh();
+        //            }
+        //        }
+        //    }
+        //    Active = !Active;
+        //    await this.Refresh();
+        //}
+        //onclick = HtmlHelper.CreateCallback(this, Toggle, CascadingCollaspe.TIconToggle)
     }
 
     /// <summary>

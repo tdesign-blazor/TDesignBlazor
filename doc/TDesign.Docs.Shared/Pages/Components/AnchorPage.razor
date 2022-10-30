@@ -1,8 +1,6 @@
 ﻿@page "/components/anchor"
-@inject NavigationManager s
-@{
+@inject NavigationManager navigationManager
 
-}
 
 <Example Title="指定容器锚点">
     <Description>指定响应滚动的容器进行锚点定位，以及 click 事件的应用，阻止锚点添加到 uri 上。</Description>
@@ -14,10 +12,10 @@
                 <TAnchorItem Title="content-3" Href="@(s.Uri+"#content-3")"></TAnchorItem>
                 <TAnchorItem Title="content-4" Href="@(s.Uri+"#content-4")"></TAnchorItem>
                 <TAnchorItem Title="content-5" Href="@(s.Uri+"#content-5")"></TAnchorItem>*@
-                <TAnchorItem Title="content-1" Href="@(s.Uri+"#s1")"></TAnchorItem>
-                <TAnchorItem Title="content-2" Href="@(s.Uri+"#s2")"></TAnchorItem>
-                <TAnchorItem Title="content-3" Href="@(s.Uri+"#s3")"></TAnchorItem>
-                <TAnchorItem Title="content-4" Href="@(s.Uri+"#s4")"></TAnchorItem>
+                <TAnchorItem Active Title="content-1" Href="@(navigationManager.Uri+"#s1" )"></TAnchorItem>
+                <TAnchorItem Title="content-2" Href="@(navigationManager.Uri+"#s2")"></TAnchorItem>
+                <TAnchorItem Title="content-3" Href="@(navigationManager.Uri+"#s3")"></TAnchorItem>
+                <TAnchorItem Title="content-4" Href="@(navigationManager.Uri+"#s4")"></TAnchorItem>
             </TAnchor>
             <div id="anchor-container" style="flex-grow: 1;height: 2000px;overflow: auto;overflow:scroll;scroll-behavior: smooth;">
                 <div id="content-1" class="anchor-content-1" style="background: #ecf2fe;text-align: center;font-size: 22px;line-height: 400px;">anchor-content-1</div>
