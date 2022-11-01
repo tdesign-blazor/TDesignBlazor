@@ -54,7 +54,7 @@ namespace TDesign
 
                     });
 
-                }, new { @class = "t-anchor__line-cursor-wrapper", style = "top: 0px; height: 24px; opacity: 1;" });
+                }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex*24}px; height: 24px; opacity: 1;" });
 
             }, new { @class = "t-anchor__line" });
         }

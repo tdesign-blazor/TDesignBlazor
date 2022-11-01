@@ -48,16 +48,19 @@ namespace TDesign
                                {
                                    for (int i = 0; i < CascadingAnchor.ChildComponents.Count; i++)
                                    {
-                                       var child = CascadingAnchor.ChildComponents[i];
-                                       if (child is TAnchorItem item)
+                                       if (CascadingAnchor.ChildComponents[i] is TAnchorItem item)
                                        {
-                                           item.Active = false;
+                                           if (Index == i)
+                                               item.Active = true;
+                                           else
+                                               item.Active = false;
+
                                            await item.Refresh();
-                                           
                                        }
                                    }
-                                   Active = true;
                                    await this.Refresh();
+                                   CascadingAnchor.SwitchIndex=Index;
+                                   await CascadingAnchor.Refresh();
                                })
                            });
 
@@ -69,30 +72,6 @@ namespace TDesign
             Index = CascadingAnchor.ChildComponents.Count - 1;
 
         }
-
-        //public async Task Toggle()
-        //{
-        //    if (Disabled)
-        //    {
-        //        return;
-        //    }
-
-        //    if (CascadingCollaspe.Mutex)
-        //    {
-        //        for (int i = 0; i < CascadingCollaspe.ChildComponents.Count; i++)
-        //        {
-        //            var child = CascadingCollaspe.ChildComponents[i];
-        //            if (child is TCollapsePanel panel)
-        //            {
-        //                panel.Active = false;
-        //                await panel.Refresh();
-        //            }
-        //        }
-        //    }
-        //    Active = !Active;
-        //    await this.Refresh();
-        //}
-        //onclick = HtmlHelper.CreateCallback(this, Toggle, CascadingCollaspe.TIconToggle)
     }
 
     /// <summary>
