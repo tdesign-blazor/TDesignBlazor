@@ -5,13 +5,13 @@
 <Example Title="指定容器锚点">
     <Description>指定响应滚动的容器进行锚点定位，以及 click 事件的应用，阻止锚点添加到 uri 上。</Description>
     <RunContent>
-        <div data-v-431a8206="" class="anchor-demo anchor-container-demo" style="display: flex;">
+@*        <div class="anchor-demo anchor-container-demo" style="display: flex;">
             <TAnchor container="#anchor-container">
-                <TAnchorItem Title="content-1" Href="@(navigationManager.Uri+"#content-1")"></TAnchorItem>
-                <TAnchorItem Title="content-2" Href="@(navigationManager.Uri+"#content-2")"></TAnchorItem>
-                <TAnchorItem Title="content-3" Href="@(navigationManager.Uri+"#content-3")"></TAnchorItem>
-                <TAnchorItem Title="content-4" Href="@(navigationManager.Uri+"#content-4")"></TAnchorItem>
-                <TAnchorItem Title="content-5" Href="@(navigationManager.Uri+"#content-5")"></TAnchorItem>
+                <TAnchorItem Title="content-1" Href="#content-1"></TAnchorItem>
+                <TAnchorItem Title="content-2" Href="#content-2"></TAnchorItem>
+                <TAnchorItem Title="content-3" Href="#content-3"></TAnchorItem>
+                <TAnchorItem Title="content-4" Href="#content-4"></TAnchorItem>
+                <TAnchorItem Title="content-5" Href="#content-5"></TAnchorItem>
             </TAnchor>
             <div id="anchor-container" style="flex-grow: 1;overflow: auto;overflow:scroll;scroll-behavior: smooth;max-height:400px;">
                 <div id="content-1" class="anchor-content-1" style="background: #ecf2fe;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-1</div>
@@ -20,9 +20,24 @@
                 <div id="content-4" class="anchor-content-4" style="background: #96bbf8;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-4</div>
                 <div id="content-5" class="anchor-content-5" style="background: #699ef5;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-5</div>
             </div>
-        </div>
+        </div>*@
+        <TAnchor container="#anchor-container">
+            <TAnchorItem Title="content-1" Href="#content-1"></TAnchorItem>
+            <TAnchorItem Title="content-2" Href="#content-2"></TAnchorItem>
+            <TAnchorItem Title="content-3" Href="#content-3"></TAnchorItem>
+            <TAnchorItem Title="content-4" Href="#content-4"></TAnchorItem>
+            <TAnchorItem Title="content-5" Href="#content-5"></TAnchorItem>
+        </TAnchor>
     </RunContent>
     <CodeContent>
 
     </CodeContent>
+
 </Example>
+
+
+<div id="content-1" class="anchor-content-1" style="background: #ecf2fe;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-1</div>
+<div id="content-2" class="anchor-content-2" style="background: #d4e3fc;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-2</div>
+<div id="content-3" class="anchor-content-3" style="background: #bbd3fb;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-3</div>
+<div id="content-4" class="anchor-content-4" style="background: #96bbf8;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-4</div>
+<div id="content-5" class="anchor-content-5" style="background: #699ef5;text-align: center;font-size: 22px;line-height: 200px;">anchor-content-5</div>

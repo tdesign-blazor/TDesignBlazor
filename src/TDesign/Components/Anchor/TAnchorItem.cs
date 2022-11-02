@@ -27,7 +27,7 @@ namespace TDesign
         /// <summary>
         /// 锚点文字
         /// </summary>
-        [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
+        [Parameter] public AnchorItemTarget? Target { get; set; }
         public RenderFragment? ChildContent { get; set; }
         internal int Index { get; private set; }
         [Parameter][CssClass("t-is-active")] public bool Active { get; set; }
@@ -61,6 +61,7 @@ namespace TDesign
                                    await this.Refresh();
                                    CascadingAnchor.SwitchIndex=Index;
                                    await CascadingAnchor.Refresh();
+                                   await JS.InvokeVoidAsync("hash", Href);
                                })
                            });
 
