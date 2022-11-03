@@ -2,7 +2,10 @@
 
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
+
+using System;
 using System.Security.Cryptography.X509Certificates;
+
 using static System.Net.WebRequestMethods;
 
 namespace TDesign
@@ -12,6 +15,7 @@ namespace TDesign
     [CssClass("t-anchor__item")]
     public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive, IHasDisabled
     {
+        private string _href;
         /// <summary>
         /// 用于自动化获取父组件。
         /// </summary>
@@ -19,7 +23,29 @@ namespace TDesign
         /// <summary>
         /// 锚点
         /// </summary>
-        [Parameter] public string? Href { get; set; }
+        [Parameter]
+        public string? Href
+        {
+            get
+            {
+                return _href;
+            }
+            set
+            {
+
+
+                var anchors = navigationManager.Uri.Split('#');
+                if (anchors.Length > 1)
+                {
+                    _href = navigationManager.Uri.Replace($"#{anchors[^1]}", value);
+                }
+                else
+                {
+                    _href = navigationManager.Uri + value;
+                }
+
+            }
+        }
         /// <summary>
         /// 标题
         /// </summary>
@@ -27,15 +53,15 @@ namespace TDesign
         /// <summary>
         /// 锚点文字
         /// </summary>
-        [Parameter] public AnchorItemTarget? Target { get; set; }
+        [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
         public RenderFragment? ChildContent { get; set; }
         internal int Index { get; private set; }
-        [Parameter][CssClass("t-is-active")] public bool Active { get; set; }
+        [Parameter] public bool Active { get; set; }
 
         [Inject] public IJSRuntime? JS { get; set; }
         [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
         public bool Disabled { get; set; }
-
+        [Inject] NavigationManager navigationManager { get; set; }
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
             builder.CreateComponent<TLink>(sequence + 1, Title,
@@ -58,13 +84,26 @@ namespace TDesign
                                            await item.Refresh();
                                        }
                                    }
+
                                    await this.Refresh();
-                                   CascadingAnchor.SwitchIndex=Index;
+                                   CascadingAnchor.SwitchIndex = Index;
                                    await CascadingAnchor.Refresh();
-                                   await JS.InvokeVoidAsync("hash", Href);
-                               })
+                               }),
+                               @class= "t-anchor__item-link"
                            });
 
+        }
+        protected override void BuildCssClass(ICssClassBuilder builder)
+        {
+            if (Active)
+            {
+                builder.Append("t-is-active");
+            }
+            else
+            {
+                builder.Remove("t-is-active");
+            }
+            base.BuildCssClass(builder);
         }
 
         protected override void OnInitialized()

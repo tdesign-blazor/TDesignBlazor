@@ -29,7 +29,7 @@ namespace TDesign
 
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
-            BuildLine(builder, sequence+1);
+            BuildLine(builder, sequence + 1);
             builder.AddContent(sequence + 2, ChildContent);
         }
 
@@ -40,7 +40,7 @@ namespace TDesign
         /// <param name="builder"></param>
         private void BuildLine(RenderTreeBuilder builder, int sequence)
         {
-            builder.CreateElement(sequence+1, "div", line =>
+            builder.CreateElement(sequence + 1, "div", line =>
             {
 
                 line.CreateElement(sequence + 2, "div", wrapper =>
@@ -50,11 +50,11 @@ namespace TDesign
                     {
 
                         @class = "t-anchor__line-cursor",
-                       
+
 
                     });
 
-                }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex*24}px; height: 24px; opacity: 1;" });
+                }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex * 24}px; height: 24px; opacity: 1;" });
 
             }, new { @class = "t-anchor__line" });
         }
