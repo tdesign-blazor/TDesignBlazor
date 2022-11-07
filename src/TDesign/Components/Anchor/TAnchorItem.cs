@@ -84,12 +84,12 @@ namespace TDesign
                                            await item.Refresh();
                                        }
                                    }
-
+                                   JS.InvokeVoidAsync("hash", Href.Split("#")[1]);
                                    await this.Refresh();
                                    CascadingAnchor.SwitchIndex = Index;
                                    await CascadingAnchor.Refresh();
                                }),
-                               @class= "t-anchor__item-link"
+                               @class = "t-anchor__item-link"
                            });
 
         }
