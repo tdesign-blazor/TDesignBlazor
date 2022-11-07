@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using TDesign.Notification;
+
 namespace TDesign;
 
 /// <summary>
 /// 警告提醒。
 /// </summary>
 [CssClass("t-alert")]
-public class TAlert : MessageComponentBase
+public class TAlert : NotifyComponentBase
 {
 
     /// <summary>

@@ -61,7 +61,7 @@
 <Example Title="通过服务调用">
     <Description>注入 <code>IMessageService</code> 接口动态调用消息</Description>
     <RunContent>
-        <TButton OnClick="@(e=>MessageService.Show(new MessageConfiguration{ Content="这是全局提示"}))">自定义提示</TButton>
+        <TButton OnClick="@(e=>MessageService.Show(new (){ Content="这是全局提示"}))">自定义提示</TButton>
         <TButton Theme="Theme.Primary" OnClick="@(e=>MessageService.Info("普通的提示"))">普通</TButton>
         <TButton Theme="Theme.Success" OnClick="@(e=>MessageService.Success("成功的提示"))">成功</TButton>
         <TButton Theme="Theme.Warning" OnClick="@(e=>MessageService.Warning("警告的提示"))">警告</TButton>
