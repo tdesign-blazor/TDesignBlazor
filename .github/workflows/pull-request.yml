@@ -41,11 +41,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AchievedOwner_TDesignBlazor" /o:"playermaker" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AchievedOwner_TDesignBlazor" /o:"playermaker" /d:sonar.login="2a3f1799901edb257281a8dc304c1617a2c02c26" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build --no-incremental
           dotnet tool install --global dotnet-coverage
           dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="2a3f1799901edb257281a8dc304c1617a2c02c26"
 
   Codacy:
     runs-on: ubuntu-latest
