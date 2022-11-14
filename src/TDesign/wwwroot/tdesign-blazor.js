@@ -16,11 +16,15 @@ window.anchorOnScroll = function (dotNetHelper) {
     for (var i = 0; i < anchors.length; i++) {
 
         document.getElementById(anchors[i].getAttribute("container").replace("#", "")).onscroll = function (e) {
-            console.warn(e.srcElement.scrollTop)
-            var s = dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-            console.log(s)
+            dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
         }
 
+    }
+}
+
+window.test = function (dotNetHelper,id) {
+    document.getElementById(id).onscroll = function (e) {
+        dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
     }
 }
 

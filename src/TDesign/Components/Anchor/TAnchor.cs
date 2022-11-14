@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,10 @@ namespace TDesign
         /// <summary>
         /// 
         /// </summary>
+        [Parameter] public string? Container { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public EventCallback<int?> OnSwitch { get; set; }
         /// <summary>
         /// 
@@ -51,9 +56,12 @@ namespace TDesign
         /// <param name="sequence"></param>
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
+
             BuildLine(builder, sequence + 1);
             builder.AddContent(sequence + 2, ChildContent);
-
+            JS?.InvokeVoidAsync("anchorOnScroll", objRef);
+            //var containerId = Container?.Split("#")[1];
+            //JS?.InvokeVoidAsync("test", objRef, containerId);
         }
 
         /// <summary>
@@ -73,15 +81,13 @@ namespace TDesign
                     {
 
                         @class = "t-anchor__line-cursor",
-
-
                     });
 
                 }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex * 24}px; height: 24px; opacity: 1;" });
 
             }, new { @class = "t-anchor__line" });
 
-            JS?.InvokeVoidAsync("anchorOnScroll", objRef);
+
         }
 
         private DotNetObjectReference<TAnchor>? objRef;
@@ -100,7 +106,6 @@ namespace TDesign
         public void Dispose()
         {
             objRef?.Dispose();
-            GC.SuppressFinalize(this);
         }
 
 
@@ -116,20 +121,20 @@ namespace TDesign
             {
                 if (ChildComponents[i] is TAnchorItem item)
                 {
-                        var start = item.OffsetTop - 22 - item.OffsetHeight;
-                        var end = item.OffsetTop;
+                    var start = item.OffsetTop - 22 - item.OffsetHeight;
+                    var end = item.OffsetTop;
 
-                        if (start <= index && index <= end)
-                        {
-                            SwitchIndex = item.Index;
-                            item.SetActive(true);
-                            await item.Refresh();
-                        }
-                        else
-                        {
-                            item.SetActive(false);
-                            await item.Refresh();
-                        }
+                    if (start <= index && index <= end)
+                    {
+                        SwitchIndex = item.Index;
+                        item.SetActive(true);
+                        await item.Refresh();
+                    }
+                    else
+                    {
+                        item.SetActive(false);
+                        await item.Refresh();
+                    }
                 }
             }
             await this.Refresh();

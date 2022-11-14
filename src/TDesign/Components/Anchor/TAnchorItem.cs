@@ -130,7 +130,7 @@ namespace TDesign
                                    await JS!.InvokeVoidAsync("hash", Href?.Split("#")[1]);
 
                                    await this.Refresh();
-                                   CascadingAnchor.SwitchIndex = Index;
+                                   CascadingAnchor!.SwitchIndex = Index;
                                    await CascadingAnchor.Refresh();
                                }),
                                @class = "t-anchor__item-link"
@@ -188,7 +188,7 @@ namespace TDesign
         /// </summary>
         [HtmlAttribute("_blank")] Blank,
         /// <summary>
-        /// <c></c>
+        /// 
         /// <see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
         /// </summary>
         [HtmlAttribute("_parent")] Parent,
