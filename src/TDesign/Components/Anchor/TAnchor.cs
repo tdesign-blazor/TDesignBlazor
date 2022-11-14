@@ -81,7 +81,7 @@ namespace TDesign
 
             }, new { @class = "t-anchor__line" });
 
-            JS?.InvokeVoidAsync("test", objRef);
+            JS?.InvokeVoidAsync("anchorOnScroll", objRef);
         }
 
         private DotNetObjectReference<TAnchor>? objRef;
