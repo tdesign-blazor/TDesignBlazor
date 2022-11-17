@@ -58,6 +58,10 @@ public class TPagination:BlazorComponentBase
     /// 设置分页页码条的显示数量。建议范围在 5-21 之间，默认是 7。
     /// </summary>
     [Parameter] public int PageNumber { get; set; } = 7;
+    /// <summary>
+    /// 设置是否显示页码条。
+    /// </summary>
+    [Parameter]public bool ShowPageNumber { get; set; }
     #endregion
 
 
@@ -137,12 +141,12 @@ public class TPagination:BlazorComponentBase
         builder.CreateElement(sequence, "ul", content =>
         {
             var (start, end) = ComputePageNumber();
-            for ( long i = start; i <=end; i++ )
+            for ( long i = start+1; i <= end-1; i++ )
             {
                 content.CreateElement((int)i, "li", i.ToString(), new { @class = "t-pagination__number" });
             }
 
-        }, new { @class = "t-pagination__pager" });
+        }, new { @class = "t-pagination__pager" }, ShowPageNumber);
 
 
         /// <summary>
