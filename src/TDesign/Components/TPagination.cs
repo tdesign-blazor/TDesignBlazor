@@ -58,6 +58,10 @@ public class TPagination : BlazorComponentBase
     /// 设置分页页码条的显示数量。建议范围在 5-21 之间，默认是 7。
     /// </summary>
     [Parameter] public int PageNumber { get; set; } = 7;
+    /// <summary>
+    /// 设置是否显示页码条。
+    /// </summary>
+    [Parameter]public bool ShowPageNumber { get; set; }
     #endregion
 
 
@@ -288,7 +292,7 @@ public class TPagination : BlazorComponentBase
             BuildPageNumerItem(content, 100, TotalPages);
             #endregion
 
-        }, new { @class = "t-pagination__pager" });
+        }, new { @class = "t-pagination__pager" }, ShowPageNumber);
 
         /// <summary>
         /// 计算分页页码的开始和结束的页码。
