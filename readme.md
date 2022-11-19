@@ -83,6 +83,7 @@
 ## :pencil: 参与贡献
 * 如果你有意向参与贡献，请先阅读[贡献指南](./Contributing.md)
 * 有任何问题，欢迎通过 [Github issues](https://github.com/AchievedOwner/TDesignBlazor/issues) 反馈
+* 提供目前进度的实时[看板](https://github.com/users/AchievedOwner/projects/4)
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出
