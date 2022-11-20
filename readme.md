@@ -25,6 +25,8 @@
 ## 🌈 在线示例
 [https://achievedowner.github.io/TDesignBlazor/](https://achievedowner.github.io/TDesignBlazor/)
 
+> 由于网络问题，可能导致以上链接不可用，请下载源码并运行 `TDesign.Docs.ServerSide` 或 `TDesign.Docs.WebAssembly` 项目。
+
 ## 🖥 支持环境
 
 - ![.NET 6](https://img.shields.io/badge/.NET-v6.0-green)
@@ -83,6 +85,7 @@
 ## :pencil: 参与贡献
 * 如果你有意向参与贡献，请先阅读[贡献指南](./Contributing.md)
 * 有任何问题，欢迎通过 [Github issues](https://github.com/AchievedOwner/TDesignBlazor/issues) 反馈
+* 提供目前进度的实时[看板](https://github.com/users/AchievedOwner/projects/4)
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出
