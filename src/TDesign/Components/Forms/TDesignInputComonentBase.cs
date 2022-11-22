@@ -65,7 +65,7 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
             }, TipContent is not null);
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-input__wrap")
+            @class = HtmlHelper.CreateCssBuilder().Append("t-input__wrap").Append(AdditionalCssClass)
         });
     }
 
