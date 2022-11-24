@@ -107,7 +107,7 @@ public class TTag : BlazorComponentBase, IHasChildContent
             {
                 Name = IconName.Close,
                 AdditionalCssCLass = "t-tag__icon-close",
-                onclick = HtmlHelper.CreateCallback(this, () =>
+                onclick = HtmlHelper.Event.Create(this, () =>
                 {
                     if (Disabled)
                     {
@@ -121,6 +121,7 @@ public class TTag : BlazorComponentBase, IHasChildContent
         }
     }
 
+    /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append($"t-tag--{Theme?.Value}", Theme is not null)
@@ -130,14 +131,18 @@ public class TTag : BlazorComponentBase, IHasChildContent
             ;
     }
 
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        attributes["onclick"] = HtmlHelper.CreateCallback<MouseEventArgs>(this, async _ =>
+        attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, async _ =>
         {
-            Checked = !Checked;
-            await CheckedChanged.InvokeAsync(Checked);
-            await this.Refresh();
-        }, Checkbox && !Disabled);
+            if (Checkbox && !Disabled)
+            {
+                Checked = !Checked;
+                await CheckedChanged.InvokeAsync(Checked);
+                await this.Refresh();
+            }
+        });
     }
 }
 

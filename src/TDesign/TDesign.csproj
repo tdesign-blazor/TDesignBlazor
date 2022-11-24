@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>10</LangVersion>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TDesign</RootNamespace>
     <PackageId>TDesign</PackageId>
@@ -55,10 +55,14 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
+  <ItemGroup Condition="$(TargetFramework) == 'net6.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == 'net7.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+  </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="1.5.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.5" />
+    <PackageReference Include="ComponentBuilder" Version="2.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
       <PrivateAssets>all</PrivateAssets>

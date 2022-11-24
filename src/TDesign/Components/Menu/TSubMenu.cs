@@ -49,7 +49,7 @@ public class TSubMenu : BlazorComponentBase, IHasChildContent
     {
         if (CascadingMenu.Popup)
         {
-            attributes["onmouseleave"] = HtmlHelper.CreateCallback(this, async () =>
+            attributes["onmouseleave"] = HtmlHelper.Event.Create(this, async () =>
             {
                 await Task.Delay(100);
                 if (CanClose)
@@ -79,20 +79,20 @@ public class TSubMenu : BlazorComponentBase, IHasChildContent
 
         Dictionary<string, object> htmlAttributes = new()
         {
-            ["class"] = HtmlHelper.CreateCssBuilder().Append(CascadingMenu.GetMenuExpandClass())
+            ["class"] = HtmlHelper.Class.Append(CascadingMenu.GetMenuExpandClass())
             .Append(IsOpenCssClass, IsOpened),
-            ["style"] = HtmlHelper.CreateStyleBuilder().Append(CascadingMenu.GetMenuExapndStyle())
+            ["style"] = HtmlHelper.Style.Append(CascadingMenu.GetMenuExapndStyle())
         };
 
         var eventAttribute = new Dictionary<string, object>();
 
         if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, () =>
             {
                 CanClose = false;
             });
-            htmlAttributes["onmouseleave"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onmouseleave"] = HtmlHelper.Event.Create(this, () =>
             {
                 CanClose = true;
                 CollapseSubMenuItem();
@@ -117,11 +117,11 @@ public class TSubMenu : BlazorComponentBase, IHasChildContent
     {
         if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, ExpandSubMenuItem);
+            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, ExpandSubMenuItem);
         }
         else
         {
-            htmlAttributes["onclick"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onclick"] = HtmlHelper.Event.Create(this, () =>
             {
                 if (IsOpened)
                 {

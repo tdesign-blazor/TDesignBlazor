@@ -236,20 +236,26 @@ public class TPagination : BlazorComponentBase
             content.CreateComponent<TIcon>(0, attributes: new { Name = iconName });
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-pagination__btn")
                                 .Append("t-pagination__btn-prev", behavior is PageButtonBehavior.First or PageButtonBehavior.Previous)
                                 .Append("t-pagination__btn-next", behavior is PageButtonBehavior.Next or PageButtonBehavior.Last)
                                 .Append("t-is-disabled", disabled)
                                 ,
-            onclick = HtmlHelper.CreateCallback(this, () => behavior switch
+            onclick = HtmlHelper.Event.Create(this, () =>
             {
-                PageButtonBehavior.First => NavigateToFirst(),
-                PageButtonBehavior.Last => NavigateToLast(),
-                PageButtonBehavior.Previous => NavigateToPrevious(),
-                _ => NavigateToNext()
-            }
-            , !disabled)
+                if (disabled)
+                {
+                    return Task.CompletedTask;
+                }
+                return behavior switch
+                {
+                    PageButtonBehavior.First => NavigateToFirst(),
+                    PageButtonBehavior.Last => NavigateToLast(),
+                    PageButtonBehavior.Previous => NavigateToPrevious(),
+                    _ => NavigateToNext()
+                };
+            })
         }, show);
     }
 
@@ -266,11 +272,18 @@ public class TPagination : BlazorComponentBase
     {
         builder.CreateElement(sequence, "li", content, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                         .Append("t-pagination__number")
                         .Append("t-is-disabled", disabled)
                         .Append(additionalClass, !string.IsNullOrEmpty(additionalClass)),
-            onclick = HtmlHelper.CreateCallback(this, callback, callback is not null && !disabled),
+            onclick = HtmlHelper.Event.Create(this, () =>
+            {
+                if (callback is not null && !disabled)
+                {
+
+                    callback();
+                }
+            }),
             disabled
         });
     }
@@ -415,7 +428,7 @@ public class TPagination : BlazorComponentBase
                     Size,
                     Value = JumpPage,
                     ValueExpression = (Expression<Func<long>>)(() => JumpPage),
-                    ValueChanged = HtmlHelper.CreateCallback<long>(this, value =>
+                    ValueChanged = HtmlHelper.Event.Create<long>(this, value =>
                     {
                         NavigateToPage(value);
                     })
