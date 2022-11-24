@@ -1,0 +1,32 @@
+﻿@page "/components/affix"
+<PageHeader Title="Affix 固钉">
+    在指定的范围内，将元素固定不动。
+</PageHeader>
+<HighlightAlert />
+<Example Title="基础固钉">
+    <Description>@Code.Create("适用于页面结构简单的场景，默认容器是 `body`。")</Description>
+    <RunContent>
+        <div id="div-box" style="overflow-y:auto;height:200px;">
+            <p>内容</p>
+            <TAffix Container="div-box" OffsetTop="50">
+                <TButton>按 钮</TButton>
+            </TAffix>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p><p>内容</p>
+            <p>内容</p><p>内容</p>
+            <p>内容</p>
+        
+        
+        </div>
+    </RunContent>
+</Example>
