@@ -30,7 +30,7 @@
 ## 🖥 支持环境
 
 - ![.NET 6](https://img.shields.io/badge/.NET-v6.0-green)
-- 支持服务端双向绑定
+- ![.NET 6](https://img.shields.io/badge/.NET-v7.0-green)
 - 支持 WebAssembly 静态文件部署
 - 主流 4 款现代浏览器，以及 Internet Explorer 11+（限 [Blazor Server](https://docs.microsoft.com/en-us/aspnet/core/blazor/supported-platforms?view=aspnetcore-3.1&WT.mc_id=DT-MVP-5003987)）
 - 可直接运行在 [.NET MAUI](https://dotnet.microsoft.com/zh-cn/apps/maui?WT.mc_id=DT-MVP-5003987)、[WPF](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/wpf?view=aspnetcore-6.0&WT.mc_id=DT-MVP-5003987)、[Windows Forms](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/windows-forms?view=aspnetcore-6.0) 等 Blazor 混合客户端环境中
