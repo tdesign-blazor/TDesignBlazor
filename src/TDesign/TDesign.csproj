@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TDesign</RootNamespace>
     <PackageId>TDesign</PackageId>
-    <Version>0.2</Version>
+    <Version>0.3</Version>
     <Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
     <Authors>William Zhou and Contributors</Authors>
     <AssemblyVersion>$(Version)</AssemblyVersion>
