@@ -130,11 +130,11 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
             Step,
             Min,
             Max,
-            onblur = HtmlHelper.CreateCallback(this, async () =>
+            onblur = HtmlHelper.Event.Create(this, async () =>
             {
                 await ConvertNumberAsync(_inputString);
             }),
-            oninput = HtmlHelper.CreateCallback<ChangeEventArgs>(this, async args =>
+            oninput = HtmlHelper.Event.Create<ChangeEventArgs>(this, async args =>
             {
                 _inputString = args?.Value?.ToString() ?? "";
                 await ConvertNumberAsync(_inputString);
@@ -211,12 +211,12 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
         {
             Varient = ButtonVarient.Outline,
             Shape = ButtonShape.Square,
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
             .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
             .Append($"t-is-disabled", iconName.ToString() == IconName.Remove.ToString() && disabled)
             .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
-            onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, e => click?.Invoke(e)),
+            onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
 
         }, condition);

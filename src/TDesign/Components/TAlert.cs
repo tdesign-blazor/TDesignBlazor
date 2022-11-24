@@ -65,7 +65,11 @@ public class TAlert : NotifyComponentBase
         builder.CreateElement(sequence + 2, "div", icon => icon.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close }), new
         {
             @class = "t-alert__close",
-            onclick = HtmlHelper.CreateCallback(this, () => { Closed = true; StateHasChanged(); }, Closable)
+            onclick = HtmlHelper.Event.Create(this, () =>
+            {
+                Closed = !Closable;
+                StateHasChanged();
+            })
         }, Closable);
     }
 

@@ -24,15 +24,15 @@ public class TNotificationContainer : NotifyContainerComponentBase<INotification
                         configuration.SubTitle,
                         configuration?.Theme,
                         configuration?.Icon,
-                        style = HtmlHelper.CreateStyleBuilder().Append("margin-bottom:16px")
+                        style = HtmlHelper.Style.Append("margin-bottom:16px")
                     }); ;
                 }
             },
                 HtmlHelper.CreateHtmlAttributes(attributes =>
                 {
                     var (classOrStyle, value) = MessageConfiguration.GetPlacement(item.Key);
-                    attributes["class"] = HtmlHelper.CreateCssBuilder().Append(value, classOrStyle);
-                    attributes["style"] = HtmlHelper.CreateCssBuilder().Append("z-index:6000").Append(value, !classOrStyle);
+                    attributes["class"] = HtmlHelper.Class.Append(value, classOrStyle);
+                    attributes["style"] = HtmlHelper.Class.Append("z-index:6000").Append(value, !classOrStyle);
                 })
             );
         }

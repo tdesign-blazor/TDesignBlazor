@@ -30,10 +30,10 @@ public class TMessageContainer : NotifyContainerComponentBase<IMessageService, M
                 HtmlHelper.CreateHtmlAttributes(attributes =>
                 {
                     var (classOrStyle, value) = MessageConfiguration.GetPlacement(item.Key);
-                    attributes["class"] = HtmlHelper.CreateCssBuilder().Append("t-message__list").Append(value, classOrStyle);
+                    attributes["class"] = HtmlHelper.Class.Append("t-message__list").Append(value, classOrStyle);
                     if (!classOrStyle)
                     {
-                        attributes["style"] = HtmlHelper.CreateCssBuilder().Append(value);
+                        attributes["style"] = HtmlHelper.Class.Append(value);
                     }
                 })
             );
