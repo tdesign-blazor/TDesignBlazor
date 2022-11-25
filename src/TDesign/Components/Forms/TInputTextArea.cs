@@ -40,7 +40,7 @@ public class TInputTextArea : BlazorInputComponentBase<string>
             base.BuildRenderTree(content);
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-textarea")
+            @class = HtmlHelper.Class.Append("t-textarea")
                                                 .Append("t-is-disabled", Disabled)
                                                 .Append("t-is-readonly", Readonly)
         });

@@ -42,12 +42,12 @@
     bool Active = false;
 
     string GetStyle() => Active ? "" : "display:none";
-    string CodeClass => HtmlHelper.CreateCssBuilder().Append("content code")
+    string CodeClass => HtmlHelper.Class.Append("content code")
     //.Append(Active, "code-collapse", "code-expand")
     .ToString()
     ;
 
-    string BtnClass => HtmlHelper.CreateCssBuilder().Append("action").Append("active", Active).ToString();
+    string BtnClass => HtmlHelper.Class.Append("action").Append("active", Active).ToString();
 
     void ToogleCode()
     {

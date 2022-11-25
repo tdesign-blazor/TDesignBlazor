@@ -25,10 +25,12 @@
 ## 🌈 在线示例
 [https://achievedowner.github.io/TDesignBlazor/](https://achievedowner.github.io/TDesignBlazor/)
 
+> 由于网络问题，可能导致以上链接不可用，请下载源码并运行 `TDesign.Docs.ServerSide` 或 `TDesign.Docs.WebAssembly` 项目。
+
 ## 🖥 支持环境
 
 - ![.NET 6](https://img.shields.io/badge/.NET-v6.0-green)
-- 支持服务端双向绑定
+- ![.NET 6](https://img.shields.io/badge/.NET-v7.0-green)
 - 支持 WebAssembly 静态文件部署
 - 主流 4 款现代浏览器，以及 Internet Explorer 11+（限 [Blazor Server](https://docs.microsoft.com/en-us/aspnet/core/blazor/supported-platforms?view=aspnetcore-3.1&WT.mc_id=DT-MVP-5003987)）
 - 可直接运行在 [.NET MAUI](https://dotnet.microsoft.com/zh-cn/apps/maui?WT.mc_id=DT-MVP-5003987)、[WPF](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/wpf?view=aspnetcore-6.0&WT.mc_id=DT-MVP-5003987)、[Windows Forms](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/windows-forms?view=aspnetcore-6.0) 等 Blazor 混合客户端环境中
@@ -83,6 +85,7 @@
 ## :pencil: 参与贡献
 * 如果你有意向参与贡献，请先阅读[贡献指南](./Contributing.md)
 * 有任何问题，欢迎通过 [Github issues](https://github.com/AchievedOwner/TDesignBlazor/issues) 反馈
+* 提供目前进度的实时[看板](https://github.com/users/AchievedOwner/projects/4)
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出

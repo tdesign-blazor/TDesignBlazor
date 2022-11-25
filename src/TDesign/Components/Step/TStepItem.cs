@@ -51,7 +51,7 @@ public class TStepItem : BlazorComponentBase, IHasChildContent
             BuildTIcon(inner, 0);
             BuildContent(inner, 1);
 
-        }, new { @class = HtmlHelper.CreateCssBuilder().Append("t-steps-item__inner") });
+        }, new { @class = HtmlHelper.Class.Append("t-steps-item__inner") });
     }
 
     private void BuildContent(RenderTreeBuilder builder, int sequence)
@@ -108,7 +108,7 @@ public class TStepItem : BlazorComponentBase, IHasChildContent
         },
                     new
                     {
-                        @class = HtmlHelper.CreateCssBuilder()
+                        @class = HtmlHelper.Class
                         .Append("t-steps-item__icon")
                         .Append($"t-steps-item--{Status.GetCssClass()}")
                     });

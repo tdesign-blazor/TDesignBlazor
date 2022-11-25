@@ -90,7 +90,7 @@ public class TImage : BlazorComponentBase
         builder.CreateElement(sequence + 2, "img", attributes: new
         {
             src = Src,
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                              .Append("t-image")
                              .Append(Fit.GetCssClass())
                              .Append($"t-image--position-{Position.GetCssClass()}"),
@@ -110,7 +110,7 @@ public class TImage : BlazorComponentBase
 
         }, attributes: new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-image__overlay-content")
                                 .Append("t-image__overlay-content--hidden", OverlayTrigger != null)
         }, Gallery || OverlayTrigger != null);

@@ -63,7 +63,7 @@ public class TMessage : NotifyComponentBase
             }, attributes: new
             {
                 @class = "t-message__close",
-                onclick = HtmlHelper.CreateCallback(this, () =>
+                onclick = HtmlHelper.Event.Create(this, () =>
                 {
                     Closed = true;
                     StateHasChanged();
