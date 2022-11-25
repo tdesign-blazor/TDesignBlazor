@@ -6,6 +6,7 @@ let affix = {
      * 组件初始化方法，用于给指定的元素绑定onscroll事件。
      * @function affix.init
      * @param {String} id HTML元素id，如果为空则使用document.body 
+     * @param {DotNetObjectReference<TAffix>} dotnetRef
      */
     init: function (id, dotnetRef) {
         console.log('[info] affix.init ', id)
