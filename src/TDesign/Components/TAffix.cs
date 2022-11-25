@@ -83,7 +83,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// <param name="attributes"></param>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        attributes["style"] = HtmlHelper.CreateStyleBuilder().Append(_fixedStyle, _fixed);
+        attributes["style"] = HtmlHelper.Style.Append(_fixedStyle, _fixed);
         base.BuildAttributes(attributes);
     }
 
