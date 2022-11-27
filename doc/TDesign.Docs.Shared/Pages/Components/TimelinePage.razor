@@ -1,0 +1,145 @@
+﻿@page "/components/timeline"
+
+<PageHeader Title="Timeline 时间轴">
+    用于时间轴展示
+</PageHeader>
+
+<Example Title="基础时间轴">
+    <Description>
+        使用 <code>TimelineItem</code> 作为子项。
+    </Description>
+    <RunContent>
+        <TTimeline>
+            <TTimelineItem Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+        <br />
+        <TTimeline Horizontal>
+            <TTimelineItem Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTimeline>
+    <TTimelineItem Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+
+<TTimeline Horizontal>
+    <TTimelineItem Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="点状时间轴">
+    <Description></Description>
+    <RunContent>
+        <TTimeline Theme="TimelineTheme.Dot">
+            <TTimelineItem Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+        <br />
+        <TTimeline Horizontal Theme="TimelineTheme.Dot">
+            <TTimelineItem Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTimeline Theme=""TimelineTheme.Dot"">
+    <TTimelineItem Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+
+<TTimeline Horizontal Theme=""TimelineTheme.Dot"">
+    <TTimelineItem Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义节点图标">
+    <Description></Description>
+    <RunContent>
+        <TTimeline>
+            <TTimelineItem IconName="IconName.Pin" Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem IconName="IconName.Heart"Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem IconName="IconName.User" Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+        <br />
+        <TTimeline Horizontal>
+            <TTimelineItem IconName="IconName.Pin" Label="2022-10-1">事件1</TTimelineItem>
+            <TTimelineItem IconName="IconName.Heart" Label="2022-10-11">事件2</TTimelineItem>
+            <TTimelineItem IconName="IconName.User" Label="2022-10-21">事件3</TTimelineItem>
+        </TTimeline>
+        </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTimeline>
+    <TTimelineItem IconName=""IconName.Pin"" Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem IconName=""IconName.Heart""Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem IconName=""IconName.User"" Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+<br />
+<TTimeline Horizontal>
+    <TTimelineItem IconName=""IconName.Pin"" Label=""2022-10-1"">事件1</TTimelineItem>
+    <TTimelineItem IconName=""IconName.Heart"" Label=""2022-10-11"">事件2</TTimelineItem>
+    <TTimelineItem IconName=""IconName.User"" Label=""2022-10-21"">事件3</TTimelineItem>
+</TTimeline>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="主题色">
+    <Description></Description>
+    <RunContent>
+        <TTimeline>
+            <TTimelineItem Label="2022-10-1" Color="Color.Primary">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11" Color="Color.Warning">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21" Color="Color.Success">事件3</TTimelineItem>
+            <TTimelineItem Label="2022-10-21" Color="Color.Error">事件4</TTimelineItem>
+        </TTimeline>
+        <br />
+        <TTimeline Horizontal>
+            <TTimelineItem Label="2022-10-1" Color="Color.Primary">事件1</TTimelineItem>
+            <TTimelineItem Label="2022-10-11" Color="Color.Warning">事件2</TTimelineItem>
+            <TTimelineItem Label="2022-10-21" Color="Color.Success">事件3</TTimelineItem>
+            <TTimelineItem Label="2022-10-21" Color="Color.Error">事件4</TTimelineItem>
+        </TTimeline>
+        </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTimeline>
+    <TTimelineItem Label=""2022-10-1"" Color=""Color.Primary"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"" Color=""Color.Warning"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"" Color=""Color.Success"">事件3</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"" Color=""Color.Error"">事件4</TTimelineItem>
+</TTimeline>
+
+<TTimeline Horizontal>
+    <TTimelineItem Label=""2022-10-1"" Color=""Color.Primary"">事件1</TTimelineItem>
+    <TTimelineItem Label=""2022-10-11"" Color=""Color.Warning"">事件2</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"" Color=""Color.Success"">事件3</TTimelineItem>
+    <TTimelineItem Label=""2022-10-21"" Color=""Color.Error"">事件4</TTimelineItem>
+</TTimeline>
+```
+")
+    </CodeContent>
+</Example>
