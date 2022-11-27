@@ -49,21 +49,21 @@ public class TInputRadio<TValue> : BlazorComponentBase, IDisposable
             content.OpenRegion(10000);
             content.CreateElement(0, "span", attributes: new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append(!CascadingRadioGroup.TButton, "t-radio__input", "t-radio-button__input")
+                @class = HtmlHelper.Class.Append("t-radio__input", !CascadingRadioGroup.TButton, "t-radio-button__input")
             });
             content.CreateElement(1, "span", ChildContent, new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append(!CascadingRadioGroup.TButton, "t-radio__label", "t-radio-button__label")
+                @class = HtmlHelper.Class.Append("t-radio__label", !CascadingRadioGroup.TButton, "t-radio-button__label")
             });
             content.CloseRegion();
         },
         new
         {
-            @class = HtmlHelper.CreateCssBuilder()
-                            .Append(!CascadingRadioGroup.TButton, "t-radio", "t-radio-button")
+            @class = HtmlHelper.Class
+                            .Append("t-radio", !CascadingRadioGroup.TButton, "t-radio-button")
                             .Append("t-is-disabled", Disabled)
                             .Append("t-is-checked", Checked.HasValue && Checked.Value),
-            style = HtmlHelper.CreateStyleBuilder().Append("background-color: var(--td-bg-color-container-select);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup.TButton && CascadingRadioGroup.ButtonStyle == RadioButtonStyle.Filled && Checked.HasValue && Checked.Value)
+            style = HtmlHelper.Style.Append("background-color: var(--td-bg-color-container-select);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup.TButton && CascadingRadioGroup.ButtonStyle == RadioButtonStyle.Filled && Checked.HasValue && Checked.Value)
             .Append("background-color: var(--td-brand-color);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup.TButton && CascadingRadioGroup.ButtonStyle == RadioButtonStyle.PrimaryFilled && Checked.HasValue && Checked.Value)
         });
     }
@@ -81,7 +81,7 @@ public class TInputRadio<TValue> : BlazorComponentBase, IDisposable
 
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        builder.Append(CascadingRadioGroup.TButton, "t-radio-button__former", "t-radio__former");
+        builder.Append("t-radio-button__former", CascadingRadioGroup.TButton, "t-radio__former");
     }
 
     public void Dispose()

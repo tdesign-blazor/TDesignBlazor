@@ -2,8 +2,9 @@ name: Release
 
 on:
   push:
+    branches: ['master']
     tags:
-      - "v*"
+      - "*"
 
 jobs:
   pack-push-nuget-package:
@@ -11,12 +12,14 @@ jobs:
     if: github.repository_owner == 'AchievedOwner'
     steps:
       - name: 迁出代码
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup .NET 6
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.101
+          dotnet-version: |
+            6.0.x
+            7.0.x
 
       - name: 转换 tag
         id: version

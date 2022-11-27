@@ -48,7 +48,7 @@ public class TBreadcrumbItem : BlazorComponentBase, IHasChildContent
             overflow.CreateElement(0, "span", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:120px" });
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-breadcrumb--text-overflow")
+            @class = HtmlHelper.Class.Append("t-breadcrumb--text-overflow")
             .Append("t-link", HasLink).Append("t-is-disabled", Disabled)
         });
 

@@ -1,8 +1,8 @@
-﻿namespace TDesign;
+﻿namespace TDesign.Notification;
 /// <summary>
 /// 消息组件的基类。
 /// </summary>
-public abstract class MessageComponentBase : BlazorComponentBase, IHasChildContent
+public abstract class NotifyComponentBase : BlazorComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

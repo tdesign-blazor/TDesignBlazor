@@ -9,9 +9,9 @@ namespace TDesign;
 [HtmlTag("li")]
 [ParentComponent]
 [ChildComponent(typeof(TMenu))]
-public class TSubMenu : BlazorComponentBase, IHasCascadingParameter<TMenu>, IHasChildContent
+public class TSubMenu : BlazorComponentBase, IHasChildContent
 {
-    [CascadingParameter] public TMenu CascadingValue { get; set; }
+    [CascadingParameter] public TMenu CascadingMenu { get; set; }
     /// <summary>
     /// 菜单内容。
     /// </summary>
@@ -47,9 +47,9 @@ public class TSubMenu : BlazorComponentBase, IHasCascadingParameter<TMenu>, IHas
 
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        if (CascadingValue.Popup)
+        if (CascadingMenu.Popup)
         {
-            attributes["onmouseleave"] = HtmlHelper.CreateCallback(this, async () =>
+            attributes["onmouseleave"] = HtmlHelper.Event.Create(this, async () =>
             {
                 await Task.Delay(100);
                 if (CanClose)
@@ -79,20 +79,20 @@ public class TSubMenu : BlazorComponentBase, IHasCascadingParameter<TMenu>, IHas
 
         Dictionary<string, object> htmlAttributes = new()
         {
-            ["class"] = HtmlHelper.CreateCssBuilder().Append(CascadingValue.GetMenuExpandClass())
+            ["class"] = HtmlHelper.Class.Append(CascadingMenu.GetMenuExpandClass())
             .Append(IsOpenCssClass, IsOpened),
-            ["style"] = HtmlHelper.CreateStyleBuilder().Append(CascadingValue.GetMenuExapndStyle())
+            ["style"] = HtmlHelper.Style.Append(CascadingMenu.GetMenuExapndStyle())
         };
 
         var eventAttribute = new Dictionary<string, object>();
 
-        if (CascadingValue.Popup)
+        if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, () =>
             {
                 CanClose = false;
             });
-            htmlAttributes["onmouseleave"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onmouseleave"] = HtmlHelper.Event.Create(this, () =>
             {
                 CanClose = true;
                 CollapseSubMenuItem();
@@ -101,7 +101,7 @@ public class TSubMenu : BlazorComponentBase, IHasCascadingParameter<TMenu>, IHas
 
         builder.CreateElement(sequence + 1, "div", content =>
         {
-            if (CascadingValue.Popup)
+            if (CascadingMenu.Popup)
             {
                 eventAttribute["class"] = "t-menu__popup-wrapper";
                 builder.CreateElement(0, "ul", ChildContent, eventAttribute);
@@ -115,13 +115,13 @@ public class TSubMenu : BlazorComponentBase, IHasCascadingParameter<TMenu>, IHas
 
     private void BuildCallbackAttributes(Dictionary<string, object> htmlAttributes)
     {
-        if (CascadingValue.Popup)
+        if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.CreateCallback(this, ExpandSubMenuItem);
+            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, ExpandSubMenuItem);
         }
         else
         {
-            htmlAttributes["onclick"] = HtmlHelper.CreateCallback(this, () =>
+            htmlAttributes["onclick"] = HtmlHelper.Event.Create(this, () =>
             {
                 if (IsOpened)
                 {

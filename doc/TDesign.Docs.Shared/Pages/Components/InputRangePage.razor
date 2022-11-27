@@ -1,0 +1,64 @@
+﻿@page "/components/inputrange"
+
+<PageHeader Title="InputRange 范围输入框">
+    用于输入范围文本。
+</PageHeader>
+
+<TAlert Theme="Theme.Primary">
+    为了使组件命名标准化，输入组件以 <code>Input</code> 开头，因此该组件的命名规范将与官方不同。
+</TAlert>
+<Example Title="基础范围输入框">
+    <Description>
+        
+    </Description>
+    <RunContent>
+        <TInputRange @bind-StartValue="Start" @bind-EndValue="End" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRange bind-StartValue=""Start"" bind-EndValue=""End"" />
+```
+```cs
+@code{
+    string Start{ get;set; }
+    string End{ get;set; }
+}
+```
+")
+    </CodeContent>
+</Example>
+
+@code{
+    string Start{ get;set; }
+    string End{ get;set; }
+}
+
+
+<Example Title="不同尺寸的标签输入框">
+    <Description>
+        提供大、中（默认）、小三种不同尺寸的的标签输入框。
+    </Description>
+    <RunContent>
+        <TInputRange @bind-StartValue="Start" @bind-EndValue="End" Size="Size.Small" />
+        <br />
+        <TInputRange @bind-StartValue="Start" @bind-EndValue="End" Size="Size.Medium" />
+        <br />
+        <TInputRange @bind-StartValue="Start" @bind-EndValue="End" Size="Size.Large" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TInputRange bind-StartValue=""Start"" bind-EndValue=""End"" Size=""Size.Small"" />
+<TInputRange bind-StartValue=""Start"" bind-EndValue=""End"" Size=""Size.Medium"" />
+<TInputRange bind-StartValue=""Start"" bind-EndValue=""End"" Size=""Size.Large"" />
+```
+```cs
+@code{
+string Start{ get;set; }
+string End{ get;set; }
+}
+```
+")
+    </CodeContent>
+</Example>

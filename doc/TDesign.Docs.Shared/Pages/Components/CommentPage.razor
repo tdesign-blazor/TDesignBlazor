@@ -1,0 +1,289 @@
+﻿@page "/components/comment"
+
+<PageHeader Title="Comment 评论">
+    评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论等。
+</PageHeader>
+
+<Example Title="基础评论">
+    <Description>评论最基本的组件，包括头像、作者、时间、评论内容，适用于各种需要进行评论展示的场景。</Description>
+    <RunContent>
+        <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+            这里是评论者写的评论内容。
+        </TComment>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```html
+<TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+    这里是评论者写的评论内容。
+</TComment>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带操作评论">
+    <Description>可对评论内容进行相关操作的组件，适用于需要自定义操作列的场景。</Description>
+    <RunContent>
+        <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+            <ChildContent>
+            这里是评论者写的评论内容。
+            </ChildContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name="IconName.ThumbUp"/></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name="IconName.Chat" /></span>
+                    <span>回复</span>
+                </li>                
+            </OperationContent>
+        </TComment>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+    <ChildContent>
+    这里是评论者写的评论内容。
+    </ChildContent>
+    <OperationContent>
+        <li>
+            <span><TIcon Name=""IconName.ThumbUp""/></span>
+            <span>10</span>
+        </li>
+        <li>
+            <span><TIcon Name=""IconName.Chat"" /></span>
+            <span>回复</span>
+        </li>                
+    </OperationContent>
+</TComment>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="列表评论">
+    <Description>以列表形式展示的评论。</Description>
+    <RunContent>
+        <TList Split>
+            <TListItem>
+                <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+                    <ChildContent>
+                        这里是评论者写的评论内容。
+                    </ChildContent>
+                    <OperationContent>
+                        <li>
+                            <span><TIcon Name="IconName.ThumbUp" /></span>
+                            <span>10</span>
+                        </li>
+                        <li>
+                            <span><TIcon Name="IconName.Chat" /></span>
+                            <span>回复</span>
+                        </li>
+                    </OperationContent>
+                </TComment>
+            </TListItem>
+
+            <TListItem>
+                <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+                    <ChildContent>
+                        这里是评论者写的评论内容。
+                    </ChildContent>
+                    <OperationContent>
+                        <li>
+                            <span><TIcon Name="IconName.ThumbUp" /></span>
+                            <span>10</span>
+                        </li>
+                        <li>
+                            <span><TIcon Name="IconName.Chat" /></span>
+                            <span>回复</span>
+                        </li>
+                    </OperationContent>
+                </TComment>
+            </TListItem>
+
+            <TListItem>
+                <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+                    <ChildContent>
+                        这里是评论者写的评论内容。
+                    </ChildContent>
+                    <OperationContent>
+                        <li>
+                            <span><TIcon Name="IconName.ThumbUp" /></span>
+                            <span>10</span>
+                        </li>
+                        <li>
+                            <span><TIcon Name="IconName.Chat" /></span>
+                            <span>回复</span>
+                        </li>
+                    </OperationContent>
+                </TComment>
+            </TListItem>
+        </TList>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TList Split>
+    <TListItem>
+        <TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+            <ChildContent>
+                这里是评论者写的评论内容。
+            </ChildContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name=""IconName.ThumbUp"" /></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name=""IconName.Chat"" /></span>
+                    <span>回复</span>
+                </li>
+            </OperationContent>
+        </TComment>
+    </TListItem>
+    <TListItem>
+        <TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+            <ChildContent>
+                这里是评论者写的评论内容。
+            </ChildContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name=""IconName.ThumbUp"" /></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name=""IconName.Chat"" /></span>
+                    <span>回复</span>
+                </li>
+            </OperationContent>
+        </TComment>
+    </TListItem>
+    <TListItem>
+        <TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+            <ChildContent>
+                这里是评论者写的评论内容。
+            </ChildContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name=""IconName.ThumbUp"" /></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name=""IconName.Chat"" /></span>
+                    <span>回复</span>
+                </li>
+            </OperationContent>
+        </TComment>
+    </TListItem>
+</TList>
+```
+")
+    </CodeContent>
+</Example>
+                
+<Example Title="带回复评论">
+    <Description>展示一条评论的回复内容的组件，适用于对评论进行回复的场景，作者名称后可标明回复对象的名称。</Description>
+    <RunContent>
+        <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+            <ChildContent>
+            这里是评论者写的评论内容。
+            </ChildContent>
+            <ReplyContent>
+                <TComment Author="回复作者">
+                    回复的内容
+                </TComment>
+            </ReplyContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name="IconName.ThumbUp"/></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name="IconName.Chat" /></span>
+                    <span>回复</span>
+                </li>                
+            </OperationContent>
+        </TComment>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+    <ChildContent>
+    这里是评论者写的评论内容。
+    </ChildContent>
+    <ReplyContent>
+        <TComment Author=""回复作者"">
+            回复的内容
+        </TComment>
+    </ReplyContent>
+    <OperationContent>
+        <li>
+            <span><TIcon Name=""IconName.ThumbUp""/></span>
+            <span>10</span>
+        </li>
+        <li>
+            <span><TIcon Name=""IconName.Chat"" /></span>
+            <span>回复</span>
+        </li>                
+    </OperationContent>
+</TComment>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带引用评论">
+    <Description>评论可以引用其他内容，表示评论和其他内容的引用关系。</Description>
+    <RunContent>
+        <TComment Avatar="/avatar.jpg" Author="作者的名称" DateTime="今天 12:40">
+            <ChildContent>
+            这里是评论者写的评论内容。
+            </ChildContent>
+            <QuateContent>
+                <TComment Author="回复作者">
+                    回复的内容
+                </TComment>
+            </QuateContent>
+            <OperationContent>
+                <li>
+                    <span><TIcon Name="IconName.ThumbUp"/></span>
+                    <span>10</span>
+                </li>
+                <li>
+                    <span><TIcon Name="IconName.Chat" /></span>
+                    <span>回复</span>
+                </li>                
+            </OperationContent>
+        </TComment>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TComment Avatar=""/avatar.jpg"" Author=""作者的名称"" DateTime=""今天 12:40"">
+    <ChildContent>
+    这里是评论者写的评论内容。
+    </ChildContent>
+    <QuateContent>
+        <TComment Author=""回复作者"">
+            回复的内容
+        </TComment>
+    </QuateContent>
+    <OperationContent>
+        <li>
+            <span><TIcon Name=""IconName.ThumbUp""/></span>
+            <span>10</span>
+        </li>
+        <li>
+            <span><TIcon Name=""IconName.Chat"" /></span>
+            <span>回复</span>
+        </li>                
+    </OperationContent>
+</TComment>
+```
+")
+    </CodeContent>
+</Example>
