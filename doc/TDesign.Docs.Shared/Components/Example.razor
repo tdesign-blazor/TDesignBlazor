@@ -22,7 +22,7 @@
         </div>
         <div class="footer">
             <div class="btn">
-                <TIcon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" />
+                <TIcon AdditionalCssClass="@BtnClass" Name="IconName.Code" Size="24px"  @onclick="e=>ToogleCode()" style="display: flex;justify-content: space-evenly;align-items: center;" />
             </div>
         </div>
         <div class="@CodeClass" style="@GetStyle()">
@@ -42,12 +42,12 @@
     bool Active = false;
 
     string GetStyle() => Active ? "" : "display:none";
-    string CodeClass => HtmlHelper.CreateCssBuilder().Append("content code")
+    string CodeClass => HtmlHelper.Class.Append("content code")
     //.Append(Active, "code-collapse", "code-expand")
     .ToString()
     ;
 
-    string BtnClass => HtmlHelper.CreateCssBuilder().Append("action").Append("active", Active).ToString();
+    string BtnClass => HtmlHelper.Class.Append("action").Append("active", Active).ToString();
 
     void ToogleCode()
     {

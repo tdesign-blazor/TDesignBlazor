@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
-    "tdesign-vue": "^0.46.1"
+    "tdesign-vue": "^0.50.1"
   }
 }

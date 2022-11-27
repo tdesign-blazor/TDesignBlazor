@@ -50,6 +50,7 @@ public class TTable<TItem> : BlazorComponentBase
     /// </summary>
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
 
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         ArgumentNullException.ThrowIfNull(Data, nameof(Data));
@@ -57,11 +58,13 @@ public class TTable<TItem> : BlazorComponentBase
         base.OnInitialized();
     }
 
+    /// <inheritdoc/>
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
     }
 
+    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         BuildTable(builder, sequence + 1);
@@ -85,12 +88,12 @@ public class TTable<TItem> : BlazorComponentBase
             },
             new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append(AutoWidth, "t-table--layout-auto", "t-table--layout-fixed")
+                @class = HtmlHelper.Class.Append("t-table--layout-auto", AutoWidth, "t-table--layout-fixed")
             });
         }, new
         {
             @class = "t-table__content",
-            style = HtmlHelper.CreateStyleBuilder().Append($"max-height:{FixedHeight}px", FixedHeight.HasValue)
+            style = HtmlHelper.Style.Append($"max-height:{FixedHeight}px", FixedHeight.HasValue)
         });
     }
 
@@ -119,7 +122,7 @@ public class TTable<TItem> : BlazorComponentBase
 
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-table__header")
+            @class = HtmlHelper.Class.Append("t-table__header")
                                                     .Append("t-table__header--fixed", FixedHeader)
         });
     }
@@ -139,18 +142,14 @@ public class TTable<TItem> : BlazorComponentBase
                 content.CreateComponent<TTableRow>(index + 1, tr =>
                 {
                     tr.AddContent(0, ChildContent!.Invoke(item));
-                }, appendFunc: (b, s) =>
-                {
-                    b.SetKey(key);
-                    return s;
-                });
+                }, key: key);
 
                 index++;
             }
 
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-table__body")
+            @class = HtmlHelper.Class.Append("t-table__body")
         });
     }
     /// <summary>
@@ -165,7 +164,7 @@ public class TTable<TItem> : BlazorComponentBase
 
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-table__footer")
+            @class = HtmlHelper.Class.Append("t-table__footer")
                                                     .Append("t-table__footer--fixed", FixedFooter)
         });
     }

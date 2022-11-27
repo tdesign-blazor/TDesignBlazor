@@ -54,7 +54,7 @@ public class TDialog : BlazorComponentBase, IHasChildContent, IHasOnActive
                     }, new
                     {
                         @class = "t-dialog__close",
-                        onclick = HtmlHelper.CreateCallback(this, () => this.Activate(false))
+                        onclick = HtmlHelper.Event.Create(this, () => this.Activate(false))
                     });
 
                     //Content
@@ -64,10 +64,10 @@ public class TDialog : BlazorComponentBase, IHasChildContent, IHasOnActive
                     dialog.CreateElement(3, "div", FooterContent, new { @class = "t-dialog__footer" }, FooterContent is not null);
                 }, new
                 {
-                    @class = HtmlHelper.CreateCssBuilder().Append("t-dialog")
+                    @class = HtmlHelper.Class.Append("t-dialog")
                                                             .Append("t-dialog--default")
                 });
-            }, new { @class = HtmlHelper.CreateCssBuilder().Append("t-dialog__position").Append(Center, "t-dialog--center", "t-dialog--top") });
+            }, new { @class = HtmlHelper.Class.Append("t-dialog__position").Append("t-dialog--center", Center, "t-dialog--top") });
         }, new { @class = "t-dialog__wrap" });
     }
 

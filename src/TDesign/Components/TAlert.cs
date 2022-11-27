@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
+using TDesign.Notification;
+
 namespace TDesign;
 
 /// <summary>
 /// 警告提醒。
 /// </summary>
 [CssClass("t-alert")]
-public class TAlert : MessageComponentBase
+public class TAlert : NotifyComponentBase
 {
 
     /// <summary>
@@ -63,7 +65,11 @@ public class TAlert : MessageComponentBase
         builder.CreateElement(sequence + 2, "div", icon => icon.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close }), new
         {
             @class = "t-alert__close",
-            onclick = HtmlHelper.CreateCallback(this, () => { Closed = true; StateHasChanged(); }, Closable)
+            onclick = HtmlHelper.Event.Create(this, () =>
+            {
+                Closed = !Closable;
+                StateHasChanged();
+            })
         }, Closable);
     }
 

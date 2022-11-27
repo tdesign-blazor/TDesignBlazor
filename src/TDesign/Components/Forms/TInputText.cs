@@ -60,7 +60,7 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
             }
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                     .Append($"t-input__{cssClassName}", !string.IsNullOrEmpty(text) || icon is not null)
                     .Append($"t-input__{cssClassName}-icon", icon is not null)
         }, !string.IsNullOrEmpty(text) || icon is not null);
@@ -70,6 +70,11 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
     {
         base.BuildAttributes(attributes);
         attributes["value"] = CurrentValueAsString;
+    }
+
+    protected override string? FormatValueAsString(TValue? value)
+    {
+        return BindConverter.FormatValue<TValue>(value)?.ToString();
     }
 }
 

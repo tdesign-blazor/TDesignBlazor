@@ -72,7 +72,7 @@ public class TCard : BlazorComponentBase, IHasChildContent
             header.CreateElement(1, "div", HeaderActionContent, new { @class = "t-card__actions" }, HeaderActionContent is not null);
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-card__header")
+            @class = HtmlHelper.Class.Append("t-card__header")
             .Append("t-card__title--bordered", HeaderDivider)
         }, HasHeader);
 

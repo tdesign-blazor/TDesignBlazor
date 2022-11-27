@@ -71,8 +71,14 @@ public class TCollapsePanel : BlazorComponentBase, IHasChildContent, IHasActive,
                 }
             }, new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append("t-collapse-panel__header").Append("t-is-clickable", !CascadingCollaspe.TIconToggle && !Disabled),
-                onclick = HtmlHelper.CreateCallback(this, Toggle, !CascadingCollaspe.TIconToggle)
+                @class = HtmlHelper.Class.Append("t-collapse-panel__header").Append("t-is-clickable", !CascadingCollaspe.IconToggle && !Disabled),
+                onclick = HtmlHelper.Event.Create(this, () =>
+                {
+                    if (!CascadingCollaspe.IconToggle)
+                    {
+                        Toggle();
+                    }
+                })
             });
             #endregion
 
@@ -88,11 +94,18 @@ public class TCollapsePanel : BlazorComponentBase, IHasChildContent, IHasActive,
         builder.CreateComponent<TIcon>(sequence, attributes: new
         {
             Name = !Active ? (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value ? IconName.ChevronLeft : IconName.ChevronRight) : IconName.ChevronDown,
-            AdditionalCssClass = HtmlHelper.CreateCssBuilder()
+            AdditionalCssClass = HtmlHelper.Class
                                     .Append("t-collapse-panel__icon")
                                     .Append("t-collapse-panel__icon--left", CascadingCollaspe.RightTIcon.HasValue && !CascadingCollaspe.RightTIcon.Value)
                                     .Append("t-collapse-panel__icon--right", CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value).ToString(),
-            onclick = HtmlHelper.CreateCallback(this, Toggle, CascadingCollaspe.TIconToggle)
+            onclick = HtmlHelper.Event.Create(this, () =>
+                {
+                    if (CascadingCollaspe.IconToggle)
+                    {
+                        Toggle();
+                    }
+
+                })
         });
     }
 
@@ -103,9 +116,9 @@ public class TCollapsePanel : BlazorComponentBase, IHasChildContent, IHasActive,
             @class = "t-collapse-panel__content"
         }), new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
             .Append("t-collapse-panel__body"),
-            style = HtmlHelper.CreateStyleBuilder()
+            style = HtmlHelper.Style
             .Append("display:none", !Active)
             .Append("")
         });

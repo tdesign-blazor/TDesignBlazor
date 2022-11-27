@@ -35,7 +35,7 @@ public class TInputCheckBox : BlazorInputComponentBase<bool?>, IHasChildContent,
             content.CloseRegion();
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-checkbox")
                                 .Append("t-is-disabled", Disabled)
                                 .Append("t-is-indeterminate", CurrentValue is null && Indeterminate)

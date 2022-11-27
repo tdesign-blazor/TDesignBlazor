@@ -79,7 +79,7 @@ public class TMenu : BlazorComponentBase, IHasChildContent
 
             builder.CreateElement(1, "ul", ChildContent, new
             {
-                @class = HtmlHelper.CreateCssBuilder()
+                @class = HtmlHelper.Class
                                 .Append("t-menu")
                                 .Append("t-menu--scroll narrow-scrollbar", Aside),
             });
