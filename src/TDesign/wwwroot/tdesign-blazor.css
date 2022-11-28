@@ -2,7 +2,12 @@
 @import 'tdesign.min.css';
 @import 'tdesign-icons.css';
 
-
+.visibility-hidden{
+    visibility:hidden
+}
+.visibility-visibile {
+    visibility: visible
+}
 .placement-top-center {
     position: absolute;
     top: 32px;

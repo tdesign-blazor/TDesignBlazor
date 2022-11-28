@@ -1,104 +1,112 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.JSInterop;
 
 namespace TDesign;
 /// <summary>
 /// 具备悬浮提示的弹出层。
 /// </summary>
+[CssClass("t-popup")]
 public class TPopup : BlazorComponentBase, IHasChildContent
 {
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public string Content { get; set; }
 
-    [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Top;
-    bool Active { get; set; }
+    /// <summary>
+    /// 设置弹出层的显示位置。
+    /// </summary>
+    [Parameter] public PopperPlacement Placement { get; set; } = PopperPlacement.Auto;
 
-    ElementReference _triggerRef;
+
+    /// <summary>
+    /// 获取火设置弹出层的内容。
+    /// </summary>
+    [Parameter] public OneOf<string?, RenderFragment?, MarkupString?> Content { get; set; }
+    /// <summary>
+    /// 设置弹出层是否具备箭头指向。
+    /// </summary>
+    [Parameter] public bool Arrow { get; set; }
+    /// <summary>
+    /// 设置是否显示弹出层。
+    /// </summary>
+    [Parameter] public bool Visible { get; set; }
+
+
     ElementReference _tipRef;
-    PopperInstance _instance;
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-    }
+    PopperInstance? _instance;
+
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.OpenElement(0, "span");
-        builder.AddAttribute(3, "onmouseenter", HtmlHelper.CreateCallback<MouseEventArgs>(this, Show));
-        builder.AddAttribute(4, "onmouseleave", HtmlHelper.CreateCallback<MouseEventArgs>(this, Hide));
-        builder.AddElementReferenceCapture(1, reference =>
+        this.CreateCascadingComponent(builder, 0, inner =>
         {
-            _triggerRef = reference;
-        });
-        builder.AddContent(10, ChildContent);
+            inner.AddContent(0, ChildContent);
+        }, "Popup", true);
 
-        if ( Active )
+        builder.CreateElement(0, "div", content =>
         {
-            builder.OpenRegion(10);
-            builder.OpenElement(0, "div");
-            builder.AddAttribute(1, "class", "t-popup");
-            //builder.AddAttribute(2, "style", "position:absolute");
-            builder.AddElementReferenceCapture(8, e => _tipRef = e);
-            builder.AddContent(10, content =>
+            builder.CreateElement(0, "div", inner =>
             {
-                content.OpenElement(0, "div");
-                content.AddAttribute(1, "class", "t-popup__content");
-                //content.AddAttribute(2, "style", $"visibility:hidden");
-                content.AddContent(10, Content);
-                content.CloseElement();
+                Content.Switch(str => inner.AddContent(0, str),
+                                fragment => inner.AddContent(0, fragment),
+                                markup => inner.AddContent(0, markup));
+
+                if (Arrow)
+                {
+                    inner.Div().Class("t-popup__arrow").Close();
+                }
+            },
+            new
+            {
+                @class = HtmlHelper.Class.Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
             });
-            builder.CloseElement();
-            builder.CloseRegion();
-
-        }
-
-        builder.CloseElement();
-        //builder.CreateElement(0, "div", content =>
-        //{
-        //    content.AddContent(0, ChildContent);
-        //    builder.CreateElement(1, "div", content =>
-        //    {
-        //        base.BuildRenderTree(content);
-        //    }, new
-        //    {
-        //        style = "width: 100%;top:0px",
-        //        @class = HtmlHelper.CreateCssBuilder().Append(Placement.GetCssClass())
-        //    });
-        //},
-        //new
-        //{
-        //    style = "position:relative",
-        //    //onmouseover = HtmlHelper.CreateCallback<MouseEventArgs>(this, Toggle),
-        //    //onmouseout = HtmlHelper.CreateCallback<MouseEventArgs>(this, Toggle)
-        //}, appendFunc: (b, i) =>
-        //{
-        //    b.SetKey(this);
-        //    b.AddElementReferenceCapture(i + 1, reference =>
-        //    {
-        //        _elementReference = reference;
-        //    });
-        //    return i;
-        //});
+        },
+        new
+        {
+            @class = HtmlHelper.Class.Append("t-popup").Append("visibility-hidden", !Visible)
+        },
+        captureReference: e => _tipRef = e);
     }
 
-    async Task Show(MouseEventArgs e)
+    public async Task Show(string selector)
     {
-        _instance = await JS.Value.InvokePopupAsync(_triggerRef, _tipRef, new()
+        Visible = true;
+        Task.Delay(5);
+        _instance = await JS.Value.InvokePopupAsync(selector, _tipRef, new()
         {
             Placement = Placement
         });
-        Active = true;
-        StateHasChanged();
+
     }
 
-    async Task Hide(MouseEventArgs e)
+    public async Task Hide()
     {
-        if ( _instance is not null )
+        if (_instance is not null)
         {
-            await _instance.Destroy();
-            //Active = false;
-            StateHasChanged();
+            await _instance.DestroyAsync();
+            Visible = false;
         }
     }
+}
+
+/// <summary>
+/// 弹出层的触发选项。
+/// </summary>
+public enum PopupTrigger
+{
+    /// <summary>
+    /// 左键点击。
+    /// </summary>
+    Click,
+    /// <summary>
+    /// 鼠标悬停。
+    /// </summary>
+    Hover,
+    /// <summary>
+    /// 焦点集中。
+    /// </summary>
+    Focus,
+    /// <summary>
+    /// 右键点击。
+    /// </summary>
+    ContextMenu,
+
 }

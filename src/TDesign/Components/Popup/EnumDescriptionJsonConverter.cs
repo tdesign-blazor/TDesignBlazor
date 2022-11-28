@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace TDesign;
 class EnumDescriptionConverter<T> : JsonConverter<T> where T : IComparable, IFormattable, IConvertible
@@ -15,16 +10,17 @@ class EnumDescriptionConverter<T> : JsonConverter<T> where T : IComparable, IFor
     {
         string jsonValue = reader.GetString();
 
-        foreach ( var fi in typeToConvert.GetFields() )
+        foreach (var fi in typeToConvert.GetFields())
         {
-            DescriptionAttribute description = (DescriptionAttribute)fi.GetCustomAttribute(typeof(DescriptionAttribute), false);
-
-            if ( description != null )
+            var name = fi.Name.ToLower();
+            if (fi.TryGetCustomAttribute<DescriptionAttribute>(out var attribute))
             {
-                if ( description.Description == jsonValue )
-                {
-                    return (T)fi.GetValue(null);
-                }
+                name = attribute.Description;
+            }
+
+            if (name == jsonValue)
+            {
+                return (T)fi.GetValue(null);
             }
         }
         throw new JsonException($"string {jsonValue} was not found as a description in the enum {typeToConvert}");
@@ -32,10 +28,20 @@ class EnumDescriptionConverter<T> : JsonConverter<T> where T : IComparable, IFor
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
+        if (value is null)
+        {
+            return;
+        }
+
         FieldInfo fi = value.GetType().GetField(value.ToString());
 
-        DescriptionAttribute description = (DescriptionAttribute)fi.GetCustomAttribute(typeof(DescriptionAttribute), false);
 
-        writer.WriteStringValue(description.Description);
+        var name = fi.Name.ToLower();
+        if (fi.TryGetCustomAttribute<DescriptionAttribute>(out var attribute))
+        {
+            name = attribute.Description;
+        }
+
+        writer.WriteStringValue(name);
     }
 }

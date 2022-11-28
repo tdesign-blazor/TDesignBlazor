@@ -1,35 +1,55 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.JSInterop;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.JSInterop;
 
 namespace TDesign;
-public class PopperInstance:IDisposable
+/// <summary>
+/// 表示 popper 对象。
+/// </summary>
+public class PopperInstance : IDisposable
 {
-    private readonly IJSObjectReference _jSInstance;
-    private readonly DotNetObjectReference<PopupOptions> _objRef;
-    private readonly IJSInProcessObjectReference _popperWrapper;
+    private readonly IJSObjectReference _popper;
+    private readonly PopperOptions _options;
+    private readonly IJSObjectReference _js;
+    private PopperState state;
 
-    public PopperInstance(IJSObjectReference jSInstance, DotNetObjectReference<PopupOptions> objRef, IJSInProcessObjectReference popperWrapper)
+    /// <summary>
+    /// 初始化 <see cref="PopperInstance"/> 类的新实例。
+    /// </summary>
+    /// <param name="popper">调用 js 返回的 popper 对象。</param>
+    /// <param name="options">popper 配置。</param>
+    /// <param name="js">引入的 js 模块对象。</param>
+    public PopperInstance(IJSObjectReference popper, PopperOptions options, IJSObjectReference js)
     {
-        this._jSInstance = jSInstance;
-        this._objRef = objRef;
-        this._popperWrapper = popperWrapper;
+        this._popper = popper;
+        this._options = options;
+        this._js = js;
     }
-    public State State
-    {
-        get { return _popperWrapper.Invoke<State>("getStateOfInstance", _jSInstance); }
-    }
-    public async Task ForceUpdate() => await _jSInstance.InvokeVoidAsync("forceUpdate");
-    public async Task<State> Update() => await _popperWrapper.InvokeAsync<State>("updateOnInstance", _jSInstance);
-    public async Task<State> SetOptions(PopupOptions options) => await _popperWrapper.InvokeAsync<State>("setOptionsOnInstance", _jSInstance, options, _objRef);
-    public async Task Destroy() => await _jSInstance.InvokeVoidAsync("destroy");
+    /// <summary>
+    /// 获取状态。
+    /// </summary>
+    public ValueTask<PopperState> GetStateAsync() => _js.InvokeAsync<PopperState>("getState", _popper);
+
+    /// <summary>
+    /// 同步更新 popper 实例。 用于低频更新。
+    /// </summary>
+    public ValueTask ForceUpdateAsync() => _popper.InvokeVoidAsync("forceUpdate");
+    /// <summary>
+    /// 异步更新 popper 实例，并返回一个 promise， 用于高频更新。
+    /// </summary>
+    public ValueTask<PopperState> UpdateAsync() => _popper.InvokeAsync<PopperState>("update");
+    /// <summary>
+    /// 更新实例的选项。
+    /// </summary>
+    /// <param name="options">要更新的实例。</param>
+    /// <returns></returns>
+    public ValueTask<PopperState> SetOptionsAsync(PopperOptions options) => _popper.InvokeAsync<PopperState>("setOptons", options);
+    /// <summary>
+    /// 销毁实例。
+    /// </summary>
+    public ValueTask DestroyAsync() => _popper.InvokeVoidAsync("destroy");
 
     public void Dispose()
     {
-        _objRef?.Dispose();
+        _popper?.DisposeAsync();
+        _js?.DisposeAsync();
     }
 }
