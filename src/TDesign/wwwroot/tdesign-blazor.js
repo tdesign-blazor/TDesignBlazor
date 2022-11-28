@@ -11,12 +11,11 @@ let popup = {
      * @param options 配置对象
      * @returns popper instance
      * */
-    create: function (triggerRef, popupRef, options, optionRef) {
+    create: function (objRef, popupRef, options, optionRef) {
         options.onFirstUpdate = state => {
             optionRef.invokeMethodAsync("CallOnFirstUpdate", { placement: state.placement });
         }
 
-        var objRef = document.querySelector(triggerRef);
         return createPopper(objRef, popupRef, options);
     },
     /**

@@ -5,8 +5,11 @@ namespace TDesign;
 /// 具备悬浮提示的弹出层。
 /// </summary>
 [CssClass("t-popup")]
-public class TPopup : BlazorComponentBase, IHasChildContent
+public class TPopup : TDesignComponentBase, IHasChildContent
 {
+
+    const string HIDDEN_CLASS = "visibility-hidden";
+
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -14,7 +17,6 @@ public class TPopup : BlazorComponentBase, IHasChildContent
     /// 设置弹出层的显示位置。
     /// </summary>
     [Parameter] public PopperPlacement Placement { get; set; } = PopperPlacement.Auto;
-
 
     /// <summary>
     /// 获取火设置弹出层的内容。
@@ -29,52 +31,57 @@ public class TPopup : BlazorComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public bool Visible { get; set; }
 
+    [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
-    ElementReference _tipRef;
     PopperInstance? _instance;
-
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        this.CreateCascadingComponent(builder, 0, inner =>
-        {
-            inner.AddContent(0, ChildContent);
-        }, "Popup", true);
+        builder.CreateCascadingComponent(this, 0, ChildContent, isFixed: true);
 
-        builder.CreateElement(0, "div", content =>
+        base.BuildRenderTree(builder);
+    }
+
+    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+    {
+        builder.CreateElement(sequence, "div", inner =>
         {
-            builder.CreateElement(0, "div", inner =>
+            Content.Switch(str => inner.AddContent(0, str),
+                            fragment => inner.AddContent(0, fragment),
+                            markup => inner.AddContent(0, markup));
+
+            if (Arrow)
             {
-                Content.Switch(str => inner.AddContent(0, str),
-                                fragment => inner.AddContent(0, fragment),
-                                markup => inner.AddContent(0, markup));
-
-                if (Arrow)
-                {
-                    inner.Div().Class("t-popup__arrow").Close();
-                }
-            },
+                inner.Div().Class("t-popup__arrow").Close();
+            }
+        },
             new
             {
                 @class = HtmlHelper.Class.Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
             });
-        },
-        new
-        {
-            @class = HtmlHelper.Class.Append("t-popup").Append("visibility-hidden", !Visible)
-        },
-        captureReference: e => _tipRef = e);
     }
 
-    public async Task Show(string selector)
+    protected override void BuildCssClass(ICssClassBuilder builder)
+    {
+        if (Visible)
+        {
+            builder.Remove(HIDDEN_CLASS);
+        }
+        else
+        {
+            builder.Append(HIDDEN_CLASS);
+        }
+    }
+
+    public async Task Show(ElementReference objRef)
     {
         Visible = true;
-        Task.Delay(5);
-        _instance = await JS.Value.InvokePopupAsync(selector, _tipRef, new()
+        this.Refresh();
+        //Task.Delay(5);
+        _instance = await JS.Value.InvokePopupAsync(objRef, Ref, new()
         {
             Placement = Placement
         });
-
     }
 
     public async Task Hide()
@@ -83,6 +90,7 @@ public class TPopup : BlazorComponentBase, IHasChildContent
         {
             await _instance.DestroyAsync();
             Visible = false;
+            this.Refresh();
         }
     }
 }

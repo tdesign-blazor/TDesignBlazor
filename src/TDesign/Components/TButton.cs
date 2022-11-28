@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 [HtmlTag("button")]
 [CssClass("t-button")]
-public class TButton : BlazorComponentBase, IHasOnClick, IHasChildContent
+public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
@@ -73,6 +73,8 @@ public class TButton : BlazorComponentBase, IHasOnClick, IHasChildContent
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         attributes["disabled"] = Disabled;
+
+        base.BuildPopupAttributes(attributes);
     }
 }
 
