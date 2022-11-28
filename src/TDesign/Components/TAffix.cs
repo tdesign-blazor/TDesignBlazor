@@ -46,7 +46,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         if (firstRender)
         {
             var objRef = DotNetObjectReference.Create(this);
-            var popperWrapper = await JS.Value.InvokeAsync<IJSInProcessObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+            var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
             await popperWrapper.InvokeVoidAsync("affix.init", Container, objRef);
 
         }
@@ -60,31 +60,18 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        if (_fixed)
-        {
-            if (!builder.Contains(CSS_NAME))
-            {
-                builder.Append(CSS_NAME);
-            }
-        }
-        else
-        {
-            if (builder.Contains(CSS_NAME))
-            {
-                builder.Remove(CSS_NAME);
-            }
-        }
+        builder.Append(CSS_NAME, _fixed);
         base.BuildCssClass(builder);
     }
 
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    /// <param name="attributes"></param>
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    /// <param name="builder"></param>
+    protected override void BuildStyle(IStyleBuilder builder)
     {
-        attributes["style"] = HtmlHelper.Style.Append(_fixedStyle, _fixed);
-        base.BuildAttributes(attributes);
+        builder.Append(_fixedStyle, _fixed);
+        base.BuildStyle(builder);
     }
 
     /// <summary>
