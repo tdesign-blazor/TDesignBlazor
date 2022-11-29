@@ -204,7 +204,42 @@
         设置 <code>Trigger</code> 使用不同的方式触发。默认是 <code>Hover</code> 。
     </Description>
     <RunContent>
-
+        <TSpace>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Click">
+                    <TButton>点击</TButton>
+                </TPopup>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Hover">
+                    <TButton>悬浮鼠标</TButton>
+                </TPopup>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Focus">
+                    <TInputText @bind-Value="Text" />
+                </TPopup>
+            </TSpaceItem>
+        </TSpace>
     </RunContent>
-    <CodeContent></CodeContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Click"">
+    <TButton>点击</TButton>
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Hover"">
+    <TButton>悬浮鼠标</TButton>
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Focus"">
+    <TInputText @bind-Value=""Text"" />
+</TPopup>
+```
+")
+    </CodeContent>
 </Example>
+@code{
+    string Text{ get; set; }
+}
