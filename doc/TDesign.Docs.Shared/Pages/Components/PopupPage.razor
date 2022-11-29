@@ -218,7 +218,7 @@
             <TSpaceItem>
                 <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Focus">
                     <TInputText @bind-Value="Text" />
-                </TPopup>
+                </TPopup>      
             </TSpaceItem>
         </TSpace>
     </RunContent>
@@ -243,3 +243,33 @@
 @code{
     string Text{ get; set; }
 }
+
+<Example Title="自定义弹出内容">
+    <Description></Description>
+    <RunContent>
+        <TPopup>
+            <PopupContent>
+                <h2>这里是标题</h2>
+                <p>这里是内容</p>
+            </PopupContent>
+            <ChildContent>
+                <TButton>点击</TButton>
+            </ChildContent>
+        </TPopup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TPopup>
+    <PopupContent>
+        <h2>这里是标题</h2>
+        <p>这里是内容</p>
+    </PopupContent>
+    <ChildContent>
+        <TButton>点击</TButton>
+    </ChildContent>
+</TPopup>
+```
+")
+    </CodeContent>
+</Example>
