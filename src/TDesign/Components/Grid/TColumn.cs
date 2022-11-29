@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 [ChildComponent(typeof(TRow))]
 [CssClass("t-col")]
-public class TColumn : BlazorComponentBase, IHasChildContent
+public class TColumn : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 获取或设置父组件 <see cref="TRow"/> 的级联参数的值。

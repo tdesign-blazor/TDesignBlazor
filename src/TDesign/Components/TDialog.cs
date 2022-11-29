@@ -2,7 +2,7 @@
 
 namespace TDesign;
 [CssClass("t-dialog__ctx")]
-public class TDialog : BlazorComponentBase, IHasChildContent, IHasOnActive
+public class TDialog : TDesignComponentBase, IHasChildContent, IHasOnActive
 {
     /// <summary>
     /// 设置非模态对话框。

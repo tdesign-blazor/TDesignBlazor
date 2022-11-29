@@ -7,8 +7,10 @@ namespace TDesign;
 [CssClass("t-popup")]
 public class TPopup : TDesignComponentBase, IHasChildContent
 {
-
-    const string HIDDEN_CLASS = "visibility-hidden";
+    /// <summary>
+    /// 隐藏的 class。
+    /// </summary>
+    const string HIDDEN_CLASS = "hide";
 
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
@@ -16,12 +18,17 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 设置弹出层的显示位置。
     /// </summary>
-    [Parameter] public PopperPlacement Placement { get; set; } = PopperPlacement.Auto;
+    [Parameter] public PopperPlacement Placement { get; set; } = PopperPlacement.Top;
 
     /// <summary>
-    /// 获取火设置弹出层的内容。
+    /// 设置弹出层的内容。
     /// </summary>
-    [Parameter] public OneOf<string?, RenderFragment?, MarkupString?> Content { get; set; }
+    [Parameter] public string? Content { get; set; }
+    /// <summary>
+    /// 设置弹出层内容的模板。
+    /// </summary>
+    [Parameter] public RenderFragment? PopupContent { get; set; }
+
     /// <summary>
     /// 设置弹出层是否具备箭头指向。
     /// </summary>
@@ -31,38 +38,54 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public bool Visible { get; set; }
 
+    /// <summary>
+    /// 触发弹出的方式。
+    /// </summary>
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
     PopperInstance? _instance;
 
+    protected override void OnComponentParameterSet()
+    {
+        base.OnComponentParameterSet();
+
+        PopupContent ??= builder => builder.AddContent(0, Content);
+    }
+
+    /// <inheritdoc/>
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.CreateCascadingComponent(this, 0, ChildContent, isFixed: true);
+        if (ChildContent != null)
+        {
+            builder.CreateCascadingComponent(this, 0, ChildContent, isFixed: true);
+        }
 
         base.BuildRenderTree(builder);
     }
 
+    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         builder.CreateElement(sequence, "div", inner =>
         {
-            Content.Switch(str => inner.AddContent(0, str),
-                            fragment => inner.AddContent(0, fragment),
-                            markup => inner.AddContent(0, markup));
+            inner.AddContent(0, PopupContent);
 
             if (Arrow)
             {
                 inner.Div().Class("t-popup__arrow").Close();
             }
         },
-            new
-            {
-                @class = HtmlHelper.Class.Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
-            });
+        new
+        {
+            @class = HtmlHelper.Class.Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
+        });
     }
 
+    /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
+
+
         if (Visible)
         {
             builder.Remove(HIDDEN_CLASS);
@@ -73,24 +96,30 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         }
     }
 
+    /// <summary>
+    /// 触发指定元素引用并显示弹出层。
+    /// </summary>
+    /// <param name="objRef">被触发弹出层的元素引用。</param>
     public async Task Show(ElementReference objRef)
     {
         Visible = true;
-        this.Refresh();
-        //Task.Delay(5);
+        await this.Refresh();
         _instance = await JS.Value.InvokePopupAsync(objRef, Ref, new()
         {
             Placement = Placement
         });
     }
 
+    /// <summary>
+    /// 隐藏弹出层。
+    /// </summary>
     public async Task Hide()
     {
         if (_instance is not null)
         {
             await _instance.DestroyAsync();
             Visible = false;
-            this.Refresh();
+            await this.Refresh();
         }
     }
 }
@@ -116,5 +145,8 @@ public enum PopupTrigger
     /// 右键点击。
     /// </summary>
     ContextMenu,
-
+    /// <summary>
+    /// 手动调用。
+    /// </summary>
+    Manual,
 }

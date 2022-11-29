@@ -8,7 +8,7 @@ namespace TDesign;
 [CssClass("t-layout")]
 [HtmlTag("section")]
 [ParentComponent]
-public class TLayout : BlazorComponentBase, IHasChildContent
+public class TLayout : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 布局的顶部内容。

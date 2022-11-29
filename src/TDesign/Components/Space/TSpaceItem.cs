@@ -5,7 +5,7 @@
 /// </summary>
 [ChildComponent(typeof(TSpace))]
 [CssClass("t-space-item")]
-public class TSpaceItem : BlazorComponentBase, IHasChildContent
+public class TSpaceItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

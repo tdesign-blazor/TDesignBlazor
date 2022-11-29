@@ -6,7 +6,7 @@ namespace TDesign;
 /// 展示操作的当前进度的进度条。
 /// </summary>
 [CssClass("t-progress")]
-public class TProgress : BlazorComponentBase, IHasActive
+public class TProgress : TDesignComponentBase, IHasActive
 {
     /// <summary>
     /// 设置是否显示进度条的百分比。<c>true</c> 则显示 <see cref="Value"/> 的百分比，否则，根据状态显示对应的图标。

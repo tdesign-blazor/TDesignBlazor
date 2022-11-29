@@ -5,7 +5,7 @@ namespace TDesign;
 /// <summary>
 /// 表示表格的单元格的基类。
 /// </summary>
-public abstract class TableColumnBase : BlazorComponentBase, IHasChildContent
+public abstract class TableColumnBase : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 获取当前是否是顶部单元格。

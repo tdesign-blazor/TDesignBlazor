@@ -1,14 +1,27 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesign;
+/// <summary>
+/// 表示 TDesign 组件的基类。
+/// </summary>
 public abstract class TDesignComponentBase : BlazorComponentBase
 {
-    protected internal ElementReference Ref { get; set; }
+    /// <summary>
+    /// 获取当前组件的元素引用。
+    /// </summary>
+    protected ElementReference Ref { get; private set; }
 
+    /// <summary>
+    /// 级联 TPopup 组件。
+    /// </summary>
     [CascadingParameter] TPopup? CascadingPopup { get; set; }
 
+    /// <summary>
+    /// 获取一个布尔值，表示是否可以具备弹出层的功能。
+    /// </summary>
     protected bool CanPopup => CascadingPopup != null;
 
+    /// <inheritdoc/>
     protected override void BuildComponentAttributes(RenderTreeBuilder builder, out int sequence)
     {
         base.BuildComponentAttributes(builder, out sequence);
@@ -16,13 +29,20 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         builder.AddElementReferenceCapture(++sequence, e => Ref = e);
     }
 
+
+    /// <summary>
+    /// 如果重写，请手动调用 <see cref="BuildPopupAttributes(IDictionary{string, object})"/> 方法。
+    /// </summary>
+    /// <param name="attributes">The attributes for components.</param>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        //base.BuildAttributes(attributes);
-
         BuildPopupAttributes(attributes);
     }
 
+    /// <summary>
+    /// 构建 Popup 相关的属性。
+    /// </summary>
+    /// <param name="attributes">The attributes for components.</param>
     protected virtual void BuildPopupAttributes(IDictionary<string, object> attributes)
     {
         if (!CanPopup)

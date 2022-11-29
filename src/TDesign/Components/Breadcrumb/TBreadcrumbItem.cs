@@ -8,7 +8,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-breadcrumb__item")]
 [ChildComponent(typeof(TBreadcrumb))]
-public class TBreadcrumbItem : BlazorComponentBase, IHasChildContent
+public class TBreadcrumbItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 获取注入的配置。

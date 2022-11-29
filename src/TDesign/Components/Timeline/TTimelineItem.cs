@@ -8,7 +8,7 @@ namespace TDesign;
 [ChildComponent(typeof(TTimeline))]
 [CssClass("t-timeline-item")]
 [HtmlTag("li")]
-public class TTimelineItem : BlazorComponentBase, IHasChildContent
+public class TTimelineItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <see cref="TTimeline"/> 父组件。

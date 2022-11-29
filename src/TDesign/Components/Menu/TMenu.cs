@@ -5,7 +5,7 @@ namespace TDesign;
 /// 导航菜单。
 /// </summary>
 [ParentComponent]
-public class TMenu : BlazorComponentBase, IHasChildContent
+public class TMenu : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 设置 <c>true</c> 表示侧边菜单栏。

@@ -7,11 +7,204 @@
 <Example Title="基本弹出层">
     <Description>由是让浮层内容和触发元素组成，两者均可自定义。设置 <code>Content</code> 自定义浮层内容。</Description>
     <RunContent>
-        <TPopup Content="@("弹出层的内容")" Placement="PopperPlacement.Top">
-            <TButton>按钮</TButton>
-        </TPopup>
+        <TSpace>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容">
+                    <TButton Disabled>按钮</TButton>
+                </TPopup>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Click">
+                    <TButton>点击</TButton>
+                </TPopup>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Hover">
+                    <TButton>悬浮鼠标</TButton>
+                </TPopup>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopup Content="弹出层的内容" Trigger="PopupTrigger.Hover" Arrow>
+                    <TButton>带箭头</TButton>
+                </TPopup>
+                    </TSpaceItem>
+        </TSpace>
     </RunContent>
     <CodeContent>
+        @Code.Create(@"
+```html
+<TPopup Content=""弹出层的内容"">
+    <TButton Disabled>按钮</TButton>
+</TPopup>
 
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Click"">
+    <TButton>点击</TButton>
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Hover"">
+    <TButton>悬浮鼠标</TButton>
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Trigger=""PopupTrigger.Hover"" Arrow>
+    <TButton>悬浮鼠标</TButton>
+</TPopup>
+```
+")
     </CodeContent>
+</Example>
+<Example Title="位置方向">
+    <Description>
+        设置 <code>Placement</code> 显示不同的位置。
+    </Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TSpace>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.TopStart">
+                            <TButton>上左</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.Top">
+                            <TButton>上</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.TopEnd">
+                            <TButton>上右</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TSpace Vertical>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.LeftStart">
+                            <TButton>左上</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.Left">
+                            <TButton>左</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.LeftEnd">
+                            <TButton>左下</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                </TSpace>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <TSpace Vertical AdditionalStyle="text-align:right">
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.RightStart">
+                            <TButton>右上</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.Right">
+                            <TButton>右</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.RightEnd">
+                            <TButton>右下</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TSpace>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.BottomStart">
+                            <TButton>下左</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.Bottom">
+                            <TButton>下</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                    <TSpaceItem>
+                        <TPopup Content="弹出层的内容" Arrow Placement="PopperPlacement.BottomEnd">
+                            <TButton>下右</TButton>
+                        </TPopup>
+                    </TSpaceItem>
+                </TSpace>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.TopStart"">
+        ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.Top"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.TopEnd"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.LeftStart"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.Left"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.LeftEnd"">
+    ...
+</TPopup>
+
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.RightStart"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.Right"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.RightEnd"">
+    ...
+</TPopup>
+
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.BottomStart"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.Bottom"">
+    ...
+</TPopup>
+
+<TPopup Content=""弹出层的内容"" Arrow Placement=""PopperPlacement.BottomEnd"">
+    ...
+</TPopup>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="触发方式">
+    <Description>
+        设置 <code>Trigger</code> 使用不同的方式触发。默认是 <code>Hover</code> 。
+    </Description>
+    <RunContent>
+
+    </RunContent>
+    <CodeContent></CodeContent>
 </Example>

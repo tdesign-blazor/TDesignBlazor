@@ -12,7 +12,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-form__item")]
 [ChildComponent(typeof(TForm))]
-public class TFormItem : BlazorComponentBase, IHasChildContent, IDisposable
+public class TFormItem : TDesignComponentBase, IHasChildContent, IDisposable
 {
     /// <summary>
     /// 级联 <see cref="TForm"/> 组件的实例。

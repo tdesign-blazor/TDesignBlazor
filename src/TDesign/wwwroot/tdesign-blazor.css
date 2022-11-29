@@ -8,6 +8,12 @@
 .visibility-visibile {
     visibility: visible
 }
+.hide{
+    display:none;
+}
+.show{
+    display:block;
+}
 .placement-top-center {
     position: absolute;
     top: 32px;

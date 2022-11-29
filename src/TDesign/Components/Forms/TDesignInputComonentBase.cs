@@ -9,6 +9,10 @@ namespace TDesign;
 public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBase<TValue>, IHasAdditionalCssClass
 {
     /// <summary>
+    /// 获取当前组件的元素引用。
+    /// </summary>
+    protected ElementReference Ref { get; private set; }
+    /// <summary>
     /// 设置只读模式。
     /// </summary>
     [Parameter] public bool Readonly { get; set; }
@@ -86,5 +90,102 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
         attributes["disabled"] = Disabled;
         attributes["readonly"] = Readonly;
         attributes["autofocus"] = AutoFocus;
+
+        BuildPopupAttributes(attributes);
+    }
+
+
+
+    /// <summary>
+    /// 级联 TPopup 组件。
+    /// </summary>
+    [CascadingParameter] TPopup? CascadingPopup { get; set; }
+
+    /// <summary>
+    /// 获取一个布尔值，表示是否可以具备弹出层的功能。
+    /// </summary>
+    protected bool CanPopup => CascadingPopup != null;
+
+    /// <inheritdoc/>
+    protected override void BuildComponentAttributes(RenderTreeBuilder builder, out int sequence)
+    {
+        base.BuildComponentAttributes(builder, out sequence);
+
+        builder.AddElementReferenceCapture(++sequence, e => Ref = e);
+    }
+
+    /// <summary>
+    /// 构建 Popup 相关的属性。
+    /// </summary>
+    /// <param name="attributes">The attributes for components.</param>
+    protected virtual void BuildPopupAttributes(IDictionary<string, object> attributes)
+    {
+        if (!CanPopup)
+        {
+            return;
+        }
+
+        switch (CascadingPopup!.Trigger)
+        {
+            case PopupTrigger.Click:
+                attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, TogglePopup);
+                break;
+            case PopupTrigger.Hover:
+                attributes["onmouseenter"] = HtmlHelper.Event.Create<MouseEventArgs>(this, ShowPopup);
+                attributes["onmouseleave"] = HtmlHelper.Event.Create<MouseEventArgs>(this, HidePopup);
+                break;
+            case PopupTrigger.Focus:
+                attributes["onfocus"] = HtmlHelper.Event.Create<FocusEventArgs>(this, ShowPopup);
+                attributes["onblur"] = HtmlHelper.Event.Create<FocusEventArgs>(this, HidePopup);
+                break;
+            case PopupTrigger.ContextMenu:
+                attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, e =>
+                {
+                    if (e.Button != 2)
+                    {
+                        return Task.CompletedTask;
+                    }
+
+                    return TogglePopup();
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected virtual Task ShowPopup()
+    {
+        if (!CanPopup)
+        {
+            return Task.CompletedTask;
+        }
+        return CascadingPopup.Show(Ref);
+    }
+
+    protected virtual Task HidePopup()
+    {
+        if (!CanPopup)
+        {
+            return Task.CompletedTask;
+        }
+        return CascadingPopup.Hide();
+    }
+
+    protected virtual async Task TogglePopup()
+    {
+        if (!CanPopup)
+        {
+            return;
+        }
+
+        if (!CascadingPopup.Visible)
+        {
+            await ShowPopup();
+        }
+        else
+        {
+            await HidePopup();
+        }
     }
 }

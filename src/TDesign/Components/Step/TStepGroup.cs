@@ -5,7 +5,7 @@
 /// </summary>
 [CssClass("t-steps")]
 [ParentComponent]
-public class TStepGroup : BlazorComponentBase, IHasChildContent
+public class TStepGroup : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
