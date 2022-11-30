@@ -6,9 +6,13 @@
 <Example Title="基础固钉">
     <Description>@Code.Create("适用于页面结构简单的场景，默认容器是 `body`。")</Description>
     <RunContent>
-        <div id="div-box" style="overflow-y:auto;height:200px;">
+        <div id="div-box" style="overflow-y:auto;height:400px;">
             <p>内容</p>
-            <TAffix Container="div-box" OffsetTop="50">
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <p>内容</p>
+            <TAffix OffsetTop="20" ZIndex="1000" Container="div-box">
                 <TButton>按 钮</TButton>
             </TAffix>
             <p>内容</p>
@@ -22,11 +26,7 @@
             <p>内容</p>
             <p>内容</p>
             <p>内容</p>
-            <p>内容</p><p>内容</p>
-            <p>内容</p><p>内容</p>
             <p>内容</p>
-        
-        
         </div>
     </RunContent>
 </Example>

@@ -25,16 +25,62 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 固钉定位层级，样式默认为 500 。
     /// </summary>
-    [Parameter] public int ZIndex { get; set; } = 500;
+    [Parameter] public int ZIndex { get; set; } = ZINDEX_DEFAULT;
 
     /// <summary>
     /// 指定滚动的容器。滚动容器不是body时，传入滚动容器的id。
     /// </summary>
     [Parameter] public string? Container { get; set; }
 
+    #region Private Members
+
+    private readonly string affixId = $"affix-{Guid.NewGuid()}";
+
+    /// <summary>
+    /// z-index 默认值。
+    /// </summary>
+    private const int ZINDEX_DEFAULT = 500;
+
     private bool _fixed = false;
 
     private string _fixedStyle = string.Empty;
+
+    private const string CSS_NAME = "t-affix";
+
+    /// <summary>
+    /// 组件原始位置：组件初始化时，距离窗口顶端的高度值。
+    /// </summary>
+    private int _affixOffsetTop = 0;
+
+    /// <summary>
+    /// 组件固定时的高度值，top值。
+    /// </summary>
+    private int _affixFixedTopValue = 0;
+    
+    /// <summary>
+    /// top 固定。
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="top"></param>
+    private void TryFixTop(bool value, int top)
+    {
+        if (OffsetTop == 0 && OffsetBottom == 0)
+        {
+            return;
+        }
+        _fixed = value;
+        if (_fixed)
+        {
+            _fixedStyle = $"top: {OffsetTop + top}px;";
+        }
+        else
+        {
+            _fixedStyle = string.Empty;
+        }
+        StateHasChanged();
+    }
+
+    #endregion END Private Members
 
     /// <summary>
     /// <inheritdoc/>
@@ -47,12 +93,12 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         {
             var objRef = DotNetObjectReference.Create(this);
             var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-            await popperWrapper.InvokeVoidAsync("affix.init", Container, objRef);
-
+            await popperWrapper.InvokeVoidAsync("affix.init", affixId, Container, objRef);
+            var offset = await popperWrapper.InvokeAsync<int>("affix.offsetTop", affixId);
+            _affixOffsetTop = offset;
         }
         await base.OnAfterRenderAsync(firstRender);
     }
-    private const string CSS_NAME = "t-affix";
 
     /// <summary>
     /// <inheritdoc/>
@@ -60,7 +106,14 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        builder.Append(CSS_NAME, _fixed);
+        if (!_fixed && builder.Contains(CSS_NAME))
+        {
+            builder.Remove(CSS_NAME);
+        }
+        else
+        {
+            builder.Append(CSS_NAME, _fixed);
+        }
         base.BuildCssClass(builder);
     }
 
@@ -71,49 +124,52 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append(_fixedStyle, _fixed);
+        builder.Append($"z-index: {ZIndex}", _fixed && ZIndex != ZINDEX_DEFAULT);
         base.BuildStyle(builder);
+    }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
+    /// <param name="attributes"></param>
+    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    {
+        if (!attributes.ContainsKey("id"))
+        {
+            attributes.Add("id", affixId);
+        }
+        base.BuildAttributes(attributes);
     }
 
     /// <summary>
     /// js 调用的方法，onscroll事件中调用并回传当前的top和bottom值。
     /// </summary>
-    /// <param name="top"></param>
-    /// <param name="bottom"></param>
-    /// <param name="height"></param>
+    /// <param name="containerScrollTop"></param>
+    /// <param name="containerOffsetTop"></param>
+    /// <param name="affixOffsetTop">组件当前位置，当前到窗口顶端的高度</param>
     [JSInvokable]
-    public void OnScrollChanged(int top, int bottom, int height)
+    public void OnScrollChanged(int containerScrollTop, int containerOffsetTop, int affixOffsetTop)
     {
-        if (FixedTop())
+        //距离当前容器顶部的高度，组件原始位置到窗口顶部的高度 - 容器到窗口顶部的高度 - 容器滚动条卷去的高度
+        var top = _affixOffsetTop - containerOffsetTop - containerScrollTop;
+        var f = top <= OffsetTop;
+        if (f && _affixFixedTopValue == 0)
         {
-            TryFixChange(top >= OffsetTop);
+            _affixFixedTopValue = _affixOffsetTop - containerScrollTop;
         }
-        else
+        if (!f && _affixFixedTopValue != 0)
         {
-            TryFixChange(bottom >= OffsetBottom);
+            _affixFixedTopValue = 0;
         }
+        TryFixTop(f, _affixFixedTopValue);
     }
 
-    private bool FixedTop() => OffsetTop > 0;
+    //private async Task DebugMsg(string msg)
+    //{
+    //    var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+    //    await popperWrapper.InvokeVoidAsync("affix.show", msg);
+    //}
 
-    private void TryFixChange(bool value)
-    {
-        if (OffsetTop == 0 && OffsetBottom == 0)
-        {
-            return;
-        }
-        if (value != _fixed)
-        {
-            _fixed = value;
-            if (_fixed)
-            {
-                _fixedStyle = FixedTop() ? $"top:{OffsetTop}px;" : $"bottom:{OffsetBottom}px;";
-            }
-            else
-            {
-                _fixedStyle = string.Empty;
-            }
-            StateHasChanged();
-        }
-    }
+    //private bool FixedTop() => OffsetTop > 0;
 }
 

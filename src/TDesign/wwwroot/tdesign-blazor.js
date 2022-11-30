@@ -5,22 +5,30 @@ let affix = {
     /**
      * 组件初始化方法，用于给指定的元素绑定onscroll事件。
      * @function affix.init
-     * @param {String} id HTML元素id，如果为空则使用document.body 
+     * @param {String} id 组件Affix div 元素的id
+     * @param {String} container HTML元素id，如果为空则使用document.body 
      * @param {DotNetObjectReference<TAffix>} dotnetRef
      */
-    init: function (id, dotnetRef) {
-        console.log('[info] affix.init ', id)
-        let el = id ? document.getElementById(id) : document.body
-        el.onscroll = function () { 
-            let top = el.scrollTop
-            let height = el.scrollHeight
-            let bottom = height - top - el.clientHeight
-            dotnetRef.invokeMethodAsync("OnScrollChanged", top, bottom, height)
+    init: function (id, container, dotnetRef) {
+        let affixDiv = document.getElementById(id)
+        let el = container ? document.getElementById(container) : document.body
+        el.onscroll = function () {
+            let containerScrollTop = el.scrollTop
+            let containerOffsetTop = el.offsetTop
+            let affixOffsetTop = affixDiv.offsetTop
+            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerOffsetTop, affixOffsetTop)
         }
-        
     },
-    show: function(top, bottom, height){
-        console.log(`[info]affix.box top:${top}, bottom:${bottom}, height:${height}`)
+    /**
+     * 获取组件当前位置距离窗口顶端的高度值，offsetTop
+     * @param {String} 组件的元素id
+     * @return {Number} offsetTop
+     * */
+    offsetTop: function (id) {
+        return document.getElementById(id).offsetTop;
+    },
+    show: function (msg) {
+        console.log(msg)
     },
 }
 
