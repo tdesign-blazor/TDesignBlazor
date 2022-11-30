@@ -11,12 +11,16 @@ let affix = {
      */
     init: function (id, container, dotnetRef) {
         let affixDiv = document.getElementById(id)
-        let el = container ? document.getElementById(container) : document.body
+        let el = container ? document.getElementById(container) : document.body      
         el.onscroll = function () {
+            let boundingClientRect = el.getBoundingClientRect()
             let containerScrollTop = el.scrollTop
-            let containerOffsetTop = el.offsetTop
-            let affixOffsetTop = affixDiv.offsetTop
-            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerOffsetTop, affixOffsetTop)
+            let containerY = parseInt(boundingClientRect.y)
+            let affixY = parseInt(affixDiv.getBoundingClientRect().y)
+            let affixHeight = affixDiv.clientHeight
+            let containerScrollHeight = el.scrollHeight
+            let containerHeight = el.clientHeight
+            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight, containerScrollHeight, affixY, affixHeight)
         }
     },
     /**
@@ -24,8 +28,8 @@ let affix = {
      * @param {String} 组件的元素id
      * @return {Number} offsetTop
      * */
-    offsetTop: function (id) {
-        return document.getElementById(id).offsetTop;
+    positionY: function (id) {
+        return parseInt(document.getElementById(id).getBoundingClientRect().y);
     },
     show: function (msg) {
         console.log(msg)
