@@ -6,7 +6,7 @@
 [ParentComponent]
 [CssClass("t-timeline")]
 [HtmlTag("ul")]
-public class TTimeline : BlazorComponentBase, IHasChildContent
+public class TTimeline : TDesignComponentBase, IHasChildContent
 {
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }

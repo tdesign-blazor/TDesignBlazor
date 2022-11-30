@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-avatar")]
 [ChildComponent(typeof(TAvatarGroup), Optional = true)]
-public class TAvatar : BlazorComponentBase, IHasChildContent
+public class TAvatar : TDesignComponentBase, IHasChildContent
 {
     [CascadingParameter] public TAvatarGroup? CascadingAvatarGroup { get; set; }
     /// <summary>

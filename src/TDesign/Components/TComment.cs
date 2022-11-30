@@ -6,7 +6,7 @@ namespace TDesign;
 /// 评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论。
 /// </summary>
 [CssClass("t-comment")]
-public class TComment : BlazorComponentBase, IHasChildContent
+public class TComment : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 设置头像的 uri 地址。

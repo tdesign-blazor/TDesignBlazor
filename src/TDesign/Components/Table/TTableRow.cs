@@ -5,7 +5,7 @@
 /// </summary>
 [ChildComponent(typeof(TTable<>))]
 [HtmlTag("tr")]
-public class TTableRow : BlazorComponentBase, IHasChildContent
+public class TTableRow : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

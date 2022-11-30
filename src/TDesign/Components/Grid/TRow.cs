@@ -5,7 +5,7 @@
 /// </summary>
 [CssClass("t-row")]
 [ParentComponent]
-public class TRow : BlazorComponentBase, IHasChildContent
+public class TRow : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 间隔，单位 px。

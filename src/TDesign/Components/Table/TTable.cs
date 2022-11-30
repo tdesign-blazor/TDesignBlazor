@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-table")]
 [CascadingTypeParameter(nameof(TItem))]
-public class TTable<TItem> : BlazorComponentBase
+public class TTable<TItem> : TDesignComponentBase
 {
     /// <summary>
     /// 设置数据源。

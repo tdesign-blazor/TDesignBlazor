@@ -5,7 +5,7 @@
 /// </summary>
 [CssClass("t-collapse")]
 [ParentComponent]
-public class TCollapse : BlazorComponentBase, IHasChildContent
+public class TCollapse : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
