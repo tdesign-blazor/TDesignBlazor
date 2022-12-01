@@ -7,6 +7,8 @@ namespace TDesign;
 /// </summary>
 public class TAffix : BlazorComponentBase, IHasChildContent
 {
+    #region Parameters
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -32,6 +34,13 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public string? Container { get; set; }
 
+    /// <summary>
+    ///  执行当 <see cref="TAffix"/> 的固定状态发生变化时的事件。
+    /// </summary>
+    [Parameter] public EventCallback<AffixedChangeEventArgs> FixedChange { get; set; }
+
+    #endregion END Parameters
+
     #region Private Members
 
     private readonly string affixId = $"affix-{Guid.NewGuid()}";
@@ -55,34 +64,76 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 组件顶端固定时的高度值，top值。
     /// </summary>
-    private int _affixFixedTopValue = 0;
-
-    /// <summary>
-    /// 组件底部固定时的高度值，top值。
-    /// </summary>
-    private int _affixFixedBottomValue = 0;
+    private int _FixedTopValue = 0;
 
     /// <summary>
     /// top 固定。
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="isFixed"></param>
     /// <param name="top"></param>
-    /// <param name="offset"></param>
-    private void TryFix(bool value, int top, int offset)
+    private async Task ChangeFixState(bool isFixed, int top)
     {
-        _fixed = value;
+        var changed = isFixed != _fixed;
+        _fixed = isFixed;
         if (_fixed)
         {
-            _fixedStyle = $"top: {offset + top}px;";
+            _fixedStyle = $"top: {top}px;";
         }
         else
         {
             _fixedStyle = string.Empty;
         }
         StateHasChanged();
+        if (changed)
+        {
+            await FixedChange.InvokeAsync(new AffixedChangeEventArgs(_fixed, top));
+        }
+    }
+
+    private bool TryFixedOffsetTop(int containerY, int containerScrollTop, out int value)
+    {
+        var top = _affixYInit - containerY - containerScrollTop;
+        value = 0;
+        if (top < 0)
+        {
+            top = 0;
+        }
+        var isFixed = false;
+        if (OffsetTop > 0)
+        {
+            isFixed = top <= OffsetTop;
+            if (isFixed)
+            {
+                value = containerY + OffsetTop;
+            }
+        }
+        return isFixed;
+    }
+
+    private bool TryFixedOffsetBottom(int containerY, int containerHeight, int containerScrollTop, out int value)
+    {
+        var top = _affixYInit - containerY - containerScrollTop;
+        value = 0;
+        if (top < 0)
+        {
+            top = 0;
+        }
+        var bottom = containerHeight - top;
+        var isFixed = false;
+        if (OffsetBottom > 0)
+        {
+            isFixed = bottom <= OffsetBottom;
+            if (isFixed)
+            {
+                value = containerY + (containerHeight - OffsetBottom);
+            }
+        }
+        return isFixed;
     }
 
     #endregion END Private Members
+
+    #region Override Methods
 
     /// <summary>
     /// <inheritdoc/>
@@ -98,7 +149,6 @@ public class TAffix : BlazorComponentBase, IHasChildContent
             await popperWrapper.InvokeVoidAsync("affix.init", affixId, Container, objRef);
             var y = await popperWrapper.InvokeAsync<int>("affix.positionY", affixId);
             _affixYInit = y;
-            await DebugMsg($"[debug]onAfaterRenderAsync affix.positon.y:{y}");
         }
         await base.OnAfterRenderAsync(firstRender);
     }
@@ -144,72 +194,60 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         base.BuildAttributes(attributes);
     }
 
+    #endregion END Override Methods
+
     /// <summary>
     /// js 调用的方法，onscroll事件中调用并回传当前的top和bottom值。
     /// </summary>
     /// <param name="containerScrollTop"></param>
-    /// <param name="containerY"></param>
-    /// <param name="containerHeight"></param>
-    /// <param name="affixY">组件当前位置，当前到窗口顶端的高度</param>
-    /// <param name="affixHeight"></param>
+    /// <param name="containerY">容器到窗口顶端的坐标值</param>
+    /// <param name="containerHeight">容器的可见高度</param>
     [JSInvokable]
-    public void OnScrollChanged(int containerScrollTop, int containerY, int containerHeight, int containerScrollHeight, int affixY, int affixHeight)
+    public async Task OnScrollChanged(int containerScrollTop, int containerY, int containerHeight)
     {
-        //if (!_fixed)
-        //{
-        //    _affixYInit = affixY;
-        //}
         //距离当前容器顶部的高度，组件原始位置到窗口顶部的高度 - 容器到窗口顶部的高度 - 容器滚动条卷去的高度
-        var top = _affixYInit - containerY - containerScrollTop;
-        if (top < 0)
+        var topFixed = TryFixedOffsetTop(containerY, containerScrollTop, out var value);
+        if (topFixed && _FixedTopValue == 0)
         {
-            top = 0;
+            _FixedTopValue = value;
         }
-        if (OffsetTop > 0)
+
+        var bottomFixed = TryFixedOffsetBottom(containerY, containerHeight, containerScrollTop, out var bottomValue);
+        if (bottomFixed && _FixedTopValue == 0)
         {
-            var isFixedTop = top <= OffsetTop;
-            if (isFixedTop && _affixFixedTopValue == 0)
-            {
-                _affixFixedTopValue = containerY;
-            }
-            if (!isFixedTop && _affixFixedTopValue != 0)
-            {
-                _affixFixedTopValue = 0;
-            }
-            TryFix(isFixedTop, _affixFixedTopValue, OffsetTop);
-            //await DebugMsg($"[debug]onscroll _affixOffsetTop:{_affixYInit}, top:{top}, containerScrollTop:{containerScrollTop}, container.y:{containerY}, fixedTop:{_affixFixedBottomValue}, isFixedTop:{isFixedTop}");
+            _FixedTopValue = bottomValue;
         }
-        //await DebugMsg($"[debug]onscroll top:{top}, containerScrollTop:{containerScrollTop}, y:{containerY}, fixedTop:{_affixFixedBottomValue}");
-        //// 如果固定了 OffsetTop 不再执行判断是否固定 OffsetBottom 的逻辑
-        //if (OffsetBottom == 0)
-        //{
-        //    return;
-        //}
-        ////var bottom = containerHeight - top;
-
-        //var currentTop = containerHeight - OffsetBottom;
-
-        ////if (bottom < 0)
-        ////{
-        ////    bottom = 0;
-        ////}
-        //var isFixedBottom = top >= currentTop;
-        //if (isFixedBottom && _affixFixedBottomValue == 0)
-        //{
-        //    _affixFixedBottomValue = containerOffsetTop;
-        //}
-        //if (!isFixedBottom && _affixFixedBottomValue != 0)
-        //{
-        //    _affixFixedBottomValue = 0;
-        //}
-        //await DebugMsg($"[debug]onscroll top:{top}, containerScrollTop:{containerScrollTop}, y:{containerOffsetTop}, fixedTop:{_affixFixedBottomValue}, fixed:{isFixedBottom}");
-        //TryFix(isFixedBottom, _affixFixedBottomValue, currentTop);
+        if (!topFixed && !bottomFixed)
+        {
+            _FixedTopValue = 0;
+        }
+        await ChangeFixState(topFixed || bottomFixed, _FixedTopValue);
     }
+}
 
-    private async Task DebugMsg(string msg)
+/// <summary>
+/// 提供<see cref="TAffix.FixedChange"/>事件的回调参数模型。
+/// </summary>
+public class AffixedChangeEventArgs
+{
+    /// <summary>
+    /// 构建<see cref="AffixedChangeEventArgs"/>实例。
+    /// </summary>
+    /// <param name="affixed"></param>
+    /// <param name="top"></param>
+    public AffixedChangeEventArgs(bool affixed, int top)
     {
-        var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-        await popperWrapper.InvokeVoidAsync("affix.show", msg);
+        Affixed = affixed;
+        Top = top;
     }
+    /// <summary>
+    /// 是否固定。
+    /// </summary>
+    public bool Affixed { get; set; }
+
+    /// <summary>
+    /// 固定时距离窗口顶端的距离。
+    /// </summary>
+    public int Top { get; set; }
 }
 

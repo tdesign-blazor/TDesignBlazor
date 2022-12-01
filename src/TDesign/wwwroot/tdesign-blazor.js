@@ -16,11 +16,8 @@ let affix = {
             let boundingClientRect = el.getBoundingClientRect()
             let containerScrollTop = el.scrollTop
             let containerY = parseInt(boundingClientRect.y)
-            let affixY = parseInt(affixDiv.getBoundingClientRect().y)
-            let affixHeight = affixDiv.clientHeight
-            let containerScrollHeight = el.scrollHeight
             let containerHeight = el.clientHeight
-            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight, containerScrollHeight, affixY, affixHeight)
+            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight)
         }
     },
     /**
