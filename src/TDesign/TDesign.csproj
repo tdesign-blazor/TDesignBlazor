@@ -18,6 +18,7 @@
     <RepositoryType>Github</RepositoryType>
     <PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
     <Copyright>TDesignBlazor © William 2022</Copyright>
+	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -82,6 +83,62 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="wwwroot\js\popper\dom-utils\contains.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getBoundingClientRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getClippingRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getCompositeRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getComputedStyle.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getDocumentElement.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getDocumentRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getHTMLElementScroll.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getLayoutRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getNodeName.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getNodeScroll.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getOffsetParent.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getParentNode.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getScrollParent.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getViewportRect.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getWindow.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getWindowScroll.js" />
+    <None Include="wwwroot\js\popper\dom-utils\getWindowScrollBarX.js" />
+    <None Include="wwwroot\js\popper\dom-utils\instanceOf.js" />
+    <None Include="wwwroot\js\popper\dom-utils\isLayoutViewport.js" />
+    <None Include="wwwroot\js\popper\dom-utils\isScrollParent.js" />
+    <None Include="wwwroot\js\popper\dom-utils\isTableElement.js" />
+    <None Include="wwwroot\js\popper\dom-utils\listScrollParents.js" />
+    <None Include="wwwroot\js\popper\modifiers\applyStyles.js" />
+    <None Include="wwwroot\js\popper\modifiers\arrow.js" />
+    <None Include="wwwroot\js\popper\modifiers\computeStyles.js" />
+    <None Include="wwwroot\js\popper\modifiers\eventListeners.js" />
+    <None Include="wwwroot\js\popper\modifiers\flip.js" />
+    <None Include="wwwroot\js\popper\modifiers\hide.js" />
+    <None Include="wwwroot\js\popper\modifiers\index.js" />
+    <None Include="wwwroot\js\popper\modifiers\offset.js" />
+    <None Include="wwwroot\js\popper\modifiers\popperOffsets.js" />
+    <None Include="wwwroot\js\popper\modifiers\preventOverflow.js" />
+    <None Include="wwwroot\js\popper\utils\computeAutoPlacement.js" />
+    <None Include="wwwroot\js\popper\utils\computeOffsets.js" />
+    <None Include="wwwroot\js\popper\utils\debounce.js" />
+    <None Include="wwwroot\js\popper\utils\detectOverflow.js" />
+    <None Include="wwwroot\js\popper\utils\expandToHashMap.js" />
+    <None Include="wwwroot\js\popper\utils\format.js" />
+    <None Include="wwwroot\js\popper\utils\getAltAxis.js" />
+    <None Include="wwwroot\js\popper\utils\getAltLen.js" />
+    <None Include="wwwroot\js\popper\utils\getBasePlacement.js" />
+    <None Include="wwwroot\js\popper\utils\getFreshSideObject.js" />
+    <None Include="wwwroot\js\popper\utils\getMainAxisFromPlacement.js" />
+    <None Include="wwwroot\js\popper\utils\getOppositePlacement.js" />
+    <None Include="wwwroot\js\popper\utils\getOppositeVariationPlacement.js" />
+    <None Include="wwwroot\js\popper\utils\getVariation.js" />
+    <None Include="wwwroot\js\popper\utils\math.js" />
+    <None Include="wwwroot\js\popper\utils\mergeByName.js" />
+    <None Include="wwwroot\js\popper\utils\mergePaddingObject.js" />
+    <None Include="wwwroot\js\popper\utils\orderModifiers.js" />
+    <None Include="wwwroot\js\popper\utils\rectToClientRect.js" />
+    <None Include="wwwroot\js\popper\utils\uniqueBy.js" />
+    <None Include="wwwroot\js\popper\utils\userAgent.js" />
+    <None Include="wwwroot\js\popper\utils\validateModifiers.js" />
+    <None Include="wwwroot\js\popper\utils\within.js" />
   </ItemGroup>
 
 </Project>

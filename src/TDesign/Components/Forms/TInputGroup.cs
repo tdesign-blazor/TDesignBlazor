@@ -4,7 +4,7 @@
 /// 可以将表单输入组件进行组合。
 /// </summary>
 [CssClass("t-input-group")]
-public class TInputGroup : BlazorComponentBase, IHasChildContent
+public class TInputGroup : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

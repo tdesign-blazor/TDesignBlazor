@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-collapse-panel")]
 [ChildComponent(typeof(TCollapse))]
-public class TCollapsePanel : BlazorComponentBase, IHasChildContent, IHasActive, IHasDisabled
+public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive, IHasDisabled
 {
     /// <summary>
     /// 初始化 <see cref="TCollapsePanel"/> 类的新实例。

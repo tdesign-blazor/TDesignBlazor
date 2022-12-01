@@ -4,7 +4,7 @@
 /// </summary>
 [CssClass("t-link")]
 [HtmlTag("a")]
-public class TLink : BlazorComponentBase, IHasChildContent, IHasDisabled
+public class TLink : TDesignComponentBase, IHasChildContent, IHasDisabled
 {
     /// <summary>
     /// <inheritdoc/>

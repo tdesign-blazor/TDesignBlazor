@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [ParentComponent]
 [CssClass("t-skeleton")]
-public class TSkeleton : BlazorComponentBase, IHasChildContent
+public class TSkeleton : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 设置是否显示骨架屏。
@@ -122,7 +122,7 @@ public class TSkeleton : BlazorComponentBase, IHasChildContent
 [ChildComponent(typeof(TSkeleton))]
 [ParentComponent]
 [CssClass("t-skeleton__row")]
-public class TSkeletonRow : BlazorComponentBase, IHasChildContent
+public class TSkeletonRow : TDesignComponentBase, IHasChildContent
 {
 
     /// <inheritdoc/>
@@ -136,7 +136,7 @@ public class TSkeletonRow : BlazorComponentBase, IHasChildContent
 [ChildComponent(typeof(TSkeleton))]
 [ChildComponent(typeof(TSkeletonRow))]
 [CssClass("t-skeleton__col")]
-public class TSkeletonColumn : BlazorComponentBase
+public class TSkeletonColumn : TDesignComponentBase
 {
 
     /// <summary>

@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [ChildComponent(typeof(TList))]
 [CssClass("t-list-item")]
-public class TListItem : BlazorComponentBase, IHasChildContent
+public class TListItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 列表项正文部分的内容。

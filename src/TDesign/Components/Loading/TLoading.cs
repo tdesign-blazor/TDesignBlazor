@@ -8,7 +8,7 @@ namespace TDesign;
 /// 显示程序正在处理的加载提示。
 /// </summary>
 [CssClass("t-loading")]
-public class TLoading : BlazorComponentBase, IHasChildContent
+public class TLoading : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

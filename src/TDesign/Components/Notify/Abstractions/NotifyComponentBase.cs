@@ -2,7 +2,7 @@
 /// <summary>
 /// 消息组件的基类。
 /// </summary>
-public abstract class NotifyComponentBase : BlazorComponentBase, IHasChildContent
+public abstract class NotifyComponentBase : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
