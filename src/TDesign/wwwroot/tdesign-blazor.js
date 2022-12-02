@@ -1,3 +1,5 @@
+import { createPopper } from './js/popper/popper.js'
+
 /**
  * @description 组件 affix 用到的js对象。
  */
@@ -32,10 +34,6 @@ let affix = {
         console.log(msg)
     },
 }
-
-export { affix }
-
-import { createPopper } from './js/popper/popper.js'
 
 /**
  * 弹出层
@@ -80,4 +78,4 @@ let popup = {
 //    return instance.setOptions(options).then(state => ({ placement: state.placement }));
 //}
 
-export { popup }
+export { affix, popup }
