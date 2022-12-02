@@ -43,7 +43,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
 
     #region Private Members
 
-    private readonly string affixId = $"affix-{Guid.NewGuid()}";
+    private readonly string _affixId = $"affix-{Guid.NewGuid()}";
 
     /// <summary>
     /// z-index 默认值。
@@ -146,8 +146,8 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         {
             var objRef = DotNetObjectReference.Create(this);
             var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-            await popperWrapper.InvokeVoidAsync("affix.init", affixId, Container, objRef);
-            var y = await popperWrapper.InvokeAsync<int>("affix.positionY", affixId);
+            await popperWrapper.InvokeVoidAsync("affix.init", _affixId, Container, objRef);
+            var y = await popperWrapper.InvokeAsync<int>("affix.positionY", _affixId);
             _affixYInit = y;
         }
         await base.OnAfterRenderAsync(firstRender);
@@ -189,7 +189,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
     {
         if (!attributes.ContainsKey("id"))
         {
-            attributes.Add("id", affixId);
+            attributes.Add("id", _affixId);
         }
         base.BuildAttributes(attributes);
     }
