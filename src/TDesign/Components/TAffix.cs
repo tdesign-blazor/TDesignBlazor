@@ -146,7 +146,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         {
             var objRef = DotNetObjectReference.Create(this);
             var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-            await popperWrapper.InvokeVoidAsync("affix.init", _affixId, Container, objRef);
+            await popperWrapper.InvokeVoidAsync("affix.init", Container, objRef);
             var y = await popperWrapper.InvokeAsync<int>("affix.positionY", _affixId);
             _affixYInit = y;
         }
