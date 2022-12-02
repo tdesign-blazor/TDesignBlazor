@@ -1,0 +1,104 @@
+﻿@page "/components/affix"
+<PageHeader Title="Affix 固钉">
+    在指定的范围内，将元素固定不动。
+</PageHeader>
+<HighlightAlert />
+
+<Example Title="指定挂载的容器">
+    <Description>适用于较为复杂的场景，元素固定位置会受容器位置的影响。</Description>
+    <RunContent>
+        <div id="div-box" style="overflow-y:auto;height:400px;">
+            <p>1内容</p>
+            <p>2内容</p>
+            <p>3内容</p>
+            <p>4内容</p>
+            <p>5内容</p>
+            <p>6内容</p>
+            <p>7内容</p>
+            <p>8内容</p>
+            <p>9内容</p>
+            <p>10内容</p>
+            <p>11内容</p>
+            <p>12内容</p>
+            <p>13内容 begin</p>
+            <TAffix OffsetTop="50" ZIndex="1000" OffsetBottom="50" Container="div-box" FixedChange="OnFixedChange">
+                <TButton>按 钮 Fixed: @Affixed</TButton>
+            </TAffix>
+            <p>14内容 end</p>
+            <p>15内容</p>
+            <p>16内容</p>
+            <p>17内容</p>
+            <p>18内容</p>
+            <p>19内容</p>
+            <p>20内容</p>
+            <p>21内容</p>
+            <p>22内容</p>
+            <p>23内容</p>
+            <p>24内容</p>
+            <p>25内容</p>
+            <p>26内容</p>
+            <p>27内容</p>
+            <p>28内容</p>
+            <p>29内容</p>
+            <p>30内容</p>
+            <p>31内容</p>
+            <p>32内容</p>
+            <p>33内容</p>
+            <p>34内容</p>
+            <p>35内容</p>
+        </div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+``` html
+ <div id=""div-box"" style=""overflow-y:auto;height:400px;"">
+     <p>1内容</p>
+     <p>2内容</p>
+     <p>3内容</p>
+     <p>4内容</p>
+     <p>5内容</p>
+     <p>6内容</p>
+     <p>7内容</p>
+     <p>8内容</p>
+     <p>9内容</p>
+     <p>10内容</p>
+     <p>11内容</p>
+     <p>12内容</p>
+     <p>13内容 begin</p>
+     <TAffix OffsetTop=""50"" ZIndex=""1000"" OffsetBottom=""50"" Container=""div-box"" FixedChange=""OnFixedChange"">
+         <TButton>按 钮 Fixed: @Affixed</TButton>
+     </TAffix>
+     <p>14内容 end</p>
+     <p>15内容</p>
+     <p>16内容</p>
+     <p>17内容</p>
+     <p>18内容</p>
+     <p>19内容</p>
+     <p>20内容</p>
+     <p>21内容</p>
+     <p>22内容</p>
+     <p>23内容</p>
+     <p>24内容</p>
+     <p>25内容</p>
+     <p>26内容</p>
+     <p>27内容</p>
+     <p>28内容</p>
+     <p>29内容</p>
+     <p>30内容</p>
+     <p>31内容</p>
+     <p>32内容</p>
+     <p>33内容</p>
+     <p>34内容</p>
+     <p>35内容</p>
+ </div>
+```
+")
+    </CodeContent>
+</Example>
+@code {
+    public void OnFixedChange(AffixedChangeEventArgs args)
+    {
+        Affixed = args.Affixed;
+    }
+    bool Affixed { get; set; }
+}
