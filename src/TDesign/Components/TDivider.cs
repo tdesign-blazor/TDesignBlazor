@@ -7,7 +7,7 @@ namespace TDesign;
 /// 分割线。
 /// </summary>
 [CssClass("t-divider")]
-public class TDivider : BlazorComponentBase, IHasChildContent
+public class TDivider : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 分割线的文本。

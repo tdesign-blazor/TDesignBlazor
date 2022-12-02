@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using Microsoft.JSInterop;
+
 namespace TDesign;
 /// <summary>
 /// TDesign 的扩展。
@@ -32,4 +34,12 @@ public static class TDesignExtensions
         }
         return mapping(status);
     }
+
+    /// <summary>
+    /// 引入 tdesign-blazor.js 脚本。
+    /// </summary>
+    /// <param name="js"></param>
+    /// <returns></returns>
+    public static ValueTask<IJSObjectReference> ImportScriptAsync(this IJSRuntime js)
+        => js.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
 }

@@ -7,7 +7,7 @@ namespace TDesign;
 /// 用于模块内切换内容的分页
 /// </summary>
 [CssClass("t-pagination")]
-public class TPagination : BlazorComponentBase
+public class TPagination : TDesignComponentBase
 {
     #region 参数
     /// <summary>

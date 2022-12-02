@@ -9,7 +9,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-tag")]
 [HtmlTag("span")]
-public class TTag : BlazorComponentBase, IHasChildContent
+public class TTag : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

@@ -5,7 +5,7 @@
 /// </summary>
 [ParentComponent]
 [CssClass("t-breadcrumb")]
-public class TBreadcrumb : BlazorComponentBase, IHasChildContent
+public class TBreadcrumb : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
