@@ -66,9 +66,9 @@
       "System.Text.RegularExpressions.dll": "sha256-pG9yfgPZgNDTC5EHHVJ3BVr0H6XUm4IXgxC\/PG+mqAc=",
       "System.Threading.dll": "sha256-uygwAT4QzY\/9yjMpyZtTNvSbrpGfC4JLCJK0EFFkWsI=",
       "System.Threading.Tasks.Parallel.dll": "sha256-uXQx+Qo1GcqEQ4Lwn+7uogTSO2bMn4Wt3duwwb+SlC8=",
-      "TDesign.dll": "sha256-Ed02NKqoWpDUa14wSTvNmb7MpHwrfMAJ+vIseNHhWvM=",
-      "TDesign.Docs.Shared.dll": "sha256-GII9CPmuSILBFcm6nNznzdZJ8pZsdClOz7D0R4YEukk=",
-      "TDesign.Docs.WebAssembly.dll": "sha256-PezfN4WqWWRTGpkplB\/53drCnwGEt9BeyeBLi21uaLs="
+      "TDesign.dll": "sha256-rAD\/wubeigQlYx6XyC6Jym0LQUwd1S49IoxoORMIoKw=",
+      "TDesign.Docs.Shared.dll": "sha256-pH4wFJYBq8JKDzKxsTGIFul6lgBTVkvt+LH5vN4Qk\/0=",
+      "TDesign.Docs.WebAssembly.dll": "sha256-DBYFuWPp99w65Ftx+2pb3pHWkfvasOdTNxW+PPqMh\/4="
     },
     "extensions": null,
     "lazyAssembly": null,
