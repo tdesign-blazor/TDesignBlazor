@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using TDesign.Notification;
 
 namespace TDesign;
 
@@ -7,7 +8,7 @@ namespace TDesign;
 /// 请使用 <see cref="IMessageService"/> 进行动态调用。
 /// </summary>
 [CssClass("t-message")]
-public class TMessage : MessageComponentBase
+public class TMessage : NotifyComponentBase
 {
     /// <summary>
     /// 加载中的状态。

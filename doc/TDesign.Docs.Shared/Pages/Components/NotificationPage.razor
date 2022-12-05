@@ -84,16 +84,13 @@
             </OperationContent>
         </TNotification>
         <br/>
-        <TNotification Theme="Theme.Warning">
-            <TitleContent>
-                消息通知 <small>这里是副标题</small>
-            </TitleContent>
+        <TNotification Theme="Theme.Warning" Title="消息通知" SubTitle="这里是副标题">
             <ChildContent>
                 1. 使用插槽自定义标题 2. 使用插槽自定义底部内容
             </ChildContent>
             <OperationContent>
-                <TButton Type="ButtonVarient.Text">取消</TButton>
-                <TButton Theme="Theme.Primary" Type="ButtonVarient.Text">稍后提醒我(10s)</TButton>
+                <TButton Varient="ButtonVarient.Text">取消</TButton>
+                <TButton Theme="Theme.Primary" Varient="ButtonVarient.Text">稍后提醒我(10s)</TButton>
             </OperationContent>
         </TNotification>
     </RunContent>
@@ -111,16 +108,13 @@
     </OperationContent>
 </TNotification>
 
-<TNotification Theme=""Theme.Warning"">
-    <TitleContent>
-        消息通知 <small>这里是副标题</small>
-    </TitleContent>
+<TNotification Theme=""Theme.Warning"" Title=""消息通知"" SubTitle=""这里是副标题"">
     <ChildContent>
         1. 使用插槽自定义标题 2. 使用插槽自定义底部内容
     </ChildContent>
     <OperationContent>
-        <TButton Type=""ButtonType.Text"">取消</TButton>
-        <TButton Theme=""Theme.Primary"" Type=""ButtonType.Text"">稍后提醒我(10s)</TButton>
+        <TButton Varient=""ButtonType.Text"">取消</TButton>
+        <TButton Theme=""Theme.Primary"" Varient=""ButtonType.Text"">稍后提醒我(10s)</TButton>
     </OperationContent>
 </TNotification>
 ```
@@ -128,5 +122,27 @@
     </CodeContent>
 </Example>
 
-        <h2>通过服务调用</h2>
-        代码建设中...
+
+<Example Title="通过服务调用">
+    <Description>注入 <code>INotificationService</code> 接口动态调用消息</Description>
+    <RunContent>
+        <TButton OnClick="@(e=>NotificationService.Show(new (){ Content="这是全局提示"}))">自定义提示</TButton>
+        <TButton Theme="Theme.Primary" OnClick="@(e=>NotificationService.Info("普通的提示","消息通知"))">普通</TButton>
+        <TButton Theme="Theme.Success" OnClick="@(e=>NotificationService.Success("成功的提示","消息通知"))">成功</TButton>
+        <TButton Theme="Theme.Warning" OnClick="@(e=>NotificationService.Warning("警告的提示","消息通知"))">警告</TButton>
+        <TButton Theme="Theme.Danger" OnClick="@(e=>NotificationService.Danger("失败的提示","消息通知"))">失败</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cs
+@inject INotificationService NotificationService
+
+NotificationService.Info(...)
+NotificationService.Success(...)
+NotificationService.Danger(...)
+NotificationService.Warning(...)
+```
+")
+    </CodeContent>
+</Example>
+@inject INotificationService NotificationService

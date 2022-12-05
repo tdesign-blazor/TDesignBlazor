@@ -23,7 +23,8 @@ public static class DependencyInjectionExtensions
         services.Configure(configure);
         services.AddComponentBuilder();
 
-        services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IMessageService, MessageService>()
+            .AddScoped<INotificationService, NotificationService>();
         return services;
     }
 }
