@@ -1,35 +1,34 @@
-﻿window.hash = function (id) {
-    let el = document.getElementById(id);
-    let topSize = el.offsetTop - el.offsetHeight;
-    el.parentNode.scrollTo({
-        top: topSize,
-        left: 0,
-        behavior: 'smooth'
-    })
+﻿import { createPopper } from './js/popper/popper.js'
+
+ */
+        }
+    },
+    /**
+     * 获取组件当前位置距离窗口顶端的高度值，offsetTop
+     * @param {String} 组件的元素id
+     * @return {Number} offsetTop
+     * */
+    positionY: function (id) {
+        return parseInt(document.getElementById(id).getBoundingClientRect().y);
+    },
 }
 
-/*
- anchor关联滚动容器滚动监听
- */
-window.onAnchorScroll = function (dotNetHelper,id) {
-    document.getElementById(id).onscroll = function (e) {
-        dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-        console.log(e.srcElement.scrollTop)
-    }
+        }
+
 }
 
-/*
- 获取元素的顶部偏移量
- */
-window.getOffsetTop = function (id) {
-    let el = document.getElementById(id);
-    return el.offsetTop;
-}
+//export function updateOnInstance(instance) {
+//    return instance.update().then(state => ({ placement: state.placement }));
+//}
 
-/*
- 获取元素的偏移高度
- */
-window.getOffsetHeight = function (id) {
-    let el = document.getElementById(id);
-    return el.offsetHeight;
-}
+//export function setOptionsOnInstance(instance, options, objRef) {
+//    options.onFirstUpdate = (state) => {
+//        const stateCopy = {
+//            placement: state.placement
+//        }
+//        objRef.invokeMethodAsync('CallOnFirstUpdate', stateCopy)
+//    };
+//    return instance.setOptions(options).then(state => ({ placement: state.placement }));
+//}
+
+export { affix, popup }

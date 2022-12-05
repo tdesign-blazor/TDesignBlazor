@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [ParentComponent]
 [CssClass("t-list")]
-public class TList : BlazorComponentBase, IHasChildContent
+public class TList : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

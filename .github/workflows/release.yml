@@ -2,7 +2,6 @@ name: Release
 
 on:
   push:
-    branches: ['master']
     tags:
       - "*"
 
@@ -14,7 +13,7 @@ jobs:
       - name: 迁出代码
         uses: actions/checkout@v2
 
-      - name: Setup .NET 6
+      - name: Setup .NET Environment
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: |
@@ -30,13 +29,7 @@ jobs:
           Version=${{steps.version.outputs.full}}
           echo "The version {$Version}"
           dotnet build
-          dotnet pack ./src/TDesignBlazor/TDesignBlazor.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
+          dotnet pack ./src/TDesign/TDesign.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
           dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
-      - name: 上传工件
-        uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: publish/
-          retention-days: 5
     

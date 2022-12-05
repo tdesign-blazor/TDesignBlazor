@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [HtmlTag("div")]
 [CssClass("t-image__wrapper")]
-public class TImage : BlazorComponentBase
+public class TImage : TDesignComponentBase
 {
     /// <summary>
     /// 图片描述

@@ -6,7 +6,7 @@
 [CssClass("t-icon")]
 [ChildComponent(typeof(TMenu), Optional = true)]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
-public class TIcon : BlazorComponentBase
+public class TIcon : TDesignComponentBase
 {
     protected override void OnParametersSet()
     {

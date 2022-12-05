@@ -1,14 +1,12 @@
-![TDesign](https://tdesign.gtimg.com/site/TDesign.png)
+![TDesign](./asset/tdesign-blazor-banner.png)
 
 ![TDesign](https://user-images.githubusercontent.com/88708072/147124305-fbb74f9f-65b2-44f9-9f1c-e812ce63a547.gif)
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
 
 
-[![PR](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/pull-request.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/pull-request.yml)
 [![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AchievedOwner/TDesignBlazor&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=AchievedOwner/TDesignBlazor&utm_campaign=Badge_Coverage)
-
 ![Version](https://img.shields.io/github/v/release/AchievedOwner/TDesignBlazor)
 
 ## ✨ 特性
@@ -29,8 +27,7 @@
 
 ## 🖥 支持环境
 
-- ![.NET 6](https://img.shields.io/badge/.NET-v6.0-green)
-- ![.NET 6](https://img.shields.io/badge/.NET-v7.0-green)
+- ![.NET 6](https://img.shields.io/badge/.NET-v6.0-green) ![.NET 6](https://img.shields.io/badge/.NET-v7.0-green)
 - 支持 WebAssembly 静态文件部署
 - 主流 4 款现代浏览器，以及 Internet Explorer 11+（限 [Blazor Server](https://docs.microsoft.com/en-us/aspnet/core/blazor/supported-platforms?view=aspnetcore-3.1&WT.mc_id=DT-MVP-5003987)）
 - 可直接运行在 [.NET MAUI](https://dotnet.microsoft.com/zh-cn/apps/maui?WT.mc_id=DT-MVP-5003987)、[WPF](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/wpf?view=aspnetcore-6.0&WT.mc_id=DT-MVP-5003987)、[Windows Forms](https://docs.microsoft.com/en-us/aspnet/core/blazor/hybrid/tutorials/windows-forms?view=aspnetcore-6.0) 等 Blazor 混合客户端环境中

@@ -6,7 +6,7 @@ namespace TDesign;
 /// </summary>
 [ChildComponent(typeof(TTab))]
 [CssClass("t-tab-panel")]
-public class TTabItem : BlazorComponentBase, IHasChildContent
+public class TTabItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 用于自动化获取父组件。

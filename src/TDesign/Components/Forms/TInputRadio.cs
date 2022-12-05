@@ -8,7 +8,7 @@ namespace TDesign;
 /// <typeparam name="TValue">与 <see cref="TInputRadioGroup{TValue}"/> 的值类型</typeparam>
 [HtmlTag("input")]
 [ChildComponent(typeof(TInputRadioGroup<>))]
-public class TInputRadio<TValue> : BlazorComponentBase, IDisposable
+public class TInputRadio<TValue> : TDesignComponentBase, IDisposable
 {
     /// <summary>
     /// 级联的单选按钮组。
