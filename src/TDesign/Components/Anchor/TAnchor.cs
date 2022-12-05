@@ -24,7 +24,6 @@ namespace TDesign
         /// </summary>
         [Parameter][HtmlAttribute] public string? Container { get; set; }
 
-        [Inject] public new IJSRuntime? JS { get; set; }
 
         public EventCallback<int?> OnSwitch { get; set; }
 
@@ -46,17 +45,18 @@ namespace TDesign
         public async Task OnScrollAnchorChangeAsync(int index)
         {
             var containerId = Container?.Split("#")[1];
-            index += await JS!.InvokeAsync<int>("getOffsetTop", containerId);
+            var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+            index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
             for (int i = 0; i < ChildComponents.Count; i++)
             {
                 if (ChildComponents[i] is TAnchorItem item)
                 {
                     var itemId = item.Href?.Split("#")[1];
-                    item.OffsetTop = await JS!.InvokeAsync<int>("getOffsetTop", itemId);
-                    item.OffsetHeight = await JS!.InvokeAsync<int>("getOffsetHeight", itemId);
+                    item.OffsetTop = await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", itemId);
+                    item.OffsetHeight = await anchorObj.InvokeAsync<int>("anchor.getOffsetHeight", itemId);
 
                     var start = item.OffsetTop;
-                    var end = item.OffsetTop+ item.OffsetHeight;
+                    var end = item.OffsetTop + item.OffsetHeight;
 
                     if (start <= index && index <= end)
                     {
@@ -80,15 +80,15 @@ namespace TDesign
             builder.AddContent(sequence + 2, ChildContent);
         }
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (!string.IsNullOrEmpty(Container))
             {
                 var containerId = Container?.Split("#")[1];
-                JS?.InvokeVoidAsync("onAnchorScroll", objRef, containerId);
+                var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                await anchorObj.InvokeVoidAsync("anchor.onAnchorScroll", objRef, containerId);
             }
-
-            base.OnAfterRender(firstRender);
+            await base.OnAfterRenderAsync(firstRender);
         }
 
         protected override void OnInitialized()
@@ -116,7 +116,7 @@ namespace TDesign
                         @class = "t-anchor__line-cursor",
                     });
 
-                }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex * 24}px; height: 24px; opacity: 1;" });
+                }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex * 26 + 2}px; height: 22px; opacity: 1;" });
 
             }, new { @class = "t-anchor__line" });
 

@@ -73,7 +73,6 @@ namespace TDesign
             }
         }
 
-        [Inject] public new IJSRuntime? JS { get; set; }
 
         /// <summary>
         /// 获取或设置偏移的高度
@@ -117,7 +116,7 @@ namespace TDesign
                                Href,
                                Title,
                                Target = Target?.GetHtmlAttribute(),
-                               onclick = HtmlHelper.CreateCallback<MouseEventArgs>(this, async x =>
+                               onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, async x =>
                                {
                                    for (int i = 0; i < CascadingAnchor?.ChildComponents.Count; i++)
                                    {
@@ -130,7 +129,8 @@ namespace TDesign
                                            await item.Refresh();
                                        }
                                    }
-                                   await JS!.InvokeVoidAsync("hash", Href?.Split("#")[1]);
+                                   var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                                   await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1]);
 
                                    await this.Refresh();
                                    CascadingAnchor!.SwitchIndex = Index;
