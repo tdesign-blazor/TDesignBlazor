@@ -1,7 +1,6 @@
 ﻿window.hash = function (id) {
-    var el = document.getElementById(id);
-    var topSize = el.offsetTop - el.offsetHeight;
-
+    let el = document.getElementById(id);
+    let topSize = el.offsetTop - el.offsetHeight;
     el.parentNode.scrollTo({
         top: topSize,
         left: 0,
@@ -9,32 +8,28 @@
     })
 }
 
-
-window.anchorOnScroll = function (dotNetHelper) {
-    var anchors = document.getElementsByClassName("t-anchor");
-
-    for (var i = 0; i < anchors.length; i++) {
-
-        document.getElementById(anchors[i].getAttribute("container").replace("#", "")).onscroll = function (e) {
-            dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-        }
-
-    }
-}
-
-window.test = function (dotNetHelper,id) {
+/*
+ anchor关联滚动容器滚动监听
+ */
+window.onAnchorScroll = function (dotNetHelper,id) {
     document.getElementById(id).onscroll = function (e) {
         dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
+        console.log(e.srcElement.scrollTop)
     }
 }
 
-
+/*
+ 获取元素的顶部偏移量
+ */
 window.getOffsetTop = function (id) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
     return el.offsetTop;
 }
 
+/*
+ 获取元素的偏移高度
+ */
 window.getOffsetHeight = function (id) {
-    var el = document.getElementById(id);
+    let el = document.getElementById(id);
     return el.offsetHeight;
 }

@@ -1,28 +1,58 @@
-﻿using ComponentBuilder;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
-
-using System;
-using System.Security.Cryptography.X509Certificates;
-
-using static System.Net.WebRequestMethods;
 
 namespace TDesign
 {
     /// <summary>
-    /// 
+    /// TAnchorItem 目标
+    /// </summary>
+    public enum AnchorItemTarget
+    {
+        /// <summary>
+        /// 在当前页面加载
+        /// </summary>
+        [HtmlAttribute("_self")] Self,
+
+        /// <summary>
+        /// 在新窗口打开
+        /// </summary>
+        [HtmlAttribute("_blank")] Blank,
+
+        /// <summary>
+        /// 如果没有 parent 框架或者浏览上下文，此选项的行为方式与 _self 相同。
+        /// 详见<see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
+        /// </summary>
+        [HtmlAttribute("_parent")] Parent,
+
+        /// <summary>
+        /// 如果没有 parent 框架或者浏览上下文，此选项的行为方式相同_self。
+        /// 详见<see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
+        /// </summary>
+        [HtmlAttribute("_top")] Top
+    }
+
+    /// <summary>
+    /// 锚点子级
     /// </summary>
     [ChildComponent(typeof(TAnchor))]
     [HtmlTag("div")]
     [CssClass("t-anchor__item")]
-    public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive, IHasDisabled
+    public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive
     {
         private string? _href;
+
+        /// <summary>
+        /// 获取或设置选中状态
+        /// </summary>
+        [Parameter] public bool Active { get; set; }
+
         /// <summary>
         /// 用于自动化获取父组件。
         /// </summary>
         [CascadingParameter] public TAnchor? CascadingAnchor { get; set; }
+
+        public RenderFragment? ChildContent { get; set; }
+
         /// <summary>
         /// 锚点
         /// </summary>
@@ -35,69 +65,50 @@ namespace TDesign
             }
             set
             {
-
-
-                var anchors = navigationManager?.Uri.Split('#') ?? Array.Empty<string>();
+                var anchors = NavigationManager?.Uri.Split('#') ?? Array.Empty<string>();
                 if (anchors.Length > 1)
-                {
-                    _href = navigationManager?.Uri?.Replace($"#{anchors[^1]}", value) ?? "";
-                }
+                    _href = NavigationManager?.Uri?.Replace($"#{anchors[^1]}", value) ?? "";
                 else
-                {
-                    _href = navigationManager?.Uri + value;
-                }
-
+                    _href = NavigationManager?.Uri + value;
             }
         }
-        /// <summary>
-        /// 标题
-        /// </summary>
-        [Parameter] public string? Title { get; set; }
-        /// <summary>
-        /// 锚点文字
-        /// </summary>
-        [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
-        /// <summary>
-        /// 
-        /// </summary>
-        public RenderFragment? ChildContent { get; set; }
-        internal int Index { get; private set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [Parameter] public bool Active { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
 
         [Inject] public new IJSRuntime? JS { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool Disabled { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [Inject] NavigationManager? navigationManager { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        public int OffsetTop { get; set; }
-        /// <summary>
-        /// 
+        /// 获取或设置偏移的高度
         /// </summary>
         public int OffsetHeight { get; set; }
 
         /// <summary>
-        /// 
+        /// 获取或设置顶部偏移
         /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="sequence"></param>
+        public int OffsetTop { get; set; }
+
+        [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+
+        /// <summary>
+        /// 锚点文字
+        /// </summary>
+        [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        [Parameter] public string? Title { get; set; }
+
+        internal int Index { get; private set; }
+        [Inject] private NavigationManager? NavigationManager { get; set; }
+
+        /// <summary>
+        /// 设置选中状态
+        /// </summary>
+        /// <param name="active"></param>
+        public void SetActive(bool active)
+        {
+            Active = active;
+        }
+
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
             builder.CreateComponent<TLink>(sequence + 1, Title,
@@ -116,16 +127,8 @@ namespace TDesign
                                                item.Active = true;
                                            else
                                                item.Active = false;
-
-
-                                           var itemId = item.Href?.Split("#")[1];
-                                           item.OffsetTop = await JS!.InvokeAsync<int>("getOffsetTop", itemId);
-                                           item.OffsetHeight = await JS!.InvokeAsync<int>("getOffsetHeight", itemId);
-
                                            await item.Refresh();
                                        }
-
-
                                    }
                                    await JS!.InvokeVoidAsync("hash", Href?.Split("#")[1]);
 
@@ -135,13 +138,8 @@ namespace TDesign
                                }),
                                @class = "t-anchor__item-link"
                            });
-
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="builder"></param>
         protected override void BuildCssClass(ICssClassBuilder builder)
         {
             if (Active)
@@ -155,47 +153,10 @@ namespace TDesign
             base.BuildCssClass(builder);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected override void OnInitialized()
         {
             base.OnInitialized();
             Index = CascadingAnchor!.ChildComponents.Count - 1;
-
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void SetActive(bool active)
-        {
-            Active = active;
-        }
-    }
-
-    /// <summary>
-    /// TAnchorItem 目标
-    /// </summary>
-    public enum AnchorItemTarget
-    {
-        /// <summary>
-        /// 在当前页面加载
-        /// </summary>
-        [HtmlAttribute("_self")] Self,
-        /// <summary>
-        /// 在新窗口打开
-        /// </summary>
-        [HtmlAttribute("_blank")] Blank,
-        /// <summary>
-        /// 
-        /// <see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
-        /// </summary>
-        [HtmlAttribute("_parent")] Parent,
-        /// <summary>
-        /// 
-        /// 
-        /// </summary>
-        [HtmlAttribute("_top")] Top
     }
 }
