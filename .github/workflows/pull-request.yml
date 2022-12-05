@@ -26,7 +26,7 @@ jobs:
         with:
           api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
           coverage-reports: 'coverage.cobertura.xml'
-  DotNet:
+   DotNet:
     runs-on: ubuntu-latest
     steps:      
       - uses: actions/checkout@v3
