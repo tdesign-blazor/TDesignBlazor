@@ -14,7 +14,7 @@ public class TCollapse : BlazorComponentBase, IHasChildContent
     /// <summary>
     /// 仅点击图标才可以触发展开或折叠的响应。
     /// </summary>
-    [Parameter] public bool TIconToggle { get; set; }
+    [Parameter] public bool IconToggle { get; set; }
 
     /// <summary>
     /// 设置 <c>true</c> 图标处于标题的右边，<c>null</c> 不用图标，<c>false</c> 图标处于标题左边。

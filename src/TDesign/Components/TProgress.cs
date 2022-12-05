@@ -89,7 +89,7 @@ public class TProgress : BlazorComponentBase, IHasActive
     /// </summary>
     private void BuildLine(RenderTreeBuilder builder)
     {
-        builder.CreateDiv(0, (RenderFragment)(content =>
+        builder.CreateElement(0, "div", content =>
         {
             content.CreateElement(0, "div", bar =>
             {
@@ -97,12 +97,12 @@ public class TProgress : BlazorComponentBase, IHasActive
             }, new { @class = "t-progress__bar" });
 
             BuildProgressInfo(content, 1);
-        }),
+        },
         new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-progress--thin")
-                                .Append(Status is null, "t-progress--status--undefined", $"t-progress--status--{Status?.GetCssClass()}")
+                                .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
                                 .Append("t-progress--status--active", Active)
         });
     }
@@ -128,12 +128,12 @@ public class TProgress : BlazorComponentBase, IHasActive
             }
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-progress__bar")
                                 .Append("t-progress--plump")
-                                .Append(Status is null, "t-progress--status--undefined", $"t-progress--status--{Status?.GetCssClass()}")
+                                .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
                                 .Append("t-progress--status--active", Active)
-                                .Append(Value <= 10, "t-progress--under-ten", "t-progress--over-ten")
+                                .Append("t-progress--under-ten", Value <= 10, "t-progress--over-ten")
         });
     }
 
@@ -178,11 +178,11 @@ public class TProgress : BlazorComponentBase, IHasActive
             });
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
                                 .Append("t-progress--circle")
-                                .Append(Status is null, "t-progress--status--undefined", $"t-progress--status--{Status?.GetCssClass()}")
+                                .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
                                 .Append("t-progress--status--active", Active),
-            style = HtmlHelper.CreateStyleBuilder()
+            style = HtmlHelper.Style
                                                 .Append($"width:{size}px", size.HasValue)
                                                 .Append($"height:{size}px", size.HasValue)
                                                 .Append($"font-size:{fontSize}px", fontSize.HasValue)
@@ -218,7 +218,7 @@ public class TProgress : BlazorComponentBase, IHasActive
                         new
                         {
                             @class = "t-progress__inner",
-                            style = HtmlHelper.CreateStyleBuilder().Append($"width:{Value}%").Append(additionalStyle ??= string.Empty),
+                            style = HtmlHelper.Style.Append($"width:{Value}%").Append(additionalStyle ??= string.Empty),
                         });
     }
 

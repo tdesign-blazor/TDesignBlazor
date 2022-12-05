@@ -52,17 +52,17 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
         },
         attributes: new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-switch__handle").Append(LOADING_CLASS_NAME, Loading).Append(DISABLED_CLASS_NAME, Disabled)
+            @class = HtmlHelper.Class.Append("t-switch__handle").Append(LOADING_CLASS_NAME, Loading).Append(DISABLED_CLASS_NAME, Disabled)
         });
         var content = Value ? TrueContent : FalseContent;
-        var cssBuilder = HtmlHelper.CreateCssBuilder().Append("t-switch__content").Append(Size.GetCssClass()).Append(DISABLED_CLASS_NAME, Disabled);
+        var cssBuilder = HtmlHelper.Class.Append("t-switch__content").Append(Size.GetCssClass()).Append(DISABLED_CLASS_NAME, Disabled);
         if (content == null)
         {
             builder.CreateElement(++sequence, "div", attributes: new { @class = cssBuilder });
         }
         else
         {
-            builder.CreateElement(++sequence, "div", childContent: content, attributes: new { @class = cssBuilder });
+            builder.CreateElement(++sequence, "div", content: content, attributes: new { @class = cssBuilder });
         }
 
     }
@@ -79,7 +79,7 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <param name="attributes"></param>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        attributes["onclick"] = HtmlHelper.CreateCallback(this, () =>
+        attributes["onclick"] = HtmlHelper.Event.Create(this, () =>
         {
             CurrentValue = !Value;
             OnChange.InvokeAsync(CurrentValue);

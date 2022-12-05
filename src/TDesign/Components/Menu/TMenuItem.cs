@@ -76,7 +76,7 @@ public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
         if (CanNavigationChanged && !string.IsNullOrWhiteSpace(Link))
         {
             attributes["href"] = Link;
-            attributes["onclick"] = HtmlHelper.CreateCallback(this, NavigateTo);
+            attributes["onclick"] = HtmlHelper.Event.Create(this, NavigateTo);
         }
     }
 

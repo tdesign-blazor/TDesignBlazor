@@ -43,10 +43,10 @@ public class TBadge : BlazorComponentBase, IHasChildContent
         builder.CreateElement(sequence, "div", ChildContent, new { @class = "badge-block" });
         builder.CreateElement(sequence + 1, "div", Text, new
         {
-            @class = HtmlHelper.CreateCssBuilder()
+            @class = HtmlHelper.Class
             .Append($"t-badge--{Shape.GetCssClass()}")
             .Append("t-size-s", Small),
-            style = HtmlHelper.CreateStyleBuilder()
+            style = HtmlHelper.Style
             .Append($"background-color:{Color}", !string.IsNullOrEmpty(Color))
             .Append($"top:{Top}px", Top.HasValue)
             .Append($"right:{Right}px", Right.HasValue)

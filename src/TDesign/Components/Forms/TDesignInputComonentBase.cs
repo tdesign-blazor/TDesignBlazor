@@ -6,7 +6,7 @@ namespace TDesign;
 /// 输入控件的基类。
 /// </summary>
 /// <typeparam name="TValue">双向绑定值的类型。</typeparam>
-public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBase<TValue>
+public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBase<TValue>, IHasAdditionalCssClass
 {
     /// <summary>
     /// 设置只读模式。
@@ -40,14 +40,23 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
     /// 对齐方式。
     /// </summary>
     [Parameter] public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.Left;
+    /// <inheritdoc/>    
+    [Parameter] public string? AdditionalCssClass { get; set; }
 
+    /// <summary>
+    /// Builds the input wrapper.
+    /// </summary>
+    /// <param name="builder">The builder.</param>
+    /// <param name="sequence">The sequence.</param>
+    /// <param name="content">The content.</param>
+    /// <param name="otherCss">The other css.</param>
     protected virtual void BuildInputWrapper(RenderTreeBuilder builder, int sequence, RenderFragment content, string? otherCss = default)
     {
         builder.CreateElement(sequence, "div", wrap =>
         {
             wrap.CreateElement(0, "div", content, new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append("t-input")
+                @class = HtmlHelper.Class.Append("t-input")
                             .Append("t-is-readonly", Readonly)
                             .Append("t-is-disabled", Disabled)
                             .Append("t-input--auto-width", AutoWidth)
@@ -60,15 +69,16 @@ public abstract class TDesignInputComonentBase<TValue> : BlazorInputComponentBas
 
             wrap.CreateElement(1, "div", TipContent, new
             {
-                @class = HtmlHelper.CreateCssBuilder().Append("t-input__tips")
+                @class = HtmlHelper.Class.Append("t-input__tips")
                 .Append($"t-input__tips--{Status.GetCssClass()}")
             }, TipContent is not null);
         }, new
         {
-            @class = HtmlHelper.CreateCssBuilder().Append("t-input__wrap")
+            @class = HtmlHelper.Class.Append("t-input__wrap").Append(AdditionalCssClass)
         });
     }
 
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
