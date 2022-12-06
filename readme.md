@@ -54,7 +54,8 @@
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
     ```html
-    <link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" />
+    <link rel=""stylesheet"" href="_content/TDesign/tdesign-blazor.css" />
+    <script src="_content/TDesign/tdesign-blazor.js"></script>
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs
