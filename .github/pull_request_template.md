@@ -8,7 +8,7 @@
 - [ ] [test]测试（添加缺失的测试或修改现有的测试）
 - [ ] [build]编译（影响构建系统或外部依赖的更改）
 - [ ] [ci]集成（对CI配置文件和脚本的更改）
-- [ ] 其他，请说明：
+- [ ] [others]其他，请说明：
 
 > 参考 [https://www.conventionalcommits.org/zh-hans/v1.0.0/](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
 
