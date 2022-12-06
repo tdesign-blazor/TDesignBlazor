@@ -67,9 +67,14 @@ namespace TDesign
             {
                 var anchors = NavigationManager?.Uri.Split('#') ?? Array.Empty<string>();
                 if (anchors.Length > 1)
+                {
                     _href = NavigationManager?.Uri?.Replace($"#{anchors[^1]}", value) ?? "";
+                }
                 else
+                {
                     _href = NavigationManager?.Uri + value;
+                }
+
             }
         }
 
@@ -123,9 +128,14 @@ namespace TDesign
                                        if (CascadingAnchor.ChildComponents[i] is TAnchorItem item)
                                        {
                                            if (Index == i)
+                                           {
                                                item.Active = true;
+                                           }
                                            else
+                                           {
                                                item.Active = false;
+                                           }
+
                                            await item.Refresh();
                                        }
                                    }
