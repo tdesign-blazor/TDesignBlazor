@@ -51,6 +51,9 @@ namespace TDesign
         /// </summary>
         [CascadingParameter] public TAnchor? CascadingAnchor { get; set; }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
@@ -74,10 +77,8 @@ namespace TDesign
                 {
                     _href = NavigationManager?.Uri + value;
                 }
-
             }
         }
-
 
         /// <summary>
         /// 获取或设置偏移的高度
@@ -89,6 +90,9 @@ namespace TDesign
         /// </summary>
         public int OffsetTop { get; set; }
 
+        /// <summary>
+        /// 点击事件
+        /// </summary>
         [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
 
         /// <summary>
@@ -113,6 +117,11 @@ namespace TDesign
             Active = active;
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="sequence"></param>
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
             builder.CreateComponent<TLink>(sequence + 1, Title,
@@ -150,6 +159,10 @@ namespace TDesign
                            });
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void BuildCssClass(ICssClassBuilder builder)
         {
             if (Active)
@@ -163,6 +176,9 @@ namespace TDesign
             base.BuildCssClass(builder);
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         protected override void OnInitialized()
         {
             base.OnInitialized();

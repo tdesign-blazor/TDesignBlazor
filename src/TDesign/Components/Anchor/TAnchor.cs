@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
-using System.Text.Json;
-
 namespace TDesign
 {
-
     /// <summary>
     /// 锚点
     /// </summary>
@@ -14,9 +11,11 @@ namespace TDesign
     [CssClass("t-anchor")]
     public class TAnchor : BlazorComponentBase, IHasChildContent, IHasOnSwitch
     {
-
         private DotNetObjectReference<TAnchor>? objRef;
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
@@ -24,7 +23,9 @@ namespace TDesign
         /// </summary>
         [Parameter][HtmlAttribute] public string? Container { get; set; }
 
-
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         public EventCallback<int?> OnSwitch { get; set; }
 
         /// <summary>
@@ -32,9 +33,13 @@ namespace TDesign
         /// </summary>
         public int? SwitchIndex { get; set; } = 0;
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         public void Dispose()
         {
             objRef?.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -67,19 +72,27 @@ namespace TDesign
                     {
                         item.SetActive(false);
                     }
-
-
                 }
             }
             await this.Refresh();
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="sequence"></param>
         protected override void AddContent(RenderTreeBuilder builder, int sequence)
         {
             BuildLine(builder, sequence + 1);
             builder.AddContent(sequence + 2, ChildContent);
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="firstRender"></param>
+        /// <returns></returns>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (!string.IsNullOrEmpty(Container))
@@ -91,6 +104,9 @@ namespace TDesign
             await base.OnAfterRenderAsync(firstRender);
         }
 
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         protected override void OnInitialized()
         {
             objRef = DotNetObjectReference.Create(this);
@@ -103,23 +119,16 @@ namespace TDesign
         /// <param name="builder"></param>
         private void BuildLine(RenderTreeBuilder builder, int sequence)
         {
-
             builder.CreateElement(sequence + 1, "div", line =>
             {
-
                 line.CreateElement(sequence + 2, "div", wrapper =>
                 {
-
                     wrapper.CreateElement(sequence + 3, "div", attributes: new
                     {
-
                         @class = "t-anchor__line-cursor",
                     });
-
                 }, new { @class = "t-anchor__line-cursor-wrapper", style = $"top: {SwitchIndex * 26 + 2}px; height: 22px; opacity: 1;" });
-
             }, new { @class = "t-anchor__line" });
-
         }
     }
 }
