@@ -50,7 +50,7 @@ public class TDialog : TDesignComponentBase, IHasChildContent, IHasOnActive
                         header.CreateElement(0, "div", HeaderContent, new { @class = "t-dialog__header-content" });
 
                         //Close TIcon
-                        dialog.CreateElement(1, "span", close =>
+                        header.CreateElement(1, "span", close =>
                         {
                             close.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close });
                         }, new
