@@ -34,9 +34,9 @@ namespace TDesign
     /// <summary>
     /// 锚点子级
     /// </summary>
-    [ChildComponent(typeof(TAnchor))]
     [HtmlTag("div")]
     [CssClass("t-anchor__item")]
+    [ChildComponentAttribute(typeof(TAnchor))]
     public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive
     {
         private string? _href;
