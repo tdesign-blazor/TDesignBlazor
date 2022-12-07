@@ -22,14 +22,14 @@ jobs:
               7.0.x
       - name: Build & Test
         run: |
-          echo CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
+          echo CODECOV_TOKEN: $CODECOV_TOKEN
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
           find ./src/TDesign.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
-          api-token: ${{ env.CODECOV_TOKEN }}
+          api-token: $CODECOV_TOKEN
           coverage-reports: 'coverage.cobertura.xml'
    DotNet:
     runs-on: ubuntu-latest
