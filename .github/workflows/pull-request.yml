@@ -27,6 +27,7 @@ jobs:
           dotnet test --collect:"XPlat Code Coverage"
           find ./src/TDesign.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
       - name: Codacy Coverage Reporter
+        if: github.repository_owner == 'AchievedOwner'
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
           api-token: $CODECOV_TOKEN
@@ -59,6 +60,7 @@ jobs:
 
       - name: Dotnet Test Reporter
         uses: bibipkins/dotnet-test-reporter@v1.0.0-beta.4
+        if: github.repository_owner == 'AchievedOwner'
         with:
           github-token: ${{ env.GITHUB_TOKEN }}
           test-results: ./src/TDesign.Test/TestResults/
