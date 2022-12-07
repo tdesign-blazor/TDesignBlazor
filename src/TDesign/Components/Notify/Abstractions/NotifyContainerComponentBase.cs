@@ -60,14 +60,27 @@ public abstract class NotifyContainerComponentBase<TNotifyService, TConfiguratio
 
         await OnTimeoutRemove();
 
-        Task OnTimeoutRemove()
+        async Task OnTimeoutRemove()
         {
-            using Timer timer = new(async (state) =>
-            {
-                await RemoveItem((TConfiguration)state);
-            }, configuration, configuration.Delay ??= Timeout.Infinite, Timeout.Infinite);
 
-            return Task.CompletedTask;
+#if NET6_0_OR_GREATER
+            using PeriodicTimer timer = new(TimeSpan.FromMilliseconds(configuration.Delay ??= Timeout.Infinite));
+            await timer.WaitForNextTickAsync();
+            await RemoveItem(configuration);
+#else
+            System.Timers.Timer timer = new(configuration.Delay?? Timeout.Infinite);
+            timer.Elapsed += (sender, args) =>
+            {
+                if (sender is not System.Timers.Timer timer)
+                    return;
+  
+                timer.Stop();
+                timer.Dispose();
+                RemoveItem(configuration);
+            };
+            timer.Start();
+            await Task.CompletedTask;
+#endif
         }
     }
 
