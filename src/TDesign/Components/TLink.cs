@@ -34,6 +34,8 @@ public class TLink : TDesignComponentBase, IHasChildContent, IHasDisabled
     /// 超链接的地址。同 <c>href</c> 属性。
     /// </summary>
     [Parameter][HtmlAttribute] public string? Href { get; set; }
+
+
 }
 /// <summary>
 /// 链接的悬停效果。
