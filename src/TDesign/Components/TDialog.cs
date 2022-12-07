@@ -45,17 +45,21 @@ public class TDialog : TDesignComponentBase, IHasChildContent, IHasOnActive
                 position.CreateElement(0, "div", dialog =>
                 {
                     //Header
-                    dialog.CreateElement(0, "div", HeaderContent, new { @class = "t-dialog__header" }, HeaderContent is not null);
+                    dialog.CreateElement(0, "div", header => {
+                        //Header Content
+                        header.CreateElement(0, "div", HeaderContent, new { @class = "t-dialog__header-content" });
 
-                    //Close TIcon
-                    dialog.CreateElement(1, "span", close =>
-                    {
-                        close.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close });
-                    }, new
-                    {
-                        @class = "t-dialog__close",
-                        onclick = HtmlHelper.Event.Create(this, () => this.Activate(false))
-                    });
+                        //Close TIcon
+                        header.CreateElement(1, "span", close =>
+                        {
+                            close.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close });
+                        }, new
+                        {
+                            @class = "t-dialog__close",
+                            onclick = HtmlHelper.Event.Create(this, () => this.Activate(false))
+                        });
+
+                    }, new { @class = "t-dialog__header" });
 
                     //Content
                     dialog.CreateElement(2, "div", ChildContent, new { @class = "t-dialog__body__icon" }, ChildContent is not null);

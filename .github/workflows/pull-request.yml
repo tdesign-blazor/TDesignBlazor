@@ -1,5 +1,9 @@
 name: "PR"
 
+env:
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 on:
   push:
     branches: [ "master" ]
@@ -18,13 +22,15 @@ jobs:
               7.0.x
       - name: Build & Test
         run: |
+          echo CODECOV_TOKEN: $CODECOV_TOKEN
           dotnet build
           dotnet test --collect:"XPlat Code Coverage"
           find ./src/TDesign.Test/*TestResults* -name "*coverage*.xml" -type f -exec cp {} ./ \;
       - name: Codacy Coverage Reporter
+        if: github.repository_owner == 'AchievedOwner'
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
-          api-token: ${{ secrets.CODACY_ACCOUNT_TOKEN }}
+          api-token: $CODECOV_TOKEN
           coverage-reports: 'coverage.cobertura.xml'
    DotNet:
     runs-on: ubuntu-latest
@@ -54,8 +60,9 @@ jobs:
 
       - name: Dotnet Test Reporter
         uses: bibipkins/dotnet-test-reporter@v1.0.0-beta.4
+        if: github.repository_owner == 'AchievedOwner'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ env.GITHUB_TOKEN }}
           test-results: ./src/TDesign.Test/TestResults/
           test-coverage: ./src/TDesign.Test/TestResults/**/*coverage*.xml
           min-coverage: 80
@@ -63,7 +70,7 @@ jobs:
       - name: PR Comment
         uses: github-actions-up-and-running/pr-comment@v1.0.1
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ env.GITHUB_TOKEN }}
           message: 查看测试结果 ${{ steps.test-report.outputs.runHtmlUrl }}
 
 
