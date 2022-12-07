@@ -11,7 +11,7 @@ let affix = {
      * @param {DotNetObjectReference<TAffix>} dotnetRef
      */
     init: function (container, dotnetRef) {
-        let el = container ? document.getElementById(container) : document.body      
+        let el = container ? document.getElementById(container) : document.body
         el.onscroll = function () {
             let boundingClientRect = el.getBoundingClientRect()
             let containerScrollTop = el.scrollTop
@@ -73,4 +73,57 @@ let popup = {
 //    return instance.setOptions(options).then(state => ({ placement: state.placement }));
 //}
 
-export { affix, popup }
+/**
+ * 锚点
+ * */
+let anchor = {
+
+    /**
+     * anchor垂直平滑滚动
+     * @param id 元素id
+     * */
+    hash : function (id) {
+        let el = document.getElementById(id);
+        let topSize = el.offsetTop - el.offsetHeight;
+        el.parentNode.scrollTo({
+            top: topSize,
+            left: 0,
+            behavior: 'smooth'
+        })
+    },
+
+
+    /**
+    * anchor关联滚动容器滚动监听
+    * @param dotNetHelper anchor 实例
+    * @param id 元素id
+    * */
+    onAnchorScroll : function (dotNetHelper, id) {
+        document.getElementById(id).onscroll = function (e) {
+            dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
+            console.log(e.srcElement.scrollTop)
+        }
+    },
+
+
+    /**
+    * 获取元素的顶部偏移量
+    * @param id 元素id
+    * */
+    getOffsetTop : function (id) {
+        let el = document.getElementById(id);
+        return el.offsetTop;
+    },
+
+
+    /**
+    * 获取元素的偏移高度
+    * @param id 元素id
+    * */
+    getOffsetHeight : function (id) {
+        let el = document.getElementById(id);
+        return el.offsetHeight;
+    },
+}
+
+export { affix, popup, anchor }
