@@ -2,91 +2,136 @@
 @using System.Xml;
 @using System.Reflection;
 @{
-    var propertys = Component.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
-    var methods = Component.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(x => !x.IsVirtual && !x.IsSpecialName);
+    var propertys = Component?.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+    var methods = Component?.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(x => !x.IsVirtual && !x.IsSpecialName);
     Parameters = new List<Parameter>();
-    foreach (var itme in propertys)
+    if (propertys.Any())
     {
-        var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
-        Parameter parameter = new()
-                {
-                    Name = itme.Name,
-                    Default = itme.PropertyType.IsValueType ? Activator.CreateInstance(itme.PropertyType)?.ToString() : "null",
-                    Description = GetD($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}"),
-                    Required = editorRequiredAttributes.Any() ? "Y" : "N",
-                    Type = itme?.PropertyType.Name
-                };
-        Parameters.Add(parameter);
+        foreach (var itme in propertys)
+        {
+            var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
+            var isNullable = itme.PropertyType.IsGenericType && itme?.PropertyType?.GetGenericTypeDefinition() == typeof(Nullable<>);
+            var type = isNullable ? string.Join(",", itme?.PropertyType?.GenericTypeArguments.Select(x => x.Name)) : itme?.PropertyType.Name;
+            var @default = isNullable || !itme.PropertyType.IsValueType ? "null" : Activator.CreateInstance(itme?.PropertyType)?.ToString();
+            Parameter parameter = new()
+                    {
+                        Name = itme.Name,
+                        Default = @default,
+                        Description = GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}"),
+                        Required = editorRequiredAttributes.Any() ? "Y" : "N",
+                        Type = type
+                    };
+            Parameters.Add(parameter);
+
+        }
+
+        @if (Parameters.Any())
+        {
+            <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Props</h3>
+            <TTable TItem="Parameter" Data="Parameters">
+                <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+                <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
+                <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
+                <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+                <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
+            </TTable>
+        }
 
     }
 
-    Methods = new List<Method>();
-    foreach (var itme in methods)
+    if (methods.Any())
     {
-        var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
-        Method method = new()
-                {
-                    Name = $"{itme.Name}()",
-                    Description = GetD(key),
-                    Parameter = String.Join(",", itme.GetParameters().Select(x => $"{x.Name}:{x.ParameterType.Name}"))
-                };
-        Methods.Add(method);
+        Methods = new List<Method>();
+        foreach (var itme in methods)
+        {
+            var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
+            Method method = new()
+                    {
+                        Name = $"{itme.Name}()",
+                        Description = GetXmlDescription(key),
+                        Parameter = String.Join(",", itme.GetParameters().Select(x => $"{x.Name}:{x.ParameterType.Name}"))
+                    };
+            Methods.Add(method);
+        }
+        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Methods</h3>
+        <TTable TItem="Method" Data="Methods">
+            <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+            <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
+            <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+        </TTable>
     }
-
-
 }
-
-@if (Parameters.Any())
-{
-    <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Props</h3>
-    <TTable TItem="Parameter" Data="Parameters">
-        <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-        <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
-        <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
-        <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
-        <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
-    </TTable>
-}
-
-
-
-@if (Methods.Any())
-{
-    <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Methods</h3>
-    <TTable TItem="Method" Data="Methods">
-        <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-        <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
-        <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
-    </TTable>
-}
-
 
 @code {
-
+    /// <summary>
+    /// 标题
+    /// </summary>
     [Parameter] public string? Title { get; set; }
-    [Parameter] public string? Description { get; set; }
-    [Parameter] public List<Parameter> Parameters { get; set; }
-    [Parameter] public List<Method> Methods { get; set; }
-    [Parameter] public Type Component { get; set; }
+    /// <summary>
+    /// 参数
+    /// </summary>
+    public List<Parameter>? Parameters { get; set; }
+    /// <summary>
+    /// 方法
+    /// </summary>
+    public List<Method>? Methods { get; set; }
+    /// <summary>
+    /// 组件类型
+    /// </summary>
+    [Parameter] public Type? Component { get; set; }
 
+    /// <summary>
+    /// 参数列表模型
+    /// </summary>
     public class Parameter
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string? Name { get; set; }
+        /// <summary>
+        /// 类型
+        /// </summary>
         public string? @Type { get; set; }
+        /// <summary>
+        /// 默认值
+        /// </summary>
         public string? @Default { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string? Description { get; set; }
+        /// <summary>
+        /// 必填
+        /// </summary>
         public string? Required { get; set; }
     }
 
+    /// <summary>
+    /// 方法列表模型
+    /// </summary>
     public class Method
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string? Name { get; set; }
+        /// <summary>
+        /// 参数
+        /// </summary>
         public string? Parameter { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string? Description { get; set; }
     }
 
-
-    private string? GetD(string key)
+    /// <summary>
+    /// 获取xml文件代码注释
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    private string? GetXmlDescription(string key)
     {
         XmlDocument xml = new XmlDocument();
         xml.Load("./TDesign.xml");
@@ -95,12 +140,11 @@
 
         foreach (XmlNode item in members)
         {
-            if (item.Attributes["name"]?.Value == key)
+            if (item?.Attributes["name"]?.Value == key)
             {
                 return item?.ChildNodes[0]?.InnerText?.Replace(" ", "").Replace("\n", "").Replace("\r", "");
             }
         }
-
         return "";
     }
 }
