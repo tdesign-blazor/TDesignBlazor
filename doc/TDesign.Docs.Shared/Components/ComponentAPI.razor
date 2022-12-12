@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Components;
+@using System.Xml;
+@using System.Reflection;
+@{
+    var propertys = Component.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+    var methods = Component.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(x => !x.IsVirtual && !x.IsSpecialName);
+    Parameters = new List<Parameter>();
+    foreach (var itme in propertys)
+    {
+        var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
+        Parameter parameter = new()
+                {
+                    Name = itme.Name,
+                    Default = itme.PropertyType.IsValueType ? Activator.CreateInstance(itme.PropertyType)?.ToString() : "null",
+                    Description = GetD($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}"),
+                    Required = editorRequiredAttributes.Any() ? "Y" : "N",
+                    Type = itme?.PropertyType.Name
+                };
+        Parameters.Add(parameter);
+
+    }
+
+    Methods = new List<Method>();
+    foreach (var itme in methods)
+    {
+        var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
+        Method method = new()
+                {
+                    Name = $"{itme.Name}()",
+                    Description = GetD(key),
+                    Parameter = String.Join(",", itme.GetParameters().Select(x => $"{x.Name}:{x.ParameterType.Name}"))
+                };
+        Methods.Add(method);
+    }
+
+
+}
+
+@if (Parameters.Any())
+{
+    <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Props</h3>
+    <TTable TItem="Parameter" Data="Parameters">
+        <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+        <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
+        <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
+        <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+        <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
+    </TTable>
+}
+
+
+
+@if (Methods.Any())
+{
+    <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Methods</h3>
+    <TTable TItem="Method" Data="Methods">
+        <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+        <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
+        <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+    </TTable>
+}
+
+
+@code {
+
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Description { get; set; }
+    [Parameter] public List<Parameter> Parameters { get; set; }
+    [Parameter] public List<Method> Methods { get; set; }
+    [Parameter] public Type Component { get; set; }
+
+    public class Parameter
+    {
+        public string? Name { get; set; }
+        public string? @Type { get; set; }
+        public string? @Default { get; set; }
+        public string? Description { get; set; }
+        public string? Required { get; set; }
+    }
+
+    public class Method
+    {
+        public string? Name { get; set; }
+        public string? Parameter { get; set; }
+        public string? Description { get; set; }
+    }
+
+
+    private string? GetD(string key)
+    {
+        XmlDocument xml = new XmlDocument();
+        xml.Load("./TDesign.xml");
+
+        var members = xml.SelectNodes("/doc/members/member");
+
+        foreach (XmlNode item in members)
+        {
+            if (item.Attributes["name"]?.Value == key)
+            {
+                return item?.ChildNodes[0]?.InnerText?.Replace(" ", "").Replace("\n", "").Replace("\r", "");
+            }
+        }
+
+        return "";
+    }
+}

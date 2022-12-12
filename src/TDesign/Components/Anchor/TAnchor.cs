@@ -16,7 +16,7 @@ namespace TDesign
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
-        [Parameter] public RenderFragment? ChildContent { get; set; }
+        [Parameter] [EditorRequired] public RenderFragment? ChildContent { get; set; }
 
         /// <summary>
         /// 获取或设置锚点关联滚动容器
@@ -49,6 +49,7 @@ namespace TDesign
         [JSInvokable]
         public async Task OnScrollAnchorChangeAsync(int index)
         {
+            
             var containerId = Container?.Split("#")[1];
             var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
             index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
