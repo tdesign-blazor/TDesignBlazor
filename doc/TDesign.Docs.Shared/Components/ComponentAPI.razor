@@ -2,22 +2,22 @@
 @using System.Xml;
 @using System.Reflection;
 @{
-    var propertys = Component?.GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
-    var methods = Component?.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance).Where(x => !x.IsVirtual && !x.IsSpecialName);
+    var bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
+    var propertys = Component?.GetProperties(bindingFlags);
+    var methods = Component?.GetMethods(bindingFlags).Where(x => !x.IsVirtual && !x.IsSpecialName);
     Parameters = new List<Parameter>();
     if (propertys.Any())
     {
         foreach (var itme in propertys)
         {
             var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
-            var isNullable = itme.PropertyType.IsGenericType && itme?.PropertyType?.GetGenericTypeDefinition() == typeof(Nullable<>);
-            var type = isNullable ? string.Join(",", itme?.PropertyType?.GenericTypeArguments.Select(x => x.Name)) : itme?.PropertyType.Name;
-            var @default = isNullable || !itme.PropertyType.IsValueType ? "null" : Activator.CreateInstance(itme?.PropertyType)?.ToString();
+            var type = TypeToCSharp(itme.PropertyType);
+            var @default = itme.PropertyType.IsGenericType || !itme.PropertyType.IsValueType ? "null" : Activator.CreateInstance(itme?.PropertyType)?.ToString();
             Parameter parameter = new()
                     {
                         Name = itme.Name,
                         Default = @default,
-                        Description = GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}"),
+                        Description = $"{GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}")}{GetEnumFildJoin(itme?.PropertyType)}",
                         Required = editorRequiredAttributes.Any() ? "Y" : "N",
                         Type = type
                     };
@@ -29,11 +29,11 @@
         {
             <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Props</h3>
             <TTable TItem="Parameter" Data="Parameters">
-                <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-                <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
-                <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
-                <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
-                <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
+                                    <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+                                    <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
+                                    <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
+                                    <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+                                    <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
             </TTable>
         }
 
@@ -55,9 +55,9 @@
         }
         <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Methods</h3>
         <TTable TItem="Method" Data="Methods">
-            <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-            <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
-            <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+                                                                                                            <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
+                                                                                                            <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
+                                                                                                            <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
         </TTable>
     }
 }
@@ -146,5 +146,50 @@
             }
         }
         return "";
+    }
+
+    /// <summary>
+    /// TypeIL转C#代码风格
+    /// </summary>
+    /// <param name="types"></param>
+    /// <returns></returns>
+    private string? TypeToCSharp(params Type[] types)
+    {
+        var reuslt = "";
+        for (int i = 0; i < types.Length; i++)
+        {
+            var item = types[i];
+            var comma = i == types.Length - 1 ? "" : ",";
+            if (item.IsGenericType)
+            {
+                reuslt += $"{item.Name.Split("`")[0]}<{TypeToCSharp(item.GenericTypeArguments)}{comma}>";
+            }
+            else
+            {
+                var enumLable = "";
+                if (item.IsEnum) { enumLable = "enum:"; }
+                reuslt += $"{enumLable}{item.Name}{comma}";
+            }
+        }
+        return reuslt;
+    }
+
+    /// <summary>
+    /// 枚举字段注释
+    /// </summary>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    private string? GetEnumFildJoin(Type type)
+    {
+        var reuslt = "";
+        if (type.IsEnum)
+        {
+            var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.Static);
+            foreach (var item in fieldInfos)
+            {
+                reuslt += GetXmlDescription($"F:{item.DeclaringType.FullName}.{item.Name}") + "\n";
+            }
+        }
+        return reuslt;
     }
 }
