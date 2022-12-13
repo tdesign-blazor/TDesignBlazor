@@ -37,5 +37,9 @@ jobs:
         # with:
         #   config-name: my-config.yml
         #   disable-autolabeler: true
+        id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses:
+        run: |
+            echo 'latest version: ${{ steps.release-drafter.tag_name }}'
