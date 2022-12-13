@@ -33,6 +33,7 @@ jobs:
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
       - uses: release-drafter/release-drafter@v5
+        name: Draft release note
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
         #   config-name: my-config.yml
@@ -40,6 +41,6 @@ jobs:
         id: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses:
+      - name: See output
         run: |
             echo 'latest version: ${{ steps.release-drafter.tag_name }}'
