@@ -18,7 +18,7 @@
                         Name = itme.Name,
                         Default = @default,
                         Description = $"{GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}")}{GetEnumFildJoin(itme?.PropertyType)}",
-                        Required = editorRequiredAttributes.Any() ? "Y" : "N",
+                        Required = editorRequiredAttributes.Any(),
                         Type = type
                     };
             Parameters.Add(parameter);
@@ -27,13 +27,25 @@
 
         @if (Parameters.Any())
         {
-            <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Props</h3>
+            <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
             <TTable TItem="Parameter" Data="Parameters">
-                                    <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-                                    <FieldColumn Value="context?.Type" Title="类型"></FieldColumn>
-                                    <FieldColumn Value="context?.Default" Title="默认值"></FieldColumn>
-                                    <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
-                                    <FieldColumn Value="context?.Required" Title="必填"></FieldColumn>
+                <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
+                <FieldColumn Title="类型" >
+                                    <code>@context?.Type</code>
+                                    </FieldColumn>
+
+                <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+                <FieldColumn Value="context?.Default" Title="默认值" AdditionalStyle="width:100px"></FieldColumn>
+                                    <FieldColumn Title="必填" AdditionalStyle="width:80px">
+                    @if (context.Required)
+                    {
+                        <TTag Theme="Theme.Danger">Y</TTag>
+                    }
+                    else
+                    {
+                        <TTag Type="TagType.Outline" Theme="Theme.Success">N</TTag>
+                    }
+                </FieldColumn>
             </TTable>
         }
 
@@ -47,16 +59,16 @@
             var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
             Method method = new()
                     {
-                        Name = $"{itme.Name}()",
+                        Name = $"{itme.Name}",
                         Description = GetXmlDescription(key),
-                        Parameter = String.Join(",", itme.GetParameters().Select(x => $"{x.Name}:{x.ParameterType.Name}"))
+                        Parameter = String.Join(", ", itme.GetParameters().Select(x => $"{x.ParameterType.Name} {x.Name}"))
                     };
             Methods.Add(method);
         }
-        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title Methods</h3>
+        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
         <TTable TItem="Method" Data="Methods">
-                                                                                                            <FieldColumn Value="context?.Name" Title="名称"></FieldColumn>
-                                                                                                            <FieldColumn Value="context?.Parameter" Title="参数"></FieldColumn>
+                                                                                                            <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
+                                                                                                            <FieldColumn Value="context?.Parameter" Title="参数" AdditionalStyle="width:200px"></FieldColumn>
                                                                                                             <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
         </TTable>
     }
@@ -66,15 +78,15 @@
     /// <summary>
     /// 标题
     /// </summary>
-    [Parameter] public string? Title { get; set; }
+    string? Title => Component.Name;
     /// <summary>
     /// 参数
     /// </summary>
-    public List<Parameter>? Parameters { get; set; }
+    List<Parameter>? Parameters { get; set; }
     /// <summary>
     /// 方法
     /// </summary>
-    public List<Method>? Methods { get; set; }
+    List<Method>? Methods { get; set; }
     /// <summary>
     /// 组件类型
     /// </summary>
@@ -92,11 +104,11 @@
         /// <summary>
         /// 类型
         /// </summary>
-        public string? @Type { get; set; }
+        public string? Type { get; set; }
         /// <summary>
         /// 默认值
         /// </summary>
-        public string? @Default { get; set; }
+        public string? Default { get; set; }
         /// <summary>
         /// 描述
         /// </summary>
@@ -104,7 +116,7 @@
         /// <summary>
         /// 必填
         /// </summary>
-        public string? Required { get; set; }
+        public bool Required { get; set; }
     }
 
     /// <summary>
