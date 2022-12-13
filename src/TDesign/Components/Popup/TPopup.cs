@@ -84,8 +84,6 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-
-
         if (Visible)
         {
             builder.Remove(HIDDEN_CLASS);
@@ -93,6 +91,16 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         else
         {
             builder.Append(HIDDEN_CLASS);
+        }
+    }
+
+    protected override void BuildAttributes(IDictionary<string, object> attributes)
+    {
+        base.BuildAttributes(attributes);
+
+        if (Visible)
+        {
+            attributes["autofocus"] = true;
         }
     }
 

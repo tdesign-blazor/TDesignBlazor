@@ -1,0 +1,17 @@
+﻿@page "/components/select"
+<PageHeader Title="Select 选择器">用于收纳大量选项的信息录入类组件。</PageHeader>
+
+<Example Title="示例">
+    <Description></Description>
+    <RunContent>
+        <TSelect @bind-Value=Value>
+            <TSelectOption Value="1">男</TSelectOption>
+            <TSelectOption Value="2">女</TSelectOption>
+        </TSelect>
+    </RunContent>
+    <CodeContent></CodeContent>
+</Example>
+
+@code{
+    string Value{ get; set; }
+}
