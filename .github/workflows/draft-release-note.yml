@@ -43,4 +43,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: See output
         run: |
-            echo 'latest version: ${{ steps.release-drafter.tag_name }}'
+            echo 'latest version: ${{ steps.release-drafter.name }}'
