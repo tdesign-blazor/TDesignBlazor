@@ -50,6 +50,10 @@ namespace TDesign
         public async Task OnScrollAnchorChangeAsync(int index)
         {
 
+            try
+            {
+
+           
             var containerId = Container?.Split("#")[1];
             var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
             index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
@@ -76,6 +80,12 @@ namespace TDesign
                 }
             }
             await this.Refresh();
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

@@ -149,7 +149,7 @@ namespace TDesign
                                        }
                                    }
                                    var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-                                   await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1]);
+                                   await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1], CascadingAnchor?.Container?.Split("#")[1]);
 
                                    await this.Refresh();
                                    CascadingAnchor!.SwitchIndex = Index;
