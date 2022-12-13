@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Components;
 @using System.Xml;
 @using System.Reflection;
+<div id="@Id">
+
+
 @{
     var bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
     var propertys = Component?.GetProperties(bindingFlags);
@@ -73,12 +76,12 @@
         </TTable>
     }
 }
-
+</div>
 @code {
     /// <summary>
     /// 标题
     /// </summary>
-    string? Title => Component.Name;
+    string? Title => TypeToCSharp(Component);
     /// <summary>
     /// 参数
     /// </summary>
@@ -91,6 +94,7 @@
     /// 组件类型
     /// </summary>
     [Parameter] public Type? Component { get; set; }
+    [Parameter] public string? Id { get; set; }
 
     /// <summary>
     /// 参数列表模型
