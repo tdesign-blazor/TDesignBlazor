@@ -1,14 +1,13 @@
-﻿<div style="padding:24px;background:#fff;height:88vh;overflow-y:auto;overflow-x:hidden;scroll-behavior: smooth;margin:10px;background:white" id="page">
-    <TLayout AdditionalStyle="background: white;">
-        @*<HeaderContent>顶部</HeaderContent>*@
+﻿<div style="height:88vh;overflow-y:auto;overflow-x:hidden;scroll-behavior: smooth;" id="page">
+    <TLayout>
         <RightSideContent>
-            @if (AnchorItems.Any())
+            @if (AnchorItems is not null && AnchorItems.Any())
             {
                 <div style="width:20vw;padding:10px;">
                     <TAnchor AdditionalStyle="position: fixed;" Container="#page">
                         @foreach (var item in AnchorItems)
                         {
-                            <TAnchorItem Title="@item.Value" Href="@item.Key"></TAnchorItem>
+                            <TAnchorItem Title="@item" Href="@("#"+item)"></TAnchorItem>
                         }
                     </TAnchor>
                 </div>
@@ -18,15 +17,10 @@
         <ChildContent>
             @ChildContent
         </ChildContent>
-        @*<FooterContent></FooterContent>*@
     </TLayout>
 </div>
 
 @code {
-    public LayoutContent()
-    {
-        AnchorItems = new Dictionary<string, string>();
-    }
-    [Parameter] public Dictionary<string, string> AnchorItems { get; set; }
+    [Parameter] public string[]? AnchorItems { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
 }
