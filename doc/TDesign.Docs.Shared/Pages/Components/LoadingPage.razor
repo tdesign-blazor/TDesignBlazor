@@ -1,5 +1,5 @@
 ﻿@page "/components/loading"
-
+<LayoutContent>
 <PageHeader Title="Loading 加载中">在网络较慢或数据较多时，表示数据正在加载的状态。</PageHeader>
 <TAlert Theme="Theme.Warning">支持双向绑定</TAlert>
 <Example Title="图标加载">
@@ -117,7 +117,7 @@
     </CodeContent>
 </Example>
 <ComponentAPI Component="typeof(TLoading)"></ComponentAPI>
-
+</LayoutContent>
 @code{
     bool IsLoading{ get; set; }
 

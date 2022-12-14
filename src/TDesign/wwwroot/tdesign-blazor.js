@@ -1,3 +1,4 @@
+import { left } from './js/popper/enums.js'
 import { createPopper } from './js/popper/popper.js'
 
 /**
@@ -84,28 +85,30 @@ let anchor = {
      * */
     hash: function (nodeId, parentNodeId) {
 
-        let el = document.getElementById(nodeId);
-        if (parentNodeId === null) {
-            let topSize = el.offsetTop - el.offsetHeight;
-            el.parentNode.scrollTo({
-                top: topSize,
-                left: 0,
-                behavior: 'smooth'
-            })
-        } else {
-
-            let elpage = document.getElementById(parentNodeId);
-            let topSize = elpage.offsetTop + el.offsetTop
-            elpage.scrollTo({
-                top: topSize,
-                left: 0,
-                behavior: 'smooth'
-            })
+        let anchor = document.getElementById(nodeId);
+        let scrollContainer = document.getElementById(parentNodeId);
+        let top =0;
+        if(scrollContainer==null){
+          scrollContainer=anchor.offsetParent;
+          top=anchor.offsetTop;
+        }else{
+            let curr=anchor
+            while(scrollContainer!=curr && curr!=null){
+              top+=curr.offsetTop;
+              curr=curr.offsetParent;
+            }
         }
+        top=top-scrollContainer.offsetTop;
+            console.log(top);
+            console.log(scrollContainer);
+        // let test = document.getElementById("layout-body");
 
+        scrollContainer.scrollTo({
+            top: top,
+            left: 0,
+            behavior: 'smooth'
+        })
     },
-
-
     /**
     * anchor关联滚动容器滚动监听
     * @param dotNetHelper anchor 实例
@@ -114,7 +117,6 @@ let anchor = {
     onAnchorScroll: function (dotNetHelper, id) {
         document.getElementById(id).onscroll = function (e) {
             dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-            console.log(e.srcElement.scrollTop)
         }
     },
 

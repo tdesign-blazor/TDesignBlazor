@@ -12,7 +12,10 @@ namespace TDesign
     public class TAnchor : BlazorComponentBase, IHasChildContent, IHasOnSwitch
     {
         private DotNetObjectReference<TAnchor>? objRef;
-
+        /// <summary>
+        /// 点击状态,防抖
+        /// </summary>
+        public bool ClickLoad { get; set; }
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
@@ -49,42 +52,34 @@ namespace TDesign
         [JSInvokable]
         public async Task OnScrollAnchorChangeAsync(int index)
         {
-
-            try
+            if (!ClickLoad)
             {
-
-           
-            var containerId = Container?.Split("#")[1];
-            var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-            index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
-            for (int i = 0; i < ChildComponents.Count; i++)
-            {
-                if (ChildComponents[i] is TAnchorItem item)
+                var containerId = Container?.Split("#")[1];
+                var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
+                for (int i = 0; i < ChildComponents.Count; i++)
                 {
-                    var itemId = item.Href?.Split("#")[1];
-                    item.OffsetTop = await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", itemId);
-                    item.OffsetHeight = await anchorObj.InvokeAsync<int>("anchor.getOffsetHeight", itemId);
-
-                    var start = item.OffsetTop;
-                    var end = item.OffsetTop + item.OffsetHeight;
-
-                    if (start <= index && index <= end)
+                    if (ChildComponents[i] is TAnchorItem item)
                     {
-                        SwitchIndex = item.Index;
-                        item.SetActive(true);
-                    }
-                    else
-                    {
-                        item.SetActive(false);
+                        var itemId = item.Href?.Split("#")[1];
+                        item.OffsetTop = await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", itemId);
+                        item.OffsetHeight = await anchorObj.InvokeAsync<int>("anchor.getOffsetHeight", itemId);
+
+                        var start = item.OffsetTop;
+                        var end = item.OffsetTop + item.OffsetHeight;
+
+                        if (start <= index && index <= end)
+                        {
+                            SwitchIndex = item.Index;
+                            item.SetActive(true);
+                        }
+                        else
+                        {
+                            item.SetActive(false);
+                        }
                     }
                 }
-            }
-            await this.Refresh();
-            }
-            catch (Exception e)
-            {
-
-                throw;
+                await this.Refresh();
             }
         }
 
