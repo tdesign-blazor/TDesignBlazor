@@ -1,5 +1,5 @@
 ﻿@page "/components/tag"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"基础标签","带图标的标签","带关闭的标签","可选择的标签","超长省略文本标签","不同尺寸的标签","不同形状的标签","API"})">
 <PageHeader Title="Tag 标签">标签常用于标记、分类和选择。</PageHeader>
 
 <Example Title="基础标签">
@@ -166,7 +166,7 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TTag)"></ComponentAPI>
 </LayoutContent>
 @inject IJSRuntime JS

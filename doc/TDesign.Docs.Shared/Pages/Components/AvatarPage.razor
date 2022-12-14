@@ -1,5 +1,5 @@
 ﻿@page "/components/avatar"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","组合头像的偏移方向","API"})">
 <PageHeader Title="Avatar 头像">
     用图标、图片、字符的形式展示用户或事物信息
 </PageHeader>
@@ -137,6 +137,6 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TAvatar)"></ComponentAPI>
 </LayoutContent>

@@ -1,5 +1,5 @@
 ﻿@page "/components/collapse"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"基础折叠面板","手风琴模式","图标的显示位置","点击图标才响应折叠","禁用状态","无边框","右侧操作的折叠面板","自定义标题","API"})">
 <PageHeader Title="Collapse 折叠面板">可以将较多或较复杂的内容进行分组，分组内容区可以折叠展开或隐藏。</PageHeader>
 
 <Example Title="基础折叠面板">
@@ -400,7 +400,7 @@
 ")
     </CodeContent>
 </Example>
-
+    <div id="API"></div>
 <ComponentAPI  Component="typeof(TCollapse)"></ComponentAPI>
 <ComponentAPI  Component="typeof(TCollapsePanel)"></ComponentAPI>
 </LayoutContent>

@@ -1,5 +1,5 @@
 ﻿@page "/components/menu"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"单层导航","双层导航","可分组的侧边导航","可收起的侧边导航","可设置宽度的侧边导航","API"})">
 <PageHeader Title="Menu 导航菜单">
     用于承载网站的架构，并提供跳转的菜单列表。
 </PageHeader>
@@ -380,7 +380,7 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TMenu)"></ComponentAPI>
 <ComponentAPI Component="typeof(TMenuItem)"></ComponentAPI>
 </LayoutContent>

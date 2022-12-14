@@ -1,5 +1,5 @@
 ﻿@page "/components/switch"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"基础开关","带描述的开关","不同状态的开关","不同大小的开关","API"})">
 <PageHeader Title="Switch 开关">
     用于两个互斥选项，用来打开或关闭选项的选择控件。
 </PageHeader>
@@ -122,7 +122,7 @@ bool sizeValue2 { get; set; }
 bool sizeValue3 { get; set; }
 ```")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TSwitch)"></ComponentAPI>
 </LayoutContent>
 @code {

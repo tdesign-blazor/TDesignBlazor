@@ -1,5 +1,5 @@
 ﻿@page "/components/affix"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"指定挂载的容器","API"})">
 
     
 <PageHeader Title="Affix 固钉">
@@ -105,6 +105,6 @@
     }
     bool Affixed { get; set; }
 }
-
+    <div id="API"></div>
 <ComponentAPI Component="typeof(TAffix)"></ComponentAPI>
 </LayoutContent>

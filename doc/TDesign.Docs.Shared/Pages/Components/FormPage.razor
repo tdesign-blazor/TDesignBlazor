@@ -1,5 +1,5 @@
 ﻿@page "/components/form"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"基本表单","表单对齐方式","行内布局","帮助文本","表单验证","API"})">
 <PageHeader Title="Form 表单">
     用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。
 </PageHeader>
@@ -259,7 +259,7 @@
 ")
     </CodeContent>
 </Example>
-
+    <div id="API"></div>
 <ComponentAPI Component="typeof(TForm)"></ComponentAPI>
 <ComponentAPI Component="typeof(TFormItem)"></ComponentAPI>
 </LayoutContent>

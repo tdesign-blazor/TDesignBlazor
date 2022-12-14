@@ -1,5 +1,5 @@
 ﻿@page "/components/button"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"示例","幽灵按钮","Block 按钮","不同颜色主题按钮","不同状态的按钮","不同尺寸的按钮","不同形状的按钮","OnClick 点击事件","API"})">
 <PageHeader Title="Button 按钮">
     按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。
 </PageHeader>
@@ -251,7 +251,7 @@
 ")
     </CodeContent>
 </Example>
-
+    <div id="API"></div>
 <ComponentAPI Component="typeof(TButton)"></ComponentAPI>
 </LayoutContent>
 @inject IJSRuntime JS

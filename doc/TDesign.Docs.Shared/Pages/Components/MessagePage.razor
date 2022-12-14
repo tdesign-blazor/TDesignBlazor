@@ -1,5 +1,5 @@
 ﻿@page "/components/message"
-<LayoutContent>
+<LayoutContent AnchorItems="@(new[]{"全局提示","加载中信息提示","可关闭的信息提示","通过服务调用","API"})">
 <PageHeader Title="Message 全局提示">
     对用户的操作作出轻量的全局反馈。
 </PageHeader>
@@ -83,7 +83,7 @@ MessageService.Question(...)
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TMessage)"></ComponentAPI>
 </LayoutContent>
 @inject IMessageService MessageService
