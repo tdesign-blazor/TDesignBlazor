@@ -4,7 +4,7 @@
 <Example Title="示例">
     <Description></Description>
     <RunContent>
-        <TSelect @bind-Value=Value>
+        <TSelect @bind-Value="Value" TValue="int">
             <TSelectOption Value="1">男</TSelectOption>
             <TSelectOption Value="2">女</TSelectOption>
         </TSelect>
@@ -13,5 +13,5 @@
 </Example>
 
 @code{
-    string Value{ get; set; }
+    int Value{ get; set; }
 }
