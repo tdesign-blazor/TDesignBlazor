@@ -1,5 +1,5 @@
 ﻿@page "/components/step"
-
+<LayoutContent AnchorItems="@(new[]{"带序号的水平步骤条","不带序的水平步骤条","垂直步骤条","自定义图标的步骤条","错误状态的步骤条","带额外内容的步骤条","API"})">
 <PageHeader Title="Steps 步骤条">
     提示用户进度以及当前的步骤，用于引导用户按照步骤完成任务的导航条。
 </PageHeader>
@@ -205,4 +205,7 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TStepGroup)"></ComponentAPI>
+<ComponentAPI Component="typeof(TStepItem)"></ComponentAPI>
+</LayoutContent>

@@ -1,5 +1,5 @@
 ﻿@page "/components/comment"
-
+<LayoutContent AnchorItems="@(new[]{"基础评论","带操作评论","列表评论","带回复评论","带引用评论","API"})">
 <PageHeader Title="Comment 评论">
     评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论等。
 </PageHeader>
@@ -287,3 +287,6 @@
 ")
     </CodeContent>
 </Example>
+<div id="API"></div>
+<ComponentAPI Component="typeof(TComment)"></ComponentAPI>
+</LayoutContent>

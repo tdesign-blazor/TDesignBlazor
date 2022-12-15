@@ -1,5 +1,5 @@
 ﻿@page "/components/timeline"
-
+<LayoutContent AnchorItems="@(new[]{"基础时间轴","点状时间轴","自定义节点图标","主题色","API"})">
 <PageHeader Title="Timeline 时间轴">
     用于时间轴展示
 </PageHeader>
@@ -142,4 +142,7 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TTimeline)"/>
+<ComponentAPI Component="typeof(TTimelineItem)"/>
+</LayoutContent>

@@ -1,4 +1,5 @@
 ﻿@page "/components/input"
+<LayoutContent AnchorItems="@(new[]{"基础输入框","组合输入框","密码输入框","不同尺寸的输入框","不同对齐方式的输入框","自适应宽度","输入框的状态","输入框的提示","API"})">
 <PageHeader Title="InputText 输入框">
     用于承载用户信息录入的文本框，常用于表单、对话框等场景，对不同内容的信息录入，可拓展形成多种信息录入形式。
 </PageHeader>
@@ -246,4 +247,6 @@ string PrefixText{ get; set; }
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TInputText<int>)"></ComponentAPI>
+</LayoutContent>
