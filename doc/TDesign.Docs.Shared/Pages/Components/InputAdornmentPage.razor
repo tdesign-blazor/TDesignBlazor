@@ -1,5 +1,5 @@
 ﻿@page "/components/inputadornment"
-
+<LayoutContent AnchorItems="@(new[]{"文本装饰","任意装饰","API"})">
 <PageHeader Title="InputAdornment 输入装饰器">
     用于装饰输入类组件的装饰器
 </PageHeader>
@@ -121,7 +121,9 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TInputAdornment)"></ComponentAPI>
 @code{
     string Text{ get; set; }
 }
+</LayoutContent>

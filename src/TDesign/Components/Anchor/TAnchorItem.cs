@@ -41,6 +41,8 @@ namespace TDesign
     {
         private string? _href;
 
+
+
         /// <summary>
         /// 获取或设置选中状态
         /// </summary>
@@ -132,6 +134,7 @@ namespace TDesign
                                Target = Target?.GetHtmlAttribute(),
                                onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, async x =>
                                {
+                                   CascadingAnchor.ClickLoad = true;
                                    for (int i = 0; i < CascadingAnchor?.ChildComponents.Count; i++)
                                    {
                                        if (CascadingAnchor.ChildComponents[i] is TAnchorItem item)
@@ -149,11 +152,12 @@ namespace TDesign
                                        }
                                    }
                                    var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-                                   await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1]);
+                                   await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1], CascadingAnchor?.Container?.Split("#")[1]);
 
                                    await this.Refresh();
                                    CascadingAnchor!.SwitchIndex = Index;
                                    await CascadingAnchor.Refresh();
+                                   CascadingAnchor.ClickLoad = false;
                                }),
                                @class = "t-anchor__item-link"
                            });

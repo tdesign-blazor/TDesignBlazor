@@ -1,4 +1,5 @@
 ﻿@page "/components/table"
+<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部","API"})">
 <PageHeader Title="Table 表格">
     表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
 </PageHeader>
@@ -285,7 +286,8 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TTable<>)"></ComponentAPI>
 @code{
 
     List<User> ManyUserList => new()
@@ -308,3 +310,4 @@
         new User{ Id=16, Name="张良",Age=38,Gender=true},
     };
 }
+</LayoutContent>

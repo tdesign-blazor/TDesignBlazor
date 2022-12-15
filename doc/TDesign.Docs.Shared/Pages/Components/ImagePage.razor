@@ -1,4 +1,5 @@
 ﻿@page "/components/image"
+<LayoutContent AnchorItems="@(new[]{"示例","基础图片","填充","不同形状的图片","图集样式的图片","API"})">
 <PageHeader Title="Image 图片">
     用于展示图片素材。
 </PageHeader>
@@ -59,7 +60,7 @@
 </Example>
 
 
-<Example Title="">
+<Example Title="填充">
     <Description>不同填充位置的图片。图片相对于容器的位置。当图片过大时，提供显示图片的局部左侧对齐、或右侧对齐的不同位置。</Description>
     <RunContent>
         <TSpace Vertical style="width: 100%">
@@ -366,6 +367,7 @@
 ```
 ")
     </CodeContent>
-</Example>
-
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TImage)"></ComponentAPI>
+</LayoutContent>
 @inject IJSRuntime JS

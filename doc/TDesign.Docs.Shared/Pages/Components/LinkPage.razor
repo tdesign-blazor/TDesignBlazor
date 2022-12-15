@@ -1,5 +1,5 @@
 ﻿@page "/components/link"
-
+<LayoutContent AnchorItems="@(new[]{"文字链接","下划线文字链接","带图标的链接","链接悬浮态样式的链接","禁用的链接","不同尺寸的链接","API"})">
 <PageHeader Title="Link 链接">
     文字超链接用于跳转一个新页面，如当前项目跳转，友情链接等。
 </PageHeader>
@@ -182,4 +182,6 @@
 ```
 ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TLink)"></ComponentAPI>
+</LayoutContent>

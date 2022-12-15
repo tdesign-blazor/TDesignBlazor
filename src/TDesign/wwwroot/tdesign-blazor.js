@@ -1,3 +1,4 @@
+import { left } from './js/popper/enums.js'
 import { createPopper } from './js/popper/popper.js'
 
 /**
@@ -80,28 +81,42 @@ let anchor = {
 
     /**
      * anchor垂直平滑滚动
-     * @param id 元素id
+     * @param nodeId 元素id
      * */
-    hash : function (id) {
-        let el = document.getElementById(id);
-        let topSize = el.offsetTop - el.offsetHeight;
-        el.parentNode.scrollTo({
-            top: topSize,
+    hash: function (nodeId, parentNodeId) {
+
+        let anchor = document.getElementById(nodeId);
+        let scrollContainer = document.getElementById(parentNodeId);
+        let top =0;
+        if(scrollContainer==null){
+          scrollContainer=anchor.offsetParent;
+          top=anchor.offsetTop;
+        }else{
+            let curr=anchor
+            while(scrollContainer!=curr && curr!=null){
+              top+=curr.offsetTop;
+              curr=curr.offsetParent;
+            }
+        }
+        top=top-scrollContainer.offsetTop;
+            console.log(top);
+            console.log(scrollContainer);
+        // let test = document.getElementById("layout-body");
+
+        scrollContainer.scrollTo({
+            top: top,
             left: 0,
             behavior: 'smooth'
         })
     },
-
-
     /**
     * anchor关联滚动容器滚动监听
     * @param dotNetHelper anchor 实例
     * @param id 元素id
     * */
-    onAnchorScroll : function (dotNetHelper, id) {
+    onAnchorScroll: function (dotNetHelper, id) {
         document.getElementById(id).onscroll = function (e) {
             dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-            console.log(e.srcElement.scrollTop)
         }
     },
 
@@ -110,7 +125,7 @@ let anchor = {
     * 获取元素的顶部偏移量
     * @param id 元素id
     * */
-    getOffsetTop : function (id) {
+    getOffsetTop: function (id) {
         let el = document.getElementById(id);
         return el.offsetTop;
     },
@@ -120,7 +135,7 @@ let anchor = {
     * 获取元素的偏移高度
     * @param id 元素id
     * */
-    getOffsetHeight : function (id) {
+    getOffsetHeight: function (id) {
         let el = document.getElementById(id);
         return el.offsetHeight;
     },
