@@ -5,8 +5,8 @@
 <TPopup @ref="RefPopup" Trigger="PopupTrigger.Click" AdditionalStyle="position:absolute">
     <ChildContent>
         <div class="t-select__wrap">
-            <div class="t-select t-select-input">
-                <TInputText @bind-Value="SelectedLabel" Readonly SuffixIcon="@(HtmlHelper.Class.Append("t-fake-arrow").Append("t-fake-arrow--active", RefPopup.Visible).Append("t-select__right-icon").ToString())" />
+            <div class="@GetCssClassString()">
+                <TInputText @bind-Value="SelectedLabel" Readonly SuffixIcon="@(RefPopup.Visible?IconName.ChevronUp:IconName.ChevronDown)" AutoWidth="AutoWidth" Placeholder="@Placeholder" Disabled="Disabled" Size="Size"/>
 
             </div>
         </div>
@@ -14,20 +14,8 @@
     <PopupContent>
         <div class="t-select__dropdown-inner t-select__dropdown-inner--size-m">
             <ul class="t-select__list">
-
                 <CascadingValue Value="this">
-
-                    @if (Options is null)
-                    {
                         @ChildContent
-                    }
-                    else
-                    {
-                        foreach (var item in Options)
-                        {
-                            <TSelectOption Value="item.Value" Label="item.Label" />
-                        }
-                    }
                 </CascadingValue>
             </ul>
         </div>

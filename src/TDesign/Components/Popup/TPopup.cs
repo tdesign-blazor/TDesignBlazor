@@ -123,11 +123,11 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// </summary>
     public async Task Hide()
     {
+        Visible = false;
+        await this.Refresh();
         if (_instance is not null)
         {
             await _instance.DestroyAsync();
-            Visible = false;
-            await this.Refresh();
         }
     }
 }
