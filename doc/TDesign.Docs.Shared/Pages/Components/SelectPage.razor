@@ -1,6 +1,9 @@
 ﻿@page "/components/select"
 <PageHeader Title="Select 选择器">用于收纳大量选项的信息录入类组件。</PageHeader>
 <HighlightAlert/>
+
+<LayoutContent AnchorItems="@(new[]{"示例","禁用状态","不同尺寸的选择器","自定义下拉选项的选择器","API"})">
+
 <Example Title="示例">
     <Description></Description>
     <RunContent>
@@ -166,3 +169,8 @@
 ")
     </CodeContent>
 </Example>
+<div id="API"></div>
+    <ComponentAPI Title="TSelect" Component="typeof(TSelect<>)" />
+    <ComponentAPI Title="TSelectOption" Component="typeof(TSelectOption<>)" />
+
+</LayoutContent>
