@@ -30,7 +30,7 @@
 
         @if (Parameters.Any())
         {
-            <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
+                <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@(GetTitle()) 的参数</h3>
             <TTable TItem="Parameter" Data="Parameters">
                 <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
                 <FieldColumn Title="类型" >
@@ -68,7 +68,7 @@
                     };
             Methods.Add(method);
         }
-        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
+        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@(GetTitle()) 的方法</h3>
         <TTable TItem="Method" Data="Methods">
                                                                                                             <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
                                                                                                             <FieldColumn Value="context?.Parameter" Title="参数" AdditionalStyle="width:200px"></FieldColumn>
@@ -81,7 +81,7 @@
     /// <summary>
     /// 标题
     /// </summary>
-    string? Title => TypeToCSharp(Component);
+    [Parameter]public string? Title{ get; set; }
     /// <summary>
     /// 参数
     /// </summary>
@@ -95,6 +95,16 @@
     /// </summary>
     [Parameter] public Type? Component { get; set; }
     [Parameter] public string? Id { get; set; }
+
+
+    public string? GetTitle()
+    {
+        if (!string.IsNullOrEmpty(Title))
+        {
+            return Title;
+        }
+        return TypeToCSharp(Component);
+    }
 
     /// <summary>
     /// 参数列表模型
