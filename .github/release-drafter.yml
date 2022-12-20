@@ -25,12 +25,15 @@ version-resolver:
   major:
     labels:
       - 'release/major'
+      - 'major'
   minor:
     labels:
       - 'release/minor'
+      - 'minor'
   patch:
     labels:
       - 'release/patch'
+      - 'patch'
   default: release/patch
 exclude-labels:
   - 'release/skip'
@@ -42,6 +45,6 @@ autolabeler:
     branch:
       - '/feature\/.+/'
 template: |
-  ## What’s Changed
+  ## 最近更新
   
   $CHANGES
