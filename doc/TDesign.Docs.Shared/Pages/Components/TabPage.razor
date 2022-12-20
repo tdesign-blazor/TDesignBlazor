@@ -1,5 +1,5 @@
 ﻿@page "/components/tab"
-
+<LayoutContent AnchorItems="@(new[]{"基础选项卡","带图标的选项卡","不同尺寸的选项卡","卡片选项卡","禁用选项卡","API"})">
 <PageHeader Title="Tab 选项卡">
     用于承载同一层级下不同页面或类别的组件，方便用户在同一个页面框架下进行快速切换。
 </PageHeader>
@@ -135,4 +135,7 @@
 ```
         ")
     </CodeContent>
-</Example>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TTab)"></ComponentAPI>
+<ComponentAPI Component="typeof(TTabItem)"></ComponentAPI>
+</LayoutContent>

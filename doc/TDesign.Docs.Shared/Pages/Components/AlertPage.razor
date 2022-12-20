@@ -1,4 +1,7 @@
 ﻿@page "/components/alert"
+<LayoutContent AnchorItems="@(new[]{"基础警告","带操作的警告","带标题的警告","可关闭的警告","API"})">
+
+
 <PageHeader Title="Alert 警告消息">
     警告条用于承载需要用户注意的信息。
 </PageHeader>
@@ -135,3 +138,6 @@
 ")
     </CodeContent>
 </Example>
+    <div id="API"></div>
+<ComponentAPI Component="typeof(TAlert)"></ComponentAPI>
+</LayoutContent>
