@@ -1,0 +1,23 @@
+﻿@namespace TDesign
+@inherits BlazorInputComponentBase<TValue>
+@typeparam TValue
+
+<TPopup @ref="RefPopup" Trigger="PopupTrigger.Click" AdditionalStyle="position:absolute">
+    <ChildContent>
+        <div class="t-select__wrap">
+            <div class="@GetCssClassString()">
+                <TInputText @bind-Value="SelectedLabel" Readonly SuffixIcon="@(RefPopup.Visible?IconName.ChevronUp:IconName.ChevronDown)" AutoWidth="AutoWidth" Placeholder="@Placeholder" Disabled="Disabled" Size="Size"/>
+
+            </div>
+        </div>
+    </ChildContent>
+    <PopupContent>
+        <div class="t-select__dropdown-inner t-select__dropdown-inner--size-m">
+            <ul class="t-select__list">
+                <CascadingValue Value="this">
+                        @ChildContent
+                </CascadingValue>
+            </ul>
+        </div>
+    </PopupContent>
+</TPopup>
