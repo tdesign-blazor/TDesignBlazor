@@ -52,4 +52,24 @@ public class MessageTheme : Theme
     /// </summary>
     public static readonly Theme Question = nameof(Question);
 }
-
+/// <summary>
+/// <see cref="TTooltip"/> 组件的主题配色。
+/// </summary>
+public class TooltipTheme : Theme
+{
+    /// <summary>
+    /// 初始化 <see cref="TooltipTheme"/> 类的新实例。
+    /// </summary>
+    /// <param name="value"></param>
+    internal protected TooltipTheme(string value) : base(value)
+    {
+    }
+    /// <summary>
+    /// 默认配色。
+    /// </summary>
+    public static readonly Theme Default = nameof(Default);
+    /// <summary>
+    /// 轻量级配色。
+    /// </summary>
+    public static readonly Theme Light = nameof(Light);
+}

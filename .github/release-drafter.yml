@@ -1,24 +1,27 @@
 
 name-template: 'v$RESOLVED_VERSION 🌈'
-tag-template: 'v$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
 categories:
   - title: '🚀 功能'
     labels:
       - 'feature'
       - 'enhancement'
       - '功能'
+      - '完善'
   - title: '🐛 Bug 修复'
     labels:
       - 'fix'
       - 'bugfix'
       - 'bug'
       - '缺陷'
-  - title: '🧰 杂项'
+  - title: '🧰 其他'
     labels: 
       - 'chore'
       - 'support'
       - 'other'
       - '维护'
+      - 'docs'
+      - '文档'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 exclude-labels:
