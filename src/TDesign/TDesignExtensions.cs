@@ -48,7 +48,7 @@ public static class TDesignExtensions
     /// </summary>
     /// <param name="js"></param>
     /// <param name="isDark">是否为暗黑模式</param>
-    public static async Task ThemeModeChange(this IJSRuntime js, bool isDark = true)
+    public static async Task ChangeThemeMode(this IJSRuntime js, bool isDark = true)
     {
         var jsObject = await js.ImportScriptAsync();
         await jsObject.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
