@@ -42,4 +42,15 @@ public static class TDesignExtensions
     /// <returns></returns>
     public static ValueTask<IJSObjectReference> ImportScriptAsync(this IJSRuntime js)
         => js.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+
+    /// <summary>
+    /// 执行切换暗黑和浅色模式切换
+    /// </summary>
+    /// <param name="js"></param>
+    /// <param name="isDark">是否为暗黑模式</param>
+    public static async Task ThemeModeChange(this IJSRuntime js, bool isDark = true)
+    {
+        var jsObject = await js.ImportScriptAsync();
+        await jsObject.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
+    }
 }
