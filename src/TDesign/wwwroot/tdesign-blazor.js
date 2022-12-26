@@ -124,4 +124,23 @@ let anchor = {
     },
 }
 
-export { affix, popup, anchor }
+
+/**
+ * 暗黑模式
+ * */
+let theme = {
+    /**
+     * 浅色模式
+     * */
+    light: function () {
+        document.documentElement.removeAttribute('theme-mode');
+    },
+    /**
+     * 暗色模式
+     * */
+    dark: function () {
+        document.documentElement.setAttribute('theme-mode', 'dark');
+    }
+}
+
+export { affix, popup, anchor, theme }
