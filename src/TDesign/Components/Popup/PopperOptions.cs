@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.JSInterop;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
-
-using Microsoft.JSInterop;
 
 namespace TDesign;
 /// <summary>
@@ -32,8 +31,8 @@ public class PopperOptions
     [JsonIgnore]
     public Action<PopperState>? OnFirstUpdate { get; set; }
 
-    [JSInvokable("CallOnFirstUpdate")]
-    public void CallOnFirstUpdate(PopperState state) => OnFirstUpdate?.Invoke(state);
+    [JSInvokable]
+    public void InvokeOnFirstUpdate(PopperState state) => OnFirstUpdate?.Invoke(state);
 }
 
 /// <summary>
@@ -41,9 +40,9 @@ public class PopperOptions
 /// </summary>
 public class PopperModifier
 {
-    public string Name { get; set; }
+    public string Name { get; init; }
     public bool Enabled { get; set; }
-
+    public object? Options { get; set; }
 }
 
 /// <summary>
