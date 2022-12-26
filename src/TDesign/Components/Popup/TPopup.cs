@@ -43,7 +43,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
-    PopperInstance? _instance;
+    Popper? _instance;
 
     protected override void OnComponentParameterSet()
     {
@@ -107,12 +107,12 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 触发指定元素引用并显示弹出层。
     /// </summary>
-    /// <param name="objRef">被触发弹出层的元素引用。</param>
-    public async Task Show(ElementReference objRef)
+    /// <param name="selector">被触发弹出层的元素引用。</param>
+    public async Task Show(ElementReference selector)
     {
         Visible = true;
-        await this.Refresh();
-        _instance = await JS.Value.InvokePopupAsync(objRef, Ref, new()
+        StateHasChanged();
+        _instance = await JS.Value.InvokePopupAsync(selector, Ref, new()
         {
             Placement = Placement
         });
@@ -124,7 +124,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     public async Task Hide()
     {
         Visible = false;
-        await this.Refresh();
+        StateHasChanged();
         if (_instance is not null)
         {
             await _instance.DestroyAsync();

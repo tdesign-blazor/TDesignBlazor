@@ -35,45 +35,28 @@ let affix = {
  * 弹出层
  * */
 let popup = {
+    popper: null,
     /**
      * 创建一个新的弹出层引用
      * @param objRef 触发对象的引用
      * @param popupRef 弹出提示对象的引用
-     * @param options 配置对象
-     * @returns popper instance
+     * @param options 弹出层配置
+     * @param optionDotNetHelper options 包装的 DotNetReference 对象
+     * @returns popper 对象
      * */
-    create: function (objRef, popupRef, options, optionRef) {
+    create: function (objRef, popupRef, options, optionDotNetReference) {
+
         options.onFirstUpdate = state => {
-            optionRef.invokeMethodAsync("CallOnFirstUpdate", { placement: state.placement });
+            optionDotNetReference.invokeMethodAsync("InvokeOnFirstUpdate", { placement: state.placement });
         }
 
-        return createPopper(objRef, popupRef, options);
-    },
-    /**
-     * 获取状态
-     * @param popperInstance popper 实例
-     * */
-    getState: function (popperInstance) {
-        return {
-            placement: popperInstance.state
-        };
+        popup.popper = createPopper(objRef, popupRef, options);
+
+        document.body.appendChild(popupRef);
+
+        return popup.popper;
     }
 }
-
-//export function updateOnInstance(instance) {
-//    return instance.update().then(state => ({ placement: state.placement }));
-//}
-
-//export function setOptionsOnInstance(instance, options, objRef) {
-//    options.onFirstUpdate = (state) => {
-//        const stateCopy = {
-//            placement: state.placement
-//        }
-//        objRef.invokeMethodAsync('CallOnFirstUpdate', stateCopy)
-//    };
-//    return instance.setOptions(options).then(state => ({ placement: state.placement }));
-//}
-
 /**
  * 锚点
  * */

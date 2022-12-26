@@ -2,19 +2,19 @@
 name-template: 'v$RESOLVED_VERSION 🌈'
 tag-template: '$RESOLVED_VERSION'
 categories:
-  - title: '🚀 功能'
+  - title: '🚀 更新功能'
     labels:
       - 'feature'
       - 'enhancement'
       - '功能'
       - '完善'
-  - title: '🐛 Bug 修复'
+  - title: '🐛 缺陷修复'
     labels:
       - 'fix'
       - 'bugfix'
       - 'bug'
       - '缺陷'
-  - title: '🧰 其他'
+  - title: '🧰 维护和其他'
     labels: 
       - 'chore'
       - 'support'
@@ -22,18 +22,22 @@ categories:
       - '维护'
       - 'docs'
       - '文档'
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-template: '- (#$NUMBER) $TITLE - by @$AUTHOR'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 exclude-labels:
   - 'skip-release'
 autolabeler:
-  - label: 'bug'
+  - label: '缺陷'
     branch:
       - '/bugfix\/.+/'
-  - label: 'feature'
+  - label: '功能'
     branch:
       - '/feature\/.+/'
-template: |
-  ## 发行说明
-  
+  - label: '文档'
+    branch:
+      - '\/.+/(docs|doc)\/.+/'
+  - label: '组件'
+    branch:
+      - '/feature/component\/.+/'
+template: |  
   $CHANGES
