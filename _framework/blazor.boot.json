@@ -57,7 +57,7 @@
       "System.Private.Uri.dll": "sha256-Ty72\/i1WnFOnaIV0PEMb5cZX3Z0ovGtzAjTbK3fl2i0=",
       "System.Private.Xml.dll": "sha256-1N1CsQYLzc0eTUO5pIpZX5RvbiIlDnpIkDOtGh52gi8=",
       "System.Runtime.CompilerServices.Unsafe.dll": "sha256-ausBMJ\/S9qxt5JB70ued3KrUCGbl+OSoovYwwLeMQFs=",
-      "System.Runtime.dll": "sha256-Sw6YEhVdDch4vJsvpKEfU8Fz6ltsg2Rl2FcjoQ7Z6Q0=",
+      "System.Runtime.dll": "sha256-z91GmTHp2XdvKGBhnxG+zxkCuRDXpyLAmJii7ksY+uE=",
       "System.Runtime.Extensions.dll": "sha256-oZu9AJVVVIAfbOElr+MY2yzvz3nB8UEkiDis69ABvXk=",
       "System.Runtime.InteropServices.dll": "sha256-iiHaoPzHHtCzOtKbbGqqSJ0bVBP6Lj\/gQQMw2kxHmF4=",
       "System.Runtime.Intrinsics.dll": "sha256-tkAReoJbop9PgIgxSfLSzNgb1UYeuWOAGxVKUW\/LGd0=",
@@ -68,9 +68,9 @@
       "System.Threading.dll": "sha256-uygwAT4QzY\/9yjMpyZtTNvSbrpGfC4JLCJK0EFFkWsI=",
       "System.Threading.Tasks.Parallel.dll": "sha256-uXQx+Qo1GcqEQ4Lwn+7uogTSO2bMn4Wt3duwwb+SlC8=",
       "System.Xml.ReaderWriter.dll": "sha256-V97uh6awrkcDHJVC4uLfJB39DdDfRGgFWu6g\/0eMvcY=",
-      "TDesign.dll": "sha256-6dk4xjSPo5he2GGNgYOI0p5qEAoYLeyhY+vywBuEnTQ=",
-      "TDesign.Docs.Shared.dll": "sha256-JQOX4TXoHYNoJSgGQetPpT1\/Z5aJ0sDqdXzBH+JAbdE=",
-      "TDesign.Docs.WebAssembly.dll": "sha256-FOLL9c5By12rtMm24zgI9xujP\/qycH+jW8cj02WuPYM="
+      "TDesign.dll": "sha256-rMCzVJ71k0+1OK2b4H7GseDsYvQ+u6g46zAnr2B3N9k=",
+      "TDesign.Docs.Shared.dll": "sha256-xgPS+iw4i0EOczcS1NtdZ\/KS5F5GNWRLmfZm5iwudWQ=",
+      "TDesign.Docs.WebAssembly.dll": "sha256-9nwP+4daQp2vp0QD7sUC5eJRKWpT9A7rUk5Y53PHwT0="
     },
     "extensions": null,
     "lazyAssembly": null,
