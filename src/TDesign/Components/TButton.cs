@@ -30,7 +30,7 @@ public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 主题颜色。
     /// </summary>
-    [Parameter][CssClass("t-button--theme-")] public Theme? Theme { get; set; }
+    [Parameter][CssClass("t-button--theme-")] public Theme Theme { get; set; } = Theme.Default;
     /// <summary>
     /// 幽灵按钮。内容反色，背景变为透明，一般是底色透明
     /// </summary>

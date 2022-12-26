@@ -54,7 +54,7 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         {
             case PopupTrigger.Click:
                 attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, TogglePopup);
-                attributes["onblur"] = HtmlHelper.Event.Create<FocusEventArgs>(this, HidePopup);
+                //attributes["onblur"] = HtmlHelper.Event.Create<FocusEventArgs>(this, HidePopup);
                 break;
             case PopupTrigger.Hover:
                 attributes["onmouseenter"] = HtmlHelper.Event.Create<MouseEventArgs>(this, ShowPopup);

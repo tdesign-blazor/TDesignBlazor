@@ -12,6 +12,11 @@ public class Theme : Enumeration
     protected internal Theme(string value) : base(value)
     {
     }
+
+    /// <summary>
+    /// 默认配色。
+    /// </summary>
+    public static readonly Theme Default = nameof(Default);
     /// <summary>
     /// 主配色。
     /// </summary>
@@ -64,10 +69,6 @@ public class TooltipTheme : Theme
     internal protected TooltipTheme(string value) : base(value)
     {
     }
-    /// <summary>
-    /// 默认配色。
-    /// </summary>
-    public static readonly Theme Default = nameof(Default);
     /// <summary>
     /// 轻量级配色。
     /// </summary>

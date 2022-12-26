@@ -18,7 +18,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 设置弹出层的显示位置。
     /// </summary>
-    [Parameter] public PopperPlacement Placement { get; set; } = PopperPlacement.Top;
+    [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Top;
 
     /// <summary>
     /// 设置弹出层的内容。

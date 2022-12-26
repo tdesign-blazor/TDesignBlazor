@@ -6,38 +6,30 @@ categories:
     labels:
       - 'feature'
       - 'enhancement'
-      - '功能'
-      - '完善'
   - title: '🐛 缺陷修复'
     labels:
       - 'fix'
       - 'bugfix'
       - 'bug'
-      - '缺陷'
   - title: '🧰 维护和其他'
     labels: 
       - 'chore'
       - 'support'
       - 'other'
-      - '维护'
       - 'docs'
-      - '文档'
 change-template: '- (#$NUMBER) $TITLE - by @$AUTHOR'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 exclude-labels:
   - 'skip-release'
 autolabeler:
-  - label: '缺陷'
+  - label: 'bug'
     branch:
       - '/bugfix\/.+/'
-  - label: '功能'
+  - label: 'feature'
     branch:
       - '/feature\/.+/'
-  - label: '文档'
+  - label: 'document'
     branch:
       - '\/.+/(docs|doc)\/.+/'
-  - label: '组件'
-    branch:
-      - '/feature/component\/.+/'
 template: |  
   $CHANGES
