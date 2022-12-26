@@ -11,9 +11,9 @@ public class PopperOptions
     /// <summary>
     /// 弹出层的位置。
     /// </summary>
-    [JsonConverter(typeof(EnumDescriptionConverter<PopperPlacement>))]
+    [JsonConverter(typeof(EnumDescriptionConverter<PopupPlacement>))]
     [JsonPropertyName("placement")]
-    public PopperPlacement Placement { get; set; } = PopperPlacement.Auto;
+    public PopupPlacement Placement { get; set; } = PopupPlacement.Auto;
 
     ///// <summary>
     ///// 获取或设置修饰符集合。
@@ -50,15 +50,15 @@ public class PopperModifier
 /// </summary>
 public class PopperState
 {
-    [JsonConverter(typeof(EnumDescriptionConverter<PopperPlacement>))]
+    [JsonConverter(typeof(EnumDescriptionConverter<PopupPlacement>))]
     [JsonPropertyName("placement")]
-    public PopperPlacement Placement { get; set; }
+    public PopupPlacement Placement { get; set; }
 }
 
 /// <summary>
-/// Popper 的位置。
+/// Popup 显示的位置。
 /// </summary>
-public enum PopperPlacement
+public enum PopupPlacement
 {
     /// <summary>
     /// 中间自动。
