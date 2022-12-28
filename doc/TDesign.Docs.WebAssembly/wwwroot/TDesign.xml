@@ -1,0 +1,4325 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TDesign</name>
+    </assembly>
+    <members>
+        <member name="T:TDesign.Abstractions.IContainerComonent">
+            <summary>
+            表示实现该接口的组件会被自动作为容器加入。该接口用于动态服务调用时组件所需要的容器组件。
+            </summary>
+        </member>
+        <member name="T:TDesign.TAnchor">
+            <summary>
+            锚点
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchor.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchor.Container">
+            <summary>
+            获取或设置锚点关联滚动容器
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchor.OnSwitch">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchor.SwitchIndex">
+            <summary>
+            获取或设置切换索引
+            </summary>
+        </member>
+        <member name="M:TDesign.TAnchor.Dispose">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TAnchor.OnScrollAnchorChangeAsync(System.Int32)">
+            <summary>
+            监听锚点关联容器滚动位置
+            </summary>
+            <param name="index">scrollTop 位置</param>
+        </member>
+        <member name="M:TDesign.TAnchor.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TAnchor.OnAfterRenderAsync(System.Boolean)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="firstRender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TAnchor.OnInitialized">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TAnchor.BuildLine(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            生成侧标竖线
+            </summary>
+            <param name="sequence"></param>
+            <param name="builder"></param>
+        </member>
+        <member name="T:TDesign.AnchorItemTarget">
+            <summary>
+            TAnchorItem 目标
+            </summary>
+        </member>
+        <member name="F:TDesign.AnchorItemTarget.Self">
+            <summary>
+            在当前页面加载
+            </summary>
+        </member>
+        <member name="F:TDesign.AnchorItemTarget.Blank">
+            <summary>
+            在新窗口打开
+            </summary>
+        </member>
+        <member name="F:TDesign.AnchorItemTarget.Parent">
+            <summary>
+            如果没有 parent 框架或者浏览上下文，此选项的行为方式与 _self 相同。
+            详见<see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
+            </summary>
+        </member>
+        <member name="F:TDesign.AnchorItemTarget.Top">
+            <summary>
+            如果没有 parent 框架或者浏览上下文，此选项的行为方式相同_self。
+            详见<see href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/a#attr-target"/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TAnchorItem">
+            <summary>
+            锚点子级
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.Active">
+            <summary>
+            获取或设置选中状态
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.CascadingAnchor">
+            <summary>
+            用于自动化获取父组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.Href">
+            <summary>
+            锚点
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.OffsetHeight">
+            <summary>
+            获取或设置偏移的高度
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.OffsetTop">
+            <summary>
+            获取或设置顶部偏移
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.OnClick">
+            <summary>
+            点击事件
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.Target">
+            <summary>
+            锚点文字
+            </summary>
+        </member>
+        <member name="P:TDesign.TAnchorItem.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="M:TDesign.TAnchorItem.SetActive(System.Boolean)">
+            <summary>
+            设置选中状态
+            </summary>
+            <param name="active"></param>
+        </member>
+        <member name="M:TDesign.TAnchorItem.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TAnchorItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TAnchorItem.OnInitialized">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TAvatar">
+            <summary>
+            头像。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatar.Shape">
+            <summary>
+            头像形状。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatar.Url">
+            <summary>
+            设置头像的图片地址。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatar.Icon">
+            <summary>
+            设置头像的字体名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatar.Size">
+            <summary>
+            头像的尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatar.ChildContent">
+            <summary>
+            头像显示的自定义内容。
+            </summary>
+        </member>
+        <member name="T:TDesign.TAvatarGroup">
+            <summary>
+            表示头像组的容器。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatarGroup.Left">
+            <summary>
+            头像排列的方向。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatarGroup.Size">
+            <summary>
+            头像组尺寸。无须再单个设置 <see cref="P:TDesign.TAvatar.Size"/> 参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAvatarGroup.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TBreadcrumb">
+            <summary>
+            面包屑导航的容器。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumb.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TBreadcrumbItem">
+            <summary>
+            表示面包屑导航的项。必须在 <see cref="T:TDesign.TBreadcrumb"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.Options">
+            <summary>
+            获取注入的配置。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.SeperatorContent">
+            <summary>
+            分隔符内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.Link">
+            <summary>
+            导航的超链接。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.Disabled">
+            <summary>
+            禁用导航。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBreadcrumbItem.HasLink">
+            <summary>
+            表示是否右超链接。
+            </summary>
+        </member>
+        <member name="T:TDesign.TCollapse">
+            <summary>
+            表示具备折叠面板的组容器，并使用 <see cref="T:TDesign.TCollapsePanel"/> 展现折叠面板的项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapse.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapse.IconToggle">
+            <summary>
+            仅点击图标才可以触发展开或折叠的响应。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapse.RightTIcon">
+            <summary>
+            设置 <c>true</c> 图标处于标题的右边，<c>null</c> 不用图标，<c>false</c> 图标处于标题左边。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapse.Borderless">
+            <summary>
+            设置为无边框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapse.Mutex">
+            <summary>
+            设置为手风琴模式，即只能同时展开1个面板。
+            </summary>
+        </member>
+        <member name="T:TDesign.TCollapsePanel">
+            <summary>
+            表示作为折叠面板的内容。必须放在 <see cref="T:TDesign.TCollapse"/> 组件中。
+            </summary>
+        </member>
+        <member name="M:TDesign.TCollapsePanel.#ctor">
+            <summary>
+            初始化 <see cref="T:TDesign.TCollapsePanel"/> 类的新实例。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.CascadingCollaspe">
+            <summary>
+            级联 <see cref="T:TDesign.TCollapse"/> 组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.TitleContent">
+            <summary>
+            设置标题部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.Title">
+            <summary>
+            设置标题字符串。若设置了 <see cref="P:TDesign.TCollapsePanel.TitleContent"/> 属性的值，则该属性无效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.OperationContent">
+            <summary>
+            右侧操作的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.Active">
+            <summary>
+            <c>true</c> 表示面板是展开状态，否则为折叠状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCollapsePanel.Disabled">
+            <summary>
+            <c>true</c> 表示禁用面板，否则为 <c>false</c>。
+            </summary>
+        </member>
+        <member name="M:TDesign.TCollapsePanel.Toggle">
+            <summary>
+            执行展开或折叠的操作。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDesignInputComonentBase`1">
+            <summary>
+            输入控件的基类。
+            </summary>
+            <typeparam name="TValue">双向绑定值的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Ref">
+            <summary>
+            获取当前组件的元素引用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Readonly">
+            <summary>
+            设置只读模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Disabled">
+            <summary>
+            设置禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.AutoWidth">
+            <summary>
+            自适应宽度。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.AutoFocus">
+            <summary>
+            自动聚焦。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Status">
+            <summary>
+            状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.TipContent">
+            <summary>
+            输入框提示的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Alignment">
+            <summary>
+            对齐方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.AdditionalCssClass">
+            <inheritdoc/>    
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.BuildInputWrapper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String)">
+            <summary>
+            Builds the input wrapper.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="sequence">The sequence.</param>
+            <param name="content">The content.</param>
+            <param name="otherCss">The other css.</param>
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.CascadingPopup">
+            <summary>
+            级联 TPopup 组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.CanPopup">
+            <summary>
+            获取一个布尔值，表示是否可以具备弹出层的功能。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.BuildComponentAttributes(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.BuildPopupAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            构建 Popup 相关的属性。
+            </summary>
+            <param name="attributes">The attributes for components.</param>
+        </member>
+        <member name="T:TDesign.TForm">
+            <summary>
+            表示作为表单的组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TForm.Inline">
+            <summary>
+            设置作为行内布局。
+            </summary>
+        </member>
+        <member name="P:TDesign.TForm.Alignment">
+            <summary>
+            表单的对齐方式。默认时 <see cref="F:TDesign.FormAlignment.Right"/> 。
+            </summary>
+        </member>
+        <member name="T:TDesign.FormAlignment">
+            <summary>
+            表单文本的对齐方式。
+            </summary>
+        </member>
+        <member name="F:TDesign.FormAlignment.Top">
+            <summary>
+            居顶对齐。
+            </summary>
+        </member>
+        <member name="F:TDesign.FormAlignment.Left">
+            <summary>
+            居左对齐。
+            </summary>
+        </member>
+        <member name="F:TDesign.FormAlignment.Right">
+            <summary>
+            居右对齐。
+            </summary>
+        </member>
+        <member name="T:TDesign.TFormItem">
+            <summary>
+            表示作为表单的项。必须在 <see cref="T:TDesign.TForm"/> 组件中。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.CascadingForm">
+            <summary>
+            级联 <see cref="T:TDesign.TForm"/> 组件的实例。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.CascadingEditContext">
+            <summary>
+            级联 <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext"/> 实例。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.Label">
+            <summary>
+            设置表单项显示的标签文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.LabelWidth">
+            <summary>
+            设置表单项文本的宽度，默认是 60px 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.LabelColon">
+            <summary>
+            设置文本自动加上冒号。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.Required">
+            <summary>
+            设置必填时自动加上红色的 “*” 符号。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.HelpText">
+            <summary>
+            帮助的提示文字。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.For">
+            <summary>
+            设置一个委托，表示具备表单验证的字段。
+            </summary>
+        </member>
+        <member name="M:TDesign.TFormItem.GetMember(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets the member.
+            </summary>
+            <param name="expression">The expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TFormItem.Dispose">
+            <summary>
+            Cleanup of component
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputAdornment">
+            <summary>
+            用于装饰输入类组件的装饰器
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputAdornment.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TInputAdornment.Prepend">
+            <summary>
+            设置前面追加的文本。若设置了 <see cref="P:TDesign.TInputAdornment.PrependContent"/> 参数，则该参数将被忽略。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputAdornment.PrependContent">
+            <summary>
+            设置前面追加的任意 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputAdornment.Append">
+            <summary>
+            设置后面追加的文本。若设置了 <see cref="P:TDesign.TInputAdornment.AppendContent"/> 参数，则该参数将被忽略。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputAdornment.AppendContent">
+            <summary>
+            设置后面追加的任意 UI 内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputAdornment.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputAdornment.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputAdornment.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TInputCheckBox">
+            <summary>
+            允许用户通过单击在选中和未选中之间切换的多选框控件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputCheckBox.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputCheckBox.Disabled">
+            <summary>
+            禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputCheckBox.Indeterminate">
+            <summary>
+            支持未确定状态。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputGroup">
+            <summary>
+            可以将表单输入组件进行组合。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputGroup.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputGroup.Seperate">
+            <summary>
+            设置组合起来的输入框之间具备一点空隙。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputNumber`1">
+            <summary>
+            数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
+            <para>
+            支持数字类型：<see cref="T:System.Int32"/>、<see cref="T:System.Int16"/>、<see cref="T:System.Int64"/>、<see cref="T:System.Decimal"/>、<see cref="T:System.Double"/>、<see cref="T:System.Single"/>
+            </para>
+            </summary>
+            <typeparam name="TValue">数字类型。</typeparam>
+        </member>
+        <member name="F:TDesign.TInputNumber`1.SupportTypes">
+            <summary>
+            允许的泛型类型
+            </summary>
+        </member>
+        <member name="F:TDesign.TInputNumber`1._inputString">
+            <summary>
+            输入框文本
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.#ctor">
+            <summary>
+            初始化 <see cref="T:TDesign.TInputNumber`1"/> 类的新实例。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Size">
+            <summary>
+            设置控件的整体大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Align">
+            <summary>
+            设置输入框的文本对齐方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Step">
+            <summary>
+            设置每一次增减的跨度值。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Max">
+            <summary>
+            设置输入的最大值限制。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Min">
+            <summary>
+            设置输入的最小值限制。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Theme">
+            <summary>
+            设置排列形式和模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.AutoWidth">
+            <summary>
+            设置可以自适应宽度。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Status">
+            <summary>
+            设置控件的状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.SuffixText">
+            <summary>
+            设置输入框后缀显示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.PrefixText">
+            <summary>
+            设置输入框前面显示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Tip">
+            <summary>
+            设置输入框出现的提示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.TipAlign">
+            <summary>
+            表示提示的对齐方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Readonly">
+            <summary>
+            设置为只读状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.Disabled">
+            <summary>
+            设置为禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputNumber`1.EventName">
+            <summary>
+            双向绑定触发事件名称
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            重写以构建组件的内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.IsOutOfMax">
+            <summary>
+            是否超出最大值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.IsOutOfMin">
+            <summary>
+            是否超出最小值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.ConvertNumberAsync(System.String)">
+            <summary>
+            转换数值类型
+            </summary>
+            <param name="inputString">输入字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TInputNumber`1.BuildButton(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Object,System.Boolean,System.Boolean,System.Action{Microsoft.AspNetCore.Components.Web.MouseEventArgs})">
+            <summary>
+            构建增减按钮。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+            <param name="iconName">图标名称。</param>
+            <param name="disabled">是否禁用。</param>
+            <param name="condition">组件创建的条件。</param>
+            <param name="click">点击事件。</param>
+        </member>
+        <member name="T:TDesign.InputNumberTheme">
+            <summary>
+             主题
+            </summary>
+        </member>
+        <member name="F:TDesign.InputNumberTheme.Row">
+            <summary>
+            按钮横向排列
+            </summary>
+        </member>
+        <member name="F:TDesign.InputNumberTheme.Column">
+            <summary>
+            按钮行内纵向排列
+            </summary>
+        </member>
+        <member name="F:TDesign.InputNumberTheme.Normal">
+            <summary>
+            没有按钮，通过上下键控制
+            </summary>
+        </member>
+        <member name="T:TDesign.TipAlign">
+            <summary>
+            提示的对齐方式。
+            </summary>
+        </member>
+        <member name="F:TDesign.TipAlign.Left">
+            <summary>
+            左对齐。
+            </summary>
+        </member>
+        <member name="F:TDesign.TipAlign.Input">
+            <summary>
+            输入框对齐。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputRadio`1">
+            <summary>
+            单选框选项，必须应用于 <see cref="T:TDesign.TInputRadioGroup`1"/> 组件中。
+            </summary>
+            <typeparam name="TValue">与 <see cref="T:TDesign.TInputRadioGroup`1"/> 的值类型</typeparam>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.CascadingRadioGroup">
+            <summary>
+            级联的单选按钮组。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.Value">
+            <summary>
+            获取或设置单选按钮的值。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.Disabled">
+            <summary>
+            禁用状态。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputRadioGroup`1">
+            <summary>
+            单选按钮的组容器，支持双向绑定。
+            </summary>
+            <typeparam name="TValue">值的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.Name">
+            <summary>
+            分组名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.ButtonStyle">
+            <summary>
+            当 <see cref="P:TDesign.TInputRadioGroup`1.TButton"/> 是 <c>true</c> 时的按钮风格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.Disabled">
+            <summary>
+            按钮组所有单选框都禁用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.OnValueSelected">
+            <summary>
+             执行当 <see cref="T:TDesign.TInputRadio`1"/> 触发的事件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.ChangeEventCallback">
+            <summary>
+            内部事件，当 <see cref="T:TDesign.TInputRadio`1"/> 组件被点击发生改变时触发。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.TButton">
+            <summary>
+            设置按钮风格的单选框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioGroup`1.SelectedValue">
+            <summary>
+            Gets the selected value.
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputRadioGroup`1.OnParametersSet">
+            <summary>
+            Method invoked when the component has received parameters from its parent in
+            the render tree, and the incoming values have been assigned to properties.
+            </summary>
+        </member>
+        <member name="T:TDesign.RadioButtonStyle">
+            <summary>
+            单选按钮的风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.RadioButtonStyle.Outline">
+            <summary>
+            边框风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.RadioButtonStyle.Filled">
+            <summary>
+            白色填充风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.RadioButtonStyle.PrimaryFilled">
+            <summary>
+            首选主题填充风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputRange`1">
+            <summary>
+            范围输入框，用于输入范围文本。
+            </summary>
+            <typeparam name="TValue">值的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TInputRange`1.StartValue">
+            <summary>
+            设置开始值。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.StartValueExpression">
+            <summary>
+            设置开始值的表达式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.StartValueChanged">
+            <summary>
+            设置开始值变化触发的回调。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.EndValue">
+            <summary>
+            设置结束值。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.EndValueExpression">
+            <summary>
+            设置结束值的表达式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.EndValueChanged">
+            <summary>
+            设置结束值变化触发的回调。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.Size">
+            <summary>
+            设置大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRange`1.Seperator">
+            <summary>
+            设置分隔符文本。
+            </summary>
+        </member>
+        <member name="M:TDesign.TInputRange`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputRange`1.BuildRnageSeperator(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建分隔符。
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> instance.</param>
+            <param name="sequence">一个整数，表示该指令在源代码中的位置。</param>
+        </member>
+        <member name="M:TDesign.TInputRange`1.BuildRangeInput(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Boolean,`0,System.Linq.Expressions.Expression{System.Func{`0}},Microsoft.AspNetCore.Components.EventCallback{`0})">
+            <summary>
+            构建输入框。
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> instance.</param>
+            <param name="sequence">一个整数，表示该指令在源代码中的位置。</param>
+            <param name="leftOrRight"><c>true</c>是左边，否则为右边。</param>
+            <param name="value">值</param>
+            <param name="expression">值的表达式</param>
+            <param name="changed">改变事件。</param>
+        </member>
+        <member name="T:TDesign.TInputText`1">
+            <summary>
+            用于承载用户信息录入的文本框。
+            </summary>
+            <typeparam name="TValue">值的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TInputText`1.Type">
+            <summary>
+            输入框的类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputText`1.PrefixText">
+            <summary>
+            输入框前缀显示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputText`1.PrefixIcon">
+            <summary>
+            输入框前缀显示的图标名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputText`1.SuffixText">
+            <summary>
+            输入框后缀显示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputText`1.SuffixIcon">
+            <summary>
+            输入框后缀显示的图标名称。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputTextArea">
+            <summary>
+            用于承载用户多行信息录入的组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.Readonly">
+            <summary>
+            设置只读模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.Disabled">
+            <summary>
+            设置禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.Status">
+            <summary>
+            状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.AutoFocus">
+            <summary>
+            设置是否自动聚焦。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.Rows">
+            <summary>
+            文本域的最大行数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTextArea.DisableResize">
+            <summary>
+            禁用重新绘制尺寸的功能。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSwitch">
+            <summary>
+            开关组件
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.Disabled">
+            <summary>
+            是否禁用
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.Loading">
+            <summary>
+            是否加载中
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.OnChange">
+            <summary>
+             执行当 <see cref="T:TDesign.TSwitch"/> 的值发生改变时的事件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.TrueContent">
+            <summary>
+            开关打开时，需要显示的自定义内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSwitch.FalseContent">
+            <summary>
+            开关关闭时，显示的自定义内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TSwitch.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TSwitch.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="attributes"></param>
+        </member>
+        <member name="M:TDesign.TSwitch.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:TDesign.TColumn">
+            <summary>
+            表示栅格的列。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.CascadingRow">
+            <summary>
+            获取或设置父组件 <see cref="T:TDesign.TRow"/> 的级联参数的值。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.Span">
+            <summary>
+            获取或设置栅格的宽度。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.Offset">
+            <summary>
+            获取或设置栅格的偏移量。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.Pull">
+            <summary>
+            获取或设置向左边拉动的单元格宽度。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.Push">
+            <summary>
+            获取或设置向右边推动的单元格宽度。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.Order">
+            <summary>
+            获取或设置单元格的排序。
+            </summary>
+        </member>
+        <member name="P:TDesign.TColumn.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TColumn.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TRow">
+            <summary>
+            表示栅格的行。
+            </summary>
+        </member>
+        <member name="P:TDesign.TRow.Gutter">
+            <summary>
+            间隔，单位 px。
+            </summary>
+        </member>
+        <member name="P:TDesign.TRow.HorizontalAlignment">
+            <summary>
+            水平对齐方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TRow.VerticalAlignment">
+            <summary>
+            垂直对齐方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TRow.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TList">
+            <summary>
+            表示一个列表容器。配合 <see cref="T:TDesign.TListItem"/> 组件使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.Size">
+            <summary>
+            列表的尺寸。默认是 <see cref="F:TDesign.Size.Medium"/> 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.Split">
+            <summary>
+            设置一个布尔值，表示列表项之间是否有分割线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.Stripe">
+            <summary>
+            设置一个布尔值，表示列表项之间是否有渐变色。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.HeaderContent">
+            <summary>
+            设置在列表中顶部的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.FooterContent">
+            <summary>
+            设置在列表中底部的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.LoadingContent">
+            <summary>
+            设置列表加载状态时的自定义内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TList.Height">
+            <summary>
+            列表的最大高度。单位 px，超过高度则自动出现滚动条。
+            </summary>
+        </member>
+        <member name="T:TDesign.TListItem">
+            <summary>
+            表示列表项。必须放在 <see cref="T:TDesign.TList"/> 组件中。
+            </summary>
+        </member>
+        <member name="P:TDesign.TListItem.ChildContent">
+            <summary>
+            列表项正文部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TListItem.TitleContent">
+            <summary>
+            列表项标题部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TListItem.AvatarContent">
+            <summary>
+            列表项头像部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TListItem.OperationContent">
+            <summary>
+            列表项操作部分的内容。
+            </summary>
+        </member>
+        <member name="T:TDesign.TLoading">
+            <summary>
+            显示程序正在处理的加载提示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.Center">
+            <summary>
+            位置是否处于容器的正中间。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.Overlay">
+            <summary>
+            设置是否显示遮罩层。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.FullScreen">
+            <summary>
+            是否全屏显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.TextOnly">
+            <summary>
+            表示只显示文字，不显示加载图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.Visible">
+            <summary>
+            获取或设置是否可见。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.VisibleExpression">
+            <summary>
+            获取或设置可行性的表达式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLoading.VisibleChanged">
+            <summary>
+            获取或设置一个具备可见性的回调函数。
+            </summary>
+        </member>
+        <member name="T:TDesign.LoadingContainer">
+            <summary>
+            用于包裹其他内容和 <see cref="T:TDesign.TLoading"/> 的容器。
+            </summary>
+        </member>
+        <member name="P:TDesign.LoadingContainer.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TMenu">
+            <summary>
+            导航菜单。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.Aside">
+            <summary>
+            设置 <c>true</c> 表示侧边菜单栏。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.Dark">
+            <summary>
+            是否暗色主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.Popup">
+            <summary>
+            设置 <c>true</c> 表示下级菜单的展开模式为【弹出】方式，即鼠标悬停后展开下级菜单。否则是【鼠标点击】后展开下级菜单。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.LogoContent">
+            <summary>
+            Logo 部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.ChildContent">
+            <summary>
+            主体部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.OperationContent">
+            <summary>
+            右侧操作部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.Collapse">
+            <summary>
+            折叠菜单，侧边菜单有效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenu.Width">
+            <summary>
+            侧边菜单的宽度。
+            </summary>
+        </member>
+        <member name="M:TDesign.TMenu.OnParametersSet">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TMenu.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TMenu.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TMenu.GetMenuSpecificClass(System.String)">
+            <summary>
+            获取菜单特定的css
+            </summary>
+            <param name="css">用'{0}'占位可变的头部还是边</param>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.TMenuItem">
+            <summary>
+            导航菜单的项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.TagName">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.Disabled">
+            <summary>
+            禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.Link">
+            <summary>
+            导航的超链接。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.TIconPrefix">
+            <summary>
+            前缀图标的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.TIconSuffix">
+            <summary>
+            后缀图标的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.Active">
+            <summary>
+            选中状态。若为 <c>false</c> 则根据导航自动判断。
+            </summary>
+        </member>
+        <member name="T:TDesign.TMenuItemGroup">
+            <summary>
+            表示菜单项的分组。只能适配侧边菜单。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItemGroup.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItemGroup.Title">
+            <summary>
+            分组标题。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSubMenu">
+            <summary>
+            表示具备下级菜单项的二级菜单。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSubMenu.ChildContent">
+            <summary>
+            菜单内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSubMenu.Title">
+            <summary>
+            显示下级菜单的当前菜单标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSubMenu.TIcon">
+            <summary>
+            图标名称。
+            </summary>
+        </member>
+        <member name="T:TDesign.Notification.INotifyService`1">
+            <summary>
+            提供可以弹出通知提示的服务。
+            </summary>
+            <typeparam name="TConfiguration">配置的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.Notification.INotifyService`1.Show(`0)">
+            <summary>
+            显示指定消息配置的全局提示。
+            </summary>
+            <param name="configuration">消息服务的配置。</param>
+        </member>
+        <member name="E:TDesign.Notification.INotifyService`1.OnClosed">
+            <summary>
+            当消息被关闭后时触发的事件。
+            </summary>
+        </member>
+        <member name="E:TDesign.Notification.INotifyService`1.OnShowing">
+            <summary>
+            当消息正在显示时触发的事件。
+            </summary>
+        </member>
+        <member name="T:TDesign.Notification.NotifyComponentBase">
+            <summary>
+            消息组件的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyComponentBase.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyComponentBase.Theme">
+            <summary>
+            提醒主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyComponentBase.TIcon">
+            <summary>
+            图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyComponentBase.GetThemeClass">
+            <summary>
+            获取对应的主题样式。
+            </summary>
+        </member>
+        <member name="M:TDesign.Notification.NotifyComponentBase.OnParametersSet">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyComponentBase.GetTIconByTheme">
+            <summary>
+            获取主题对应的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Key">
+            <summary>
+            Gets the key.
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Content">
+            <summary>
+            获取或设置内容文本字符串。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Theme">
+            <summary>
+            获取或设置主题风格。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Delay">
+            <summary>
+            获取或设置消息持续多久自动关闭，单位是毫秒，默认 5 秒，即 5000 毫秒。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Icon">
+            <summary>
+            获取或设置消息提示的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.Notification.NotifyConfigurationBase.Placement">
+            <summary>
+            获取或设置显示的位置。
+            </summary>
+        </member>
+        <member name="M:TDesign.Notification.NotifyConfigurationBase.GetPlacement(OneOf.OneOf{TDesign.Placement,System.ValueTuple{System.Int32,System.Int32}})">
+            <summary>
+            获取显示的位置。
+            </summary>
+            <returns>class 或 style</returns>
+        </member>
+        <member name="T:TDesign.Notification.NotifyContainerComponentBase`2">
+            <summary>
+            表示通知提示的容器基类组件。
+            </summary>
+            <typeparam name="TNotifyService">通知服务的类型。</typeparam>
+            <typeparam name="TConfiguration">配置的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.Notification.NotifyContainerComponentBase`2.OnInitialized">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.Notification.NotifyContainerComponentBase`2.NotifyService_OnShowing(`1)">
+            <summary>
+            Notifies the message on showing.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <returns>A Task.</returns>
+        </member>
+        <member name="M:TDesign.Notification.NotifyContainerComponentBase`2.AddItem(`1)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <returns>A Task.</returns>
+        </member>
+        <member name="M:TDesign.Notification.NotifyContainerComponentBase`2.RemoveItem(`1)">
+            <summary>
+            Removes the item.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <returns>A Task.</returns>
+        </member>
+        <member name="M:TDesign.Notification.NotifyContainerComponentBase`2.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.Notification.NotifyServiceBase`1">
+            <summary>
+            通知服务的默认实现基类。
+            </summary>
+            <typeparam name="TConfiguration"></typeparam>
+        </member>
+        <member name="M:TDesign.Notification.NotifyServiceBase`1.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.Notification.NotifyServiceBase`1.Show(`0)">
+            <summary>
+            显示指定消息配置的全局提示。
+            </summary>
+            <param name="configuration">消息服务的配置。</param>
+        </member>
+        <member name="T:TDesign.IMessageService">
+            <summary>
+            提供全局提示的功能。
+            </summary>
+        </member>
+        <member name="T:TDesign.MessageConfiguration">
+            <summary>
+            表示全局消息的配置。
+            </summary>
+            <remarks>该对象用于 <see cref="T:TDesign.IMessageService"/> 调用时传值给 <see cref="T:TDesign.TMessage"/> 组件。</remarks>
+        </member>
+        <member name="P:TDesign.MessageConfiguration.Loading">
+            <summary>
+            获取或设置消息提示具备加载中的状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.MessageConfiguration.Closable">
+            <summary>
+            获取或设置消息提示可以被用户关闭。
+            </summary>
+        </member>
+        <member name="T:TDesign.MessageService">
+            <summary>
+            The message service.
+            </summary>
+        </member>
+        <member name="T:TDesign.MessageServiceExtensions">
+            <summary>
+            <see cref="T:TDesign.IMessageService"/> 的扩展。
+            </summary>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Info(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行普通的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Success(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行成功的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Warning(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行警告的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Danger(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行错误的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Loading(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行加载中的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.MessageServiceExtensions.Question(TDesign.IMessageService,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行有疑问的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.IMessageService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="placement">显示的位置。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="T:TDesign.TMessage">
+            <summary>
+            对用户的操作作出轻量的全局反馈。
+            请使用 <see cref="T:TDesign.IMessageService"/> 进行动态调用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMessage.Loading">
+            <summary>
+            加载中的状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMessage.Closable">
+            <summary>
+            可关闭的功能。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMessage.Closed">
+            <summary>
+            获取一个布尔值，表示组件是否被关闭。
+            </summary>
+        </member>
+        <member name="M:TDesign.TMessage.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="P:TDesign.TMessage.GetTIconByTheme">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TMessage.OnParametersSet">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TMessageContainer">
+            <summary>
+            用于 <see cref="T:TDesign.IMessageService"/> 动态显示 <see cref="T:TDesign.TMessage"/> 组件的容器组件。
+            </summary>
+        </member>
+        <member name="M:TDesign.TMessageContainer.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.INotificationService">
+            <summary>
+            提供消息通知的功能。
+            </summary>
+        </member>
+        <member name="T:TDesign.NotificationConfiguration">
+            <summary>
+            表示消息通知的配置。
+            </summary>
+        </member>
+        <member name="P:TDesign.NotificationConfiguration.Title">
+            <summary>
+            获取或设置标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.NotificationConfiguration.SubTitle">
+            <summary>
+            获取或设置副标题。
+            </summary>
+        </member>
+        <member name="T:TDesign.NotificationService">
+            <summary>
+            The notification service.
+            </summary>
+        </member>
+        <member name="T:TDesign.NotificationServiceExtensions">
+            <summary>
+            <see cref="T:TDesign.INotificationService"/> 的扩展。
+            </summary>
+        </member>
+        <member name="M:TDesign.NotificationServiceExtensions.Info(TDesign.INotificationService,System.String,System.String,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object,System.Boolean)">
+            <summary>
+            执行普通的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.INotificationService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="title">标题。</param>
+            <param name="subTitle">副标题。</param>
+            <param name="placement">显示的位置。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+            <param name="closable">是否可以被关闭。</param>
+        </member>
+        <member name="M:TDesign.NotificationServiceExtensions.Success(TDesign.INotificationService,System.String,System.String,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object)">
+            <summary>
+            执行成功的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.INotificationService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="title">标题。</param>
+            <param name="subTitle">副标题。</param>
+            <param name="placement">显示的位置。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+        </member>
+        <member name="M:TDesign.NotificationServiceExtensions.Warning(TDesign.INotificationService,System.String,System.String,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object)">
+            <summary>
+            执行警告的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.INotificationService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="title">标题。</param>
+            <param name="subTitle">副标题。</param>
+            <param name="placement">显示的位置。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+        </member>
+        <member name="M:TDesign.NotificationServiceExtensions.Danger(TDesign.INotificationService,System.String,System.String,System.String,TDesign.Placement,System.Nullable{System.Int32},System.Object)">
+            <summary>
+            执行错误的提示。
+            </summary>
+            <param name="messageService"><see cref="T:TDesign.INotificationService"/> 的扩展。</param>
+            <param name="content">提示的内容。</param>
+            <param name="title">标题。</param>
+            <param name="subTitle">副标题。</param>
+            <param name="placement">显示的位置。</param>
+            <param name="delay">持续时间，单位毫秒</param>
+            <param name="icon">自定义图标。</param>
+        </member>
+        <member name="T:TDesign.TNotification">
+            <summary>
+            轻量级的全局消息提示和确认机制。
+            </summary>
+        </member>
+        <member name="P:TDesign.TNotification.Title">
+            <summary>
+            显示的标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TNotification.SubTitle">
+            <summary>
+            显示的副标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TNotification.OperationContent">
+            <summary>
+            具备操作部分的 UI 内容。
+            </summary>
+        </member>
+        <member name="T:TDesign.NotificationDetailItem">
+            <summary>
+            用于对通知时的操作排版项。仅在 <see cref="T:TDesign.TNotification"/> 组件中的 <see cref="P:TDesign.TNotification.OperationContent"/> 参数中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.NotificationDetailItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TNotificationContainer">
+            <summary>
+            承载 <see cref="T:TDesign.TNotification"/> 动态组件的容器。
+            </summary>
+        </member>
+        <member name="M:TDesign.TNotificationContainer.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.PopperInstance">
+            <summary>
+            表示 popper 对象。
+            </summary>
+        </member>
+        <member name="M:TDesign.PopperInstance.#ctor(Microsoft.JSInterop.IJSObjectReference,TDesign.PopperOptions,Microsoft.JSInterop.IJSObjectReference)">
+            <summary>
+            初始化 <see cref="T:TDesign.PopperInstance"/> 类的新实例。
+            </summary>
+            <param name="popper">调用 js 返回的 popper 对象。</param>
+            <param name="options">popper 配置。</param>
+            <param name="js">引入的 js 模块对象。</param>
+        </member>
+        <member name="M:TDesign.PopperInstance.GetStateAsync">
+            <summary>
+            获取状态。
+            </summary>
+        </member>
+        <member name="M:TDesign.PopperInstance.ForceUpdateAsync">
+            <summary>
+            同步更新 popper 实例。 用于低频更新。
+            </summary>
+        </member>
+        <member name="M:TDesign.PopperInstance.UpdateAsync">
+            <summary>
+            异步更新 popper 实例，并返回一个 promise， 用于高频更新。
+            </summary>
+        </member>
+        <member name="M:TDesign.PopperInstance.SetOptionsAsync(TDesign.PopperOptions)">
+            <summary>
+            更新实例的选项。
+            </summary>
+            <param name="options">要更新的实例。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.PopperInstance.DestroyAsync">
+            <summary>
+            销毁实例。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopperOptions">
+            <summary>
+            表示 popper 的配置项。
+            </summary>
+        </member>
+        <member name="P:TDesign.PopperOptions.Placement">
+            <summary>
+            弹出层的位置。
+            </summary>
+        </member>
+        <member name="P:TDesign.PopperOptions.Strategy">
+            <summary>
+            获取或设置要使用的定位策略。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopperModifier">
+            <summary>
+            Popup 修饰者。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopperState">
+            <summary>
+            Popup 状态。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopperPlacement">
+            <summary>
+            Popper 的位置。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.Auto">
+            <summary>
+            中间自动。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.AutoStart">
+            <summary>
+            起始自动。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.AutoEnd">
+            <summary>
+            末尾自动。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.Top">
+            <summary>
+            顶部中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.TopStart">
+            <summary>
+            顶部起始。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.TopEnd">
+            <summary>
+            顶部末尾。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.Bottom">
+            <summary>
+            底部中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.BottomStart">
+            <summary>
+            底部起始。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.BottomEnd">
+            <summary>
+            底部末尾。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.Right">
+            <summary>
+            右边中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.RightStart">
+            <summary>
+            右边起始。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.RightEnd">
+            <summary>
+            右边末尾。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.Left">
+            <summary>
+            左边中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.LeftStart">
+            <summary>
+            左边起始。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperPlacement.LeftEnd">
+            <summary>
+            右边起始。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopperStrategy">
+            <summary>
+            Popper 策略。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperStrategy.Absolute">
+            <summary>
+            绝对定位。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopperStrategy.Fixed">
+            <summary>
+            固定定位。
+            </summary>
+        </member>
+        <member name="T:TDesign.TPopup">
+            <summary>
+            具备悬浮提示的弹出层。
+            </summary>
+        </member>
+        <member name="F:TDesign.TPopup.HIDDEN_CLASS">
+            <summary>
+            隐藏的 class。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TPopup.Placement">
+            <summary>
+            设置弹出层的显示位置。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.Content">
+            <summary>
+            设置弹出层的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.PopupContent">
+            <summary>
+            设置弹出层内容的模板。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.Arrow">
+            <summary>
+            设置弹出层是否具备箭头指向。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.Visible">
+            <summary>
+            设置是否显示弹出层。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPopup.Trigger">
+            <summary>
+            触发弹出的方式。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPopup.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPopup.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPopup.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPopup.Show(Microsoft.AspNetCore.Components.ElementReference)">
+            <summary>
+            触发指定元素引用并显示弹出层。
+            </summary>
+            <param name="objRef">被触发弹出层的元素引用。</param>
+        </member>
+        <member name="M:TDesign.TPopup.Hide">
+            <summary>
+            隐藏弹出层。
+            </summary>
+        </member>
+        <member name="T:TDesign.PopupTrigger">
+            <summary>
+            弹出层的触发选项。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopupTrigger.Click">
+            <summary>
+            左键点击。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopupTrigger.Hover">
+            <summary>
+            鼠标悬停。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopupTrigger.Focus">
+            <summary>
+            焦点集中。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopupTrigger.ContextMenu">
+            <summary>
+            右键点击。
+            </summary>
+        </member>
+        <member name="F:TDesign.PopupTrigger.Manual">
+            <summary>
+            手动调用。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSpace">
+            <summary>
+            组件之间具备一定间距的布局组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSpace.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TSpace.Vertical">
+            <summary>
+            是否为竖向排列。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSpace.Gap">
+            <summary>
+            <see cref="T:TDesign.TSpaceItem"/> 之间的间距。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSpace.BreakLine">
+            <summary>
+            水平排列时是否可以被自动换行。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSpaceItem">
+            <summary>
+            表示间距排版的项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSpaceItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TStepGroup">
+            <summary>
+            步骤组件的容器。配合 <see cref="T:TDesign.TStepItem"/> 组件使用步骤项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepGroup.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepGroup.Vertical">
+            <summary>
+            设置为垂直排列。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepGroup.Reserve">
+            <summary>
+            设置一个布尔值，表示步骤的顺序是否为倒序。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepGroup.Dot">
+            <summary>
+            设置 <c>true</c> 使用 “.” 作为步骤项的连接标识。否则使用序号。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepGroup.Seperator">
+            <summary>
+            步骤项分割线风格，默认是 <see cref="F:TDesign.StepSeperator.Line"/> 。
+            </summary>
+        </member>
+        <member name="T:TDesign.StepSeperator">
+            <summary>
+            步骤条分隔符。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepSeperator.Line">
+            <summary>
+            线条。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepSeperator.Dash">
+            <summary>
+            虚线。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepSeperator.Arrow">
+            <summary>
+            箭头。
+            </summary>
+        </member>
+        <member name="T:TDesign.TStepItem">
+            <summary>
+            表示步骤的项。必须在 <see cref="T:TDesign.TStepGroup"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.CascadingStepGroup">
+            <summary>
+            级联参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.Status">
+            <summary>
+            步骤的状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.Clickable">
+            <summary>
+            设置可点击的样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.TIcon">
+            <summary>
+            设置图标名称。默认自动计算当前步骤所在的数字。
+            <para>
+            当 <see cref="P:TDesign.TStepGroup.Dot"/> 是 <c>true</c> 时无效。
+            </para>
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.DescriptionContent">
+            <summary>
+            设置描述内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TStepItem.ExtraContent">
+            <summary>
+            设置附加内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TStepItem.BuildTIcon(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建步骤的图标。
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:TDesign.StepStatus">
+            <summary>
+            步骤的当前状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepStatus.NotStart">
+            <summary>
+            默认，未开始状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepStatus.Process">
+            <summary>
+            正在进行，会高亮步骤。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepStatus.Finish">
+            <summary>
+            完成。
+            </summary>
+        </member>
+        <member name="F:TDesign.StepStatus.Error">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="T:TDesign.FieldColumn`1">
+            <summary>
+            表示可以输出数据的表格列。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.FieldColumn`1.Value">
+            <summary>
+            获取或设置列中输出的值。
+            </summary>
+        </member>
+        <member name="M:TDesign.FieldColumn`1.OnInitializedAsync">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.FieldColumn`1.GetColumnContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.TableColumnBase">
+            <summary>
+            表示表格的单元格的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TableColumnBase.IsHeader">
+            <summary>
+            获取当前是否是顶部单元格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TableColumnBase.Title">
+            <summary>
+            设置列标题。若设置了 <see cref="P:TDesign.TableColumnBase.TitleContent"/> 参数，则该参数无效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TableColumnBase.TitleContent">
+            <summary>
+            设置列标题部分的任意 UI 片段。
+            </summary>
+        </member>
+        <member name="P:TDesign.TableColumnBase.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TableColumnBase.GetHeaderContent">
+            <summary>
+            获取顶部标题内容。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TableColumnBase.GetColumnContent">
+            <summary>
+            获取表格列的内容。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.TTable`1">
+            <summary>
+            只具备一些基本功能的数据表格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.Data">
+            <summary>
+            设置数据源。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.AutoWidth">
+            <summary>
+            设置是否为自动列宽，默认是固定的。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.Striped">
+            <summary>
+            设置行具备条纹间隔的样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.Bordered">
+            <summary>
+            设置列具备边框的样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.Hoverable">
+            <summary>
+            设置行具备鼠标悬浮时高亮样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.Size">
+            <summary>
+            设置表格的尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.FixedHeader">
+            <summary>
+            设置固定列头。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.FixedFooter">
+            <summary>
+            设置固定底部。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.FixedHeight">
+            <summary>
+            当固定头部或底部时，表格内容部分的固定高度，单位是 px。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TTable`1.OnInitialized">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTable`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTable(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建表格。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildPagination(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建分页。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableHeader(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建 theader 部分。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建 tbody 部分。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableFooter(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建 tfooter 部分。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="T:TDesign.TTableCell">
+            <summary>
+            表示渲染 td 元素的组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableCell.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TTableHeader">
+            <summary>
+            表示渲染 th 元素的组件。
+            </summary>
+        </member>
+        <member name="T:TDesign.TTableRow">
+            <summary>
+            用于渲染 tr 元素的组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableRow.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="T:TDesign.TTab">
+            <summary>
+            选项卡
+            </summary>
+        </member>
+        <member name="P:TDesign.TTab.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TTab.Position">
+            <summary>
+            选项卡标题呈现的位置。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTab.Card">
+            <summary>
+            卡片模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTab.Size">
+            <summary>
+            选项卡的尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTab.OnSwitch">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TTab.BuildTabContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            选项卡的内容
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TTab.BuildTabHeaderItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            选项卡头部的项。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="T:TDesign.TabSize">
+            <summary>
+            选项卡尺寸。
+            </summary>
+        </member>
+        <member name="F:TDesign.TabSize.Medium">
+            <summary>
+            中等尺寸。
+            </summary>
+        </member>
+        <member name="F:TDesign.TabSize.Large">
+            <summary>
+            大型尺寸。
+            </summary>
+        </member>
+        <member name="T:TDesign.TTabItem">
+            <summary>
+            选项卡的项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.CascadingTab">
+            <summary>
+            用于自动化获取父组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.Title">
+            <summary>
+            选项卡标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.Padding">
+            <summary>
+            选项卡内容的内边距，默认时 25px。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.Disabled">
+            <summary>
+            禁用选项卡。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTabItem.TIcon">
+            <summary>
+            选项卡标题的图标。
+            </summary>
+        </member>
+        <member name="T:TDesign.TAffix">
+            <summary>
+            固钉组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.OffsetBottom">
+            <summary>
+            距离容器顶部达到指定距离后触发固定，默认值0 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.OffsetTop">
+            <summary>
+            距离容器底部达到指定距离后触发固定，默认值0 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.ZIndex">
+            <summary>
+            固钉定位层级，样式默认为 500 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.Container">
+            <summary>
+            指定滚动的容器。滚动容器不是body时，传入滚动容器的id。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAffix.FixedChange">
+            <summary>
+             执行当 <see cref="T:TDesign.TAffix"/> 的固定状态发生变化时的事件。
+            </summary>
+        </member>
+        <member name="F:TDesign.TAffix.ZINDEX_DEFAULT">
+            <summary>
+            z-index 默认值。
+            </summary>
+        </member>
+        <member name="F:TDesign.TAffix._affixYInit">
+            <summary>
+            组件原始位置：组件初始化时，距离窗口顶端的高度值。
+            </summary>
+        </member>
+        <member name="F:TDesign.TAffix._FixedTopValue">
+            <summary>
+            组件顶端固定时的高度值，top值。
+            </summary>
+        </member>
+        <member name="M:TDesign.TAffix.ChangeFixState(System.Boolean,System.Int32)">
+            <summary>
+            top 固定。
+            </summary>
+            <param name="isFixed"></param>
+            <param name="top"></param>
+        </member>
+        <member name="M:TDesign.TAffix.OnAfterRenderAsync(System.Boolean)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="firstRender"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TAffix.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TAffix.BuildStyle(ComponentBuilder.IStyleBuilder)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TAffix.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="attributes"></param>
+        </member>
+        <member name="M:TDesign.TAffix.OnScrollChanged(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            js 调用的方法，onscroll事件中调用并回传当前的top和bottom值。
+            </summary>
+            <param name="containerScrollTop"></param>
+            <param name="containerY">容器到窗口顶端的坐标值</param>
+            <param name="containerHeight">容器的可见高度</param>
+        </member>
+        <member name="T:TDesign.AffixedChangeEventArgs">
+            <summary>
+            提供<see cref="P:TDesign.TAffix.FixedChange"/>事件的回调参数模型。
+            </summary>
+        </member>
+        <member name="M:TDesign.AffixedChangeEventArgs.#ctor(System.Boolean,System.Int32)">
+            <summary>
+            构建<see cref="T:TDesign.AffixedChangeEventArgs"/>实例。
+            </summary>
+            <param name="affixed"></param>
+            <param name="top"></param>
+        </member>
+        <member name="P:TDesign.AffixedChangeEventArgs.Affixed">
+            <summary>
+            是否固定。
+            </summary>
+        </member>
+        <member name="P:TDesign.AffixedChangeEventArgs.Top">
+            <summary>
+            固定时距离窗口顶端的距离。
+            </summary>
+        </member>
+        <member name="T:TDesign.TAlert">
+            <summary>
+            警告提醒。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAlert.Title">
+            <summary>
+            显示的标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAlert.TitleContent">
+            <summary>
+            具备标题的 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAlert.OperationContent">
+            <summary>
+            具备操作部分的 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAlert.Closable">
+            <summary>
+            是否可以关闭。
+            </summary>
+        </member>
+        <member name="T:TDesign.TBadge">
+            <summary>
+            徽章组件，出现在图标或文字右上角的徽标标识。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Text">
+            <summary>
+            徽章显示的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Small">
+            <summary>
+            小尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Shape">
+            <summary>
+            徽章形状，默认是 <see cref="F:TDesign.BadgeShape.Circle"/> 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Color">
+            <summary>
+            徽章的颜色，支持十六进制的字符串。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Top">
+            <summary>
+            距离上面的偏移量，单位 px。
+            </summary>
+        </member>
+        <member name="P:TDesign.TBadge.Right">
+            <summary>
+            距离右侧的偏移量，单位 px。
+            </summary>
+        </member>
+        <member name="M:TDesign.TBadge.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.BadgeShape">
+            <summary>
+            徽标形状。
+            </summary>
+        </member>
+        <member name="F:TDesign.BadgeShape.Circle">
+            <summary>
+            圆形。
+            </summary>
+        </member>
+        <member name="F:TDesign.BadgeShape.Round">
+            <summary>
+            椭圆。
+            </summary>
+        </member>
+        <member name="F:TDesign.BadgeShape.Dot">
+            <summary>
+            点。
+            </summary>
+        </member>
+        <member name="T:TDesign.TButton">
+            <summary>
+            表示用于开启一个闭环的操作任务的按钮。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.OnClick">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.HtmlType">
+            <summary>
+            设置按钮的 HTML 类型。默认时 <see cref="F:TDesign.ButtonHtmlType.Button"/> 类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Varient">
+            <summary>
+            按钮类型的风格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Theme">
+            <summary>
+            主题颜色。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Ghost">
+            <summary>
+            幽灵按钮。内容反色，背景变为透明，一般是底色透明
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Size">
+            <summary>
+            提供大、中（默认）、小三种尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Block">
+            <summary>
+            宽度上充满其所在的父容器。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Shape">
+            <summary>
+            按钮形状。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Disabled">
+            <summary>
+            禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TButton.Loading">
+            <summary>
+            加载状态。
+            </summary>
+        </member>
+        <member name="M:TDesign.TButton.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="T:TDesign.ButtonVarient">
+            <summary>
+            按钮风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.ButtonShape">
+            <summary>
+            按钮形状。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonShape.Rectangle">
+            <summary>
+            长方形。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonShape.Square">
+            <summary>
+            正方形。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonShape.Round">
+            <summary>
+            圆角长方形。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonShape.Circle">
+            <summary>
+            圆形。
+            </summary>
+        </member>
+        <member name="T:TDesign.ButtonHtmlType">
+            <summary>
+            按钮的 HTML 类型。
+            </summary>
+        </member>
+        <member name="T:TDesign.TCard">
+            <summary>
+            卡片组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.Borderless">
+            <summary>
+            设置不显示边框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HoverShadow">
+            <summary>
+            鼠标悬停显示阴影。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HeaderDivider">
+            <summary>
+            设置是否显示头部内容分割线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HeaderTitleContent">
+            <summary>
+            设置头部内容的标题部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HeaderSubTitleContent">
+            <summary>
+            设置头部内容的副标题部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HeaderDescriptionContent">
+            <summary>
+            设置头部内容的描述部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.HeaderActionContent">
+            <summary>
+            设置头部内容的操作部分的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.FooterContent">
+            <summary>
+            设置卡片的底部内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCard.Width">
+            <summary>
+            宽度，默认400px.
+            </summary>
+        </member>
+        <member name="T:TDesign.TComment">
+            <summary>
+            评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.Avatar">
+            <summary>
+            设置头像的 uri 地址。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.Author">
+            <summary>
+            设置作者的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.DateTime">
+            <summary>
+            设置显示的日期时间字符串。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.ChildContent">
+            <summary>
+            设置评论的任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.OperationContent">
+            <summary>
+            设置评论的操作内容。每一个操作需要用 li 标记进行渲染。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.ReplyContent">
+            <summary>
+            设置当前评论的回复内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TComment.QuateContent">
+            <summary>
+            设置评论内容的引用内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TComment.BuildAvatar(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建头像。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TComment.BuildCommentContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建评论内容
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="T:TDesign.TDesignContainer">
+            <summary>
+            用于动态渲染组件的容器。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDialog.Modeless">
+            <summary>
+            设置非模态对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Center">
+            <summary>
+            设置屏幕居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.OnActive">
+            <summary>
+            设置一个当对话框显示或关闭时执行的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Active">
+            <summary>
+            设置显示对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.HeaderContent">
+            <summary>
+            设置对话框顶部的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.ChildContent">
+            <summary>
+            设置对话框消息的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.FooterContent">
+            <summary>
+            设置对话框底部的内容。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDivider">
+            <summary>
+            分割线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDivider.ChildContent">
+            <summary>
+            分割线的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDivider.Vertical">
+            <summary>
+            垂直分割线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDivider.Dashed">
+            <summary>
+            是否为虚线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDivider.Alignment">
+            <summary>
+            文字对齐方式。
+            </summary>
+        </member>
+        <member name="T:TDesign.TIcon">
+            <summary>
+            图标组件。内置图标要手动引入样式 <c>tdesign-icons.css</c>
+            </summary>
+        </member>
+        <member name="P:TDesign.TIcon.CascadingMenu">
+            <summary>
+            图标放在 <see cref="T:TDesign.TMenu"/> 组件中会有特定样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TIcon.Name">
+            <summary>
+            图标名称。参见 https://tdesign.tencent.com/vue/components/icon 。
+            <para>可使用 <see cref="T:TDesign.IconName"/> 枚举。</para>
+            </summary>
+        </member>
+        <member name="P:TDesign.TIcon.Color">
+            <summary>
+            图标的颜色。自由填写支持 color 的字符串，例如颜色名称或16进制表达式（#xxxxxx）。
+            </summary>
+        </member>
+        <member name="P:TDesign.TIcon.Size">
+            <summary>
+            图标的大小。自由填写支持 font-size 的字符串，例如 32px 或 2rem 等。
+            </summary>
+        </member>
+        <member name="P:TDesign.TIcon.IsInMenuOperation">
+            <summary>
+            判断 TIcon 是否在 <see cref="T:TDesign.TMenu"/> 组件的 <see cref="P:TDesign.TMenu.OperationContent"/> 内。
+            </summary>
+        </member>
+        <member name="T:TDesign.TImage">
+            <summary>
+            图片
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Alt">
+            <summary>
+            图片描述
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Disabled">
+            <summary>
+            禁用状态
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Error">
+            <summary>
+            错误内容
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Fit">
+            <summary>
+            填充模式
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Gallery">
+            <summary>
+            是否展示为图集样式
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Lazy">
+            <summary>
+            是否开启图片懒加载
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Loading">
+            <summary>
+            加载中状态的图片内容
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.OverlayContent">
+            <summary>
+            图片上方的浮层内容
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.OverlayTrigger">
+            <summary>
+            浮层 overlayContent 出现的时机
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Placeholder">
+            <summary>
+            占位元素
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Position">
+            <summary>
+            定位
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Shape">
+            <summary>
+            图片圆角类型
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.Src">
+            <summary>
+            图片链接
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.OnError">
+            <summary>
+            加载失败
+            </summary>
+        </member>
+        <member name="P:TDesign.TImage.OnLoad">
+            <summary>
+            加载完成
+            </summary>
+        </member>
+        <member name="T:TDesign.ImageFitType">
+            <summary>
+            填充模式
+            </summary>
+        </member>
+        <member name="F:TDesign.ImageFitType.None">
+            <summary>
+            保持原有尺寸
+            </summary>
+        </member>
+        <member name="F:TDesign.ImageFitType.Contain">
+            <summary>
+            原比例缩放，全部可见
+            </summary>
+        </member>
+        <member name="F:TDesign.ImageFitType.Cover">
+            <summary>
+            原比例缩放，部分可见
+            </summary>
+        </member>
+        <member name="F:TDesign.ImageFitType.Fill">
+            <summary>
+            填充
+            </summary>
+        </member>
+        <member name="F:TDesign.ImageFitType.ScaleDown">
+            <summary>
+            保持原有尺寸比例,如果容器尺寸大于图片内容尺寸，保持图片的原有尺寸，不会放大失真；容器尺寸小于图片内容尺寸，用法跟contain一样。
+            </summary>
+        </member>
+        <member name="T:TDesign.OverlayTriggerType">
+            <summary>
+            浮层出现时机类型
+            </summary>
+        </member>
+        <member name="F:TDesign.OverlayTriggerType.Always">
+            <summary>
+            总是出现
+            </summary>
+        </member>
+        <member name="F:TDesign.OverlayTriggerType.Hover">
+            <summary>
+            浮动
+            </summary>
+        </member>
+        <member name="T:TDesign.ShapeType">
+            <summary>
+            圆角类型
+            </summary>
+        </member>
+        <member name="F:TDesign.ShapeType.Circle">
+            <summary>
+            圆形
+            </summary>
+        </member>
+        <member name="F:TDesign.ShapeType.Round">
+            <summary>
+            圆角
+            </summary>
+        </member>
+        <member name="F:TDesign.ShapeType.Square">
+            <summary>
+            正方形
+            </summary>
+        </member>
+        <member name="T:TDesign.TTimeline">
+            <summary>
+            时间轴组件的容器，用于时间轴展示。配合 <see cref="T:TDesign.TTimelineItem"/> 组件使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimeline.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TTimeline.Horizontal">
+            <summary>
+            设置水平显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimeline.Alternate">
+            <summary>
+            设置标签展示在轴两侧。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimeline.Theme">
+            <summary>
+            设置时间轴的主题，默认是 <see cref="F:TDesign.TimelineTheme.Default"/> 。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimeline.LabelAlignment">
+            <summary>
+            设置标签信息放在时间轴的位置，当 <see cref="P:TDesign.TTimeline.Alternate"/> 是 <c>true</c> 时有效。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTimeline.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TimelineTheme">
+            <summary>
+            时间轴显示主题。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineTheme.Default">
+            <summary>
+            直线。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineTheme.Dot">
+            <summary>
+            虚线。
+            </summary>
+        </member>
+        <member name="T:TDesign.TimelineLabelAlignment">
+            <summary>
+            标签信息放在时间轴的位置。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineLabelAlignment.Left">
+            <summary>
+            左侧。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineLabelAlignment.Right">
+            <summary>
+            右侧。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineLabelAlignment.Alternate">
+            <summary>
+            两侧。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineLabelAlignment.Top">
+            <summary>
+            上侧。
+            </summary>
+        </member>
+        <member name="F:TDesign.TimelineLabelAlignment.Bottom">
+            <summary>
+            下侧。
+            </summary>
+        </member>
+        <member name="T:TDesign.TTimelineItem">
+            <summary>
+            表示时间轴的项。必须在 <see cref="T:TDesign.TTimeline"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimelineItem.CascadingTimeline">
+            <summary>
+            <see cref="T:TDesign.TTimeline"/> 父组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimelineItem.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TTimelineItem.Label">
+            <summary>
+            标签文本内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimelineItem.Color">
+            <summary>
+            设置节点的颜色。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTimelineItem.IconName">
+            <summary>
+            自定义图标的名称。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTimelineItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTimelineItem.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TLayout">
+            <summary>
+            布局组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLayout.HeaderContent">
+            <summary>
+            布局的顶部内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLayout.LeftSideContent">
+            <summary>
+            布局的右侧内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLayout.RightSideContent">
+            <summary>
+            布局的左侧部分。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLayout.FooterContent">
+            <summary>
+            布局的底部部分。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLayout.ChildContent">
+            <summary>
+            布局的主体部分。
+            </summary>
+        </member>
+        <member name="T:TDesign.TLink">
+            <summary>
+            超链接文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Theme">
+            <summary>
+            颜色。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Underline">
+            <summary>
+            显示超链接的下划线。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Hover">
+            <summary>
+            设置鼠标悬停时的效果。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Disabled">
+            <summary>
+            禁用超链接。
+            </summary>
+        </member>
+        <member name="P:TDesign.TLink.Href">
+            <summary>
+            超链接的地址。同 <c>href</c> 属性。
+            </summary>
+        </member>
+        <member name="T:TDesign.LinkHover">
+            <summary>
+            链接的悬停效果。
+            </summary>
+        </member>
+        <member name="F:TDesign.LinkHover.Underline">
+            <summary>
+            下划线模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.LinkHover.Color">
+            <summary>
+            高亮颜色模式。
+            </summary>
+        </member>
+        <member name="T:TDesign.TPagination">
+            <summary>
+            用于模块内切换内容的分页
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.Size">
+            <summary>
+            设置分页组件的大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.Current">
+            <summary>
+            设置当前页码。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.CurrentChanged">
+            <summary>
+            设置一个当页码变更时的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.PageSize">
+            <summary>
+            设置每一页的数据量。默认是 10。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.PageSizeChanged">
+            <summary>
+            设置一个当每页数据量变更时的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.Total">
+            <summary>
+            设置分页的总数据量。必须要大于 0。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.TotalChanged">
+            <summary>
+            设置一个当总数据量变化时的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.TotalContent">
+            <summary>
+            设置显示总数据量的任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.ShowTotal">
+            <summary>
+            设置一个布尔值，表示是否显示总数据量的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.PageNumber">
+            <summary>
+            设置分页页码条的显示数量。建议范围在 5-21 之间，默认是 7。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.ShowPageNumber">
+            <summary>
+            设置是否显示页码条。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.ShowFirstLastBtn">
+            <summary>
+            是否显示首页和末页按钮。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.EllipsisMode">
+            <summary>
+            设置当页码数量超出时，前后省略模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.ShowJumpPage">
+            <summary>
+            设置是否显示跳转到文本框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.Simple">
+            <summary>
+            设置为极简版的分页。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.TotalPages">
+            <summary>
+            获取总页数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TPagination.JumpPage">
+            <summary>
+            跳转页码。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.NavigateToPage(System.Int64)">
+            <summary>
+            跳转到指定页。
+            </summary>
+            <param name="page">要跳转的页码。</param>
+        </member>
+        <member name="M:TDesign.TPagination.NavigateToFirst">
+            <summary>
+            跳转到首页。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.NavigateToLast">
+            <summary>
+            跳转到末页。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.NavigateToPrevious">
+            <summary>
+            跳转到上一页。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.NavigateToNext">
+            <summary>
+            跳转到下一页。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPagination.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPagination.BuildTotal(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建总数据量的元素。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.BuildPageSizeSelect(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:TDesign.TPagination.BuildPageBehaviorBtn(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,TDesign.TPagination.PageButtonBehavior,System.Object,System.Boolean,System.Boolean)" -->
+        <member name="M:TDesign.TPagination.BuildPageItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.Func{System.Threading.Tasks.Task},System.Boolean,System.String)">
+            <summary>
+            该方法用于构建分页的页码条的各项，例如上一页按钮，分页页码，末页按钮等。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+            <param name="content">显示的文本。</param>
+            <param name="callback">点击的回调。</param>
+            <param name="disabled">是否禁用。</param>
+            <param name="additionalClass">附加的 class 样式。</param>
+        </member>
+        <member name="M:TDesign.TPagination.BuildPageNumerItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Int64)">
+            <summary>
+            构建分页数字。
+            </summary>
+            <param name="pageNumber">分页数字。</param>
+        </member>
+        <member name="M:TDesign.TPagination.BuildPageNumbers(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建分页条。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPagination.BuildJumper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建 跳转到 文本框。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="T:TDesign.TPagination.PageButtonBehavior">
+            <summary>
+            分页按钮的行为。
+            </summary>
+        </member>
+        <member name="F:TDesign.TPagination.PageButtonBehavior.First">
+            <summary>
+            首页。
+            </summary>
+        </member>
+        <member name="F:TDesign.TPagination.PageButtonBehavior.Previous">
+            <summary>
+            上一页。
+            </summary>
+        </member>
+        <member name="F:TDesign.TPagination.PageButtonBehavior.Next">
+            <summary>
+            下一页。
+            </summary>
+        </member>
+        <member name="F:TDesign.TPagination.PageButtonBehavior.Last">
+            <summary>
+            末页。
+            </summary>
+        </member>
+        <member name="T:TDesign.PageEllipsisMode">
+            <summary>
+            页码条省略模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.PageEllipsisMode.Middle">
+            <summary>
+            中间省略。
+            </summary>
+        </member>
+        <member name="F:TDesign.PageEllipsisMode.BothEnds">
+            <summary>
+            两端省略。
+            </summary>
+        </member>
+        <member name="T:TDesign.TProgress">
+            <summary>
+            展示操作的当前进度的进度条。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.ShowLabel">
+            <summary>
+            设置是否显示进度条的百分比。<c>true</c> 则显示 <see cref="P:TDesign.TProgress.Value"/> 的百分比，否则，根据状态显示对应的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.HideLabel">
+            <summary>
+            设置是否隐藏进度条的百分比。
+            <c>true</c> 则不显示百分比和状态图标，即使 <see cref="P:TDesign.TProgress.ShowLabel"/> 已设置。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Theme">
+            <summary>
+            设置进度条的风格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Status">
+            <summary>
+            设置进度条的状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Value">
+            <summary>
+            设置进度条长度的百分比。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Label">
+            <summary>
+            自定义显示标签的内容。否则显示 <see cref="P:TDesign.TProgress.Value"/> 的百分比。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Active">
+            <summary>
+            设置进度条具备渐变效果。
+            </summary>
+        </member>
+        <member name="P:TDesign.TProgress.Size">
+            <summary>
+            进度条的大小。
+            </summary>
+        </member>
+        <member name="M:TDesign.TProgress.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TProgress.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TProgress.GetSizeStyle">
+            <summary>
+            根据 <see cref="P:TDesign.TProgress.Size"/> 获取 style 的宽高。
+            </summary>
+        </member>
+        <member name="M:TDesign.TProgress.BuildLine(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构造 <see cref="F:TDesign.ProgressTheme.Line"/> 的 HTML 代码。
+            </summary>
+        </member>
+        <member name="M:TDesign.TProgress.BuildPlump(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构造 <see cref="F:TDesign.ProgressTheme.Plump"/> 的 HTML 代码。
+            </summary>
+        </member>
+        <member name="M:TDesign.TProgress.BuildProgressInner(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String)">
+            <summary>
+            构建 <c>&lt;div class="t-progress__inner">xx&lt;/div></c> 这段代码
+            </summary>
+            <param name="content"></param>
+            <param name="sequence"></param>
+            <param name="childContent"></param>
+            <param name="additionalStyle"></param>
+        </member>
+        <member name="M:TDesign.TProgress.BuildProgressInfo(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Boolean)">
+            <summary>
+            构建 <c>&lt;div class="t-progress__info">xx&lt;/div></c> 这段代码
+            </summary>
+        </member>
+        <member name="T:TDesign.ProgressTheme">
+            <summary>
+            进度条的类型。
+            </summary>
+        </member>
+        <member name="F:TDesign.ProgressTheme.Line">
+            <summary>
+            瘦小的线，很细的线。
+            </summary>
+        </member>
+        <member name="F:TDesign.ProgressTheme.Plump">
+            <summary>
+            丰满的线，比较粗的线。
+            </summary>
+        </member>
+        <member name="F:TDesign.ProgressTheme.Circle">
+            <summary>
+            圆形。像仪表盘一样。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSkeleton">
+            <summary>
+            骨架屏。当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeleton.Loading">
+            <summary>
+            设置是否显示骨架屏。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeleton.ChildContent">
+            <summary>
+            当 <see cref="P:TDesign.TSkeleton.Loading"/> 是 <c>false</c> 时显示的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeleton.LoadingContent">
+            <summary>
+            当 <see cref="P:TDesign.TSkeleton.Loading"/> 是 <c>true</c> 时显示的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeleton.Animation">
+            <summary>
+            设置动画效果。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeleton.Theme">
+            <summary>
+            设置骨架屏的模式。可以快速设置骨架屏显示的模式。
+            </summary>
+        </member>
+        <member name="M:TDesign.TSkeleton.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TSkeleton.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TSkeleton.GetThemeContent">
+            <summary>
+            获取主题对应的骨架屏。
+            </summary>
+        </member>
+        <member name="T:TDesign.TSkeletonRow">
+            <summary>
+            表示骨架屏中的行。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeletonRow.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TSkeletonColumn">
+            <summary>
+            表示骨架屏中的行。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeletonColumn.CascadingSkeleton">
+            <summary>
+            获取 <see cref="T:TDesign.TSkeleton"/> 组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TSkeletonColumn.Type">
+            <summary>
+            设置列的类型。
+            </summary>
+        </member>
+        <member name="M:TDesign.TSkeletonColumn.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.SkeletonColumnType">
+            <summary>
+            骨架屏列的类型。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonColumnType.Rectangle">
+            <summary>
+            长方形。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonColumnType.Circle">
+            <summary>
+            圆形。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonColumnType.Text">
+            <summary>
+            文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.SkeletonAnimation">
+            <summary>
+            骨架屏的动画效果。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonAnimation.Gradient">
+            <summary>
+            渐变效果。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonAnimation.Flashed">
+            <summary>
+            闪烁效果。
+            </summary>
+        </member>
+        <member name="T:TDesign.SkeletonTheme">
+            <summary>
+            骨架屏主题模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.Text">
+            <summary>
+            文本。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.Paragraph">
+            <summary>
+            段落。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.Avatar">
+            <summary>
+            头像。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.AvatarText">
+            <summary>
+            头像文本。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.Tab">
+            <summary>
+            选项卡。
+            </summary>
+        </member>
+        <member name="F:TDesign.SkeletonTheme.Article">
+            <summary>
+            长篇文章。
+            </summary>
+        </member>
+        <member name="T:TDesign.TTag">
+            <summary>
+            标签。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Theme">
+            <summary>
+            主题颜色。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Type">
+            <summary>
+            标签的类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Shape">
+            <summary>
+            形状。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.TIcon">
+            <summary>
+            图标的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Closable">
+            <summary>
+            是否可以被关闭。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Disabled">
+            <summary>
+            设置组件处于禁用状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.OnClosing">
+            <summary>
+            设置一个函数，当关闭发生时触发。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Checkbox">
+            <summary>
+            设置标签作为复选框形式呈现。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Checked">
+            <summary>
+            获取或设置一个布尔值，表示是否被选中。<see cref="P:TDesign.TTag.Checkbox"/> 为 <c>true</c> 时有效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.CheckedChanged">
+            <summary>
+            获取或设置一个选择变更时的函数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.CheckedExpression">
+            <summary>
+            获取或设置一个选择变更的表达式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.CheckedContent">
+            <summary>
+            设置 <see cref="P:TDesign.TTag.Checked"/> 是 <c>true</c> 时显示的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTag.Width">
+            <summary>
+            标签固定的宽度，超长省略，单位px。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTag.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTag.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TagType">
+            <summary>
+            标签类型。
+            </summary>
+        </member>
+        <member name="T:TDesign.TagShape">
+            <summary>
+            标签形状。
+            </summary>
+        </member>
+        <member name="F:TDesign.TagShape.Round">
+            <summary>
+            椭圆。
+            </summary>
+        </member>
+        <member name="F:TDesign.TagShape.Mark">
+            <summary>
+            半椭圆。
+            </summary>
+        </member>
+        <member name="T:TDesign.HorizontalAlignment">
+            <summary>
+            水平对齐方式。
+            </summary>
+        </member>
+        <member name="F:TDesign.HorizontalAlignment.Left">
+            <summary>
+            居左。
+            </summary>
+        </member>
+        <member name="F:TDesign.HorizontalAlignment.Center">
+            <summary>
+            居中。
+            </summary>
+        </member>
+        <member name="F:TDesign.HorizontalAlignment.Right">
+            <summary>
+            居右。
+            </summary>
+        </member>
+        <member name="T:TDesign.VerticalAlignment">
+            <summary>
+            垂直对齐方式。
+            </summary>
+        </member>
+        <member name="F:TDesign.VerticalAlignment.Top">
+            <summary>
+            居上。
+            </summary>
+        </member>
+        <member name="F:TDesign.VerticalAlignment.Middle">
+            <summary>
+            居中。
+            </summary>
+        </member>
+        <member name="F:TDesign.VerticalAlignment.Bottom">
+            <summary>
+            居下。
+            </summary>
+        </member>
+        <member name="T:TDesign.JustifyContent">
+            <summary>
+            Flex 的横版对齐方式
+            </summary>
+        </member>
+        <member name="T:TDesign.Color">
+            <summary>
+            颜色。
+            </summary>
+        </member>
+        <member name="F:TDesign.Color.Primary">
+            <summary>
+            默认。
+            </summary>
+        </member>
+        <member name="F:TDesign.Color.Warning">
+            <summary>
+            警告。
+            </summary>
+        </member>
+        <member name="F:TDesign.Color.Success">
+            <summary>
+            成功。
+            </summary>
+        </member>
+        <member name="F:TDesign.Color.Error">
+            <summary>
+            失败。
+            </summary>
+        </member>
+        <member name="T:TDesign.IconName">
+            <summary>
+            图标名称。
+            </summary>
+        </member>
+        <member name="T:TDesign.Position">
+            <summary>
+            所在对象的相对位置。
+            </summary>
+        </member>
+        <member name="F:TDesign.Position.Top">
+            <summary>
+            顶部。
+            </summary>
+        </member>
+        <member name="F:TDesign.Position.Left">
+            <summary>
+            左部。
+            </summary>
+        </member>
+        <member name="F:TDesign.Position.Right">
+            <summary>
+            右部。
+            </summary>
+        </member>
+        <member name="F:TDesign.Position.Bottom">
+            <summary>
+            底部。
+            </summary>
+        </member>
+        <member name="F:TDesign.Position.Center">
+            <summary>
+            居中
+            </summary>
+        </member>
+        <member name="T:TDesign.Placement">
+            <summary>
+            显示的相对摆放位置。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.TopLeft">
+            <summary>
+            顶部左边。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.TopCenter">
+            <summary>
+            顶部中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.TopRight">
+            <summary>
+            顶部右边。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.MiddleLeft">
+            <summary>
+            中部左边。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.MiddleCenter">
+            <summary>
+            中部中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.MiddleRight">
+            <summary>
+            中部右边。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.BottomLeft">
+            <summary>
+            底部左边。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.BottomCenter">
+            <summary>
+            底部中间。
+            </summary>
+        </member>
+        <member name="F:TDesign.Placement.BottomRight">
+            <summary>
+            底部右边。
+            </summary>
+        </member>
+        <member name="T:TDesign.Shape">
+            <summary>
+            表示组件的边框形状。
+            </summary>
+        </member>
+        <member name="M:TDesign.Shape.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:TDesign.Shape"/> 类的新实例。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="F:TDesign.Shape.Round">
+            <summary>
+            表示边角是弧形。
+            </summary>
+        </member>
+        <member name="F:TDesign.Shape.Circle">
+            <summary>
+            表示圆形。
+            </summary>
+        </member>
+        <member name="T:TDesign.Size">
+            <summary>
+            尺寸。
+            </summary>
+        </member>
+        <member name="F:TDesign.Size.Small">
+            <summary>
+            小尺寸。
+            </summary>
+        </member>
+        <member name="F:TDesign.Size.Medium">
+            <summary>
+            中尺寸。
+            </summary>
+        </member>
+        <member name="F:TDesign.Size.Large">
+            <summary>
+             大尺寸。
+            </summary>
+        </member>
+        <member name="T:TDesign.ColumnSpan">
+            <summary>
+            栅格列的跨度。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is1">
+            <summary>
+            跨度是1个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is2">
+            <summary>
+            跨度是2个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is3">
+            <summary>
+            跨度是3个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is4">
+            <summary>
+            跨度是4个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is5">
+            <summary>
+            跨度是5个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is6">
+            <summary>
+            跨度是6个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is7">
+            <summary>
+            跨度是7个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is8">
+            <summary>
+            跨度是8个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is9">
+            <summary>
+            跨度是9个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is10">
+            <summary>
+            跨度是10个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is11">
+            <summary>
+            跨度是11个单位。
+            </summary>
+        </member>
+        <member name="F:TDesign.ColumnSpan.Is12">
+            <summary>
+            跨度是12个单位。
+            </summary>
+        </member>
+        <member name="T:TDesign.Status">
+            <summary>
+            表示状态的候选值。
+            </summary>
+        </member>
+        <member name="F:TDesign.Status.Default">
+            <summary>
+            默认状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.Status.Success">
+            <summary>
+            成功的状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.Status.Error">
+            <summary>
+            错误的状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.Status.Warning">
+            <summary>
+            警告的状态。
+            </summary>
+        </member>
+        <member name="T:TDesign.Theme">
+            <summary>
+            风格主题的配色方案。
+            </summary>
+        </member>
+        <member name="M:TDesign.Theme.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:TDesign.Theme"/> 类的新实例。
+            </summary>
+            <param name="value">配色的指。</param>
+        </member>
+        <member name="F:TDesign.Theme.Primary">
+            <summary>
+            主配色。
+            </summary>
+        </member>
+        <member name="F:TDesign.Theme.Danger">
+            <summary>
+            危险级别的配色。
+            </summary>
+        </member>
+        <member name="F:TDesign.Theme.Warning">
+            <summary>
+            警告级别的配色。
+            </summary>
+        </member>
+        <member name="F:TDesign.Theme.Success">
+            <summary>
+            成功级别的配色。
+            </summary>
+        </member>
+        <member name="M:TDesign.Theme.op_Implicit(System.String)~TDesign.Theme">
+            <summary>
+            自定义的配色方案。
+            </summary>
+            <param name="name">配色方案的名称。</param>
+        </member>
+        <member name="T:TDesign.MessageTheme">
+            <summary>
+            消息主题配色方案。
+            </summary>
+        </member>
+        <member name="M:TDesign.MessageTheme.#ctor(System.String)">
+            <summary>
+            初始化 <see cref="T:TDesign.MessageTheme"/> 类的新实例。
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="F:TDesign.MessageTheme.Question">
+            <summary>
+            疑问的主题配色。
+            </summary>
+        </member>
+        <member name="T:TDesign.ThemeMode">
+            <summary>
+            主题模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.ThemeMode.Light">
+            <summary>
+            亮色。
+            </summary>
+        </member>
+        <member name="F:TDesign.ThemeMode.Dark">
+            <summary>
+            暗色。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDesignComponentBase">
+            <summary>
+            表示 TDesign 组件的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignComponentBase.Ref">
+            <summary>
+            获取当前组件的元素引用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignComponentBase.CascadingPopup">
+            <summary>
+            级联 TPopup 组件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignComponentBase.CanPopup">
+            <summary>
+            获取一个布尔值，表示是否可以具备弹出层的功能。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignComponentBase.BuildComponentAttributes(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDesignComponentBase.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            如果重写，请手动调用 <see cref="M:TDesign.TDesignComponentBase.BuildPopupAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})"/> 方法。
+            </summary>
+            <param name="attributes">The attributes for components.</param>
+        </member>
+        <member name="M:TDesign.TDesignComponentBase.BuildPopupAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            构建 Popup 相关的属性。
+            </summary>
+            <param name="attributes">The attributes for components.</param>
+        </member>
+        <member name="T:TDesign.TDesignExtensions">
+            <summary>
+            TDesign 的扩展。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignExtensions.GetStatusIconName(TDesign.Status,System.Func{TDesign.Status,TDesign.IconName})">
+            <summary>
+            获取状态对应的图标名称。
+            </summary>
+            <param name="status">The status.</param>
+            <param name="mapping">状态和图标的映射关系。</param>
+            <returns>图标枚举。</returns>
+        </member>
+        <member name="M:TDesign.TDesignExtensions.ImportScriptAsync(Microsoft.JSInterop.IJSRuntime)">
+            <summary>
+            引入 tdesign-blazor.js 脚本。
+            </summary>
+            <param name="js"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.TDesignOptions">
+            <summary>
+            TDesign 的配置项。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignOptions.Dark">
+            <summary>
+            获取或设置使用暗色主题。
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.DependencyInjectionExtensions">
+            <summary>
+            依赖注入的扩展。
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.DependencyInjectionExtensions.AddTDesign(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            添加 TDesign 组件的默认配置。
+            </summary>
+            <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 实例。</param>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.DependencyInjectionExtensions.AddTDesign(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{TDesign.TDesignOptions})">
+             <summary>
+             添加 TDesign 组件的全局配置。
+             </summary>
+             <param name="services"><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> 实例。</param>
+             <param name="configure">个性化配置。</param>
+            <remarks>暂不对外开放。</remarks>
+        </member>
+    </members>
+</doc>
