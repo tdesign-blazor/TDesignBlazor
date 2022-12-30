@@ -58,8 +58,7 @@
 
     [Inject] HttpClient? _client { get; set; }
     [Inject] IJSRuntime JS { get; set; }
-    bool IsWasm => JS.GetType().ToString()
-            .Contains("DefaultWebAssemblyJSRuntime");
+    bool IsWasm => JS is IJSInProcessRuntime;
 
     protected override async Task OnParametersSetAsync()
     {

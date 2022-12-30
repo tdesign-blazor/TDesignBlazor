@@ -141,4 +141,8 @@
     <None Include="wwwroot\js\popper\utils\within.js" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo OutDir:$(OutDir)&#xD;&#xA;echo ----------------------------------&#xD;&#xA;for /d /r %25%25i in (..\..\*) do ( echo %25%25i )&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot" />
+  </Target>
+
 </Project>
