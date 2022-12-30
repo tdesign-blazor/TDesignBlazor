@@ -20,14 +20,10 @@ jobs:
             6.0.x
             7.0.x
 
-      - name: 转换 tag
-        id: version
-        uses: release-kit/semver@v1
-
       - name: 发布 nuget 包
         run: |
-          Version=${{steps.version.outputs.full}}
-          echo "The version {$Version}"
+          VERSION=`git describe --tags`
+          echo "Publishing Version: ${VERSION}"
           dotnet build
           dotnet pack ./src/TDesign/TDesign.csproj -c release --no-build -o ./pack -p:PackageVersion=$Version
           dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
