@@ -2,88 +2,46 @@
 @using System.Xml;
 @using System.Reflection;
 <div id="@Id">
-
-
-@{
-    var bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
-    var propertys = Component?.GetProperties(bindingFlags);
-    var methods = Component?.GetMethods(bindingFlags).Where(x => !x.IsVirtual && !x.IsSpecialName);
-    Parameters = new List<Parameter>();
-    if (propertys.Any())
+    @if (Parameters.Any())
     {
-        foreach (var itme in propertys)
-        {
-            var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
-            var type = TypeToCSharp(itme.PropertyType);
-            var @default = itme.PropertyType.IsGenericType || !itme.PropertyType.IsValueType ? "null" : Activator.CreateInstance(itme?.PropertyType)?.ToString();
-            Parameter parameter = new()
-                    {
-                        Name = itme.Name,
-                        Default = @default,
-                        Description = $"{GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}")}{GetEnumFildJoin(itme?.PropertyType)}",
-                        Required = editorRequiredAttributes.Any(),
-                        Type = type
-                    };
-            Parameters.Add(parameter);
+        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
+        <TTable TItem="Parameter" Data="Parameters">
+            <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
+            <FieldColumn Title="类型">
+                <code>@context?.Type</code>
+            </FieldColumn>
 
-        }
+            <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
+            <FieldColumn Value="context?.Default" Title="默认值" AdditionalStyle="width:100px"></FieldColumn>
+            <FieldColumn Title="必填" AdditionalStyle="width:80px">
+                @if (context.Required)
+                {
+                    <TTag Theme="Theme.Danger">Y</TTag>
+                }
+                else
+                {
+                    <TTag Type="TagType.Outline" Theme="Theme.Success">N</TTag>
+                }
+            </FieldColumn>
 
-        @if (Parameters.Any())
-        {
-                <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@(GetTitle()) 的参数</h3>
-            <TTable TItem="Parameter" Data="Parameters">
-                <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
-                <FieldColumn Title="类型" >
-                                    <code>@context?.Type</code>
-                                    </FieldColumn>
-
-                <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
-                <FieldColumn Value="context?.Default" Title="默认值" AdditionalStyle="width:100px"></FieldColumn>
-                                    <FieldColumn Title="必填" AdditionalStyle="width:80px">
-                    @if (context.Required)
-                    {
-                        <TTag Theme="Theme.Danger">Y</TTag>
-                    }
-                    else
-                    {
-                        <TTag Type="TagType.Outline" Theme="Theme.Success">N</TTag>
-                    }
-                </FieldColumn>
-            </TTable>
-        }
-
+        </TTable>
     }
-
-    if (methods.Any())
+    @if (Methods.Any())
     {
-        Methods = new List<Method>();
-        foreach (var itme in methods)
-        {
-            var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
-            Method method = new()
-                    {
-                        Name = $"{itme.Name}",
-                        Description = GetXmlDescription(key),
-                        Parameter = String.Join(", ", itme.GetParameters().Select(x => $"{x.ParameterType.Name} {x.Name}"))
-                    };
-            Methods.Add(method);
-        }
-        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@(GetTitle()) 的方法</h3>
+
+        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
         <TTable TItem="Method" Data="Methods">
             <FieldColumn Value="context?.Name" Title="名称" AdditionalStyle="width:200px"></FieldColumn>
-            <FieldColumn  Title="参数" AdditionalStyle="width:300px">
-            <code>@context?.Parameter</code>
-            </FieldColumn>
+            <FieldColumn Value="context?.Parameter" Title="参数" AdditionalStyle="width:200px"></FieldColumn>
             <FieldColumn Value="context?.Description" Title="描述"></FieldColumn>
         </TTable>
     }
-}
 </div>
 @code {
     /// <summary>
     /// 标题
     /// </summary>
-    [Parameter]public string? Title{ get; set; }
+    string? Title => TypeToCSharp(Component);
     /// <summary>
     /// 参数
     /// </summary>
@@ -98,60 +56,50 @@
     [Parameter] public Type? Component { get; set; }
     [Parameter] public string? Id { get; set; }
 
+    [Inject] HttpClient? _client { get; set; }
+    [Inject] IJSRuntime JS { get; set; }
+    bool IsWasm => JS is IJSInProcessRuntime;
 
-    public string? GetTitle()
+    protected override async Task OnParametersSetAsync()
     {
-        if (!string.IsNullOrEmpty(Title))
+        await InitApiAsync();
+    }
+    private async Task InitApiAsync()
+    {
+        var bindingFlags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance;
+        var propertys = Component?.GetProperties(bindingFlags);
+        var methods = Component?.GetMethods(bindingFlags).Where(x => !x.IsVirtual && !x.IsSpecialName);
+        Parameters = new List<Parameter>();
+        Methods = new List<Method>();
+
+        foreach (var itme in propertys)
         {
-            return Title;
+            var editorRequiredAttributes = itme.GetCustomAttributes(typeof(EditorRequiredAttribute), true);
+            var type = TypeToCSharp(itme.PropertyType);
+            var @default = itme.PropertyType.IsGenericType || !itme.PropertyType.IsValueType ? "null" : Activator.CreateInstance(itme?.PropertyType)?.ToString();
+            Parameter parameter = new()
+                {
+                    Name = itme.Name,
+                    Default = @default,
+                    Description = $"{await GetXmlDescription($"P:{itme?.DeclaringType?.FullName}.{itme?.Name}")}{await GetEnumFildJoin(itme?.PropertyType)}",
+                    Required = editorRequiredAttributes.Any(),
+                    Type = type
+                };
+            Parameters.Add(parameter);
+
         }
-        return TypeToCSharp(Component);
-    }
 
-    /// <summary>
-    /// 参数列表模型
-    /// </summary>
-    public class Parameter
-    {
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string? Name { get; set; }
-        /// <summary>
-        /// 类型
-        /// </summary>
-        public string? Type { get; set; }
-        /// <summary>
-        /// 默认值
-        /// </summary>
-        public string? Default { get; set; }
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string? Description { get; set; }
-        /// <summary>
-        /// 必填
-        /// </summary>
-        public bool Required { get; set; }
-    }
-
-    /// <summary>
-    /// 方法列表模型
-    /// </summary>
-    public class Method
-    {
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string? Name { get; set; }
-        /// <summary>
-        /// 参数
-        /// </summary>
-        public string? Parameter { get; set; }
-        /// <summary>
-        /// 描述
-        /// </summary>
-        public string? Description { get; set; }
+        foreach (var itme in methods)
+        {
+            var key = $"M:{itme?.DeclaringType?.FullName}.{itme?.Name}({String.Join(",", itme.GetParameters().Select(x => x.ParameterType.FullName))})";
+            Method method = new()
+                {
+                    Name = $"{itme.Name}",
+                    Description = await GetXmlDescription(key),
+                    Parameter = String.Join(", ", itme.GetParameters().Select(x => $"{x.ParameterType.Name} {x.Name}"))
+                };
+            Methods.Add(method);
+        }
     }
 
     /// <summary>
@@ -159,10 +107,23 @@
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    private string? GetXmlDescription(string key)
+    private async Task<string?> GetXmlDescription(string key)
     {
+
         XmlDocument xml = new XmlDocument();
-        xml.Load("./TDesign.xml");
+
+        if (IsWasm)
+        {
+            // WebAssembly
+            var xmlStream = await _client.GetStreamAsync("TDesign.xml");
+            xml.Load(xmlStream);
+        }
+        else
+        {
+            // Server
+            var xmlPath = System.IO.Path.Combine(".", "TDesign.xml");
+            xml.Load(xmlPath);
+        }
 
         var members = xml.SelectNodes("/doc/members/member");
 
@@ -207,7 +168,7 @@
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
-    private string? GetEnumFildJoin(Type type)
+    private async Task<string?> GetEnumFildJoin(Type type)
     {
         var reuslt = "";
         if (type.IsEnum)
@@ -215,9 +176,56 @@
             var fieldInfos = type.GetFields(BindingFlags.Public | BindingFlags.Static);
             foreach (var item in fieldInfos)
             {
-                reuslt += GetXmlDescription($"F:{item.DeclaringType.FullName}.{item.Name}") + "\n";
+                reuslt += await GetXmlDescription($"F:{item?.DeclaringType?.FullName}.{item?.Name}") + "\n";
             }
         }
         return reuslt;
+    }
+
+    /// <summary>
+    /// 参数列表模型
+    /// </summary>
+    public class Parameter
+    {
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string? Name { get; set; }
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public string? Type { get; set; }
+        /// <summary>
+        /// 默认值
+        /// </summary>
+        public string? Default { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string? Description { get; set; }
+        /// <summary>
+        /// 必填
+        /// </summary>
+        public bool Required { get; set; }
+    }
+
+    /// <summary>
+    /// 方法列表模型
+    /// </summary>
+    public class Method
+    {
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string? Name { get; set; }
+        /// <summary>
+        /// 参数
+        /// </summary>
+        public string? Parameter { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string? Description { get; set; }
     }
 }

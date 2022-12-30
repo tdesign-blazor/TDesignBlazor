@@ -141,4 +141,8 @@
     <None Include="wwwroot\js\popper\utils\within.js" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="rem(){ :;};rem '&#xD;&#xA;@goto b&#xD;&#xA;';&#xD;&#xA;echo sh;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot;&#xD;&#xA;exit&#xD;&#xA;&#xD;&#xA;:b&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot" />
+  </Target>
+
 </Project>
