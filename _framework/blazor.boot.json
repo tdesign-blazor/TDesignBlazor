@@ -68,9 +68,9 @@
       "System.Threading.dll": "sha256-uygwAT4QzY\/9yjMpyZtTNvSbrpGfC4JLCJK0EFFkWsI=",
       "System.Threading.Tasks.Parallel.dll": "sha256-uXQx+Qo1GcqEQ4Lwn+7uogTSO2bMn4Wt3duwwb+SlC8=",
       "System.Xml.ReaderWriter.dll": "sha256-V97uh6awrkcDHJVC4uLfJB39DdDfRGgFWu6g\/0eMvcY=",
-      "TDesign.dll": "sha256-2EEJRG6WC9dCrSDRED6leMbMImz8Y647\/a6e1syp5VA=",
-      "TDesign.Docs.Shared.dll": "sha256-0ByaUf6rOJ5dNtXePloIQiIbH7j1QBL+Nb+DS7Pw9jE=",
-      "TDesign.Docs.WebAssembly.dll": "sha256-mtN5E+u5vkduei2KfT3p9pfpL2gyV6DcrAlrcCU1kbU="
+      "TDesign.dll": "sha256-33cPMGgjlTBoqHkY9rbnyIFWF9ZIv+02BtJyYlyG728=",
+      "TDesign.Docs.Shared.dll": "sha256-8gz0x2H7vXtHDctioPlxsgvFZymtagYBZ+2+ZY9KX+g=",
+      "TDesign.Docs.WebAssembly.dll": "sha256-yFLw0x0UAL0vc56nkKCLJWClDXKdW1wQegvTpkM2mEI="
     },
     "extensions": null,
     "lazyAssembly": null,
