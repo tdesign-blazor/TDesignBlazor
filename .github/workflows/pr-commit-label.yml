@@ -35,7 +35,7 @@ jobs:
                 labels: ['documentation']
               - type: 'build'
                 nouns: ['build','rebuild']
-                labels: ['build','skip-release']
+                labels: ['build','release/skip']
               - type: 'chore'
                 nouns: ['chore', 'CHORE']
                 labels: ['chore']
