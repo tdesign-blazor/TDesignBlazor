@@ -1,0 +1,51 @@
+name: PR conventional labeled
+
+on:
+  pull_request:
+    branches: [master]
+    types:
+      [opened, reopened, labeled, unlabeled]
+
+jobs:
+  assign-labels:
+    runs-on: ubuntu-latest
+    name: Assign labels in pull request
+    if: github.event.pull_request.merged == false
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: mauroalderete/action-assign-labels@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          conventional-commits: |
+            conventional-commits:
+              - type: 'fix'
+                nouns: ['FIX', 'Fix', 'fix', 'FIXED', 'Fixed', 'fixed']
+                labels: ['bug','patch']
+              - type: 'feature'
+                nouns: ['FEATURE', 'Feature', 'feature', 'FEAT', 'Feat', 'feat']
+                labels: ['feature','minar']
+              - type: 'breaking_change'
+                nouns: ['BREAKING CHANGE', 'BREAKING', 'MAJOR']
+                labels: ['BREAKING CHANGE','major']
+              - type: 'documentation'
+                nouns: ['doc','docs','document','documentation']
+                labels: ['documentation']
+              - type: 'build'
+                nouns: ['build','rebuild']
+                labels: ['build','skip-release']
+              - type: 'chore'
+                nouns: ['chore', 'CHORE']
+                labels: ['chore']
+              - type: 'style'
+                nouns: ['stlye','STYLE']
+                labels: ['chore']                
+              - type: 'refactor'
+                nouns: ['refactor', 'REFACTOR']
+                labels: ['chore']           
+              - type: 'pref'
+                nouns: ['pref', 'PREF','performance','PERFORMANCE']
+                labels: ['chore']           
+              - type: 'test'
+                nouns: ['test', 'TEST']
+                labels: ['chore']
