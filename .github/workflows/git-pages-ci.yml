@@ -17,23 +17,25 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/checkout@v2
       with:
-        dotnet-version: 6.0
+        dotnet-version: |
+          6.0.x
+          7.0.x
 
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./release --nologo
+      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./ --nologo
     
     # changes the base-tag in index.html from '/' to 'WebAssembly' to match GitHub Pages repository subdirectory
-    - name: Change base-tag in index.html from / to WebAssembly
-      run: sed -i 's/<base href="\/" \/>/<base href="\/TDesignBlazor\/" \/>/g' release/wwwroot/index.html
+    #- name: Change base-tag in index.html from / to WebAssembly
+    #  run: sed -i 's/<base href="\/" \/>/<base href="\/TDesignBlazor\/" \/>/g' release/wwwroot/index.html
     
     # copy index.html to 404.html to serve the same file when a file is not found
     - name: copy index.html to 404.html
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
+      run: cp wwwroot/index.html wwwroot/404.html
 
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
+    #- name: Add .nojekyll file
+    #  run: touch release/wwwroot/.nojekyll
       
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1

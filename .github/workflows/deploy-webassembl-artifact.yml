@@ -1,0 +1,55 @@
+name: Deploy to Artifact
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  Deploy-Artifact:    
+    # use ubuntu-latest image to run steps on
+    runs-on: ubuntu-latest
+    steps:
+    # uses GitHub's checkout action to checkout code form the master branch
+    - uses: actions/checkout@v2
+    # sets up .NET Core SDK 6.0
+    - name: Setup .NET Core SDK
+      uses: actions/checkout@v2
+      with:
+        dotnet-version: |
+          6.0.x
+          7.0.x
+          
+    # publishes Blazor project to the release-folder
+    - name: Publish .NET Core Project
+      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./release --nologo
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: tdesign-WebAssembly-artifact
+        path: ./release
+  Push-Deploy-branch:
+    need: Deploy-Artifact
+    runs-on: ubuntu-latest
+    steps:  
+
+      - name: Checkout Deploy-Pages branch
+        uses: actions/checkout@v2
+          with:
+            ref: deploy-pages
+      - name: Download Artifact
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: tdesign-WebAssembly-artifact
+          path: ./release
+      - name: Publish to deploy branch
+        run: |
+          git add .
+          git commit -m "New releases"
+          git push
+
+
+    
+
+
