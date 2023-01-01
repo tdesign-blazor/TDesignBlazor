@@ -45,6 +45,8 @@ jobs:
           path: ./release
       - name: Publish to deploy branch
         run: |
+          git config user.name 'deploy'
+          git config user.email 'deploy@tdesign.com'
           git add .
           git commit -m "New releases"
           git push
