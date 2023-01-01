@@ -30,13 +30,13 @@ jobs:
         name: tdesign-WebAssembly-artifact
         path: ./release
   Push-Deploy-branch:
-    need: Deploy-Artifact
+    needs: Deploy-Artifact
     runs-on: ubuntu-latest
     steps:  
 
       - name: Checkout Deploy-Pages branch
         uses: actions/checkout@v2
-          with:
+        with:
             ref: deploy-pages
       - name: Download Artifact
         uses: actions/download-artifact@v3.0.1
