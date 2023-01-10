@@ -104,7 +104,7 @@
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
 
 ## :newspaper: 许可证（License）
-[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesign/blob/master/LICENSE.md)
+[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesignBlazor/blob/master/LICENSE.md)
 
 ## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
