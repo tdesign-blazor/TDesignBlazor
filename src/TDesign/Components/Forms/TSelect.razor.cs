@@ -17,22 +17,11 @@ public partial class TSelect<TValue>
     /// </summary>
     [Parameter] public EventCallback<TValue> OnValueSelected { get; set; }
     /// <summary>
-    /// 自适应宽度。
-    /// </summary>
-    [Parameter] public bool AutoWidth { get; set; }
-    /// <summary>
-    /// 禁用状态。
-    /// </summary>
-    [Parameter] public bool Disabled { get; set; }
-    /// <summary>
-    /// 尺寸，默认 <see cref="Size.Medium"/>。
-    /// </summary>
-    [Parameter] public Size Size { get; set; } = Size.Medium;
-    /// <summary>
     /// 无边框样式。
     /// </summary>
     [Parameter][CssClass("t-select-input--borderless")] public bool Borderless { get; set; }
 
+    [Parameter] public string? Placeholder { get; set; }
     /// <summary>
     /// Popup 组件的引用。
     /// </summary>
@@ -51,7 +40,7 @@ public partial class TSelect<TValue>
     public Task? SelectValue(TValue? value, string? label)
     {
         Value = value;
-        ValueChanged?.InvokeAsync(value);
+        ValueChanged.InvokeAsync(value);
         OnValueSelected.InvokeAsync(value);
         SelectedLabel = label;
         this.Refresh();
@@ -73,7 +62,7 @@ public partial class TSelect<TValue>
 [CascadingTypeParameter("TValue")]
 [HtmlTag("li")]
 [CssClass("t-select-option")]
-public class TSelectOption<TValue> : BlazorAbstractComponentBase, IHasChildContent
+public class TSelectOption<TValue> : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联 <see cref="TSelect{TValue}"/> 组件。

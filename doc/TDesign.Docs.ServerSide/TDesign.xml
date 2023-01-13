@@ -403,8 +403,28 @@
             对齐方式。
             </summary>
         </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.AdditionalCssClass">
+        <member name="P:TDesign.TDesignInputComonentBase`1.AdditionalClass">
             <inheritdoc/>    
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.ValueChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.ValueExpression">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.CascadedEditContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignInputComonentBase`1.EventName">
+            <summary>
+            获取触发数据绑定的事件名称。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
         </member>
         <member name="M:TDesign.TDesignInputComonentBase`1.BuildInputWrapper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String)">
             <summary>
@@ -417,25 +437,6 @@
         </member>
         <member name="M:TDesign.TDesignInputComonentBase`1.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <inheritdoc/>
-        </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.CascadingPopup">
-            <summary>
-            级联 TPopup 组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.CanPopup">
-            <summary>
-            获取一个布尔值，表示是否可以具备弹出层的功能。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDesignInputComonentBase`1.BuildComponentAttributes(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TDesignInputComonentBase`1.BuildPopupAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            构建 Popup 相关的属性。
-            </summary>
-            <param name="attributes">The attributes for components.</param>
         </member>
         <member name="T:TDesign.TForm">
             <summary>
@@ -451,6 +452,27 @@
             <summary>
             表单的对齐方式。默认时 <see cref="F:TDesign.FormAlignment.Right"/> 。
             </summary>
+        </member>
+        <member name="P:TDesign.TForm.Model">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.OnSubmit">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.OnValidSubmit">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.OnInvalidSubmit">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.FixedEditContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.EditContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TForm.ChildContent">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.FormAlignment">
             <summary>
@@ -581,11 +603,6 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:TDesign.TInputCheckBox.Disabled">
-            <summary>
-            禁用状态。
-            </summary>
-        </member>
         <member name="P:TDesign.TInputCheckBox.Indeterminate">
             <summary>
             支持未确定状态。
@@ -688,21 +705,6 @@
         <member name="P:TDesign.TInputNumber`1.TipAlign">
             <summary>
             表示提示的对齐方式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputNumber`1.Readonly">
-            <summary>
-            设置为只读状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputNumber`1.Disabled">
-            <summary>
-            设置为禁用状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputNumber`1.EventName">
-            <summary>
-            双向绑定触发事件名称
             </summary>
         </member>
         <member name="M:TDesign.TInputNumber`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
@@ -817,19 +819,9 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:TDesign.TInputRadioGroup`1.Size">
-            <summary>
-            尺寸。
-            </summary>
-        </member>
         <member name="P:TDesign.TInputRadioGroup`1.ButtonStyle">
             <summary>
             当 <see cref="P:TDesign.TInputRadioGroup`1.TButton"/> 是 <c>true</c> 时的按钮风格。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputRadioGroup`1.Disabled">
-            <summary>
-            按钮组所有单选框都禁用。
             </summary>
         </member>
         <member name="P:TDesign.TInputRadioGroup`1.OnValueSelected">
@@ -1027,21 +1019,6 @@
             设置当选项被选中后的回调。
             </summary>
         </member>
-        <member name="P:TDesign.TSelect`1.AutoWidth">
-            <summary>
-            自适应宽度。
-            </summary>
-        </member>
-        <member name="P:TDesign.TSelect`1.Disabled">
-            <summary>
-            禁用状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.TSelect`1.Size">
-            <summary>
-            尺寸，默认 <see cref="F:TDesign.Size.Medium"/>。
-            </summary>
-        </member>
         <member name="P:TDesign.TSelect`1.Borderless">
             <summary>
             无边框样式。
@@ -1148,12 +1125,6 @@
             </summary>
             <param name="builder"></param>
             <param name="sequence"></param>
-        </member>
-        <member name="M:TDesign.TSwitch.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            <inheritdoc/>
-            </summary>
-            <param name="attributes"></param>
         </member>
         <member name="M:TDesign.TSwitch.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <summary>
@@ -1436,11 +1407,6 @@
             导航菜单的项。
             </summary>
         </member>
-        <member name="P:TDesign.TMenuItem.TagName">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TMenuItem.Disabled">
             <summary>
             禁用状态。
@@ -1464,6 +1430,26 @@
         <member name="P:TDesign.TMenuItem.Active">
             <summary>
             选中状态。若为 <c>false</c> 则根据导航自动判断。
+            </summary>
+        </member>
+        <member name="P:TDesign.TMenuItem.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.OnAfterRenderAsync(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.NavigateTo">
+            <summary>
+            跳转到指定的连接地址。
             </summary>
         </member>
         <member name="T:TDesign.TMenuItemGroup">
@@ -2118,6 +2104,9 @@
         <member name="M:TDesign.TPopup.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <inheritdoc/>
         </member>
+        <member name="M:TDesign.TPopup.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
         <member name="M:TDesign.TPopup.Show(Microsoft.AspNetCore.Components.ElementReference)">
             <summary>
             触发指定元素引用并显示弹出层。
@@ -2328,12 +2317,6 @@
             获取或设置列中输出的值。
             </summary>
         </member>
-        <member name="M:TDesign.FieldColumn`1.OnInitializedAsync">
-            <summary>
-            <inheritdoc/>
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:TDesign.FieldColumn`1.GetColumnContent">
             <summary>
             <inheritdoc/>
@@ -2376,6 +2359,12 @@
             获取表格列的内容。
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:TDesign.TableColumnBase.GetTagName">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TableColumnBase.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.TTable`1">
             <summary>
@@ -3353,6 +3342,9 @@
             <summary>
             自定义图标的名称。
             </summary>
+        </member>
+        <member name="P:TDesign.TTimelineItem.AdditionalClass">
+            <inheritdoc/>
         </member>
         <member name="M:TDesign.TTimelineItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <inheritdoc/>
@@ -4498,9 +4490,6 @@
             <summary>
             获取一个布尔值，表示是否可以具备弹出层的功能。
             </summary>
-        </member>
-        <member name="M:TDesign.TDesignComponentBase.BuildComponentAttributes(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32@)">
-            <inheritdoc/>
         </member>
         <member name="M:TDesign.TDesignComponentBase.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>

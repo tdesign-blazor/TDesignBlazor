@@ -45,10 +45,9 @@ public class TPopup : TDesignComponentBase, IHasChildContent
 
     Popper? _instance;
 
-    protected override void OnComponentParameterSet()
+    protected override void OnParametersSet()
     {
-        base.OnComponentParameterSet();
-
+        base.OnParametersSet();
         PopupContent ??= builder => builder.AddContent(0, Content);
     }
 
@@ -94,6 +93,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         }
     }
 
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);

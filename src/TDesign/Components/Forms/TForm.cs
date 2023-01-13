@@ -1,10 +1,12 @@
-﻿namespace TDesign;
+﻿using Microsoft.AspNetCore.Components.Forms;
+
+namespace TDesign;
 
 /// <summary>
 /// 表示作为表单的组件。
 /// </summary>
 [CssClass("t-form")]
-public class TForm : BlazorFormComponentBase<TForm>
+public class TForm : TDesignComponentBase,IHasForm
 {
     /// <summary>
     /// 设置作为行内布局。
@@ -15,6 +17,20 @@ public class TForm : BlazorFormComponentBase<TForm>
     /// 表单的对齐方式。默认时 <see cref="FormAlignment.Right"/> 。
     /// </summary>
     [Parameter] public FormAlignment Alignment { get; set; } = FormAlignment.Right;
+    /// <inheritdoc/>
+    [Parameter]public object? Model { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public EventCallback<EditContext> OnSubmit { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public EventCallback<EditContext> OnInvalidSubmit { get; set; }
+    /// <inheritdoc/>
+    public EditContext? FixedEditContext { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public EditContext? EditContext { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public RenderFragment<EditContext>? ChildContent { get; set; }
 }
 
 /// <summary>

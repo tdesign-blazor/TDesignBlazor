@@ -9,6 +9,8 @@
     <PackageId>TDesign</PackageId>
     <Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
     <Authors>William Zhou and Contributors</Authors>
+	  <VersionPrefix>0.5</VersionPrefix>
+	  <VersionSuffix>beta</VersionSuffix>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <OutputPath>.\bin\$(Configuration)</OutputPath>
@@ -69,7 +71,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="2.1.0" />
+    <PackageReference Include="ComponentBuilder" Version="3.0.0-beta-0114" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
       <PrivateAssets>all</PrivateAssets>

@@ -8,7 +8,7 @@ namespace TDesign;
 [ChildComponent(typeof(TTimeline))]
 [CssClass("t-timeline-item")]
 [HtmlTag("li")]
-public class TTimelineItem : TDesignComponentBase, IHasChildContent
+public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAdditionalClass
 {
     /// <summary>
     /// <see cref="TTimeline"/> 父组件。
@@ -34,6 +34,8 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent
     /// 自定义图标的名称。
     /// </summary>
     [Parameter] public object? IconName { get; set; }
+    /// <inheritdoc/>
+    [Parameter]public string? AdditionalClass { get; set; }
 
 
     /// <inheritdoc/>

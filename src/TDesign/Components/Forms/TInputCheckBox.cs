@@ -7,16 +7,12 @@ namespace TDesign;
 /// </summary>
 [HtmlTag("input")]
 [CssClass("t-checkbox__former")]
-public class TInputCheckBox : BlazorInputComponentBase<bool?>, IHasChildContent, IHasDisabled
+public class TInputCheckBox : TDesignInputComonentBase<bool?>, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
-    /// <summary>
-    /// 禁用状态。
-    /// </summary>
-    [Parameter] public bool Disabled { get; set; }
     /// <summary>
     /// 支持未确定状态。
     /// </summary>
@@ -38,18 +34,16 @@ public class TInputCheckBox : BlazorInputComponentBase<bool?>, IHasChildContent,
             @class = HtmlHelper.Class
                                 .Append("t-checkbox")
                                 .Append("t-is-disabled", Disabled)
-                                .Append("t-is-indeterminate", CurrentValue is null && Indeterminate)
-                                .Append("t-is-checked", CurrentValue.HasValue && CurrentValue.Value)
+                                .Append("t-is-indeterminate", Value is null && Indeterminate)
+                                .Append("t-is-checked", Value.HasValue && Value.Value)
         });
     }
+
+    protected override string EventName => "onchange";
+
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         attributes["type"] = "checkbox";
         base.BuildAttributes(attributes);
-        base.AddValueChangedAttribute(attributes);
-        if (Disabled)
-        {
-            attributes["disabled"] = true;
-        }
     }
 }

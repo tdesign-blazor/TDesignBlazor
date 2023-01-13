@@ -6,7 +6,7 @@ namespace TDesign;
 /// 开关组件
 /// </summary>
 [CssClass("t-switch")]
-public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
+public class TSwitch : TDesignInputComonentBase<bool>, IHasDisabled
 {
     /// <summary>
     /// 是否禁用
@@ -73,18 +73,7 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
 
     private const string CHECKED_CLASS_NAME = "t-is-checked";
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    /// <param name="attributes"></param>
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        attributes["onclick"] = HtmlHelper.Event.Create(this, () =>
-        {
-            CurrentValue = !Value;
-            OnChange.InvokeAsync(CurrentValue);
-        });
-    }
+    protected override string EventName => "onclick";
 
     /// <summary>
     /// <inheritdoc/>
@@ -92,7 +81,7 @@ public class TSwitch : BlazorInputComponentBase<bool>, IHasDisabled
     /// <param name="builder"></param>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
-        AppendClass(builder, CHECKED_CLASS_NAME, CurrentValue);
+        AppendClass(builder, CHECKED_CLASS_NAME, this.Value);
         AppendClass(builder, LOADING_CLASS_NAME, Loading);
         AppendClass(builder, DISABLED_CLASS_NAME, Disabled);
     }

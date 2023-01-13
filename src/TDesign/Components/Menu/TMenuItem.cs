@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace TDesign;
 
@@ -8,14 +9,15 @@ namespace TDesign;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
 [ChildComponent(typeof(TMenu))]
-public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
+public class TMenuItem : TDesignComponentBase,IHasNavLink, IHasDisabled, IHasActive,IHasChildContent
 {
+    [Inject] public NavigationManager NavigationManager { get; set; }
     [CascadingParameter] public TMenu CascadingMenu { get; set; }
     [CascadingParameter] public TSubMenu? CascadingSubMenu { get; set; }
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    protected override string TagName => CascadingSubMenu is not null ? "div" : "li";
+    [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.All;
+    public bool IsActive { get; set; }
+    internal bool CanNavigationChanged { get; set; } = true;
+
     /// <summary>
     /// 禁用状态。
     /// </summary>
@@ -36,10 +38,13 @@ public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
     /// 选中状态。若为 <c>false</c> 则根据导航自动判断。
     /// </summary>
     [Parameter] public bool Active { get; set; }
+    /// <inheritdoc/>
+    [Parameter]public RenderFragment? ChildContent { get; set; }
+
+    protected override string? GetTagName() => CascadingSubMenu is not null ? "div" : "li";
 
 
-    internal bool CanNavigationChanged { get; set; } = true;
-
+    /// <inheritdoc/>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
@@ -50,12 +55,14 @@ public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
     }
 
 
+    /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append("t-is-active", Active || IsActive)
             .Append("t-menu__item--plain");
     }
 
+    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         if (TIconPrefix is not null)
@@ -71,6 +78,7 @@ public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
         }
     }
 
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         if (CanNavigationChanged && !string.IsNullOrWhiteSpace(Link))
@@ -80,9 +88,12 @@ public class TMenuItem : BlazorAnchorComponentBase, IHasDisabled, IHasActive
         }
     }
 
+    /// <summary>
+    /// 跳转到指定的连接地址。
+    /// </summary>
     void NavigateTo()
     {
-        NavigationManger.NavigateTo(Link);
+        NavigationManager.NavigateTo(Link);
         CascadingSubMenu?.CollapseSubMenuItem();
     }
 }

@@ -21,15 +21,6 @@ public abstract class TDesignComponentBase : BlazorComponentBase
     /// </summary>
     protected bool CanPopup => CascadingPopup != null;
 
-    /// <inheritdoc/>
-    protected override void BuildComponentAttributes(RenderTreeBuilder builder, out int sequence)
-    {
-        base.BuildComponentAttributes(builder, out sequence);
-
-        builder.AddElementReferenceCapture(++sequence, e => Ref = e);
-    }
-
-
     /// <summary>
     /// 如果重写，请手动调用 <see cref="BuildPopupAttributes(IDictionary{string, object})"/> 方法。
     /// </summary>
@@ -39,6 +30,7 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         BuildPopupAttributes(attributes);
     }
 
+    //TODO 换成 Interceptor 实现
     /// <summary>
     /// 构建 Popup 相关的属性。
     /// </summary>

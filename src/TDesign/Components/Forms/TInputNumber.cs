@@ -12,7 +12,7 @@ namespace TDesign;
 /// </summary>
 /// <typeparam name="TValue">数字类型。</typeparam>
 [CssClass("t-input-number")]
-public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
+public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
 {
     /// <summary>
     /// 允许的泛型类型
@@ -83,18 +83,8 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// 表示提示的对齐方式。
     /// </summary>
     [Parameter] public TipAlign? TipAlign { get; set; } = TDesign.TipAlign.Input;
-    /// <summary>
-    /// 设置为只读状态。
-    /// </summary>
-    [Parameter] public bool Readonly { get; set; }
-    /// <summary>
-    /// 设置为禁用状态。
-    /// </summary>
-    [Parameter] public bool Disabled { get; set; }
-    /// <summary>
-    /// 双向绑定触发事件名称
-    /// </summary>
-    protected override string EventName => "oninput";
+
+    [Parameter] public string? Placeholder { get; set; }
 
     /// <summary>
     /// 重写以构建组件的内容。
@@ -175,16 +165,15 @@ public class TInputNumber<TValue> : BlazorInputComponentBase<TValue>
     /// <returns></returns>
     private async Task ConvertNumberAsync(string? inputString)
     {
-        _ = TryParseValueFromString(inputString, out TValue? num, out _);
+        _ = this.TryParseValueFromString(inputString,out var error);
         if (IsOutOfMax())
         {
-            num = Max;
+            this.ChangeValue(Max);
         }
         if (IsOutOfMin())
         {
-            num = Min;
+            this.ChangeValue(Min);
         }
-        await ValueChanged?.InvokeAsync(num);
     }
 
 
