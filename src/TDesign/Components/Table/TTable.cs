@@ -50,6 +50,11 @@ public class TTable<TItem> : TDesignComponentBase
     /// </summary>
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
 
+    /// <summary>
+    /// 加载中状态。值为 true 会显示默认加载中样式。
+    /// </summary>
+    [Parameter] public bool Loading { get; set; }
+
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
@@ -78,13 +83,29 @@ public class TTable<TItem> : TDesignComponentBase
     /// <param name="sequence">源代码的位置。</param>
     void BuildTable(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, "div", content =>
+        if (Loading)
         {
-            builder.CreateElement(0, "table", table =>
+            builder.CreateComponent<LoadingContainer>(++sequence, container =>
             {
-                BuildTableHeader(table, 0);
-                BuildTableBody(table, 1);
-                BuildTableFooter(table, 2);
+                BuildTableContent(container, sequence);
+                container.CreateComponent<TLoading>(++sequence, attributes: new { Overlay = true });
+            });
+        }
+        else
+        {
+            BuildTableContent(builder, sequence);
+        }
+    }
+
+    private void BuildTableContent(RenderTreeBuilder container, int sequence)
+    {
+        container.CreateElement(++sequence, "div", content =>
+        {
+            content.CreateElement(++sequence, "table", table =>
+            {
+                BuildTableHeader(table, ++sequence);
+                BuildTableBody(table, ++sequence);
+                BuildTableFooter(table, ++sequence);
             },
             new
             {
