@@ -70,20 +70,20 @@ let anchor = {
 
         let anchor = document.getElementById(nodeId);
         let scrollContainer = document.getElementById(parentNodeId);
-        let top = 0;
-        if (scrollContainer == null) {
-            scrollContainer = anchor.offsetParent;
-            top = anchor.offsetTop;
-        } else {
-            let curr = anchor
-            while (scrollContainer != curr && curr != null) {
-                top += curr.offsetTop;
-                curr = curr.offsetParent;
+        let top =0;
+        if(scrollContainer==null){
+          scrollContainer=anchor.offsetParent;
+          top=anchor.offsetTop;
+        }else{
+            let curr=anchor
+            while(scrollContainer!=curr && curr!=null){
+              top+=curr.offsetTop;
+              curr=curr.offsetParent;
             }
         }
-        top = top - scrollContainer.offsetTop;
-        console.log(top);
-        console.log(scrollContainer);
+        top=top-scrollContainer.offsetTop;
+            console.log(top);
+            console.log(scrollContainer);
         // let test = document.getElementById("layout-body");
 
         scrollContainer.scrollTo({
