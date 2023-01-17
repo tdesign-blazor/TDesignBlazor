@@ -1,5 +1,5 @@
 ﻿@page "/components/table"
-<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部","API"})">
+<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态","API"})">
 <PageHeader Title="Table 表格">
     表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
 </PageHeader>
@@ -286,7 +286,63 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
+    </Example>
+    <Example Title="加载状态">
+    <Description>普通加载，会在表格上面显示半透明加载层，表格内容不隐藏。</Description>
+    <RunContent>
+        <TTable TItem="User" Data="UserList" Loading="Loading">
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <TTag Theme="Theme.Primary">男</TTag>
+                    }
+                    else
+                    {
+                        <TTag Theme="Theme.Danger">女</TTag>
+                    }
+                }
+                </FieldColumn>
+        </TTable>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTable TItem=""User"" Data=""UserList"" Loading=""Loading"">
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+        </FieldColumn>
+</TTable>
+```
+```cs
+@code{
+    bool Loading = true;
+}
+```
+")
+    </CodeContent>
+</Example>
+ @code{
+    bool Loading = true;
+ }
+<div id="API"></div>
 <ComponentAPI Component="typeof(TTable<>)"></ComponentAPI>
 @code{
 
