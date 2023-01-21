@@ -85,10 +85,10 @@ public class TTable<TItem> : TDesignComponentBase
     {
         if (Loading)
         {
-            builder.CreateComponent<LoadingContainer>(++sequence, container =>
+            builder.CreateComponent<LoadingContainer>(sequence, container =>
             {
-                BuildTableContent(container, sequence);
-                container.CreateComponent<TLoading>(++sequence, attributes: new { Overlay = true });
+                BuildTableContent(container, 0);
+                container.CreateComponent<TLoading>(1, attributes: new { Overlay = true });
             });
         }
         else
@@ -100,9 +100,9 @@ public class TTable<TItem> : TDesignComponentBase
     private void BuildTableContent(RenderTreeBuilder container, int sequence)
     {
         int childSequence = 0;
-        container.CreateElement(sequence + 1, "div", content =>
+        container.CreateElement(sequence, "div", content =>
         {
-            content.CreateElement(0, "table", table =>
+            content.CreateElement(childSequence, "table", table =>
             {
                 BuildTableHeader(table, childSequence);
                 BuildTableBody(table, childSequence);
