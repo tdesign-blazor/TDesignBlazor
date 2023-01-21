@@ -99,13 +99,14 @@ public class TTable<TItem> : TDesignComponentBase
 
     private void BuildTableContent(RenderTreeBuilder container, int sequence)
     {
-        container.CreateElement(++sequence, "div", content =>
+        int childSequence = 0;
+        container.CreateElement(sequence + 1, "div", content =>
         {
-            content.CreateElement(++sequence, "table", table =>
+            content.CreateElement(0, "table", table =>
             {
-                BuildTableHeader(table, ++sequence);
-                BuildTableBody(table, ++sequence);
-                BuildTableFooter(table, ++sequence);
+                BuildTableHeader(table, childSequence);
+                BuildTableBody(table, childSequence);
+                BuildTableFooter(table, childSequence);
             },
             new
             {
