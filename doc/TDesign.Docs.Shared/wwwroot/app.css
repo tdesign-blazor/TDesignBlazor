@@ -11,6 +11,9 @@ code {
     padding-left: 10px;
     padding-right: 10px;
 }
+:root[theme-mode=dark] code {
+    background-color: var(--td-gray-color-11);
+}
 
 [class*=tdesign-demo-item--grid] .t-col:nth-of-type(2n) > div {
     background: var(--td-brand-color-4);
@@ -166,6 +169,28 @@ code {
         background-color: #efefef !important;
     }
 
+/* 页面滚动条 */
+
+::-webkit-scrollbar-corner, ::-webkit-scrollbar-corner {
+    width: 0
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar {
+    background: transparent;
+    height: 16px;
+    width: 16px
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
+    background: var(--td-bg-color-page)
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb {
+    background-clip: content-box;
+    background-color: var(--td-scrollbar-color);
+    border: 4px solid transparent;
+    border-radius: 8px
+}
 /* 暗黑模式切换 */
 .TDesign-theme-tabs {
     box-sizing: border-box;
@@ -193,3 +218,17 @@ code {
     .TDesign-theme-tabs .t-radio-group.t-radio-group__outline .sun .t-radio-button.t-is-checked {
         color: rgb(255, 189, 46);
     }
+    .TDesign-theme-tabs .t-radio-group.t-radio-group__outline .moon .t-radio-button.t-is-checked {
+        color: var(--text-anti);
+        background-color: var(--td-gray-color-10);
+    }
+
+.t-layout__header .t-head-menu {
+    box-shadow: inset 0 -1px 0 var(--td-gray-color-3);
+}
+:root[theme-mode=dark] .t-layout__header .t-head-menu {
+    box-shadow: inset 0 -1px 0 var(--td-gray-color-11);
+}
+.t-layout__content > div {
+    background-color: var(--td-bg-color-container)
+}
