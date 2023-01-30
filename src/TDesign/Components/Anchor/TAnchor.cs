@@ -101,7 +101,7 @@ namespace TDesign
         /// <returns></returns>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!string.IsNullOrEmpty(Container))
+            if (firstRender && !string.IsNullOrEmpty(Container))
             {
                 var containerId = Container?.Split("#")[1];
                 var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
