@@ -1,6 +1,24 @@
 import { left } from './js/popper/enums.js'
 import { createPopper } from './js/popper/popper.js'
 
+let tdesign = {
+    /**
+     * 为指定的元素订阅js事件，该方法可支持保留原有的事件不被覆盖，并支持参数指定强制覆盖。
+     * @param {Element} el 
+     * @param {String} name 事件名称，如 "onscroll"
+     * @param {Function} method 事件方法
+     * @param {Boolean} cover 是否覆盖原有事件，默认为false，需要覆盖时传入true
+     */
+    setEvent: function(el, name, method, cover = false) {
+        let f = el[name];
+        el[name] = function(e) {
+            if (!cover && f) {
+                f(e)
+            }
+            method(e)
+        }
+    }
+}
 /**
  * @description 组件 affix 用到的js对象。
  */
@@ -13,13 +31,14 @@ let affix = {
      */
     init: function (container, dotnetRef) {
         let el = container ? document.getElementById(container) : document.body
-        el.onscroll = function () {
+        let scroll = function () {
             let boundingClientRect = el.getBoundingClientRect()
             let containerScrollTop = el.scrollTop
             let containerY = parseInt(boundingClientRect.y)
             let containerHeight = el.clientHeight
             dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight)
         }
+        tdesign.setEvent(el, "onscroll", scroll);
     },
     /**
      * 获取组件当前位置距离窗口顶端的高度值，offsetTop
@@ -82,8 +101,8 @@ let anchor = {
             }
         }
         top=top-scrollContainer.offsetTop;
-            console.log(top);
-            console.log(scrollContainer);
+            //console.log(top);
+           // console.log(scrollContainer);
         // let test = document.getElementById("layout-body");
 
         scrollContainer.scrollTo({
@@ -98,9 +117,10 @@ let anchor = {
     * @param id 元素id
     * */
     onAnchorScroll: function (dotNetHelper, id) {
-        document.getElementById(id).onscroll = function (e) {
+        let scroll = function (e) {
             dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
         }
+        tdesign.setEvent(document.getElementById(id), "onscroll", scroll)
     },
 
 
