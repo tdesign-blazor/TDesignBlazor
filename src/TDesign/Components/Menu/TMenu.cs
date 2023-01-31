@@ -41,12 +41,8 @@ public class TMenu : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public int? Width { get; set; }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    protected override void OnParametersSet()
+    protected override void AfterInvokeOnParameterSetInterceptors()
     {
-        base.OnParametersSet();
 
         /* 顶部导航二级菜单问题
         * ***强制设成 popup 的模式显示二级菜单。
@@ -54,16 +50,24 @@ public class TMenu : TDesignComponentBase, IHasChildContent
         * 腾讯说实话：蛋疼的很
         */
 
-        if (!Aside && !Popup)
+        if ( !Aside && !Popup )
         {
             Popup = true;
         }
 
-        if (!Width.HasValue && Collapse)
+        if ( !Width.HasValue && Collapse )
         {
             Width = 64;
         }
     }
+
+    ///// <summary>
+    ///// <inheritdoc/>
+    ///// </summary>
+    //protected override void OnParametersSet()
+    //{
+    //    base.OnParametersSet();
+    //}
 
     /// <summary>
     /// <inheritdoc/>

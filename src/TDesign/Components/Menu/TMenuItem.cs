@@ -9,12 +9,15 @@ namespace TDesign;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
 [ChildComponent(typeof(TMenu))]
-public class TMenuItem : TDesignComponentBase,IHasNavLink, IHasDisabled, IHasActive,IHasChildContent
+public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasActive, IHasChildContent
 {
     [Inject] public NavigationManager NavigationManager { get; set; }
     [CascadingParameter] public TMenu CascadingMenu { get; set; }
     [CascadingParameter] public TSubMenu? CascadingSubMenu { get; set; }
     [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.All;
+
+    string? IHasNavLink.ActiveCssClass => "t-is-active";
+
     public bool IsActive { get; set; }
     internal bool CanNavigationChanged { get; set; } = true;
 

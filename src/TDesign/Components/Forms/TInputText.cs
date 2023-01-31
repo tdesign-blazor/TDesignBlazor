@@ -70,7 +70,7 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
-        attributes["value"] = this.FormatValueAsString();
+        attributes["value"] = this.GetValueAsString();
     }
 }
 

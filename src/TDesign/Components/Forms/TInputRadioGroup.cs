@@ -50,7 +50,7 @@ public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasCh
     /// </summary>
     protected override void OnParametersSet()
     {
-        var newValue = this.FormatValueAsString();
+        var newValue = this.GetValueAsString();
         ChangeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value =>
         {
             this.GetCurrentValueAsString(__value);

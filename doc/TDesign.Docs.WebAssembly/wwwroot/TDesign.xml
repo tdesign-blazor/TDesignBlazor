@@ -1377,11 +1377,6 @@
             侧边菜单的宽度。
             </summary>
         </member>
-        <member name="M:TDesign.TMenu.OnParametersSet">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="M:TDesign.TMenu.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             <inheritdoc/>
