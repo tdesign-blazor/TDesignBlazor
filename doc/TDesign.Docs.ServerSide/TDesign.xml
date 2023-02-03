@@ -2370,6 +2370,11 @@
             <inheritdoc/>
             </summary>
         </member>
+        <member name="P:TDesign.TTable`1.Loading">
+            <summary>
+            加载中状态。值为 true 会显示默认加载中样式。
+            </summary>
+        </member>
         <member name="M:TDesign.TTable`1.OnInitialized">
             <inheritdoc/>
         </member>
