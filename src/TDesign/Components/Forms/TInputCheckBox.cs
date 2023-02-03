@@ -44,6 +44,7 @@ public class TInputCheckBox : TDesignInputComonentBase<bool?>, IHasChildContent
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         attributes["type"] = "checkbox";
+        
         base.BuildAttributes(attributes);
     }
 }

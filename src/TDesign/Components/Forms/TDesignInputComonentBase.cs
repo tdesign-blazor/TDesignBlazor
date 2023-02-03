@@ -8,12 +8,8 @@ namespace TDesign;
 /// 输入控件的基类。
 /// </summary>
 /// <typeparam name="TValue">双向绑定值的类型。</typeparam>
-public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IHasInputValue<TValue>, IHasAdditionalClass
+public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IHasInputValue<TValue?>, IHasAdditionalClass
 {
-    /// <summary>
-    /// 获取当前组件的元素引用。
-    /// </summary>
-    protected ElementReference Ref { get; private set; }
     /// <summary>
     /// 设置只读模式。
     /// </summary>
@@ -62,15 +58,11 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     /// 获取触发数据绑定的事件名称。
     /// </summary>
     protected virtual string EventName => "oninput";
+        
 
-    /// <inheritdoc/>
-    public override Task SetParametersAsync(ParameterView parameters)
+    protected override void AfterSetParameters(ParameterView parameters)
     {
-        parameters.SetParameterProperties(this);
-
         this.InitializeInputValue();
-
-        return base.SetParametersAsync(ParameterView.Empty);
     }
 
     /// <summary>
@@ -112,10 +104,22 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
-        attributes[EventName] = this.CreateValueChangedCallback();
+        BuildEventAttribute(attributes);
+    }
+
+    protected virtual void BuildEventAttribute(IDictionary<string,object> attributes)
+    {
+        attributes[EventName] = HtmlHelper.Event.CreateBinder(this, _value =>
+        {
+            this.ChangeValue(_value);
+        }, Value);
+    }
+
+    /// <inheritdoc/>
+    protected override void DisposeComponentResources()
+    {
+        this.DisposeInputValue();
     }
 
 
-
-   
 }

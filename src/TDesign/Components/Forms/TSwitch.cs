@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using ComponentBuilder;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesign;
 
@@ -6,22 +7,13 @@ namespace TDesign;
 /// 开关组件
 /// </summary>
 [CssClass("t-switch")]
-public class TSwitch : TDesignInputComonentBase<bool>, IHasDisabled
+public class TSwitch : TDesignInputComonentBase<bool>
 {
-    /// <summary>
-    /// 是否禁用
-    /// </summary>
-    [Parameter] public bool Disabled { get; set; }
 
     /// <summary>
     /// 是否加载中
     /// </summary>
     [Parameter] public bool Loading { get; set; }
-
-    /// <summary>
-    /// 尺寸。
-    /// </summary>
-    [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
 
     /// <summary>
     ///  执行当 <see cref="TSwitch"/> 的值发生改变时的事件。
@@ -37,7 +29,7 @@ public class TSwitch : TDesignInputComonentBase<bool>, IHasDisabled
     /// 开关关闭时，显示的自定义内容。
     /// </summary>
     [Parameter] public RenderFragment? FalseContent { get; set; }
-
+    
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -74,6 +66,19 @@ public class TSwitch : TDesignInputComonentBase<bool>, IHasDisabled
     private const string CHECKED_CLASS_NAME = "t-is-checked";
 
     protected override string EventName => "onclick";
+
+    bool ChangedValue { get; set; }
+
+    protected override void BuildEventAttribute(IDictionary<string, object> attributes)
+    {
+        attributes[EventName] = HtmlHelper.Event.Create<MouseEventArgs>(this, e =>
+        {
+            //ChangedValue = !ChangedValue;
+            Value = !Value;
+            ValueChanged.InvokeAsync(Value);
+            StateHasChanged();
+        });
+    }
 
     /// <summary>
     /// <inheritdoc/>

@@ -38,7 +38,7 @@ public abstract class TableColumnBase : TDesignComponentBase, IHasChildContent
     protected abstract RenderFragment? GetColumnContent();
 
     /// <inheritdoc/>
-    protected override string? GetTagName() => IsHeader ? "th" : "td";
+    public override string? GetTagName() => IsHeader ? "th" : "td";
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

@@ -41,8 +41,9 @@ public class TMenu : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public int? Width { get; set; }
 
-    protected override void AfterInvokeOnParameterSetInterceptors()
+    protected override void OnParametersSet()
     {
+        base.OnParametersSet();
 
         /* 顶部导航二级菜单问题
         * ***强制设成 popup 的模式显示二级菜单。

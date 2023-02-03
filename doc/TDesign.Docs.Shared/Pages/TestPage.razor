@@ -1,20 +1,12 @@
 ﻿@page "/test"
 @layout EmptyLayout
 
-@code {
-    List<User> UserList => new(){
-        new User{ Id=1, Name="张三",Age=35,Gender=true},
-        new User{ Id=2, Name="李四",Age=22,Gender=false},
-        new User{ Id=3, Name="王五",Age=35,Gender=true},
-        new User{ Id=4, Name="赵六",Age=18,Gender=false},
-        new User{ Id=5, Name="韩七",Age=65,Gender=true},
-    };
+@*<TInputText @bind-Value="Text" />*@
 
-    class User
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public int? Age { get; set; }
-        public bool Gender { get; set; }
-    }
+<TInputCheckBox @bind-Value="Checked"/>
+
+@code {
+    string? Text{ get; set; }
+
+    bool? Checked { get; set; }
 }

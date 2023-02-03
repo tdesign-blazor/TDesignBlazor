@@ -358,11 +358,6 @@
             </summary>
             <typeparam name="TValue">双向绑定值的类型。</typeparam>
         </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.Ref">
-            <summary>
-            获取当前组件的元素引用。
-            </summary>
-        </member>
         <member name="P:TDesign.TDesignInputComonentBase`1.Readonly">
             <summary>
             设置只读模式。
@@ -423,9 +418,6 @@
             获取触发数据绑定的事件名称。
             </summary>
         </member>
-        <member name="M:TDesign.TDesignInputComonentBase`1.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TDesignInputComonentBase`1.BuildInputWrapper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String)">
             <summary>
             Builds the input wrapper.
@@ -436,6 +428,9 @@
             <param name="otherCss">The other css.</param>
         </member>
         <member name="M:TDesign.TDesignInputComonentBase`1.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDesignInputComonentBase`1.DisposeComponentResources">
             <inheritdoc/>
         </member>
         <member name="T:TDesign.TForm">
@@ -544,17 +539,27 @@
             设置一个委托，表示具备表单验证的字段。
             </summary>
         </member>
+        <member name="P:TDesign.TFormItem.Identifier">
+            <summary>
+            获取绑定字段的识别器。
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.StatusCssClass">
+            <summary>
+            获取状态的 class.
+            </summary>
+        </member>
+        <member name="P:TDesign.TFormItem.ErrorMessages">
+            <summary>
+            获取错误信息。
+            </summary>
+        </member>
         <member name="M:TDesign.TFormItem.GetMember(System.Linq.Expressions.Expression)">
             <summary>
             Gets the member.
             </summary>
             <param name="expression">The expression.</param>
             <returns></returns>
-        </member>
-        <member name="M:TDesign.TFormItem.Dispose">
-            <summary>
-            Cleanup of component
-            </summary>
         </member>
         <member name="T:TDesign.TInputAdornment">
             <summary>
@@ -647,11 +652,6 @@
             初始化 <see cref="T:TDesign.TInputNumber`1"/> 类的新实例。
             </summary>
         </member>
-        <member name="P:TDesign.TInputNumber`1.Size">
-            <summary>
-            设置控件的整体大小。
-            </summary>
-        </member>
         <member name="P:TDesign.TInputNumber`1.Align">
             <summary>
             设置输入框的文本对齐方式。
@@ -675,16 +675,6 @@
         <member name="P:TDesign.TInputNumber`1.Theme">
             <summary>
             设置排列形式和模式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputNumber`1.AutoWidth">
-            <summary>
-            设置可以自适应宽度。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputNumber`1.Status">
-            <summary>
-            设置控件的状态。
             </summary>
         </member>
         <member name="P:TDesign.TInputNumber`1.SuffixText">
@@ -844,12 +834,6 @@
             Gets the selected value.
             </summary>
         </member>
-        <member name="M:TDesign.TInputRadioGroup`1.OnParametersSet">
-            <summary>
-            Method invoked when the component has received parameters from its parent in
-            the render tree, and the incoming values have been assigned to properties.
-            </summary>
-        </member>
         <member name="T:TDesign.RadioButtonStyle">
             <summary>
             单选按钮的风格。
@@ -973,26 +957,6 @@
             用于承载用户多行信息录入的组件。
             </summary>
         </member>
-        <member name="P:TDesign.TInputTextArea.Readonly">
-            <summary>
-            设置只读模式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputTextArea.Disabled">
-            <summary>
-            设置禁用状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputTextArea.Status">
-            <summary>
-            状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputTextArea.AutoFocus">
-            <summary>
-            设置是否自动聚焦。
-            </summary>
-        </member>
         <member name="P:TDesign.TInputTextArea.Rows">
             <summary>
             文本域的最大行数。
@@ -1089,19 +1053,9 @@
             开关组件
             </summary>
         </member>
-        <member name="P:TDesign.TSwitch.Disabled">
-            <summary>
-            是否禁用
-            </summary>
-        </member>
         <member name="P:TDesign.TSwitch.Loading">
             <summary>
             是否加载中
-            </summary>
-        </member>
-        <member name="P:TDesign.TSwitch.Size">
-            <summary>
-            尺寸。
             </summary>
         </member>
         <member name="P:TDesign.TSwitch.OnChange">
@@ -1412,12 +1366,12 @@
             导航的超链接。
             </summary>
         </member>
-        <member name="P:TDesign.TMenuItem.TIconPrefix">
+        <member name="P:TDesign.TMenuItem.IconPrefix">
             <summary>
             前缀图标的名称。
             </summary>
         </member>
-        <member name="P:TDesign.TMenuItem.TIconSuffix">
+        <member name="P:TDesign.TMenuItem.IconSuffix">
             <summary>
             后缀图标的名称。
             </summary>

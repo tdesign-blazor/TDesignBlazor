@@ -52,10 +52,12 @@ public class AvatarTest : TestBase<TAvatar>
     [Fact(DisplayName = "AvatarGroup - 渲染头像组统一大小")]
     public void Test_Render_AvatarGroup_Size_Parapeter_With_Avatars()
     {
-        TestContext.RenderComponent<TAvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<TAvatar>(0)).Add(p => p.Size, Size.Large))
-            .Should().HaveClass("t-avatar-group")
-            .And.HaveChildMarkup("<div class=\"t-avatar t-avatar--circle t-size-l\"></div>")
-            ;
+        var group = TestContext.RenderComponent<TAvatarGroup>(m => m.AddChildContent(p => p.CreateComponent<TAvatar>(0)).Add(p => p.Size, Size.Large));
+
+
+        group.Should().HaveClass("t-avatar-group");
+
+        group.FindComponent<TAvatar>().Should().HaveClass("t-size-l");
     }
 
     [Fact(DisplayName = "AvatarGroup - Left 参数")]

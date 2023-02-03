@@ -32,11 +32,11 @@ public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasAc
     /// <summary>
     /// 前缀图标的名称。
     /// </summary>
-    [Parameter] public object? TIconPrefix { get; set; }
+    [Parameter] public object? IconPrefix { get; set; }
     /// <summary>
     /// 后缀图标的名称。
     /// </summary>
-    [Parameter] public object? TIconSuffix { get; set; }
+    [Parameter] public object? IconSuffix { get; set; }
     /// <summary>
     /// 选中状态。若为 <c>false</c> 则根据导航自动判断。
     /// </summary>
@@ -44,7 +44,7 @@ public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasAc
     /// <inheritdoc/>
     [Parameter]public RenderFragment? ChildContent { get; set; }
 
-    protected override string? GetTagName() => CascadingSubMenu is not null ? "div" : "li";
+    public override string? GetTagName() => CascadingSubMenu is not null ? "div" : "li";
 
 
     /// <inheritdoc/>
@@ -68,17 +68,11 @@ public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasAc
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        if (TIconPrefix is not null)
-        {
-            builder.CreateComponent<TIcon>(sequence, attributes: new { Name = TIconPrefix });
-        }
+        builder.CreateComponent<TIcon>(sequence, attributes: new { Name = IconPrefix }, condition: IconPrefix is not null);
 
         builder.CreateElement(sequence, "span", ChildContent, new { @class = "t-menu__content" });
 
-        if (TIconSuffix is not null)
-        {
-            builder.CreateComponent<TIcon>(sequence, attributes: new { Name = TIconSuffix });
-        }
+        builder.CreateComponent<TIcon>(sequence, attributes: new { Name = IconSuffix }, condition: IconSuffix is not null);
     }
 
     /// <inheritdoc/>

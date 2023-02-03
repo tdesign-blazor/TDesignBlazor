@@ -6,6 +6,7 @@ namespace TDesign;
 /// 表示作为表单的组件。
 /// </summary>
 [CssClass("t-form")]
+[ParentComponent]
 public class TForm : TDesignComponentBase,IHasForm
 {
     /// <summary>

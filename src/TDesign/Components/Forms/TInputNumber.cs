@@ -35,10 +35,6 @@ public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
         }
     }
     /// <summary>
-    /// 设置控件的整体大小。
-    /// </summary>
-    [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
-    /// <summary>
     /// 设置输入框的文本对齐方式。
     /// </summary>
     [Parameter] public HorizontalAlignment Align { get; set; } = HorizontalAlignment.Center;
@@ -58,14 +54,6 @@ public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
     /// 设置排列形式和模式。
     /// </summary>
     [Parameter][CssClass("t-input-number--")] public InputNumberTheme Theme { get; set; } = InputNumberTheme.Row;
-    /// <summary>
-    /// 设置可以自适应宽度。
-    /// </summary>
-    [Parameter][CssClass("t-input-number--auto-width")] public bool AutoWidth { get; set; }
-    /// <summary>
-    /// 设置控件的状态。
-    /// </summary>
-    [Parameter][CssClass("t-is-")] public Status Status { get; set; } = Status.Default;
     /// <summary>
     /// 设置输入框后缀显示的文本。
     /// </summary>

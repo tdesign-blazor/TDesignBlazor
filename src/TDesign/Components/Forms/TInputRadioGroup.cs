@@ -6,7 +6,7 @@
 /// <typeparam name="TValue">值的类型。</typeparam>
 [CssClass("t-radio-group t-radio-group__outline")]
 [ParentComponent(IsFixed = true)]
-public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasChildContent, IHasDisabled
+public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasChildContent
 {
     /// <summary>
     /// 分组名称。
@@ -44,12 +44,10 @@ public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasCh
     internal event Action RerenderRadioBoxes;
     string _oldValue = "";
 
-    /// <summary>
-    /// Method invoked when the component has received parameters from its parent in
-    /// the render tree, and the incoming values have been assigned to properties.
-    /// </summary>
     protected override void OnParametersSet()
     {
+        base.OnParametersSet();
+
         var newValue = this.GetValueAsString();
         ChangeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value =>
         {
@@ -58,9 +56,9 @@ public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasCh
         }
         , newValue);
 
-        if (_oldValue != newValue)
+        if ( _oldValue != newValue )
         {
-            _oldValue = newValue;   
+            _oldValue = newValue;
             RerenderRadioBoxes?.Invoke();
         }
     }
