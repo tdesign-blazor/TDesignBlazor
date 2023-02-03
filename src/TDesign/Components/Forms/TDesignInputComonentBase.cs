@@ -25,7 +25,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     /// <summary>
     /// 尺寸。
     /// </summary>
-    [Parameter] public Size Size { get; set; } = Size.Medium;
+    [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
     /// <summary>
     /// 自动聚焦。
     /// </summary>
