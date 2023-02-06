@@ -40,6 +40,13 @@ public class AvatarTest : TestBase<TAvatar>
         GetComponent(m => m.Add(p => p.Size, Size.Large)).Should().HaveClass("t-size-l");
     }
 
+    [Fact(DisplayName ="Avatar - Shape 参数")]
+    public void Test_Shape_Parameter()
+    {
+        GetComponent(m => m.Add(p => p.Shape, Shape.Circle)).Should().HaveClass("t-avatar--circle");
+        GetComponent(m => m.Add(p => p.Shape, Shape.Round)).Should().HaveClass("t-avatar--round");
+    }
+
     [Fact(DisplayName = "AvatarGroup - 渲染头像组")]
     public void Test_Render_AvatarGroup_With_Avatars()
     {

@@ -11,10 +11,6 @@ namespace TDesign;
 public class TBreadcrumbItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
-    /// 获取注入的配置。
-    /// </summary>
-    [Inject] IOptions<TDesignOptions> Options { get; set; }
-    /// <summary>
     /// 分隔符内容。
     /// </summary>
     [Parameter] public RenderFragment? SeperatorContent { get; set; }

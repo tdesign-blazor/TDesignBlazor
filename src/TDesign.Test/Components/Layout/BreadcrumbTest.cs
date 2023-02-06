@@ -1,4 +1,6 @@
 ﻿using AngleSharp.Dom;
+using ComponentBuilder;
+using Microsoft.AspNetCore.Components;
 
 namespace TDesign.Test.Components.Layout;
 public class BreadcrumbTest : TestBase<TBreadcrumbItem>
@@ -6,7 +8,11 @@ public class BreadcrumbTest : TestBase<TBreadcrumbItem>
     [Fact(DisplayName = "Breadcrumb - 渲染元素和默认样式")]
     public void Test_Render_Breadcrumb()
     {
-        TestContext.RenderComponent<TBreadcrumb>().Should().HaveClass("t-breadcrumb");
+        TestContext.RenderComponent<TBreadcrumb>(m => m.Add(p =>p.ChildContent,(RenderFragment)(builder=>
+        {
+            builder.CreateComponent<TBreadcrumbItem>(0);
+            builder.CreateComponent<TBreadcrumbItem>(1);
+        }))).Should().HaveClass("t-breadcrumb");
     }
 
     [Fact(DisplayName = "BreadcrumbItem - 渲染子项和默认样式")]

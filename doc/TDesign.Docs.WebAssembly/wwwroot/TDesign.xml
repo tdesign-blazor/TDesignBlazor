@@ -242,11 +242,6 @@
             表示面包屑导航的项。必须在 <see cref="T:TDesign.TBreadcrumb"/> 组件中使用。
             </summary>
         </member>
-        <member name="P:TDesign.TBreadcrumbItem.Options">
-            <summary>
-            获取注入的配置。
-            </summary>
-        </member>
         <member name="P:TDesign.TBreadcrumbItem.SeperatorContent">
             <summary>
             分隔符内容。
@@ -2817,6 +2812,26 @@
             按钮风格。
             </summary>
         </member>
+        <member name="F:TDesign.ButtonVarient.Base">
+            <summary>
+            填充风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonVarient.Outline">
+            <summary>
+            描边风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonVarient.Dashed">
+            <summary>
+            虚框风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonVarient.Text">
+            <summary>
+            文字风格。
+            </summary>
+        </member>
         <member name="T:TDesign.ButtonShape">
             <summary>
             按钮形状。
@@ -2845,6 +2860,21 @@
         <member name="T:TDesign.ButtonHtmlType">
             <summary>
             按钮的 HTML 类型。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonHtmlType.Button">
+            <summary>
+            表示为 button 普通按钮。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonHtmlType.Submit">
+            <summary>
+            表示为 submit 提交按钮，可触发 form 的提交功能。
+            </summary>
+        </member>
+        <member name="F:TDesign.ButtonHtmlType.Reset">
+            <summary>
+            表示为 reset 重置按钮，可触发 form 的重置功能。
             </summary>
         </member>
         <member name="T:TDesign.TCard">
@@ -4435,6 +4465,11 @@
         <member name="T:TDesign.TDesignComponentBase">
             <summary>
             表示 TDesign 组件的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignComponentBase.Options">
+            <summary>
+            获取注入的配置。
             </summary>
         </member>
         <member name="P:TDesign.TDesignComponentBase.CascadingPopup">
