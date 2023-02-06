@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Data;
 public class AvatarTest : TestBase<TAvatar>
 {
     [Fact(DisplayName = "Avatar - 渲染 img 元素和默认样式")]

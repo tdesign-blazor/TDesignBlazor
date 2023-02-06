@@ -1,6 +1,6 @@
 ﻿using AngleSharp.Dom;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Layout;
 public class BreadcrumbTest : TestBase<TBreadcrumbItem>
 {
     [Fact(DisplayName = "Breadcrumb - 渲染元素和默认样式")]
@@ -27,7 +27,7 @@ public class BreadcrumbTest : TestBase<TBreadcrumbItem>
     {
         GetComponent(m => m.AddChildContent("home"))
             .Find(".t-breadcrumb__item>.t-breadcrumb--text-overflow>.t-breadcrumb__inner")
-            .Html().Should().Equals("home");            
+            .Html().Should().Equals("home");
     }
 
     [Fact(DisplayName = "BreadcrumbItem - Seperator 参数")]

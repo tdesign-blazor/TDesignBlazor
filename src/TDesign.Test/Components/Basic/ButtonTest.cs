@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Basic;
 
 public class ButtonTest : TestBase
 {

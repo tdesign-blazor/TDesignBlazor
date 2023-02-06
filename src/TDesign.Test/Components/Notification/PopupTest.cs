@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Notification;
 public class PopupTest : TestBase<TPopup>
 {
     [Fact(DisplayName = "Popup - 组件渲染")]

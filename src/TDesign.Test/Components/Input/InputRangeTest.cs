@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Input;
 public class InputRangeTest : TestBase<TInputRange<string>>
 {
     //[Fact(DisplayName = "InputRange - 渲染 css")]

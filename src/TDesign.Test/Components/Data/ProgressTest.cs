@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Data;
 public class ProgressTest : TestBase<TProgress>
 {
     [Fact(DisplayName = "进度条 - 渲染 50% 进度的进度条和样式")]

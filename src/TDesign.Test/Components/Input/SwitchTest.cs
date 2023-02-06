@@ -1,7 +1,7 @@
 ﻿using AngleSharp.Dom;
 using ComponentBuilder;
 
-namespace TDesign.Test.Components
+namespace TDesign.Test.Components.Input
 {
     public class SwitchTest : TestBase<TSwitch>
     {
@@ -18,8 +18,8 @@ namespace TDesign.Test.Components
 
             component.Find(".t-switch__handle").Should().HaveTag("span");
             component.Find(".t-switch__content").Should().HaveTag("div");
-                
-                //.MarkupMatches("<div class=\"t-switch t-size-m\" placeholder=\"\"><span class=\"t-switch__handle\"></span><div class=\"t-switch__content t-size-m\"></div></div>");
+
+            //.MarkupMatches("<div class=\"t-switch t-size-m\" placeholder=\"\"><span class=\"t-switch__handle\"></span><div class=\"t-switch__content t-size-m\"></div></div>");
         }
 
         [Fact(DisplayName = "Switch - Value 参数")]

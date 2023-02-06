@@ -7,17 +7,17 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDesign.Test.Components
+namespace TDesign.Test.Components.Input
 {
-    public class InputAdornmentTest:TestBase<TInputAdornment>
+    public class InputAdornmentTest : TestBase<TInputAdornment>
     {
-        [Fact(DisplayName ="InputAdornment - 渲染并验证 css")]
+        [Fact(DisplayName = "InputAdornment - 渲染并验证 css")]
         public void Test_Render()
         {
             GetComponent().Should().HaveClass("t-input-adornment");
         }
 
-        [Fact(DisplayName ="InputAdornment - Prepend 参数")]
+        [Fact(DisplayName = "InputAdornment - Prepend 参数")]
         public void Test_Prepend_Parameter()
         {
             GetComponent(m => m.Add(p => p.Prepend, "http"))
@@ -27,14 +27,14 @@ namespace TDesign.Test.Components
                 .HaveChildMarkup(builder => builder.CreateElement(0, "span", "http", new { @class = "t-input-adornment__prepend" }));
         }
 
-        [Fact(DisplayName ="InputAdornment - PrependContent 参数")]
+        [Fact(DisplayName = "InputAdornment - PrependContent 参数")]
         public void Test_PrependContent_Parameter()
         {
-            GetComponent(m=>m.Add(p=>p.PrependContent,builder=>builder.AddContent(0,"html content")))
+            GetComponent(m => m.Add(p => p.PrependContent, builder => builder.AddContent(0, "html content")))
                 .Should()
                 .HaveClass("t-input-adornment--prepend")
                 .And
-                .HaveChildMarkup(builder => builder.CreateElement(0, "span", content=>content.AddContent(0,"html content"), new { @class = "t-input-adornment__prepend" }));
+                .HaveChildMarkup(builder => builder.CreateElement(0, "span", content => content.AddContent(0, "html content"), new { @class = "t-input-adornment__prepend" }));
         }
         [Fact(DisplayName = "InputAdornment - Append 参数")]
         public void Test_Append_Parameter()

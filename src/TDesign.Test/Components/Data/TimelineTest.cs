@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Data;
 public class TimelineTest : TestBase<TTimeline>
 {
     [Fact(DisplayName = "Timeline - 渲染")]
@@ -40,23 +40,23 @@ public class TimelineTest : TestBase<TTimeline>
         content.FirstElementChild.Should().NotBeNull().And.HaveClass("t-timeline-item__label").And.HaveClass("t-timeline-item__label--same")
             ;
 
-//        component.MarkupMatches(@"
-//<ul class=""t-timeline t-timeline-left t-timeline-vertical t-timeline-label--same t-timeline-label"">
-//    <li class=""t-timeline-item t-timeline-item-left "">
-//        <div class=""t-timeline-item__wrapper"">
-//            <div class=""t-timeline-item__dot  t-timeline-item__dot--primary"">
-//                <div class=""t-timeline-item__dot-content""></div>
-//            </div>
-//            <div class=""t-timeline-item__tail t-timeline-item__tail--theme-default t-timeline-item__tail--status-primary"">
-//            </div>
-//        </div>
-//        <div class=""t-timeline-item__content"">
-//            事件一
-//            <div class=""t-timeline-item__label t-timeline-item__label--same"">2022-01-01</div>
-//        </div>
-//    </li>
-//</ul>
-//");
+        //        component.MarkupMatches(@"
+        //<ul class=""t-timeline t-timeline-left t-timeline-vertical t-timeline-label--same t-timeline-label"">
+        //    <li class=""t-timeline-item t-timeline-item-left "">
+        //        <div class=""t-timeline-item__wrapper"">
+        //            <div class=""t-timeline-item__dot  t-timeline-item__dot--primary"">
+        //                <div class=""t-timeline-item__dot-content""></div>
+        //            </div>
+        //            <div class=""t-timeline-item__tail t-timeline-item__tail--theme-default t-timeline-item__tail--status-primary"">
+        //            </div>
+        //        </div>
+        //        <div class=""t-timeline-item__content"">
+        //            事件一
+        //            <div class=""t-timeline-item__label t-timeline-item__label--same"">2022-01-01</div>
+        //        </div>
+        //    </li>
+        //</ul>
+        //");
 
 
     }

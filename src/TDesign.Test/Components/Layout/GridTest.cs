@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Layout;
 public class GridTest : TestBase
 {
     [Fact(DisplayName = "Grid - 1行3列占比1")]
@@ -13,7 +13,7 @@ public class GridTest : TestBase
             b.CreateComponent<TColumn>(2, attributes: new { Span = ColumnSpan.Is1 });
         }));
 
-//        Equal(3, component.Instance.ChildComponents.Count);
+        //        Equal(3, component.Instance.ChildComponents.Count);
 
         var row = component.Find(".t-row");
         NotNull(row);

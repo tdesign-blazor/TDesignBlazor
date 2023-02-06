@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Layout;
 public class SpaceTest : TestBase<TSpace>
 {
     [Fact(DisplayName = "Space - 渲染和默认样式")]

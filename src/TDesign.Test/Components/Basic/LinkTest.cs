@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Basic;
 public class LinkTest : TestBase
 {
     [Fact(DisplayName = "Link - 渲染 a 元素和默认 t-link 样式")]
