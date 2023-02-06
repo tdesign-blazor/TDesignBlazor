@@ -42,4 +42,11 @@ public class BreadcrumbTest : TestBase<TBreadcrumbItem>
         var component = GetComponent(m => m.Add(p => p.SeperatorContent, b => b.AddContent(0, "/")));
         component.Find(".t-breadcrumb__item>.t-breadcrumb__separator").Html().Should().Equals("/");
     }
+
+    [Fact(DisplayName = "BreadcrumbItem - Disabled 参数")]
+    public void Test_Disabled_Parameter()
+    {
+        var component = GetComponent(m => m.Add(p => p.Disabled, true));
+        component.Find(".t-is-disabled");
+    }
 }
