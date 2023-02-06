@@ -104,6 +104,11 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         }
     }
 
+    /// <summary>
+    /// 捕获 <see cref="TPopup"/> 的元素引用。
+    /// </summary>
+    /// <param name="builder"><inheritdoc/></param>
+    /// <param name="sequence"><inheritdoc/></param>
     protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
     {
         builder.AddElementReferenceCapture(sequence, element => Reference = element);

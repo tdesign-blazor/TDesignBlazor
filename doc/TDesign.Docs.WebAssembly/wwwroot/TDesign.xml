@@ -2056,6 +2056,13 @@
         <member name="M:TDesign.TPopup.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <inheritdoc/>
         </member>
+        <member name="M:TDesign.TPopup.CaptureElementReference(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            捕获 <see cref="T:TDesign.TPopup"/> 的元素引用。
+            </summary>
+            <param name="builder"><inheritdoc/></param>
+            <param name="sequence"><inheritdoc/></param>
+        </member>
         <member name="M:TDesign.TPopup.Show(ComponentBuilder.IBlazorComponent)">
             <summary>
             触发指定元素引用并显示弹出层。
