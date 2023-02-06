@@ -104,15 +104,20 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         }
     }
 
+    protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
+    {
+        builder.AddElementReferenceCapture(sequence, element => Reference = element);
+    }
+
     /// <summary>
     /// 触发指定元素引用并显示弹出层。
     /// </summary>
     /// <param name="selector">被触发弹出层的元素引用。</param>
-    public async Task Show(ElementReference selector)
+    public async Task Show(IBlazorComponent selector)
     {
         Visible = true;
         StateHasChanged();
-        _instance = await JS.Value.InvokePopupAsync(selector, Ref, new()
+        _instance = await JS.Value.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
             Placement = Placement
         });

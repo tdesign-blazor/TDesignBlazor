@@ -2056,7 +2056,7 @@
         <member name="M:TDesign.TPopup.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <inheritdoc/>
         </member>
-        <member name="M:TDesign.TPopup.Show(Microsoft.AspNetCore.Components.ElementReference)">
+        <member name="M:TDesign.TPopup.Show(ComponentBuilder.IBlazorComponent)">
             <summary>
             触发指定元素引用并显示弹出层。
             </summary>
@@ -4428,11 +4428,6 @@
         <member name="T:TDesign.TDesignComponentBase">
             <summary>
             表示 TDesign 组件的基类。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDesignComponentBase.Ref">
-            <summary>
-            获取当前组件的元素引用。
             </summary>
         </member>
         <member name="P:TDesign.TDesignComponentBase.CascadingPopup">

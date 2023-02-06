@@ -7,11 +7,6 @@ namespace TDesign;
 public abstract class TDesignComponentBase : BlazorComponentBase
 {
     /// <summary>
-    /// 获取当前组件的元素引用。
-    /// </summary>
-    protected ElementReference Ref { get; private set; }
-
-    /// <summary>
     /// 级联 TPopup 组件。
     /// </summary>
     [CascadingParameter] TPopup? CascadingPopup { get; set; }
@@ -72,13 +67,25 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         }
     }
 
+    protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
+    {
+        if ( CanPopup )
+        {
+            builder.AddElementReferenceCapture(sequence, element => Reference = element);
+        }
+        else
+        {
+            base.CaptureElementReference(builder, sequence);
+        }
+    }
+
     protected virtual Task ShowPopup()
     {
         if (!CanPopup)
         {
             return Task.CompletedTask;
         }
-        return CascadingPopup.Show(Ref);
+        return CascadingPopup.Show(this);
     }
 
     protected virtual Task HidePopup()
