@@ -95,7 +95,7 @@ namespace TDesign
         /// <summary>
         /// 点击事件
         /// </summary>
-        [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+        [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
 
         /// <summary>
         /// 锚点文字

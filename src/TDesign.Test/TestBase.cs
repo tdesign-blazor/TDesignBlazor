@@ -1,5 +1,4 @@
 ﻿using ComponentBuilder;
-
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +14,6 @@ public class TestBase
 
     public TestBase()
     {
-
         _testContext = new TestContext();
         _testContext.Services.AddTDesign().AddComponentBuilder();
         _provider = _testContext.Services.BuildServiceProvider();

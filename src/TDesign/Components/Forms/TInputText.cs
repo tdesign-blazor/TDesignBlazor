@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using ComponentBuilder;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesign;
 
@@ -69,12 +70,7 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
-        attributes["value"] = CurrentValueAsString;
-    }
-
-    protected override string? FormatValueAsString(TValue? value)
-    {
-        return BindConverter.FormatValue<TValue>(value)?.ToString();
+        attributes["value"] = this.GetValueAsString();
     }
 }
 

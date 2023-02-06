@@ -42,11 +42,9 @@ public class TAvatar : TDesignComponentBase, IHasChildContent
         builder.Append("t-avatar__icon", Icon is not null);
     }
 
-    protected override void OnParametersSet()
+    protected override void AfterSetParameters(ParameterView parameters)
     {
-        base.OnParametersSet();
-
-        if (CascadingAvatarGroup is not null && CascadingAvatarGroup.Size is not null)
+        if ( CascadingAvatarGroup is not null )
         {
             Size = CascadingAvatarGroup.Size;
         }

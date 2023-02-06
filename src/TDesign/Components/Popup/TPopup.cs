@@ -45,10 +45,9 @@ public class TPopup : TDesignComponentBase, IHasChildContent
 
     Popper? _instance;
 
-    protected override void OnComponentParameterSet()
+    protected override void OnParametersSet()
     {
-        base.OnComponentParameterSet();
-
+        base.OnParametersSet();
         PopupContent ??= builder => builder.AddContent(0, Content);
     }
 
@@ -94,6 +93,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         }
     }
 
+    /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
@@ -105,14 +105,24 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     }
 
     /// <summary>
+    /// 捕获 <see cref="TPopup"/> 的元素引用。
+    /// </summary>
+    /// <param name="builder"><inheritdoc/></param>
+    /// <param name="sequence"><inheritdoc/></param>
+    protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
+    {
+        builder.AddElementReferenceCapture(sequence, element => Reference = element);
+    }
+
+    /// <summary>
     /// 触发指定元素引用并显示弹出层。
     /// </summary>
     /// <param name="selector">被触发弹出层的元素引用。</param>
-    public async Task Show(ElementReference selector)
+    public async Task Show(IBlazorComponent selector)
     {
         Visible = true;
         StateHasChanged();
-        _instance = await JS.Value.InvokePopupAsync(selector, Ref, new()
+        _instance = await JS.Value.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
             Placement = Placement
         });

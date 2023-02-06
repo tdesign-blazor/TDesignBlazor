@@ -9,10 +9,13 @@
         最基础的单行输入框，按状态可分为正常、禁用、错误、带额外提示。通常在需要输入少量内容（20个字以内）的场景下使用。</Description>
     <RunContent>
         <TInputText @bind-Value="BasicText" Placeholder="文本框"/>
+        @BasicText
         <br />
         <TInputText @bind-Value="DefaultText" Placeholder="默认值" />
+        @DefaultText
         <br />
         <TInputText @bind-Value="PrefixText" PrefixText="价格：" SuffixText="元" Type="InputType.Number" />
+        @PrefixText
     </RunContent>
     <CodeContent>
         @Code.Create(@"
