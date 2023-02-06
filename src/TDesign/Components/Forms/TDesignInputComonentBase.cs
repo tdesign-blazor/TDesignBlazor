@@ -58,8 +58,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     /// 获取触发数据绑定的事件名称。
     /// </summary>
     protected virtual string EventName => "oninput";
-        
-
+    
     protected override void AfterSetParameters(ParameterView parameters)
     {
         this.InitializeInputValue();
