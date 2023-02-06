@@ -51,9 +51,12 @@ public class TCard : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public int Width { get; set; } = 400;
 
-
+    /// <summary>
+    /// 是否有顶部内容。
+    /// </summary>
     bool HasHeader => HeaderTitleContent is not null || HeaderActionContent is not null;
 
+    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         builder.CreateElement(sequence, "div", header =>
@@ -84,6 +87,7 @@ public class TCard : TDesignComponentBase, IHasChildContent
         }, new { @class = "t-card__footer" }, FooterContent is not null);
     }
 
+    /// <inheritdoc/>
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append($"width:{Width}px");

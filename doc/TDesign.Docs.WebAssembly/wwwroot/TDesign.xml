@@ -2932,6 +2932,17 @@
             宽度，默认400px.
             </summary>
         </member>
+        <member name="P:TDesign.TCard.HasHeader">
+            <summary>
+            是否有顶部内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TCard.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TCard.BuildStyle(ComponentBuilder.IStyleBuilder)">
+            <inheritdoc/>
+        </member>
         <member name="T:TDesign.TComment">
             <summary>
             评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论。
