@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Linq.Expressions;
 
 namespace TDesign;
 /// <summary>
@@ -90,7 +89,7 @@ public class TInputRange<TValue> : BlazorComponentBase
     /// <param name="changed">改变事件。</param>
     void BuildRangeInput(RenderTreeBuilder builder, int sequence, bool leftOrRight, TValue? value, Expression<Func<TValue?>>? expression, EventCallback<TValue?> changed)
     {
-        builder.CreateComponent<TInputText<TValue>>(0, attributes: new
+        builder.CreateComponent<TInputText<TValue>>(sequence, attributes: new
         {
             Value = value,
             ValueExpression = expression,
