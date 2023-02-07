@@ -85,4 +85,13 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
                 })
             .Close();
     }
+
+    /// <summary>
+    /// 为最后一个Item追加 class。
+    /// </summary>
+    internal Task AppendLastItemClass()
+    {
+        AdditionalClass += "t-timeline-item--last";
+        return this.Refresh();
+    }
 }

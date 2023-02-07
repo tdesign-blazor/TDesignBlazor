@@ -3269,6 +3269,9 @@
             设置标签信息放在时间轴的位置，当 <see cref="P:TDesign.TTimeline.Alternate"/> 是 <c>true</c> 时有效。
             </summary>
         </member>
+        <member name="M:TDesign.TTimeline.OnInitialized">
+            <inheritdoc/>
+        </member>
         <member name="M:TDesign.TTimeline.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <inheritdoc/>
         </member>
@@ -3353,6 +3356,11 @@
         </member>
         <member name="M:TDesign.TTimelineItem.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTimelineItem.AppendLastItemClass">
+            <summary>
+            为最后一个Item追加 class。
+            </summary>
         </member>
         <member name="T:TDesign.TLayout">
             <summary>
