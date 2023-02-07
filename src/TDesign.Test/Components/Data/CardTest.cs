@@ -98,4 +98,10 @@ public class CardTest : TestBase<TCard>
 
         component.Find(".t-card__footer>.t-card__footer-wrapper").Html().Should().Be("Footer");
     }
+
+    [Fact(DisplayName ="Card - Width 参数")]
+    public void Test_Card_Width_Parameter()
+    {
+        GetComponent(m => m.Add(p => p.Width, 100)).Should().HaveAttribute("style","width:100px");
+    }
 }
