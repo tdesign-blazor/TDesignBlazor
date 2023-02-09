@@ -6,7 +6,7 @@
 /// <typeparam name="TValue">值的类型。</typeparam>
 [CssClass("t-radio-group t-radio-group__outline")]
 [ParentComponent(IsFixed = true)]
-public class TInputRadioGroup<TValue> : BlazorInputComponentBase<TValue>, IHasChildContent, IHasDisabled
+public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasChildContent
 {
     /// <summary>
     /// 分组名称。
@@ -17,18 +17,9 @@ public class TInputRadioGroup<TValue> : BlazorInputComponentBase<TValue>, IHasCh
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
-    /// 尺寸。
-    /// </summary>
-    [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
-    /// <summary>
     /// 当 <see cref="TButton"/> 是 <c>true</c> 时的按钮风格。
     /// </summary>
     [Parameter] public RadioButtonStyle? ButtonStyle { get; set; }
-
-    /// <summary>
-    /// 按钮组所有单选框都禁用。
-    /// </summary>
-    [Parameter] public bool Disabled { get; set; }
 
     /// <summary>
     ///  执行当 <see cref="TInputRadio{TValue}"/> 触发的事件。
@@ -48,26 +39,24 @@ public class TInputRadioGroup<TValue> : BlazorInputComponentBase<TValue>, IHasCh
     /// <summary>
     /// Gets the selected value.
     /// </summary>
-    internal TValue? SelectedValue => CurrentValue;
+    internal TValue? SelectedValue => this.Value;
 
     internal event Action RerenderRadioBoxes;
     string _oldValue = "";
 
-    /// <summary>
-    /// Method invoked when the component has received parameters from its parent in
-    /// the render tree, and the incoming values have been assigned to properties.
-    /// </summary>
     protected override void OnParametersSet()
     {
-        var newValue = CurrentValueAsString;
+        base.OnParametersSet();
+
+        var newValue = this.GetValueAsString();
         ChangeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value =>
         {
-            CurrentValueAsString = __value;
+            this.GetCurrentValueAsString(__value);
             _ = OnValueSelected.InvokeAsync(__value);
         }
-        , CurrentValueAsString);
+        , newValue);
 
-        if (_oldValue != newValue)
+        if ( _oldValue != newValue )
         {
             _oldValue = newValue;
             RerenderRadioBoxes?.Invoke();

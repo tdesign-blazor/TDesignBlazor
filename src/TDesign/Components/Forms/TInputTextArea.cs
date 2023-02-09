@@ -6,24 +6,8 @@ namespace TDesign;
 /// </summary>
 [HtmlTag("textarea")]
 [CssClass("t-textarea__inner")]
-public class TInputTextArea : BlazorInputComponentBase<string>
+public class TInputTextArea : TDesignInputComonentBase<string>
 {
-    /// <summary>
-    /// 设置只读模式。
-    /// </summary>
-    [Parameter] public bool Readonly { get; set; }
-    /// <summary>
-    /// 设置禁用状态。
-    /// </summary>
-    [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
-    /// <summary>
-    /// 状态。
-    /// </summary>
-    [Parameter][CssClass("t-is-")] public Status Status { get; set; } = Status.Default;
-    /// <summary>
-    /// 设置是否自动聚焦。
-    /// </summary>
-    [Parameter] public bool AutoFocus { get; set; }
     /// <summary>
     /// 文本域的最大行数。
     /// </summary>
@@ -45,24 +29,7 @@ public class TInputTextArea : BlazorInputComponentBase<string>
                                                 .Append("t-is-readonly", Readonly)
         });
     }
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        base.BuildAttributes(attributes);
-        base.AddValueChangedAttribute(attributes);
-        attributes["value"] = CurrentValueAsString;
-        if (Disabled)
-        {
-            attributes["disabled"] = true;
-        }
-        if (Readonly)
-        {
-            attributes["readonly"] = true;
-        }
-        if (AutoFocus)
-        {
-            attributes["autofocus"] = true;
-        }
-    }
+
 
     protected override void BuildStyle(IStyleBuilder builder)
     {

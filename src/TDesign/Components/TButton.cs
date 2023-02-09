@@ -12,7 +12,7 @@ public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter][HtmlEvent("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+    [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>

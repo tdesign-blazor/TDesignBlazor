@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
-
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Rendering;
 
 namespace TDesign;
 /// <summary>
@@ -12,16 +11,16 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-form__item")]
 [ChildComponent(typeof(TForm))]
-public class TFormItem : TDesignComponentBase, IHasChildContent, IDisposable
+public class TFormItem : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联 <see cref="TForm"/> 组件的实例。
     /// </summary>
-    [CascadingParameter][NotNull] public TForm CascadingForm { get; set; }
+    [CascadingParameter] public TForm CascadingForm { get; set; }
     /// <summary>
     /// 级联 <see cref="EditContext"/> 实例。
     /// </summary>
-    [CascadingParameter][NotNull] EditContext CascadingEditContext { get; set; }
+    [CascadingParameter] EditContext CascadingEditContext { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
@@ -52,10 +51,18 @@ public class TFormItem : TDesignComponentBase, IHasChildContent, IDisposable
     /// </summary>
     [Parameter] public Expression<Func<dynamic>>? For { get; set; }
 
+    /// <summary>
+    /// 获取绑定字段的识别器。
+    /// </summary>
     FieldIdentifier? Identifier { get; set; }
 
-
+    /// <summary>
+    /// 获取状态的 class.
+    /// </summary>
     string? StatusCssClass { get; set; }
+    /// <summary>
+    /// 获取错误信息。
+    /// </summary>
     IEnumerable<string> ErrorMessages { get; set; } = Array.Empty<string>();
 
     protected override void OnInitialized()
@@ -64,24 +71,19 @@ public class TFormItem : TDesignComponentBase, IHasChildContent, IDisposable
 
         CascadingEditContext.OnValidationStateChanged += CascadingEditContext_ValidationStateChanged;
         CascadingEditContext.SetFieldCssClassProvider(new FormFieldCssClassProvider());
-    }
 
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        if (For is not null)
+        if ( For is not null )
         {
             Identifier = FieldIdentifier.Create(For);
 
             var member = GetMember(For.Body);
 
-            if (member.TryGetCustomAttribute<RequiredAttribute>(out var requiredAttribute))
+            if ( member.TryGetCustomAttribute<RequiredAttribute>(out var requiredAttribute) )
             {
                 Required = !requiredAttribute!.AllowEmptyStrings;
             }
 
-            if (member.TryGetCustomAttribute<DisplayAttribute>(out var displayAttribute) && string.IsNullOrEmpty(Label))
+            if ( member.TryGetCustomAttribute<DisplayAttribute>(out var displayAttribute) && string.IsNullOrEmpty(Label) )
             {
                 Label = displayAttribute?.Name;
             }
@@ -166,12 +168,9 @@ public class TFormItem : TDesignComponentBase, IHasChildContent, IDisposable
         return default;
     }
 
-    /// <summary>
-    /// Cleanup of component
-    /// </summary>
-    public void Dispose()
+    protected override void DisposeComponentResources()
     {
-        if (CascadingEditContext != null)
+        if ( CascadingEditContext != null )
         {
             CascadingEditContext.OnValidationStateChanged -= CascadingEditContext_ValidationStateChanged;
         }

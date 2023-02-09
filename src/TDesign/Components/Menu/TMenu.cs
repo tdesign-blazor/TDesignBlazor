@@ -41,9 +41,6 @@ public class TMenu : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter] public int? Width { get; set; }
 
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -54,16 +51,24 @@ public class TMenu : TDesignComponentBase, IHasChildContent
         * 腾讯说实话：蛋疼的很
         */
 
-        if (!Aside && !Popup)
+        if ( !Aside && !Popup )
         {
             Popup = true;
         }
 
-        if (!Width.HasValue && Collapse)
+        if ( !Width.HasValue && Collapse )
         {
             Width = 64;
         }
     }
+
+    ///// <summary>
+    ///// <inheritdoc/>
+    ///// </summary>
+    //protected override void OnParametersSet()
+    //{
+    //    base.OnParametersSet();
+    //}
 
     /// <summary>
     /// <inheritdoc/>

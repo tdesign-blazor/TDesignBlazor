@@ -10,15 +10,13 @@ public class FieldColumn<TItem> : TableColumnBase
     /// 获取或设置列中输出的值。
     /// </summary>
     [Parameter] public object? Value { get; set; }
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    /// <returns></returns>
-    protected override async Task OnInitializedAsync()
+
+    protected override void OnInitialized()
     {
         ArgumentNullException.ThrowIfNull(CascadingTable, nameof(CascadingTable));
 
-        await CascadingTable.AddChildComponent(this);
+        CascadingTable.AddChildComponent(this);
+        base.OnInitialized();
     }
 
     /// <summary>

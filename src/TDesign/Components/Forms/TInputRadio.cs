@@ -26,11 +26,12 @@ public class TInputRadio<TValue> : TDesignComponentBase, IDisposable
     /// 禁用状态。
     /// </summary>
     [Parameter][HtmlAttribute] public bool Disabled { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        if (Value?.GetType() != typeof(TValue))
+        if ( Value?.GetType() != typeof(TValue) )
         {
             throw new InvalidOperationException($"参数 {nameof(this.Value)} 的数据类型必须与 {typeof(TInputRadio<>).FullName} 的数据类型相同");
         }

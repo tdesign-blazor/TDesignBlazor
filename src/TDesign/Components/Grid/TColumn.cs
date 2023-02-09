@@ -12,7 +12,7 @@ public class TColumn : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 获取或设置父组件 <see cref="TRow"/> 的级联参数的值。
     /// </summary>
-    [CascadingParameter] public TRow? CascadingRow { get; set; }
+    [CascadingParameter] public TRow CascadingRow { get; set; }
     /// <summary>
     /// 获取或设置栅格的宽度。
     /// </summary>
