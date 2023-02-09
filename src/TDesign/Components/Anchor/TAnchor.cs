@@ -50,7 +50,7 @@ namespace TDesign
         /// </summary>
         /// <param name="index">scrollTop 位置</param>
         [JSInvokable]
-        public async Task OnScrollAnchorChangeAsync(int index)
+        public async Task OnScrollAnchorChangeAsync(double index)
         {
             if (!ClickLoad)
             {

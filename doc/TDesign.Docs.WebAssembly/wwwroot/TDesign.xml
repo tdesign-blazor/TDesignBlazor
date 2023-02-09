@@ -44,7 +44,7 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="M:TDesign.TAnchor.OnScrollAnchorChangeAsync(System.Int32)">
+        <member name="M:TDesign.TAnchor.OnScrollAnchorChangeAsync(System.Double)">
             <summary>
             监听锚点关联容器滚动位置
             </summary>
