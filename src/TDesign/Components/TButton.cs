@@ -51,7 +51,7 @@ public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
     /// <summary>
     /// 禁用状态。
     /// </summary>
-    [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
+    [Parameter][CssClass("t-is-disabled")][HtmlAttribute] public bool Disabled { get; set; }
     /// <summary>
     /// 加载状态。
     /// </summary>
@@ -69,13 +69,6 @@ public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
             base.AddContent(content, sequence);
         }, new { @class = "t-button__text" });
     }
-
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        attributes["disabled"] = Disabled;
-
-        base.BuildPopupAttributes(attributes);
-    }
 }
 
 /// <summary>
@@ -83,9 +76,21 @@ public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
 /// </summary>
 public enum ButtonVarient
 {
+    /// <summary>
+    /// 填充风格。
+    /// </summary>
     Base,
+    /// <summary>
+    /// 描边风格。
+    /// </summary>
     Outline,
+    /// <summary>
+    /// 虚框风格。
+    /// </summary>
     Dashed,
+    /// <summary>
+    /// 文字风格。
+    /// </summary>
     Text
 }
 
@@ -116,7 +121,16 @@ public enum ButtonShape
 /// </summary>
 public enum ButtonHtmlType
 {
+    /// <summary>
+    /// 表示为 button 普通按钮。
+    /// </summary>
     Button,
+    /// <summary>
+    /// 表示为 submit 提交按钮，可触发 form 的提交功能。
+    /// </summary>
     Submit,
+    /// <summary>
+    /// 表示为 reset 重置按钮，可触发 form 的重置功能。
+    /// </summary>
     Reset
 }

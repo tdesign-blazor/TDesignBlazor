@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Basic;
 public class IconTest : TestBase
 {
     [Fact(DisplayName = "TIcon - 渲染 i 元素和默认的样式")]

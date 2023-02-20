@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json.Linq;
 using System.Linq.Expressions;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Input;
 public class InputNumberTest : TestBase
 {
     IRenderedComponent<TInputNumber<TValue>> GetInputNumer<TValue>(Action<ComponentParameterCollectionBuilder<TInputNumber<TValue>>> parameterBuilder)

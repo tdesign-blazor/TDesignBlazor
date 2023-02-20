@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Data;
 public class AvatarTest : TestBase<TAvatar>
 {
     [Fact(DisplayName = "Avatar - 渲染 img 元素和默认样式")]
@@ -38,6 +38,13 @@ public class AvatarTest : TestBase<TAvatar>
         GetComponent(m => m.Add(p => p.Size, Size.Small)).Should().HaveClass("t-size-s");
         GetComponent(m => m.Add(p => p.Size, Size.Medium)).Should().HaveClass("t-size-m");
         GetComponent(m => m.Add(p => p.Size, Size.Large)).Should().HaveClass("t-size-l");
+    }
+
+    [Fact(DisplayName ="Avatar - Shape 参数")]
+    public void Test_Shape_Parameter()
+    {
+        GetComponent(m => m.Add(p => p.Shape, Shape.Circle)).Should().HaveClass("t-avatar--circle");
+        GetComponent(m => m.Add(p => p.Shape, Shape.Round)).Should().HaveClass("t-avatar--round");
     }
 
     [Fact(DisplayName = "AvatarGroup - 渲染头像组")]

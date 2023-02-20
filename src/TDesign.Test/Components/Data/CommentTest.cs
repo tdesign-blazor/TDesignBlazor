@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Data;
 public class CommentTest : TestBase<TComment>
 {
     [Fact(DisplayName = "Comment - 基本渲染")]

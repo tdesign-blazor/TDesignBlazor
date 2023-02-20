@@ -31,22 +31,16 @@ public class TTimeline : TDesignComponentBase, IHasChildContent
     /// </summary>
     [Parameter][CssClass("t-timeline-")] public TimelineLabelAlignment LabelAlignment { get; set; } = TimelineLabelAlignment.Left;
 
-    protected override void OnParametersSet()
+    /// <inheritdoc/>
+    protected override void OnInitialized()
     {
-        base.OnParametersSet();
+        base.OnInitialized();
 
-
-        if ( ChildComponents.Any() )
+        if ( ChildComponents.Any() && ChildComponents.Last() is TTimelineItem timelineItem )
         {
-            if ( ChildComponents.Last() is TTimelineItem timelineItem )
-            {
-                //TODO：要判断最后一条并追加 CSS
-                timelineItem.AdditionalClass += "t-timeline-item--last";
-                timelineItem.Refresh();
-            }
+            timelineItem.AppendLastItemClass();
         }
     }
-
 
     /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)

@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Data;
 public class BadgeTest : TestBase<TBadge>
 {
     [Fact(DisplayName = "Badge - 渲染 div 元素和默认样式")]

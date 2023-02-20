@@ -1,6 +1,6 @@
 ﻿using ComponentBuilder;
 
-namespace TDesign.Test.Components;
+namespace TDesign.Test.Components.Layout;
 public class DividerTest : TestBase<TDivider>
 {
     [Fact(DisplayName = "Divider - 默认样式的渲染")]

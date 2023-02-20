@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using Microsoft.Extensions.Options;
 
 namespace TDesign;
 /// <summary>
@@ -6,6 +7,10 @@ namespace TDesign;
 /// </summary>
 public abstract class TDesignComponentBase : BlazorComponentBase
 {
+    /// <summary>
+    /// 获取注入的配置。
+    /// </summary>
+    [Inject]protected IOptions<TDesignOptions> Options { get; set; }
     /// <summary>
     /// 级联 TPopup 组件。
     /// </summary>

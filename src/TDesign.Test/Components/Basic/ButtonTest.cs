@@ -1,4 +1,4 @@
-﻿namespace TDesign.Test.Components;
+﻿namespace TDesign.Test.Components.Basic;
 
 public class ButtonTest : TestBase
 {
@@ -30,7 +30,7 @@ public class ButtonTest : TestBase
         TestContext.RenderComponent<TButton>(m => m.Add(p => p.HtmlType, ButtonHtmlType.Reset)).Should().HaveAttribute("type", "reset");
     }
 
-    [Fact(DisplayName = "按钮 - Type 参数")]
+    [Fact(DisplayName = "按钮 - Varient 参数")]
     public void Test_Type_Parameter()
     {
         TestContext.RenderComponent<TButton>(m => m.Add(p => p.Varient, ButtonVarient.Dashed)).Should().HaveClass("t-button--variant-dashed");
@@ -74,7 +74,7 @@ public class ButtonTest : TestBase
     [Fact(DisplayName = "按钮 - Disabled 参数")]
     public void Test_Disabled_Parameter()
     {
-        TestContext.RenderComponent<TButton>(m => m.Add(p => p.Disabled, true)).Should().HaveClass("t-is-disabled");
+        TestContext.RenderComponent<TButton>(m => m.Add(p => p.Disabled, true)).Should().HaveClass("t-is-disabled").And.HaveAttribute("disabled","disabled");
     }
 
 
