@@ -12,7 +12,7 @@ public class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 设置数据源。
     /// </summary>
-    [Parameter] public IEnumerable<TItem>? Data { get; set; }
+    [Parameter] public IEnumerable<TItem> Data { get; set; } = Enumerable.Empty<TItem>();
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -54,6 +54,10 @@ public class TTable<TItem> : TDesignComponentBase
     /// 加载中状态。值为 true 会显示默认加载中样式。
     /// </summary>
     [Parameter] public bool Loading { get; set; }
+    /// <summary>
+    /// 设置当表格数据是空时显示的自定义内容。
+    /// </summary>
+    [Parameter]public RenderFragment? EmptyContent { get; set; }
 
     /// <inheritdoc/>
     protected override void OnInitialized()
@@ -61,6 +65,13 @@ public class TTable<TItem> : TDesignComponentBase
         ArgumentNullException.ThrowIfNull(Data, nameof(Data));
 
         base.OnInitialized();
+    }
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        EmptyContent ??= builder => builder.AddContent(0, "暂无数据");
     }
 
     /// <inheritdoc/>
@@ -156,23 +167,46 @@ public class TTable<TItem> : TDesignComponentBase
     {
         builder.CreateElement(sequence, "tbody", content =>
         {
-            var index = 0;
-            foreach (var item in Data!)
+            if ( Data.Any() )
             {
-                var key = index;
-                content.CreateComponent<TTableRow>(index + 1, tr =>
+                var index = 0;
+                foreach ( var item in Data! )
                 {
-                    tr.AddContent(0, ChildContent!.Invoke(item));
-                }, key: key);
+                    var key = index;
+                    content.CreateComponent<TTableRow>(index + 1, tr =>
+                    {
+                        tr.AddContent(0, ChildContent!.Invoke(item));
+                    }, key: key);
 
-                index++;
+                    index++;
+                }
             }
-
+            else
+            {
+                BuildEmptyContent(content);
+            }
         }, new
         {
             @class = HtmlHelper.Class.Append("t-table__body")
         });
     }
+
+    /// <summary>
+    /// 构建空表格的内容。
+    /// </summary>
+    /// <param name="builder"></param>
+    private void BuildEmptyContent(RenderTreeBuilder builder)
+    {
+        builder.CreateElement(0, "tr", content =>
+        {
+            content.CreateElement(0, "td", empty =>
+            {
+                empty.CreateElement(0, "div", EmptyContent, new { @class = "t-table__empty" });
+            }, new { colspan = ChildComponents.Count });
+
+        }, new { @class = "t-table__empty-row" });
+    }
+
     /// <summary>
     /// 构建 tfooter 部分。
     /// </summary>
