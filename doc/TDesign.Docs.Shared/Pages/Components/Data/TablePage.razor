@@ -342,6 +342,101 @@
  @code{
     bool Loading = true;
  }
+ <Example Title="空表格">
+        <Description>使用默认空表格样式。可使用 <code>EmptyContent</code> 自定义空表格模板</Description>
+    <RunContent>
+            <TTable TItem="User" Data="new List<User>()">
+            <FieldColumn Value="context?.Id" Title="Id" />
+            <FieldColumn Value="context?.Name" Title="姓名" />
+            <FieldColumn Value="context?.Age" Title="年龄" />
+            <FieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <TTag Theme="Theme.Primary">男</TTag>
+                    }
+                    else
+                    {
+                        <TTag Theme="Theme.Danger">女</TTag>
+                    }
+                }
+                </FieldColumn>
+        </TTable>
+
+            <TTable TItem="User" Data="new List<User>()">
+                <ChildContent>
+                <FieldColumn Value="context?.Id" Title="Id" />
+                <FieldColumn Value="context?.Name" Title="姓名" />
+                <FieldColumn Value="context?.Age" Title="年龄" />
+                <FieldColumn Title="性别">
+                    @if ( context is not null )
+                    {
+                        if ( context.Gender )
+                        {
+                            <TTag Theme="Theme.Primary">男</TTag>
+                        }
+                        else
+                        {
+                            <TTag Theme="Theme.Danger">女</TTag>
+                        }
+                    }
+                </FieldColumn>
+                </ChildContent>
+                <EmptyContent>
+                    自定义空模板
+                </EmptyContent>
+            </TTable>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTable TItem=""User"" Data=""new List<User>()"">
+    <FieldColumn Value=""context?.Id"" Title=""Id"" />
+    <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <FieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+    </FieldColumn>
+</TTable>
+
+<TTable TItem=""User"" Data=""new List<User>()"">
+    <ChildContent>
+        <FieldColumn Value=""context?.Id"" Title=""Id"" />
+        <FieldColumn Value=""context?.Name"" Title=""姓名"" />
+        <FieldColumn Value=""context?.Age"" Title=""年龄"" />
+        <FieldColumn Title=""性别"">
+            @if (context is not null)
+            {
+                if (context.Gender)
+                {
+                    <TTag Theme=""Theme.Primary"">男</TTag>
+                }
+                else
+                {
+                    <TTag Theme=""Theme.Danger"">女</TTag>
+                }
+            }
+        </FieldColumn>
+    </ChildContent>
+    <EmptyContent>
+        自定义空模板
+    </EmptyContent>
+</TTable>
+```
+")
+    </CodeContent>
+</Example>
 <div id="API"></div>
 <ComponentAPI Component="typeof(TTable<>)"></ComponentAPI>
 @code{
