@@ -2258,65 +2258,6 @@
             错误
             </summary>
         </member>
-        <member name="T:TDesign.FieldColumn`1">
-            <summary>
-            表示可以输出数据的表格列。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
-            </summary>
-        </member>
-        <member name="P:TDesign.FieldColumn`1.Value">
-            <summary>
-            获取或设置列中输出的值。
-            </summary>
-        </member>
-        <member name="M:TDesign.FieldColumn`1.GetColumnContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:TDesign.TableColumnBase">
-            <summary>
-            表示表格的单元格的基类。
-            </summary>
-        </member>
-        <member name="P:TDesign.TableColumnBase.IsHeader">
-            <summary>
-            获取当前是否是顶部单元格。
-            </summary>
-        </member>
-        <member name="P:TDesign.TableColumnBase.Title">
-            <summary>
-            设置列标题。若设置了 <see cref="P:TDesign.TableColumnBase.TitleContent"/> 参数，则该参数无效。
-            </summary>
-        </member>
-        <member name="P:TDesign.TableColumnBase.TitleContent">
-            <summary>
-            设置列标题部分的任意 UI 片段。
-            </summary>
-        </member>
-        <member name="P:TDesign.TableColumnBase.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
-        <member name="M:TDesign.TableColumnBase.GetHeaderContent">
-            <summary>
-            获取顶部标题内容。
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TDesign.TableColumnBase.GetColumnContent">
-            <summary>
-            获取表格列的内容。
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TDesign.TableColumnBase.GetTagName">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TableColumnBase.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <inheritdoc/>
-        </member>
         <member name="T:TDesign.TTable`1">
             <summary>
             只具备一些基本功能的数据表格。
@@ -2324,7 +2265,18 @@
         </member>
         <member name="P:TDesign.TTable`1.Data">
             <summary>
-            设置数据源。
+            设置表格的数据源。如果时需要动态数据，则使用 <see cref="P:TDesign.TTable`1.DataQuery"/> 参数。
+            <para>
+            如果 <see cref="P:TDesign.TTable`1.Data"/> 和 <see cref="P:TDesign.TTable`1.DataQuery"/> 均有值，则优先使用 <see cref="P:TDesign.TTable`1.DataQuery"/> 参数。
+            </para>
+            <para>
+            如果 <see cref="P:TDesign.TTable`1.Data"/> 和 <see cref="P:TDesign.TTable`1.DataQuery"/> 都是 <c>null</c>，则抛出异常。
+            </para>
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.DataQuery">
+            <summary>
+            设置一个读取数据源的委托。该参数优先于 <see cref="P:TDesign.TTable`1.Data"/> 参数应用。
             </summary>
         </member>
         <member name="P:TDesign.TTable`1.AutoWidth">
@@ -2382,7 +2334,37 @@
             设置当表格数据是空时显示的自定义内容。
             </summary>
         </member>
-        <member name="M:TDesign.TTable`1.OnInitialized">
+        <member name="P:TDesign.TTable`1.PageIndex">
+            <summary>
+            表示当前的页码。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.PageIndexChanged">
+            <summary>
+            当页码变更时执行的方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.PageSize">
+            <summary>
+            设置每页呈现的数据量。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.PageSizeChanged">
+            <summary>
+            当数据量变更时执行的方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.TotalCount">
+            <summary>
+            总页数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.DataLoaded">
+            <summary>
+            已加载的数据源。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TTable`1.OnParametersSet">
@@ -2400,6 +2382,13 @@
             </summary>
             <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
             <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构造表格的 tbody 内容部分。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
         </member>
         <member name="M:TDesign.TTable`1.BuildPagination(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
@@ -2449,6 +2438,68 @@
             <summary>
             表示渲染 th 元素的组件。
             </summary>
+        </member>
+        <member name="T:TDesign.TTableColumnBase">
+            <summary>
+            表示表格的单元格的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableColumnBase.IsHeader">
+            <summary>
+            获取当前是否是顶部单元格。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableColumnBase.Title">
+            <summary>
+            设置列标题。若设置了 <see cref="P:TDesign.TTableColumnBase.TitleContent"/> 参数，则该参数无效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableColumnBase.TitleContent">
+            <summary>
+            设置列标题部分的任意 UI 片段。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableColumnBase.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="M:TDesign.TTableColumnBase.GetHeaderContent">
+            <summary>
+            获取顶部标题内容。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TTableColumnBase.GetColumnContent">
+            <summary>
+            获取表格列的内容。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TTableColumnBase.GetTagName">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableColumnBase.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableColumnBase.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TTableFieldColumn`1">
+            <summary>
+            表示可以输出数据的表格列。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableFieldColumn`1.Value">
+            <summary>
+            获取或设置列中输出的值。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTableFieldColumn`1.GetColumnContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:TDesign.TTableRow">
             <summary>
@@ -3551,7 +3602,7 @@
             跳转页码。
             </summary>
         </member>
-        <member name="M:TDesign.TPagination.NavigateToPage(System.Int64)">
+        <member name="M:TDesign.TPagination.NavigateToPage(System.Int32)">
             <summary>
             跳转到指定页。
             </summary>
@@ -3607,7 +3658,7 @@
             <param name="disabled">是否禁用。</param>
             <param name="additionalClass">附加的 class 样式。</param>
         </member>
-        <member name="M:TDesign.TPagination.BuildPageNumerItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Int64)">
+        <member name="M:TDesign.TPagination.BuildPageNumerItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.Int32)">
             <summary>
             构建分页数字。
             </summary>
@@ -4526,6 +4577,36 @@
             构建 Popup 相关的属性。
             </summary>
             <param name="attributes">The attributes for components.</param>
+        </member>
+        <member name="T:TDesign.TDesignChildContentComponentBase">
+            <summary>
+            带 ChildContent 参数的 TDesign 组件基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignChildContentComponentBase.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TDesignAdditionParameterComponentBase">
+            <summary>
+            带 AdditionalClass 和 AdditionalStyle 参数的 TDesign 组件基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignAdditionParameterComponentBase.AdditionalStyle">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignAdditionParameterComponentBase.AdditionalClass">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TDesignAdditionParameterWithChildContentComponentBase">
+            <summary>
+            带 ChildContent AdditionalClass 和 AdditionalStyle 参数的 TDesign 组件基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignAdditionParameterWithChildContentComponentBase.AdditionalStyle">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TDesignAdditionParameterWithChildContentComponentBase.AdditionalClass">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.TDesignExtensions">
             <summary>

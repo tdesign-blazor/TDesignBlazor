@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Linq.Expressions;
 
 namespace TDesign;
 /// <summary>
@@ -19,11 +18,11 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置当前页码。
     /// </summary>
-    [Parameter][EditorRequired] public long Current { get; set; }
+    [Parameter][EditorRequired] public int Current { get; set; }
     /// <summary>
     /// 设置一个当页码变更时的回调方法。
     /// </summary>
-    [Parameter] public EventCallback<long> CurrentChanged { get; set; }
+    [Parameter] public EventCallback<int> CurrentChanged { get; set; }
     #endregion
 
     #region PageSize
@@ -41,15 +40,15 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置分页的总数据量。必须要大于 0。
     /// </summary>
-    [Parameter][EditorRequired] public long Total { get; set; }
+    [Parameter][EditorRequired] public int Total { get; set; }
     /// <summary>
     /// 设置一个当总数据量变化时的回调方法。
     /// </summary>
-    [Parameter] public EventCallback<long> TotalChanged { get; set; }
+    [Parameter] public EventCallback<int> TotalChanged { get; set; }
     /// <summary>
     /// 设置显示总数据量的任意内容。
     /// </summary>
-    [Parameter] public RenderFragment<long>? TotalContent { get; set; }
+    [Parameter] public RenderFragment<int>? TotalContent { get; set; }
     /// <summary>
     /// 设置一个布尔值，表示是否显示总数据量的内容。
     /// </summary>
@@ -94,7 +93,7 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 获取总页数。
     /// </summary>
-    long TotalPages
+    int TotalPages
     {
         get
         {
@@ -115,7 +114,7 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 跳转页码。
     /// </summary>
-    long JumpPage { get; set; } = 1;
+    int JumpPage { get; set; } = 1;
     #endregion
 
     #region Method
@@ -126,11 +125,10 @@ public class TPagination : TDesignComponentBase
     /// 跳转到指定页。
     /// </summary>
     /// <param name="page">要跳转的页码。</param>
-    public async Task NavigateToPage(long page)
+    public async Task NavigateToPage(int page)
     {
         page = page < 1 ? 1 : page;
         page = page > TotalPages ? TotalPages : page;
-
 
         Current = page;
         JumpPage = page;
@@ -291,7 +289,7 @@ public class TPagination : TDesignComponentBase
     /// 构建分页数字。
     /// </summary>
     /// <param name="pageNumber">分页数字。</param>
-    void BuildPageNumerItem(RenderTreeBuilder builder, int sequence, long pageNumber)
+    void BuildPageNumerItem(RenderTreeBuilder builder, int sequence, int pageNumber)
     {
         if (pageNumber == Current)
         {
@@ -340,7 +338,7 @@ public class TPagination : TDesignComponentBase
             //页码1 永远显示，所有从2开始
             //最后一页永远显示，所以结束要少一个索引
             var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
-            for (long i = start + offset; i <= end - offset; i++)
+            for (var i = start + offset; i <= end - offset; i++)
             {
                 var current = i;
                 var contentSequence = (int)i + 30;
@@ -374,10 +372,10 @@ public class TPagination : TDesignComponentBase
         /// 计算分页页码的开始和结束的页码。
         /// </summary>
         /// <returns>开始和结束的页码。</returns>
-        (long start, long end) ComputePageNumber()
+        (int start, int end) ComputePageNumber()
         {
-            var start = 0L;
-            var end = 0L;
+            var start = 0;
+            var end = 0;
 
             var middle = PageNumber / 2;
             if (Current <= middle)
@@ -419,16 +417,16 @@ public class TPagination : TDesignComponentBase
             content.AddContent(0, "跳至");
             content.CreateComponent<TInputAdornment>(1, input =>
             {
-                input.CreateComponent<TInputNumber<long>>(0, attributes: new
+                input.CreateComponent<TInputNumber<int>>(0, attributes: new
                 {
-                    AdditionalCssClass = "t-pagination__input",
+                    AdditionalClass = "t-pagination__input",
                     Theme = InputNumberTheme.Normal,
                     Min = 1L,
                     Max = TotalPages,
                     Size,
                     Value = JumpPage,
-                    ValueExpression = (Expression<Func<long>>)(() => JumpPage),
-                    ValueChanged = HtmlHelper.Event.Create<long>(this, value =>
+                    ValueExpression = (Expression<Func<int>>)(() => JumpPage),
+                    ValueChanged = HtmlHelper.Event.Create<int>(this, value =>
                     {
                         NavigateToPage(value);
                     })

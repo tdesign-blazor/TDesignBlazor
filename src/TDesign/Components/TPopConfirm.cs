@@ -90,7 +90,7 @@ public class TPopConfirm:TPopup
                 icon.CreateComponent<TIcon>(0, attributes: new
                 {
                     Name = Icon,
-                    AdditionalCssClass = $"t-popconfirm__icon--{Theme.Value}"
+                    AdditionalClass = $"t-popconfirm__icon--{Theme.Value}"
                 });
 
                 icon.Div().Class("t-popconfirm__inner").Content(ConfirmContent).Close();
@@ -134,7 +134,7 @@ public class TPopConfirm:TPopup
                 }
             }),
             Size=BtnSize,
-            AdditionalCssClass = css
+            AdditionalClass = css
         });
     }
 }

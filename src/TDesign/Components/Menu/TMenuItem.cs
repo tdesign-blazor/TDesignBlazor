@@ -9,7 +9,7 @@ namespace TDesign;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
 [ChildComponent(typeof(TMenu))]
-public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasActive, IHasChildContent
+public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasActive
 {
     [Inject] public NavigationManager NavigationManager { get; set; }
     [CascadingParameter] public TMenu CascadingMenu { get; set; }

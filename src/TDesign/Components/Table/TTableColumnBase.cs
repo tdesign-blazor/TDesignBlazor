@@ -5,7 +5,7 @@ namespace TDesign;
 /// <summary>
 /// 表示表格的单元格的基类。
 /// </summary>
-public abstract class TableColumnBase : TDesignComponentBase, IHasChildContent
+public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// 获取当前是否是顶部单元格。
@@ -38,7 +38,13 @@ public abstract class TableColumnBase : TDesignComponentBase, IHasChildContent
     protected abstract RenderFragment? GetColumnContent();
 
     /// <inheritdoc/>
-    public override string? GetTagName() => IsHeader ? "th" : "td";
+    public override string GetTagName() => IsHeader ? "th" : "td";
+
+    /// <inheritdoc/>
+    protected override void AfterSetParameters(ParameterView parameters)
+    {
+        ChildContent ??= GetColumnContent();
+    }
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -49,7 +55,7 @@ public abstract class TableColumnBase : TDesignComponentBase, IHasChildContent
         }
         else
         {
-            builder.AddContent(0, ChildContent ??= GetColumnContent());
+            builder.AddContent(0, ChildContent);
         }
     }
 }

@@ -60,7 +60,7 @@ public class TLoading : TDesignComponentBase, IHasChildContent
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateComponent<TIcon>(sequence, attributes: new { Name = IconName.Loading, AdditionalCssClass = "t-loading__gradient" }, condition: !TextOnly);
+        builder.CreateComponent<TIcon>(sequence, attributes: new { Name = IconName.Loading, AdditionalClass = "t-loading__gradient" }, condition: !TextOnly);
 
         builder.CreateElement(sequence + 1, "div", ChildContent, new { @class = "t-loading__text" }, ChildContent is not null);
     }

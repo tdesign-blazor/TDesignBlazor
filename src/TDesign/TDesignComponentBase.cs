@@ -119,3 +119,33 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         }
     }
 }
+
+/// <summary>
+/// 带 ChildContent 参数的 TDesign 组件基类。
+/// </summary>
+public abstract class TDesignChildContentComponentBase : TDesignComponentBase, IHasChildContent
+{
+    /// <inheritdoc/>
+    [Parameter]public RenderFragment? ChildContent { get; set; }
+}
+
+/// <summary>
+/// 带 AdditionalClass 和 AdditionalStyle 参数的 TDesign 组件基类。
+/// </summary>
+public abstract class TDesignAdditionParameterComponentBase : TDesignComponentBase, IHasAdditionalClass, IHasAdditionalStyle
+{
+    /// <inheritdoc/>
+    [Parameter]public string? AdditionalStyle { get; set; }
+    /// <inheritdoc/>
+    [Parameter]public string? AdditionalClass { get; set; }
+}
+/// <summary>
+/// 带 ChildContent AdditionalClass 和 AdditionalStyle 参数的 TDesign 组件基类。
+/// </summary>
+public abstract class TDesignAdditionParameterWithChildContentComponentBase : TDesignChildContentComponentBase, IHasAdditionalClass, IHasAdditionalStyle
+{
+    /// <inheritdoc/>
+    [Parameter] public string? AdditionalStyle { get; set; }
+    /// <inheritdoc/>
+    [Parameter] public string? AdditionalClass { get; set; }
+}
