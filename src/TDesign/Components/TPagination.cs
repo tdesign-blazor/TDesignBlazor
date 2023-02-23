@@ -178,27 +178,27 @@ public class TPagination : TDesignComponentBase
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        BuildTotal(builder, sequence);
-        BuildPageSizeSelect(builder, sequence + 1);
+        BuildTotal(builder);
+        BuildPageSizeSelect(builder);
 
-        BuildPageBehaviorBtn(builder, sequence + 10, PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, Current <= 1);
-        BuildPageBehaviorBtn(builder, sequence + 11, PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: Current <= 1);
+        BuildPageBehaviorBtn(builder,PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, Current <= 1);
+        BuildPageBehaviorBtn(builder,  PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: Current <= 1);
 
         if (Simple)
         {
-            BuildJumper(builder, sequence + 20);
+            BuildJumper(builder);
         }
         else
         {
-            BuildPageNumbers(builder, sequence + 20);
+            BuildPageNumbers(builder);
         }
 
-        BuildPageBehaviorBtn(builder, sequence + 21, PageButtonBehavior.Next, IconName.ChevronRight, disabled: Current >= TotalPages);
-        BuildPageBehaviorBtn(builder, sequence + 22, PageButtonBehavior.Last, IconName.PageLast, ShowFirstLastBtn, Current >= TotalPages);
+        BuildPageBehaviorBtn(builder,  PageButtonBehavior.Next, IconName.ChevronRight, disabled: Current >= TotalPages);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Last, IconName.PageLast, ShowFirstLastBtn, Current >= TotalPages);
 
         if (!Simple)
         {
-            BuildJumper(builder, sequence + 30);
+            BuildJumper(builder);
         }
     }
     #endregion
@@ -207,55 +207,43 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 构建总数据量的元素。
     /// </summary>
-    void BuildTotal(RenderTreeBuilder builder, int sequence)
-        => builder.CreateElement(sequence, "div", TotalContent?.Invoke(Total), new { @class = "t-pagination__total" }, ShowTotal);
+    void BuildTotal(RenderTreeBuilder builder)
+        => builder.Fluent().Div("t-pagination__total", ShowTotal).Content(TotalContent?.Invoke(Total)).Close();
 
     /// <summary>
     /// 构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="sequence"></param>
-    void BuildPageSizeSelect(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "div", content =>
-        {
-            content.AddContent(0, $"{PageSize} 条/页");
-        }, new { @class = "t-select__wrap t-pagination__select" });
-    }
+    void BuildPageSizeSelect(RenderTreeBuilder builder)
+        => builder.Fluent().Div("t-select__wrap t-pagination__select").Content(HtmlHelper.CreateContent($"{PageSize} 条/页")).Close();
 
     /// <summary>
     /// 构建上一页或下一页按钮。
     /// <param name="prevOrNext"><c>true</c> 表示上一页，否则是下一页。</param>
     /// <param name="disabled">是否被禁用。</param>
-    void BuildPageBehaviorBtn(RenderTreeBuilder builder, int sequence, PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default)
-    {
-        builder.CreateElement(sequence, "div", content =>
-        {
-            content.CreateComponent<TIcon>(0, attributes: new { Name = iconName });
-        }, new
-        {
-            @class = HtmlHelper.Class
-                                .Append("t-pagination__btn")
-                                .Append("t-pagination__btn-prev", behavior is PageButtonBehavior.First or PageButtonBehavior.Previous)
-                                .Append("t-pagination__btn-next", behavior is PageButtonBehavior.Next or PageButtonBehavior.Last)
-                                .Append("t-is-disabled", disabled)
-                                ,
-            onclick = HtmlHelper.Event.Create(this, () =>
-            {
-                if (disabled)
+    void BuildPageBehaviorBtn(RenderTreeBuilder builder,  PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default) 
+        => builder.Fluent()
+            .Div("t-pagination__btn", show)
+                .Class("t-pagination__btn-prev", behavior is PageButtonBehavior.First or PageButtonBehavior.Previous)
+                .Class("t-pagination__btn-next", behavior is PageButtonBehavior.Next or PageButtonBehavior.Last)
+                .Class("t-is-disabled", disabled)
+                .Callback("onclick", this, () =>
                 {
-                    return Task.CompletedTask;
-                }
-                return behavior switch
-                {
-                    PageButtonBehavior.First => NavigateToFirst(),
-                    PageButtonBehavior.Last => NavigateToLast(),
-                    PageButtonBehavior.Previous => NavigateToPrevious(),
-                    _ => NavigateToNext()
-                };
-            })
-        }, show);
-    }
+                    if ( disabled )
+                    {
+                        return Task.CompletedTask;
+                    }
+                    return behavior switch
+                    {
+                        PageButtonBehavior.First => NavigateToFirst(),
+                        PageButtonBehavior.Last => NavigateToLast(),
+                        PageButtonBehavior.Previous => NavigateToPrevious(),
+                        _ => NavigateToNext()
+                    };
+                })
+                .Content(icon => icon.Fluent().Component<TIcon>().Attribute(new { Name = iconName }).Close())
+            .Close()
+            ;
 
     /// <summary>
     /// 该方法用于构建分页的页码条的各项，例如上一页按钮，分页页码，末页按钮等。
@@ -266,25 +254,20 @@ public class TPagination : TDesignComponentBase
     /// <param name="callback">点击的回调。</param>
     /// <param name="disabled">是否禁用。</param>
     /// <param name="additionalClass">附加的 class 样式。</param>
-    void BuildPageItem(RenderTreeBuilder builder, int sequence, RenderFragment content, Func<Task>? callback = default, bool disabled = default, string? additionalClass = default)
-    {
-        builder.CreateElement(sequence, "li", content, new
-        {
-            @class = HtmlHelper.Class
-                        .Append("t-pagination__number")
-                        .Append("t-is-disabled", disabled)
-                        .Append(additionalClass, !string.IsNullOrEmpty(additionalClass)),
-            onclick = HtmlHelper.Event.Create(this, () =>
-            {
-                if (callback is not null && !disabled)
-                {
+    void BuildPageItem(RenderTreeBuilder builder, int sequence, RenderFragment content, Func<Task>? callback = default, bool disabled = default, string? additionalClass = default) 
+        => builder.Fluent().Li().Class("t-pagination__number")
+                             .Class("t-is-disabled", disabled)
+                             .Class(additionalClass, !string.IsNullOrEmpty(additionalClass))
+                             .Callback("onclick", this, () =>
+                             {
+                                 if ( callback is not null && !disabled )
+                                 {
 
-                    callback();
-                }
-            }),
-            disabled
-        });
-    }
+                                     callback();
+                                 }
+                             }, disabled)
+                            .Content(content)
+                            .Close();
     /// <summary>
     /// 构建分页数字。
     /// </summary>
@@ -304,105 +287,104 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 构建分页条。
     /// </summary>
-    void BuildPageNumbers(RenderTreeBuilder builder, int sequence)
+    void BuildPageNumbers(RenderTreeBuilder builder) 
+        => builder.Fluent().Ul("t-pagination__pager", ShowPageNumber)
+                        .Content(content =>
+                        {
+                            if ( EllipsisMode == PageEllipsisMode.Middle )
+                            {
+                                #region 第一页
+
+                                //第一页永远显示
+                                BuildPageNumerItem(content, 0, 1);
+
+                                #endregion
+
+                                #region 前5页
+                                if ( Current > PageNumber / 2 )
+                                {
+                                    var backTo = PageNumber - 5;
+                                    if ( backTo <= 1 )
+                                    {
+                                        backTo = 1;
+                                    }
+                                    BuildPageItem(content, 1, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(backTo));
+                                }
+                                #endregion
+                            }
+
+                            #region 页码条
+
+                            var (start, end) = ComputePageNumber();
+
+                            //页码1 永远显示，所有从2开始
+                            //最后一页永远显示，所以结束要少一个索引
+                            var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
+                            for ( var i = start + offset; i <= end - offset; i++ )
+                            {
+                                var current = i;
+                                var contentSequence = (int)i + 30;
+
+                                BuildPageNumerItem(content, contentSequence, current);
+                            }
+                            #endregion
+
+                            if ( EllipsisMode == PageEllipsisMode.Middle )
+                            {
+                                #region 后5页
+                                if ( Current < TotalPages - PageNumber / 2 )
+                                {
+                                    var nextTo = Current + 5;
+                                    if ( nextTo >= TotalPages )
+                                    {
+                                        nextTo = TotalPages;
+                                    }
+                                    BuildPageItem(content, 90, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(nextTo));
+                                }
+                                #endregion
+
+                                #region 末页
+                                BuildPageNumerItem(content, 100, TotalPages);
+                                #endregion
+                            }
+                        })
+                        .Close();
+
+
+    /// <summary>
+    /// 计算分页页码的开始和结束的页码。
+    /// </summary>
+    /// <returns>开始和结束的页码。</returns>
+    (int start, int end) ComputePageNumber()
     {
-        //分页条
-        builder.CreateElement(sequence + 1, "ul", content =>
+        var start = 0;
+        var end = 0;
+
+        var middle = PageNumber / 2;
+        if ( Current <= middle )
         {
-            if (EllipsisMode == PageEllipsisMode.Middle)
-            {
-                #region 第一页
-
-                //第一页永远显示
-                BuildPageNumerItem(content, 0, 1);
-
-                #endregion
-
-                #region 前5页
-                if (Current > PageNumber / 2)
-                {
-                    var backTo = PageNumber - 5;
-                    if (backTo <= 1)
-                    {
-                        backTo = 1;
-                    }
-                    BuildPageItem(content, 1, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(backTo));
-                }
-                #endregion
-            }
-
-            #region 页码条
-
-            var (start, end) = ComputePageNumber();
-
-            //页码1 永远显示，所有从2开始
-            //最后一页永远显示，所以结束要少一个索引
-            var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
-            for (var i = start + offset; i <= end - offset; i++)
-            {
-                var current = i;
-                var contentSequence = (int)i + 30;
-
-                BuildPageNumerItem(content, contentSequence, current);
-            }
-            #endregion
-
-            if (EllipsisMode == PageEllipsisMode.Middle)
-            {
-                #region 后5页
-                if (Current < TotalPages - PageNumber / 2)
-                {
-                    var nextTo = Current + 5;
-                    if (nextTo >= TotalPages)
-                    {
-                        nextTo = TotalPages;
-                    }
-                    BuildPageItem(content, 90, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(nextTo));
-                }
-                #endregion
-
-                #region 末页
-                BuildPageNumerItem(content, 100, TotalPages);
-                #endregion
-            }
-
-        }, new { @class = "t-pagination__pager" }, ShowPageNumber);
-
-        /// <summary>
-        /// 计算分页页码的开始和结束的页码。
-        /// </summary>
-        /// <returns>开始和结束的页码。</returns>
-        (int start, int end) ComputePageNumber()
-        {
-            var start = 0;
-            var end = 0;
-
-            var middle = PageNumber / 2;
-            if (Current <= middle)
-            {
-                start = 1;
-                end = PageNumber;
-            }
-            else if (Current > middle)
-            {
-                start = Current - middle;
-                end = Current + middle;
-            }
-            if (end > TotalPages)
-            {
-                end = TotalPages;
-                if (start + end != PageNumber - 2)
-                {
-                    start = end - PageNumber + 2 - 1;
-                }
-            }
-            if (end <= PageNumber)
-            {
-                start = 1;
-            }
-
-            return (start, end);
+            start = 1;
+            end = PageNumber;
         }
+        else if ( Current > middle )
+        {
+            start = Current - middle;
+            end = Current + middle;
+        }
+        if ( end > TotalPages )
+        {
+            end = TotalPages;
+            if ( start + end != PageNumber - 2 )
+            {
+                start = end - PageNumber + 2 - 1;
+            }
+        }
+        if ( end <= PageNumber )
+        {
+            start = 1;
+        }
+
+        return (start, end);
     }
 
     /// <summary>
@@ -410,33 +392,34 @@ public class TPagination : TDesignComponentBase
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
-    void BuildJumper(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "div", content =>
-        {
-            content.AddContent(0, "跳至");
-            content.CreateComponent<TInputAdornment>(1, input =>
-            {
-                input.CreateComponent<TInputNumber<int>>(0, attributes: new
-                {
-                    AdditionalClass = "t-pagination__input",
-                    Theme = InputNumberTheme.Normal,
-                    Min = 1L,
-                    Max = TotalPages,
-                    Size,
-                    Value = JumpPage,
-                    ValueExpression = (Expression<Func<int>>)(() => JumpPage),
-                    ValueChanged = HtmlHelper.Event.Create<int>(this, value =>
-                    {
-                        NavigateToPage(value);
-                    })
-                });
-            }, new
-            {
-                Append = $"/{TotalPages} 页"
-            });
-        }, new { @class = "t-pagination__jump" }, ShowJumpPage);
-    }
+    void BuildJumper(RenderTreeBuilder builder) 
+        => builder.Fluent().Div("t-pagination__jump", ShowJumpPage)
+                            .Content(content =>
+                            {
+                                content.AddContent(0, "跳至");
+
+                                content.Fluent()
+                                        .Component<TInputAdornment>()
+                                        .Attribute(nameof(TInputAdornment.Append), $"/{TotalPages} 页")
+                                        .Content(input => input.Fluent().Component<TInputNumber<int>>()
+                                                                        .Attribute(new
+                                                                        {
+                                                                            AdditionalClass = "t-pagination__input",
+                                                                            Theme = InputNumberTheme.Normal,
+                                                                            Min = 1,
+                                                                            Max = TotalPages,
+                                                                            Size,
+                                                                            Value = JumpPage,
+                                                                            ValueExpression = (Expression<Func<int>>)(() => JumpPage),
+                                                                            ValueChanged = HtmlHelper.Event.Create<int>(this, value =>
+                                                                            {
+                                                                                NavigateToPage(value);
+                                                                            })
+                                                                        })
+                                                                        .Close())
+                                .Close();
+                            })
+            .Close();
     #endregion
 
     #endregion

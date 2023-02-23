@@ -14,13 +14,13 @@ namespace TDesign.Test.Components.Input
         [Fact(DisplayName = "InputAdornment - 渲染并验证 css")]
         public void Test_Render()
         {
-            GetComponent().Should().HaveClass("t-input-adornment");
+            RenderComponent().Should().HaveClass("t-input-adornment");
         }
 
         [Fact(DisplayName = "InputAdornment - Prepend 参数")]
         public void Test_Prepend_Parameter()
         {
-            GetComponent(m => m.Add(p => p.Prepend, "http"))
+            RenderComponent(m => m.Add(p => p.Prepend, "http"))
                 .Should()
                 .HaveClass("t-input-adornment--prepend")
                 .And
@@ -30,7 +30,7 @@ namespace TDesign.Test.Components.Input
         [Fact(DisplayName = "InputAdornment - PrependContent 参数")]
         public void Test_PrependContent_Parameter()
         {
-            GetComponent(m => m.Add(p => p.PrependContent, builder => builder.AddContent(0, "html content")))
+            RenderComponent(m => m.Add(p => p.PrependContent, builder => builder.AddContent(0, "html content")))
                 .Should()
                 .HaveClass("t-input-adornment--prepend")
                 .And
@@ -39,7 +39,7 @@ namespace TDesign.Test.Components.Input
         [Fact(DisplayName = "InputAdornment - Append 参数")]
         public void Test_Append_Parameter()
         {
-            GetComponent(m => m.Add(p => p.Append, "http"))
+            RenderComponent(m => m.Add(p => p.Append, "http"))
                 .Should()
                 .HaveClass("t-input-adornment--append")
                 .And
@@ -49,7 +49,7 @@ namespace TDesign.Test.Components.Input
         [Fact(DisplayName = "InputAdornment - AppendContent 参数")]
         public void Test_AppendContent_Parameter()
         {
-            GetComponent(m => m.Add(p => p.AppendContent, builder => builder.AddContent(0, "html content")))
+            RenderComponent(m => m.Add(p => p.AppendContent, builder => builder.AddContent(0, "html content")))
                 .Should()
                 .HaveClass("t-input-adornment--append")
                 .And

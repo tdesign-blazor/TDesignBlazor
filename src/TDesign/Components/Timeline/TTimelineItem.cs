@@ -47,42 +47,37 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.Div()
+        builder.Fluent().Div()
                 .Class("t-timeline-item__wrapper")
                 .Content(content =>
                 {
-                    content.Div()
-                        .Class("t-timeline-item__dot", Color.GetCssClass("t-timeline-item__dot--"), (IconName is not null, "t-timeline-item__dot--custom"))
+                    content.Fluent().Div()
+                        .Class("t-timeline-item__dot")
+                        .Class(Color.GetCssClass("t-timeline-item__dot--"))
+                        .Class( "t-timeline-item__dot--custom", IconName is not null)
                         .Content(icon =>
                         {
-                            icon.Div().Class("t-timeline-item__dot-content").Content(dot =>
+                            icon.Fluent().Div().Class("t-timeline-item__dot-content").Content(dot =>
                             {
                                 if (IconName is not null)
                                 {
-                                    dot.Open<TIcon>().Attributes("Name", IconName).Close();
+                                    dot.Fluent().Component<TIcon>().Attribute("Name", IconName).Close();
                                 }
                             })
                             .Close();
                         })
-                    .Close();
-
-                    content.Div().Class("t-timeline-item__tail", CascadingTimeline.Theme.GetCssClass("t-timeline-item__tail--theme-"), "t-timeline-item__tail--status-primary")
+                    .Close()
+                    .Div("t-timeline-item__tail")
+                        .Class(CascadingTimeline.Theme.GetCssClass("t-timeline-item__tail--theme-")).Class("t-timeline-item__tail--status-primary")
                     .Close();
                 })
-        .Close();
-
-        builder.Div()
-                .Class("t-timeline-item__content")
+        .Close()
+        .Div("t-timeline-item__content")
                 .Content(content =>
-                {
-                    content.AddContent(0, ChildContent);
-                    if (!string.IsNullOrEmpty(Label))
-                    {
-                        content.Div().Class("t-timeline-item__label", $"t-timeline-item__label--{(CascadingTimeline.Alternate ? "alternate" : "same")}")
-                                .Content(Label)
-                        .Close();
-                    }
-                })
+                    content.Fluent().Content(ChildContent).Div("t-timeline-item__label", !string.IsNullOrEmpty(Label))
+                    .Class($"t-timeline-item__label--{(CascadingTimeline.Alternate ? "alternate" : "same")}")
+                    .Content(Label)
+                    .Close())
             .Close();
     }
 

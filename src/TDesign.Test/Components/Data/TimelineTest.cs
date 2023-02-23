@@ -7,7 +7,7 @@ public class TimelineTest : TestBase<TTimeline>
     [Fact(DisplayName = "Timeline - 渲染")]
     public void Test_Render()
     {
-        var component = GetComponent(m => m.AddChildContent(builder =>
+        var component = RenderComponent(m => m.AddChildContent(builder =>
         {
             builder.CreateComponent<TTimelineItem>(0, "事件一", new { Label = "2022-01-01" });
         }));
@@ -45,7 +45,7 @@ public class TimelineTest : TestBase<TTimeline>
     [Fact(DisplayName ="Timeline - 为最后一个 TimelineItem 附加一个 AdditionalClass",Skip ="暂时不知道为什么无法加载样式")]
     public void Test_OnParameterSet_Then_Last_TimelineItem_Has_AdditionalClass()
     {
-        var timeline = GetComponent(m => m.AddChildContent(b =>
+        var timeline = RenderComponent(m => m.AddChildContent(b =>
         {
             b.CreateComponent<TTimelineItem>(0);
             b.CreateComponent<TTimelineItem>(1);
@@ -59,13 +59,13 @@ public class TimelineTest : TestBase<TTimeline>
     [Fact(DisplayName = "Timeline - 基础时间轴 - 垂直")]
     public void Test_Basic_Timeline_Vertical()
     {
-        GetComponent().Should().HaveClass("t-timeline-vertical");
+        RenderComponent().Should().HaveClass("t-timeline-vertical");
     }
 
     [Fact(DisplayName = "Timeline - 基础时间轴 - 水平")]
     public void Test_Basic_Timeline_Horizontal()
     {
-        GetComponent(m => m.Add(p => p.Horizontal, true)).Should().HaveClass("t-timeline-horizontal");
+        RenderComponent(m => m.Add(p => p.Horizontal, true)).Should().HaveClass("t-timeline-horizontal");
     }
 
     [Theory(DisplayName = "Timeline - 不同的颜色 Color")]
@@ -75,7 +75,7 @@ public class TimelineTest : TestBase<TTimeline>
     [InlineData(new object[] { Color.Error })]
     public void Test_Timeline_With_Different_Color(Color color)
     {
-        var item = GetComponent(m => m.AddChildContent(builder =>
+        var item = RenderComponent(m => m.AddChildContent(builder =>
                 {
                     builder.CreateComponent<TTimelineItem>(0, attributes: new { Color = color });
                 })).FindComponent<TTimelineItem>().Find(".t-timeline-item__dot");
@@ -89,7 +89,7 @@ public class TimelineTest : TestBase<TTimeline>
     [InlineData(new object[] { TimelineTheme.Dot })]
     public void Test_Timeline_Theme_Parameter(TimelineTheme theme)
     {
-        var item = GetComponent(m => m.Add(p => p.Theme, theme).AddChildContent(builder =>
+        var item = RenderComponent(m => m.Add(p => p.Theme, theme).AddChildContent(builder =>
         {
             builder.CreateComponent<TTimelineItem>(0);
         })).FindComponent<TTimelineItem>().Find(".t-timeline-item__tail");
@@ -100,15 +100,15 @@ public class TimelineTest : TestBase<TTimeline>
     [Fact(DisplayName ="Timeline - Alternative 参数")]
     public void Test_Timeline_Alternative_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Alternate, false)).Should().HaveClass("t-timeline-label--same");
-        GetComponent(m => m.Add(p => p.Alternate, true)).Should().HaveClass("t-timeline-label--alternate");
+        RenderComponent(m => m.Add(p => p.Alternate, false)).Should().HaveClass("t-timeline-label--same");
+        RenderComponent(m => m.Add(p => p.Alternate, true)).Should().HaveClass("t-timeline-label--alternate");
     }
 
     [Fact(DisplayName = "Timeline - Horizontal 参数")]
     public void Test_Timeline_Horizontal_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Horizontal, false)).Should().HaveClass("t-timeline-vertical");
-        GetComponent(m => m.Add(p => p.Horizontal, true)).Should().HaveClass("t-timeline-horizontal");
+        RenderComponent(m => m.Add(p => p.Horizontal, false)).Should().HaveClass("t-timeline-vertical");
+        RenderComponent(m => m.Add(p => p.Horizontal, true)).Should().HaveClass("t-timeline-horizontal");
     }
 
     [Theory(DisplayName = "Timeline - LabelAlignment 参数")]
@@ -119,13 +119,13 @@ public class TimelineTest : TestBase<TTimeline>
     [InlineData(new object[] { TimelineLabelAlignment.Alternate })]
     public void Test_Timeline_LabelAlignment_Parameter(TimelineLabelAlignment alignment)
     {
-        GetComponent(m => m.Add(p => p.LabelAlignment, alignment)).Should().HaveClass($"t-timeline-{alignment.GetCssClass()}");
+        RenderComponent(m => m.Add(p => p.LabelAlignment, alignment)).Should().HaveClass($"t-timeline-{alignment.GetCssClass()}");
     }
 
     [Fact(DisplayName ="Timeline - TimelineItem 的 Icon 参数")]
     public void Test_TimelineItem_Icon()
     {
-        GetComponent(m => m.AddChildContent(builder =>
+        RenderComponent(m => m.AddChildContent(builder =>
         {
             builder.CreateComponent<TTimelineItem>(0, attributes: new { IconName = IconName.Add });
         }))
@@ -135,7 +135,7 @@ public class TimelineTest : TestBase<TTimeline>
     [Fact(DisplayName ="Timeline - TimelineItem 的 AdditionalClass 参数")]
     public void Test_TimelineItem_AdditionalClass_Parameter()
     {
-        GetComponent(m => m.AddChildContent(builder =>
+        RenderComponent(m => m.AddChildContent(builder =>
         {
             builder.CreateComponent<TTimelineItem>(0, attributes: new { AdditionalClass = "custom-class" });
         }))

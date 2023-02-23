@@ -71,7 +71,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
 
             if (Arrow)
             {
-                inner.Div().Class("t-popup__arrow").Close();
+                inner.Fluent().Div().Class("t-popup__arrow").Close();
             }
         },
         new

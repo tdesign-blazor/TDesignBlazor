@@ -6,13 +6,13 @@ public class AvatarTest : TestBase<TAvatar>
     [Fact(DisplayName = "Avatar - 渲染 img 元素和默认样式")]
     public void Test_Render_Avatar()
     {
-        GetComponent().Should().HaveTag("div").And.HaveClass("t-avatar");
+        RenderComponent().Should().HaveTag("div").And.HaveClass("t-avatar");
     }
 
     [Fact(DisplayName = "Avatar - Icon 参数")]
     public void Test_Icon_Parameter()
     {
-        GetComponent(p => p.Add(m => m.Icon, IconName.Add))
+        RenderComponent(p => p.Add(m => m.Icon, IconName.Add))
             .Should().HaveClass("t-avatar__icon")
             .And.HaveChildMarkup("<i class=\"t-icon t-icon-add\" />")
             ;
@@ -21,30 +21,30 @@ public class AvatarTest : TestBase<TAvatar>
     [Fact(DisplayName = "Avatar - Url 参数")]
     public void Test_Url_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Url, "img.baidu.com"))
+        RenderComponent(m => m.Add(p => p.Url, "img.baidu.com"))
             .Should().HaveChildMarkup("<img src=\"img.baidu.com\"/>");
     }
 
     [Fact(DisplayName = "Avatar - ChildContent 参数")]
     public void Test_ChildContent_Parameter()
     {
-        GetComponent(m => m.AddChildContent("text"))
+        RenderComponent(m => m.AddChildContent("text"))
             .Should().HaveChildMarkup("<span style=\"transform:scale(1)\">text</span>");
     }
 
     [Fact(DisplayName = "Avatar - Size 参数")]
     public void Test_Size_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Size, Size.Small)).Should().HaveClass("t-size-s");
-        GetComponent(m => m.Add(p => p.Size, Size.Medium)).Should().HaveClass("t-size-m");
-        GetComponent(m => m.Add(p => p.Size, Size.Large)).Should().HaveClass("t-size-l");
+        RenderComponent(m => m.Add(p => p.Size, Size.Small)).Should().HaveClass("t-size-s");
+        RenderComponent(m => m.Add(p => p.Size, Size.Medium)).Should().HaveClass("t-size-m");
+        RenderComponent(m => m.Add(p => p.Size, Size.Large)).Should().HaveClass("t-size-l");
     }
 
     [Fact(DisplayName ="Avatar - Shape 参数")]
     public void Test_Shape_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Shape, Shape.Circle)).Should().HaveClass("t-avatar--circle");
-        GetComponent(m => m.Add(p => p.Shape, Shape.Round)).Should().HaveClass("t-avatar--round");
+        RenderComponent(m => m.Add(p => p.Shape, Shape.Circle)).Should().HaveClass("t-avatar--circle");
+        RenderComponent(m => m.Add(p => p.Shape, Shape.Round)).Should().HaveClass("t-avatar--round");
     }
 
     [Fact(DisplayName = "AvatarGroup - 渲染头像组")]

@@ -97,15 +97,21 @@ partial class TTable<TItem>
     /// <param name="sequence">源代码的位置。</param>
     void BuildPagination(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateComponent<TPagination>(sequence, attributes: new
+        builder.CreateElement(sequence, "div", content =>
         {
-            Current = PageIndex,
-            CurrentChanged = PageIndexChanged,
-            PageSize,
-            PageSizeChanged,
-            Total=TotalCount,
-            TotalChanged=TotalCountChanged
-        });
+            content.CreateElement(0, "div", pagination =>
+            {
+                builder.CreateComponent<TPagination>(sequence, attributes: new
+                {
+                    Current = PageIndex,
+                    CurrentChanged = PageIndexChanged,
+                    PageSize,
+                    PageSizeChanged,
+                    Total = TotalCount,
+                    TotalChanged = TotalCountChanged
+                });
+            },new { @class= "t-table__pagination" });
+        }, new { @class = "t-table__pagination-wrap", style = "opacity:1" }, condition: Pagination);
     }
     /// <summary>
     /// 构建 theader 部分。

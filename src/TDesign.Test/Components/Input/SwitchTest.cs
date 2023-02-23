@@ -9,7 +9,7 @@ namespace TDesign.Test.Components.Input
         public void Test_Render()
         {
             var value = false;
-            var component = GetComponent(op =>
+            var component = RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
             });
@@ -26,7 +26,7 @@ namespace TDesign.Test.Components.Input
         public void Test_Value_Parameter()
         {
             var value = true;
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { }
                 );
@@ -37,7 +37,7 @@ namespace TDesign.Test.Components.Input
         public void Test_Disabled_Parameter()
         {
             var value = false;
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
                 op.Add(item => item.Disabled, true);
@@ -48,7 +48,7 @@ namespace TDesign.Test.Components.Input
         public void Test_Loading_Parameter()
         {
             var value = false;
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
                 op.Add(item => item.Loading, true);
@@ -66,19 +66,19 @@ namespace TDesign.Test.Components.Input
         public void Test_Size_Parameter()
         {
             var value = false;
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
                 op.Add(item => item.Size, Size.Small);
             }).Should().HaveClass("t-size-s");
 
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
                 op.Add(item => item.Size, Size.Medium);
             }).Should().HaveClass("t-size-m");
 
-            GetComponent(op =>
+            RenderComponent(op =>
             {
                 op.Bind(item => item.Value, value, (switchValue) => { });
                 op.Add(item => item.Size, Size.Large);
@@ -89,7 +89,7 @@ namespace TDesign.Test.Components.Input
         //public void Test_TrueContent_Parameter()
         //{
         //    var value = true;
-        //    GetComponent(op =>
+        //    RenderComponent(op =>
         //    {
         //        op.Bind(item => item.Value, value, (switchValue) => { });
         //        op.Add(item => item.TrueContent, builder => { builder.AddContent(0, "OPEN"); });
@@ -100,7 +100,7 @@ namespace TDesign.Test.Components.Input
         //public void Test_FalseContent_Parameter()
         //{
         //    var value = false;
-        //    GetComponent(op =>
+        //    RenderComponent(op =>
         //    {
         //        op.Bind(item => item.Value, value, (switchValue) => { });
         //        op.Add(item => item.FalseContent, builder => { builder.AddContent(0, "CLOSE"); });

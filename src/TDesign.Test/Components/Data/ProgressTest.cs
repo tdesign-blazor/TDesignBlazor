@@ -4,7 +4,7 @@ public class ProgressTest : TestBase<TProgress>
     [Fact(DisplayName = "进度条 - 渲染 50% 进度的进度条和样式")]
     public void Test_Progress_Default()
     {
-        GetComponent(m => m.Add(p => p.Value, 50)).MarkupMatches(@"
+        RenderComponent(m => m.Add(p => p.Value, 50)).MarkupMatches(@"
 <div class=""t-progress"">
     <div class=""t-progress--thin t-progress--status--undefined"">
         <div class=""t-progress__bar"">
@@ -19,7 +19,7 @@ public class ProgressTest : TestBase<TProgress>
     [Fact(DisplayName = "进度条 - ShowLabel 参数")]
     public void Test_Progress_ShowLabel_Parameter()
     {
-        GetComponent(m => m.Add(p => p.Value, 50).Add(p => p.ShowLabel, true)).MarkupMatches(@"
+        RenderComponent(m => m.Add(p => p.Value, 50).Add(p => p.ShowLabel, true)).MarkupMatches(@"
 <div class=""t-progress"">
     <div class=""t-progress--thin t-progress--status--undefined"">
         <div class=""t-progress__bar"">
@@ -34,7 +34,7 @@ public class ProgressTest : TestBase<TProgress>
     [Fact(DisplayName = "进度条 - Plump 类型时，Value < 10 的样式")]
     public void Test_Progress_Plump_UnderTen_Label()
     {
-        GetComponent(m => m.Add(p => p.Value, 5).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Plump)).MarkupMatches(@"
+        RenderComponent(m => m.Add(p => p.Value, 5).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Plump)).MarkupMatches(@"
 <div class=""t-progress"">
     <div class=""t-progress__bar t-progress--plump t-progress--status--undefined t-progress--under-ten"">
         <div class=""t-progress__inner"" style=""width:5%""></div>
@@ -47,7 +47,7 @@ public class ProgressTest : TestBase<TProgress>
     [Fact(DisplayName = "进度条 - Plump 类型时，Value >= 10 的样式")]
     public void Test_Progress_Plump_OverTen_Label()
     {
-        GetComponent(m => m.Add(p => p.Value, 15).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Plump)).MarkupMatches(@"
+        RenderComponent(m => m.Add(p => p.Value, 15).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Plump)).MarkupMatches(@"
 <div class=""t-progress"">
     <div class=""t-progress__bar t-progress--plump t-progress--status--undefined t-progress--over-ten"">
         <div class=""t-progress__inner"" style=""width:15%"">
@@ -65,7 +65,7 @@ public class ProgressTest : TestBase<TProgress>
     [InlineData(new object[] { Status.Default })]
     public void Test_Progress_Status_Parameter(Status status)
     {
-        GetComponent(m => m.Add(p => p.Value, 15).Add(p => p.ShowLabel, true).Add(p => p.Status, status)).MarkupMatches($@"
+        RenderComponent(m => m.Add(p => p.Value, 15).Add(p => p.ShowLabel, true).Add(p => p.Status, status)).MarkupMatches($@"
 <div class=""t-progress"">
     <div class=""t-progress--thin t-progress--status--{status.ToString().ToLower()}"">
         <div class=""t-progress__bar"">
@@ -80,7 +80,7 @@ public class ProgressTest : TestBase<TProgress>
     [Fact(DisplayName = "进度条 - Circle 类型")]
     public void Test_Progress_Circle()
     {
-        GetComponent(m => m.Add(p => p.Value, 30).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Circle).Add(p => p.Size, Size.Small))
+        RenderComponent(m => m.Add(p => p.Value, 30).Add(p => p.ShowLabel, true).Add(p => p.Theme, ProgressTheme.Circle).Add(p => p.Size, Size.Small))
             .MarkupMatches($@"
 <div class=""t-progress"">
     <div class=""t-progress--circle t-progress--status--undefined"" style=""width:72px;height:72px;font-size:14px;"">

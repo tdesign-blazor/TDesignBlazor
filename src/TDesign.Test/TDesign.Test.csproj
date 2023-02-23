@@ -27,8 +27,4 @@
     <ProjectReference Include="..\TDesign\TDesign.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Components\Navigation\" />
-  </ItemGroup>
-
 </Project>

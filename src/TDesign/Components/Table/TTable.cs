@@ -67,7 +67,10 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 设置当表格数据是空时显示的自定义内容。
     /// </summary>
     [Parameter]public RenderFragment? EmptyContent { get; set; }
-
+    /// <summary>
+    /// 开启分页模式。
+    /// </summary>
+    [Parameter] public bool Pagination { get; set; }
     /// <summary>
     /// 表示当前的页码。
     /// </summary>

@@ -2334,6 +2334,11 @@
             设置当表格数据是空时显示的自定义内容。
             </summary>
         </member>
+        <member name="P:TDesign.TTable`1.Pagination">
+            <summary>
+            开启分页模式。
+            </summary>
+        </member>
         <member name="P:TDesign.TTable`1.PageIndex">
             <summary>
             表示当前的页码。
@@ -2423,6 +2428,13 @@
             </summary>
             <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
             <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.QueryData(System.Int32,System.Int32)">
+            <summary>
+            以异步的方式查询数据。
+            </summary>
+            <param name="page">页码。</param>
+            <param name="size">数据量。</param>
         </member>
         <member name="T:TDesign.TTableCell">
             <summary>
@@ -3634,19 +3646,18 @@
         <member name="M:TDesign.TPagination.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:TDesign.TPagination.BuildTotal(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+        <member name="M:TDesign.TPagination.BuildTotal(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建总数据量的元素。
             </summary>
         </member>
-        <member name="M:TDesign.TPagination.BuildPageSizeSelect(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+        <member name="M:TDesign.TPagination.BuildPageSizeSelect(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
             </summary>
             <param name="builder"></param>
-            <param name="sequence"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:TDesign.TPagination.BuildPageBehaviorBtn(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,TDesign.TPagination.PageButtonBehavior,System.Object,System.Boolean,System.Boolean)" -->
+        <!-- Badly formed XML comment ignored for member "M:TDesign.TPagination.BuildPageBehaviorBtn(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,TDesign.TPagination.PageButtonBehavior,System.Object,System.Boolean,System.Boolean)" -->
         <member name="M:TDesign.TPagination.BuildPageItem(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.Func{System.Threading.Tasks.Task},System.Boolean,System.String)">
             <summary>
             该方法用于构建分页的页码条的各项，例如上一页按钮，分页页码，末页按钮等。
@@ -3664,12 +3675,18 @@
             </summary>
             <param name="pageNumber">分页数字。</param>
         </member>
-        <member name="M:TDesign.TPagination.BuildPageNumbers(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+        <member name="M:TDesign.TPagination.BuildPageNumbers(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建分页条。
             </summary>
         </member>
-        <member name="M:TDesign.TPagination.BuildJumper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+        <member name="M:TDesign.TPagination.ComputePageNumber">
+            <summary>
+            计算分页页码的开始和结束的页码。
+            </summary>
+            <returns>开始和结束的页码。</returns>
+        </member>
+        <member name="M:TDesign.TPagination.BuildJumper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建 跳转到 文本框。
             </summary>

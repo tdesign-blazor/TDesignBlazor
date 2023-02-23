@@ -40,12 +40,12 @@ public class TestBase<TComponent> : TestBase where TComponent : IComponent
     /// 获取组件。
     /// </summary>
     /// <param name="parameterBuilder">参数构造器。</param>
-    protected IRenderedComponent<TComponent> GetComponent(Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) => TestContext.RenderComponent(parameterBuilder);
+    protected IRenderedComponent<TComponent> RenderComponent(Action<ComponentParameterCollectionBuilder<TComponent>> parameterBuilder) => TestContext.RenderComponent(parameterBuilder);
 
     /// <summary>
     /// 获取组件。
     /// </summary>
     /// <param name="parameters">组件参数数组。</param>
-    protected IRenderedComponent<TComponent> GetComponent(params ComponentParameter[] parameters) => TestContext.RenderComponent<TComponent>(parameters);
+    protected IRenderedComponent<TComponent> RenderComponent(params ComponentParameter[] parameters) => TestContext.RenderComponent<TComponent>(parameters);
 
 }

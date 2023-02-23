@@ -6,7 +6,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     [Fact(DisplayName = "Table - 空数据表格")]
     public void Test_EmptyTable()
     {
-        var table = GetComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
+        var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
             b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
         }))).Add(p=>p.Data, TestData.Empty));
@@ -17,7 +17,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     [Fact(DisplayName = "Table - 自定义空数据表格")]
     public void Test_EmptyTable_Customize_EmptyContent()
     {
-        var table = GetComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
+        var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
             b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
         })))
