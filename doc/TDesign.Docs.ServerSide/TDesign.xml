@@ -3640,9 +3640,6 @@
             跳转到下一页。
             </summary>
         </member>
-        <member name="M:TDesign.TPagination.OnParametersSet">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TPagination.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>
         </member>

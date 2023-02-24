@@ -1,12 +1,10 @@
 ﻿@page "/test"
 @layout EmptyLayout
 
-@*<TInputText @bind-Value="Text" />*@
-
-<TInputCheckBox @bind-Value="Checked"/>
+<TPagination   @bind-Current="Index" @bind-PageSize="Size" @bind-Total="Total" ShowJumpPage/>
 
 @code {
-    string? Text{ get; set; }
-
-    bool? Checked { get; set; }
+    int Index=1;
+    int Size=10;
+    int Total=30;
 }

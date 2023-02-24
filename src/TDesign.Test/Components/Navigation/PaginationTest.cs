@@ -1,16 +1,20 @@
 ﻿namespace TDesign.Test.Components.Navigation;
 
-public class PaginationTest:TestBase<TPagination>
+public class PaginationTest : TestBase<TPagination>
 {
-    [Fact(DisplayName ="Pagination - 完整的 HTML 渲染")]
+    [Fact(DisplayName = "Pagination - 完整的 HTML 渲染")]
     public void Test_Render()
     {
-        var component= RenderComponent(m => m.Bind(p => p.Current, 1, value => { })
+        var component = RenderComponent(m => m.Bind(p => p.Current, 1, value => { })
                                             .Bind(p => p.PageSize, 10, value => { })
                                             .Bind(p => p.Total, 100, value => { })
                                             );
-        
+
         component.Find(".t-pagination").Should().NotBeNull();
+
+        component.Find(".t-pagination__total").Should().NotBeNull();
+
+
 
         /*
 <div class="t-pagination t-size-m">

@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace TDesign;
 /// <summary>
 /// 用于模块内切换内容的分页
 /// </summary>
 [CssClass("t-pagination")]
-public class TPagination : TDesignComponentBase
+public partial class TPagination : TDesignComponentBase
 {
     #region 参数
     /// <summary>
@@ -18,7 +17,7 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置当前页码。
     /// </summary>
-    [Parameter][EditorRequired] public int Current { get; set; }
+    [Parameter] public int Current { get; set; }
     /// <summary>
     /// 设置一个当页码变更时的回调方法。
     /// </summary>
@@ -29,7 +28,7 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置每一页的数据量。默认是 10。
     /// </summary>
-    [Parameter][EditorRequired] public int PageSize { get; set; } = 10;
+    [Parameter] public int PageSize { get; set; } = 10;
     /// <summary>
     /// 设置一个当每页数据量变更时的回调方法。
     /// </summary>
@@ -154,11 +153,9 @@ public class TPagination : TDesignComponentBase
     #endregion
 
     #region Protected
-    /// <inheritdoc/>
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
 
+    protected override void AfterSetParameters(ParameterView parameters)
+    {
         if (Current <= 0)
         {
             throw new ArgumentException($"{nameof(Current)} 必须大于0");
@@ -181,8 +178,8 @@ public class TPagination : TDesignComponentBase
         BuildTotal(builder);
         BuildPageSizeSelect(builder);
 
-        BuildPageBehaviorBtn(builder,PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, Current <= 1);
-        BuildPageBehaviorBtn(builder,  PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: Current <= 1);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, Current <= 1);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: Current <= 1);
 
         if (Simple)
         {
@@ -193,7 +190,7 @@ public class TPagination : TDesignComponentBase
             BuildPageNumbers(builder);
         }
 
-        BuildPageBehaviorBtn(builder,  PageButtonBehavior.Next, IconName.ChevronRight, disabled: Current >= TotalPages);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Next, IconName.ChevronRight, disabled: Current >= TotalPages);
         BuildPageBehaviorBtn(builder, PageButtonBehavior.Last, IconName.PageLast, ShowFirstLastBtn, Current >= TotalPages);
 
         if (!Simple)
@@ -221,7 +218,7 @@ public class TPagination : TDesignComponentBase
     /// 构建上一页或下一页按钮。
     /// <param name="prevOrNext"><c>true</c> 表示上一页，否则是下一页。</param>
     /// <param name="disabled">是否被禁用。</param>
-    void BuildPageBehaviorBtn(RenderTreeBuilder builder,  PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default) 
+    void BuildPageBehaviorBtn(RenderTreeBuilder builder, PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default)
         => builder.Fluent()
             .Div("t-pagination__btn", show)
                 .Class("t-pagination__btn-prev", behavior is PageButtonBehavior.First or PageButtonBehavior.Previous)
@@ -229,7 +226,7 @@ public class TPagination : TDesignComponentBase
                 .Class("t-is-disabled", disabled)
                 .Callback("onclick", this, () =>
                 {
-                    if ( disabled )
+                    if (disabled)
                     {
                         return Task.CompletedTask;
                     }
@@ -254,18 +251,14 @@ public class TPagination : TDesignComponentBase
     /// <param name="callback">点击的回调。</param>
     /// <param name="disabled">是否禁用。</param>
     /// <param name="additionalClass">附加的 class 样式。</param>
-    void BuildPageItem(RenderTreeBuilder builder, int sequence, RenderFragment content, Func<Task>? callback = default, bool disabled = default, string? additionalClass = default) 
+    void BuildPageItem(RenderTreeBuilder builder, int sequence, RenderFragment content, Func<Task>? callback = default, bool disabled = default, string? additionalClass = default)
         => builder.Fluent().Li().Class("t-pagination__number")
                              .Class("t-is-disabled", disabled)
                              .Class(additionalClass, !string.IsNullOrEmpty(additionalClass))
                              .Callback("onclick", this, () =>
                              {
-                                 if ( callback is not null && !disabled )
-                                 {
-
-                                     callback();
-                                 }
-                             }, disabled)
+                                 callback();
+                             }, callback is not null && !disabled)
                             .Content(content)
                             .Close();
     /// <summary>
@@ -287,11 +280,11 @@ public class TPagination : TDesignComponentBase
     /// <summary>
     /// 构建分页条。
     /// </summary>
-    void BuildPageNumbers(RenderTreeBuilder builder) 
+    void BuildPageNumbers(RenderTreeBuilder builder)
         => builder.Fluent().Ul("t-pagination__pager", ShowPageNumber)
                         .Content(content =>
                         {
-                            if ( EllipsisMode == PageEllipsisMode.Middle )
+                            if (EllipsisMode == PageEllipsisMode.Middle)
                             {
                                 #region 第一页
 
@@ -301,10 +294,10 @@ public class TPagination : TDesignComponentBase
                                 #endregion
 
                                 #region 前5页
-                                if ( Current > PageNumber / 2 )
+                                if (Current > PageNumber / 2)
                                 {
                                     var backTo = PageNumber - 5;
-                                    if ( backTo <= 1 )
+                                    if (backTo <= 1)
                                     {
                                         backTo = 1;
                                     }
@@ -320,7 +313,7 @@ public class TPagination : TDesignComponentBase
                             //页码1 永远显示，所有从2开始
                             //最后一页永远显示，所以结束要少一个索引
                             var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
-                            for ( var i = start + offset; i <= end - offset; i++ )
+                            for (var i = start + offset; i <= end - offset; i++)
                             {
                                 var current = i;
                                 var contentSequence = (int)i + 30;
@@ -329,13 +322,13 @@ public class TPagination : TDesignComponentBase
                             }
                             #endregion
 
-                            if ( EllipsisMode == PageEllipsisMode.Middle )
+                            if (EllipsisMode == PageEllipsisMode.Middle)
                             {
                                 #region 后5页
-                                if ( Current < TotalPages - PageNumber / 2 )
+                                if (Current < TotalPages - PageNumber / 2)
                                 {
                                     var nextTo = Current + 5;
-                                    if ( nextTo >= TotalPages )
+                                    if (nextTo >= TotalPages)
                                     {
                                         nextTo = TotalPages;
                                     }
@@ -361,25 +354,25 @@ public class TPagination : TDesignComponentBase
         var end = 0;
 
         var middle = PageNumber / 2;
-        if ( Current <= middle )
+        if (Current <= middle)
         {
             start = 1;
             end = PageNumber;
         }
-        else if ( Current > middle )
+        else if (Current > middle)
         {
             start = Current - middle;
             end = Current + middle;
         }
-        if ( end > TotalPages )
+        if (end > TotalPages)
         {
             end = TotalPages;
-            if ( start + end != PageNumber - 2 )
+            if (start + end != PageNumber - 2)
             {
                 start = end - PageNumber + 2 - 1;
             }
         }
-        if ( end <= PageNumber )
+        if (end <= PageNumber)
         {
             start = 1;
         }
@@ -392,7 +385,7 @@ public class TPagination : TDesignComponentBase
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
-    void BuildJumper(RenderTreeBuilder builder) 
+    void BuildJumper(RenderTreeBuilder builder)
         => builder.Fluent().Div("t-pagination__jump", ShowJumpPage)
                             .Content(content =>
                             {
@@ -401,25 +394,20 @@ public class TPagination : TDesignComponentBase
                                 content.Fluent()
                                         .Component<TInputAdornment>()
                                         .Attribute(nameof(TInputAdornment.Append), $"/{TotalPages} 页")
-                                        .Content(input => input.Fluent().Component<TInputNumber<int>>()
-                                                                        .Attribute(new
-                                                                        {
-                                                                            AdditionalClass = "t-pagination__input",
-                                                                            Theme = InputNumberTheme.Normal,
-                                                                            Min = 1,
-                                                                            Max = TotalPages,
-                                                                            Size,
-                                                                            Value = JumpPage,
-                                                                            ValueExpression = (Expression<Func<int>>)(() => JumpPage),
-                                                                            ValueChanged = HtmlHelper.Event.Create<int>(this, value =>
-                                                                            {
-                                                                                NavigateToPage(value);
-                                                                            })
-                                                                        })
-                                                                        .Close())
-                                .Close();
+                                        .ChildContent(input => input.CreateComponent<TInputNumber<int>>(0, attributes: new
+                                        {
+                                            AdditionalClass = "t-pagination__input",
+                                            Theme = InputNumberTheme.Normal,
+                                            Min = 1,
+                                            Max = TotalPages,
+                                            Size,
+                                            Value = JumpPage,
+                                            ValueExpression = (Expression<Func<int>>)(() => JumpPage),
+                                            ValueChanged = HtmlHelper.Event.Create<int>(this, NavigateToPage)
+                                        }))
+                                        .Close();
                             })
-            .Close();
+                            .Close();
     #endregion
 
     #endregion
