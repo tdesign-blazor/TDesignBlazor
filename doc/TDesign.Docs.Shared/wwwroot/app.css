@@ -29,6 +29,10 @@ code {
     line-height: 40px;
 }
 
+.t-head-menu__inner {
+    padding: 0 24px;
+}
+
 .tdesign-demo-item--layout {
     display: flex;
     flex-direction: column;
