@@ -5,7 +5,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>TDesign.Docs.Shared</RootNamespace>
-
+		<RazorOutputPath>.</RazorOutputPath>
+		<UseRazorSourceGenerator>false</UseRazorSourceGenerator>
 	</PropertyGroup>
 
 

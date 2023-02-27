@@ -95,7 +95,7 @@ public class TInputRange<TValue> : BlazorComponentBase
             ValueExpression = expression,
             ValueChanged = changed,
             Size,
-            AdditionalCssClass = $"t-range-input__inner-{(leftOrRight ? "left" : "right")}"
+            AdditionalClass = $"t-range-input__inner-{(leftOrRight ? "left" : "right")}"
         });
     }
 }

@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace TDesign;
+﻿namespace TDesign;
 
 /// <summary>
 /// 只具备一些基本功能的数据表格。
 /// </summary>
 [CssClass("t-table")]
 [CascadingTypeParameter(nameof(TItem))]
-public class TTable<TItem> : TDesignComponentBase
+public partial class TTable<TItem> : TDesignComponentBase
 {
+    #region 参数
     /// <summary>
-    /// 设置数据源。
+    /// 设置表格的数据源。
     /// </summary>
-    [Parameter] public IEnumerable<TItem> Data { get; set; } = Enumerable.Empty<TItem>();
+    [Parameter][EditorRequired]public DataSource<TItem>? Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -58,169 +57,38 @@ public class TTable<TItem> : TDesignComponentBase
     /// 设置当表格数据是空时显示的自定义内容。
     /// </summary>
     [Parameter]public RenderFragment? EmptyContent { get; set; }
+    /// <summary>
+    /// 开启分页模式。
+    /// </summary>
+    [Parameter] public bool Pagination { get; set; }
+    /// <summary>
+    /// 表示当前的页码。
+    /// </summary>
+    [Parameter] public int PageIndex { get; set; } = 1;
+    /// <summary>
+    /// 当页码变更时执行的方法。
+    /// </summary>
+    [Parameter]public EventCallback<int> PageIndexChanged { get; set; }
+    /// <summary>
+    /// 设置每页呈现的数据量。
+    /// </summary>
+    [Parameter] public int PageSize { get; set; } = 10;
+    /// <summary>
+    /// 当数据量变更时执行的方法。
+    /// </summary>
+    [Parameter]public EventCallback<int> PageSizeChanged { get; set; }
+    #endregion
 
-    /// <inheritdoc/>
-    protected override void OnInitialized()
-    {
-        ArgumentNullException.ThrowIfNull(Data, nameof(Data));
-
-        base.OnInitialized();
-    }
-
-    /// <inheritdoc/>
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        EmptyContent ??= builder => builder.AddContent(0, "暂无数据");
-    }
-
-    /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
-    }
-
-    /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        BuildTable(builder, sequence + 1);
-        BuildPagination(builder, sequence + 2);
-    }
+    #region Internal
+    /// <summary>
+    /// 总页数。
+    /// </summary>
+    internal int TotalCount { get; set; } = 1;
+    internal EventCallback<int> TotalCountChanged { get; set; }
 
     /// <summary>
-    /// 构建表格。
+    /// 已加载的数据。内部使用。
     /// </summary>
-    /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildTable(RenderTreeBuilder builder, int sequence)
-    {
-        if (Loading)
-        {
-            builder.CreateComponent<LoadingContainer>(sequence, container =>
-            {
-                BuildTableContent(container, 0);
-                container.CreateComponent<TLoading>(1, attributes: new { Overlay = true });
-            });
-        }
-        else
-        {
-            BuildTableContent(builder, sequence);
-        }
-    }
-
-    private void BuildTableContent(RenderTreeBuilder container, int sequence)
-    {
-        container.CreateElement(sequence, "div", content =>
-        {
-            content.CreateElement(0, "table", table =>
-            {
-                BuildTableHeader(table, 0);
-                BuildTableBody(table, 1);
-                BuildTableFooter(table, 2);
-            },
-            new
-            {
-                @class = HtmlHelper.Class.Append("t-table--layout-auto", AutoWidth, "t-table--layout-fixed")
-            });
-        }, new
-        {
-            @class = "t-table__content",
-            style = HtmlHelper.Style.Append($"max-height:{FixedHeight}px", FixedHeight.HasValue)
-        });
-    }
-
-    /// <summary>
-    /// 构建分页。
-    /// </summary>
-    /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildPagination(RenderTreeBuilder builder, int sequence)
-    {
-
-    }
-    /// <summary>
-    /// 构建 theader 部分。
-    /// </summary>
-    /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildTableHeader(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence + 1, "thead", content =>
-        {
-            content.CreateComponent<TTableRow>(0, tr =>
-            {
-                tr.CreateCascadingComponent(true, sequence, ChildContent?.Invoke(default), "IsHeader");
-            });
-
-        }, new
-        {
-            @class = HtmlHelper.Class.Append("t-table__header")
-                                                    .Append("t-table__header--fixed", FixedHeader)
-        });
-    }
-    /// <summary>
-    /// 构建 tbody 部分。
-    /// </summary>
-    /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildTableBody(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "tbody", content =>
-        {
-            if ( Data.Any() )
-            {
-                var index = 0;
-                foreach ( var item in Data! )
-                {
-                    var key = index;
-                    content.CreateComponent<TTableRow>(index + 1, tr =>
-                    {
-                        tr.AddContent(0, ChildContent!.Invoke(item));
-                    }, key: key);
-
-                    index++;
-                }
-            }
-            else
-            {
-                BuildEmptyContent(content);
-            }
-        }, new
-        {
-            @class = HtmlHelper.Class.Append("t-table__body")
-        });
-    }
-
-    /// <summary>
-    /// 构建空表格的内容。
-    /// </summary>
-    /// <param name="builder"></param>
-    private void BuildEmptyContent(RenderTreeBuilder builder)
-    {
-        builder.CreateElement(0, "tr", content =>
-        {
-            content.CreateElement(0, "td", empty =>
-            {
-                empty.CreateElement(0, "div", EmptyContent, new { @class = "t-table__empty" });
-            }, new { colspan = ChildComponents.Count });
-
-        }, new { @class = "t-table__empty-row" });
-    }
-
-    /// <summary>
-    /// 构建 tfooter 部分。
-    /// </summary>
-    /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildTableFooter(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "tfoot", content =>
-        {
-
-        }, new
-        {
-            @class = HtmlHelper.Class.Append("t-table__footer")
-                                                    .Append("t-table__footer--fixed", FixedFooter)
-        });
-    }
+    internal IEnumerable<TItem> TableData { get; set; } = Enumerable.Empty<TItem>();
+    #endregion
 }

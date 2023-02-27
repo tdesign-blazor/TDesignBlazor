@@ -6,7 +6,7 @@
 [CssClass("t-icon")]
 [ChildComponent(typeof(TMenu), Optional = true)]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
-public class TIcon : TDesignComponentBase
+public class TIcon : TDesignAdditionParameterComponentBase
 {
     protected override void OnParametersSet()
     {

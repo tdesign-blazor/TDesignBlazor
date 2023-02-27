@@ -82,30 +82,53 @@ public class TPopConfirm:TPopup
     /// </summary>
     /// <param name="builder"></param>
     void BuildPopConfirmContent(RenderTreeBuilder builder)
-    {
-        builder.Div().Class("t-popconfirm__content").Content(content =>
-        {
-            content.CreateElement(0, "div", icon =>
-            {
-                icon.CreateComponent<TIcon>(0, attributes: new
-                {
-                    Name = Icon,
-                    AdditionalCssClass = $"t-popconfirm__icon--{Theme.Value}"
-                });
+    => builder.Fluent()
+            .Div("t-popconfirm__content")
+                .Content(content => content.Fluent()
+                            .Div("t-popconfirm__body")
+                                .Content(icon => icon.Fluent()
+                                                    .Component<TIcon>()
+                                                        .Attribute(new
+                                                        {
+                                                            Name = Icon,
+                                                            AdditionalClass = $"t-popconfirm__icon--{Theme.Value}"
+                                                        })
+                                                    .Close()
+                                                    .Div("t-popconfirm__inner")
+                                                        .Content(ConfirmContent)
+                                                    .Close())
+                            .Close()
+                            .Div("t-popconfirm__buttons").Content(buttons =>
+                            {
+                                BuildButton(buttons, 0, CancelBtnText, OnCancel, CancelBtnVarient, CancelBtnTheme, "t-popconfirm__cancel");
+                                BuildButton(buttons, 0, ConfirmBtnText, OnConfirm, ConfirmBtnVarient, ConfirmBtnTheme, "t-popconfirm__confirm");
 
-                icon.Div().Class("t-popconfirm__inner").Content(ConfirmContent).Close();
+                            })
+                            .Close())
+                .Close();
+                            
+                    
+            
+            //content.CreateElement(0, "div", icon =>
+            //{
+            //    icon.CreateComponent<TIcon>(0, attributes: new
+            //    {
+            //        Name = Icon,
+            //        AdditionalClass = $"t-popconfirm__icon--{Theme.Value}"
+            //    });
 
-            }, new { @class = "t-popconfirm__body" });
+            //    icon.Div().Class("t-popconfirm__inner").Content(ConfirmContent).Close();
 
-            content.CreateElement(1, "div", buttons =>
-            {
-                BuildButton(buttons, 0, CancelBtnText, OnCancel, CancelBtnVarient, CancelBtnTheme, "t-popconfirm__cancel");
-                BuildButton(buttons, 0, ConfirmBtnText, OnConfirm, ConfirmBtnVarient, ConfirmBtnTheme, "t-popconfirm__confirm");
+            //}, new { @class = "t-popconfirm__body" });
 
-            }, new { @class = "t-popconfirm__buttons" });
-        })
-        .Close();
-    }
+            //content.CreateElement(1, "div", buttons =>
+            //{
+            //    BuildButton(buttons, 0, CancelBtnText, OnCancel, CancelBtnVarient, CancelBtnTheme, "t-popconfirm__cancel");
+            //    BuildButton(buttons, 0, ConfirmBtnText, OnConfirm, ConfirmBtnVarient, ConfirmBtnTheme, "t-popconfirm__confirm");
+
+            //}, new { @class = "t-popconfirm__buttons" });
+        //})
+    
 
     /// <summary>
     /// 构建按钮。
@@ -134,7 +157,7 @@ public class TPopConfirm:TPopup
                 }
             }),
             Size=BtnSize,
-            AdditionalCssClass = css
+            AdditionalClass = css
         });
     }
 }

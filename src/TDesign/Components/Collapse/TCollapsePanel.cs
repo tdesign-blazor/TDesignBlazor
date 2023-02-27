@@ -94,7 +94,7 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
         builder.CreateComponent<TIcon>(sequence, attributes: new
         {
             Name = !Active ? (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value ? IconName.ChevronLeft : IconName.ChevronRight) : IconName.ChevronDown,
-            AdditionalCssClass = HtmlHelper.Class
+            AdditionalClass = HtmlHelper.Class
                                     .Append("t-collapse-panel__icon")
                                     .Append("t-collapse-panel__icon--left", CascadingCollaspe.RightTIcon.HasValue && !CascadingCollaspe.RightTIcon.Value)
                                     .Append("t-collapse-panel__icon--right", CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value).ToString(),

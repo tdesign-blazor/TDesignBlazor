@@ -71,7 +71,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="3.0.0-beta-0206" />
+    <PackageReference Include="ComponentBuilder" Version="3.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">
       <PrivateAssets>all</PrivateAssets>

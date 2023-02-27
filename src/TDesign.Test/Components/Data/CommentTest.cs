@@ -6,7 +6,7 @@ public class CommentTest : TestBase<TComment>
     [Fact(DisplayName = "Comment - 基本渲染")]
     public void Test_Render()
     {
-        GetComponent(m => m.Add(p => p.Author, "作者")
+        RenderComponent(m => m.Add(p => p.Author, "作者")
                         .Add(p => p.Avatar, "avatar.jpg")
                         .Add(p => p.DateTime, "12:30")
                         .AddChildContent("内容")
@@ -47,7 +47,7 @@ public class CommentTest : TestBase<TComment>
     [Fact(DisplayName = "Comment - 带操作的评论")]
     public void Test_Comment_With_Operation()
     {
-        GetComponent(m => m.Add(p => p.Author, "作者")
+        RenderComponent(m => m.Add(p => p.Author, "作者")
                         .Add(p => p.Avatar, "avatar.jpg")
                         .Add(p => p.DateTime, "12:30")
                         .AddChildContent("内容")
@@ -96,7 +96,7 @@ public class CommentTest : TestBase<TComment>
     [Fact(DisplayName = "Comment - 带引用的评论")]
     public void Test_Comment_With_Quate()
     {
-        GetComponent(m => m.Add(p => p.Author, "作者")
+        RenderComponent(m => m.Add(p => p.Author, "作者")
                         .Add(p => p.Avatar, "avatar.jpg")
                         .Add(p => p.DateTime, "12:30")
                         .AddChildContent("内容")
@@ -162,7 +162,7 @@ public class CommentTest : TestBase<TComment>
     [Fact(DisplayName = "Comment - 带回复的评论")]
     public void Test_Comment_With_Reply()
     {
-        GetComponent(m => m.Add(p => p.Author, "作者")
+        RenderComponent(m => m.Add(p => p.Author, "作者")
                         .Add(p => p.Avatar, "avatar.jpg")
                         .Add(p => p.DateTime, "12:30")
                         .AddChildContent("内容")

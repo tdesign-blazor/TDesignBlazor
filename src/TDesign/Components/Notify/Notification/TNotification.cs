@@ -28,7 +28,7 @@ public class TNotification : NotifyComponentBase
     {
         builder.CreateElement(sequence, "div", icon =>
         {
-            icon.CreateComponent<TIcon>(0, attributes: new { Name = TIcon, AdditionalCssClass = $"t-is-{GetThemeClass}" });
+            icon.CreateComponent<TIcon>(0, attributes: new { Name = TIcon, AdditionalClass = $"t-is-{GetThemeClass}" });
         }, new { @class = "t-notification__icon" }, TIcon is not null);
 
         builder.CreateElement(sequence + 1, "div",

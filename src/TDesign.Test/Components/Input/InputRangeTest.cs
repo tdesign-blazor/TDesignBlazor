@@ -7,7 +7,7 @@ public class InputRangeTest : TestBase<TInputRange<string>>
     [Fact(DisplayName = "InputRange - 渲染 css")]
     public void Test_Render()
     {
-        var component = GetComponent(m =>
+        var component = RenderComponent(m =>
          m.Bind(p => p.StartValue, "10", value => { })
          .Bind(p => p.EndValue, "50", value => { })
          );
@@ -21,7 +21,7 @@ public class InputRangeTest : TestBase<TInputRange<string>>
     [Fact(DisplayName = "InputRange - Size 参数")]
     public void Test_Size_Parameter()
     {
-        var component = GetComponent(m =>
+        var component = RenderComponent(m =>
          m.Bind(p => p.StartValue, "10", value => { })
          .Bind(p => p.EndValue, "50", value => { })
          .Add(p => p.Size, Size.Small)
@@ -32,7 +32,7 @@ public class InputRangeTest : TestBase<TInputRange<string>>
     [Fact(DisplayName ="InputRange - Seperator 参数")]
     public void Test_Seperator_Parameter()
     {
-        var component = GetComponent(m =>
+        var component = RenderComponent(m =>
          m.Bind(p => p.StartValue, "10", value => { })
          .Bind(p => p.EndValue, "50", value => { })
          .Add(p => p.Seperator, "/")

@@ -249,7 +249,7 @@ public class TProgress : TDesignComponentBase, IHasActive
                             TDesign.Status.Warning => IconName.Error,
                             _ => default
                         }),
-                        AdditionalCssClass = "t-progress__icon"
+                        AdditionalClass = "t-progress__icon"
                     });
                 }
             }, new { @class = "t-progress__info" });
