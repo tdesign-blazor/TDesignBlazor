@@ -4,6 +4,54 @@
         <name>TDesign</name>
     </assembly>
     <members>
+        <member name="T:TDesign.DataSource`1">
+            <summary>
+            表示数据源对象。支持静态和动态的数据检索。
+            </summary>
+            <typeparam name="T">要加载的数据类型。</typeparam>
+        </member>
+        <member name="F:TDesign.DataSource`1.Empty">
+            <summary>
+            表示无任何数据的数据源。
+            </summary>
+        </member>
+        <member name="M:TDesign.DataSource`1.#ctor(OneOf.OneOf{System.Collections.Generic.IEnumerable{`0},System.Func{System.Int32,System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Collections.Generic.IEnumerable{`0},System.Int32}}}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TDesign.DataSource`1"/> class.
+            </summary>
+            <param name="input">数据源类型。</param>
+        </member>
+        <member name="M:TDesign.DataSource`1.Query(System.Int32,System.Int32)">
+            <summary>
+            对数据源进行检索。
+            </summary>
+            <param name="take">要获取的数据量。</param>
+            <param name="skip">要跳过的数据量。</param>
+        </member>
+        <member name="M:TDesign.DataSource`1.op_Implicit(System.Collections.Generic.List{`0})~TDesign.DataSource{`0}">
+            <summary>
+            转换 List 为 <see cref="T:TDesign.DataSource`1"/> 的数据源。
+            </summary>
+            <param name="value">要转换的列表。</param>
+        </member>
+        <member name="M:TDesign.DataSource`1.op_Implicit(System.Func{System.Int32,System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Collections.Generic.IEnumerable{`0},System.Int32}}})~TDesign.DataSource{`0}">
+            <summary>
+            转换一个委托为 <see cref="T:TDesign.DataSource`1"/> 的数据源。
+            </summary>
+            <param name="value">一个可以用于查询的委托。</param>
+        </member>
+        <member name="M:TDesign.DataSource`1.Parse(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            转换 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 为 <see cref="T:TDesign.DataSource`1"/> 的数据源。
+            </summary>
+            <param name="value">可迭代的结果。</param>
+        </member>
+        <member name="M:TDesign.DataSource`1.Parse(System.Func{System.Int32,System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Collections.Generic.IEnumerable{`0},System.Int32}}})">
+            <summary>
+            转换具备2个参数和相同返回值的方法为 <see cref="T:TDesign.DataSource`1"/> 的数据源。
+            </summary>
+            <param name="value">具备有2个参数和一个 <see cref="T:System.Threading.Tasks.Task`1"/> 任务的返回值的回调方法。</param>
+        </member>
         <member name="T:TDesign.Abstractions.IContainerComonent">
             <summary>
             表示实现该接口的组件会被自动作为容器加入。该接口用于动态服务调用时组件所需要的容器组件。
@@ -2265,18 +2313,7 @@
         </member>
         <member name="P:TDesign.TTable`1.Data">
             <summary>
-            设置表格的数据源。如果时需要动态数据，则使用 <see cref="P:TDesign.TTable`1.DataQuery"/> 参数。
-            <para>
-            如果 <see cref="P:TDesign.TTable`1.Data"/> 和 <see cref="P:TDesign.TTable`1.DataQuery"/> 均有值，则优先使用 <see cref="P:TDesign.TTable`1.DataQuery"/> 参数。
-            </para>
-            <para>
-            如果 <see cref="P:TDesign.TTable`1.Data"/> 和 <see cref="P:TDesign.TTable`1.DataQuery"/> 都是 <c>null</c>，则抛出异常。
-            </para>
-            </summary>
-        </member>
-        <member name="P:TDesign.TTable`1.DataQuery">
-            <summary>
-            设置一个读取数据源的委托。该参数优先于 <see cref="P:TDesign.TTable`1.Data"/> 参数应用。
+            设置表格的数据源。
             </summary>
         </member>
         <member name="P:TDesign.TTable`1.AutoWidth">
@@ -2364,9 +2401,9 @@
             总页数。
             </summary>
         </member>
-        <member name="P:TDesign.TTable`1.DataLoaded">
+        <member name="P:TDesign.TTable`1.TableData">
             <summary>
-            已加载的数据源。
+            已加载的数据。内部使用。
             </summary>
         </member>
         <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
@@ -2435,6 +2472,13 @@
             </summary>
             <param name="page">页码。</param>
             <param name="size">数据量。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.ChangeTotalCount(System.Int32)">
+            <summary>
+            变更总记录数。
+            </summary>
+            <param name="count">总记录数。</param>
+            <exception cref="T:System.InvalidOperationException"><paramref name="count"/> 小于0。</exception>
         </member>
         <member name="T:TDesign.TTableCell">
             <summary>
@@ -3534,14 +3578,14 @@
             设置分页组件的大小。
             </summary>
         </member>
-        <member name="P:TDesign.TPagination.Current">
+        <member name="P:TDesign.TPagination.PageIndex">
             <summary>
             设置当前页码。
             </summary>
         </member>
-        <member name="P:TDesign.TPagination.CurrentChanged">
+        <member name="P:TDesign.TPagination.PageIndexChanged">
             <summary>
-            设置一个当页码变更时的回调方法。
+            设置当页码改变时的回调，通常这是双向绑定语法。
             </summary>
         </member>
         <member name="P:TDesign.TPagination.PageSize">
@@ -3639,6 +3683,9 @@
             <summary>
             跳转到下一页。
             </summary>
+        </member>
+        <member name="M:TDesign.TPagination.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
         </member>
         <member name="M:TDesign.TPagination.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>

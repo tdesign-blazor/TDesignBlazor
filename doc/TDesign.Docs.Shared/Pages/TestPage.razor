@@ -1,10 +1,21 @@
 ﻿@page "/test"
+@using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
-
-<TPagination   @bind-Current="Index" @bind-PageSize="Size" @bind-Total="Total" ShowJumpPage/>
-
-@code {
-    int Index=1;
-    int Size=10;
-    int Total=30;
-}
+<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination>
+    <TTableFieldColumn Value="context?.Id" Title="Id" />
+    <TTableFieldColumn Value="context?.Name" Title="姓名" />
+    <TTableFieldColumn Value="context?.Age" Title="年龄" />
+    <TTableFieldColumn Title="性别">
+        @if ( context is not null )
+        {
+            if ( context.Gender )
+            {
+                <TTag Theme="Theme.Primary">男</TTag>
+            }
+            else
+            {
+                <TTag Theme="Theme.Danger">女</TTag>
+            }
+        }
+    </TTableFieldColumn>
+</TTable>

@@ -17,18 +17,18 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置当前页码。
     /// </summary>
-    [Parameter] public int Current { get; set; }
+    [Parameter] public int PageIndex { get; set; } = 1;
     /// <summary>
-    /// 设置一个当页码变更时的回调方法。
+    /// 设置当页码改变时的回调，通常这是双向绑定语法。
     /// </summary>
-    [Parameter] public EventCallback<int> CurrentChanged { get; set; }
+    [Parameter] public EventCallback<int> PageIndexChanged { get; set; }
     #endregion
 
     #region PageSize
     /// <summary>
     /// 设置每一页的数据量。默认是 10。
     /// </summary>
-    [Parameter] public int PageSize { get; set; } = 10;
+    [Parameter]public int PageSize { get; set; } = 10;
     /// <summary>
     /// 设置一个当每页数据量变更时的回调方法。
     /// </summary>
@@ -39,7 +39,7 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置分页的总数据量。必须要大于 0。
     /// </summary>
-    [Parameter][EditorRequired] public int Total { get; set; }
+    [Parameter] public int Total { get; set; }
     /// <summary>
     /// 设置一个当总数据量变化时的回调方法。
     /// </summary>
@@ -129,9 +129,9 @@ public partial class TPagination : TDesignComponentBase
         page = page < 1 ? 1 : page;
         page = page > TotalPages ? TotalPages : page;
 
-        Current = page;
+        PageIndex = page;
         JumpPage = page;
-        await CurrentChanged.InvokeAsync(page);
+        await PageIndexChanged.InvokeAsync(page);
         await this.Refresh();
     }
     /// <summary>
@@ -145,30 +145,18 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 跳转到上一页。
     /// </summary>
-    public Task NavigateToPrevious() => NavigateToPage(--Current);
+    public Task NavigateToPrevious() => NavigateToPage(--PageIndex);
     /// <summary>
     /// 跳转到下一页。
     /// </summary>
-    public Task NavigateToNext() => NavigateToPage(++Current);
+    public Task NavigateToNext() => NavigateToPage(++PageIndex);
     #endregion
 
     #region Protected
 
+    /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
-        if (Current <= 0)
-        {
-            throw new ArgumentException($"{nameof(Current)} 必须大于0");
-        }
-        if (PageSize <= 0)
-        {
-            throw new ArgumentException($"{nameof(PageSize)} 必须大于0");
-        }
-        if (Total <= 0)
-        {
-            throw new ArgumentException($"{nameof(Total)} 必须大于0");
-        }
-
         TotalContent ??= value => new RenderFragment(builder => builder.AddContent(0, $"共 {Total} 项数据"));
     }
 
@@ -178,8 +166,8 @@ public partial class TPagination : TDesignComponentBase
         BuildTotal(builder);
         BuildPageSizeSelect(builder);
 
-        BuildPageBehaviorBtn(builder, PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, Current <= 1);
-        BuildPageBehaviorBtn(builder, PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: Current <= 1);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.First, IconName.PageFirst, ShowFirstLastBtn, PageIndex <= 1);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Previous, IconName.ChevronLeft, disabled: PageIndex <= 1);
 
         if (Simple)
         {
@@ -190,8 +178,8 @@ public partial class TPagination : TDesignComponentBase
             BuildPageNumbers(builder);
         }
 
-        BuildPageBehaviorBtn(builder, PageButtonBehavior.Next, IconName.ChevronRight, disabled: Current >= TotalPages);
-        BuildPageBehaviorBtn(builder, PageButtonBehavior.Last, IconName.PageLast, ShowFirstLastBtn, Current >= TotalPages);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Next, IconName.ChevronRight, disabled: PageIndex >= TotalPages);
+        BuildPageBehaviorBtn(builder, PageButtonBehavior.Last, IconName.PageLast, ShowFirstLastBtn, PageIndex >= TotalPages);
 
         if (!Simple)
         {
@@ -267,7 +255,7 @@ public partial class TPagination : TDesignComponentBase
     /// <param name="pageNumber">分页数字。</param>
     void BuildPageNumerItem(RenderTreeBuilder builder, int sequence, int pageNumber)
     {
-        if (pageNumber == Current)
+        if (pageNumber == PageIndex)
         {
             BuildPageItem(builder, sequence, number => number.AddContent(0, pageNumber), additionalClass: "t-is-current");
         }
@@ -294,7 +282,7 @@ public partial class TPagination : TDesignComponentBase
                                 #endregion
 
                                 #region 前5页
-                                if (Current > PageNumber / 2)
+                                if (PageIndex > PageNumber / 2)
                                 {
                                     var backTo = PageNumber - 5;
                                     if (backTo <= 1)
@@ -325,9 +313,9 @@ public partial class TPagination : TDesignComponentBase
                             if (EllipsisMode == PageEllipsisMode.Middle)
                             {
                                 #region 后5页
-                                if (Current < TotalPages - PageNumber / 2)
+                                if (PageIndex < TotalPages - PageNumber / 2)
                                 {
-                                    var nextTo = Current + 5;
+                                    var nextTo = PageIndex + 5;
                                     if (nextTo >= TotalPages)
                                     {
                                         nextTo = TotalPages;
@@ -354,15 +342,15 @@ public partial class TPagination : TDesignComponentBase
         var end = 0;
 
         var middle = PageNumber / 2;
-        if (Current <= middle)
+        if (PageIndex <= middle)
         {
             start = 1;
             end = PageNumber;
         }
-        else if (Current > middle)
+        else if (PageIndex > middle)
         {
-            start = Current - middle;
-            end = Current + middle;
+            start = PageIndex - middle;
+            end = PageIndex + middle;
         }
         if (end > TotalPages)
         {

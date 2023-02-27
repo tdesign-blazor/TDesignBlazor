@@ -9,9 +9,9 @@ partial class TTable<TItem>
     /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
-        if (DataQuery is null && Data is null)
+        if (Data is null)
         {
-            throw new InvalidOperationException($"必须提供 {nameof(Data)} 或 {nameof(DataQuery)} 参数，但不能两个同时提供");
+            throw new InvalidOperationException($"必须提供 {nameof(Data)} 参数");
         }
     }
 
@@ -103,12 +103,13 @@ partial class TTable<TItem>
             {
                 builder.CreateComponent<TPagination>(sequence, attributes: new
                 {
-                    Current = PageIndex,
-                    CurrentChanged = PageIndexChanged,
+                    PageIndex,
+                    PageIndexChanged = HtmlHelper.Event.Create<int>(this,value=> QueryData(value, PageSize)),
                     PageSize,
-                    PageSizeChanged,
+                    PageSizeChanged = HtmlHelper.Event.Create<int>(this, value => QueryData(1, value)),
                     Total = TotalCount,
-                    TotalChanged = TotalCountChanged
+                    TotalChanged = HtmlHelper.Event.Create<int>(this, value => QueryData(1, PageSize)),
+                    ShowJumpPage=true
                 });
             },new { @class= "t-table__pagination" });
         }, new { @class = "t-table__pagination-wrap", style = "opacity:1" }, condition: Pagination);
@@ -142,10 +143,10 @@ partial class TTable<TItem>
     {
         builder.CreateElement(sequence, "tbody", content =>
         {
-            if ( DataLoaded.Any() )
+            if ( TableData.Any() )
             {
                 var index = 0;
-                foreach ( var item in DataLoaded! )
+                foreach ( var item in TableData! )
                 {
                     var key = index;
                     content.CreateComponent<TTableRow>(index + 1, tr =>
@@ -204,35 +205,46 @@ partial class TTable<TItem>
     /// </summary>
     /// <param name="page">页码。</param>
     /// <param name="size">数据量。</param>
-    public async Task QueryData(int page=1,int size=10)
+    public async Task QueryData(int page = 1, int size = 10)
     {
         if ( page < 1 )
         {
             throw new InvalidOperationException("页码不能小于1");
         }
-        if(size < 0 )
+        if ( size < 0 )
         {
             throw new InvalidOperationException("数据量不能小于0");
         }
 
-        if ( Data is not null )
-        {
-            DataLoaded = Data.Skip((page - 1)*size).Take(page * size);
-            TotalCount = !Data.Any() ? 1 : Data.Count();
-            await TotalCountChanged.InvokeAsync(TotalCount);
-        }
-        if ( DataQuery is not null )
-        {
-            Loading = true;
-            var queryTask = DataQuery.Invoke(new(page, size));
-            if ( queryTask.IsCompleted )
-            {
-                var result = await queryTask;
-                DataLoaded = result.Data;
-                TotalCount = result.Count;
-            }
-            Loading = false;
-        }
+        Loading = true;
         await this.Refresh();
+
+        var (result, count) = await Data!.Query(page * size,(page - 1) * size);
+        TableData = result;
+        TotalCount = count;
+
+        Loading = false;
+        await this.Refresh();
+
+        PageIndex = page;
+        PageSize= size;
+        await ChangeTotalCount(TotalCount);
+
+    }
+
+    /// <summary>
+    /// 变更总记录数。
+    /// </summary>
+    /// <param name="count">总记录数。</param>
+    /// <exception cref="InvalidOperationException"><paramref name="count"/> 小于0。</exception>
+    public Task ChangeTotalCount(int count)
+    {
+        if ( count < 0 )
+        {
+            throw new InvalidOperationException("总数不能小于0");
+        }
+
+        TotalCount= count;
+        return TotalCountChanged.InvokeAsync(count);
     }
 }

@@ -5,7 +5,7 @@ public class PaginationTest : TestBase<TPagination>
     [Fact(DisplayName = "Pagination - 完整的 HTML 渲染")]
     public void Test_Render()
     {
-        var component = RenderComponent(m => m.Bind(p => p.Current, 1, value => { })
+        var component = RenderComponent(m => m.Bind(p => p.PageIndex, 1, value => { })
                                             .Bind(p => p.PageSize, 10, value => { })
                                             .Bind(p => p.Total, 100, value => { })
                                             );

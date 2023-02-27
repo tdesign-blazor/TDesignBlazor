@@ -9,19 +9,9 @@ public partial class TTable<TItem> : TDesignComponentBase
 {
     #region 参数
     /// <summary>
-    /// 设置表格的数据源。如果时需要动态数据，则使用 <see cref="DataQuery"/> 参数。
-    /// <para>
-    /// 如果 <see cref="Data"/> 和 <see cref="DataQuery"/> 均有值，则优先使用 <see cref="DataQuery"/> 参数。
-    /// </para>
-    /// <para>
-    /// 如果 <see cref="Data"/> 和 <see cref="DataQuery"/> 都是 <c>null</c>，则抛出异常。
-    /// </para>
+    /// 设置表格的数据源。
     /// </summary>
-    [Parameter]public IEnumerable<TItem>? Data { get; set; }
-    /// <summary>
-    /// 设置一个读取数据源的委托。该参数优先于 <see cref="Data"/> 参数应用。
-    /// </summary>
-    [Parameter] public Func<TTableDataRequestEventArgs, Task<TTableDataResponseEventArgs<TItem>>>? DataQuery { get; set; }
+    [Parameter][EditorRequired]public DataSource<TItem>? Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -97,8 +87,8 @@ public partial class TTable<TItem> : TDesignComponentBase
     internal EventCallback<int> TotalCountChanged { get; set; }
 
     /// <summary>
-    /// 已加载的数据源。
+    /// 已加载的数据。内部使用。
     /// </summary>
-    internal IEnumerable<TItem> DataLoaded { get; set; } = Enumerable.Empty<TItem>();
+    internal IEnumerable<TItem> TableData { get; set; } = Enumerable.Empty<TItem>();
     #endregion
 }

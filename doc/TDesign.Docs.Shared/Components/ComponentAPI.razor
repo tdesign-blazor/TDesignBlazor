@@ -41,7 +41,7 @@
     /// <summary>
     /// 标题
     /// </summary>
-    string? Title => TypeToCSharp(Component);
+    [Parameter] public string? Title { get; set; } 
     /// <summary>
     /// 参数
     /// </summary>
@@ -59,9 +59,9 @@
     [Inject] HttpClient? _client { get; set; }
     [Inject] IJSRuntime JS { get; set; }
     bool IsWasm => JS is IJSInProcessRuntime;
-
     protected override async Task OnParametersSetAsync()
     {
+        Title ??= TypeToCSharp(Component);
         await InitApiAsync();
     }
     private async Task InitApiAsync()
