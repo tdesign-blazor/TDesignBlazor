@@ -2311,6 +2311,27 @@
             只具备一些基本功能的数据表格。
             </summary>
         </member>
+        <member name="M:TDesign.TTable`1.BuildTable(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建表格。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构造表格的 tbody 内容部分。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildPagination(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            构建分页。
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence">源代码的位置。</param>
+        </member>
         <member name="P:TDesign.TTable`1.Data">
             <summary>
             设置表格的数据源。
@@ -2396,9 +2417,24 @@
             当数据量变更时执行的方法。
             </summary>
         </member>
+        <member name="P:TDesign.TTable`1.FooterContent">
+            <summary>
+            设置表尾的自定义内容。
+            </summary>
+        </member>
         <member name="P:TDesign.TTable`1.TotalCount">
             <summary>
             总页数。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.TotalCountChanged">
+            <summary>
+            设置记录总数变更的回调。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.DataLoadedComplete">
+            <summary>
+            表示当数据加载完成。
             </summary>
         </member>
         <member name="P:TDesign.TTable`1.TableData">
@@ -2417,54 +2453,6 @@
         </member>
         <member name="M:TDesign.TTable`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildTable(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构建表格。
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
-            <param name="sequence">源代码的位置。</param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildTableContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构造表格的 tbody 内容部分。
-            </summary>
-            <param name="builder"></param>
-            <param name="sequence"></param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildPagination(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构建分页。
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
-            <param name="sequence">源代码的位置。</param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildTableHeader(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构建 theader 部分。
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
-            <param name="sequence">源代码的位置。</param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildTableBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构建 tbody 部分。
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
-            <param name="sequence">源代码的位置。</param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildEmptyContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
-            <summary>
-            构建空表格的内容。
-            </summary>
-            <param name="builder"></param>
-        </member>
-        <member name="M:TDesign.TTable`1.BuildTableFooter(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            构建 tfooter 部分。
-            </summary>
-            <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
-            <param name="sequence">源代码的位置。</param>
         </member>
         <member name="M:TDesign.TTable`1.QueryData(System.Int32,System.Int32)">
             <summary>
@@ -2505,6 +2493,11 @@
             获取当前是否是顶部单元格。
             </summary>
         </member>
+        <member name="P:TDesign.TTableColumnBase.Key">
+            <summary>
+            设置列的唯一标识。
+            </summary>
+        </member>
         <member name="P:TDesign.TTableColumnBase.Title">
             <summary>
             设置列标题。若设置了 <see cref="P:TDesign.TTableColumnBase.TitleContent"/> 参数，则该参数无效。
@@ -2518,6 +2511,11 @@
         <member name="P:TDesign.TTableColumnBase.ChildContent">
             <summary>
             <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableColumnBase.FooterContent">
+            <summary>
+            设置底部的任意 UI 片段。
             </summary>
         </member>
         <member name="M:TDesign.TTableColumnBase.GetHeaderContent">
@@ -2544,6 +2542,11 @@
         <member name="T:TDesign.TTableFieldColumn`1">
             <summary>
             表示可以输出数据的表格列。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableFieldColumn`1.CascadingTable">
+            <summary>
+            级联的 <see cref="T:TDesign.TTable`1"/> 组件。
             </summary>
         </member>
         <member name="P:TDesign.TTableFieldColumn`1.Value">
