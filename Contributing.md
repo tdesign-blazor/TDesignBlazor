@@ -16,8 +16,7 @@
 ### 关于技术问题
 对于项目贡献相关的技术问题，你可以直接联系贡献者团队或其他的常规技术询问站点：
 
-* 创始人邮箱： [william-zzh@outlook.com](mailto:william-zzh@outlook.com)
-* QQ群：1012762441
+* 作者邮箱： [william-zzh@outlook.com](mailto:william-zzh@outlook.com)
 * 微信群：TDesignBlazor 组件交流
 * [StackOverflow](http://www.stackoverflow.com)
 * [谷歌](http://www.google.com)
@@ -37,7 +36,7 @@
 * 小的功能可以被制作和直接提交作为一个拉请求。
 
 ## 提交指南（Submit Issue）
-#### 分支管理
+### 分支管理
 > 如果你是通过 fork 形式提交分支，请跳过此约束，并遵守 PR 规范
 
 **如果你还没有成为贡献者，需要通过联系方式通知仓库所有者将你添加到贡献者名单中**
@@ -76,7 +75,7 @@
 
 > 一个分支只做一件事情，请不要将多件事情同时在一个分支里做。
 
-#### 实时看板
+### 实时看板
 我们采用[实时看板](https://github.com/users/AchievedOwner/projects/4/)展示最直观的进度和工作量，并公开给所有用户。
 
 当贡献者领取了 Issue 后，请在适当的时候更新任务的实施状态：
@@ -88,7 +87,7 @@
 
     ![](./asset/kanban-update-status.png)
 
-#### 提交记录
+### 提交记录
 请在每一次提交的内容中写出本次提交的内容摘要，这将导致在查看项目历史记录时更容易理解的可读消息。同时，我们使用git提交消息来生成更新日志。
 
 > 提交规范要求符合：[https://www.conventionalcommits.org/zh-hans/v1.0.0/](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
@@ -96,7 +95,7 @@
 **PR 会自动对提交记录进行检查**
 
 
-#### 合并请求（Pull Request）
+### 合并请求（Pull Request）
 当你分支开发完成后，推送到服务器上，然后请提交【合并请求（Pull Request）】，简称 **PR(日后将使用简称代替）**。但是在提交之前，请先到遵守以下规范：
 * 在 [Github](https://github.com/AchievedOwner/TDesignBlazor/pulls) 上先搜索是否出现过重复或类似的合并请求，即使已经被关闭了，以避免重复性工作；
 * 符合[代码规范](#代码规范)的定义；
@@ -109,24 +108,29 @@
 * 必要的持续集成（CI）已经完成并通过；
 * 根据 PR 模板，完善信息；
 
-> PR 标题请采用[语义化提交规范](https://www.conventionalcommits.org/zh-hans/v1.0.0/)并会在 CI 中校验
-
-**合并需要时间阅读代码、验证并讨论，请保持耐心**
+### 关于 Pull Request
+* PR 标题请采用[语义化提交规范](https://www.conventionalcommits.org/zh-hans/v1.0.0/)并会在 CI 中校验。
+* 在此基础上，如果提交内容和组件相关，则 PR 的标题格式为：`scope(component): message`
+    * 示例1：`feat(button): 为按钮新增一个功能`
+    * 示例2：`fix(progress): 修复xx样式不成功的问题`
+    * 示例3：`test(avatar): 添加 Avatar 组件的单元测试代码`
 
 ## 代码规范
 为了确保整个源代码的一致性，在工作时请记住以下规则：
 * 要求代码符合 C# 代码规范，参考[https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md](https://github.com/dotnet/runtime/blob/main/docs/coding-guidelines/coding-style.md) 和 [微软官方 C# 编码约定](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/coding-style/identifier-names)
 * 完整且清晰的注释，要求组件的参数、暴露的 public、protected 方法都必须使用 `<summary>...</summary>` 进行描述。
 
+> 解决方案使用了 `.editconfig` 文件来定义编译器检查代码风格和规范，目前采用的是简单级别，即大多数警告的模式。
+
 ## 组件开发规范
 * 组件名称要以 **“T”** 字母作为开头，例如 `TButton`、`TTable`、`TTab`、`TInputText` 等，以最大限度避免与其他组件的命名出现冲突（项目中可能会有多个组件框架出现）
   > 如何判断是组件类？组件类必须继承 `TDesignComponentBase` 以及会以 `TDesignComponentBase` 结尾的组件基类。
 * 可输入组件要以 `Input` 开头，例如 `TInputText`、`TInputCheckBox`
 * 分组或容器组件以 `Group` 或 `Container` 作为后缀命名，如 `TAvatarGroup`、`TInputGroup`
-* 组件的参数名称，尽可能与官方定义的组件名称保持一致
+* 组件的参数名称，不用与官方保持一致，命名规范参照开发语言规范即可
 * 可选参数优先使用枚举进行定义
 * 若一个参数可具备多种数据类型，请使用 `OneOf<>` 类型，例如 `OneOf<int, (int,int)>`
-* 必须编写组件的单元测试，目前总体覆盖了目标是 **20%**
+* 必须编写组件的单元测试，质量永远是一个产品存在的根本
 
 ## 第三方库
 项目中使用了一些第三方库来帮助我们完善某些功能的开发，请确保这些库是可以被直接使用的，项目的作者有权取消使用该类库以避免不必要的版权纠纷。
