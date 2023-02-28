@@ -1,14 +1,8 @@
 ﻿@page "/components/table"
-<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态","空表格","可分页的表格", "API"})">
+<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态","自定义表尾的表格","可分页的表格","空表格", "API"})">
 <PageHeader Title="Table 表格">
     表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
 </PageHeader>
-
-<h2>表格分类</h2>
-<p>随着表格功能越来越多，如果把所有的功能都集中在一个组件里面，代码文件会越来越臃肿。既不利于维护，也不利于按需引入必要功能的业务。</p>
-<p>
-    因此，表格组件有三个：BaseTable（基础表格）、PrimaryTable（主表格）、EnhancedTable（增强型表格）。
-</p>
 
 <Example Title="基础表格">
     <Description>简单表格，使用边框线、斑马纹等清晰呈现各数据单元格边界线，辅助信息区隔。</Description>
@@ -201,7 +195,6 @@
 ")
     </CodeContent>
 </Example>
-
     
 <Example Title="固定顶部">
     <Description>设置 <code>FixedHeader</code> 可以固定顶部列，但同时要设置 <code>FixedHeight</code> 定义内容部分的高度</Description>
@@ -250,7 +243,7 @@
 ")
     </CodeContent>
     </Example>
-    <Example Title="加载状态">
+<Example Title="加载状态">
     <Description>普通加载，会在表格上面显示半透明加载层，表格内容不隐藏。</Description>
     <RunContent>
         <TTable TItem="User" Data="User.GetData()" Loading>
@@ -302,33 +295,54 @@
 ")
     </CodeContent>
 </Example>
- <Example Title="空表格">
-        <Description>使用默认空表格样式。可使用 <code>EmptyContent</code> 自定义空表格模板</Description>
+<Example Title="自定义表尾的表格">
+    <Description>
+        设置表格的 <code>FooterContent</code> 设置通栏表尾的内容；<br />
+        设置列的 <code>FooterContent</code> 可单独设置列的尾部内容；<br />
+        表格的 <code>FooterContent</code> 优先级高于列的 <code>FooterContent</code>
+    </Description>
     <RunContent>
-            <TTable TItem="User" Data="new List<User>()">
-            <TTableFieldColumn Value="context?.Id" Title="Id" />
-            <TTableFieldColumn Value="context?.Name" Title="姓名" />
-            <TTableFieldColumn Value="context?.Age" Title="年龄" />
-            <TTableFieldColumn Title="性别">
-                @if (context is not null)
-                {
-                    if (context.Gender)
-                    {
-                        <TTag Theme="Theme.Primary">男</TTag>
-                    }
-                    else
-                    {
-                        <TTag Theme="Theme.Danger">女</TTag>
-                    }
-                }
-                </TTableFieldColumn>
-        </TTable>
-
-            <TTable TItem="User" Data="new List<User>()">
+            <h3>自定义通栏底部</h3>
+            <TTable TItem="User" Data="TablePage.User.GetData(5)">
                 <ChildContent>
-                <TTableFieldColumn Value="context?.Id" Title="Id" />
-                <TTableFieldColumn Value="context?.Name" Title="姓名" />
-                <TTableFieldColumn Value="context?.Age" Title="年龄" />
+                    <TTableFieldColumn Value="context?.Id" Title="Id" />
+                    <TTableFieldColumn Value="context?.Name" Title="姓名" />
+                    <TTableFieldColumn Value="context?.Age" Title="年龄" />
+                    <TTableFieldColumn Title="性别">
+                        @if ( context is not null )
+                        {
+                            if ( context.Gender )
+                            {
+                                <TTag Theme="Theme.Primary">男</TTag>
+                            }
+                            else
+                            {
+                                <TTag Theme="Theme.Danger">女</TTag>
+                            }
+                        }
+                    </TTableFieldColumn>
+                </ChildContent>
+                <FooterContent>
+                    表格的底部
+                </FooterContent>
+            </TTable>
+            <h3>自定义列的底部</h3>
+            <TTable TItem="User" Data="TablePage.User.GetData(5)">
+                <TTableFieldColumn Value="context?.Id" Title="Id">
+                    <FooterContent>
+                        Id
+                    </FooterContent>
+                </TTableFieldColumn>
+                <TTableFieldColumn Value="context?.Name" Title="姓名">
+                    <FooterContent>
+                        姓名
+                    </FooterContent>
+                </TTableFieldColumn>
+                <TTableFieldColumn Value="context?.Age" Title="年龄">
+                    <FooterContent>
+                        年龄
+                    </FooterContent>
+                </TTableFieldColumn>
                 <TTableFieldColumn Title="性别">
                     @if ( context is not null )
                     {
@@ -342,43 +356,21 @@
                         }
                     }
                 </TTableFieldColumn>
-                </ChildContent>
-                <EmptyContent>
-                    自定义空模板
-                </EmptyContent>
             </TTable>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
-<TTable TItem=""User"" Data=""new List<User>()"">
-    <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
-    <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
-    <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
-    <TTableFieldColumn Title=""性别"">
-        @if (context is not null)
-        {
-            if (context.Gender)
-            {
-                <TTag Theme=""Theme.Primary"">男</TTag>
-            }
-            else
-            {
-                <TTag Theme=""Theme.Danger"">女</TTag>
-            }
-        }
-    </TTableFieldColumn>
-</TTable>
-
-<TTable TItem=""User"" Data=""new List<User>()"">
+<h3>自定义通栏底部</h3>
+<TTable TItem=""User"" Data=""TablePage.User.GetData(5)"">
     <ChildContent>
         <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
         <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
         <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
         <TTableFieldColumn Title=""性别"">
-            @if (context is not null)
+            @if ( context is not null )
             {
-                if (context.Gender)
+                if ( context.Gender )
                 {
                     <TTag Theme=""Theme.Primary"">男</TTag>
                 }
@@ -389,15 +381,47 @@
             }
         </TTableFieldColumn>
     </ChildContent>
-    <EmptyContent>
-        自定义空模板
-    </EmptyContent>
+    <FooterContent>
+        表格的底部
+    </FooterContent>
+</TTable>
+
+<h3>自定义列的底部</h3>
+<TTable TItem=""User"" Data=""TablePage.User.GetData(5)"">
+    <TTableFieldColumn Value=""context?.Id"" Title=""Id"">
+        <FooterContent>
+            Id
+        </FooterContent>
+    </TTableFieldColumn>
+    <TTableFieldColumn Value=""context?.Name"" Title=""姓名"">
+        <FooterContent>
+            姓名
+        </FooterContent>
+    </TTableFieldColumn>
+    <TTableFieldColumn Value=""context?.Age"" Title=""年龄"">
+        <FooterContent>
+            年龄
+        </FooterContent>
+    </TTableFieldColumn>
+    <TTableFieldColumn Title=""性别"">
+        @if ( context is not null )
+        {
+            if ( context.Gender )
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+    </TTableFieldColumn>
 </TTable>
 ```
 ")
     </CodeContent>
 </Example>
-    <Example Title="可分页的表格">
+<Example Title="可分页的表格">
     <Description>
         参数 <code>Data</code> 是静态数据。动态数据则使用 <code>DataQuery</code> 参数，它是一个委托。
     </Description>
@@ -495,6 +519,101 @@ static async Task<(IEnumerable<User> data,int count)> Mock(int take,int skip)
     var data = result.Take(take).Skip(skip);
     return (data,count);
 }
+```
+")
+    </CodeContent>
+</Example>
+ <Example Title="空表格">
+        <Description>使用默认空表格样式。可使用 <code>EmptyContent</code> 自定义空表格模板</Description>
+    <RunContent>
+            <TTable TItem="User" Data="new List<User>()">
+            <TTableFieldColumn Value="context?.Id" Title="Id" />
+            <TTableFieldColumn Value="context?.Name" Title="姓名" />
+            <TTableFieldColumn Value="context?.Age" Title="年龄" />
+            <TTableFieldColumn Title="性别">
+                @if (context is not null)
+                {
+                    if (context.Gender)
+                    {
+                        <TTag Theme="Theme.Primary">男</TTag>
+                    }
+                    else
+                    {
+                        <TTag Theme="Theme.Danger">女</TTag>
+                    }
+                }
+                </TTableFieldColumn>
+        </TTable>
+
+            <TTable TItem="User" Data="new List<User>()">
+                <ChildContent>
+                <TTableFieldColumn Value="context?.Id" Title="Id" />
+                <TTableFieldColumn Value="context?.Name" Title="姓名" />
+                <TTableFieldColumn Value="context?.Age" Title="年龄" />
+                <TTableFieldColumn Title="性别">
+                    @if ( context is not null )
+                    {
+                        if ( context.Gender )
+                        {
+                            <TTag Theme="Theme.Primary">男</TTag>
+                        }
+                        else
+                        {
+                            <TTag Theme="Theme.Danger">女</TTag>
+                        }
+                    }
+                </TTableFieldColumn>
+                </ChildContent>
+                <EmptyContent>
+                    自定义空模板
+                </EmptyContent>
+            </TTable>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTable TItem=""User"" Data=""new List<User>()"">
+    <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
+    <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <TTableFieldColumn Title=""性别"">
+        @if (context is not null)
+        {
+            if (context.Gender)
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+    </TTableFieldColumn>
+</TTable>
+
+<TTable TItem=""User"" Data=""new List<User>()"">
+    <ChildContent>
+        <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
+        <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
+        <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
+        <TTableFieldColumn Title=""性别"">
+            @if (context is not null)
+            {
+                if (context.Gender)
+                {
+                    <TTag Theme=""Theme.Primary"">男</TTag>
+                }
+                else
+                {
+                    <TTag Theme=""Theme.Danger"">女</TTag>
+                }
+            }
+        </TTableFieldColumn>
+    </ChildContent>
+    <EmptyContent>
+        自定义空模板
+    </EmptyContent>
+</TTable>
 ```
 ")
     </CodeContent>

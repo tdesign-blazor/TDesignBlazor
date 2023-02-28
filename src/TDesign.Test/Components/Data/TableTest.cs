@@ -12,6 +12,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
         {
             b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
         }))).Add(p=>p.Data, DataSource<TestData>.Empty));
+
         table.Find("tr.t-table__empty-row").Should().NotBeNull();
         table.Find("tr.t-table__empty-row>td>div.t-table__empty");
     }
@@ -47,6 +48,35 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
         table.Find(".t-table__body>tr").ChildElementCount.Should().Be(5);
     }
 
+    [Fact(DisplayName ="Table - 自定义表底模板")]
+    public void Test_Table_FooterContent()
+    {
+        var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
+        {
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
+        })))
+        .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData()))
+        .Add(p => p.FooterContent, builder => builder.AddContent(0, "表底数据"))
+        );
+
+        table.Find("tfoot.t-table__footer").Should().NotBeNull();
+        table.Find("tfoot>tr.t-table__row--full").Should().NotBeNull();
+    }
+
+    [Fact(DisplayName = "Table - 自定义列的表底模板")]
+    public void Test_TableColumn_FooterContent()
+    {
+        var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
+        {
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1,FooterContent=HtmlHelper.CreateContent(b=>b.AddContent(0,"列1")) });
+        })))
+        .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData()))
+        );
+
+        table.Find("tfoot.t-table__footer").Should().NotBeNull();
+        table.Find("tfoot>tr.t-tdesign__custom-footer-tr").Should().NotBeNull();
+    }
+
     public class TestData
     {
         public int Id { get; set; }
@@ -62,7 +92,6 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
             yield return new TestData { Id = 4, Name = "赵六", Gender = false, Birthday = new DateTime(1999, 4, 10) };
             yield return new TestData { Id = 5, Name = "钱七", Gender = true, Birthday = new DateTime(1955, 8, 15) };
         }
-        public static IEnumerable<TestData> Empty = Enumerable.Empty<TestData>();
     }
 
 }
