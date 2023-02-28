@@ -84,6 +84,9 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 总页数。
     /// </summary>
     internal int TotalCount { get; set; } = 1;
+    /// <summary>
+    /// 设置记录总数变更的回调。
+    /// </summary>
     internal EventCallback<int> TotalCountChanged { get; set; }
 
     /// <summary>
