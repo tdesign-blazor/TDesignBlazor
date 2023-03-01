@@ -19,7 +19,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText bind-Value=""BasicText"" Placeholder=""文本框""/>
 <TInputText bind-Value=""DefaultText"" Placeholder=""默认值""/>
 <TInputText bind-Value=""PrefixText"" PrefixText=""价格："" SuffixText=""元"" Type=""InputType.Number"" />
@@ -59,7 +59,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputGroup Seperate>
     <TInputText bind-Value=""InputGroup1"" />
     <TInputText bind-Value=""InputGroup2"" />
@@ -93,7 +93,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText Type=""InputType.Password"" bind-Value=""InputPassword""/>
 
 <TInputText Type=""InputType.Password"" bind-Value=""InputPassword"" PrefixIcon=""IconName.LockOn""/>
@@ -114,7 +114,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText bind-Value=""SizeText"" Size=""Size.Small""/>
 <TInputText bind-Value=""SizeText"" Size=""Size.Medium"" />
 <TInputText bind-Value=""SizeText"" Size=""Size.Large""/>
@@ -134,7 +134,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText bind-Value=""AlignmentText""/>
 <TInputText bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Center""/>
 <TInputText bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Right"" />
@@ -154,7 +154,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <div style=""width:300px"">
     <TInputText @bind-Value=""AutoWidthText"" AutoWidth/>
 </div>
@@ -191,7 +191,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText bind-Value=""StatusText"" Disabled Placeholder=""禁用""/>
 <TInputText bind-Value=""StatusText"" Readonly Placeholder=""只读"" />
 <TInputText bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"" />
@@ -234,7 +234,7 @@ string PrefixText{ get; set; }
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputText bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"">
     <TipContent>默认的提示</TipContent>
 </TInputText>

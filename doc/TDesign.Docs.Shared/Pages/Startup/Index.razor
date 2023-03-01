@@ -51,7 +51,7 @@ builder.Services.AddTDesign();
 <h3>修改 App.razor </h3>
 
 @Code.Create(@"
-```html
+```cshtml-razor
 <Router AppAssembly=""@typeof(App).Assembly"">
     <Found Context=""routeData"">
         <RouteView RouteData=""@routeData"" DefaultLayout=""@typeof(MainLayout)"" />
@@ -70,3 +70,13 @@ builder.Services.AddTDesign();
 ```
 ")
 </LayoutContent>
+@code {
+    [Inject] public IJSRuntime JSRuntime { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("highlight");
+        }
+    }
+}
