@@ -818,7 +818,12 @@
         </member>
         <member name="P:TDesign.TInputRadio`1.CascadingRadioGroup">
             <summary>
-            级联的单选按钮组。
+            级联的单选按钮组。这个对象时可选的
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.CascadingRadioContainer">
+            <summary>
+            级联单选组件容器。
             </summary>
         </member>
         <member name="P:TDesign.TInputRadio`1.Value">
@@ -836,45 +841,93 @@
             禁用状态。
             </summary>
         </member>
+        <member name="M:TDesign.TInputRadio`1.OnInitialized">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputRadio`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputRadio`1.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputRadio`1.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TInputRadio`1.DisposeComponentResources">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.IsButtonStyle">
+            <summary>
+            是否为按钮风格的单选按钮，在 <see cref="P:TDesign.TInputRadio`1.CascadingRadioGroup"/> 有值时有效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadio`1.Checked">
+            <summary>
+            是否选中。
+            </summary>
+        </member>
+        <member name="T:TDesign.TInputRadioContainer`1">
+            <summary>
+            单选按钮的组容器，支持双向绑定。
+            </summary>
+            <typeparam name="TValue">值的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.ChildContent">
+            <summary>
+            <inheritdoc/>
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.OnValueSelected">
+            <summary>
+             执行当 <see cref="T:TDesign.TInputRadio`1"/> 触发的事件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.ChangeEventCallback">
+            <summary>
+            内部事件，当 <see cref="T:TDesign.TInputRadio`1"/> 组件被点击发生改变时触发。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.SelectedValue">
+            <summary>
+            Gets the selected value.
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.CascadedEditContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.Value">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.ValueExpression">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TInputRadioContainer`1.ValueChanged">
+            <inheritdoc/>
+        </member>
+        <member name="E:TDesign.TInputRadioContainer`1.NotifyRadioInputRendered">
+            <summary>
+            表示当组内的单选框发生变化时的通知。
+            </summary>
+        </member>
         <member name="T:TDesign.TInputRadioGroup`1">
             <summary>
             单选按钮的组容器，支持双向绑定。
             </summary>
             <typeparam name="TValue">值的类型。</typeparam>
         </member>
-        <member name="P:TDesign.TInputRadioGroup`1.Name">
-            <summary>
-            分组名称。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputRadioGroup`1.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TInputRadioGroup`1.ButtonStyle">
             <summary>
-            当 <see cref="P:TDesign.TInputRadioGroup`1.TButton"/> 是 <c>true</c> 时的按钮风格。
+            设置单选框的按钮风格。
             </summary>
         </member>
-        <member name="P:TDesign.TInputRadioGroup`1.OnValueSelected">
+        <member name="P:TDesign.TInputRadioGroup`1.Disabled">
             <summary>
-             执行当 <see cref="T:TDesign.TInputRadio`1"/> 触发的事件。
+            设置禁用状态。
             </summary>
         </member>
-        <member name="P:TDesign.TInputRadioGroup`1.ChangeEventCallback">
+        <member name="P:TDesign.TInputRadioGroup`1.Size">
             <summary>
-            内部事件，当 <see cref="T:TDesign.TInputRadio`1"/> 组件被点击发生改变时触发。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputRadioGroup`1.TButton">
-            <summary>
-            设置按钮风格的单选框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TInputRadioGroup`1.SelectedValue">
-            <summary>
-            Gets the selected value.
+            设置按钮的同一尺寸。
             </summary>
         </member>
         <member name="T:TDesign.RadioButtonStyle">
@@ -2306,6 +2359,29 @@
             错误
             </summary>
         </member>
+        <member name="T:TDesign.TTableRowSelectedEventArgs`1">
+            <summary>
+            表示 <see cref="T:TDesign.TTable`1"/> 组件中行选中事件的参数。
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="M:TDesign.TTableRowSelectedEventArgs`1.#ctor(`0,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TDesign.TTableRowSelectedEventArgs`1"/> class.
+            </summary>
+            <param name="item">选中的项。</param>
+            <param name="index">选中的行索引。</param>
+        </member>
+        <member name="P:TDesign.TTableRowSelectedEventArgs`1.Item">
+            <summary>
+            获取选中行的数据。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableRowSelectedEventArgs`1.Index">
+            <summary>
+            获取选中行的索引位置。
+            </summary>
+        </member>
         <member name="T:TDesign.TTable`1">
             <summary>
             只具备一些基本功能的数据表格。
@@ -2422,6 +2498,11 @@
             设置表尾的自定义内容。
             </summary>
         </member>
+        <member name="P:TDesign.TTable`1.SelectMode">
+            <summary>
+            设置后会在第一列自动加入选中行的单选或多选控件。
+            </summary>
+        </member>
         <member name="P:TDesign.TTable`1.TotalCount">
             <summary>
             总页数。
@@ -2440,6 +2521,21 @@
         <member name="P:TDesign.TTable`1.TableData">
             <summary>
             已加载的数据。内部使用。
+            </summary>
+        </member>
+        <member name="T:TDesign.TTable`1.SelectRowMode">
+            <summary>
+            选中行的模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.TTable`1.SelectRowMode.Single">
+            <summary>
+            单行选中，呈现单选控件。
+            </summary>
+        </member>
+        <member name="F:TDesign.TTable`1.SelectRowMode.Multiple">
+            <summary>
+            多行选中，呈现多选控件。
             </summary>
         </member>
         <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
@@ -2508,11 +2604,6 @@
             设置列标题部分的任意 UI 片段。
             </summary>
         </member>
-        <member name="P:TDesign.TTableColumnBase.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTableColumnBase.FooterContent">
             <summary>
             设置底部的任意 UI 片段。
@@ -2544,21 +2635,39 @@
             表示可以输出数据的表格列。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
             </summary>
         </member>
-        <member name="P:TDesign.TTableFieldColumn`1.CascadingTable">
+        <member name="M:TDesign.TTableFieldColumn`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableFieldColumn`1.GetColumnContent">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.TTableFieldColumn`1.ChildContent">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TTableFieldColumnBase`1">
+            <summary>
+            表示可以输出数据的表格列的基类。必须在 <see cref="T:TDesign.TTable`1"/> 组件中使用。
+            </summary>
+            <typeparam name="TItem">数据的类型。</typeparam>
+        </member>
+        <member name="P:TDesign.TTableFieldColumnBase`1.CascadingTable">
             <summary>
             级联的 <see cref="T:TDesign.TTable`1"/> 组件。
             </summary>
         </member>
-        <member name="P:TDesign.TTableFieldColumn`1.Value">
+        <member name="P:TDesign.TTableFieldColumnBase`1.Value">
             <summary>
             获取或设置列中输出的值。
             </summary>
         </member>
-        <member name="M:TDesign.TTableFieldColumn`1.GetColumnContent">
-            <summary>
+        <member name="M:TDesign.TTableFieldColumnBase`1.OnInitialized">
             <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TTableRadioColumn`1">
+            <summary>
+            表示呈现单选控件的列。
             </summary>
-            <returns></returns>
+            <typeparam name="TItem"></typeparam>
         </member>
         <member name="T:TDesign.TTableRow">
             <summary>

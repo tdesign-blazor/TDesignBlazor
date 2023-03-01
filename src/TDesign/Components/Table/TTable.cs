@@ -82,6 +82,13 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 设置表尾的自定义内容。
     /// </summary>
     [Parameter]public RenderFragment? FooterContent { get; set; }
+
+    #region 选中行
+    /// <summary>
+    /// 设置后会在第一列自动加入选中行的单选或多选控件。
+    /// </summary>
+    [Parameter]public SelectRowMode? SelectMode { get; set; }
+    #endregion
     #endregion
 
     #region Internal
@@ -104,4 +111,20 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// </summary>
     internal IEnumerable<TItem> TableData { get; set; } = Enumerable.Empty<TItem>();
     #endregion
+
+
+    /// <summary>
+    /// 选中行的模式。
+    /// </summary>
+    public enum SelectRowMode
+    {
+        /// <summary>
+        /// 单行选中，呈现单选控件。
+        /// </summary>
+        Single,
+        /// <summary>
+        /// 多行选中，呈现多选控件。
+        /// </summary>
+        Multiple
+    }
 }
