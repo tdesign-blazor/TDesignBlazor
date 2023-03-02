@@ -12,6 +12,10 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     /// </summary>
     [CascadingParameter(Name = "IsHeader")] protected bool IsHeader { get; set; }
     /// <summary>
+    /// 设置列的唯一标识。
+    /// </summary>
+    [Parameter]public object Key { get; set; }
+    /// <summary>
     /// 设置列标题。若设置了 <see cref="TitleContent"/> 参数，则该参数无效。
     /// </summary>
     [Parameter] public string? Title { get; set; }
@@ -24,6 +28,11 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     /// <inheritdoc/>
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    /// <summary>
+    /// 设置底部的任意 UI 片段。
+    /// </summary>
+    [Parameter]public RenderFragment? FooterContent { get; set; }
 
     /// <summary>
     /// 获取顶部标题内容。
@@ -44,6 +53,7 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     protected override void AfterSetParameters(ParameterView parameters)
     {
         ChildContent ??= GetColumnContent();
+        Key ??= Title ?? Guid.NewGuid().ToString();
     }
 
     /// <inheritdoc/>

@@ -77,6 +77,11 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 当数据量变更时执行的方法。
     /// </summary>
     [Parameter]public EventCallback<int> PageSizeChanged { get; set; }
+
+    /// <summary>
+    /// 设置表尾的自定义内容。
+    /// </summary>
+    [Parameter]public RenderFragment? FooterContent { get; set; }
     #endregion
 
     #region Internal
@@ -84,7 +89,15 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 总页数。
     /// </summary>
     internal int TotalCount { get; set; } = 1;
+    /// <summary>
+    /// 设置记录总数变更的回调。
+    /// </summary>
     internal EventCallback<int> TotalCountChanged { get; set; }
+
+    /// <summary>
+    /// 表示当数据加载完成。
+    /// </summary>
+    internal bool DataLoadedComplete { get; set; }
 
     /// <summary>
     /// 已加载的数据。内部使用。

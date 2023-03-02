@@ -5,7 +5,10 @@
 /// </summary>
 public class TTableFieldColumn<TItem> : TTableColumnBase
 {
-    [CascadingParameter(Name = "Table")] protected TTable<TItem>? CascadingTable { get; set; }
+    /// <summary>
+    /// 级联的 <see cref="TTable{TItem}"/> 组件。
+    /// </summary>
+    [CascadingParameter(Name = "Table")]TTable<TItem>? CascadingTable { get; set; }
     /// <summary>
     /// 获取或设置列中输出的值。
     /// </summary>
@@ -13,9 +16,11 @@ public class TTableFieldColumn<TItem> : TTableColumnBase
 
     protected override void OnInitialized()
     {
-        ArgumentNullException.ThrowIfNull(CascadingTable, nameof(CascadingTable));
+        if ( !CascadingTable!.ChildComponents.OfType<TTableColumnBase>().Any(m => m.Key!.Equals(Key)) )
+        {
+            CascadingTable.AddChildComponent(this);
+        }
 
-        CascadingTable.AddChildComponent(this);
         base.OnInitialized();
     }
 

@@ -11,19 +11,23 @@
 
 ## ✨ 特性
 
-- 🌈 提炼自企业级中后台产品的交互语言和视觉风格
+- 🌈 提炼自 TDesign 的企业级中后台产品的交互语言和视觉风格
 - 📦 开箱即用的高质量 Blazor 组件，可在多种托管方式共享
 - 💕 支持基于 WebAssembly 的客户端和基于 SignalR 的服务端 UI 事件交互
 - 🎨 支持渐进式 Web 应用（PWA）
 - 🛡 使用 C# 构建，多范式静态语言带来高效的开发体验
-- ⚙️ 基于 .NET 6，可直接引用丰富的 .NET 类库
+- ⚙️ 基于 .NET 6/7，可直接引用丰富的 .NET 类库
 - 🎁 可与已有的 ASP.NET Core MVC、Razor Pages 项目无缝集成
 - 💴 基于 MIT 开源协议
 
-## 🌈 在线示例
-[http://tblazor.com](http://tblazor.com)
-
-> 由于网络问题，可能导致以上链接不可用，请下载源码并运行 `TDesign.Docs.ServerSide` 或 `TDesign.Docs.WebAssembly` 项目。
+## 🌈 Demo 演示
+* 在线演示
+    * [https://achievedowner.github.io/TDesignBlazor](https://achievedowner.github.io/TDesignBlazor/) Nightly - master 合并后更新
+    * [http://tblazor.com](http://tblazor.com) 稳定版 - 版本发布后更新
+* 源码运行
+    * `TDesign.Docs.ServerSide` 是服务端
+    * `TDesign.Docs.WebAssembly` 是客户端
+    * `TDesign.Docs.Shared` 是两端共享组件和页面
 
 ## 🖥 支持环境
 
@@ -95,10 +99,13 @@
 </div>
 
 ## :house: 社区支持
-如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助。我们也鼓励有经验的用户帮助新手。
+如果您在此过程中遇到任何问题，请通过以下渠道寻求帮助：
 * 作者邮箱：[william-zzh@outlook.com]
-* QQ 群：1012762441
-* 微信群：TDesignBlazor 贡献者交流
+* 作者微信：playermaker（请注明来源）
+* 官方微信：TDesignBlazor 官方群
+* 交流论坛：[https://github.com/AchievedOwner/TDesignBlazor/discussions](https://github.com/AchievedOwner/TDesignBlazor/discussions)
+
+> 我们鼓励有经验的用户帮助新手，并会授予勋章。
 
 ## :triangular_flag_on_post: 行为准则
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
@@ -109,3 +116,4 @@
 ## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
 - [MS Learn 平台 Blazor 教程](https://docs.microsoft.com/zh-cn/learn/modules/build-blazor-webassembly-visual-studio-code/?WT.mc_id=DT-MVP-5003987)
+- [ComponentBuilder 自动化组件框架](https://github.com/AchievedOwner/ComponentBuilder)
