@@ -110,6 +110,11 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 已加载的数据。内部使用。
     /// </summary>
     internal IEnumerable<TItem> TableData { get; set; } = Enumerable.Empty<TItem>();
+
+    /// <summary>
+    /// 表示有单选按钮。
+    /// </summary>
+    internal bool HasRadioButton { get; set; }
     #endregion
 
 
