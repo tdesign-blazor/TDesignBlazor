@@ -6,6 +6,7 @@ namespace TDesign;
 
 partial class TTable<TItem>
 {
+
     /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
@@ -13,12 +14,6 @@ partial class TTable<TItem>
         {
             throw new InvalidOperationException($"必须提供 {nameof(Data)} 参数");
         }
-    }
-
-    /// <inheritdoc/>
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
         EmptyContent ??= builder => builder.AddContent(0, "暂无数据");
     }
 
@@ -31,10 +26,7 @@ partial class TTable<TItem>
     }
 
     /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder)
-    {
-        builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
-    }
+    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -64,7 +56,11 @@ partial class TTable<TItem>
         await this.Refresh();
 
         var (result, count) = await Data!.Query(page * size,(page - 1) * size);
-        TableData = result;
+        if ( result is not null )
+        {
+            TableData.Clear();
+            TableData.AddRange(result);
+        }
         TotalCount = count;
 
         Loading = false;
@@ -92,4 +88,46 @@ partial class TTable<TItem>
         TotalCount= count;
         return TotalCountChanged.InvokeAsync(count);
     }
+
+    #region 选择行
+    /// <summary>
+    /// 选中指定索引的行，如果该行被选中，则会取消选中。 <see cref="RowSelection"/> 为 <c>true</c> 时有效。
+    /// </summary>
+    /// <param name="rowIndex">要选择的行索引。</param>
+    /// <exception cref="TDesignComponentException">无法找到指定行索引的数据。</exception>
+    public Task SelectRow(int rowIndex)
+    {
+        if ( !RowSelection )
+        {
+            return Task.CompletedTask;
+        }
+
+        try
+        {
+            var item = TableData[rowIndex];
+
+            if ( SelectedItems.Contains(item) )
+            {
+                SelectedItems.Remove(item);
+                OnRowSelected.InvokeAsync(new TTableRowItemEventArgs<TItem>(default, rowIndex));
+            }
+            else
+            {
+                if ( IsSingleSelection )
+                {
+                    SelectedItems.Clear();
+                }
+                SelectedItems.Add(item);
+                OnRowSelected.InvokeAsync(new TTableRowItemEventArgs<TItem>(item, rowIndex));
+            }
+
+
+            return this.Refresh();
+        }
+        catch ( ArgumentOutOfRangeException ex )
+        {
+            throw new TDesignComponentException(this, $"无法在行{rowIndex}找到数据", ex);
+        }
+    }
+    #endregion
 }

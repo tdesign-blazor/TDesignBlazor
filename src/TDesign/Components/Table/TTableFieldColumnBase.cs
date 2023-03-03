@@ -9,7 +9,7 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
     /// <summary>
     /// 级联的 <see cref="TTable{TItem}"/> 组件。
     /// </summary>
-    [CascadingParameter(Name = "Table")] TTable<TItem>? CascadingTable { get; set; }
+    [CascadingParameter(Name = "Table")]protected TTable<TItem> CascadingTable { get; set; }
     /// <summary>
     /// 获取或设置列中输出的值。
     /// </summary>
@@ -23,11 +23,19 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
             throw new InvalidOperationException("列必须定义在 TTable 组件中");
         }
 
-        if ( !CascadingTable!.ChildComponents.OfType<TTableColumnBase>().Any(m => m.Key!.Equals(Key)) )
+        if ( !CascadingTable!.GetColumns().Any(m => m.Key!.Equals(Key)) )
         {
             CascadingTable.AddChildComponent(this);
         }
-
         base.OnInitialized();
+    }
+    /// <inheritdoc/>
+    protected override RenderFragment? GetHeaderContent()
+    {
+        if ( TitleContent is null )
+        {
+          return  builder => builder.AddContent(0, Title ?? Value?.GetType()?.Name ?? "未命名标题");
+        }
+        return TitleContent;
     }
 }

@@ -1,7 +1,10 @@
-﻿namespace TDesign.Docs.Shared.Pages.Components.Data;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
+namespace TDesign.Docs.Shared.Pages.Components.Data;
 partial class TablePage
 {
+    [Inject] IJSRuntime JS { get; set; }
     public class User
     {
 
@@ -51,4 +54,7 @@ partial class TablePage
         var data = result.Take(take).Skip(skip);
         return (data,count);
     }
+
+    async Task RowSelected(TTableRowItemEventArgs<User> e) 
+        => await JS.InvokeVoidAsync("alert", e.Item is null?"你什么都没选":$"你选择的是：{e.Item?.Name}");
 }

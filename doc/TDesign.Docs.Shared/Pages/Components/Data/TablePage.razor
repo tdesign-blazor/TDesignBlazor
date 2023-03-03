@@ -1,5 +1,5 @@
 ﻿@page "/components/table"
-<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态","自定义表尾的表格","可分页的表格","空表格", "API"})">
+<LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态","自定义表尾的表格","可分页的表格","可选择行的表格","空表格", "API"})">
 <PageHeader Title="Table 表格">
     表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
 </PageHeader>
@@ -523,6 +523,63 @@ static async Task<(IEnumerable<User> data,int count)> Mock(int take,int skip)
 ")
     </CodeContent>
 </Example>
+<Example Title="可选择行的表格">
+    <Description>
+        设置 <code>RowSelection</code> 开启选择行功能
+        <br />可以选择使用 <code>&lt;TTableRadioColumn></code> 组件呈现单选按钮的列表示选择行
+    </Description>
+    <RunContent>
+            <TTable TItem="User" Data="User.GetData(7)" Hoverable RowSelection OnRowSelected="RowSelected">
+                <TTableRadioColumn Value="context?.Id" SelectionKey="Id" Title="选择"/>
+                <TTableFieldColumn Value="context?.Id" Title="Id" />
+                <TTableFieldColumn Value="context?.Name" Title="姓名" />
+                <TTableFieldColumn Value="context?.Age" Title="年龄" />
+                <TTableFieldColumn Title="性别">
+                    @if ( context is not null )
+                    {
+                        if ( context.Gender )
+                        {
+                            <TTag Theme="Theme.Primary">男</TTag>
+                        }
+                        else
+                        {
+                            <TTag Theme="Theme.Danger">女</TTag>
+                        }
+                    }
+                </TTableFieldColumn>
+            </TTable>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+<TTable TItem=""User"" Data=""User.GetData(7)"" Hoverable RowSelection OnRowSelected=""RowSelected"">
+    <TTableRadioColumn Value=""context?.Id"" SelectionKey=""Id"" Title=""选择""/>
+    <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
+    <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <TTableFieldColumn Title=""性别"">
+        @if ( context is not null )
+        {
+            if ( context.Gender )
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+    </TTableFieldColumn>
+</TTable>
+```
+```cs
+async Task RowSelected(TTableRowItemEventArgs<User> e) 
+    => await JS.InvokeVoidAsync(""alert"", e.Item is null ? ""你什么都没选"" : $""你选择的是：{e.Item?.Name}"");
+```
+")
+    </CodeContent>
+</Example>
+
  <Example Title="空表格">
         <Description>使用默认空表格样式。可使用 <code>EmptyContent</code> 自定义空表格模板</Description>
     <RunContent>
@@ -618,6 +675,7 @@ static async Task<(IEnumerable<User> data,int count)> Mock(int take,int skip)
 ")
     </CodeContent>
 </Example>
+
 <div id="API"></div>
 <ComponentAPI Component="typeof(TTable<>)" Title="TTable"></ComponentAPI>
 </LayoutContent>

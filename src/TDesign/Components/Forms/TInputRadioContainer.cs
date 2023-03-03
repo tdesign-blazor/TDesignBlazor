@@ -64,5 +64,5 @@ public class TInputRadioContainer<TValue> : BlazorComponentBase, IHasChildConten
             _oldValue = newValue;
             NotifyRadioInputRendered?.Invoke();
         }
-    }
+    }   
 }

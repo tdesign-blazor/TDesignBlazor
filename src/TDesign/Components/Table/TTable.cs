@@ -11,7 +11,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 设置表格的数据源。
     /// </summary>
-    [Parameter][EditorRequired]public DataSource<TItem>? Data { get; set; }
+    [Parameter][EditorRequired] public DataSource<TItem>? Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -56,7 +56,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 设置当表格数据是空时显示的自定义内容。
     /// </summary>
-    [Parameter]public RenderFragment? EmptyContent { get; set; }
+    [Parameter] public RenderFragment? EmptyContent { get; set; }
     /// <summary>
     /// 开启分页模式。
     /// </summary>
@@ -68,7 +68,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 当页码变更时执行的方法。
     /// </summary>
-    [Parameter]public EventCallback<int> PageIndexChanged { get; set; }
+    [Parameter] public EventCallback<int> PageIndexChanged { get; set; }
     /// <summary>
     /// 设置每页呈现的数据量。
     /// </summary>
@@ -76,18 +76,38 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 当数据量变更时执行的方法。
     /// </summary>
-    [Parameter]public EventCallback<int> PageSizeChanged { get; set; }
+    [Parameter] public EventCallback<int> PageSizeChanged { get; set; }
 
     /// <summary>
     /// 设置表尾的自定义内容。
     /// </summary>
-    [Parameter]public RenderFragment? FooterContent { get; set; }
+    [Parameter] public RenderFragment? FooterContent { get; set; }
 
     #region 选中行
     /// <summary>
-    /// 设置后会在第一列自动加入选中行的单选或多选控件。
+    /// 是否具备行选择功能。
     /// </summary>
-    [Parameter]public SelectRowMode? SelectMode { get; set; }
+    [Parameter] public bool RowSelection { get; set; }
+
+    /// <summary>
+    /// 设置当行被点击选择后的回调方法。
+    /// </summary>
+    [Parameter] public EventCallback<TTableRowItemEventArgs<TItem>> OnRowSelected { get; set; }
+
+    /// <summary>
+    /// 获取选中的项。
+    /// </summary>
+    internal TItem? SelectedItem => SelectedItems.FirstOrDefault();
+
+    /// <summary>
+    /// 获取或设置选中项的集合。
+    /// </summary>
+    internal List<TItem> SelectedItems { get; set; } = new();
+
+    /// <summary>
+    /// 获取一个布尔值，表示行仅可以被单选。
+    /// </summary>
+    internal bool IsSingleSelection { get; set; }
     #endregion
     #endregion
 
@@ -109,27 +129,6 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 已加载的数据。内部使用。
     /// </summary>
-    internal IEnumerable<TItem> TableData { get; set; } = Enumerable.Empty<TItem>();
-
-    /// <summary>
-    /// 表示有单选按钮。
-    /// </summary>
-    internal bool HasRadioButton { get; set; }
+    internal List<TItem> TableData { get; set; } = new();
     #endregion
-
-
-    /// <summary>
-    /// 选中行的模式。
-    /// </summary>
-    public enum SelectRowMode
-    {
-        /// <summary>
-        /// 单行选中，呈现单选控件。
-        /// </summary>
-        Single,
-        /// <summary>
-        /// 多行选中，呈现多选控件。
-        /// </summary>
-        Multiple
-    }
 }

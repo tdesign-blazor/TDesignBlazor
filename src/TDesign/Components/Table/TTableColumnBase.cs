@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace TDesign;
 
@@ -34,7 +33,7 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// 获取顶部标题内容。
     /// </summary>
     /// <returns></returns>
-    protected RenderFragment? GetHeaderContent() => TitleContent ??= b => b.AddContent(0, Title);
+    protected abstract RenderFragment? GetHeaderContent();
 
     /// <summary>
     /// 获取表格列的内容。
@@ -52,6 +51,19 @@ public abstract class TTableColumnBase : TDesignComponentBase
     }
 
     /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence) 
-        => builder.AddContent(sequence, IsHeader ? GetHeaderContent() : GetColumnContent());
+    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+    {
+        if(IsHeader)
+        {
+            var content = GetHeaderContent();
+            if ( content is not null )
+            {
+                builder.AddContent(sequence, content);
+            }
+        }
+        else
+        {
+            builder.AddContent(sequence, GetColumnContent());
+        }
+    }
 }
