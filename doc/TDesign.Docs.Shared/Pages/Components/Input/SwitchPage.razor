@@ -3,7 +3,7 @@
 <PageHeader Title="Switch 开关">
     用于两个互斥选项，用来打开或关闭选项的选择控件。
 </PageHeader>
-<HighlightAlert />
+
 <Example Title="基础开关">
     <Description>不带描述，最基础的开关。</Description>
     <RunContent>
@@ -15,7 +15,7 @@
     <CodeContent>
         @Code.Create(@"
  ``` html
- <TSwitch bind-Value=""BaseValue"" />
+ <TSwitch @bind-Value=""BaseValue"" />
  <p>您的选择：BaseValue</p>
  ```
  ``` cs
@@ -45,11 +45,11 @@
     <CodeContent>
         @Code.Create(@"
 ``` html
-<TSwitch bind-Value=""DescriptionValue1"">
+<TSwitch @bind-Value=""DescriptionValue1"">
     <TrueContent>DescriptionOpened1</TrueContent>
     <FalseContent>DescriptionClosed1</FalseContent>
 </TSwitch>
-<TSwitch bind-Value=""DescriptionValue2"">
+<TSwitch @bind-Value=""DescriptionValue2"">
     <TrueContent>
         <TIcon Name=""IconName.Check"" />
     </TrueContent>
@@ -82,9 +82,9 @@ bool DescriptionValue2 { get; set; }
     <CodeContent>
         @Code.Create(@"
 ``` html
-<TSwitch bind-Value=""statusValue1"" />
-<TSwitch bind-Value=""statusValue2"" Loading=""statusLoading"" />
-<TSwitch bind-Value=""statusValue3"" Disabled=""statusDisabled"" />
+<TSwitch @bind-Value=""statusValue1"" />
+<TSwitch @bind-Value=""statusValue2"" Loading=""statusLoading"" />
+<TSwitch @bind-Value=""statusValue3"" Disabled=""statusDisabled"" />
 ```
 ``` cs
  bool statusValue1 { get; set; } = true;
@@ -112,9 +112,9 @@ bool DescriptionValue2 { get; set; }
     <CodeContent>
         @Code.Create(@"
 ``` html
-<TSwitch bind-Value=""sizeValue1"" Size=""Size.Large"" />
-<TSwitch bind-Value=""sizeValue2"" Size=""Size.Medium"" />
-<TSwitch bind-Value=""sizeValue3"" Size=""Size.Small"" />
+<TSwitch @bind-Value=""sizeValue1"" Size=""Size.Large"" />
+<TSwitch @bind-Value=""sizeValue2"" Size=""Size.Medium"" />
+<TSwitch @bind-Value=""sizeValue3"" Size=""Size.Small"" />
 ```
 ``` cs
 bool sizeValue1 { get; set; } = true;

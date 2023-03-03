@@ -1,11 +1,10 @@
 ﻿/* 用于定义表格中各种代码片段的文件 */
 
-using Microsoft.AspNetCore.Components.Routing;
+using ComponentBuilder;
 
 namespace TDesign;
 partial class TTable<TItem>
 {
-
     /// <summary>
     /// 构建表格。
     /// </summary>
@@ -17,13 +16,13 @@ partial class TTable<TItem>
         {
             builder.CreateComponent<LoadingContainer>(sequence, container =>
             {
-                BuildTableContent(container, 0);
+                BuildTableContent(container);
                 container.CreateComponent<TLoading>(1, attributes: new { Overlay = true });
             });
         }
         else
         {
-            BuildTableContent(builder, sequence);
+            BuildTableContent(builder);
         }
     }
 
@@ -32,25 +31,24 @@ partial class TTable<TItem>
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
-    void BuildTableContent(RenderTreeBuilder builder, int sequence)
+    void BuildTableContent(RenderTreeBuilder builder)
     {
-        builder.CreateElement(sequence, "div", content =>
-        {
-            content.CreateElement(0, "table", table =>
+        builder.Fluent()
+            .Div().Class("t-table__content").Style($"max-height:{FixedHeight}px", FixedHeight.HasValue)
+            .Content(content =>
             {
-                BuildHeader(table, 0);
-                BuildBody(table, 1);
-                BuildFooter(table);
-            },
-            new
-            {
-                @class = HtmlHelper.Class.Append("t-table--layout-auto", AutoWidth, "t-table--layout-fixed")
-            });
-        }, new
-        {
-            @class = "t-table__content",
-            style = HtmlHelper.Style.Append($"max-height:{FixedHeight}px", FixedHeight.HasValue)
-        });
+                content.Fluent().Element("table")
+                                    .Class("t-table--layout-auto", AutoWidth)
+                                    .Class("t-table--layout-fixed", !AutoWidth)
+                                    .Content(table =>
+                                    {
+                                        BuildHeader(table, 0);
+                                        BuildBody(table, 1);
+                                        BuildFooter(table);
+                                    })
+                                .Close();
+            })
+            .Close();
 
 
         /// <summary>
@@ -80,33 +78,26 @@ partial class TTable<TItem>
         /// <param name="sequence">源代码的位置。</param>
         void BuildBody(RenderTreeBuilder builder, int sequence)
         {
-            builder.CreateElement(sequence, "tbody", content =>
-            {
-                if ( TableData.Any() )
-                {
-                    var index = 0;
-                    foreach ( var item in TableData! )
+            builder.Fluent().Element("tbody", "t-table__body")
+                    .Content(content =>
                     {
-                        var key = index;
-                        content.CreateComponent<TTableRow>(index + 1, tr =>
+                        var index = 0;
+                        foreach ( var item in TableData )
                         {
-                            tr.AddContent(0, ChildContent!.Invoke(item));
-                        }, key: key);
-
-                        index++;
-                    }
-                }
-                else
-                {
-                    if ( DataLoadedComplete )
-                    {
-                        BuildEmptyContent(content);
-                    }
-                }
-            }, new
-            {
-                @class = HtmlHelper.Class.Append("t-table__body")
-            });
+                            var key = index;
+                            content.CreateComponent<TTableRow>(index, ChildContent!.Invoke(item), new
+                            {
+                                onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => SelectRow(key), RowSelection)
+                            }, key: key);
+                            index++;
+                        }
+                        
+                        if ( DataLoadedComplete && !TableData.Any() )
+                        {
+                            BuildEmptyContent(content);
+                        }
+                    })
+                .Close();
 
             #region 空表格的内容
             void BuildEmptyContent(RenderTreeBuilder builder)
@@ -132,29 +123,42 @@ partial class TTable<TItem>
 
             using var footer = builder.Fluent();
 
-            if ( FooterContent is null && ChildComponents.OfType<TTableColumnBase>().All(m => m.FooterContent is null) )
+            if ( FooterContent is null && GetColumns().All(m => m.FooterContent is null) )
             {
                 return;
             }
 
             footer.Element("tfoot", "t-table__footer")
                     .Class("t-table__footer--fixed", FixedFooter)
-                    .Content(content => content.Fluent().Element("tr", "t-table__row--full", FooterContent is not null)
-                                                            .Content(tr => tr.CreateElement(0, "td", inner =>
-                                                            {
-                                                                inner.Fluent().Div("t-table__row-full-element")
-                                                                .Content(div=>div.Fluent().Div("t-table__row-filter-inner").Content(FooterContent).Close())
-                                                                .Close();
-                                                            }, new { colspan=ChildComponents.Count}))
-                                                        .Close()
-                                                        .Element("tr", "t-tdesign__custom-footer-tr")
-                                                        .Content(tr => tr.Fluent()
-                                                                            .ForEach("td", ChildComponents.Count, (content, index) => content.Content(((TTableColumnBase)ChildComponents[index]).FooterContent)))
-                                                        .Close()
-                                                        )
-
-                        //.Close()
-                        ;
+                    .Content(content =>
+                    {
+                        content.Fluent()
+                                .Element("tr", "t-table__row--full", FooterContent is not null)
+                                    .Content(tr => tr.CreateElement(0, "td", inner =>
+                                    {
+                                        inner.Fluent()
+                                        .Div("t-table__row-full-element")
+                                        .Content(div =>
+                                        {
+                                            div.Fluent()
+                                                        .Div("t-table__row-filter-inner")
+                                                        .Content(FooterContent)
+                                                        .Close();
+                                        })
+                                        .Close();
+                                    }, new { colspan = ChildComponents.Count }))
+                                .Close()
+                                .Element("tr", "t-tdesign__custom-footer-tr")
+                                    .Content(tr =>
+                                    {
+                                        tr.Fluent()
+                                            .ForEach("td", ChildComponents.Count, (content, index) =>
+                                            {
+                                                content.Content(((TTableColumnBase)ChildComponents[index]).FooterContent);
+                                            });
+                                    })
+                                .Close();
+                    });
         }
                     
         #endregion
@@ -184,5 +188,15 @@ partial class TTable<TItem>
             }, new { @class = "t-table__pagination" });
         }, new { @class = "t-table__pagination-wrap", style = "opacity:1" }, condition: Pagination);
     }
+
+    /// <summary>
+    /// 获取列集合。
+    /// </summary>
+    internal IEnumerable<TTableColumnBase> GetColumns() => GetColumns<TTableColumnBase>();
+    /// <summary>
+    /// 获取指定类型的列集合。
+    /// </summary>
+    /// <typeparam name="TTableColumn">列的类型。</typeparam>
+    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase => ChildComponents.OfType<TTableColumn>();
 
 }

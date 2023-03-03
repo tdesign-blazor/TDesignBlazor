@@ -3,7 +3,7 @@
 <PageHeader Title="Pagination 分页">
     用于模块内切换内容的控件。
 </PageHeader>
-<HighlightAlert/>
+
 <h1>基础分页</h1>
 <Example Title="少量页面">
     <Description>最基础的分页控件，仅展示页码。建议使用在内容少于10页的轻量化分页场景。</Description>
@@ -15,8 +15,8 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total""/>
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total"" ShowFirstLastBtn/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total""/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowFirstLastBtn/>
 ```
 ```cs
 @code{
@@ -45,8 +45,8 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page1"" bind-PageSize=""PageSize1"" bind-Total=""Total1""/>
-<TPagination bind-PageIndex=""Page1"" bind-PageSize=""PageSize1"" bind-Total=""Total1""  EllipsisMode=""PageEllipsisMode.BothEnds""/>
+<TPagination @bind-PageIndex=""Page1"" @bind-PageSize=""PageSize1"" @bind-PageSize=""Total1""/>
+<TPagination @bind-PageIndex=""Page1"" @bind-PageSize=""PageSize1"" @bind-PageSize=""Total1""  EllipsisMode=""PageEllipsisMode.BothEnds""/>
 ```
 ```cs
 @code{
@@ -77,7 +77,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page2"" bind-PageSize=""PageSize2"" bind-Total=""Total2"">
+<TPagination @bind-PageIndex=""Page2"" @bind-PageSize=""PageSize2"" @bind-PageSize=""Total2"">
     <TotalContent>
         目前展现了 @context 条数据
     </TotalContent>
@@ -100,7 +100,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total"" ShowJumpPage/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowJumpPage/>
 ```
 ")
     </CodeContent>
@@ -113,7 +113,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total"" ShowJumpPage Simple/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowJumpPage Simple/>
 ```
 ")
     </CodeContent>
@@ -126,7 +126,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total"" Size=""Size.Small"" ShowJumpPage/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" Size=""Size.Small"" ShowJumpPage/>
 ```
 ")
     </CodeContent>
@@ -139,7 +139,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TPagination bind-PageIndex=""Page"" bind-PageSize=""PageSize"" bind-Total=""Total"" Size=""Size.Small"" ShowJumpPage Simple/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" Size=""Size.Small"" ShowJumpPage Simple/>
 ```
 ")
     </CodeContent>

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace TDesign;
 
 /// <summary>
 /// 表示表格的单元格的基类。
 /// </summary>
-public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
+public abstract class TTableColumnBase : TDesignComponentBase
 {
     /// <summary>
     /// 获取当前是否是顶部单元格。
@@ -14,7 +14,7 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 设置列的唯一标识。
     /// </summary>
-    [Parameter]public object Key { get; set; }
+    [Parameter][NotNull]public object Key { get; set; }
     /// <summary>
     /// 设置列标题。若设置了 <see cref="TitleContent"/> 参数，则该参数无效。
     /// </summary>
@@ -25,11 +25,6 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     [Parameter] public RenderFragment? TitleContent { get; set; }
 
     /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-
-    /// <summary>
     /// 设置底部的任意 UI 片段。
     /// </summary>
     [Parameter]public RenderFragment? FooterContent { get; set; }
@@ -38,7 +33,7 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     /// 获取顶部标题内容。
     /// </summary>
     /// <returns></returns>
-    protected RenderFragment? GetHeaderContent() => TitleContent ??= b => b.AddContent(0, Title);
+    protected abstract RenderFragment? GetHeaderContent();
 
     /// <summary>
     /// 获取表格列的内容。
@@ -52,20 +47,23 @@ public abstract class TTableColumnBase : TDesignComponentBase, IHasChildContent
     /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
-        ChildContent ??= GetColumnContent();
         Key ??= Title ?? Guid.NewGuid().ToString();
     }
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        if (IsHeader)
+        if(IsHeader)
         {
-            builder.AddContent(0, GetHeaderContent());
+            var content = GetHeaderContent();
+            if ( content is not null )
+            {
+                builder.AddContent(sequence, content);
+            }
         }
         else
         {
-            builder.AddContent(0, ChildContent);
+            builder.AddContent(sequence, GetColumnContent());
         }
     }
 }

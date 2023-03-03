@@ -4,72 +4,22 @@
 /// 单选按钮的组容器，支持双向绑定。
 /// </summary>
 /// <typeparam name="TValue">值的类型。</typeparam>
-[CssClass("t-radio-group t-radio-group__outline")]
+[CssClass("t-radio-group")]
 [ParentComponent(IsFixed = true)]
-public class TInputRadioGroup<TValue> : TDesignInputComonentBase<TValue>, IHasChildContent
+public class TInputRadioGroup<TValue> : TInputRadioContainer<TValue>,IHasDisabled
 {
     /// <summary>
-    /// 分组名称。
+    /// 设置单选框的按钮风格。
     /// </summary>
-    [Parameter] public string Name { get; set; } = $"radio_group_{Guid.NewGuid()}";
+    [Parameter][CssClass] public RadioButtonStyle? ButtonStyle { get; set; }
     /// <summary>
-    /// <inheritdoc/>
+    /// 设置禁用状态。
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public bool Disabled { get; set; }
     /// <summary>
-    /// 当 <see cref="TButton"/> 是 <c>true</c> 时的按钮风格。
+    /// 设置按钮的同一尺寸。
     /// </summary>
-    [Parameter] public RadioButtonStyle? ButtonStyle { get; set; }
-
-    /// <summary>
-    ///  执行当 <see cref="TInputRadio{TValue}"/> 触发的事件。
-    /// </summary>
-    [Parameter] public EventCallback<string> OnValueSelected { get; set; }
-
-    /// <summary>
-    /// 内部事件，当 <see cref="TInputRadio{TValue}"/> 组件被点击发生改变时触发。
-    /// </summary>
-    internal EventCallback<ChangeEventArgs> ChangeEventCallback { get; set; }
-
-    /// <summary>
-    /// 设置按钮风格的单选框。
-    /// </summary>
-    internal bool TButton => ButtonStyle.HasValue;
-
-    /// <summary>
-    /// Gets the selected value.
-    /// </summary>
-    internal TValue? SelectedValue => this.Value;
-
-    internal event Action RerenderRadioBoxes;
-    string _oldValue = "";
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        var newValue = this.GetValueAsString();
-        ChangeEventCallback = EventCallback.Factory.CreateBinder<string?>(this, __value =>
-        {
-            this.GetCurrentValueAsString(__value);
-            _ = OnValueSelected.InvokeAsync(__value);
-        }
-        , newValue);
-
-        if ( _oldValue != newValue )
-        {
-            _oldValue = newValue;
-            RerenderRadioBoxes?.Invoke();
-        }
-    }
-
-    protected override void BuildCssClass(ICssClassBuilder builder)
-    {
-        if (ButtonStyle.HasValue)
-        {
-            builder.Append(ButtonStyle.GetCssClass(), TButton);
-        }
-    }
+    [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
 }
 
 /// <summary>
@@ -80,7 +30,7 @@ public enum RadioButtonStyle
     /// <summary>
     /// 边框风格。
     /// </summary>
-    Outline,
+    [CssClass("t-radio-group__outline")]Outline,
     /// <summary>
     /// 白色填充风格。
     /// </summary>
