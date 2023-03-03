@@ -1,6 +1,6 @@
 ﻿@page "/components/select"
 <PageHeader Title="Select 选择器">用于收纳大量选项的信息录入类组件。</PageHeader>
-<HighlightAlert/>
+
 
 <LayoutContent AnchorItems="@(new[]{"示例","禁用状态","不同尺寸的选择器","自定义下拉选项的选择器","API"})">
 
@@ -31,12 +31,12 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSelect bind-Value=""Value"">
+<TSelect @bind-Value=""Value"">
     <TSelectOption Value=""1"" Label=""男""/>
     <TSelectOption Value=""2"" Label=""女""/>
 </TSelect> 
 
-<TSelect bind-Value=""Value2"">
+<TSelect @bind-Value=""Value2"">
     <TSelectOption Value=""云计算"" Label=""云计算"" />
     <TSelectOption Value=""RDS"" Label=""RDS"" />
     <TSelectOption Value=""云存储"" Label=""云存储"" Disabled/>
@@ -63,7 +63,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSelect bind-Value=""Value"" Disabled>
+<TSelect @bind-Value=""Value"" Disabled>
     <TSelectOption Value=""1"" Label=""男""/>
     <TSelectOption Value=""2"" Label=""女""/>
 </TSelect>
@@ -100,17 +100,17 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSelect bind-Value=""Value"" Size=""Size.Small"">
+<TSelect @bind-Value=""Value"" Size=""Size.Small"">
     <TSelectOption Value=""1"" Label=""男""/>
     <TSelectOption Value=""2"" Label=""女""/>
 </TSelect>
 
-<TSelect bind-Value=""Value"" Size=""Size.Small"">
+<TSelect @bind-Value=""Value"" Size=""Size.Small"">
     <TSelectOption Value=""1"" Label=""男""/>
     <TSelectOption Value=""2"" Label=""女""/>
 </TSelect>
 
-<TSelect bind-Value=""Value"" Size=""Size.Large"">
+<TSelect @bind-Value=""Value"" Size=""Size.Large"">
     <TSelectOption Value=""1"" Label=""男""/>
     <TSelectOption Value=""2"" Label=""女""/>
 </TSelect>
@@ -146,7 +146,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSelect bind-Value=""Value1"">
+<TSelect @bind-Value=""Value1"">
     <TSelectOption Value=""1"" Label=""男"" >
         <div style=""display:flex"">
             <TImage Src=""avatar.jpg""  AdditionalStyle=""width:24px""/>

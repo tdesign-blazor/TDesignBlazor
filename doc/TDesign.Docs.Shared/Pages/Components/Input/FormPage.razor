@@ -3,7 +3,7 @@
 <PageHeader Title="Form 表单">
     用以收集、校验和提交数据，一般由输入框、单选框、复选框、选择器等控件组成。
 </PageHeader>
-<HighlightAlert/>
+
 <Example Title="基本表单">
     <Description></Description>
     <RunContent>
@@ -40,19 +40,19 @@
 ```cshtml-razor
 <TForm Model=""basicForm"">
     <TFormItem Label=""账号"">
-        <TInputText bind-Value=""basicForm.Name""/>
+        <TInputText @bind-Value=""basicForm.Name""/>
     </TFormItem>
     <TFormItem Label=""密码"">
-        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password""/>
+        <TInputText @bind-Value=""basicForm.Password"" Type=""InputType.Password""/>
     </TFormItem>
     <TFormItem Label=""性别"">
-        <TInputRadioGroup bind-Value=""basicForm.Gender"">
+        <TInputRadioGroup @bind-Value=""basicForm.Gender"">
             <TInputRadio Value=""@(""男"")""><TIcon Name=""IconName.GenderMale""/></TInputRadio>
             <TInputRadio Value=""@(""女"")""><TIcon Name=""IconName.GenderFemale"" /></TInputRadio>
         </TInputRadioGroup>
     </TFormItem>
     <TFormItem>
-        <TInputCheckBox bind-Value=""basicForm.Agree"">是否同意注册协议</TInputCheckBox>
+        <TInputCheckBox @bind-Value=""basicForm.Agree"">是否同意注册协议</TInputCheckBox>
     </TFormItem>
     <TFormItem>
         <TSpace>
@@ -118,7 +118,7 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputRadioGroup bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
+<TInputRadioGroup @bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
     <TInputRadio Value=""FormAlignment.Left"">居左对齐</TInputRadio>
     <TInputRadio Value=""FormAlignment.Right"">居右对齐</TInputRadio>
     <TInputRadio Value=""FormAlignment.Top"">居顶对齐</TInputRadio>
@@ -126,10 +126,10 @@
 
 <TForm Model=""basicForm"" Alignment=""Alignment"">
     <TFormItem Label=""账号"">
-        <TInputText bind-Value=""basicForm.Name"" />
+        <TInputText @bind-Value=""basicForm.Name"" />
     </TFormItem>
     <TFormItem Label=""密码"">
-        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+        <TInputText @bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
     </TFormItem>
 </TForm>
 ```
@@ -162,10 +162,10 @@
 ```cshtml-razor
 <TForm Model=""basicForm"" Inline>
     <TFormItem Label=""账号"">
-        <TInputText bind-Value=""basicForm.Name"" />
+        <TInputText @bind-Value=""basicForm.Name"" />
     </TFormItem>
     <TFormItem Label=""密码"">
-        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+        <TInputText @bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
     </TFormItem>
 </TForm>
 ```
@@ -189,10 +189,10 @@
 ```cshtml-razor
 <TForm Model=""basicForm"">
     <TFormItem Label=""账号"" HelpText=""不能少于6个字符"">
-        <TInputText bind-Value=""basicForm.Name"" />
+        <TInputText @bind-Value=""basicForm.Name"" />
     </TFormItem>
     <TFormItem Label=""密码"" HelpText=""必须包含大写、小写和数字"">
-        <TInputText bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
+        <TInputText @bind-Value=""basicForm.Password"" Type=""InputType.Password"" />
     </TFormItem>
 </TForm>
 ```
@@ -224,10 +224,10 @@
 <TForm Model=""validationForm"" OnValidSubmit=""Submit"">
     <DataAnnotationsValidator/>            
     <TFormItem For=""()=>validationForm.UserName"">
-        <TInputText bind-Value=""validationForm.UserName"" />
+        <TInputText @bind-Value=""validationForm.UserName"" />
     </TFormItem>
     <TFormItem For=""()=>validationForm.Password"">
-        <TInputText bind-Value=""validationForm.Password"" Type=""InputType.Password"" />
+        <TInputText @bind-Value=""validationForm.Password"" Type=""InputType.Password"" />
     </TFormItem>
     <TFormItem>
         <TButton Theme=""Theme.Primary"" HtmlType=""ButtonHtmlType.Submit"">提交</TButton>

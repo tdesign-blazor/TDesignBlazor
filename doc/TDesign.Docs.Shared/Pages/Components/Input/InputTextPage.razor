@@ -3,7 +3,7 @@
 <PageHeader Title="InputText 输入框">
     用于承载用户信息录入的文本框，常用于表单、对话框等场景，对不同内容的信息录入，可拓展形成多种信息录入形式。
 </PageHeader>
-<HighlightAlert/>
+
 <Example Title="基础输入框">
     <Description>
         最基础的单行输入框，按状态可分为正常、禁用、错误、带额外提示。通常在需要输入少量内容（20个字以内）的场景下使用。</Description>
@@ -20,9 +20,9 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText bind-Value=""BasicText"" Placeholder=""文本框""/>
-<TInputText bind-Value=""DefaultText"" Placeholder=""默认值""/>
-<TInputText bind-Value=""PrefixText"" PrefixText=""价格："" SuffixText=""元"" Type=""InputType.Number"" />
+<TInputText @bind-Value=""BasicText"" Placeholder=""文本框""/>
+<TInputText @bind-Value=""DefaultText"" Placeholder=""默认值""/>
+<TInputText @bind-Value=""PrefixText"" PrefixText=""价格："" SuffixText=""元"" Type=""InputType.Number"" />
 ```
 ```cs
 string BasicText{ get; set; }
@@ -61,19 +61,19 @@ string PrefixText{ get; set; }
         @Code.Create(@"
 ```cshtml-razor
 <TInputGroup Seperate>
-    <TInputText bind-Value=""InputGroup1"" />
-    <TInputText bind-Value=""InputGroup2"" />
+    <TInputText @bind-Value=""InputGroup1"" />
+    <TInputText @bind-Value=""InputGroup2"" />
 </TInputGroup>
 
 <TInputGroup>
-    <TInputText bind-Value=""InputGroup1"" />
-    <TInputText bind-Value=""InputGroup2"" />
+    <TInputText @bind-Value=""InputGroup1"" />
+    <TInputText @bind-Value=""InputGroup2"" />
 </TInputGroup>
 
 <TInputGroup Seperate>
-    <TInputText bind-Value=""InputGroup1"" Placeholder=""区号""/>
+    <TInputText @bind-Value=""InputGroup1"" Placeholder=""区号""/>
     <span style=""line-height:32px"">-</span>
-    <TInputText bind-Value=""InputGroup2"" Placeholder=""电话""/>
+    <TInputText @bind-Value=""InputGroup2"" Placeholder=""电话""/>
 </TInputGroup>
 ```
 ")
@@ -94,9 +94,9 @@ string PrefixText{ get; set; }
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText Type=""InputType.Password"" bind-Value=""InputPassword""/>
+<TInputText Type=""InputType.Password"" @bind-Value=""InputPassword""/>
 
-<TInputText Type=""InputType.Password"" bind-Value=""InputPassword"" PrefixIcon=""IconName.LockOn""/>
+<TInputText Type=""InputType.Password"" @bind-Value=""InputPassword"" PrefixIcon=""IconName.LockOn""/>
 ```
 ")
     </CodeContent>
@@ -115,9 +115,9 @@ string PrefixText{ get; set; }
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText bind-Value=""SizeText"" Size=""Size.Small""/>
-<TInputText bind-Value=""SizeText"" Size=""Size.Medium"" />
-<TInputText bind-Value=""SizeText"" Size=""Size.Large""/>
+<TInputText @bind-Value=""SizeText"" Size=""Size.Small""/>
+<TInputText @bind-Value=""SizeText"" Size=""Size.Medium"" />
+<TInputText @bind-Value=""SizeText"" Size=""Size.Large""/>
 ```
 ")
     </CodeContent>
@@ -135,9 +135,9 @@ string PrefixText{ get; set; }
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText bind-Value=""AlignmentText""/>
-<TInputText bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Center""/>
-<TInputText bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Right"" />
+<TInputText @bind-Value=""AlignmentText""/>
+<TInputText @bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Center""/>
+<TInputText @bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Right"" />
 ```
 ")
     </CodeContent>
@@ -192,12 +192,12 @@ string PrefixText{ get; set; }
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText bind-Value=""StatusText"" Disabled Placeholder=""禁用""/>
-<TInputText bind-Value=""StatusText"" Readonly Placeholder=""只读"" />
-<TInputText bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"" />
-<TInputText bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"" />
-<TInputText bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"" />
-<TInputText bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"" />
+<TInputText @bind-Value=""StatusText"" Disabled Placeholder=""禁用""/>
+<TInputText @bind-Value=""StatusText"" Readonly Placeholder=""只读"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"" />
 ```
 ")
     </CodeContent>
@@ -235,16 +235,16 @@ string PrefixText{ get; set; }
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TInputText bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"">
+<TInputText @bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"">
     <TipContent>默认的提示</TipContent>
 </TInputText>
-<TInputText bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"">
+<TInputText @bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"">
     <TipContent>成功的提示</TipContent>
 </TInputText>
-<TInputText bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"">
+<TInputText @bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"">
     <TipContent>警告的提示</TipContent>
 </TInputText>
-<TInputText bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"">
+<TInputText @bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"">
     <TipContent>错误的提示</TipContent>
 </TInputText>
 ```
