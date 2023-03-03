@@ -66,7 +66,7 @@
     @using TDesign
     ```
 - 在 `App.razor` 增加 `TDesignContainer` 组件，用于动态组件的渲染
-    ```html
+    ```cshtml-razor
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />

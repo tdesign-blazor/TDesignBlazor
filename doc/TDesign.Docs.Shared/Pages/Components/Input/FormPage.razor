@@ -37,7 +37,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TForm Model=""basicForm"">
     <TFormItem Label=""账号"">
         <TInputText bind-Value=""basicForm.Name""/>
@@ -117,7 +117,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TInputRadioGroup bind-Value=""Alignment"" ButtonStyle=""RadioButtonStyle.Filled"">
     <TInputRadio Value=""FormAlignment.Left"">居左对齐</TInputRadio>
     <TInputRadio Value=""FormAlignment.Right"">居右对齐</TInputRadio>
@@ -159,7 +159,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TForm Model=""basicForm"" Inline>
     <TFormItem Label=""账号"">
         <TInputText bind-Value=""basicForm.Name"" />
@@ -186,7 +186,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TForm Model=""basicForm"">
     <TFormItem Label=""账号"" HelpText=""不能少于6个字符"">
         <TInputText bind-Value=""basicForm.Name"" />
@@ -220,7 +220,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TForm Model=""validationForm"" OnValidSubmit=""Submit"">
     <DataAnnotationsValidator/>            
     <TFormItem For=""()=>validationForm.UserName"">

@@ -31,7 +31,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TSpace Vertical>
     <TSpaceItem>
         <TTag>默认</TTag>
@@ -67,7 +67,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTag TIcon=""IconName.Discount"">默认标签</TTag>
 ```
 ")
@@ -83,7 +83,7 @@
     </RunContent>
     <CodeContent>
 @Code.Create(@"
-```html
+```cshtml-razor
 <TTag Closable>默认标签</TTag>
 
 <TTag Closable OnClosing=""@(closed=>JS.InvokeVoidAsync(""alert"",$""关闭：{closed}""))"">点击关闭</TTag>
@@ -102,7 +102,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTag Checkbox @bind-Checked=""Checked1"">
     <ChildContent>未选择</ChildContent>
     <CheckedContent>已选择</CheckedContent>
@@ -118,7 +118,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTag Width=""120"" title=""默认超过八个字符就省略显示"">默认超过八个字符就省略显示</TTag>
 ```
 ")
@@ -133,7 +133,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTag Size=""Size.Small"">小标签</TTag>
 <TTag>中标签</TTag>
 <TTag Size=""Size.Large"">大标签</TTag>
@@ -154,7 +154,7 @@
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTag>方形</TTag>
 <TTag Theme=""Theme.Primary"">方形</TTag>
 
