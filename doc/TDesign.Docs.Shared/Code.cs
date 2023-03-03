@@ -7,11 +7,7 @@ public static class Code
 {
     public static MarkupString Create(string value)
     {
-        var content = Markdown.ToHtml(value, new MarkdownPipelineBuilder()
-            .UseAdvancedExtensions()
-            //.UseEmojiAndSmiley()
-            .UseSyntaxHighlighting()
-            .Build());
+        var content = Markdown.ToHtml(value);
         return new MarkupString(content);
     }
     public const string BgRun = "background:#ccc";

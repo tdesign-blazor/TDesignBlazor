@@ -29,6 +29,10 @@ code {
     line-height: 40px;
 }
 
+.t-head-menu__inner {
+    padding: 0 24px;
+}
+
 .tdesign-demo-item--layout {
     display: flex;
     flex-direction: column;
@@ -162,11 +166,11 @@ code {
 
             .demo-wrapper .footer > .btn > .action.active {
                 color: var(--text-primary);
-                background-color: #ddd;
+                background-color: var(--td-bg-color-container-active);
             }
 
     .demo-wrapper .code, .demo-wrapper .code pre {
-        background-color: #efefef !important;
+        background-color: #f8f8f8 !important;
     }
 
 /* 页面滚动条 */

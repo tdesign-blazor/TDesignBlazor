@@ -10,6 +10,7 @@
     <base href="~/" />
     <link rel="stylesheet" href="_content/TDesign/tdesign-blazor.css" />
     <link rel="stylesheet" href="_content/TDesign.Docs.Shared/app.css" />
+    <link rel="stylesheet" href="_content/TDesign.Docs.Shared/styles-github.min.css">
     <link rel="shortcut icon" href="favicon.ico" />
     <title>TDsign for Blazor - 开源级企业级设计体系</title>
 
@@ -56,5 +57,12 @@
     <script src="_framework/blazor.server.js"></script>
     <script src="_content/TDesign/popper.min.js"></script>
     <script src="_content/TDesign/tdesign-blazor.js" type="module"></script>
+    <script src="https://lib.baomitu.com/highlight.js/10.7.3/highlight.min.js"></script>
+    <script src="_content/TDesign.Docs.Shared/cshtml-razor.min.js"></script>
+    <script>
+        window.highlight = () => {
+            hljs.highlightAll();
+        }
+    </script>
 </body>
 </html>

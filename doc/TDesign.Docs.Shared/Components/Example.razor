@@ -32,7 +32,7 @@
 </div>
 @using ComponentBuilder
 @code {
-
+    [Inject] public IJSRuntime JSRuntime { get; set; }
     [Parameter] public string Id { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public RenderFragment Description { get; set; }
@@ -54,6 +54,14 @@
     {
         Active = !Active;
         StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("highlight");
+        }
     }
 }
 

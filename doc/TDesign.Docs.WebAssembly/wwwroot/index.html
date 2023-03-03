@@ -8,8 +8,9 @@
     <base href="/" />
     <link rel="stylesheet" href="_content/TDesign/tdesign-blazor.css" />
     <link rel="stylesheet" href="_content/TDesign.Docs.Shared/app.css" />
-    <link rel="stylesheet" href="app.css"/>
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="_content/TDesign.Docs.Shared/styles-github.min.css">
+    <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
 <body style="background-color: #e9f5f1">
@@ -18,5 +19,12 @@
         <div class="linear-progress"></div>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="https://lib.baomitu.com/highlight.js/10.7.3/highlight.min.js"></script>
+    <script src="_content/TDesign.Docs.Shared/cshtml-razor.min.js"></script>
+    <script>
+        window.highlight = () => {
+            hljs.highlightAll();
+        }
+    </script>
 </body>
 </html>
