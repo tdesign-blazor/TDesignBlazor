@@ -2382,6 +2382,11 @@
             获取行的索引位置。
             </summary>
         </member>
+        <member name="P:TDesign.TTableRowItemEventArgs`1.IsSelected">
+            <summary>
+            获取一个布尔值，表示指定的行是否被选择。
+            </summary>
+        </member>
         <member name="T:TDesign.TTable`1">
             <summary>
             只具备一些基本功能的数据表格。
@@ -2519,21 +2524,6 @@
             设置当行被点击选择后的回调方法。
             </summary>
         </member>
-        <member name="P:TDesign.TTable`1.SelectedItem">
-            <summary>
-            获取选中的项。
-            </summary>
-        </member>
-        <member name="P:TDesign.TTable`1.SelectedItems">
-            <summary>
-            获取或设置选中项的集合。
-            </summary>
-        </member>
-        <member name="P:TDesign.TTable`1.IsSingleSelection">
-            <summary>
-            获取一个布尔值，表示行仅可以被单选。
-            </summary>
-        </member>
         <member name="P:TDesign.TTable`1.TotalCount">
             <summary>
             总页数。
@@ -2552,6 +2542,16 @@
         <member name="P:TDesign.TTable`1.TableData">
             <summary>
             已加载的数据。内部使用。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.SelectedRows">
+            <summary>
+            获取或设置选择行的集合。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.IsSingleSelection">
+            <summary>
+            获取一个布尔值，表示行仅可以被单选。
             </summary>
         </member>
         <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
@@ -2598,6 +2598,28 @@
             <summary>
             表示渲染 th 元素的组件。
             </summary>
+        </member>
+        <member name="T:TDesign.TTableCheckboxColumn`1">
+            <summary>
+            表示呈现复选选控件的列。
+            </summary>
+            <typeparam name="TItem">数据的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`1.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`1.GetColumnContent">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`1.GetCheckboxFragment(System.Boolean,System.Object)">
+            <summary>
+            获取复选框的内容。
+            </summary>
+            <param name="isChecked">是否选中、</param>
+            <param name="value">复选框的值。</param>
+        </member>
+        <member name="P:TDesign.TTableCheckboxColumn`1.IsChecked">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.TTableColumnBase">
             <summary>
@@ -2690,7 +2712,10 @@
             <summary>
             表示呈现单选控件的列。
             </summary>
-            <typeparam name="TItem"></typeparam>
+            <typeparam name="TItem">数据的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.TTableRadioColumn`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
         </member>
         <member name="P:TDesign.TTableRadioColumn`1.SelectionKey">
             <summary>

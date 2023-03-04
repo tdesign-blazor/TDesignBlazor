@@ -14,7 +14,7 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// <summary>
     /// 设置列的唯一标识。
     /// </summary>
-    [Parameter][NotNull]public object Key { get; set; }
+    [Parameter][NotNull] public object Key { get; set; }
     /// <summary>
     /// 设置列标题。若设置了 <see cref="TitleContent"/> 参数，则该参数无效。
     /// </summary>
@@ -27,7 +27,7 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// <summary>
     /// 设置底部的任意 UI 片段。
     /// </summary>
-    [Parameter]public RenderFragment? FooterContent { get; set; }
+    [Parameter] public RenderFragment? FooterContent { get; set; }
 
     /// <summary>
     /// 获取顶部标题内容。
@@ -53,10 +53,10 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        if(IsHeader)
+        if (IsHeader)
         {
             var content = GetHeaderContent();
-            if ( content is not null )
+            if (content is not null)
             {
                 builder.AddContent(sequence, content);
             }
