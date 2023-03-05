@@ -526,7 +526,8 @@ static async Task<(IEnumerable<User> data,int count)> Mock(int take,int skip)
 <Example Title="可选择行的表格">
     <Description>
         设置 <code>RowSelection</code> 开启选择行功能
-        <br />可以选择使用 <code>&lt;TTableRadioColumn></code> 组件呈现单选按钮的列表示选择行
+        <br />可以选择使用 <code>&lt;TTableRadioColumn></code> 组件呈现单选按钮的列
+            <br />可以选择使用 <code>&lt;TTableCheckboxColumn></code> 组件呈现多选按钮的列
     </Description>
     <RunContent>
             <TTable TItem="User" Data="User.GetData(7)" Hoverable RowSelection OnRowSelected="RowSelected">
@@ -548,12 +549,51 @@ static async Task<(IEnumerable<User> data,int count)> Mock(int take,int skip)
                     }
                 </TTableFieldColumn>
             </TTable>
+            <TTable TItem="User" Data="User.GetData(5)" Hoverable RowSelection OnRowSelected="RowSelected">
+                <TTableCheckboxColumn Value="context?.Id" SelectionKey="Id"  Title="选择"/>
+                <TTableFieldColumn Value="context?.Id" Title="Id" />
+                <TTableFieldColumn Value="context?.Name" Title="姓名" />
+                <TTableFieldColumn Value="context?.Age" Title="年龄" />
+                <TTableFieldColumn Title="性别">
+                    @if ( context is not null )
+                    {
+                        if ( context.Gender )
+                        {
+                            <TTag Theme="Theme.Primary">男</TTag>
+                        }
+                        else
+                        {
+                            <TTag Theme="Theme.Danger">女</TTag>
+                        }
+                    }
+                </TTableFieldColumn>
+            </TTable>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
-```html
+```cshtml-razor
 <TTable TItem=""User"" Data=""User.GetData(7)"" Hoverable RowSelection OnRowSelected=""RowSelected"">
     <TTableRadioColumn Value=""context?.Id"" SelectionKey=""Id"" Title=""选择""/>
+    <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
+    <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
+    <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
+    <TTableFieldColumn Title=""性别"">
+        @if ( context is not null )
+        {
+            if ( context.Gender )
+            {
+                <TTag Theme=""Theme.Primary"">男</TTag>
+            }
+            else
+            {
+                <TTag Theme=""Theme.Danger"">女</TTag>
+            }
+        }
+    </TTableFieldColumn>
+</TTable>
+
+<TTable TItem=""User"" Data=""User.GetData(5)"" Hoverable RowSelection OnRowSelected=""RowSelected"">
+    <TTableCheckboxColumn Value=""context?.Id"" SelectionKey=""Id"" AllSelection/>
     <TTableFieldColumn Value=""context?.Id"" Title=""Id"" />
     <TTableFieldColumn Value=""context?.Name"" Title=""姓名"" />
     <TTableFieldColumn Value=""context?.Age"" Title=""年龄"" />
@@ -677,6 +717,9 @@ async Task RowSelected(TTableRowItemEventArgs<User> e)
 </Example>
 
 <div id="API"></div>
-<ComponentAPI Component="typeof(TTable<>)" Title="TTable"></ComponentAPI>
+    <ComponentAPI Component="typeof(TTable<>)" Title="TTable"/>
+    <ComponentAPI Component="typeof(TTableFieldColumn<>)" Title="TTableFieldColumn"/>
+    <ComponentAPI Component="typeof(TTableRadioColumn<>)" Title="TTableRadioColumn" />
+    <ComponentAPI Component="typeof(TTableCheckboxColumn<>)" Title="TTableCheckboxColumn" />
 </LayoutContent>
 

@@ -19,7 +19,7 @@ partial class TTable<TItem>
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if ( firstRender )
+        if (firstRender)
         {
             await QueryData(PageIndex, PageSize);
         }
@@ -42,11 +42,11 @@ partial class TTable<TItem>
     /// <param name="size">数据量。</param>
     public async Task QueryData(int page = 1, int size = 10)
     {
-        if ( page < 1 )
+        if (page < 1)
         {
             throw new InvalidOperationException("页码不能小于1");
         }
-        if ( size < 0 )
+        if (size < 0)
         {
             throw new InvalidOperationException("数据量不能小于0");
         }
@@ -55,8 +55,8 @@ partial class TTable<TItem>
         Loading = true;
         await this.Refresh();
 
-        var (result, count) = await Data!.Query(page * size,(page - 1) * size);
-        if ( result is not null )
+        var (result, count) = await Data!.Query(page * size, (page - 1) * size);
+        if (result is not null)
         {
             TableData.Clear();
             TableData.AddRange(result);
@@ -66,7 +66,7 @@ partial class TTable<TItem>
         Loading = false;
 
         PageIndex = page;
-        PageSize= size;
+        PageSize = size;
         await ChangeTotalCount(TotalCount);
 
         DataLoadedComplete = true;
@@ -80,12 +80,12 @@ partial class TTable<TItem>
     /// <exception cref="InvalidOperationException"><paramref name="count"/> 小于0。</exception>
     public Task ChangeTotalCount(int count)
     {
-        if ( count < 0 )
+        if (count < 0)
         {
             throw new InvalidOperationException("总数不能小于0");
         }
 
-        TotalCount= count;
+        TotalCount = count;
         return TotalCountChanged.InvokeAsync(count);
     }
 
@@ -97,37 +97,39 @@ partial class TTable<TItem>
     /// <exception cref="TDesignComponentException">无法找到指定行索引的数据。</exception>
     public Task SelectRow(int rowIndex)
     {
-        if ( !RowSelection )
+        if (!RowSelection)
         {
             return Task.CompletedTask;
         }
 
-        try
+        if (rowIndex < 0 || rowIndex > TableData.Count)
         {
-            var item = TableData[rowIndex];
-
-            if ( SelectedItems.Contains(item) )
-            {
-                SelectedItems.Remove(item);
-                OnRowSelected.InvokeAsync(new TTableRowItemEventArgs<TItem>(default, rowIndex));
-            }
-            else
-            {
-                if ( IsSingleSelection )
-                {
-                    SelectedItems.Clear();
-                }
-                SelectedItems.Add(item);
-                OnRowSelected.InvokeAsync(new TTableRowItemEventArgs<TItem>(item, rowIndex));
-            }
-
-
-            return this.Refresh();
+            return Task.CompletedTask;
         }
-        catch ( ArgumentOutOfRangeException ex )
+
+        var item = TableData[rowIndex];
+
+        var selectedItem = SelectedRows.SingleOrDefault(m => m.RowIndex == rowIndex);
+
+        if (selectedItem is not null)//已经选择过
         {
-            throw new TDesignComponentException(this, $"无法在行{rowIndex}找到数据", ex);
+            SelectedRows.Remove(selectedItem);
+            OnRowSelected.InvokeAsync(selectedItem);
         }
+        else // 没有选择过
+        {
+            selectedItem = new(item, rowIndex);
+
+            if (IsSingleSelection)
+            {
+                SelectedRows.Clear();
+            }
+            SelectedRows.Add(selectedItem);
+            OnRowSelected.InvokeAsync(selectedItem);
+        }
+
+
+        return this.Refresh();
     }
     #endregion
 }

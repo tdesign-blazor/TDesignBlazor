@@ -1,8 +1,16 @@
 ﻿@page "/test"
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
+
+@*<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
+    <TTableRadioColumn Value="context?.Id" Title="选择" SelectionKey="@nameof(context.Id)" />
+    <TTableFieldColumn Value="context?.Id" Title="编号" />
+    <TTableFieldColumn Value="context?.Name" Title="姓名" />
+    <TTableFieldColumn Value="context?.Age" Title="年龄" />
+</TTable>*@
+
 <TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
-    <TTableRadioColumn Value="context?.Id" Title="选择" SelectionKey="@nameof(context.Id)"/>
+    <TTableCheckboxColumn Value="context?.Id" Title="选择" SelectionKey="@nameof(context.Id)"/>
     <TTableFieldColumn Value="context?.Id" Title="编号"/>
     <TTableFieldColumn Value="context?.Name" Title="姓名" />
     <TTableFieldColumn Value="context?.Age" Title="年龄" />

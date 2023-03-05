@@ -25,4 +25,9 @@ public class TTableRowItemEventArgs<TItem> : EventArgs
     /// 获取行的索引位置。
     /// </summary>
     public int RowIndex { get; }
+
+    /// <summary>
+    /// 获取一个布尔值，表示指定的行是否被选择。
+    /// </summary>
+    public bool IsSelected => Item is not null;
 }

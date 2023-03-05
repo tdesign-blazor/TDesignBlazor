@@ -93,21 +93,6 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 设置当行被点击选择后的回调方法。
     /// </summary>
     [Parameter] public EventCallback<TTableRowItemEventArgs<TItem>> OnRowSelected { get; set; }
-
-    /// <summary>
-    /// 获取选中的项。
-    /// </summary>
-    internal TItem? SelectedItem => SelectedItems.FirstOrDefault();
-
-    /// <summary>
-    /// 获取或设置选中项的集合。
-    /// </summary>
-    internal List<TItem> SelectedItems { get; set; } = new();
-
-    /// <summary>
-    /// 获取一个布尔值，表示行仅可以被单选。
-    /// </summary>
-    internal bool IsSingleSelection { get; set; }
     #endregion
     #endregion
 
@@ -130,5 +115,17 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 已加载的数据。内部使用。
     /// </summary>
     internal List<TItem> TableData { get; set; } = new();
+
+
+    /// <summary>
+    /// 获取或设置选择行的集合。
+    /// </summary>
+    internal List<TTableRowItemEventArgs<TItem>> SelectedRows { get; set; } = new();
+
+    /// <summary>
+    /// 获取一个布尔值，表示行仅可以被单选。
+    /// </summary>
+    internal bool IsSingleSelection { get; set; }
+
     #endregion
 }
