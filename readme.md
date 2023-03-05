@@ -22,8 +22,7 @@
 
 ## 🌈 Demo 演示
 * 在线演示
-    * [https://achievedowner.github.io/TDesignBlazor](https://achievedowner.github.io/TDesignBlazor/) Nightly - master 合并后更新
-    * [http://tblazor.com](http://tblazor.com) 稳定版 - 版本发布后更新
+    * [http://tblazor.com](http://tblazor.com) 
 * 源码运行
     * `TDesign.Docs.ServerSide` 是服务端
     * `TDesign.Docs.WebAssembly` 是客户端
