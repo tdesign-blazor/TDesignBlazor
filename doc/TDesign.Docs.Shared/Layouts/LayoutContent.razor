@@ -4,7 +4,7 @@
             @if (AnchorItems is not null && AnchorItems.Any())
             {
                 <div style="width:20vw;padding:10px;">
-                    <TAnchor AdditionalStyle="position: fixed;" Container="#page">
+                    <TAnchor style="position: fixed;" Container="#page">
                         @foreach (var item in AnchorItems)
                         {
                             <TAnchorItem Title="@item" Href="@("#"+item)"></TAnchorItem>
