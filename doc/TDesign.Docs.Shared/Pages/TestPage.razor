@@ -2,16 +2,17 @@
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
-@*<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
-    <TTableRadioColumn Value="context?.Id" Title="选择" SelectionKey="@nameof(context.Id)" />
-    <TTableFieldColumn Value="context?.Id" Title="编号" />
-    <TTableFieldColumn Value="context?.Name" Title="姓名" />
-    <TTableFieldColumn Value="context?.Age" Title="年龄" />
-</TTable>*@
+<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
+    <TTableRadioColumn Field="@nameof(Test.User.Id)" Header="选择" />
+    <TTableFieldColumn Field="@nameof(Test.User.Id)" Header="编号" />
+    <TTableFieldColumn Field="@nameof(Test.User.Name)" Header="姓名" />
+    <TTableFieldColumn Field="@nameof(Test.User.Age)" Header="年龄" />
+</TTable>
+
 
 <TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
-    <TTableCheckboxColumn Value="context?.Id" Title="选择" SelectionKey="@nameof(context.Id)"/>
-    <TTableFieldColumn Value="context?.Id" Title="编号"/>
-    <TTableFieldColumn Value="context?.Name" Title="姓名" />
-    <TTableFieldColumn Value="context?.Age" Title="年龄" />
+    <TTableCheckboxColumn Field="@nameof(Test.User.Id)"  Header="选择"/>
+    <TTableFieldColumn Field="@nameof(Test.User.Id)" Header="编号"/>
+    <TTableFieldColumn Field="@nameof(Test.User.Name)" Header="姓名" />
+    <TTableFieldColumn Field="@nameof(Test.User.Age)" Header="年龄" />
 </TTable>

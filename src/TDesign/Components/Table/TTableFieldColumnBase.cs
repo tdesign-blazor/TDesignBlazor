@@ -9,33 +9,48 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
     /// <summary>
     /// 级联的 <see cref="TTable{TItem}"/> 组件。
     /// </summary>
-    [CascadingParameter(Name = "Table")]protected TTable<TItem> CascadingTable { get; set; }
+    [CascadingParameter(Name = "GenericTable")]protected TTable<TItem> CascadingGenericTable { get; set; }
     /// <summary>
-    /// 获取或设置列中输出的值。
+    /// 设置数据源的字段名称。
     /// </summary>
-    [Parameter] public object? Value { get; set; }
+    [Parameter][EditorRequired] public string? Field { get; set; }
 
-    /// <inheritdoc/>
-    protected override void OnInitialized()
+    /// <summary>
+    /// 获取具备字段值的内容。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="columnIndex">列索引。</param>
+    /// <param name="rowData">每一行的数据。</param>
+    internal virtual RenderFragment? GetFieldValueContent(in int rowIndex, in int columnIndex, in TItem? rowData)
     {
-        if(CascadingTable is null )
-        {
-            throw new InvalidOperationException("列必须定义在 TTable 组件中");
-        }
-
-        if ( !CascadingTable!.GetColumns().Any(m => m.Key!.Equals(Key)) )
-        {
-            CascadingTable.AddChildComponent(this);
-        }
-        base.OnInitialized();
+        var value = GetValue(rowData);
+        return builder => builder.AddContent(0, value);
     }
+
     /// <inheritdoc/>
-    protected override RenderFragment? GetHeaderContent()
+    internal override RenderFragment? GetColumnContent(in int rowIndex, in int columnIndex)
     {
-        if ( TitleContent is null )
+        throw new NotSupportedException($"请使用{nameof(GetFieldValueContent)}方法");
+    }
+    /// <summary>
+    /// 获取指定数据的值。
+    /// </summary>
+    /// <param name="item">要获取的数据对象。</param>
+    /// <returns>值或 null。</returns>
+    /// <exception cref="TDesignComponentException">字段与数据的属性不匹配。</exception>
+    protected object? GetValue(in TItem? item)
+    {
+        if ( item is null || string.IsNullOrEmpty(Field) )
         {
-          return  builder => builder.AddContent(0, Title ?? Value?.GetType()?.Name ?? "未命名标题");
+            return default;
         }
-        return TitleContent;
+
+        var property = item.GetType().GetProperty(Field);
+        if ( property is null )
+        {
+            throw new TDesignComponentException(this, $"没有在{item.GetType().Name}找到字段{Field}");
+        }
+
+        return property.GetValue(item);
     }
 }

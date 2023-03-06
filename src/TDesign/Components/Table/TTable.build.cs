@@ -1,7 +1,5 @@
 ﻿/* 用于定义表格中各种代码片段的文件 */
 
-using ComponentBuilder;
-
 namespace TDesign;
 partial class TTable<TItem>
 {
@@ -43,7 +41,7 @@ partial class TTable<TItem>
                                     .Content(table =>
                                     {
                                         BuildHeader(table, 0);
-                                        BuildBody(table, 1);
+                                        BuildBody(table);
                                         BuildFooter(table);
                                     })
                                 .Close();
@@ -58,40 +56,61 @@ partial class TTable<TItem>
         /// <param name="sequence">源代码的位置。</param>
         void BuildHeader(RenderTreeBuilder builder, int sequence)
         {
-            builder.CreateElement(sequence + 1, "thead", content =>
-            {
-                content.CreateComponent<TTableRow>(0, tr =>
-                {
-                    tr.CreateCascadingComponent(true, sequence, ChildContent?.Invoke(default), "IsHeader");
-                });
+            builder.Fluent().Element("thead", "t-table__header")
+                                .Class("t-table__header--fixed", FixedHeader)
+                                .Content(content =>
+                                {
+                                    content.CreateComponent<TTableRow>(0, tr =>
+                                    {
+                                        tr.AddContent(0, ChildContent!.Invoke(default));
 
-            }, new
-            {
-                @class = HtmlHelper.Class.Append("t-table__header")
-                                                        .Append("t-table__header--fixed", FixedHeader)
-            });
+                                        tr.OpenRegion(1);
+                                        var index = 0;
+                                        foreach ( var column in GetColumns() )
+                                        {
+                                            var key = index;
+                                            var headerContent = column.GetHeaderContent();
+
+                                            tr.CreateElement(index, "th", headerContent, new { @class = column.HeaderClass }, key: key);
+                                            index++;
+                                        }
+                                        tr.CloseRegion();
+                                    });
+                                })
+                            .Close();
         }
         /// <summary>
         /// 构建 tbody 部分。
         /// </summary>
         /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
         /// <param name="sequence">源代码的位置。</param>
-        void BuildBody(RenderTreeBuilder builder, int sequence)
+        void BuildBody(RenderTreeBuilder builder)
         {
             builder.Fluent().Element("tbody", "t-table__body")
                     .Content(content =>
                     {
-                        var index = 0;
-                        foreach ( var item in TableData )
+                        var rowIndex = 0;
+
+                        foreach ( var (type, data) in TableData )
                         {
-                            var key = index;
-                            content.CreateComponent<TTableRow>(index, ChildContent!.Invoke(item), new
+                            content.AddContent(0, ChildContent, data);
+
+                            var rowKey = rowIndex;
+
+                            content.CreateComponent<TTableRow>(1, rowContent =>
                             {
-                                onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => SelectRow(key), RowSelection)
-                            }, key: key);
-                            index++;
+                                BuildRow(rowContent, rowIndex, type, data);
+                            }, 
+                            attributes: new
+                            {
+                                rowIndex,
+                                //onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => SelectRow(rowKey), RowSelection)
+                            }, 
+                            key: rowKey);
+
+                            rowIndex++;
                         }
-                        
+
                         if ( DataLoadedComplete && !TableData.Any() )
                         {
                             BuildEmptyContent(content);
@@ -160,8 +179,45 @@ partial class TTable<TItem>
                                 .Close();
                     });
         }
-                    
+
         #endregion
+    }
+
+    private void BuildRow(RenderTreeBuilder builder,in int rowIndex, TTable<TItem>.TableRowDataType type, TItem? data)
+    {
+        var indexOfRow = rowIndex;
+        switch ( type )
+        {
+            case TTable<TItem>.TableRowDataType.Expand:
+                var expandColumn = GetColumns<TTableExpandColumn>().FirstOrDefault();
+                if ( expandColumn is null )
+                {
+                    break;
+                }
+                builder.AddContent(0, expandColumn.GetExpandedRow());
+                break;
+            case TTable<TItem>.TableRowDataType.Data:
+                builder.AddContent(0,row =>
+                    {
+                        var columnIndex = 0;
+                        foreach ( var column in GetColumns() )
+                        {
+                            var key = columnIndex;
+
+                            RenderFragment? columnContent = column switch
+                            {
+                                TTableFieldColumnBase<TItem> fieldColumn => fieldColumn.GetFieldValueContent(indexOfRow, columnIndex, data),
+                                _ => column.GetColumnContent(indexOfRow, columnIndex),
+                            };
+                            row.CreateElement(0, "td", columnContent, new { columnIndex, @class = column.GetCssClassString() }, key: key);
+                            columnIndex++;
+                        }
+                    })
+                        ;
+                break;
+            default: //TODO 如何处理未知数据？不渲染还是渲染一个错误？
+                break;
+        }
     }
 
     /// <summary>
@@ -188,15 +244,5 @@ partial class TTable<TItem>
             }, new { @class = "t-table__pagination" });
         }, new { @class = "t-table__pagination-wrap", style = "opacity:1" }, condition: Pagination);
     }
-
-    /// <summary>
-    /// 获取列集合。
-    /// </summary>
-    internal IEnumerable<TTableColumnBase> GetColumns() => GetColumns<TTableColumnBase>();
-    /// <summary>
-    /// 获取指定类型的列集合。
-    /// </summary>
-    /// <typeparam name="TTableColumn">列的类型。</typeparam>
-    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase => ChildComponents.OfType<TTableColumn>();
 
 }

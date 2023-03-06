@@ -17,6 +17,7 @@ partial class TTable<TItem>
         EmptyContent ??= builder => builder.AddContent(0, "暂无数据");
     }
 
+    /// <inheritdoc/>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -26,7 +27,7 @@ partial class TTable<TItem>
     }
 
     /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
+    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "GenericTable");
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -34,6 +35,7 @@ partial class TTable<TItem>
         BuildTable(builder, sequence + 1);
         BuildPagination(builder, sequence + 2);
     }
+
 
     /// <summary>
     /// 以异步的方式查询数据。
@@ -55,11 +57,11 @@ partial class TTable<TItem>
         Loading = true;
         await this.Refresh();
 
-        var (result, count) = await Data!.Query(page * size, (page - 1) * size);
-        if (result is not null)
+        var (data, count) = await Data!.Query(page * size, (page - 1) * size);
+        if (data is not null)
         {
             TableData.Clear();
-            TableData.AddRange(result);
+            AddDataRange(data);
         }
         TotalCount = count;
 
@@ -102,23 +104,26 @@ partial class TTable<TItem>
             return Task.CompletedTask;
         }
 
-        if (rowIndex < 0 || rowIndex > TableData.Count)
+        if (rowIndex < 0)
         {
             return Task.CompletedTask;
         }
 
-        var item = TableData[rowIndex];
-
         var selectedItem = SelectedRows.SingleOrDefault(m => m.RowIndex == rowIndex);
 
-        if (selectedItem is not null)//已经选择过
+        if ( selectedItem is not null )//已经选择过
         {
             SelectedRows.Remove(selectedItem);
             OnRowSelected.InvokeAsync(selectedItem);
         }
         else // 没有选择过
         {
-            selectedItem = new(item, rowIndex);
+            if(!TryGetRowData(rowIndex, out var rowItem) )
+            {
+                //没有抓到数据，如何处理
+            }
+
+            selectedItem = new(rowItem.data, rowIndex);
 
             if (IsSingleSelection)
             {
@@ -128,8 +133,73 @@ partial class TTable<TItem>
             OnRowSelected.InvokeAsync(selectedItem);
         }
 
+        return this.Refresh();
+    }
+    #endregion
+
+    #region 展开/收缩行
+    public Task ExpandRow(int rowIndex)
+    {
+        if ( !GetColumns<TTableExpandColumn>().Any() )
+        {
+            return Task.CompletedTask;
+        }
+        var nextIndex = rowIndex + 1;
+        if ( TryGetRowData(nextIndex, out _) )
+        {
+            TableData.RemoveAt(nextIndex);
+        }
+        else
+        {
+            TableData.Insert(nextIndex, new(TableRowDataType.Expand, default));
+        }
 
         return this.Refresh();
+    }
+    #endregion
+
+    #region Private
+    private void AddData(TableRowDataType rowType, TItem data) => TableData.Add((rowType, data));
+
+    private void AddDataRange(IEnumerable<TItem> rows) => rows.ForEach(item => AddData(TableRowDataType.Data, item));
+
+    /// <summary>
+    /// 获取指定行索引的数据。
+    /// </summary>
+    /// <param name="rowIndex"></param>
+    /// <returns></returns>
+    /// <exception cref="TDesignComponentException">指定行索引不存在。</exception>
+    private (TableRowDataType type, TItem? data) GetRowData(int rowIndex)
+    {
+        try
+        {
+            return TableData[rowIndex];
+
+        }
+        catch ( ArgumentOutOfRangeException ex )
+        {
+            throw new TDesignComponentException(this, $"指定的行索引{rowIndex}不存在", ex);
+        }
+    }
+
+    /// <summary>
+    /// 尝试获取指定行索引的数据。
+    /// </summary>
+    /// <param name="rowIndex">行的索引位置。</param>
+    /// <param name="rowData">获取到的行数据。</param>
+    /// <returns>当能获取到行数据时返回 <c>true</c>；否则返回 <c>false</c>。</returns>
+    private bool TryGetRowData(int rowIndex, out (TableRowDataType type, TItem? data) rowData)
+    {
+        try
+        {
+            rowData = GetRowData(rowIndex);
+            return true;
+        }
+        catch
+        {
+            rowData = new(TableRowDataType.Unknow, default);
+            return false;
+        }
     }
     #endregion
 }

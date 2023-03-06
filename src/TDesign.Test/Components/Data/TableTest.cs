@@ -10,7 +10,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1,Title="列" });
         }))).Add(p=>p.Data, DataSource<TestData>.Empty));
 
         table.Find("tr.t-table__empty-row").Should().NotBeNull();
@@ -22,7 +22,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1, Title = "列" });
         })))
         .Add(p => p.Data,DataSource<TestData>.Empty)
         .Add(p=>p.EmptyContent,builder=>builder.AddContent(0,"个性化空数据"))

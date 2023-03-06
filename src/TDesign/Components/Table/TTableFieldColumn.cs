@@ -1,20 +1,18 @@
 ﻿namespace TDesign;
 
 /// <summary>
-/// 表示可以输出数据的表格列。必须在 <see cref="TTable{TItem}"/> 组件中使用。
+/// 定义可对字段绑定的列。
 /// </summary>
 public class TTableFieldColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChildContent
 {
-    /// <inheritdoc/>
-    protected override void AfterSetParameters(ParameterView parameters)
+    internal override RenderFragment? GetFieldValueContent(in int rowIndex,in int columnIndex, in TItem? rowData)
     {
-        base.AfterSetParameters(parameters);
-
-        ChildContent ??= builder => builder.AddContent(0, Value);
+        if ( ChildContent is null )
+        {
+           return base.GetFieldValueContent(rowIndex, columnIndex, rowData);
+        }
+        return ChildContent;
     }
-
-    /// <inheritdoc/>
-    protected override RenderFragment? GetColumnContent() => ChildContent;
 
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }

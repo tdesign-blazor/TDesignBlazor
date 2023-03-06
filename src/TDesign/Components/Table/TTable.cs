@@ -1,11 +1,31 @@
 ﻿namespace TDesign;
 
 /// <summary>
-/// 只具备一些基本功能的数据表格。
+/// 表示表格的基类。
+/// </summary>
+public abstract class TTableBase: TDesignComponentBase
+{
+    /// <inheritdoc/>
+    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
+
+
+    /// <summary>
+    /// 获取列集合。
+    /// </summary>
+    internal IEnumerable<TTableColumnBase> GetColumns() => GetColumns<TTableColumnBase>();
+    /// <summary>
+    /// 获取指定类型的列集合。
+    /// </summary>
+    /// <typeparam name="TTableColumn">列的类型。</typeparam>
+    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase => ChildComponents.OfType<TTableColumn>();
+}
+
+/// <summary>
+/// 数据表格。
 /// </summary>
 [CssClass("t-table")]
 [CascadingTypeParameter(nameof(TItem))]
-public partial class TTable<TItem> : TDesignComponentBase
+public partial class TTable<TItem> : TTableBase
 {
     #region 参数
     /// <summary>
@@ -47,7 +67,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
+    [Parameter] public RenderFragment<TItem?>? ChildContent { get; set; }
 
     /// <summary>
     /// 加载中状态。值为 true 会显示默认加载中样式。
@@ -114,7 +134,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 已加载的数据。内部使用。
     /// </summary>
-    internal List<TItem> TableData { get; set; } = new();
+    internal List<(TableRowDataType type, TItem? data)> TableData { get; set; } = new();
 
 
     /// <summary>
@@ -128,4 +148,23 @@ public partial class TTable<TItem> : TDesignComponentBase
     internal bool IsSingleSelection { get; set; }
 
     #endregion
+
+    /// <summary>
+    /// 行的数据类型。
+    /// </summary>
+    internal enum TableRowDataType
+    {
+        /// <summary>
+        /// 数据类型未知
+        /// </summary>
+        Unknow,
+        /// <summary>
+        /// 正常的数据行。
+        /// </summary>
+        Data,
+        /// <summary>
+        /// 展开行。
+        /// </summary>
+        Expand
+    }
 }
