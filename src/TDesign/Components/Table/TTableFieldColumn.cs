@@ -5,11 +5,14 @@
 /// </summary>
 public class TTableFieldColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChildContent
 {
-    internal override RenderFragment? GetFieldValueContent(in int rowIndex,in int columnIndex, in TItem? rowData)
+    /// <inheritdoc/>
+    internal override RenderFragment? GetColumnContent(params object[]? args)
     {
+        var data = GetRowData(args);
+        var value = GetValue(data);
         if ( ChildContent is null )
         {
-           return base.GetFieldValueContent(rowIndex, columnIndex, rowData);
+            return builder => builder.AddContent(0, value);
         }
         return ChildContent;
     }

@@ -4,7 +4,7 @@
 /// 定义可展开详情行的列。
 /// </summary>
 [CssClass("t-table__expandable-icon-cell")]
-public class TTableExpandColumn : TTableColumnBase,IHasChildContent
+public class TTableExpandColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChildContent
 {
     /// <summary>
     /// 设置要展开的图标。
@@ -19,33 +19,49 @@ public class TTableExpandColumn : TTableColumnBase,IHasChildContent
     /// </summary>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
-    internal override RenderFragment? GetColumnContent(in int rowIndex, in int columnIndex)
+
+    /// <inheritdoc/>
+    internal override RenderFragment? GetColumnContent(params object[] args)
     {
-        return builder => builder.Fluent().Span("t-table__expand-box")
-                                            .Class($"t-table__row--{(Expanded?"expanded":"collapsed")}")
-                                            .Class("t-positive-rotate-90", Expanded)
-                                            .Content(content => content.CreateComponent<TIcon>(0, attributes:new{ Name=Expanded?CollapseIcon:ExpandIcon}))
+        var rowData = GetRowData(args);
+        var value = GetValue(rowData);
+
+
+        var rowIndex = (int)args[1];
+
+        var nextRowIndex = rowIndex + 1;
+
+        var isExpand = CascadingGenericTable.TryGetRowData(nextRowIndex, out var result) && result.type == TableRowDataType.Expand;
+
+
+        return  builder => builder.Fluent().Span("t-table__expand-box")
+                                            .Class($"t-table__row--{(isExpand ? "expanded" : "collapsed")}")
+                                            .Class("t-positive-rotate-90", isExpand)
+                                            .Callback<MouseEventArgs>("onclick", this, e =>
+                                            {
+                                                var index = FindRowIndex(value);
+                                                CascadingGenericTable.ExpandRow(index);
+                                            })
+                                            .Content(content => content.CreateComponent<TIcon>(0, attributes: new
+                                            {
+                                                Name = isExpand ? CollapseIcon : ExpandIcon
+                                            }))
                                         .Close();
     }
 
+    /// <inheritdoc/>
     internal override RenderFragment? GetHeaderContent() => builder => builder.AddContent(0, "展开/收起");
 
     /// <summary>
     /// 获取展开行的 UI 内容。
     /// </summary>
     internal RenderFragment? GetExpandedRow()
-    => builder => builder.Fluent().Element("tr", "t-table__expanded-row",Expanded)
-                                    .Content(td => td.CreateElement(0, "td", content =>
-                                    {
-                                        content.Fluent().Div("t-table__expanded-row-inner")
+    => new(builder => builder.Fluent().Element("td")
+                                    .Attribute("colspan", CascadingTable.ChildComponents.Count)
+                                    .Content(content => content.Fluent().Div("t-table__expanded-row-inner")
                                                             .Content(div => div.Fluent().Div("t-table__row-full-element")
                                                             .Content(ChildContent).Close())
-                                                        .Close();
-                                    }, new {colspan=base.CascadingTable.ChildComponents.Count}))
-                                    .Close();
-
-    /// <summary>
-    /// 行是否展开。
-    /// </summary>
-    internal bool Expanded { get; set; }
+                                                        .Close())
+                                  .Close());
 }
+

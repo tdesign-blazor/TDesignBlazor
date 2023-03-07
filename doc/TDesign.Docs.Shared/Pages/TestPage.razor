@@ -3,16 +3,31 @@
 @layout EmptyLayout
 
 <TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
-    <TTableRadioColumn Field="@nameof(Test.User.Id)" Header="选择" />
+    <TTableExpandColumn Header="asd" Field="@nameof(Test.User.Id)">
+        名字： @context?.Name
+    </TTableExpandColumn>
     <TTableFieldColumn Field="@nameof(Test.User.Id)" Header="编号" />
     <TTableFieldColumn Field="@nameof(Test.User.Name)" Header="姓名" />
     <TTableFieldColumn Field="@nameof(Test.User.Age)" Header="年龄" />
+    <TTableFieldColumn Header="性别">
+    @if (context is not null)
+    {
+        if (context.Gender)
+        {
+            <TTag Theme="Theme.Primary">男</TTag>
+        }
+        else
+        {
+            <TTag Theme="Theme.Danger">女</TTag>
+        }
+    }
+    </TTableFieldColumn>
 </TTable>
 
 
-<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
+@*<TTable TItem="Test.User" Data="DataSource<Test.User>.Parse(Test.Mock)" Pagination RowSelection>
     <TTableCheckboxColumn Field="@nameof(Test.User.Id)"  Header="选择"/>
     <TTableFieldColumn Field="@nameof(Test.User.Id)" Header="编号"/>
     <TTableFieldColumn Field="@nameof(Test.User.Name)" Header="姓名" />
     <TTableFieldColumn Field="@nameof(Test.User.Age)" Header="年龄" />
-</TTable>
+</TTable>*@

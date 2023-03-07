@@ -1,5 +1,7 @@
 ﻿/* 用于定义表格中各种代码片段的文件 */
 
+using ComponentBuilder;
+
 namespace TDesign;
 partial class TTable<TItem>
 {
@@ -93,20 +95,18 @@ partial class TTable<TItem>
 
                         foreach ( var (type, data) in TableData )
                         {
-                            content.AddContent(0, ChildContent, data);
+                            content.AddContent(0, ChildContent!.Invoke(data));
 
                             var rowKey = rowIndex;
 
-                            content.CreateComponent<TTableRow>(1, rowContent =>
-                            {
-                                BuildRow(rowContent, rowIndex, type, data);
-                            }, 
-                            attributes: new
-                            {
-                                rowIndex,
-                                //onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => SelectRow(rowKey), RowSelection)
-                            }, 
-                            key: rowKey);
+                            content.OpenRegion(rowIndex);
+
+                            content.OpenElement(1,"tr");
+                            BuildRow(content,rowIndex, type, data);
+                            content.SetKey(rowKey);
+                            content.CloseElement();
+
+                            content.CloseRegion();
 
                             rowIndex++;
                         }
@@ -183,20 +183,20 @@ partial class TTable<TItem>
         #endregion
     }
 
-    private void BuildRow(RenderTreeBuilder builder,in int rowIndex, TTable<TItem>.TableRowDataType type, TItem? data)
+    private void BuildRow(RenderTreeBuilder builder,int rowIndex, TableRowDataType type, TItem? data)
     {
-        var indexOfRow = rowIndex;
         switch ( type )
         {
-            case TTable<TItem>.TableRowDataType.Expand:
-                var expandColumn = GetColumns<TTableExpandColumn>().FirstOrDefault();
+            case TableRowDataType.Expand:
+                var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
                 if ( expandColumn is null )
                 {
                     break;
                 }
-                builder.AddContent(0, expandColumn.GetExpandedRow());
+                builder.AddAttribute(0, "class", "t-table__expanded-row");
+                builder.AddContent(1, expandColumn.GetExpandedRow());
                 break;
-            case TTable<TItem>.TableRowDataType.Data:
+            case TableRowDataType.Data:
                 builder.AddContent(0,row =>
                     {
                         var columnIndex = 0;
@@ -206,9 +206,11 @@ partial class TTable<TItem>
 
                             RenderFragment? columnContent = column switch
                             {
-                                TTableFieldColumnBase<TItem> fieldColumn => fieldColumn.GetFieldValueContent(indexOfRow, columnIndex, data),
-                                _ => column.GetColumnContent(indexOfRow, columnIndex),
+                                //TTableFieldColumn<TItem> fieldColumn => fieldColumn.GetColumnContent(data!, type),
+                                TTableExpandColumn<TItem> expandColumn => expandColumn.GetColumnContent(data!, rowIndex),
+                                _ => builder => builder.AddContent(0, column.GetColumnContent(data!, type)),
                             };
+
                             row.CreateElement(0, "td", columnContent, new { columnIndex, @class = column.GetCssClassString() }, key: key);
                             columnIndex++;
                         }

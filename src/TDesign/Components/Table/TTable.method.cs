@@ -140,18 +140,33 @@ partial class TTable<TItem>
     #region 展开/收缩行
     public Task ExpandRow(int rowIndex)
     {
-        if ( !GetColumns<TTableExpandColumn>().Any() )
+        var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
+
+        if ( expandColumn  is null)
         {
             return Task.CompletedTask;
         }
+
         var nextIndex = rowIndex + 1;
-        if ( TryGetRowData(nextIndex, out _) )
+
+        if ( TryGetRowData(rowIndex, out var row) )
         {
-            TableData.RemoveAt(nextIndex);
-        }
-        else
-        {
-            TableData.Insert(nextIndex, new(TableRowDataType.Expand, default));
+            try
+            {
+                var (type, data) = TableData[nextIndex];
+                if ( type == TableRowDataType.Expand )
+                {
+                    TableData.RemoveAt(nextIndex);
+                }
+                else
+                {
+                    TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+                }
+            }
+            catch 
+            {
+                TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+            }
         }
 
         return this.Refresh();
@@ -169,7 +184,7 @@ partial class TTable<TItem>
     /// <param name="rowIndex"></param>
     /// <returns></returns>
     /// <exception cref="TDesignComponentException">指定行索引不存在。</exception>
-    private (TableRowDataType type, TItem? data) GetRowData(int rowIndex)
+    internal (TableRowDataType type, TItem? data) GetRowData(int rowIndex)
     {
         try
         {
@@ -188,7 +203,7 @@ partial class TTable<TItem>
     /// <param name="rowIndex">行的索引位置。</param>
     /// <param name="rowData">获取到的行数据。</param>
     /// <returns>当能获取到行数据时返回 <c>true</c>；否则返回 <c>false</c>。</returns>
-    private bool TryGetRowData(int rowIndex, out (TableRowDataType type, TItem? data) rowData)
+    internal bool TryGetRowData(int rowIndex, out (TableRowDataType type, TItem? data) rowData)
     {
         try
         {

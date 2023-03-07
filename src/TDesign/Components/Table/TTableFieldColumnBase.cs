@@ -1,4 +1,6 @@
-﻿namespace TDesign;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TDesign;
 
 /// <summary>
 /// 表示可以输出数据的表格列的基类。必须在 <see cref="TTable{TItem}"/> 组件中使用。
@@ -6,32 +8,34 @@
 /// <typeparam name="TItem">数据的类型。</typeparam>
 public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
 {
-    /// <summary>
-    /// 级联的 <see cref="TTable{TItem}"/> 组件。
-    /// </summary>
-    [CascadingParameter(Name = "GenericTable")]protected TTable<TItem> CascadingGenericTable { get; set; }
+    [CascadingParameter(Name ="GenericTable")]internal TTable<TItem> CascadingGenericTable { get; set; }
     /// <summary>
     /// 设置数据源的字段名称。
     /// </summary>
     [Parameter][EditorRequired] public string? Field { get; set; }
 
     /// <summary>
-    /// 获取具备字段值的内容。
+    /// 从自定义参数中获取行数据，第一个参数必须是 <typeparamref name="TItem"/> 类型。
     /// </summary>
-    /// <param name="rowIndex">行索引。</param>
-    /// <param name="columnIndex">列索引。</param>
-    /// <param name="rowData">每一行的数据。</param>
-    internal virtual RenderFragment? GetFieldValueContent(in int rowIndex, in int columnIndex, in TItem? rowData)
+    /// <param name="args">上下文的参数数组。</param>
+    /// <returns>行数据。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="args"/> 是 null。</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="args"/> 长度是0。</exception>
+    /// <exception cref="ArgumentException">第一个参数不是 <typeparamref name="TItem"/> 类型。</exception>
+    protected TItem GetRowData(object[]? args)
     {
-        var value = GetValue(rowData);
-        return builder => builder.AddContent(0, value);
+        if ( args is null )
+        {
+            throw new ArgumentNullException(nameof(args));
+        }
+        if(args.Length == 0 )
+        {
+            throw new ArgumentOutOfRangeException(nameof(args),$"{args}的参数不能是空的");
+        }
+        var rowData= (TItem?)args[0];
+        return rowData ?? throw new ArgumentException($"{args}第一个参数的值必须是{nameof(TItem)}类型");
     }
 
-    /// <inheritdoc/>
-    internal override RenderFragment? GetColumnContent(in int rowIndex, in int columnIndex)
-    {
-        throw new NotSupportedException($"请使用{nameof(GetFieldValueContent)}方法");
-    }
     /// <summary>
     /// 获取指定数据的值。
     /// </summary>
@@ -52,5 +56,23 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
         }
 
         return property.GetValue(item);
+    }
+
+    /// <summary>
+    /// 获取指定的值所在的行索引。
+    /// </summary>
+    /// <param name="value">字段的值。</param>
+    /// <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
+    protected int FindRowIndex(object? value)
+    {
+        var index = CascadingGenericTable.TableData.FindIndex(m =>
+        {
+            if ( m.data is null )
+            {
+                return false;
+            }
+            return m.data.GetType().GetProperty(Field!).GetValue(m.data).Equals(value);
+        });
+        return index;
     }
 }

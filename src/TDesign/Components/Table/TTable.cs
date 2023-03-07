@@ -148,23 +148,24 @@ public partial class TTable<TItem> : TTableBase
     internal bool IsSingleSelection { get; set; }
 
     #endregion
+}
 
+
+/// <summary>
+/// 行的数据类型。
+/// </summary>
+internal enum TableRowDataType
+{
     /// <summary>
-    /// 行的数据类型。
+    /// 数据类型未知
     /// </summary>
-    internal enum TableRowDataType
-    {
-        /// <summary>
-        /// 数据类型未知
-        /// </summary>
-        Unknow,
-        /// <summary>
-        /// 正常的数据行。
-        /// </summary>
-        Data,
-        /// <summary>
-        /// 展开行。
-        /// </summary>
-        Expand
-    }
+    Unknow,
+    /// <summary>
+    /// 正常的数据行。
+    /// </summary>
+    Data,
+    /// <summary>
+    /// 展开行。
+    /// </summary>
+    Expand
 }

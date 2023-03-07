@@ -13,14 +13,13 @@ public class TTableCheckboxColumn<TItem> : TTableRadioColumn<TItem>
         CascadingGenericTable.IsSingleSelection = false;
     }
 
-    internal override RenderFragment? GetFieldValueContent(in int rowIndex,in int columnIndex,in TItem? rowData)
+    internal override RenderFragment? GetColumnContent(params object[]? args)
     {
+        var rowData = GetRowData(args);
         var value = GetValue(rowData);
-        var index = rowIndex;
 
        return builder => builder.Fluent().Element("label", "t-checkbox")
                                         .Class("t-is-checked", IsChecked(value))
-                                        .Attribute("rowIndex",index)
                                         .Content(checkbox =>
                                         {
                                             checkbox.Fluent().Element("input", "t-checkbox__former")
@@ -28,14 +27,7 @@ public class TTableCheckboxColumn<TItem> : TTableRadioColumn<TItem>
                                                             .Attribute("type", "checkbox")
                                                             .Callback<ChangeEventArgs>("onchange",this,e=>
                                                             {
-                                                                var getRowIndex = CascadingGenericTable.TableData.FindIndex(m =>
-                                                                {
-                                                                    if(m.data is null )
-                                                                    {
-                                                                        return false;
-                                                                    }
-                                                                   return m.data.GetType().GetProperty(Field!).GetValue(m.data).Equals(value);
-                                                                });
+                                                                var getRowIndex = FindRowIndex(value);
                                                                 CascadingGenericTable.SelectRow(getRowIndex);
                                                             })
                                                         .Close();

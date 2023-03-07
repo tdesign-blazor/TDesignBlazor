@@ -54,9 +54,9 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// <summary>
     /// 获取表格列的内容。
     /// </summary>
-    /// <param name="rowIndex">行索引。</param>
-    /// <param name="columnIndex">列索引。</param>
-    internal abstract RenderFragment? GetColumnContent(in int rowIndex,in int columnIndex);
+    /// <param name="args">参数数组。</param>
+    internal abstract RenderFragment? GetColumnContent(params object[]? args);
+
     /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
@@ -86,4 +86,6 @@ public abstract class TTableColumnBase : TDesignComponentBase
     {
         //全部都在 TTable 里来创建列
     }
+
+
 }

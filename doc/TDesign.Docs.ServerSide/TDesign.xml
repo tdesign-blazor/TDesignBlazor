@@ -2543,26 +2543,6 @@
             获取一个布尔值，表示行仅可以被单选。
             </summary>
         </member>
-        <member name="T:TDesign.TTable`1.TableRowDataType">
-            <summary>
-            行的数据类型。
-            </summary>
-        </member>
-        <member name="F:TDesign.TTable`1.TableRowDataType.Unknow">
-            <summary>
-            数据类型未知
-            </summary>
-        </member>
-        <member name="F:TDesign.TTable`1.TableRowDataType.Data">
-            <summary>
-            正常的数据行。
-            </summary>
-        </member>
-        <member name="F:TDesign.TTable`1.TableRowDataType.Expand">
-            <summary>
-            展开行。
-            </summary>
-        </member>
         <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
         </member>
@@ -2604,7 +2584,7 @@
             <returns></returns>
             <exception cref="T:TDesign.TDesignComponentException">指定行索引不存在。</exception>
         </member>
-        <member name="M:TDesign.TTable`1.TryGetRowData(System.Int32,System.ValueTuple{TDesign.TTable{`0}.TableRowDataType,`0}@)">
+        <member name="M:TDesign.TTable`1.TryGetRowData(System.Int32,System.ValueTuple{TDesign.TableRowDataType,`0}@)">
             <summary>
             尝试获取指定行索引的数据。
             </summary>
@@ -2631,19 +2611,24 @@
             </summary>
             <typeparam name="TTableColumn">列的类型。</typeparam>
         </member>
-        <member name="T:TDesign.TTableCell">
+        <member name="T:TDesign.TableRowDataType">
             <summary>
-            表示渲染 td 元素的组件。
+            行的数据类型。
             </summary>
         </member>
-        <member name="P:TDesign.TTableCell.ChildContent">
+        <member name="F:TDesign.TableRowDataType.Unknow">
             <summary>
-            <inheritdoc/>
+            数据类型未知
             </summary>
         </member>
-        <member name="T:TDesign.TTableHeader">
+        <member name="F:TDesign.TableRowDataType.Data">
             <summary>
-            表示渲染 th 元素的组件。
+            正常的数据行。
+            </summary>
+        </member>
+        <member name="F:TDesign.TableRowDataType.Expand">
+            <summary>
+            展开行。
             </summary>
         </member>
         <member name="T:TDesign.TTableCheckboxColumn`1">
@@ -2704,12 +2689,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TDesign.TTableColumnBase.GetColumnContent(System.Int32@,System.Int32@)">
+        <member name="M:TDesign.TTableColumnBase.GetColumnContent(System.Object[])">
             <summary>
             获取表格列的内容。
             </summary>
-            <param name="rowIndex">行索引。</param>
-            <param name="columnIndex">列索引。</param>
+            <param name="args">参数数组。</param>
         </member>
         <member name="M:TDesign.TTableColumnBase.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
@@ -2723,40 +2707,44 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="T:TDesign.TTableExpandColumn">
+        <member name="T:TDesign.TTableExpandColumn`1">
             <summary>
             定义可展开详情行的列。
             </summary>
         </member>
-        <member name="P:TDesign.TTableExpandColumn.ExpandIcon">
+        <member name="P:TDesign.TTableExpandColumn`1.ExpandIcon">
             <summary>
             设置要展开的图标。
             </summary>
         </member>
-        <member name="P:TDesign.TTableExpandColumn.CollapseIcon">
+        <member name="P:TDesign.TTableExpandColumn`1.CollapseIcon">
             <summary>
             设置要收起的图标。
             </summary>
         </member>
-        <member name="P:TDesign.TTableExpandColumn.ChildContent">
+        <member name="P:TDesign.TTableExpandColumn`1.ChildContent">
             <summary>
             设置展开的 UI 内容。
             </summary>
         </member>
-        <member name="M:TDesign.TTableExpandColumn.GetExpandedRow">
+        <member name="M:TDesign.TTableExpandColumn`1.GetColumnContent(System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableExpandColumn`1.GetHeaderContent">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableExpandColumn`1.GetExpandedRow">
             <summary>
             获取展开行的 UI 内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TTableExpandColumn.Expanded">
-            <summary>
-            行是否展开。
             </summary>
         </member>
         <member name="T:TDesign.TTableFieldColumn`1">
             <summary>
             定义可对字段绑定的列。
             </summary>
+        </member>
+        <member name="M:TDesign.TTableFieldColumn`1.GetColumnContent(System.Object[])">
+            <inheritdoc/>
         </member>
         <member name="P:TDesign.TTableFieldColumn`1.ChildContent">
             <inheritdoc/>
@@ -2767,26 +2755,20 @@
             </summary>
             <typeparam name="TItem">数据的类型。</typeparam>
         </member>
-        <member name="P:TDesign.TTableFieldColumnBase`1.CascadingGenericTable">
-            <summary>
-            级联的 <see cref="T:TDesign.TTable`1"/> 组件。
-            </summary>
-        </member>
         <member name="P:TDesign.TTableFieldColumnBase`1.Field">
             <summary>
             设置数据源的字段名称。
             </summary>
         </member>
-        <member name="M:TDesign.TTableFieldColumnBase`1.GetFieldValueContent(System.Int32@,System.Int32@,`0@)">
+        <member name="M:TDesign.TTableFieldColumnBase`1.GetRowData(System.Object[])">
             <summary>
-            获取具备字段值的内容。
+            从自定义参数中获取行数据，第一个参数必须是 <typeparamref name="TItem"/> 类型。
             </summary>
-            <param name="rowIndex">行索引。</param>
-            <param name="columnIndex">列索引。</param>
-            <param name="rowData">每一行的数据。</param>
-        </member>
-        <member name="M:TDesign.TTableFieldColumnBase`1.GetColumnContent(System.Int32@,System.Int32@)">
-            <inheritdoc/>
+            <param name="args">上下文的参数数组。</param>
+            <returns>行数据。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="args"/> 是 null。</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="args"/> 长度是0。</exception>
+            <exception cref="T:System.ArgumentException">第一个参数不是 <typeparamref name="TItem"/> 类型。</exception>
         </member>
         <member name="M:TDesign.TTableFieldColumnBase`1.GetValue(`0@)">
             <summary>
@@ -2795,6 +2777,13 @@
             <param name="item">要获取的数据对象。</param>
             <returns>值或 null。</returns>
             <exception cref="T:TDesign.TDesignComponentException">字段与数据的属性不匹配。</exception>
+        </member>
+        <member name="M:TDesign.TTableFieldColumnBase`1.FindRowIndex(System.Object)">
+            <summary>
+            获取指定的值所在的行索引。
+            </summary>
+            <param name="value">字段的值。</param>
+            <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
         </member>
         <member name="T:TDesign.TTableRadioColumn`1">
             <summary>
@@ -2805,7 +2794,7 @@
         <member name="M:TDesign.TTableRadioColumn`1.OnParametersSet">
             <inheritdoc/>
         </member>
-        <member name="M:TDesign.TTableRadioColumn`1.GetFieldValueContent(System.Int32@,System.Int32@,`0@)">
+        <member name="M:TDesign.TTableRadioColumn`1.GetColumnContent(System.Object[])">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TTableRadioColumn`1.IsChecked(System.Object)">
