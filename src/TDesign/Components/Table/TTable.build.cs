@@ -64,8 +64,6 @@ partial class TTable<TItem>
                                 {
                                     content.CreateComponent<TTableRow>(0, tr =>
                                     {
-                                        tr.AddContent(0, ChildContent!.Invoke(default));
-
                                         tr.OpenRegion(1);
                                         var index = 0;
                                         foreach ( var column in GetColumns() )

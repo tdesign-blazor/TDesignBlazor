@@ -12,7 +12,14 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
     /// <summary>
     /// 设置数据源的字段名称。
     /// </summary>
-    [Parameter][EditorRequired] public string? Field { get; set; }
+    [Parameter] public string? Field { get; set; }
+
+    protected override void AfterSetParameters(ParameterView parameters)
+    {
+        base.AfterSetParameters(parameters);
+
+        Header ??= Field;
+    }
 
     /// <summary>
     /// 从自定义参数中获取行数据，第一个参数必须是 <typeparamref name="TItem"/> 类型。
@@ -59,19 +66,37 @@ public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
     }
 
     /// <summary>
-    /// 获取指定的值所在的行索引。
+    /// 获取当前字段的指定值所在的行索引。
     /// </summary>
     /// <param name="value">字段的值。</param>
     /// <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
-    protected int FindRowIndex(object? value)
+    protected int FindRowIndex(object? value) => FindRowIndex(Field, value);
+
+    /// <summary>
+    /// 获取指定字段的值所在的行索引。
+    /// </summary>
+    /// <param name="field">字段。</param>
+    /// <param name="value">字段的值。</param>
+    /// <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
+    protected int FindRowIndex(string? field, object? value)
     {
-        var index = CascadingGenericTable.TableData.FindIndex(m =>
+        if ( string.IsNullOrWhiteSpace(field) )
         {
-            if ( m.data is null )
+            throw new ArgumentException($"{nameof(field)} 不能是 null 或空白字符串");
+        }
+
+        var index = CascadingGenericTable.TableData.FindIndex(row =>
+        {
+            if ( row.data is null )
             {
                 return false;
             }
-            return m.data.GetType().GetProperty(Field!).GetValue(m.data).Equals(value);
+            var property = row.data.GetType()!.GetProperty(field);
+            if(property is null )
+            {
+                return false;
+            }
+            return property!.GetValue(row.data).Equals(value);
         });
         return index;
     }

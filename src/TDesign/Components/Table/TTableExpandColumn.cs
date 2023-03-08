@@ -9,11 +9,7 @@ public class TTableExpandColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChild
     /// <summary>
     /// 设置要展开的图标。
     /// </summary>
-    [Parameter] public object? ExpandIcon { get; set; } = IconName.ChevronRightCircle;
-    /// <summary>
-    /// 设置要收起的图标。
-    /// </summary>
-    [Parameter] public object? CollapseIcon { get; set; } = IconName.ChevronDownCircle;
+    [Parameter] public object? Icon { get; set; } = IconName.ChevronRightCircle;
     /// <summary>
     /// 设置展开的 UI 内容。
     /// </summary>
@@ -23,6 +19,11 @@ public class TTableExpandColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChild
     /// <inheritdoc/>
     internal override RenderFragment? GetColumnContent(params object[] args)
     {
+        if ( args is null )
+        {
+            throw new ArgumentNullException(nameof(args));
+        }
+
         var rowData = GetRowData(args);
         var value = GetValue(rowData);
 
@@ -44,7 +45,7 @@ public class TTableExpandColumn<TItem> : TTableFieldColumnBase<TItem>, IHasChild
                                             })
                                             .Content(content => content.CreateComponent<TIcon>(0, attributes: new
                                             {
-                                                Name = isExpand ? CollapseIcon : ExpandIcon
+                                                Name = Icon
                                             }))
                                         .Close();
     }

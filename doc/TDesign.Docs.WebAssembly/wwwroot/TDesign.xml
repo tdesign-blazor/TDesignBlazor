@@ -2653,11 +2653,6 @@
             级联的 <see cref="!:TTable"/> 组件。
             </summary>
         </member>
-        <member name="P:TDesign.TTableColumnBase.Key">
-            <summary>
-            设置列的唯一标识。
-            </summary>
-        </member>
         <member name="P:TDesign.TTableColumnBase.Header">
             <summary>
             设置列标题。若设置了 <see cref="P:TDesign.TTableColumnBase.HeaderContent"/> 参数，则该参数无效。
@@ -2683,6 +2678,9 @@
             设置底部的任意 UI 片段。
             </summary>
         </member>
+        <member name="M:TDesign.TTableColumnBase.OnInitialized">
+            <inheritdoc/>
+        </member>
         <member name="M:TDesign.TTableColumnBase.GetHeaderContent">
             <summary>
             获取顶部标题内容。
@@ -2695,12 +2693,6 @@
             </summary>
             <param name="args">参数数组。</param>
         </member>
-        <member name="M:TDesign.TTableColumnBase.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TTableColumnBase.OnInitialized">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TTableColumnBase.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             什么都不干。
@@ -2712,14 +2704,9 @@
             定义可展开详情行的列。
             </summary>
         </member>
-        <member name="P:TDesign.TTableExpandColumn`1.ExpandIcon">
+        <member name="P:TDesign.TTableExpandColumn`1.Icon">
             <summary>
             设置要展开的图标。
-            </summary>
-        </member>
-        <member name="P:TDesign.TTableExpandColumn`1.CollapseIcon">
-            <summary>
-            设置要收起的图标。
             </summary>
         </member>
         <member name="P:TDesign.TTableExpandColumn`1.ChildContent">
@@ -2780,8 +2767,16 @@
         </member>
         <member name="M:TDesign.TTableFieldColumnBase`1.FindRowIndex(System.Object)">
             <summary>
-            获取指定的值所在的行索引。
+            获取当前字段的指定值所在的行索引。
             </summary>
+            <param name="value">字段的值。</param>
+            <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
+        </member>
+        <member name="M:TDesign.TTableFieldColumnBase`1.FindRowIndex(System.String,System.Object)">
+            <summary>
+            获取指定字段的值所在的行索引。
+            </summary>
+            <param name="field">字段。</param>
             <param name="value">字段的值。</param>
             <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
         </member>
