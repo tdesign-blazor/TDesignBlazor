@@ -10,7 +10,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1,Title="列" });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Id) });
         }))).Add(p=>p.Data, DataSource<TestData>.Empty));
 
         table.Find("tr.t-table__empty-row").Should().NotBeNull();
@@ -22,7 +22,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1, Title = "列" });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Id) });
         })))
         .Add(p => p.Data,DataSource<TestData>.Empty)
         .Add(p=>p.EmptyContent,builder=>builder.AddContent(0,"个性化空数据"))
@@ -32,20 +32,19 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
         table.Find("tr.t-table__empty-row>td>div.t-table__empty").Html().Should().Be("个性化空数据");
     }
 
-    [Fact(DisplayName ="Table - 呈现5条数据",Skip ="暂时跳过")]
-    public void Test_Table_With_5_Data()
+    [Fact(DisplayName ="Table - 呈现4条数据")]
+    public void Test_Table_With_Data()
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = value?.Id });
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = value?.Name });
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = value?.Birthday });
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = value?.Gender });
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = value?.Id });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Id) });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Name) });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Birthday) });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Gender) });
         })))
         .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData())));
         table.Should().NotBeNull();
-        table.Find(".t-table__body>tr").ChildElementCount.Should().Be(5);
+        table.Find(".t-table__body>tr").ChildElementCount.Should().Be(4);
     }
 
     [Fact(DisplayName ="Table - 自定义表底模板")]
@@ -53,7 +52,7 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1 });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Field = nameof(TestData.Id) });
         })))
         .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData()))
         .Add(p => p.FooterContent, builder => builder.AddContent(0, "表底数据"))
@@ -68,7 +67,9 @@ public class TableTest:TestBase<TTable<TableTest.TestData>>
     {
         var table = RenderComponent(m => m.Add(p => p.ChildContent, new RenderFragment<TestData>(value => new RenderFragment(b =>
         {
-            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new { Value = 1,FooterContent=HtmlHelper.CreateContent(b=>b.AddContent(0,"列1")) });
+            b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new {
+                Field = nameof(TestData.Id),
+                FooterContent =HtmlHelper.CreateContent(b=>b.AddContent(0,"列1")) });
         })))
         .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData()))
         );
