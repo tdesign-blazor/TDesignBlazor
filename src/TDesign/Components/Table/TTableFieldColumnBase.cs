@@ -1,4 +1,6 @@
-﻿namespace TDesign;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TDesign;
 
 /// <summary>
 /// 表示可以输出数据的表格列的基类。必须在 <see cref="TTable{TItem}"/> 组件中使用。
@@ -6,36 +8,96 @@
 /// <typeparam name="TItem">数据的类型。</typeparam>
 public abstract class TTableFieldColumnBase<TItem> : TTableColumnBase
 {
+    [CascadingParameter(Name ="GenericTable")]internal TTable<TItem> CascadingGenericTable { get; set; }
     /// <summary>
-    /// 级联的 <see cref="TTable{TItem}"/> 组件。
+    /// 设置数据源的字段名称。
     /// </summary>
-    [CascadingParameter(Name = "Table")]protected TTable<TItem> CascadingTable { get; set; }
-    /// <summary>
-    /// 获取或设置列中输出的值。
-    /// </summary>
-    [Parameter] public object? Value { get; set; }
+    [Parameter] public string? Field { get; set; }
 
-    /// <inheritdoc/>
-    protected override void OnInitialized()
+    protected override void AfterSetParameters(ParameterView parameters)
     {
-        if(CascadingTable is null )
-        {
-            throw new InvalidOperationException("列必须定义在 TTable 组件中");
-        }
+        base.AfterSetParameters(parameters);
 
-        if ( !CascadingTable!.GetColumns().Any(m => m.Key!.Equals(Key)) )
-        {
-            CascadingTable.AddChildComponent(this);
-        }
-        base.OnInitialized();
+        Header ??= Field;
     }
-    /// <inheritdoc/>
-    protected override RenderFragment? GetHeaderContent()
+
+    /// <summary>
+    /// 从自定义参数中获取行数据，第一个参数必须是 <typeparamref name="TItem"/> 类型。
+    /// </summary>
+    /// <param name="args">上下文的参数数组。</param>
+    /// <returns>行数据。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="args"/> 是 null。</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="args"/> 长度是0。</exception>
+    /// <exception cref="ArgumentException">第一个参数不是 <typeparamref name="TItem"/> 类型。</exception>
+    protected TItem GetRowData(object[]? args)
     {
-        if ( TitleContent is null )
+        if ( args is null )
         {
-          return  builder => builder.AddContent(0, Title ?? Value?.GetType()?.Name ?? "未命名标题");
+            throw new ArgumentNullException(nameof(args));
         }
-        return TitleContent;
+        if(args.Length == 0 )
+        {
+            throw new ArgumentOutOfRangeException(nameof(args),$"{args}的参数不能是空的");
+        }
+        var rowData= (TItem?)args[0];
+        return rowData ?? throw new ArgumentException($"{args}第一个参数的值必须是{nameof(TItem)}类型");
+    }
+
+    /// <summary>
+    /// 获取指定数据的值。
+    /// </summary>
+    /// <param name="item">要获取的数据对象。</param>
+    /// <returns>值或 null。</returns>
+    /// <exception cref="TDesignComponentException">字段与数据的属性不匹配。</exception>
+    protected object? GetValue(in TItem? item)
+    {
+        if ( item is null || string.IsNullOrEmpty(Field) )
+        {
+            return default;
+        }
+
+        var property = item.GetType().GetProperty(Field);
+        if ( property is null )
+        {
+            throw new TDesignComponentException(this, $"没有在{item.GetType().Name}找到字段{Field}");
+        }
+
+        return property.GetValue(item);
+    }
+
+    /// <summary>
+    /// 获取当前字段的指定值所在的行索引。
+    /// </summary>
+    /// <param name="value">字段的值。</param>
+    /// <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
+    protected int FindRowIndex(object? value) => FindRowIndex(Field, value);
+
+    /// <summary>
+    /// 获取指定字段的值所在的行索引。
+    /// </summary>
+    /// <param name="field">字段。</param>
+    /// <param name="value">字段的值。</param>
+    /// <returns>若找到数据则返回其索引，否则返回 <c>-1</c>。</returns>
+    protected int FindRowIndex(string? field, object? value)
+    {
+        if ( string.IsNullOrWhiteSpace(field) )
+        {
+            throw new ArgumentException($"{nameof(field)} 不能是 null 或空白字符串");
+        }
+
+        var index = CascadingGenericTable.TableData.FindIndex(row =>
+        {
+            if ( row.data is null )
+            {
+                return false;
+            }
+            var property = row.data.GetType()!.GetProperty(field);
+            if(property is null )
+            {
+                return false;
+            }
+            return property!.GetValue(row.data).Equals(value);
+        });
+        return index;
     }
 }

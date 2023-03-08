@@ -10,38 +10,38 @@ public class TTableCheckboxColumn<TItem> : TTableRadioColumn<TItem>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        CascadingTable.IsSingleSelection = false;
+        CascadingGenericTable.IsSingleSelection = false;
     }
-    /// <inheritdoc/>
-    protected override RenderFragment? GetColumnContent() => GetCheckboxFragment(IsChecked, Value);
 
-    /// <summary>
-    /// 获取复选框的内容。
-    /// </summary>
-    /// <param name="isChecked">是否选中、</param>
-    /// <param name="value">复选框的值。</param>
-    private RenderFragment? GetCheckboxFragment(bool isChecked, object? value = default)
-        => builder => builder.Fluent().Element("label", "t-checkbox")
-                                        .Class("t-is-checked", isChecked)
+    internal override RenderFragment? GetColumnContent(params object[]? args)
+    {
+        var rowData = GetRowData(args);
+        var value = GetValue(rowData);
+
+       return builder => builder.Fluent().Element("label", "t-checkbox")
+                                        .Class("t-is-checked", IsChecked(value))
                                         .Content(checkbox =>
                                         {
                                             checkbox.Fluent().Element("input", "t-checkbox__former")
                                                             .Attribute("value", value, value is not null)
                                                             .Attribute("type", "checkbox")
+                                                            .Callback<ChangeEventArgs>("onchange",this,e=>
+                                                            {
+                                                                var getRowIndex = FindRowIndex(value);
+                                                                CascadingGenericTable.SelectRow(getRowIndex);
+                                                            })
                                                         .Close();
                                             checkbox.Fluent().Span("t-checkbox__input").Close();
                                             checkbox.Fluent().Span("t-checkbox__label").Close();
                                         })
                                       .Close();
+    }
 
     /// <inheritdoc/>
-    protected override bool IsChecked
+    protected override bool IsChecked(object? value)
     {
-        get
-        {
-            var values = CascadingTable.SelectedRows.Select(m => m.Item?.GetType()?.GetProperty(SelectionKey!)?.GetValue(m.Item));
+        var values = CascadingGenericTable.SelectedRows.Select(m => m.Item?.GetType()?.GetProperty(Field!)?.GetValue(m.Item));
 
-            return values.Any(value => value is not null && value.Equals(Value));
-        }
+        return values.Any(eachValue => eachValue is not null && eachValue.Equals(value));
     }
 }
