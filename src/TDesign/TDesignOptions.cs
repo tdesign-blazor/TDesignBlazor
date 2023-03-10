@@ -8,4 +8,9 @@ public class TDesignOptions
     /// 获取或设置使用暗色主题。
     /// </summary>
     public bool Dark { get; set; }
+
+    /// <summary>
+    /// 设置 Popup 延迟显示或隐藏的时间，默认是 400 毫秒。
+    /// </summary>
+    public int? PopupTimeout { get; set; } = 400;
 }

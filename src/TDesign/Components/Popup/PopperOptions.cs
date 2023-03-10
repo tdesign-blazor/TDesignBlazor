@@ -15,18 +15,17 @@ public class PopperOptions
     [JsonPropertyName("placement")]
     public PopupPlacement Placement { get; set; } = PopupPlacement.Auto;
 
-    ///// <summary>
-    ///// 获取或设置修饰符集合。
-    ///// </summary>
-    //[JsonPropertyName("modifiers")]
-    //public PopperModifier[]? Modifiers { get; set; }
-
     /// <summary>
     /// 获取或设置要使用的定位策略。
     /// </summary>
     [JsonConverter(typeof(EnumDescriptionConverter<PopperStrategy>))]
     [JsonPropertyName("strategy")]
     public PopperStrategy Strategy { get; set; } = PopperStrategy.Absolute;
+    /// <summary>
+    /// 获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 400 毫秒。
+    /// </summary>
+    [JsonPropertyName("timeout")]
+    public int Timeout { get; set; } = 400;
 
     [JsonIgnore]
     public Action<PopperState>? OnFirstUpdate { get; set; }
@@ -36,20 +35,13 @@ public class PopperOptions
 }
 
 /// <summary>
-/// Popup 修饰者。
-/// </summary>
-public class PopperModifier
-{
-    public string Name { get; init; }
-    public bool Enabled { get; set; }
-    public object? Options { get; set; }
-}
-
-/// <summary>
 /// Popup 状态。
 /// </summary>
 public class PopperState
 {
+    /// <summary>
+    /// 弹出层的位置。
+    /// </summary>
     [JsonConverter(typeof(EnumDescriptionConverter<PopupPlacement>))]
     [JsonPropertyName("placement")]
     public PopupPlacement Placement { get; set; }

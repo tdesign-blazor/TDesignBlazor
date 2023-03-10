@@ -7,6 +7,7 @@ namespace TDesign;
 /// </summary>
 public class Popper : IAsyncDisposable
 {
+    private readonly IJSObjectReference _tdesignJsObj;
     private readonly IJSObjectReference? _popper;
     private readonly PopperOptions? _options;
     
@@ -14,8 +15,9 @@ public class Popper : IAsyncDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="Popper"/> class.
     /// </summary>
-    internal Popper(IJSObjectReference popper, PopperOptions options)
+    internal Popper(IJSObjectReference tdesignJsObj, IJSObjectReference popper, PopperOptions options)
     {
+        _tdesignJsObj = tdesignJsObj;
         this._popper = popper;
         this._options = options;
     }
@@ -49,9 +51,9 @@ public class Popper : IAsyncDisposable
     /// <summary>
     /// 销毁实例。
     /// </summary>
-    public ValueTask DestroyAsync()
+    public ValueTask HideAsync(ElementReference? popupElement)
     {
-        return _popper!.InvokeVoidAsync("destroy");
+        return _tdesignJsObj!.InvokeVoidAsync("popup.hide", _popper,popupElement, _options);
     }
 
     /// <inheritdoc/>
@@ -60,7 +62,6 @@ public class Popper : IAsyncDisposable
         if ( _popper is not null )
         {
             await _popper.DisposeAsync();
-            await DisposeAsync();
         }
     }
 }

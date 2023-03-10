@@ -15,9 +15,9 @@ public static class PopperExtensions
     /// <param name="options">Popup的配置。</param>
     public static async ValueTask<Popper> InvokePopupAsync(this IJSRuntime js, ElementReference selectorRef, ElementReference popupRef, PopperOptions options)
     {
-        var jsObject = await js.ImportScriptAsync();
-        var popperObject = await jsObject.InvokeAsync<IJSObjectReference>("popup.create", selectorRef, popupRef, options, DotNetObjectReference.Create(options));
+        var tdesignJsObj = await js.ImportTDesignScriptAsync();
+        var popperObject = await tdesignJsObj.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options));
 
-        return new (popperObject, options);
+        return new (tdesignJsObj,popperObject, options);
     }
 }

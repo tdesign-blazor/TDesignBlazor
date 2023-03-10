@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
+using System.Reflection;
 
 namespace TDesign;
 /// <summary>
@@ -36,11 +35,11 @@ public static class TDesignExtensions
     }
 
     /// <summary>
-    /// 引入 tdesign-blazor.js 脚本。
+    /// 引入 tdesign-blazor.js 的 JS 对象。
     /// </summary>
     /// <param name="js"></param>
     /// <returns></returns>
-    public static ValueTask<IJSObjectReference> ImportScriptAsync(this IJSRuntime js)
+    public static ValueTask<IJSObjectReference> ImportTDesignScriptAsync(this IJSRuntime js)
         => js.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
 
     /// <summary>
@@ -50,7 +49,7 @@ public static class TDesignExtensions
     /// <param name="isDark">是否为暗黑模式</param>
     public static async Task ChangeThemeMode(this IJSRuntime js, bool isDark = true)
     {
-        var jsObject = await js.ImportScriptAsync();
+        var jsObject = await js.ImportTDesignScriptAsync();
         await jsObject.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
     }
 }
