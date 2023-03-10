@@ -22,7 +22,7 @@ public class PopperOptions
     [JsonPropertyName("strategy")]
     public PopperStrategy Strategy { get; set; } = PopperStrategy.Absolute;
     /// <summary>
-    /// 获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 600 毫秒。
+    /// 获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 400 毫秒。
     /// </summary>
     [JsonPropertyName("timeout")]
     public int Timeout { get; set; } = 400;
