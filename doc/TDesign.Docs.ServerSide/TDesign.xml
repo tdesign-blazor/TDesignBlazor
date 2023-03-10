@@ -1933,7 +1933,7 @@
             表示 popper 对象。
             </summary>
         </member>
-        <member name="M:TDesign.Popper.#ctor(Microsoft.JSInterop.IJSObjectReference,TDesign.PopperOptions)">
+        <member name="M:TDesign.Popper.#ctor(Microsoft.JSInterop.IJSObjectReference,Microsoft.JSInterop.IJSObjectReference,TDesign.PopperOptions)">
             <summary>
             Initializes a new instance of the <see cref="T:TDesign.Popper"/> class.
             </summary>
@@ -1955,7 +1955,7 @@
             <param name="options">要更新的实例。</param>
             <returns></returns>
         </member>
-        <member name="M:TDesign.Popper.DestroyAsync">
+        <member name="M:TDesign.Popper.HideAsync(System.Nullable{Microsoft.AspNetCore.Components.ElementReference})">
             <summary>
             销毁实例。
             </summary>
@@ -1992,14 +1992,19 @@
             获取或设置要使用的定位策略。
             </summary>
         </member>
-        <member name="T:TDesign.PopperModifier">
+        <member name="P:TDesign.PopperOptions.Timeout">
             <summary>
-            Popup 修饰者。
+            获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 600 毫秒。
             </summary>
         </member>
         <member name="T:TDesign.PopperState">
             <summary>
             Popup 状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.PopperState.Placement">
+            <summary>
+            弹出层的位置。
             </summary>
         </member>
         <member name="T:TDesign.PopupPlacement">
@@ -2102,11 +2107,6 @@
             具备悬浮提示的弹出层。
             </summary>
         </member>
-        <member name="F:TDesign.TPopup.HIDDEN_CLASS">
-            <summary>
-            隐藏的 class。
-            </summary>
-        </member>
         <member name="P:TDesign.TPopup.ChildContent">
             <inheritdoc/>
         </member>
@@ -2130,26 +2130,23 @@
             设置弹出层是否具备箭头指向。
             </summary>
         </member>
-        <member name="P:TDesign.TPopup.Visible">
-            <summary>
-            设置是否显示弹出层。
-            </summary>
-        </member>
         <member name="P:TDesign.TPopup.Trigger">
             <summary>
             触发弹出的方式。
             </summary>
         </member>
+        <member name="P:TDesign.TPopup.Visible">
+            <summary>
+            获取一个布尔值，表示弹出框是否显示。
+            </summary>
+        </member>
+        <member name="M:TDesign.TPopup.OnParametersSet">
+            <inheritdoc/>
+        </member>
         <member name="M:TDesign.TPopup.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TPopup.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TPopup.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TPopup.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TPopup.CaptureElementReference(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
@@ -4949,9 +4946,9 @@
             <param name="mapping">状态和图标的映射关系。</param>
             <returns>图标枚举。</returns>
         </member>
-        <member name="M:TDesign.TDesignExtensions.ImportScriptAsync(Microsoft.JSInterop.IJSRuntime)">
+        <member name="M:TDesign.TDesignExtensions.ImportTDesignScriptAsync(Microsoft.JSInterop.IJSRuntime)">
             <summary>
-            引入 tdesign-blazor.js 脚本。
+            引入 tdesign-blazor.js 的 JS 对象。
             </summary>
             <param name="js"></param>
             <returns></returns>

@@ -1,17 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace TDesign;
+﻿namespace TDesign;
 /// <summary>
 /// 具备悬浮提示的弹出层。
 /// </summary>
 [CssClass("t-popup")]
 public class TPopup : TDesignComponentBase, IHasChildContent
 {
-    /// <summary>
-    /// 隐藏的 class。
-    /// </summary>
-    const string HIDDEN_CLASS = "hide";
-
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -33,18 +26,20 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// 设置弹出层是否具备箭头指向。
     /// </summary>
     [Parameter] public bool Arrow { get; set; }
-    /// <summary>
-    /// 设置是否显示弹出层。
-    /// </summary>
-    [Parameter] public bool Visible { get; set; }
 
     /// <summary>
     /// 触发弹出的方式。
     /// </summary>
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
+    /// <summary>
+    /// 获取一个布尔值，表示弹出框是否显示。
+    /// </summary>
+    public bool Visible { get; private set; }
+
     Popper? _instance;
 
+    /// <inheritdoc/>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -80,28 +75,9 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         });
     }
 
-    /// <inheritdoc/>
-    protected override void BuildCssClass(ICssClassBuilder builder)
+    protected override void BuildStyle(IStyleBuilder builder)
     {
-        if (Visible)
-        {
-            builder.Remove(HIDDEN_CLASS);
-        }
-        else
-        {
-            builder.Append(HIDDEN_CLASS);
-        }
-    }
-
-    /// <inheritdoc/>
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        base.BuildAttributes(attributes);
-
-        if (Visible)
-        {
-            attributes["autofocus"] = true;
-        }
+        builder.Append("display:none");
     }
 
     /// <summary>
@@ -120,12 +96,11 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <param name="selector">被触发弹出层的元素引用。</param>
     public async Task Show(IBlazorComponent selector)
     {
-        Visible = true;
-        StateHasChanged();
         _instance = await JS.Value.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
             Placement = Placement
         });
+        Visible = _instance is not null;
     }
 
     /// <summary>
@@ -133,11 +108,10 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// </summary>
     public async Task Hide()
     {
-        Visible = false;
-        StateHasChanged();
         if (_instance is not null)
         {
-            await _instance.DestroyAsync();
+            await _instance.HideAsync(Reference);
+            Visible = false;
         }
     }
 }

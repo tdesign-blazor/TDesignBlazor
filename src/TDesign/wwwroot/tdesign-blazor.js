@@ -54,7 +54,6 @@ let affix = {
  * 弹出层
  * */
 let popup = {
-    popper: null,
     /**
      * 创建一个新的弹出层引用
      * @param objRef 触发对象的引用
@@ -63,17 +62,31 @@ let popup = {
      * @param optionDotNetHelper options 包装的 DotNetReference 对象
      * @returns popper 对象
      * */
-    create: function (objRef, popupRef, options, optionDotNetReference) {
+    show: function (trigerElement, popupElement, options, optionDotNetReference) {
 
         options.onFirstUpdate = state => {
             optionDotNetReference.invokeMethodAsync("InvokeOnFirstUpdate", { placement: state.placement });
         }
 
-        popup.popper = createPopper(objRef, popupRef, options);
+        let popper = createPopper(trigerElement, popupElement, options);
+        setTimeout(() => {
+            document.body.appendChild(popupElement);
+            popupElement.style.display = "";
 
-        document.body.appendChild(popupRef);
+            window.addEventListener("onclick", () => {
+                popup.hide(popper, popupElement, options);
+            });
 
-        return popup.popper;
+        }, options.timeout)
+        return popper;
+    },
+    hide: function (popper,popupElement, options) {
+        setTimeout(() => {
+            if (popupElement && popupElement.style.display == '') {
+                popupElement.style.display = 'none';
+            }
+            popper.destroy();
+        }, options.timeout);
     }
 }
 /**
