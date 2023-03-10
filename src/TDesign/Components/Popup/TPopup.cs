@@ -33,6 +33,11 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
     /// <summary>
+    /// 设置弹出延迟的时间，单位毫秒，默认400毫秒。
+    /// </summary>
+    [Parameter] public int? Timeout { get; set; } = 400;
+
+    /// <summary>
     /// 获取一个布尔值，表示弹出框是否显示。
     /// </summary>
     public bool Visible { get; private set; }
@@ -75,6 +80,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         });
     }
 
+    /// <inheritdoc/>
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append("display:none");
@@ -98,6 +104,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     {
         _instance = await JS.Value.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
+            Timeout = Timeout ?? Options.Value.PopupTimeout ?? 400,
             Placement = Placement
         });
         Visible = _instance is not null;
