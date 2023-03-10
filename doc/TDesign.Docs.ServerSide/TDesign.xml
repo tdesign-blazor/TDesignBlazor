@@ -1994,7 +1994,7 @@
         </member>
         <member name="P:TDesign.PopperOptions.Timeout">
             <summary>
-            获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 600 毫秒。
+            获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 400 毫秒。
             </summary>
         </member>
         <member name="T:TDesign.PopperState">
@@ -2135,6 +2135,11 @@
             触发弹出的方式。
             </summary>
         </member>
+        <member name="P:TDesign.TPopup.Timeout">
+            <summary>
+            设置弹出延迟的时间，单位毫秒，默认400毫秒。
+            </summary>
+        </member>
         <member name="P:TDesign.TPopup.Visible">
             <summary>
             获取一个布尔值，表示弹出框是否显示。
@@ -2147,6 +2152,9 @@
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TPopup.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TPopup.BuildStyle(ComponentBuilder.IStyleBuilder)">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TPopup.CaptureElementReference(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
@@ -4968,6 +4976,11 @@
         <member name="P:TDesign.TDesignOptions.Dark">
             <summary>
             获取或设置使用暗色主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDesignOptions.PopupTimeout">
+            <summary>
+            设置 Popup 延迟显示或隐藏的时间，默认是 400 毫秒。
             </summary>
         </member>
         <member name="T:Microsoft.Extensions.DependencyInjection.DependencyInjectionExtensions">
