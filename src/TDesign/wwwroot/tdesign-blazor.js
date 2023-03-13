@@ -1,4 +1,3 @@
-import { left } from './js/popper/enums.js'
 import { createPopper } from './js/popper/popper.js'
 
 let tdesign = {
@@ -67,17 +66,13 @@ let popup = {
         options.onFirstUpdate = state => {
             optionDotNetReference.invokeMethodAsync("InvokeOnFirstUpdate", { placement: state.placement });
         }
-
-        let popper = createPopper(trigerElement, popupElement, options);
+        let popper = createPopper(trigerElement, popupElement, options);;
+        
         setTimeout(() => {
-            document.body.appendChild(popupElement);
             popupElement.style.display = "";
-
-            window.addEventListener("onclick", () => {
-                popup.hide(popper, popupElement, options);
-            });
-
-        }, options.timeout)
+            document.body.appendChild(popupElement);
+            popper.update();
+        }, options.timeout);
         return popper;
     },
     hide: function (popper,popupElement, options) {
