@@ -1017,6 +1017,11 @@
             <param name="expression">值的表达式</param>
             <param name="changed">改变事件。</param>
         </member>
+        <member name="T:TDesign.TInputTag">
+            <summary>
+            用于输入文本标签。
+            </summary>
+        </member>
         <member name="T:TDesign.TInputText`1">
             <summary>
             用于承载用户信息录入的文本框。

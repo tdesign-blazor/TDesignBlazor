@@ -1,0 +1,23 @@
+﻿@page "/components/inputtag"
+
+<LayoutContent AnchorItems="@(new[]{"基础标签输入框"})">
+    <PageHeader Title="TagInput 标签输入框">
+        用于输入文本标签。
+    </PageHeader>
+    <Example Title="基础标签输入框">
+    <Description></Description>
+    <RunContent>
+        <TInputTag @bind-Value="BasicTags"/>
+        @string.Join(",",BasicTags)
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```html
+```
+")
+    </CodeContent>
+</Example>
+</LayoutContent>
+@code{
+    IEnumerable<string> BasicTags { get; set; } = Enumerable.Empty<string>();
+}

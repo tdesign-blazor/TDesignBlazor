@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{FE
 		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComponentBuilder", "..\ComponentBuilder\src\ComponentBuilder\ComponentBuilder.csproj", "{C99DEF71-67DF-4914-8CC5-1B9EB0DEF4C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{231C5268-E45C-4465-81A4-7A84B1DAC589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99DEF71-67DF-4914-8CC5-1B9EB0DEF4C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99DEF71-67DF-4914-8CC5-1B9EB0DEF4C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99DEF71-67DF-4914-8CC5-1B9EB0DEF4C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99DEF71-67DF-4914-8CC5-1B9EB0DEF4C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,13 @@
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
+<TInputTag @bind-Value="Text"/>
 
-<TPopup Content="Hello" Placement="PopupPlacement.Right">
-    <TButton>Submit</TButton>
-</TPopup>
+@code{
+    IEnumerable<string> Text { get; set; } = Enumerable.Empty<string>();
+
+    void HandleKey(KeyboardEventArgs e)
+    {
+        
+    }
+}

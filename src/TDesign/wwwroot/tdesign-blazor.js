@@ -16,6 +16,14 @@ let tdesign = {
             }
             method(e)
         }
+    },
+    focus: function (element,dotnetHelper) {
+        if (element) {
+            element.focus();
+            if (dotnetHelper) {
+                dotnetHelper.invokeMethodAsync("Invoke");
+            }
+        }
     }
 }
 /**
@@ -171,4 +179,4 @@ let theme = {
     }
 }
 
-export { affix, popup, anchor, theme }
+export { tdesign, affix, popup, anchor, theme }

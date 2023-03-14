@@ -149,18 +149,16 @@ partial class TTable<TItem>
                     .Class("t-table__footer--fixed", FixedFooter)
                     .Content(content =>
                     {
-                        content.Fluent()
-                                .Element("tr", "t-table__row--full", FooterContent is not null)
+                        content.Element("tr", "t-table__row--full", FooterContent is not null)
                                     .Content(tr => tr.CreateElement(0, "td", inner =>
                                     {
-                                        inner.Fluent()
+                                        inner
                                         .Div("t-table__row-full-element")
                                         .Content(div =>
                                         {
-                                            div.Fluent()
-                                                        .Div("t-table__row-filter-inner")
-                                                        .Content(FooterContent)
-                                                        .Close();
+                                            div.Div("t-table__row-filter-inner")
+                                                .Content(FooterContent)
+                                               .Close();
                                         })
                                         .Close();
                                     }, new { colspan = ChildComponents.Count }))
@@ -168,10 +166,9 @@ partial class TTable<TItem>
                                 .Element("tr", "t-tdesign__custom-footer-tr")
                                     .Content(tr =>
                                     {
-                                        tr.Fluent()
-                                            .ForEach("td", ChildComponents.Count, (content, index) =>
+                                        tr.ForEach("td", ChildComponents.Count, e =>
                                             {
-                                                content.Content(((TTableColumnBase)ChildComponents[index]).FooterContent);
+                                               e.builder.Content(((TTableColumnBase)ChildComponents[e.index]).FooterContent);
                                             });
                                     })
                                 .Close();

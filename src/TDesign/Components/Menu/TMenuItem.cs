@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Routing;
+﻿using Microsoft.AspNetCore.Components.Routing;
 
 namespace TDesign;
 
@@ -9,14 +8,14 @@ namespace TDesign;
 [CssClass("t-menu__item")]
 [ChildComponent(typeof(TSubMenu), Optional = true)]
 [ChildComponent(typeof(TMenu))]
-public class TMenuItem : TDesignComponentBase, IHasNavLink, IHasDisabled, IHasActive
+public class TMenuItem : TDesignComponentBase, IHasNavLinkComponent, IHasDisabled, IHasActive
 {
     [Inject] public NavigationManager NavigationManager { get; set; }
     [CascadingParameter] public TMenu CascadingMenu { get; set; }
     [CascadingParameter] public TSubMenu? CascadingSubMenu { get; set; }
     [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.All;
 
-    string? IHasNavLink.ActiveCssClass => "t-is-active";
+    string? IHasNavLinkComponent.ActiveCssClass => "t-is-active";
 
     public bool IsActive { get; set; }
     internal bool CanNavigationChanged { get; set; } = true;
