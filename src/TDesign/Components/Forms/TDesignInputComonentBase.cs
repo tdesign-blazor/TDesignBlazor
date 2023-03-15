@@ -69,8 +69,8 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     /// <param name="builder">The builder.</param>
     /// <param name="sequence">The sequence.</param>
     /// <param name="content">The content.</param>
-    /// <param name="otherCss">The other css.</param>
-    protected virtual void BuildInputWrapper(RenderTreeBuilder builder, int sequence, RenderFragment content, string? otherCss = default)
+    /// <param name="inputClass">The other css.</param>
+    protected virtual void BuildInputWrapper(RenderTreeBuilder builder, int sequence, RenderFragment content, string? inputClass = default,string? wrapClass=default)
     {
         builder.CreateElement(sequence, "div", wrap =>
         {
@@ -84,7 +84,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
                             .Append($"t-is-{Status.GetCssClass()}")
                             .Append($"t-align-{Alignment.GetCssClass()}")
                             .Append(Size.GetCssClass())
-                            .Append(otherCss, !string.IsNullOrEmpty(otherCss))
+                            .Append(inputClass, !string.IsNullOrEmpty(inputClass))
             });
 
             wrap.CreateElement(1, "div", TipContent, new
@@ -94,7 +94,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
             }, TipContent is not null);
         }, new
         {
-            @class = HtmlHelper.Class.Append("t-input__wrap").Append(AdditionalClass)
+            @class = HtmlHelper.Class.Append("t-input__wrap").Append(wrapClass)
         });
     }
 

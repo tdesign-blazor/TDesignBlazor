@@ -461,14 +461,14 @@
             获取触发数据绑定的事件名称。
             </summary>
         </member>
-        <member name="M:TDesign.TDesignInputComonentBase`1.BuildInputWrapper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String)">
+        <member name="M:TDesign.TDesignInputComonentBase`1.BuildInputWrapper(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,Microsoft.AspNetCore.Components.RenderFragment,System.String,System.String)">
             <summary>
             Builds the input wrapper.
             </summary>
             <param name="builder">The builder.</param>
             <param name="sequence">The sequence.</param>
             <param name="content">The content.</param>
-            <param name="otherCss">The other css.</param>
+            <param name="inputClass">The other css.</param>
         </member>
         <member name="M:TDesign.TDesignInputComonentBase`1.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <inheritdoc/>
@@ -1020,6 +1020,36 @@
         <member name="T:TDesign.TInputTag">
             <summary>
             用于输入文本标签。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.Prefix">
+            <summary>
+            设置标签的前缀文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.PrefixContent">
+            <summary>
+            设置标签的前缀任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.Max">
+            <summary>
+            最多容纳的标签数量。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.OnEnterPressed">
+            <summary>
+            设置一个当按下回车键后的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.Placeholder">
+            <summary>
+            设置文本框的水印占位字符串。
+            </summary>
+        </member>
+        <member name="P:TDesign.TInputTag.Theme">
+            <summary>
+            设置标签的主题颜色。
             </summary>
         </member>
         <member name="T:TDesign.TInputText`1">

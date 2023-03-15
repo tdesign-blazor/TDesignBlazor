@@ -1,13 +1,18 @@
-﻿namespace TDesign;
+﻿using ComponentBuilder;
+using ComponentBuilder.JSInterope;
+using Microsoft.JSInterop;
+
+namespace TDesign;
 
 /// <summary>
 /// 用于输入文本标签。
 /// </summary>
 public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
 {
-    internal List<string> TagList { get; set; } = new();
+    List<string> _currentTagList = new();
 
     private string? _inputText;
+    private ElementReference? _inputRef;
     /// <summary>
     /// 设置标签的前缀文本。
     /// </summary>
@@ -16,18 +21,45 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
     /// 设置标签的前缀任意内容。
     /// </summary>
     [Parameter] public RenderFragment? PrefixContent { get; set; }
-    
+    /// <summary>
+    /// 最多容纳的标签数量。
+    /// </summary>
+    [Parameter] public int? Max { get; set; }
+    /// <summary>
+    /// 设置一个当按下回车键后的回调方法。
+    /// </summary>
+    [Parameter] public EventCallback<string?> OnEnterPressed { get; set; }
+
+    /// <summary>
+    /// 设置文本框的水印占位字符串。
+    /// </summary>
+    [Parameter] public string? Placeholder { get; set; }
+    /// <summary>
+    /// 设置标签的主题颜色。
+    /// </summary>
+    [Parameter] public Theme? Theme { get; set; }
+
+    protected override void AfterSetParameters(ParameterView parameters)
+    {
+        base.AfterSetParameters(parameters);
+
+    }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        AdditionalClass += HtmlHelper.Class.Append("t-tag-input")
-                .Append("t-is-empty", !TagList!.Any())
-                .Append("t-tag-input--with-tag", TagList.Any())
-                .ToString();
 
         if ( Prefix.IsNotNullOrEmpty() )
         {
             PrefixContent ??= HtmlHelper.CreateContent(Prefix);
+        }
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if ( firstRender )
+        {
+            _currentTagList.AddRange(Value);
         }
     }
 
@@ -40,10 +72,12 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
                     {
                         tag.Div("t-tag-input__prefix", PrefixContent is not null).Content(PrefixContent).Close();
 
-                        tag.ForEach<TTag, string>(TagList, loop =>
+                        tag.ForEach<TTag, string>(Value, loop =>
                         {
                             loop.attribute.ChildContent(loop.item)
                                         .Attribute(nameof(TTag.Closable), true)
+                                        .Attribute(nameof(TTag.Size),Size)
+                                        .Attribute(nameof(TTag.Theme),Theme)
                                         .Callback<bool>(nameof(TTag.OnClosing), this, closed =>
                                         {
                                             if ( !closed )
@@ -54,43 +88,62 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
                                         })
                                         ;
                         });
-                    })
-                .Input(_inputText,@class: "t-input__inner").Style("width:0px")
-                    .Callback<ChangeEventArgs>("onchange",this,EnterInputText)
-                    .Callback<KeyboardEventArgs>("onkeyup",this,HandleKey)
-                .Span("t-input__input-pre")
-                .Close();
-        }, "t-input--prefix");
+                    }).Close();
+
+            inner.CreateElement(0, "input", attributes: new
+            {
+                @class = "t-input__inner",
+                placeholder = Placeholder
+            }, captureReference: el => _inputRef = el);
+
+            inner.Span("t-input__input-pre").Close();
+        }, "t-input--prefix", HtmlHelper.Class.Append("t-tag-input")
+                .Append("t-is-empty", !Value!.Any())
+                .Append("t-tag-input--with-tag", Value.Any())
+                .ToString());
     }
 
-    Task EnterInputText(ChangeEventArgs e)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _inputText = e.Value?.ToString();
-        return Task.CompletedTask;
+        //if ( firstRender )
+        //{
+            var tdesignJs = await JS.Value.ImportTDesignScriptAsync();
+            await tdesignJs.InvokeVoidAsync("tagInput.pressKey", _inputRef, CallbackFactory.Create<int, string>((keyCode, inputText) =>
+            {
+                _inputText = inputText;
+                HandleKey(keyCode);
+            }));
+            //await tdesignJs.InvokeVoidAsync("tagInput.remove", _inputRef, CallbackFactory.Create<int>(keyCode =>
+            //{
+            //    HandleKey(keyCode);
+            //}));
+        //}
     }
 
     protected override void BuildEventAttribute(IDictionary<string, object> attributes)
     {
     }
 
-    void HandleKey(KeyboardEventArgs e)
+    void HandleKey(int keyCode)
     {
-        switch ( e.Key )
+        switch ( keyCode )
         {
-            case "Enter":
-                if ( !string.IsNullOrWhiteSpace(_inputText) && !TagList.Contains(_inputText) )
+            case 13:
+                OnEnterPressed.InvokeAsync(_inputText);
+
+                if ( CanEnter() )
                 {
-                    TagList.Add(_inputText);
-                    Value = TagList;
-                    ValueChanged.InvokeAsync(TagList);
+                    _currentTagList.Add(_inputText);
+                    Value = _currentTagList;
+                    ValueChanged.InvokeAsync(_currentTagList);
                     StateHasChanged();
                     _inputText = default;
                 }
                 break;
-            case "Backspace":
-                if ( TagList.Count > 0 )
+            case 8: //Backspace
+                if ( _currentTagList.Count > 0 )
                 {
-                    Remove(TagList.Count - 1);
+                    Remove(_currentTagList.Count - 1);
                 }
                 break;
             default:
@@ -98,13 +151,30 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
         }
     }
 
+    private bool CanEnter()
+    {
+        if ( string.IsNullOrEmpty(_inputText) )
+        {
+            return false;
+        }
+        if ( _currentTagList.Contains(_inputText!) )
+        {
+            return false;
+        }
+        if ( Max.HasValue && _currentTagList.Count >= Max.Value )
+        {
+            return false;
+        }
+        return true;
+    }
+
     Task Remove(int index)
     {
         if ( index > -1 )
         {
-            TagList.RemoveAt(index);
-            Value = TagList;
-            ValueChanged.InvokeAsync(TagList);
+            _currentTagList.RemoveAt(index);
+            Value = _currentTagList;
+            ValueChanged.InvokeAsync(_currentTagList);
             StateHasChanged();
         }
         return Task.CompletedTask;

@@ -160,6 +160,35 @@ let anchor = {
     },
 }
 
+let tagInput = {
+    pressKey: function (element, dotNetObject) {
+
+        let inputValue;
+        element.addEventListener('input', (e) => {
+            inputValue = e.target.value;
+        });
+
+        element.addEventListener('keyup', e => {
+            //13: 回车键(Enter)
+            if (e.keyCode == 13) {
+                dotNetObject.invokeMethodAsync("Invoke", e.keyCode, inputValue);
+                element.value = inputValue = '';
+                element.focus();
+            }
+        })
+    },
+    remove: function (element, dotNetObject) {
+
+        element.addEventListener('keyup', e => {
+            //8: 退格键(Backspace)
+            if (e.keyCode == 8) {
+                dotNetObject.invokeMethodAsync("Invoke", e.keyCode);
+                element.focus();
+            }
+        })
+    }
+}
+
 
 /**
  * 暗黑模式
@@ -179,4 +208,4 @@ let theme = {
     }
 }
 
-export { tdesign, affix, popup, anchor, theme }
+export { tdesign, affix, popup, anchor, theme, tagInput }
