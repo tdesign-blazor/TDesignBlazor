@@ -1,99 +1,76 @@
-﻿using ComponentBuilder.Fluent;
-using Microsoft.AspNetCore.Components.Forms;
-using System.Linq.Expressions;
-using System.Text;
-
-namespace TDesign;
+﻿namespace TDesign;
 
 /// <summary>
 /// 用于输入文本标签。
 /// </summary>
-[CssClass("t-input__inner")]
-[HtmlTag("input")]
-public class TInputTag : TDesignComponentBase,IHasInputValue<IEnumerable<string>>
+public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
 {
     internal List<string> TagList { get; set; } = new();
-    [CascadingParameter] public EditContext? CascadedEditContext { get; internal set; }
-    [Parameter]public Expression<Func<IEnumerable<string>?>>? ValueExpression { get; set; }
-    [Parameter] public IEnumerable<string>? Value { get; set; }
-    [Parameter] public EventCallback<IEnumerable<string>?> ValueChanged { get; set; }
 
     private string? _inputText;
-
-    private ElementReference? _inputRef;
-
-    protected override void AfterSetParameters(ParameterView parameters)
+    /// <summary>
+    /// 设置标签的前缀文本。
+    /// </summary>
+    [Parameter] public string? Prefix { get; set; }
+    /// <summary>
+    /// 设置标签的前缀任意内容。
+    /// </summary>
+    [Parameter] public RenderFragment? PrefixContent { get; set; }
+    
+    protected override void OnParametersSet()
     {
-        this.InitializeInputValue();
+        base.OnParametersSet();
+        AdditionalClass += HtmlHelper.Class.Append("t-tag-input")
+                .Append("t-is-empty", !TagList!.Any())
+                .Append("t-tag-input--with-tag", TagList.Any())
+                .ToString();
+
+        if ( Prefix.IsNotNullOrEmpty() )
+        {
+            PrefixContent ??= HtmlHelper.CreateContent(Prefix);
+        }
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        builder.Div("t-input__wrap t-tag-input")
-                .Class("t-is-empty", !TagList!.Any())
-                .Class("t-tag-input--with-tag", TagList.Any())
-                .Content(prefix =>
-                {
-                    prefix.Div("t-input t-input--prefix")
-                        .Content(inner =>
+        BuildInputWrapper(builder, 0, inner =>
+        {
+            inner.Div("t-input__prefix")
+                    .Content(tag =>
+                    {
+                        tag.Div("t-tag-input__prefix", PrefixContent is not null).Content(PrefixContent).Close();
+
+                        tag.ForEach<TTag, string>(TagList, loop =>
                         {
-                            inner.Div("t-input__prefix")
-                                    .Content(tag =>
-                                    {
-                                        tag.ForEach<TTag, string>(TagList, loop =>
+                            loop.attribute.ChildContent(loop.item)
+                                        .Attribute(nameof(TTag.Closable), true)
+                                        .Callback<bool>(nameof(TTag.OnClosing), this, closed =>
                                         {
-                                            loop.attribute.ChildContent(loop.item);
-                                        });
-                                    })
-                                .Close();
-                            base.BuildRenderTree(inner);
-                            inner.Span("t-input__input-pre").Close();
-
-                        })
-                        .Close();
-                })
-            .Close();
-
-        //builder.Div("t-input t-input--prefix")
-        //    .Content(inner =>
-        //    {
-        //        builder.CreateElement(0, "input", attributes: new
-        //        {
-        //            @class= "t-input__inner",
-        //            onchange=HtmlHelper.Event.Create(this,Enter)
-        //        });
-        //        //inner
-        //        ////              .Div("t-input__prefix")
-        //        ////                .Content(tag =>
-        //        ////                {
-        //        ////                    tag.ForEach<TTag, string>(TagList, loop =>
-        //        ////                    {
-        //        ////                        loop.attribute.ChildContent(loop.item);
-        //        ////                    });
-        //        ////                })
-        //        //            .Input(_inputText, @class: "t-input__inner")
-        //        //                .Style("width:0px")
-        //        //                //.Callback<ChangeEventArgs>("onchange", this, Enter)
-        //        //                //.Callback<KeyboardEventArgs>("onkeypress", this, HandleKey)
-        //        ////            .Span("t-input__input-pre")
-        //        //        .Close();
-
-        //    })
-        //    .Close();
+                                            if ( !closed )
+                                            {
+                                                return;
+                                            }
+                                            Remove(loop.index);
+                                        })
+                                        ;
+                        });
+                    })
+                .Input(_inputText,@class: "t-input__inner").Style("width:0px")
+                    .Callback<ChangeEventArgs>("onchange",this,EnterInputText)
+                    .Callback<KeyboardEventArgs>("onkeyup",this,HandleKey)
+                .Span("t-input__input-pre")
+                .Close();
+        }, "t-input--prefix");
     }
 
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        attributes["value"] = _inputText;
-        attributes["onchange"] = HtmlHelper.Event.Create(this, Enter);
-        attributes["onkeyup"] = HtmlHelper.Event.Create(this, HandleKey);
-    }
-
-
-
-    void Enter(ChangeEventArgs e)
+    Task EnterInputText(ChangeEventArgs e)
     {
         _inputText = e.Value?.ToString();
+        return Task.CompletedTask;
+    }
+
+    protected override void BuildEventAttribute(IDictionary<string, object> attributes)
+    {
     }
 
     void HandleKey(KeyboardEventArgs e)
@@ -101,25 +78,35 @@ public class TInputTag : TDesignComponentBase,IHasInputValue<IEnumerable<string>
         switch ( e.Key )
         {
             case "Enter":
-                var text = _inputText;
-                if ( !string.IsNullOrWhiteSpace(text) )
+                if ( !string.IsNullOrWhiteSpace(_inputText) && !TagList.Contains(_inputText) )
                 {
-                    TagList.Add(text);
-                    _inputText = default;
-                    this.ChangeValue(TagList);
+                    TagList.Add(_inputText);
+                    Value = TagList;
+                    ValueChanged.InvokeAsync(TagList);
                     StateHasChanged();
+                    _inputText = default;
                 }
                 break;
             case "Backspace":
                 if ( TagList.Count > 0 )
                 {
-                    TagList.RemoveAt(TagList.Count - 1);
-                    this.ChangeValue(TagList);
-                    StateHasChanged();
+                    Remove(TagList.Count - 1);
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    Task Remove(int index)
+    {
+        if ( index > -1 )
+        {
+            TagList.RemoveAt(index);
+            Value = TagList;
+            ValueChanged.InvokeAsync(TagList);
+            StateHasChanged();
+        }
+        return Task.CompletedTask;
     }
 }

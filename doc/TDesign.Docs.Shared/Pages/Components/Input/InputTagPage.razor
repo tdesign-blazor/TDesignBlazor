@@ -7,12 +7,25 @@
     <Example Title="基础标签输入框">
     <Description></Description>
     <RunContent>
-        <TInputTag @bind-Value="BasicTags"/>
+            <TInputTag @bind-Value="BasicTags" />
+            <TInputTag @bind-Value="BasicTags" Prefix="标签" />
+            <TInputTag @bind-Value="BasicTags">
+                <PrefixContent>
+                    <TIcon Name="IconName.CheckRectangle" /> 标签
+                </PrefixContent>
+            </TInputTag>
         @string.Join(",",BasicTags)
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```html
+<TInputTag @bind-Value=""BasicTags"" />
+<TInputTag @bind-Value=""BasicTags"" Prefix=""标签"" />
+<TInputTag @bind-Value=""BasicTags"">
+    <PrefixContent>
+        <TIcon Name=""IconName.CheckRectangle"" /> 标签
+    <PrefixContent>
+</TInputTag>
 ```
 ")
     </CodeContent>

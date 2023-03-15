@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Linq.Expressions;
 
 namespace TDesign;
 
@@ -106,7 +105,7 @@ public class TTag : TDesignComponentBase, IHasChildContent
             builder.CreateComponent<TIcon>(sequence, attributes: new
             {
                 Name = IconName.Close,
-                AdditionalCssCLass = "t-tag__icon-close",
+                AdditionalCLass = "t-tag__icon-close",
                 onclick = HtmlHelper.Event.Create(this, () =>
                 {
                     if (Disabled)

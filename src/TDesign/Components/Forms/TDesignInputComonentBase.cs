@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Rendering;
 using System.Linq.Expressions;
 
 namespace TDesign;
@@ -103,7 +102,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
-        //BuildEventAttribute(attributes);
+        BuildEventAttribute(attributes);
     }
 
     protected virtual void BuildEventAttribute(IDictionary<string,object> attributes)
