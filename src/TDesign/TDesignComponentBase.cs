@@ -30,11 +30,6 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         BuildPopupAttributes(attributes);
     }
 
-    public override void AddChildComponent(IBlazorComponent component)
-    {
-        base.AddChildComponent(component);
-        StateHasChanged();
-    }
 
     //TODO 换成 Interceptor 实现
     /// <summary>
