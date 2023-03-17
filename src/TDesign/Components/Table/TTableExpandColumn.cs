@@ -3,6 +3,7 @@
 /// <summary>
 /// 定义可展开详情行的列。
 /// </summary>
+/// <typeparam name="TItem">数据的类型。</typeparam>
 [CssClass("t-table__expandable-icon-cell")]
 public class TTableExpandColumn<TItem> : TTableColumnBase<TItem>, IHasChildContent<TItem>
 {
@@ -17,7 +18,7 @@ public class TTableExpandColumn<TItem> : TTableColumnBase<TItem>, IHasChildConte
 
 
     /// <inheritdoc/>
-    protected internal override RenderFragment? GetColumnContent(int rowIndex, TItem item)
+    protected internal override RenderFragment? GetCellContent(int rowIndex, TItem item)
     {
         var nextRowIndex = rowIndex + 1;
 

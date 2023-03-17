@@ -8,7 +8,7 @@ namespace TDesign;
 public abstract class TTableColumnBase<TItem> : BlazorComponentBase
 {
     /// <summary>
-    /// 级联的 <see cref="TTable"/> 组件。
+    /// 级联的 <see cref="TTable{TItem}"/> 组件。
     /// </summary>
     [CascadingParameter(Name ="Table")]protected internal TTable<TItem> Table { get; set; }
     /// <summary>
@@ -34,6 +34,7 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
     /// </summary>
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
+    /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
         base.AfterSetParameters(parameters);
@@ -51,21 +52,21 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
 
         Header ??= $"标题{Table.ChildComponents.Count}";
 
-        //任何时候，Header 必须有个值
         Table.AddChildComponent(this);
         base.OnInitialized();
     }
     /// <summary>
-    /// 获取顶部标题内容。
+    /// 获取标题内容。
     /// </summary>
     /// <returns></returns>
     protected internal virtual RenderFragment? GetHeaderContent() => HeaderContent;
 
     /// <summary>
-    /// 获取表格列的内容。
+    /// 获取单元格的内容。
     /// </summary>
+    /// <param name="rowIndex">行索引。</param>
     /// <param name="item">数据的每一项。</param>
-    protected internal abstract RenderFragment? GetColumnContent(int rowIndex, TItem item);
+    protected internal abstract RenderFragment? GetCellContent(int rowIndex, TItem item);
     /// <summary>
     /// 什么都不干。
     /// </summary>

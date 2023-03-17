@@ -3,6 +3,7 @@
 /// 表示呈现复选选控件的列。
 /// </summary>
 /// <typeparam name="TItem">数据的类型。</typeparam>
+/// <typeparam name="TField">绑定的字段类型。</typeparam>
 [CssClass("t-table__cell-check")]
 public class TTableCheckboxColumn<TItem,TField> : TTableRadioColumn<TItem,TField>
 {
@@ -14,7 +15,7 @@ public class TTableCheckboxColumn<TItem,TField> : TTableRadioColumn<TItem,TField
     }
 
     /// <inheritdoc/>
-    protected internal override RenderFragment? GetColumnContent(int rowIndex,TItem item)
+    protected internal override RenderFragment? GetCellContent(int rowIndex,TItem item)
     {
         var value = CellTextFunc!(item);
 

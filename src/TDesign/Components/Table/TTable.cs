@@ -1,18 +1,21 @@
 ﻿namespace TDesign;
 
 /// <summary>
-/// 数据表格。
+/// 数据表格组件。
 /// </summary>
 [CssClass("t-table")]
 [CascadingTypeParameter(nameof(TItem))]
 public partial class TTable<TItem> : TDesignComponentBase
 {
     #region 参数
+    /// <summary>
+    /// 设置行索引的键。默认是当前行。
+    /// </summary>
     [Parameter] public Func<TItem, object> ItemKey { get; set; } = x => x!;
     /// <summary>
     /// 设置表格的数据源。
     /// </summary>
-    [Parameter][EditorRequired] public DataSource<TItem>? Data { get; set; }
+    [Parameter,EditorRequired] public DataSource<TItem> Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>

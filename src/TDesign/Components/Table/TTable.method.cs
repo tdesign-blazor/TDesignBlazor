@@ -4,7 +4,7 @@
 
 namespace TDesign;
 
-partial class TTable<TItem>:TDesignComponentBase
+public partial class TTable<TItem>:TDesignComponentBase
 {
 
     /// <inheritdoc/>
@@ -124,6 +124,10 @@ partial class TTable<TItem>:TDesignComponentBase
     #endregion
 
     #region 展开/收缩行
+    /// <summary>
+    /// 展开/收缩指定索引的行。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
     public Task ExpandRow(int rowIndex)
     {
         var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
@@ -209,10 +213,10 @@ partial class TTable<TItem>:TDesignComponentBase
     /// <summary>
     /// 获取列集合。
     /// </summary>
-    internal IEnumerable<TTableColumnBase<TItem>> GetColumns() => GetColumns<TTableColumnBase<TItem>>();
+    protected internal IEnumerable<TTableColumnBase<TItem>> GetColumns() => GetColumns<TTableColumnBase<TItem>>();
     /// <summary>
     /// 获取指定类型的列集合。
     /// </summary>
     /// <typeparam name="TTableColumn">列的类型。</typeparam>
-    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase<TItem> => ChildComponents.OfType<TTableColumn>();
+    protected internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase<TItem> => ChildComponents.OfType<TTableColumn>();
 }
