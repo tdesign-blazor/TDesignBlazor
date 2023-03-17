@@ -9,8 +9,13 @@
     <TTableCheckboxColumn Field="f=>f.Id" />
     <TTableFieldColumn Field="f=>f.Id" />
     <TTableFieldColumn Field="f=>f.Name" />
-    <TTableFieldColumn Field="f=>f.Age" />
+    <TTableFieldColumn Field="f=>f.Age" >
+        <FooterContent>
+            底部内容
+        </FooterContent>
+        </TTableFieldColumn>
     <TTableFieldColumn Field="f=>f.Gender" />
+       
 </TTable>
 
 @code {

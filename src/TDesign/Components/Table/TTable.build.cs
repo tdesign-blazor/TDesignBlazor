@@ -150,7 +150,7 @@ partial class TTable<TItem>
                                     .Close();
                                 }, new { colspan = ChildComponents.Count }))
                             .Close()
-                            .Element("tr", "t-tdesign__custom-footer-tr",GetColumns().All(m => m.FooterContent is not null))
+                            .Element("tr", "t-tdesign__custom-footer-tr",GetColumns().Any(m => m.FooterContent is not null))
                                 .Content(tr =>
                                 {
                                     tr.ForEach("td", ChildComponents.Count, e =>
