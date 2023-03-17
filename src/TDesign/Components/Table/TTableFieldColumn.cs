@@ -9,7 +9,6 @@ namespace TDesign;
 public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChildContent<TItem>
 {
     private Expression<Func<TItem, TField>>? _lastAssignedField;
-    private Func<TItem, string?>? _cellTextFunc;
 
     /// <summary>
     /// 设置数据源的字段名称。
@@ -23,6 +22,9 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
     /// <inheritdoc/>
     [Parameter]public RenderFragment<TItem>? ChildContent { get; set; }
 
+    protected Func<TItem, string?>? CellTextFunc { get; private set; }
+
+    /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
         base.AfterSetParameters(parameters);
@@ -30,6 +32,7 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
         Header ??= (Field.Body as MemberExpression)?.Member?.Name;
     }
 
+    /// <inheritdoc/>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -46,19 +49,20 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
                 {
                     throw new TDesignComponentException(this, $"提供了 {nameof(Format)} 参数的值，但是字段 {typeof(TField)} 没有实现 {nameof(IFormattable)} 接口");
                 }
-                _cellTextFunc = item => ((IFormattable?)compiledFieldExpression(item!))?.ToString(Format, default);
+                CellTextFunc = item => ((IFormattable?)compiledFieldExpression(item!))?.ToString(Format, default);
             }
             else
             {
 
-                _cellTextFunc = item => compiledFieldExpression(item!)?.ToString();
+                CellTextFunc = item => compiledFieldExpression(item!)?.ToString();
             }
         }
 
-        ChildContent ??= value => builder => builder.AddContent(0, _cellTextFunc!(value));
+        ChildContent ??= value => builder => builder.AddContent(0, CellTextFunc!(value));
     }
 
-    protected internal override RenderFragment? GetColumnContent(TItem item)
+    /// <inheritdoc/>
+    protected internal override RenderFragment? GetColumnContent(int rowIndex, TItem item)
     => builder => builder.AddContent(0, ChildContent, item);
 
     ///// <summary>

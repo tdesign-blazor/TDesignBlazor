@@ -12,7 +12,7 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// <summary>
     /// 设置表格的数据源。
     /// </summary>
-    [Parameter][EditorRequired] public DataSource<TItem> Data { get; set; }
+    [Parameter][EditorRequired] public DataSource<TItem>? Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -85,11 +85,6 @@ public partial class TTable<TItem> : TDesignComponentBase
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
     #region 选中行
-    /// <summary>
-    /// 是否具备行选择功能。
-    /// </summary>
-    [Parameter] public bool RowSelection { get; set; }
-
     /// <summary>
     /// 设置当行被点击选择后的回调方法。
     /// </summary>

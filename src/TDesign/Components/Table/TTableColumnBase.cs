@@ -10,7 +10,7 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
     /// <summary>
     /// 级联的 <see cref="TTable"/> 组件。
     /// </summary>
-    [CascadingParameter(Name ="Table")] internal TTable<TItem> Table { get; set; }
+    [CascadingParameter(Name ="Table")]protected internal TTable<TItem> Table { get; set; }
     /// <summary>
     /// 设置列标题。若设置了 <see cref="HeaderContent"/> 参数，则该参数无效。
     /// </summary>
@@ -53,7 +53,6 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
 
         //任何时候，Header 必须有个值
         Table.AddChildComponent(this);
-        //StateHasChanged();
         base.OnInitialized();
     }
     /// <summary>
@@ -66,7 +65,7 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
     /// 获取表格列的内容。
     /// </summary>
     /// <param name="item">数据的每一项。</param>
-    protected internal abstract RenderFragment? GetColumnContent(TItem item);
+    protected internal abstract RenderFragment? GetColumnContent(int rowIndex, TItem item);
     /// <summary>
     /// 什么都不干。
     /// </summary>

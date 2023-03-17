@@ -70,16 +70,12 @@ partial class TTable<TItem>
                     {
                         var rowIndex = 0;
 
-                        foreach ( var (type, data) in TableData )
+                        foreach ( var item in TableData )
                         {
-                            content.OpenRegion(rowIndex);
-
-                            content.OpenElement(1,"tr");
-                            BuildTableRow(content, type, data);
+                            content.OpenElement(0, "tr");
                             content.SetKey(ItemKey);
+                            BuildTableRow(content, rowIndex, item);
                             content.CloseElement();
-
-                            content.CloseRegion();
 
                             rowIndex++;
                         }
@@ -170,27 +166,25 @@ partial class TTable<TItem>
 
     #endregion
 
-    private void BuildTableRow(RenderTreeBuilder builder, TableRowDataType type, TItem? data)
+    private void BuildTableRow(RenderTreeBuilder builder,int rowIndex, (TableRowDataType type, TItem? data) item)
     {
-        switch ( type )
+        switch ( item.type )
         {
-            //case TableRowDataType.Expand:
-            //    var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
-            //    if ( expandColumn is null )
-            //    {
-            //        break;
-            //    }
-            //    builder.AddAttribute(0, "class", "t-table__expanded-row");
-            //    builder.AddContent(1, expandColumn.GetExpandedRow());
-            //    break;
+            case TableRowDataType.Expand:
+                var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
+                if ( expandColumn is null )
+                {
+                    break;
+                }
+                builder.AddAttribute(0, "class", "t-table__expanded-row");
+                builder.AddContent(1, expandColumn.GetExpandedRow(item.data));
+                break;
             case TableRowDataType.Data:
                 builder.AddContent(0,row =>
                     {
-                        var columnIndex = 0;
                         foreach ( var column in GetColumns() )
                         {
-                            row.CreateElement(0, "td", column.GetColumnContent(data), new { columnIndex, @class = column.GetCssClassString() }, key: column);
-                            columnIndex++;
+                            row.CreateElement(0, "td", column.GetColumnContent(rowIndex, item.data), new { @class = column.GetCssClassString() }, key: column);
                         }
                     })
                         ;

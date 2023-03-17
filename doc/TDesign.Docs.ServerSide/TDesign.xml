@@ -2551,11 +2551,6 @@
             设置表尾的自定义内容。
             </summary>
         </member>
-        <member name="P:TDesign.TTable`1.RowSelection">
-            <summary>
-            是否具备行选择功能。
-            </summary>
-        </member>
         <member name="P:TDesign.TTable`1.OnRowSelected">
             <summary>
             设置当行被点击选择后的回调方法。
@@ -2613,7 +2608,7 @@
         </member>
         <member name="M:TDesign.TTable`1.SelectRow(System.Int32)">
             <summary>
-            选中指定索引的行，如果该行被选中，则会取消选中。 <see cref="P:TDesign.TTable`1.RowSelection"/> 为 <c>true</c> 时有效。
+            选中指定索引的行，如果该行被选中，则会取消选中。
             </summary>
             <param name="rowIndex">要选择的行索引。</param>
             <exception cref="T:TDesign.TDesignComponentException">无法找到指定行索引的数据。</exception>
@@ -2665,12 +2660,27 @@
             展开行。
             </summary>
         </member>
+        <member name="T:TDesign.TTableCheckboxColumn`2">
+            <summary>
+            表示呈现复选选控件的列。
+            </summary>
+            <typeparam name="TItem">数据的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`2.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`2.GetColumnContent(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableCheckboxColumn`2.IsChecked(System.String)">
+            <inheritdoc/>
+        </member>
         <member name="T:TDesign.TTableColumnBase`1">
             <summary>
             表示表格的单元格的基类。
             </summary>
         </member>
-        <member name="P:TDesign.TTableColumnBase`1.CascadingTable">
+        <member name="P:TDesign.TTableColumnBase`1.Table">
             <summary>
             级联的 <see cref="!:TTable"/> 组件。
             </summary>
@@ -2709,7 +2719,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TDesign.TTableColumnBase`1.GetColumnContent(`0)">
+        <member name="M:TDesign.TTableColumnBase`1.GetColumnContent(System.Int32,`0)">
             <summary>
             获取表格列的内容。
             </summary>
@@ -2720,6 +2730,32 @@
             什么都不干。
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:TDesign.TTableExpandColumn`1">
+            <summary>
+            定义可展开详情行的列。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableExpandColumn`1.Icon">
+            <summary>
+            设置要展开的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableExpandColumn`1.ChildContent">
+            <summary>
+            设置展开的 UI 内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTableExpandColumn`1.GetColumnContent(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableExpandColumn`1.GetHeaderContent">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableExpandColumn`1.GetExpandedRow(`0)">
+            <summary>
+            获取展开行的 UI 内容。
+            </summary>
         </member>
         <member name="T:TDesign.TTableFieldColumn`2">
             <summary>
@@ -2740,14 +2776,30 @@
         <member name="P:TDesign.TTableFieldColumn`2.ChildContent">
             <inheritdoc/>
         </member>
-        <member name="T:TDesign.TTableRow">
-            <summary>
-            用于渲染 tr 元素的组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TTableRow.ChildContent">
-            <summary>
+        <member name="M:TDesign.TTableFieldColumn`2.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableFieldColumn`2.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableFieldColumn`2.GetColumnContent(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TTableRadioColumn`2">
+            <summary>
+            表示呈现单选控件的列。
+            </summary>
+            <typeparam name="TItem">数据的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.TTableRadioColumn`2.OnParametersSet">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableRadioColumn`2.GetColumnContent(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableRadioColumn`2.IsChecked(System.String)">
+            <summary>
+            是否被选中。
             </summary>
         </member>
         <member name="T:TDesign.TTab">

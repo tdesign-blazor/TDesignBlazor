@@ -83,17 +83,12 @@ partial class TTable<TItem>:TDesignComponentBase
 
     #region 选择行
     /// <summary>
-    /// 选中指定索引的行，如果该行被选中，则会取消选中。 <see cref="RowSelection"/> 为 <c>true</c> 时有效。
+    /// 选中指定索引的行，如果该行被选中，则会取消选中。
     /// </summary>
     /// <param name="rowIndex">要选择的行索引。</param>
     /// <exception cref="TDesignComponentException">无法找到指定行索引的数据。</exception>
     public Task SelectRow(int rowIndex)
     {
-        if (!RowSelection)
-        {
-            return Task.CompletedTask;
-        }
-
         if (rowIndex < 0)
         {
             return Task.CompletedTask;
@@ -111,6 +106,7 @@ partial class TTable<TItem>:TDesignComponentBase
             if(!TryGetRowData(rowIndex, out var rowItem) )
             {
                 //没有抓到数据，如何处理
+                return Task.CompletedTask;
             }
 
             selectedItem = new(rowItem.data, rowIndex);
@@ -127,41 +123,41 @@ partial class TTable<TItem>:TDesignComponentBase
     }
     #endregion
 
-    //#region 展开/收缩行
-    //public Task ExpandRow(int rowIndex)
-    //{
-    //    var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
+    #region 展开/收缩行
+    public Task ExpandRow(int rowIndex)
+    {
+        var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
 
-    //    if ( expandColumn  is null)
-    //    {
-    //        return Task.CompletedTask;
-    //    }
+        if ( expandColumn is null )
+        {
+            return Task.CompletedTask;
+        }
 
-    //    var nextIndex = rowIndex + 1;
+        var nextIndex = rowIndex + 1;
 
-    //    if ( TryGetRowData(rowIndex, out var row) )
-    //    {
-    //        try
-    //        {
-    //            var (type, data) = TableData[nextIndex];
-    //            if ( type == TableRowDataType.Expand )
-    //            {
-    //                TableData.RemoveAt(nextIndex);
-    //            }
-    //            else
-    //            {
-    //                TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
-    //            }
-    //        }
-    //        catch 
-    //        {
-    //            TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
-    //        }
-    //    }
+        if ( TryGetRowData(rowIndex, out var row) )
+        {
+            try
+            {
+                var (type, data) = TableData[nextIndex];
+                if ( type == TableRowDataType.Expand )
+                {
+                    TableData.RemoveAt(nextIndex);
+                }
+                else
+                {
+                    TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+                }
+            }
+            catch
+            {
+                TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+            }
+        }
 
-    //    return this.Refresh();
-    //}
-    //#endregion
+        return this.Refresh();
+    }
+    #endregion
 
     #region Private
     private void AddData(TableRowDataType rowType, TItem data) => TableData.Add((rowType, data));
