@@ -117,7 +117,6 @@ partial class TTable<TItem>
                         .Close();
     }
 
-    #region tfoot 部分
     /// <summary>
     /// 构建底部，自定义 FooterContent 作为通栏表底，对列的 FooterContent 作为当列的表底。
     /// </summary>
@@ -151,7 +150,7 @@ partial class TTable<TItem>
                                     .Close();
                                 }, new { colspan = ChildComponents.Count }))
                             .Close()
-                            .Element("tr", "t-tdesign__custom-footer-tr")
+                            .Element("tr", "t-tdesign__custom-footer-tr",GetColumns().All(m => m.FooterContent is not null))
                                 .Content(tr =>
                                 {
                                     tr.ForEach("td", ChildComponents.Count, e =>
@@ -163,8 +162,6 @@ partial class TTable<TItem>
                 })
                 .Close();
     }
-
-    #endregion
 
     /// <summary>
     /// 构建表格的行数据。

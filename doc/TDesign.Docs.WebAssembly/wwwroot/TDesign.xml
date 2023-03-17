@@ -2429,24 +2429,35 @@
         </member>
         <member name="T:TDesign.TTable`1">
             <summary>
-            数据表格。
+            数据表格组件。
             </summary>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTable`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
         </member>
         <member name="M:TDesign.TTable`1.BuildTable(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             构建表格。
             </summary>
             <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
+            <param name="sequence"></param>
         </member>
-        <member name="M:TDesign.TTable`1.GetTableClass">
+        <member name="M:TDesign.TTable`1.BuildTableContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
-            获取 table 元素的 class 字符串。
+            构建表格。
             </summary>
-            <returns></returns>
         </member>
         <member name="M:TDesign.TTable`1.BuildTableBody">
             <summary>
             构建 tbody 部分。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildEmptyContent">
+            <summary>
+            构建空表格的内容。
             </summary>
         </member>
         <member name="M:TDesign.TTable`1.BuildTableHeader">
@@ -2454,12 +2465,30 @@
             构建 thead 部分。
             </summary>
         </member>
+        <member name="M:TDesign.TTable`1.BuildTableFooter">
+            <summary>
+            构建底部，自定义 FooterContent 作为通栏表底，对列的 FooterContent 作为当列的表底。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTable`1.BuildTableRow(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32,System.ValueTuple{TDesign.TableRowDataType,`0})">
+            <summary>
+            构建表格的行数据。
+            </summary>
+            <param name="builder"></param>
+            <param name="rowIndex">行索引。</param>
+            <param name="item">数据。</param>
+        </member>
         <member name="M:TDesign.TTable`1.BuildPagination(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             构建分页。
             </summary>
             <param name="builder"><see cref="T:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder"/> 实例。</param>
             <param name="sequence">源代码的位置。</param>
+        </member>
+        <member name="P:TDesign.TTable`1.ItemKey">
+            <summary>
+            设置行索引的键。默认是当前行。
+            </summary>
         </member>
         <member name="P:TDesign.TTable`1.Data">
             <summary>
@@ -2613,6 +2642,12 @@
             <param name="rowIndex">要选择的行索引。</param>
             <exception cref="T:TDesign.TDesignComponentException">无法找到指定行索引的数据。</exception>
         </member>
+        <member name="M:TDesign.TTable`1.ExpandRow(System.Int32)">
+            <summary>
+            展开/收缩指定索引的行。
+            </summary>
+            <param name="rowIndex">行索引。</param>
+        </member>
         <member name="M:TDesign.TTable`1.GetRowData(System.Int32)">
             <summary>
             获取指定行索引的数据。
@@ -2683,7 +2718,7 @@
         </member>
         <member name="P:TDesign.TTableColumnBase`1.Table">
             <summary>
-            级联的 <see cref="!:TTable"/> 组件。
+            级联的 <see cref="T:TDesign.TTable`1"/> 组件。
             </summary>
         </member>
         <member name="P:TDesign.TTableColumnBase`1.Header">
@@ -2711,6 +2746,9 @@
             设置底部的任意 UI 片段。
             </summary>
         </member>
+        <member name="M:TDesign.TTableColumnBase`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
+        </member>
         <member name="M:TDesign.TTableColumnBase`1.OnInitialized">
             <inheritdoc/>
         </member>
@@ -2724,6 +2762,7 @@
             <summary>
             获取单元格的内容。
             </summary>
+            <param name="rowIndex">行索引。</param>
             <param name="item">数据的每一项。</param>
         </member>
         <member name="M:TDesign.TTableColumnBase`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
@@ -2736,6 +2775,7 @@
             <summary>
             定义可展开详情行的列。
             </summary>
+            <typeparam name="TItem">数据的类型。</typeparam>
         </member>
         <member name="P:TDesign.TTableExpandColumn`1.Icon">
             <summary>
