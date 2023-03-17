@@ -1,16 +1,28 @@
 ﻿/* 用于定义表格中各种代码片段的文件 */
 
 using ComponentBuilder;
+using ComponentBuilder.Fluent;
 
 namespace TDesign;
 partial class TTable<TItem>
 {
+    protected override void BuildRenderTree(RenderTreeBuilder builder)
+    {
+        builder.CreateCascadingComponent(this, 0, base.BuildRenderTree,"Table", true);
+    }
+
+    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+    {
+        builder.AddContent(sequence, ChildContent);
+        BuildTable(builder, sequence + 1);
+        BuildPagination(builder, 10);
+    }
+
     /// <summary>
     /// 构建表格。
     /// </summary>
     /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-    /// <param name="sequence">源代码的位置。</param>
-    void BuildTable(RenderTreeBuilder builder, int sequence)
+    void BuildTable(RenderTreeBuilder builder,int sequence)
     {
         if ( Loading )
         {
@@ -27,81 +39,44 @@ partial class TTable<TItem>
     }
 
     /// <summary>
-    /// 构造表格的 tbody 内容部分。
+    /// 获取 table 元素的 class 字符串。
     /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="sequence"></param>
+    /// <returns></returns>
+    string? GetTableClass() => HtmlHelper.Class.Append("t-table--layout-fixed", !AutoWidth, "t-table--layout-auto").ToString();
+
     void BuildTableContent(RenderTreeBuilder builder)
-    {
-        builder.Fluent()
-            .Div().Class("t-table__content").Style($"max-height:{FixedHeight}px", FixedHeight.HasValue)
-            .Content(content =>
-            {
-                content.Fluent().Element("table")
-                                    .Class("t-table--layout-auto", AutoWidth)
-                                    .Class("t-table--layout-fixed", !AutoWidth)
-                                    .Content(table =>
-                                    {
-                                        BuildHeader(table, 0);
-                                        BuildBody(table);
-                                        BuildFooter(table);
-                                    })
-                                .Close();
-            })
-            .Close();
+    => builder.Div("t-table__content").Style($"max-height:{FixedHeight}px", FixedHeight.HasValue)
+                .Content(content =>
+                {
+                    content.Element("table", GetTableClass())
+                    .Content(table =>
+                    {
+                        table.AddContent(0, BuildTableHeader());
+                        table.AddContent(1, BuildTableBody());
+                        table.AddContent(2, BuildTableFooter());
+                    })
+                    .Close();
 
-
-        /// <summary>
-        /// 构建 theader 部分。
-        /// </summary>
-        /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-        /// <param name="sequence">源代码的位置。</param>
-        void BuildHeader(RenderTreeBuilder builder, int sequence)
-        {
-            builder.Fluent().Element("thead", "t-table__header")
-                                .Class("t-table__header--fixed", FixedHeader)
-                                .Content(content =>
-                                {
-                                    content.CreateComponent<TTableRow>(0, tr =>
-                                    {
-                                        tr.OpenRegion(1);
-                                        var index = 0;
-                                        foreach ( var column in GetColumns() )
-                                        {
-                                            var key = index;
-                                            var headerContent = column.GetHeaderContent();
-
-                                            tr.CreateElement(index, "th", headerContent, new { @class = column.HeaderClass }, key: key);
-                                            index++;
-                                        }
-                                        tr.CloseRegion();
-                                    });
-                                })
-                            .Close();
-        }
+                })
+        .Close();
+       
         /// <summary>
         /// 构建 tbody 部分。
         /// </summary>
-        /// <param name="builder"><see cref="RenderTreeBuilder"/> 实例。</param>
-        /// <param name="sequence">源代码的位置。</param>
-        void BuildBody(RenderTreeBuilder builder)
+        RenderFragment? BuildTableBody()
         {
-            builder.Fluent().Element("tbody", "t-table__body")
+            return builder=> builder.Element("tbody", "t-table__body")
                     .Content(content =>
                     {
                         var rowIndex = 0;
 
                         foreach ( var (type, data) in TableData )
                         {
-                            content.AddContent(0, ChildContent!.Invoke(data));
-
-                            var rowKey = rowIndex;
-
                             content.OpenRegion(rowIndex);
 
                             content.OpenElement(1,"tr");
-                            BuildRow(content,rowIndex, type, data);
-                            content.SetKey(rowKey);
+                            BuildTableRow(content, type, data);
+                            content.SetKey(ItemKey);
                             content.CloseElement();
 
                             content.CloseRegion();
@@ -111,102 +86,110 @@ partial class TTable<TItem>
 
                         if ( DataLoadedComplete && !TableData.Any() )
                         {
-                            BuildEmptyContent(content);
+                            content.AddContent(10, BuildEmptyContent());
                         }
                     })
                 .Close();
-
-            #region 空表格的内容
-            void BuildEmptyContent(RenderTreeBuilder builder)
-                => builder.Fluent().Element("tr", "t-table__empty-row")
-                .Content(td => td.Fluent().Element("td")
-                                        .Attribute("colspan", ChildComponents.Count)
-                                        .Content(content => content.Fluent()
-                                                                .Div("t-table__empty")
-                                                                .Content(EmptyContent)
-                                                                .Close())
-                                        .Close())
-                .Close();
-            #endregion
         }
-        #region tfoot 部分
-        // 自定义 FooterContent 作为通栏表底，对列的 FooterContent 作为当列的表底
-        void BuildFooter(RenderTreeBuilder builder)
+
+    #region 空表格的内容
+    RenderFragment BuildEmptyContent()
+        => builder => builder.Element("tr", "t-table__empty-row")
+                                .Content(td => td.Element("td")
+                                                    .Attribute("colspan", ChildComponents.Count)
+                                                    .Content(content => content.Div("t-table__empty").Content(EmptyContent).Close())
+                                                .Close())
+                            .Close();
+    #endregion
+    /// <summary>
+    /// 构建 thead 部分。
+    /// </summary>
+    RenderFragment? BuildTableHeader()
+    {
+      return builder=>  builder.Element("thead", "t-table__header")
+                            .Class("t-table__header--fixed", FixedHeader)
+                            .Content(content =>
+                            {
+                                content.Element("tr").Content(tr =>
+                                {
+                                    var index = 0;
+                                    foreach ( var column in GetColumns() )
+                                    {
+                                        var headerContent = column.GetHeaderContent();
+                                        tr.CreateElement(index, "th", headerContent, new { @class = column.HeaderClass }, key: column);
+                                        index++;
+                                    }
+                                }).Close();
+                            })
+                        .Close();
+    }
+    #region tfoot 部分
+    // 自定义 FooterContent 作为通栏表底，对列的 FooterContent 作为当列的表底
+    private RenderFragment? BuildTableFooter()
+    {
+        if ( !DataLoadedComplete )
         {
-            if ( !DataLoadedComplete )
-            {
-                return;
-            }
-
-            using var footer = builder.Fluent();
-
-            if ( FooterContent is null && GetColumns().All(m => m.FooterContent is null) )
-            {
-                return;
-            }
-
-            footer.Element("tfoot", "t-table__footer")
-                    .Class("t-table__footer--fixed", FixedFooter)
-                    .Content(content =>
-                    {
-                        content.Element("tr", "t-table__row--full", FooterContent is not null)
-                                    .Content(tr => tr.CreateElement(0, "td", inner =>
-                                    {
-                                        inner
-                                        .Div("t-table__row-full-element")
-                                        .Content(div =>
-                                        {
-                                            div.Div("t-table__row-filter-inner")
-                                                .Content(FooterContent)
-                                               .Close();
-                                        })
-                                        .Close();
-                                    }, new { colspan = ChildComponents.Count }))
-                                .Close()
-                                .Element("tr", "t-tdesign__custom-footer-tr")
-                                    .Content(tr =>
-                                    {
-                                        tr.ForEach("td", ChildComponents.Count, e =>
-                                            {
-                                               e.builder.Content(((TTableColumnBase)ChildComponents[e.index]).FooterContent);
-                                            });
-                                    })
-                                .Close();
-                    });
+            return default;
         }
 
-        #endregion
+        if ( FooterContent is null && GetColumns().All(m => m.FooterContent is null) )
+        {
+            return default;
+        }
+
+       return builder=> builder.Element("tfoot", "t-table__footer")
+                .Class("t-table__footer--fixed", FixedFooter)
+                .Content(content =>
+                {
+                    content.Element("tr", "t-table__row--full", FooterContent is not null)
+                                .Content(tr => tr.CreateElement(0, "td", inner =>
+                                {
+                                    inner
+                                    .Div("t-table__row-full-element")
+                                    .Content(div =>
+                                    {
+                                        div.Div("t-table__row-filter-inner")
+                                            .Content(FooterContent)
+                                           .Close();
+                                    })
+                                    .Close();
+                                }, new { colspan = ChildComponents.Count }))
+                            .Close()
+                            .Element("tr", "t-tdesign__custom-footer-tr")
+                                .Content(tr =>
+                                {
+                                    tr.ForEach("td", ChildComponents.Count, e =>
+                                    {
+                                        e.builder.Content(((TTableColumnBase<TItem>)ChildComponents[e.index]).FooterContent);
+                                    });
+                                })
+                            .Close();
+                })
+                .Close();
     }
 
-    private void BuildRow(RenderTreeBuilder builder,int rowIndex, TableRowDataType type, TItem? data)
+    #endregion
+
+    private void BuildTableRow(RenderTreeBuilder builder, TableRowDataType type, TItem? data)
     {
         switch ( type )
         {
-            case TableRowDataType.Expand:
-                var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
-                if ( expandColumn is null )
-                {
-                    break;
-                }
-                builder.AddAttribute(0, "class", "t-table__expanded-row");
-                builder.AddContent(1, expandColumn.GetExpandedRow());
-                break;
+            //case TableRowDataType.Expand:
+            //    var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
+            //    if ( expandColumn is null )
+            //    {
+            //        break;
+            //    }
+            //    builder.AddAttribute(0, "class", "t-table__expanded-row");
+            //    builder.AddContent(1, expandColumn.GetExpandedRow());
+            //    break;
             case TableRowDataType.Data:
                 builder.AddContent(0,row =>
                     {
                         var columnIndex = 0;
                         foreach ( var column in GetColumns() )
                         {
-                            var key = columnIndex;
-
-                            RenderFragment? columnContent = column switch
-                            {
-                                //TTableFieldColumn<TItem> fieldColumn => fieldColumn.GetColumnContent(data!, type),
-                                TTableExpandColumn<TItem> expandColumn => expandColumn.GetColumnContent(data!, rowIndex),
-                                _ => builder => builder.AddContent(0, column.GetColumnContent(data!, type)),
-                            };
-
-                            row.CreateElement(0, "td", columnContent, new { columnIndex, @class = column.GetCssClassString() }, key: key);
+                            row.CreateElement(0, "td", column.GetColumnContent(data), new { columnIndex, @class = column.GetCssClassString() }, key: column);
                             columnIndex++;
                         }
                     })
@@ -241,5 +224,5 @@ partial class TTable<TItem>
             }, new { @class = "t-table__pagination" });
         }, new { @class = "t-table__pagination-wrap", style = "opacity:1" }, condition: Pagination);
     }
-
 }
+

@@ -1,37 +1,18 @@
 ﻿namespace TDesign;
 
 /// <summary>
-/// 表示表格的基类。
-/// </summary>
-public abstract class TTableBase: TDesignComponentBase
-{
-    /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "Table");
-
-
-    /// <summary>
-    /// 获取列集合。
-    /// </summary>
-    internal IEnumerable<TTableColumnBase> GetColumns() => GetColumns<TTableColumnBase>();
-    /// <summary>
-    /// 获取指定类型的列集合。
-    /// </summary>
-    /// <typeparam name="TTableColumn">列的类型。</typeparam>
-    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase => ChildComponents.OfType<TTableColumn>();
-}
-
-/// <summary>
 /// 数据表格。
 /// </summary>
 [CssClass("t-table")]
 [CascadingTypeParameter(nameof(TItem))]
-public partial class TTable<TItem> : TTableBase
+public partial class TTable<TItem> : TDesignComponentBase
 {
     #region 参数
+    [Parameter] public Func<TItem, object> ItemKey { get; set; } = x => x!;
     /// <summary>
     /// 设置表格的数据源。
     /// </summary>
-    [Parameter][EditorRequired] public DataSource<TItem>? Data { get; set; }
+    [Parameter][EditorRequired] public DataSource<TItem> Data { get; set; }
     /// <summary>
     /// 设置是否为自动列宽，默认是固定的。
     /// </summary>
@@ -67,7 +48,7 @@ public partial class TTable<TItem> : TTableBase
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter] public RenderFragment<TItem?>? ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 加载中状态。值为 true 会显示默认加载中样式。

@@ -2,7 +2,12 @@
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
-<TInputTag @bind-Value="Text"/>
+<TTable TItem="Test.User" Data="Test.User.GetData()">
+    <TTableFieldColumn Field="f=>f.Id"/>
+    <TTableFieldColumn Field="f=>f.Name" />
+    <TTableFieldColumn Field="f=>f.Age" />
+    <TTableFieldColumn Field="f=>f.Gender" />
+</TTable>
 
 @code{
     IEnumerable<string> Text { get; set; } = Enumerable.Empty<string>();

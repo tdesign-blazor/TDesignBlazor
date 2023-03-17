@@ -4,7 +4,7 @@
 
 namespace TDesign;
 
-partial class TTable<TItem>
+partial class TTable<TItem>:TDesignComponentBase
 {
 
     /// <inheritdoc/>
@@ -26,16 +26,6 @@ partial class TTable<TItem>
         }
     }
 
-    /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "GenericTable");
-
-    /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        BuildTable(builder, sequence + 1);
-        BuildPagination(builder, sequence + 2);
-    }
-
 
     /// <summary>
     /// 以异步的方式查询数据。
@@ -55,7 +45,7 @@ partial class TTable<TItem>
 
         DataLoadedComplete = false;
         Loading = true;
-        await this.Refresh();
+        StateHasChanged();
 
         var (data, count) = await Data!.Query(page * size, (page - 1) * size);
         if (data is not null)
@@ -137,41 +127,41 @@ partial class TTable<TItem>
     }
     #endregion
 
-    #region 展开/收缩行
-    public Task ExpandRow(int rowIndex)
-    {
-        var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
+    //#region 展开/收缩行
+    //public Task ExpandRow(int rowIndex)
+    //{
+    //    var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
 
-        if ( expandColumn  is null)
-        {
-            return Task.CompletedTask;
-        }
+    //    if ( expandColumn  is null)
+    //    {
+    //        return Task.CompletedTask;
+    //    }
 
-        var nextIndex = rowIndex + 1;
+    //    var nextIndex = rowIndex + 1;
 
-        if ( TryGetRowData(rowIndex, out var row) )
-        {
-            try
-            {
-                var (type, data) = TableData[nextIndex];
-                if ( type == TableRowDataType.Expand )
-                {
-                    TableData.RemoveAt(nextIndex);
-                }
-                else
-                {
-                    TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
-                }
-            }
-            catch 
-            {
-                TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
-            }
-        }
+    //    if ( TryGetRowData(rowIndex, out var row) )
+    //    {
+    //        try
+    //        {
+    //            var (type, data) = TableData[nextIndex];
+    //            if ( type == TableRowDataType.Expand )
+    //            {
+    //                TableData.RemoveAt(nextIndex);
+    //            }
+    //            else
+    //            {
+    //                TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+    //            }
+    //        }
+    //        catch 
+    //        {
+    //            TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
+    //        }
+    //    }
 
-        return this.Refresh();
-    }
-    #endregion
+    //    return this.Refresh();
+    //}
+    //#endregion
 
     #region Private
     private void AddData(TableRowDataType rowType, TItem data) => TableData.Add((rowType, data));
@@ -217,4 +207,16 @@ partial class TTable<TItem>
         }
     }
     #endregion
+
+
+
+    /// <summary>
+    /// 获取列集合。
+    /// </summary>
+    internal IEnumerable<TTableColumnBase<TItem>> GetColumns() => GetColumns<TTableColumnBase<TItem>>();
+    /// <summary>
+    /// 获取指定类型的列集合。
+    /// </summary>
+    /// <typeparam name="TTableColumn">列的类型。</typeparam>
+    internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase<TItem> => ChildComponents.OfType<TTableColumn>();
 }

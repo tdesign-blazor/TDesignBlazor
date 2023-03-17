@@ -4,7 +4,7 @@
 <div id="@Id">
     @if (Parameters.Any())
     {
-        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
+       @* <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
         <TTable TItem="Parameter" Data="Parameters" >
             <TTableFieldColumn Field="@(nameof(Parameter.Name))" Header="名称" style="width:200px"></TTableFieldColumn>
             <TTableFieldColumn Header="类型">
@@ -24,17 +24,17 @@
                 }
             </TTableFieldColumn>
 
-        </TTable>
+        </TTable>*@
     }
     @if (Methods.Any())
     {
 
-        <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
+       @* <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
         <TTable TItem="Method" Data="Methods">
             <TTableFieldColumn Field="Name" Header="名称" style="width:200px"></TTableFieldColumn>
             <TTableFieldColumn Field="Parameter" Header="参数" style="width:200px"></TTableFieldColumn>
             <TTableFieldColumn Field="Description" Header="描述"></TTableFieldColumn>
-        </TTable>
+        </TTable>*@
     }
 </div>
 @code {
