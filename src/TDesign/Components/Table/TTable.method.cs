@@ -4,7 +4,7 @@
 
 namespace TDesign;
 
-partial class TTable<TItem>
+public partial class TTable<TItem>:TDesignComponentBase
 {
 
     /// <inheritdoc/>
@@ -26,16 +26,6 @@ partial class TTable<TItem>
         }
     }
 
-    /// <inheritdoc/>
-    protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.CreateCascadingComponent(this, 0, base.BuildRenderTree, "GenericTable");
-
-    /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        BuildTable(builder, sequence + 1);
-        BuildPagination(builder, sequence + 2);
-    }
-
 
     /// <summary>
     /// 以异步的方式查询数据。
@@ -55,7 +45,7 @@ partial class TTable<TItem>
 
         DataLoadedComplete = false;
         Loading = true;
-        await this.Refresh();
+        StateHasChanged();
 
         var (data, count) = await Data!.Query(page * size, (page - 1) * size);
         if (data is not null)
@@ -93,17 +83,12 @@ partial class TTable<TItem>
 
     #region 选择行
     /// <summary>
-    /// 选中指定索引的行，如果该行被选中，则会取消选中。 <see cref="RowSelection"/> 为 <c>true</c> 时有效。
+    /// 选中指定索引的行，如果该行被选中，则会取消选中。
     /// </summary>
     /// <param name="rowIndex">要选择的行索引。</param>
     /// <exception cref="TDesignComponentException">无法找到指定行索引的数据。</exception>
     public Task SelectRow(int rowIndex)
     {
-        if (!RowSelection)
-        {
-            return Task.CompletedTask;
-        }
-
         if (rowIndex < 0)
         {
             return Task.CompletedTask;
@@ -121,6 +106,7 @@ partial class TTable<TItem>
             if(!TryGetRowData(rowIndex, out var rowItem) )
             {
                 //没有抓到数据，如何处理
+                return Task.CompletedTask;
             }
 
             selectedItem = new(rowItem.data, rowIndex);
@@ -138,11 +124,15 @@ partial class TTable<TItem>
     #endregion
 
     #region 展开/收缩行
+    /// <summary>
+    /// 展开/收缩指定索引的行。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
     public Task ExpandRow(int rowIndex)
     {
         var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();
 
-        if ( expandColumn  is null)
+        if ( expandColumn is null )
         {
             return Task.CompletedTask;
         }
@@ -163,7 +153,7 @@ partial class TTable<TItem>
                     TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
                 }
             }
-            catch 
+            catch
             {
                 TableData.Insert(nextIndex, new(TableRowDataType.Expand, row.data));
             }
@@ -217,4 +207,16 @@ partial class TTable<TItem>
         }
     }
     #endregion
+
+
+
+    /// <summary>
+    /// 获取列集合。
+    /// </summary>
+    protected internal IEnumerable<TTableColumnBase<TItem>> GetColumns() => GetColumns<TTableColumnBase<TItem>>();
+    /// <summary>
+    /// 获取指定类型的列集合。
+    /// </summary>
+    /// <typeparam name="TTableColumn">列的类型。</typeparam>
+    protected internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase<TItem> => ChildComponents.OfType<TTableColumn>();
 }

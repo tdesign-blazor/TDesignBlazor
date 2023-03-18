@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using ComponentBuilder.JSInterope;
+using Microsoft.JSInterop;
 using System.Reflection;
 
 namespace TDesign;
@@ -51,5 +52,16 @@ public static class TDesignExtensions
     {
         var jsObject = await js.ImportTDesignScriptAsync();
         await jsObject.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
+    }
+
+    public static async ValueTask FocusAsync(this IJSRuntime js, ElementReference? inputElement,Action? focused = default)
+    {
+        if( inputElement is null )
+        {
+            return;
+        }
+
+        var tdesignScript = await js.ImportTDesignScriptAsync();
+        await tdesignScript.InvokeVoidAsync("tdesign.focus", inputElement);
     }
 }

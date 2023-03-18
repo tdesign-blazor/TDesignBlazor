@@ -30,6 +30,7 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         BuildPopupAttributes(attributes);
     }
 
+
     //TODO 换成 Interceptor 实现
     /// <summary>
     /// 构建 Popup 相关的属性。

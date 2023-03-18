@@ -5,12 +5,12 @@ namespace TDesign;
 /// <summary>
 /// 表示表格的单元格的基类。
 /// </summary>
-public abstract class TTableColumnBase : TDesignComponentBase
+public abstract class TTableColumnBase<TItem> : BlazorComponentBase
 {
     /// <summary>
-    /// 级联的 <see cref="TTable"/> 组件。
+    /// 级联的 <see cref="TTable{TItem}"/> 组件。
     /// </summary>
-    [CascadingParameter(Name = "Table")] protected TTableBase CascadingTable { get; set; }
+    [CascadingParameter(Name ="Table")]protected internal TTable<TItem> Table { get; set; }
     /// <summary>
     /// 设置列标题。若设置了 <see cref="HeaderContent"/> 参数，则该参数无效。
     /// </summary>
@@ -34,6 +34,7 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// </summary>
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
+    /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
         base.AfterSetParameters(parameters);
@@ -44,31 +45,28 @@ public abstract class TTableColumnBase : TDesignComponentBase
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
-        if ( CascadingTable is null )
+        if ( Table is null )
         {
             throw new InvalidOperationException("列必须定义在 TTable 组件中");
         }
 
-        Header ??= $"标题{CascadingTable.ChildComponents.Count}";
+        Header ??= $"标题{Table.ChildComponents.Count}";
 
-        //任何时候，Header 必须有个值
-        if ( !CascadingTable!.GetColumns().Any(m => m.Header!.Equals(Header)) )
-        {
-            CascadingTable.AddChildComponent(this);
-        }
+        Table.AddChildComponent(this);
         base.OnInitialized();
     }
     /// <summary>
-    /// 获取顶部标题内容。
+    /// 获取标题内容。
     /// </summary>
     /// <returns></returns>
-    internal virtual RenderFragment? GetHeaderContent() => HeaderContent;
+    protected internal virtual RenderFragment? GetHeaderContent() => HeaderContent;
 
     /// <summary>
-    /// 获取表格列的内容。
+    /// 获取单元格的内容。
     /// </summary>
-    /// <param name="args">参数数组。</param>
-    internal abstract RenderFragment? GetColumnContent(params object[]? args);
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="item">数据的每一项。</param>
+    protected internal abstract RenderFragment? GetCellContent(int rowIndex, TItem item);
     /// <summary>
     /// 什么都不干。
     /// </summary>

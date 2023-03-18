@@ -5,15 +5,15 @@
     @if (Parameters.Any())
     {
         <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的参数</h3>
-        <TTable TItem="Parameter" Data="Parameters">
-            <TTableFieldColumn Value="context?.Name" Header="名称" style="width:200px"></TTableFieldColumn>
-            <TTableFieldColumn Header="类型">
+        <TTable TItem="Parameter" Data="Parameters" >
+            <TTableFieldColumn Field="f=>f.Name" Header="名称" style="width:200px"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Type" Header="类型">
                 <code>@context?.Type</code>
             </TTableFieldColumn>
 
-            <TTableFieldColumn Value="context?.Description" Header="描述"></TTableFieldColumn>
-            <TTableFieldColumn Value="context?.Default" Header="默认值" style="width:100px"></TTableFieldColumn>
-            <TTableFieldColumn Header="必填" style="width:80px">
+            <TTableFieldColumn Field="f=>f.Description" Header="描述"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Default" Header="默认值" style="width:100px"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Required" Header="必填" style="width:80px">
                 @if (context.Required)
                 {
                     <TTag Theme="Theme.Danger">Y</TTag>
@@ -31,9 +31,9 @@
 
         <h3 style="font-weight: 700;font-size: 20px;line-height: 28px;margin: 48px 0 8px;display: flex;align-items: center;">@Title 的方法</h3>
         <TTable TItem="Method" Data="Methods">
-            <TTableFieldColumn Value="context?.Name" Header="名称" AdditionalStyle="width:200px"></TTableFieldColumn>
-            <TTableFieldColumn Value="context?.Parameter" Header="参数" AdditionalStyle="width:200px"></TTableFieldColumn>
-            <TTableFieldColumn Value="context?.Description" Header="描述"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Name" Header="名称" style="width:200px"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Parameter" Header="参数" style="width:200px"></TTableFieldColumn>
+            <TTableFieldColumn Field="f=>f.Description" Header="描述"></TTableFieldColumn>
         </TTable>
     }
 </div>

@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-form")]
 [ParentComponent]
-public class TForm : TDesignComponentBase,IHasForm
+public class TForm : TDesignComponentBase,IFormComponent
 {
     /// <summary>
     /// 设置作为行内布局。

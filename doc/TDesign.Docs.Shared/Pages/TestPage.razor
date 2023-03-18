@@ -2,7 +2,27 @@
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
+<TTable TItem="Test.User" Data="Test.User.GetData()">
+    <TTableExpandColumn>
+        <h4>Name:@context.Name</h4>
+    </TTableExpandColumn>
+    <TTableCheckboxColumn Field="f=>f.Id" />
+    <TTableFieldColumn Field="f=>f.Id" />
+    <TTableFieldColumn Field="f=>f.Name" />
+    <TTableFieldColumn Field="f=>f.Age" >
+        <FooterContent>
+            底部内容
+        </FooterContent>
+        </TTableFieldColumn>
+    <TTableFieldColumn Field="f=>f.Gender" />
+       
+</TTable>
 
-<TPopup Content="Hello" Placement="PopupPlacement.Right">
-    <TButton>Submit</TButton>
-</TPopup>
+@code {
+    IEnumerable<string> Text { get; set; } = Enumerable.Empty<string>();
+
+    void HandleKey(KeyboardEventArgs e)
+    {
+
+    }
+}

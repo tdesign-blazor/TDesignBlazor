@@ -5,14 +5,14 @@
 /// </summary>
 /// <typeparam name="TValue">与 <see cref="TInputRadioGroup{TValue}"/> 的值类型</typeparam>
 [HtmlTag("input")]
-[ChildComponent(typeof(TInputRadioGroup<>),Optional =true)]
+[ChildComponent(typeof(TInputRadioGroup<>))]
 [ChildComponent(typeof(TInputRadioContainer<>))]
 public class TInputRadio<TValue> : TDesignComponentBase
 {
     /// <summary>
     /// 级联的单选按钮组。这个对象时可选的
     /// </summary>
-    [CascadingParameter] public TInputRadioGroup<TValue>? CascadingRadioGroup { get; set; }
+    [CascadingParameter] public TInputRadioGroup<TValue> CascadingRadioGroup { get; set; }
 
     /// <summary>
     /// 级联单选组件容器。
@@ -109,7 +109,7 @@ public class TInputRadio<TValue> : TDesignComponentBase
     /// <summary>
     /// 是否为按钮风格的单选按钮，在 <see cref="CascadingRadioGroup"/> 有值时有效。
     /// </summary>
-    bool IsButtonStyle => CascadingRadioGroup is not null && CascadingRadioGroup.ButtonStyle.HasValue;
+    bool IsButtonStyle =>  CascadingRadioGroup.ButtonStyle.HasValue;
 
     /// <summary>
     /// 是否选中。
