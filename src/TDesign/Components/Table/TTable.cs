@@ -93,6 +93,17 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// </summary>
     [Parameter] public EventCallback<TTableRowItemEventArgs<TItem>> OnRowSelected { get; set; }
     #endregion
+
+    #region 可编辑/操作
+    /// <summary>
+    /// 设置一个点击【编辑】操作时触发的回调方法。
+    /// </summary>
+    [Parameter] public EventCallback<TTableRowItemEventArgs<TItem>> OnRowEditing { get; set; }
+    /// <summary>
+    /// 设置一个点击【提交】操作时触发的回调方法。
+    /// </summary>
+    [Parameter] public EventCallback<TTableRowItemEventArgs<TItem>> OnRowEdited { get; set; }
+    #endregion
     #endregion
 
     #region Internal
@@ -125,6 +136,11 @@ public partial class TTable<TItem> : TDesignComponentBase
     /// 获取一个布尔值，表示行仅可以被单选。
     /// </summary>
     internal bool IsSingleSelection { get; set; }
+
+    /// <summary>
+    /// 当前表格是否处于编辑状态。
+    /// </summary>
+    internal Dictionary<int, bool> EditableState { get; set; } = new();
 
     #endregion
 }

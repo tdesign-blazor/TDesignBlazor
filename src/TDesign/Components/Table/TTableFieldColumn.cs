@@ -22,7 +22,14 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
     [Parameter] public string? Format { get; set; }
     /// <inheritdoc/>
     [Parameter]public RenderFragment<TItem>? ChildContent { get; set; }
+    /// <summary>
+    /// 设置可编辑状态下的 UI 内容。
+    /// </summary>
+    [Parameter] public RenderFragment<TItem>? EditableContent { get; set; }
 
+    /// <summary>
+    /// 获取一个单元格文本的委托。
+    /// </summary>
     protected Func<TItem, string?>? CellTextFunc { get; private set; }
 
     /// <inheritdoc/>
@@ -58,11 +65,18 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
                 CellTextFunc = item => compiledFieldExpression(item!)?.ToString();
             }
         }
-
-        ChildContent ??= value => builder => builder.AddContent(0, CellTextFunc!(value));
+        
     }
 
     /// <inheritdoc/>
     protected internal override RenderFragment? GetCellContent(int rowIndex, TItem item)
-    => builder => builder.AddContent(0, ChildContent, item);
+    {
+        if ( Table.GetOrCreateEditableState(rowIndex) )
+        {
+            EditableContent ??= value => builder => builder.AddContent(0, CellTextFunc!(value));
+            return builder => builder.AddContent(0, EditableContent, item);
+        }
+        ChildContent ??= value => builder => builder.AddContent(0, CellTextFunc!(value));
+        return builder => builder.AddContent(0, ChildContent, item);
+    }
 }

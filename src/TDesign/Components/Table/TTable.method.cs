@@ -208,8 +208,7 @@ public partial class TTable<TItem>:TDesignComponentBase
     }
     #endregion
 
-
-
+    #region GetColumns
     /// <summary>
     /// 获取列集合。
     /// </summary>
@@ -219,4 +218,64 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// </summary>
     /// <typeparam name="TTableColumn">列的类型。</typeparam>
     protected internal IEnumerable<TTableColumn> GetColumns<TTableColumn>() where TTableColumn : TTableColumnBase<TItem> => ChildComponents.OfType<TTableColumn>();
+    #endregion
+
+    #region 编辑
+
+    /// <summary>
+    /// 获取或创建可编辑状态。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="editable">可否编辑。如果是 <c>null</c> 时，若 rowIndex 不存在，则默认状态时 <c>false</c>；若 rowIndex 存在，则更新为该值。</param>
+    /// <returns><c>True</c> 表示编辑状态，否则为 <c>false</c>。</returns>
+    internal bool GetOrCreateEditableState(int rowIndex, bool? editable = default)
+    {
+        if ( !EditableState.ContainsKey(rowIndex) )
+        {
+            EditableState.Add(rowIndex, editable ?? false);
+        }
+        if ( editable.HasValue )
+        {
+            EditableState[rowIndex] = editable.Value;
+        }
+        return EditableState[rowIndex];
+    }
+
+
+    /// <summary>
+    /// 切换到编辑视图。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="item">当前数据。</param>
+    public Task SwitchToEditView(int rowIndex,TItem item)
+    {
+        GetOrCreateEditableState(rowIndex, true);
+        OnRowEditing.InvokeAsync(new(item, rowIndex));
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// 切换到非编辑视图。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="item">当前数据。</param>
+    public Task SwitchToNonEditView(int rowIndex,TItem item)
+    {
+        GetOrCreateEditableState(rowIndex, false);
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// 提交保存指定行的数据。
+    /// </summary>
+    /// <param name="rowIndex">行索引。</param>
+    /// <param name="item">变化的数据。</param>
+    public async Task SubmitEditting(int rowIndex,TItem item)
+    {
+        await OnRowEdited.InvokeAsync(new(item, rowIndex));
+        await SwitchToNonEditView(rowIndex, item);
+    }
+    #endregion
 }

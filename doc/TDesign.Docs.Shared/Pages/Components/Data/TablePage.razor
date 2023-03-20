@@ -1,6 +1,6 @@
 ﻿@page "/components/table"
 <LayoutContent AnchorItems="@(new[]{"基础表格","斑马纹表格","边框表格","鼠标悬浮行","固定顶部", "加载状态",
-"自定义表尾的表格","可分页的表格","可选择行的表格","可展开行的表格","空表格", "API"})">
+"自定义表尾的表格","可分页的表格","可选择行的表格","可展开行的表格","空表格","可编辑的行", "API"})">
 <PageHeader Title="Table 表格">
     表格常用于展示同类结构下的多种数据，易于组织、对比和分析等，并可对数据进行搜索、筛选、排序等操作。一般包括表头、数据行和表尾三部分。
 </PageHeader>
@@ -779,7 +779,52 @@ async Task RowSelected(TTableRowItemEventArgs<User> e)
 ")
     </CodeContent>
 </Example>
-
+<Example Title="可编辑的行">
+    <Description>
+        设置 <code>&lt;TTableOperationColumn></code> 显示可操作的列，并使用 <code>&lt;EditableContent></code> 来设置编辑模式下的内容。
+    </Description>
+    <RunContent>
+            <TTable TItem="User" Data="User.GetData(5)">
+                <TTableCheckboxColumn Field="f=>f.Id" Header="选择" />
+                <TTableFieldColumn Field="f=>f.Id" Header="Id" />
+                <TTableFieldColumn Field="f=>f.Name" Header="姓名" >
+                    <EditableContent>
+                        <TInputText @bind-Value="context.Name"/>
+                    </EditableContent>
+                </TTableFieldColumn>
+                <TTableFieldColumn Field="f=>f.Age" Header="年龄" >
+                    <TInputNumber @bind-Value="context.Age" Min="18" Max="80"/>
+                    </TTableFieldColumn>
+                <TTableFieldColumn Field="f=>f.Gender" Header="性别">
+                    <ChildContent>
+                    @if ( context is not null )
+                    {
+                        if ( context.Gender )
+                        {
+                            <TTag Theme="Theme.Primary">男</TTag>
+                        }
+                        else
+                        {
+                            <TTag Theme="Theme.Danger">女</TTag>
+                        }
+                        }
+                    </ChildContent>
+                    <EditableContent>
+                        <TSelect @bind-Value="context.Gender">
+                            <TSelectOption Value="true">男</TSelectOption>
+                            <TSelectOption Value="false">女</TSelectOption>
+                        </TSelect>
+                    </EditableContent>
+                </TTableFieldColumn>
+            </TTable>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+```
+")
+    </CodeContent>
+</Example>
 <div id="API"></div>
     <ComponentAPI Component="typeof(TTable<>)" Title="TTable" />
     <ComponentAPI Component="typeof(TTableFieldColumn<,>)" Title="TTableFieldColumn"/>

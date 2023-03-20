@@ -2585,6 +2585,16 @@
             设置当行被点击选择后的回调方法。
             </summary>
         </member>
+        <member name="P:TDesign.TTable`1.OnRowEditing">
+            <summary>
+            设置一个点击【编辑】操作时触发的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.OnRowEdited">
+            <summary>
+            设置一个点击【提交】操作时触发的回调方法。
+            </summary>
+        </member>
         <member name="P:TDesign.TTable`1.TotalCount">
             <summary>
             总页数。
@@ -2613,6 +2623,11 @@
         <member name="P:TDesign.TTable`1.IsSingleSelection">
             <summary>
             获取一个布尔值，表示行仅可以被单选。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTable`1.EditableState">
+            <summary>
+            当前表格是否处于编辑状态。
             </summary>
         </member>
         <member name="M:TDesign.TTable`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
@@ -2674,6 +2689,35 @@
             获取指定类型的列集合。
             </summary>
             <typeparam name="TTableColumn">列的类型。</typeparam>
+        </member>
+        <member name="M:TDesign.TTable`1.GetOrCreateEditableState(System.Int32,System.Nullable{System.Boolean})">
+            <summary>
+            获取或创建可编辑状态。
+            </summary>
+            <param name="rowIndex">行索引。</param>
+            <param name="editable">可否编辑。如果是 <c>null</c> 时，若 rowIndex 不存在，则默认状态时 <c>false</c>；若 rowIndex 存在，则更新为该值。</param>
+            <returns><c>True</c> 表示编辑状态，否则为 <c>false</c>。</returns>
+        </member>
+        <member name="M:TDesign.TTable`1.SwitchToEditView(System.Int32,`0)">
+            <summary>
+            切换到编辑视图。
+            </summary>
+            <param name="rowIndex">行索引。</param>
+            <param name="item">当前数据。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.SwitchToNonEditView(System.Int32,`0)">
+            <summary>
+            切换到非编辑视图。
+            </summary>
+            <param name="rowIndex">行索引。</param>
+            <param name="item">当前数据。</param>
+        </member>
+        <member name="M:TDesign.TTable`1.SubmitEditting(System.Int32,`0)">
+            <summary>
+            提交保存指定行的数据。
+            </summary>
+            <param name="rowIndex">行索引。</param>
+            <param name="item">变化的数据。</param>
         </member>
         <member name="T:TDesign.TableRowDataType">
             <summary>
@@ -2818,6 +2862,16 @@
         <member name="P:TDesign.TTableFieldColumn`2.ChildContent">
             <inheritdoc/>
         </member>
+        <member name="P:TDesign.TTableFieldColumn`2.EditableContent">
+            <summary>
+            设置可编辑状态下的 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableFieldColumn`2.CellTextFunc">
+            <summary>
+            获取一个单元格文本的委托。
+            </summary>
+        </member>
         <member name="M:TDesign.TTableFieldColumn`2.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
         </member>
@@ -2825,6 +2879,48 @@
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TTableFieldColumn`2.GetCellContent(System.Int32,`0)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.TTableOperationColumn`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.Editable">
+            <summary>
+            设置一个委托，表示是否可编辑行。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.EditableContent">
+            <summary>
+            设置在非编辑状态下，可编辑操作的 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.Removable">
+            <summary>
+            设置一个委托，表示是否可移除行。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.RemovableContent">
+            <summary>
+            在非编辑状态下，可移除操作的 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.SubmitContent">
+            <summary>
+            设置在编辑状态下，提交编辑操作的任意 UI 内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TTableOperationColumn`1.CancelContent">
+            <summary>
+            设置在编辑状态下，取消编辑操作的任意 UI 内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TTableOperationColumn`1.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TTableOperationColumn`1.GetCellContent(System.Int32,`0)">
             <inheritdoc/>
         </member>
         <member name="T:TDesign.TTableRadioColumn`2">

@@ -3,19 +3,39 @@
 @layout EmptyLayout
 
 <TTable TItem="Test.User" Data="Test.User.GetData()">
-    <TTableExpandColumn>
-        <h4>Name:@context.Name</h4>
-    </TTableExpandColumn>
-    <TTableCheckboxColumn Field="f=>f.Id" />
-    <TTableFieldColumn Field="f=>f.Id" />
-    <TTableFieldColumn Field="f=>f.Name" />
-    <TTableFieldColumn Field="f=>f.Age" >
-        <FooterContent>
-            底部内容
-        </FooterContent>
-        </TTableFieldColumn>
-    <TTableFieldColumn Field="f=>f.Gender" />
-       
+    <TTableFieldColumn Field="f=>f.Id" Header="Id" />
+    <TTableFieldColumn Field="f=>f.Name" Header="姓名">
+        <EditableContent>
+            <TInputText @bind-Value="context.Name" />
+        </EditableContent>
+    </TTableFieldColumn>
+    <TTableFieldColumn Field="f=>f.Age" Header="年龄">
+        <EditableContent>
+        <TInputNumber @bind-Value="context.Age" Min="18" Max="80" />
+        </EditableContent>
+    </TTableFieldColumn>
+    <TTableFieldColumn Field="f=>f.Gender" Header="性别">
+        <ChildContent>
+            @if ( context is not null )
+            {
+                if ( context.Gender )
+                {
+                    <TTag Theme="Theme.Primary">男</TTag>
+                }
+                else
+                {
+                    <TTag Theme="Theme.Danger">女</TTag>
+                }
+            }
+        </ChildContent>
+        <EditableContent>
+            <TSelect @bind-Value="context.Gender">
+                <TSelectOption Value="true">男</TSelectOption>
+                <TSelectOption Value="false">女</TSelectOption>
+            </TSelect>
+        </EditableContent>
+    </TTableFieldColumn>
+    <TTableOperationColumn/>
 </TTable>
 
 @code {
