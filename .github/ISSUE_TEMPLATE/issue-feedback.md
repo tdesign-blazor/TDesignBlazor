@@ -2,7 +2,7 @@
 name: Issue Feedback
 about: 在使用过程中遇到的问题
 title: "[问题]"
-labels: ''
+labels: want help
 assignees: ''
 
 ---

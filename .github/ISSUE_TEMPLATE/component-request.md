@@ -2,7 +2,7 @@
 name: Component Request
 about: 新增或更新组件
 title: "[组件]"
-labels: feature
+labels: component, feature
 assignees: ''
 
 ---
