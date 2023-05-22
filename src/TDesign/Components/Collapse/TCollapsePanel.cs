@@ -71,8 +71,8 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
                 }
             }, new
             {
-                @class = HtmlHelper.Class.Append("t-collapse-panel__header").Append("t-is-clickable", !CascadingCollaspe.IconToggle && !Disabled),
-                onclick = HtmlHelper.Event.Create(this, () =>
+                @class = HtmlHelper.Instance.Class().Append("t-collapse-panel__header").Append("t-is-clickable", !CascadingCollaspe.IconToggle && !Disabled),
+                onclick = HtmlHelper.Instance.Callback().Create(this, () =>
                 {
                     if (!CascadingCollaspe.IconToggle)
                     {
@@ -94,11 +94,11 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
         builder.CreateComponent<TIcon>(sequence, attributes: new
         {
             Name = !Active ? (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value ? IconName.ChevronLeft : IconName.ChevronRight) : IconName.ChevronDown,
-            AdditionalClass = HtmlHelper.Class
+            AdditionalClass = HtmlHelper.Instance.Class()
                                     .Append("t-collapse-panel__icon")
                                     .Append("t-collapse-panel__icon--left", CascadingCollaspe.RightTIcon.HasValue && !CascadingCollaspe.RightTIcon.Value)
                                     .Append("t-collapse-panel__icon--right", CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value).ToString(),
-            onclick = HtmlHelper.Event.Create(this, () =>
+            onclick = HtmlHelper.Instance.Callback().Create(this, () =>
                 {
                     if (CascadingCollaspe.IconToggle)
                     {
@@ -116,9 +116,9 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
             @class = "t-collapse-panel__content"
         }), new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
             .Append("t-collapse-panel__body"),
-            style = HtmlHelper.Style
+            style = HtmlHelper.Instance.Style()
             .Append("display:none", !Active)
             .Append("")
         });

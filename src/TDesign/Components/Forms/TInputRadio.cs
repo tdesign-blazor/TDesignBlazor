@@ -60,21 +60,21 @@ public class TInputRadio<TValue> : TDesignComponentBase
             content.OpenRegion(10000);
             content.CreateElement(0, "span", attributes: new
             {
-                @class = HtmlHelper.Class.Append("t-radio__input", !IsButtonStyle, "t-radio-button__input")
+                @class = HtmlHelper.Instance.Class().Append("t-radio__input", !IsButtonStyle, "t-radio-button__input")
             });
             content.CreateElement(1, "span", ChildContent, new
             {
-                @class = HtmlHelper.Class.Append("t-radio__label", !IsButtonStyle, "t-radio-button__label")
+                @class = HtmlHelper.Instance.Class().Append("t-radio__label", !IsButtonStyle, "t-radio-button__label")
             });
             content.CloseRegion();
         },
         new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                             .Append("t-radio", !IsButtonStyle, "t-radio-button")
                             .Append("t-is-disabled", Disabled)
                             .Append("t-is-checked", Checked),
-            style = HtmlHelper.Style.Append("background-color: var(--td-bg-color-container-select);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup?.ButtonStyle == RadioButtonStyle.Filled && Checked)
+            style = HtmlHelper.Instance.Style().Append("background-color: var(--td-bg-color-container-select);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup?.ButtonStyle == RadioButtonStyle.Filled && Checked)
             .Append("background-color: var(--td-brand-color);transition: all .2s cubic-bezier(.38,0,.24,1);", CascadingRadioGroup?.ButtonStyle == RadioButtonStyle.PrimaryFilled && Checked)
         });
     }

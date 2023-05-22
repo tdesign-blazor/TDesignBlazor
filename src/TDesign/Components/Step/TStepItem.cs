@@ -51,7 +51,7 @@ public class TStepItem : TDesignComponentBase, IHasChildContent
             BuildTIcon(inner, 0);
             BuildContent(inner, 1);
 
-        }, new { @class = HtmlHelper.Class.Append("t-steps-item__inner") });
+        }, new { @class = HtmlHelper.Instance.Class().Append("t-steps-item__inner") });
     }
 
     private void BuildContent(RenderTreeBuilder builder, int sequence)
@@ -108,7 +108,7 @@ public class TStepItem : TDesignComponentBase, IHasChildContent
         },
                     new
                     {
-                        @class = HtmlHelper.Class
+                        @class = HtmlHelper.Instance.Class()
                         .Append("t-steps-item__icon")
                         .Append($"t-steps-item--{Status.GetCssClass()}")
                     });

@@ -114,7 +114,7 @@ public class TSelectOption<TValue> : TDesignComponentBase, IHasChildContent
     /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        attributes["onclick"] = HtmlHelper.Event.Create(this, () =>
+        attributes["onclick"] = HtmlHelper.Instance.Callback().Create(this, () =>
         {
             if (!Disabled)
             {

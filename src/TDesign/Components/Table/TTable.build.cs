@@ -211,11 +211,11 @@ partial class TTable<TItem>
                 builder.CreateComponent<TPagination>(sequence, attributes: new
                 {
                     PageIndex,
-                    PageIndexChanged = HtmlHelper.Event.Create<int>(this, value => QueryData(value, PageSize)),
+                    PageIndexChanged = HtmlHelper.Instance.Callback().Create<int>(this, value => QueryData(value, PageSize)),
                     PageSize,
-                    PageSizeChanged = HtmlHelper.Event.Create<int>(this, value => QueryData(1, value)),
+                    PageSizeChanged = HtmlHelper.Instance.Callback().Create<int>(this, value => QueryData(1, value)),
                     Total = TotalCount,
-                    TotalChanged = HtmlHelper.Event.Create<int>(this, value => QueryData(1, PageSize)),
+                    TotalChanged = HtmlHelper.Instance.Callback().Create<int>(this, value => QueryData(1, PageSize)),
                     ShowJumpPage = true
                 });
             }, new { @class = "t-table__pagination" });

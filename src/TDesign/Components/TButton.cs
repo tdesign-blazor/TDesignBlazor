@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 [HtmlTag("button")]
 [CssClass("t-button")]
-public class TButton : TDesignComponentBase, IHasOnClick, IHasChildContent
+public class TButton : TDesignComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>

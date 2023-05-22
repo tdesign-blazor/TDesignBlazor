@@ -1,0 +1,36 @@
+<Project>
+	<PropertyGroup>	
+		<LangVersion Condition="$(TargetFramework) == '.net6.0'">10</LangVersion>
+		<LangVersion Condition="$(TargetFramework) == '.net7.0'">11</LangVersion>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
+	<Choose>
+		<When Condition="'$(Configuration)' == 'Debug'">
+			<PropertyGroup>
+				<DebugSymbols>true</DebugSymbols>
+				<DebugType>full</DebugType>
+				<Optimize>false</Optimize>
+				<DefineConstants>DEBUG;TRACE</DefineConstants>
+			</PropertyGroup>
+		</When>
+		<When Condition=" '$(Configuration)'=='Release' ">
+			<PropertyGroup>
+				<DebugSymbols>false</DebugSymbols>
+				<Optimize>true</Optimize>
+				<DefineConstants>TRACE</DefineConstants>
+				<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+				<PackageOutputPath>..\..\pack</PackageOutputPath>
+			</PropertyGroup>
+		</When>
+	</Choose>
+	<ItemGroup Condition="$(TargetFramework) == 'net6.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) == 'net7.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+	</ItemGroup>
+</Project>

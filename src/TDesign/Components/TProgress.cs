@@ -100,7 +100,7 @@ public class TProgress : TDesignComponentBase, IHasActive
         },
         new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                                 .Append("t-progress--thin")
                                 .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
                                 .Append("t-progress--status--active", Active)
@@ -128,7 +128,7 @@ public class TProgress : TDesignComponentBase, IHasActive
             }
         }, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                                 .Append("t-progress__bar")
                                 .Append("t-progress--plump")
                                 .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
@@ -178,11 +178,11 @@ public class TProgress : TDesignComponentBase, IHasActive
             });
         }, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                                 .Append("t-progress--circle")
                                 .Append("t-progress--status--undefined", Status is null, $"t-progress--status--{Status?.GetCssClass()}")
                                 .Append("t-progress--status--active", Active),
-            style = HtmlHelper.Style
+            style = HtmlHelper.Instance.Style()
                                                 .Append($"width:{size}px", size.HasValue)
                                                 .Append($"height:{size}px", size.HasValue)
                                                 .Append($"font-size:{fontSize}px", fontSize.HasValue)
@@ -218,7 +218,7 @@ public class TProgress : TDesignComponentBase, IHasActive
                         new
                         {
                             @class = "t-progress__inner",
-                            style = HtmlHelper.Style.Append($"width:{Value}%").Append(additionalStyle ??= string.Empty),
+                            style = HtmlHelper.Instance.Style().Append($"width:{Value}%").Append(additionalStyle ??= string.Empty),
                         });
     }
 

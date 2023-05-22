@@ -1,6 +1,4 @@
-﻿using ComponentBuilder.JSInterope;
-using Microsoft.JSInterop;
-using System.Reflection;
+﻿using Microsoft.JSInterop;
 
 namespace TDesign;
 /// <summary>
@@ -8,11 +6,6 @@ namespace TDesign;
 /// </summary>
 public static class TDesignExtensions
 {
-    public static bool TryGetCustomAttribute<TAttribute>(this MemberInfo? memberInfo, out TAttribute attribute) where TAttribute : Attribute
-    {
-        attribute = memberInfo?.GetCustomAttribute<TAttribute>();
-        return attribute is not null;
-    }
     /// <summary>
     /// 获取状态对应的图标名称。
     /// </summary>
@@ -40,8 +33,8 @@ public static class TDesignExtensions
     /// </summary>
     /// <param name="js"></param>
     /// <returns></returns>
-    public static ValueTask<IJSObjectReference> ImportTDesignScriptAsync(this IJSRuntime js)
-        => js.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+    public static ValueTask<IJSModule> ImportTDesignScriptAsync(this IJSRuntime js)
+        => js.ImportAsync("./_content/TDesign/tdesign-blazor.js");
 
     /// <summary>
     /// 执行切换暗黑和浅色模式切换
@@ -51,7 +44,7 @@ public static class TDesignExtensions
     public static async Task ChangeThemeMode(this IJSRuntime js, bool isDark = true)
     {
         var jsObject = await js.ImportTDesignScriptAsync();
-        await jsObject.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
+        await jsObject.Module.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
     }
 
     public static async ValueTask FocusAsync(this IJSRuntime js, ElementReference? inputElement,Action? focused = default)
@@ -62,6 +55,6 @@ public static class TDesignExtensions
         }
 
         var tdesignScript = await js.ImportTDesignScriptAsync();
-        await tdesignScript.InvokeVoidAsync("tdesign.focus", inputElement);
+        await tdesignScript.Module.InvokeVoidAsync("tdesign.focus", inputElement);
     }
 }

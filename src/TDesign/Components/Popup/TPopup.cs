@@ -76,7 +76,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         },
         new
         {
-            @class = HtmlHelper.Class.Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
+            @class = HtmlHelper.Instance.Class().Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
         });
     }
 
@@ -102,7 +102,7 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// <param name="selector">被触发弹出层的元素引用。</param>
     public async Task Show(IBlazorComponent selector)
     {
-        _instance = await JS.Value.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
+        _instance = await JS.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
             Timeout = Timeout ?? Options.Value.PopupTimeout ?? 400,
             Placement = Placement

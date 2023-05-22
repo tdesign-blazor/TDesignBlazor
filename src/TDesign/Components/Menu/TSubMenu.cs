@@ -49,7 +49,7 @@ public class TSubMenu : TDesignComponentBase, IHasChildContent
     {
         if (CascadingMenu.Popup)
         {
-            attributes["onmouseleave"] = HtmlHelper.Event.Create(this, async () =>
+            attributes["onmouseleave"] = HtmlHelper.Instance.Callback().Create(this, async () =>
             {
                 await Task.Delay(100);
                 if (CanClose)
@@ -79,20 +79,20 @@ public class TSubMenu : TDesignComponentBase, IHasChildContent
 
         Dictionary<string, object> htmlAttributes = new()
         {
-            ["class"] = HtmlHelper.Class.Append(CascadingMenu.GetMenuExpandClass())
+            ["class"] = HtmlHelper.Instance.Class().Append(CascadingMenu.GetMenuExpandClass())
             .Append(IsOpenCssClass, IsOpened),
-            ["style"] = HtmlHelper.Style.Append(CascadingMenu.GetMenuExapndStyle())
+            ["style"] = HtmlHelper.Instance.Style().Append(CascadingMenu.GetMenuExapndStyle())
         };
 
         var eventAttribute = new Dictionary<string, object>();
 
         if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, () =>
+            htmlAttributes["onmouseenter"] = HtmlHelper.Instance.Callback().Create(this, () =>
             {
                 CanClose = false;
             });
-            htmlAttributes["onmouseleave"] = HtmlHelper.Event.Create(this, () =>
+            htmlAttributes["onmouseleave"] = HtmlHelper.Instance.Callback().Create(this, () =>
             {
                 CanClose = true;
                 CollapseSubMenuItem();
@@ -117,11 +117,11 @@ public class TSubMenu : TDesignComponentBase, IHasChildContent
     {
         if (CascadingMenu.Popup)
         {
-            htmlAttributes["onmouseenter"] = HtmlHelper.Event.Create(this, ExpandSubMenuItem);
+            htmlAttributes["onmouseenter"] = HtmlHelper.Instance.Callback().Create(this, ExpandSubMenuItem);
         }
         else
         {
-            htmlAttributes["onclick"] = HtmlHelper.Event.Create(this, () =>
+            htmlAttributes["onclick"] = HtmlHelper.Instance.Callback().Create(this, () =>
             {
                 if (IsOpened)
                 {

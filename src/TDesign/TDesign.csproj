@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
+	<Import Project="../../common.props" />
   <PropertyGroup>
-    <LangVersion Condition="$(TargetFramework) == '.net6.0'">10</LangVersion>
-    <LangVersion Condition="$(TargetFramework) == '.net7.0'">11</LangVersion>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TDesign</RootNamespace>
     <PackageId>TDesign</PackageId>
@@ -31,29 +28,6 @@
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
   </PropertyGroup>
-  <PropertyGroup>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-  </PropertyGroup>
-  <Choose>
-    <When Condition="'$(Configuration)' == 'Debug'">
-      <PropertyGroup>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-      </PropertyGroup>
-    </When>
-    <When Condition=" '$(Configuration)'=='Release' ">
-      <PropertyGroup>
-        <DebugSymbols>false</DebugSymbols>
-        <Optimize>true</Optimize>
-        <DefineConstants>TRACE</DefineConstants>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <PackageOutputPath>..\..\pack</PackageOutputPath>
-      </PropertyGroup>
-    </When>
-  </Choose>
   <ItemGroup>
     <Compile Remove="Parameters\**" />
     <Content Remove="Parameters\**" />
@@ -71,8 +45,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="3.1.4" />
+    <PackageReference Include="ComponentBuilder" Version="4.0.0-beta-3" />
+    <PackageReference Include="ComponentBuilder.Extensions" Version="4.0.0-beta-3" />
+    <PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.0.0-beta-3" />
+    <PackageReference Include="ComponentBuilder.JSInterop" Version="4.0.0-beta-3" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+    <PackageReference Include="OneOf" Version="3.0.243" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

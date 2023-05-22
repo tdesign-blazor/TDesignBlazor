@@ -44,10 +44,10 @@ public class TSwitch : TDesignInputComonentBase<bool>
         },
         attributes: new
         {
-            @class = HtmlHelper.Class.Append("t-switch__handle").Append(LOADING_CLASS_NAME, Loading).Append(DISABLED_CLASS_NAME, Disabled)
+            @class = HtmlHelper.Instance.Class().Append("t-switch__handle").Append(LOADING_CLASS_NAME, Loading).Append(DISABLED_CLASS_NAME, Disabled)
         });
         var content = Value ? TrueContent : FalseContent;
-        var cssBuilder = HtmlHelper.Class.Append("t-switch__content").Append(Size.GetCssClass()).Append(DISABLED_CLASS_NAME, Disabled);
+        var cssBuilder = HtmlHelper.Instance.Class().Append("t-switch__content").Append(Size.GetCssClass()).Append(DISABLED_CLASS_NAME, Disabled);
         if (content == null)
         {
             builder.CreateElement(++sequence, "div", attributes: new { @class = cssBuilder });
@@ -71,7 +71,7 @@ public class TSwitch : TDesignInputComonentBase<bool>
 
     protected override void BuildEventAttribute(IDictionary<string, object> attributes)
     {
-        attributes[EventName] = HtmlHelper.Event.Create<MouseEventArgs>(this, e =>
+        attributes[EventName] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, e =>
         {
             //ChangedValue = !ChangedValue;
             Value = !Value;

@@ -200,7 +200,7 @@ public partial class TPagination : TDesignComponentBase
     /// </summary>
     /// <param name="builder"></param>
     void BuildPageSizeSelect(RenderTreeBuilder builder)
-        => builder.Fluent().Div("t-select__wrap t-pagination__select").Content(HtmlHelper.CreateContent($"{PageSize} 条/页")).Close();
+        => builder.Fluent().Div("t-select__wrap t-pagination__select").Content(HtmlHelper.Instance.CreateContent($"{PageSize} 条/页")).Close();
 
     /// <summary>
     /// 构建上一页或下一页按钮。
@@ -391,7 +391,7 @@ public partial class TPagination : TDesignComponentBase
                                             Size,
                                             Value = JumpPage,
                                             ValueExpression = (Expression<Func<int>>)(() => JumpPage),
-                                            ValueChanged = HtmlHelper.Event.Create<int>(this, NavigateToPage)
+                                            ValueChanged = HtmlHelper.Instance.Callback().Create<int>(this, NavigateToPage)
                                         }))
                                         .Close();
                             })

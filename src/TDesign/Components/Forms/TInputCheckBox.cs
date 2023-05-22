@@ -31,7 +31,7 @@ public class TInputCheckBox : TDesignInputComonentBase<bool?>, IHasChildContent
             content.CloseRegion();
         }, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                                 .Append("t-checkbox")
                                 .Append("t-is-disabled", Disabled)
                                 .Append("t-is-indeterminate", Value is null && Indeterminate)

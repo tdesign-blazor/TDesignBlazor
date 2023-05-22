@@ -103,16 +103,16 @@ public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
             AutoWidth,
             Readonly,
             Disabled,
-            TipContent = TipAlign is not null && TipAlign == TDesign.TipAlign.Input ? HtmlHelper.CreateContent(Tip) : HtmlHelper.CreateContent(""),
+            TipContent = TipAlign is not null && TipAlign == TDesign.TipAlign.Input ? HtmlHelper.Instance.CreateContent(Tip) : HtmlHelper.Instance.CreateContent(""),
             @Type = InputType.Number,
             Step,
             Min,
             Max,
-            onblur = HtmlHelper.Event.Create(this, async () =>
+            onblur = HtmlHelper.Instance.Callback().Create(this, async () =>
             {
                 await ConvertNumberAsync(_inputString);
             }),
-            oninput = HtmlHelper.Event.Create<ChangeEventArgs>(this, async args =>
+            oninput = HtmlHelper.Instance.Callback().Create<ChangeEventArgs>(this, async args =>
             {
                 _inputString = args?.Value?.ToString() ?? "";
                 await ConvertNumberAsync(_inputString);
@@ -188,12 +188,12 @@ public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
         {
             Varient = ButtonVarient.Outline,
             Shape = ButtonShape.Square,
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
             .Append($"t-input-number__decrease", iconName.ToString() == IconName.Remove.ToString())
             .Append($"t-input-number__increase", iconName.ToString() == IconName.Add.ToString())
             .Append($"t-is-disabled", iconName.ToString() == IconName.Remove.ToString() && disabled)
             .Append($"t-is-disabled", iconName.ToString() == IconName.Add.ToString() && disabled),
-            onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, e => click?.Invoke(e)),
+            onclick = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, e => click?.Invoke(e)),
             Disabled = disabled,
 
         }, condition);

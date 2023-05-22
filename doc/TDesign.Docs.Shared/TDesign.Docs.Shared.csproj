@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
+	<Import Project="../../common.props" />
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>TDesign.Docs.Shared</RootNamespace>
@@ -17,7 +16,6 @@
 	<ItemGroup>
 		<PackageReference Include="Markdig" Version="0.30.2" />
 		<PackageReference Include="MarkdigExtensions.SyntaxHighlighting" Version="1.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -106,7 +106,7 @@ public class TTag : TDesignComponentBase, IHasChildContent
             {
                 Name = IconName.Close,
                 AdditionalCLass = "t-tag__icon-close",
-                onclick = HtmlHelper.Event.Create(this, () =>
+                onclick = HtmlHelper.Instance.Callback().Create(this, () =>
                 {
                     if (Disabled)
                     {
@@ -133,7 +133,7 @@ public class TTag : TDesignComponentBase, IHasChildContent
     /// <inheritdoc/>
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
-        attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, async _ =>
+        attributes["onclick"] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, async _ =>
         {
             if (Checkbox && !Disabled)
             {

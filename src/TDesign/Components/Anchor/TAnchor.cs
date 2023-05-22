@@ -9,7 +9,7 @@ namespace TDesign
     [HtmlTag("div")]
     [ParentComponent]
     [CssClass("t-anchor")]
-    public class TAnchor : BlazorComponentBase, IHasChildContent, IHasOnSwitch
+    public class TAnchor : TDesignComponentBase, IHasChildContent, IHasOnSwitch
     {
         private DotNetObjectReference<TAnchor>? objRef;
         /// <summary>
@@ -55,7 +55,7 @@ namespace TDesign
             if (!ClickLoad)
             {
                 var containerId = Container?.Split("#")[1];
-                var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                var anchorObj = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
                 index += await anchorObj.InvokeAsync<int>("anchor.getOffsetTop", containerId);
                 for (int i = 0; i < ChildComponents.Count; i++)
                 {
@@ -104,7 +104,7 @@ namespace TDesign
             if (firstRender && !string.IsNullOrEmpty(Container))
             {
                 var containerId = Container?.Split("#")[1];
-                var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                var anchorObj = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
                 await anchorObj.InvokeVoidAsync("anchor.onAnchorScroll", objRef, containerId);
             }
             await base.OnAfterRenderAsync(firstRender);

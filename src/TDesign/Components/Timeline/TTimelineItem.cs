@@ -51,7 +51,7 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
                 .Class("t-timeline-item__wrapper")
                 .Content(content =>
                 {
-                    content.Fluent().Div()
+                    content.Div()
                         .Class("t-timeline-item__dot")
                         .Class(Color.GetCssClass("t-timeline-item__dot--"))
                         .Class( "t-timeline-item__dot--custom", IconName is not null)
