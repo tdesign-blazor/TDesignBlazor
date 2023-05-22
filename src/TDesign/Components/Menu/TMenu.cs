@@ -84,7 +84,7 @@ public class TMenu : TDesignComponentBase, IHasChildContent
 
             builder.CreateElement(1, "ul", ChildContent, new
             {
-                @class = HtmlHelper.Class
+                @class = HtmlHelper.Instance.Class()
                                 .Append("t-menu")
                                 .Append("t-menu--scroll narrow-scrollbar", Aside),
             });

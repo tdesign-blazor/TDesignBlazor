@@ -37,7 +37,7 @@ namespace TDesign
     [HtmlTag("div")]
     [CssClass("t-anchor__item")]
     [ChildComponentAttribute(typeof(TAnchor))]
-    public class TAnchorItem : BlazorComponentBase, IHasChildContent, IHasActive
+    public class TAnchorItem : TDesignComponentBase, IHasChildContent, IHasActive
     {
         private string? _href;
 
@@ -132,7 +132,7 @@ namespace TDesign
                                Href,
                                Title,
                                Target = Target?.GetHtmlAttribute(),
-                               onclick = HtmlHelper.Event.Create<MouseEventArgs>(this, async x =>
+                               onclick = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, async x =>
                                {
                                    CascadingAnchor.ClickLoad = true;
                                    for (int i = 0; i < CascadingAnchor?.ChildComponents.Count; i++)
@@ -151,7 +151,7 @@ namespace TDesign
                                            await item.Refresh();
                                        }
                                    }
-                                   var anchorObj = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+                                   var anchorObj = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
                                    await anchorObj.InvokeVoidAsync("anchor.hash", Href?.Split("#")[1], CascadingAnchor?.Container?.Split("#")[1]);
 
                                    await this.Refresh();

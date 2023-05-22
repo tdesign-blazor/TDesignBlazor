@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-
 using TDesign.Notification;
 
 namespace TDesign;
@@ -24,15 +23,15 @@ public class TNotificationContainer : NotifyContainerComponentBase<INotification
                         configuration.SubTitle,
                         configuration?.Theme,
                         configuration?.Icon,
-                        style = HtmlHelper.Style.Append("margin-bottom:16px")
+                        style = HtmlHelper.Instance.Style().Append("margin-bottom:16px")
                     }); ;
                 }
             },
-                HtmlHelper.CreateHtmlAttributes(attributes =>
+                HtmlHelper.Instance.CreateHtmlAttributes(attributes =>
                 {
                     var (classOrStyle, value) = MessageConfiguration.GetPlacement(item.Key);
-                    attributes["class"] = HtmlHelper.Class.Append(value, classOrStyle);
-                    attributes["style"] = HtmlHelper.Class.Append("z-index:6000").Append(value, !classOrStyle);
+                    attributes["class"] = HtmlHelper.Instance.Class().Append(value, classOrStyle);
+                    attributes["style"] = HtmlHelper.Instance.Class().Append("z-index:6000").Append(value, !classOrStyle);
                 })
             );
         }

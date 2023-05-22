@@ -30,7 +30,7 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName ="Card - 头部标题")]
     public void Test_Card_HeadContent()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.CreateContent("Header")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.Instance.CreateContent("Header")));
 
         component.Find(".t-card__header>.t-card__header-wrapper>div>.t-card__title").Html().Should().Be("Header");
     }
@@ -38,8 +38,8 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName ="Card - 头部副标题")]
     public void Test_Card_HeadContent_SubTitle()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.CreateContent("Header"))
-                                            .Add(p=>p.HeaderSubTitleContent,HtmlHelper.CreateContent("SubTitle")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.Instance.CreateContent("Header"))
+                                            .Add(p=>p.HeaderSubTitleContent,HtmlHelper.Instance.CreateContent("SubTitle")));
 
         component.Find(".t-card__header>.t-card__header-wrapper>div>.t-card__subtitle").Html().Should().Be("SubTitle");
     }
@@ -47,7 +47,7 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName ="Card - 头部没有主标题，但是有副标题，则不显示")]
     public void Test_Card_HeaderContent_Without_HeadTitleContent_And_Set_SubTitleContent_Then_SubTitle_Dose_Not_Display()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderSubTitleContent, HtmlHelper.CreateContent("SubTitle")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderSubTitleContent, HtmlHelper.Instance.CreateContent("SubTitle")));
 
         Throws<ElementNotFoundException>(() => component.Find(".t-card__header>.t-card__header-wrapper>div>.t-card__subtitle"));
     }
@@ -55,8 +55,8 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName = "Card - 头部描述")]
     public void Test_Card_HeadContent_Description()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.CreateContent("Header"))
-                                            .Add(p => p.HeaderDescriptionContent, HtmlHelper.CreateContent("Description")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.Instance.CreateContent("Header"))
+                                            .Add(p => p.HeaderDescriptionContent, HtmlHelper.Instance.CreateContent("Description")));
 
         component.Find(".t-card__header>.t-card__header-wrapper>div>.t-card__description").Html().Should().Be("Description");
     }
@@ -64,7 +64,7 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName = "Card - 头部没有主标题，但是有副标题，则不显示")]
     public void Test_Card_HeaderContent_Without_HeadTitleContent_And_Set_DescriptionContent_Then_Description_Dose_Not_Display()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderDescriptionContent, HtmlHelper.CreateContent("Description")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderDescriptionContent, HtmlHelper.Instance.CreateContent("Description")));
 
         Throws<ElementNotFoundException>(() => component.Find(".t-card__header>.t-card__header-wrapper>div>.t-card__description"));
     }
@@ -72,14 +72,14 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName ="Card - 头部操作内容")]
     public void Test_Card_HeaderAction()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderActionContent, HtmlHelper.CreateContent("Action")));
+        var component = RenderComponent(m => m.Add(p => p.HeaderActionContent, HtmlHelper.Instance.CreateContent("Action")));
         component.Find(".t-card__header>.t-card__actions").Html().Should().Be("Action");
     }
 
     [Fact(DisplayName ="Card - 头部分割线")]
     public void Test_Card_HeaderDivider()
     {
-        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.CreateContent("Header"))
+        var component = RenderComponent(m => m.Add(p => p.HeaderTitleContent, HtmlHelper.Instance.CreateContent("Header"))
                                             .Add(p=>p.HeaderDivider,true));
         component.Find(".t-card__header").Should().HaveClass("t-card__title--bordered");
     }
@@ -94,7 +94,7 @@ public class CardTest : TestBase<TCard>
     [Fact(DisplayName ="Card - 底部内容")]
     public void Test_Card_FooterContent()
     {
-        var component = RenderComponent(m => m.Add(p => p.FooterContent, HtmlHelper.CreateContent("Footer")));
+        var component = RenderComponent(m => m.Add(p => p.FooterContent, HtmlHelper.Instance.CreateContent("Footer")));
 
         component.Find(".t-card__footer>.t-card__footer-wrapper").Html().Should().Be("Footer");
     }

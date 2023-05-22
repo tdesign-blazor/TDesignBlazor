@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.Options;
+using Microsoft.JSInterop;
 
 namespace TDesign;
 /// <summary>
@@ -11,6 +12,7 @@ public abstract class TDesignComponentBase : BlazorComponentBase
     /// 获取注入的配置。
     /// </summary>
     [Inject]protected IOptions<TDesignOptions> Options { get; set; }
+    [Inject]protected IJSRuntime JS { get; set; }
     /// <summary>
     /// 级联 TPopup 组件。
     /// </summary>
@@ -46,19 +48,19 @@ public abstract class TDesignComponentBase : BlazorComponentBase
         switch (CascadingPopup!.Trigger)
         {
             case PopupTrigger.Click:
-                attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, TogglePopup);
-                //attributes["onblur"] = HtmlHelper.Event.Create<FocusEventArgs>(this, HidePopup);
+                attributes["onclick"] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, TogglePopup);
+                //attributes["onblur"] = HtmlHelper.Instance.Callback().Create<FocusEventArgs>(this, HidePopup);
                 break;
             case PopupTrigger.Hover:
-                attributes["onmouseenter"] = HtmlHelper.Event.Create<MouseEventArgs>(this, ShowPopup);
-                attributes["onmouseleave"] = HtmlHelper.Event.Create<MouseEventArgs>(this, HidePopup);
+                attributes["onmouseenter"] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, ShowPopup);
+                attributes["onmouseleave"] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, HidePopup);
                 break;
             case PopupTrigger.Focus:
-                attributes["onfocus"] = HtmlHelper.Event.Create<FocusEventArgs>(this, ShowPopup);
-                attributes["onblur"] = HtmlHelper.Event.Create<FocusEventArgs>(this, HidePopup);
+                attributes["onfocus"] = HtmlHelper.Instance.Callback().Create<FocusEventArgs>(this, ShowPopup);
+                attributes["onblur"] = HtmlHelper.Instance.Callback().Create<FocusEventArgs>(this, HidePopup);
                 break;
             case PopupTrigger.ContextMenu:
-                attributes["onclick"] = HtmlHelper.Event.Create<MouseEventArgs>(this, e =>
+                attributes["onclick"] = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, e =>
                 {
                     if (e.Button != 2)
                     {

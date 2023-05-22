@@ -61,7 +61,7 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
             }
         }, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                     .Append($"t-input__{cssClassName}", !string.IsNullOrEmpty(text) || icon is not null)
                     .Append($"t-input__{cssClassName}-icon", icon is not null)
         }, !string.IsNullOrEmpty(text) || icon is not null);

@@ -109,13 +109,13 @@ public class TFormItem : TDesignComponentBase, IHasChildContent
             content.CreateElement(0, "label", Label, new { @for = "" });
         }, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
                                 .Append("t-form__label")
                                 .Append($"t-form__label--{CascadingForm.Alignment.GetCssClass()}")
                                 .Append("t-form__label--colon", LabelColon)
                                 .Append("t-form__label--required", Required)
                                 ,
-            style = HtmlHelper.Style.Append($"width:{LabelWidth}", !string.IsNullOrEmpty(LabelWidth) && CascadingForm.Alignment != FormAlignment.Top)
+            style = HtmlHelper.Instance.Style().Append($"width:{LabelWidth}", !string.IsNullOrEmpty(LabelWidth) && CascadingForm.Alignment != FormAlignment.Top)
         });
     }
 
@@ -135,10 +135,10 @@ public class TFormItem : TDesignComponentBase, IHasChildContent
             }
         }, new
         {
-            @class = HtmlHelper.Class.Append("t-form__controls")
+            @class = HtmlHelper.Instance.Class().Append("t-form__controls")
                                                 .Append($"t-is-{StatusCssClass}", Identifier.HasValue)
                                                 .Append($"t-form--success-border", StatusCssClass == Status.Success.GetCssClass()),
-            style = HtmlHelper.Style.Append("margin-left:60px", CascadingForm.Alignment != FormAlignment.Top)
+            style = HtmlHelper.Instance.Style().Append("margin-left:60px", CascadingForm.Alignment != FormAlignment.Top)
         });
     }
 

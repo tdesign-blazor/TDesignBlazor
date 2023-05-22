@@ -71,7 +71,7 @@
 //    //    {
 //    //        b.CreateComponent<TTableFieldColumn<TestData>>(0, attributes: new {
 //    //            Field = nameof(TestData.Id),
-//    //            FooterContent =HtmlHelper.CreateContent(b=>b.AddContent(0,"列1")) });
+//    //            FooterContent =HtmlHelper.Instance.CreateContent(b=>b.AddContent(0,"列1")) });
 //    //    })))
 //    //    .Add(p => p.Data, DataSource<TestData>.Parse(TestData.GetData()))
 //    //    );

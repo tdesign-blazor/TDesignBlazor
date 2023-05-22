@@ -16,8 +16,8 @@ public static class PopperExtensions
     public static async ValueTask<Popper> InvokePopupAsync(this IJSRuntime js, ElementReference selectorRef, ElementReference popupRef, PopperOptions options)
     {
         var tdesignJsObj = await js.ImportTDesignScriptAsync();
-        var popperObject = await tdesignJsObj.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options));
+        var popperObject = await tdesignJsObj.Module.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options));
 
-        return new (tdesignJsObj,popperObject, options);
+        return new (tdesignJsObj.Module,popperObject, options);
     }
 }

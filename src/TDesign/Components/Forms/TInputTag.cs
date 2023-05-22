@@ -1,6 +1,4 @@
-﻿using ComponentBuilder;
-using ComponentBuilder.JSInterope;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 
 namespace TDesign;
 
@@ -51,7 +49,7 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
 
         if ( Prefix.IsNotNullOrEmpty() )
         {
-            PrefixContent ??= HtmlHelper.CreateContent(Prefix);
+            PrefixContent ??= HtmlHelper.Instance.CreateContent(Prefix);
         }
     }
     protected override void OnAfterRender(bool firstRender)
@@ -97,7 +95,7 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
             }, captureReference: el => _inputRef = el);
 
             inner.Span("t-input__input-pre").Close();
-        }, "t-input--prefix", HtmlHelper.Class.Append("t-tag-input")
+        }, "t-input--prefix", HtmlHelper.Instance.Class().Append("t-tag-input")
                 .Append("t-is-empty", !Value!.Any())
                 .Append("t-tag-input--with-tag", Value.Any())
                 .ToString());
@@ -107,8 +105,8 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
     {
         //if ( firstRender )
         //{
-            var tdesignJs = await JS.Value.ImportTDesignScriptAsync();
-            await tdesignJs.InvokeVoidAsync("tagInput.pressKey", _inputRef, CallbackFactory.Create<int, string>((keyCode, inputText) =>
+            var tdesignJs = await JS.ImportTDesignScriptAsync();
+            await tdesignJs.Module.InvokeVoidAsync("tagInput.pressKey", _inputRef, JSInvokeMethodFactory.Create<int, string>((keyCode, inputText) =>
             {
                 _inputText = inputText;
                 HandleKey(keyCode);

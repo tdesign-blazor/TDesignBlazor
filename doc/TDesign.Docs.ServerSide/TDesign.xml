@@ -632,10 +632,7 @@
             设置后面追加的任意 UI 内容。
             </summary>
         </member>
-        <member name="M:TDesign.TInputAdornment.OnParametersSet">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TInputAdornment.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
+        <member name="M:TDesign.TInputAdornment.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TInputAdornment.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">

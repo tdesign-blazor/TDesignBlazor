@@ -146,7 +146,7 @@ public class TPopConfirm:TPopup
         {
             Theme = theme,
             Varient = varient,
-            OnClick = HtmlHelper.Event.Create<MouseEventArgs>(this, async (_) =>
+            OnClick = HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, async (_) =>
             {
                 PopConfirmEventArgs e = new();
                 await callback.InvokeAsync(e);

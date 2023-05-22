@@ -75,7 +75,7 @@ public class TCard : TDesignComponentBase, IHasChildContent
             header.CreateElement(1, "div", HeaderActionContent, new { @class = "t-card__actions" }, HeaderActionContent is not null);
         }, new
         {
-            @class = HtmlHelper.Class.Append("t-card__header")
+            @class = HtmlHelper.Instance.Class().Append("t-card__header")
             .Append("t-card__title--bordered", HeaderDivider)
         }, HasHeader);
 

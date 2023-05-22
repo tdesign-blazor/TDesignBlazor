@@ -5,7 +5,7 @@ namespace TDesign;
 /// <summary>
 /// 固钉组件。
 /// </summary>
-public class TAffix : BlazorComponentBase, IHasChildContent
+public class TAffix : TDesignComponentBase, IHasChildContent
 {
     #region Parameters
 
@@ -145,7 +145,7 @@ public class TAffix : BlazorComponentBase, IHasChildContent
         if (firstRender)
         {
             var objRef = DotNetObjectReference.Create(this);
-            var popperWrapper = await JS.Value.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
+            var popperWrapper = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
             await popperWrapper.InvokeVoidAsync("affix.init", Container, objRef);
             var y = await popperWrapper.InvokeAsync<int>("affix.positionY", _affixId);
             _affixYInit = y;

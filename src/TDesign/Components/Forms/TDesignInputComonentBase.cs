@@ -76,7 +76,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
         {
             wrap.CreateElement(0, "div", content, new
             {
-                @class = HtmlHelper.Class.Append("t-input")
+                @class = HtmlHelper.Instance.Class().Append("t-input")
                             .Append("t-is-readonly", Readonly)
                             .Append("t-is-disabled", Disabled)
                             .Append("t-input--auto-width", AutoWidth)
@@ -89,12 +89,12 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
 
             wrap.CreateElement(1, "div", TipContent, new
             {
-                @class = HtmlHelper.Class.Append("t-input__tips")
+                @class = HtmlHelper.Instance.Class().Append("t-input__tips")
                 .Append($"t-input__tips--{Status.GetCssClass()}")
             }, TipContent is not null);
         }, new
         {
-            @class = HtmlHelper.Class.Append("t-input__wrap").Append(wrapClass)
+            @class = HtmlHelper.Instance.Class().Append("t-input__wrap").Append(wrapClass)
         });
     }
 
@@ -107,7 +107,7 @@ public abstract class TDesignInputComonentBase<TValue> : TDesignComponentBase,IH
 
     protected virtual void BuildEventAttribute(IDictionary<string,object> attributes)
     {
-        attributes[EventName] = HtmlHelper.Event.CreateBinder(this, _value =>
+        attributes[EventName] = HtmlHelper.Instance.Callback().CreateBinder(this, _value =>
         {
             this.ChangeValue(_value);
         }, Value);

@@ -45,7 +45,7 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
     {
         builder.CreateElement(sequence, "div", BuildTabHeaderNav, new
         {
-            @class = HtmlHelper.Class
+            @class = HtmlHelper.Instance.Class()
             .Append("t-tabs__header")
             .Append(Position.GetCssClass("t-is-")),
         });
@@ -69,7 +69,7 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                 }, new { @class = "t-tabs__nav-scroll" });
             }, new
             {
-                @class = HtmlHelper.Class
+                @class = HtmlHelper.Instance.Class()
                             .Append("t-tabs__nav-container")
                             .Append(CardCss, Card)
                             .Append(Position.GetCssClass("t-is-"))
@@ -111,10 +111,10 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
             {
                 builder.CreateElement(0, "div", attributes: new
                 {
-                    @class = HtmlHelper.Class
+                    @class = HtmlHelper.Instance.Class()
                                     .Append("t-tabs__bar")
                                     .Append(Position.GetCssClass("t-is-")),
-                    //style = HtmlHelper.Style
+                    //style = HtmlHelper.Instance.Style()
                     //                .Append($"left:{tabItem.Width * SwitchIndex}px")
                     //                .Append($"width:{tabItem?.Width}px", tabItem!.Width.HasValue)
                 });
@@ -130,19 +130,19 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                     }, new { @class = "t-tabs__nav-item-text-wrapper" });
                 }, new
                 {
-                    @class = HtmlHelper.Class
+                    @class = HtmlHelper.Instance.Class()
                                 .Append("t-tabs__nav-item-wrapper")
                                 .Append(GetActiveCss(index))
                 });
             }, new
             {
-                @class = HtmlHelper.Class
+                @class = HtmlHelper.Instance.Class()
                                 .Append("t-tabs__nav-item")
                                 .Append(CardCss, Card)
                                 .Append(GetActiveCss(index))
                                 .Append("t-is-disabled", tabItem!.Disabled)
                                 .Append(Size.GetCssClass("t-size-")),
-                onclick = HtmlHelper.Event.Create(this, () =>
+                onclick = HtmlHelper.Instance.Callback().Create(this, () =>
                 {
                     if (!tabItem!.Disabled)
                     {

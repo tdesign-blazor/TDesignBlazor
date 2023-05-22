@@ -80,7 +80,7 @@ public class TMenuItem : TDesignComponentBase, IHasNavLinkComponent, IHasDisable
         if (CanNavigationChanged && !string.IsNullOrWhiteSpace(Link))
         {
             attributes["href"] = Link;
-            attributes["onclick"] = HtmlHelper.Event.Create(this, NavigateTo);
+            attributes["onclick"] = HtmlHelper.Instance.Callback().Create(this, NavigateTo);
         }
     }
 
