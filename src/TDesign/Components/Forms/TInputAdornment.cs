@@ -32,35 +32,28 @@ public class TInputAdornment : BlazorComponentBase, IHasChildContent
     [Parameter]public RenderFragment? AppendContent { get; set; }
 
     /// <inheritdoc/>
-    protected override void OnParametersSet()
+    protected override void AfterSetParameters(ParameterView parameters)
     {
-        base.OnParametersSet();
-
-        if ( !string.IsNullOrEmpty(Prepend) )
+        base.AfterSetParameters(parameters);
+        if (!string.IsNullOrWhiteSpace( Prepend ))
         {
             PrependContent ??= builder => builder.AddContent(0, Prepend);
         }
-        if ( !string.IsNullOrEmpty(Append) )
+        if ( !string.IsNullOrWhiteSpace(Append) )
         {
             AppendContent ??= builder => builder.AddContent(0, Append);
         }
     }
 
     /// <inheritdoc/>
-    protected override void BuildCssClass(ICssClassBuilder builder)
-    {
-        builder.Append("t-input-adornment--prepend", PrependContent is not null)
-            .Append("t-input-adornment--append",AppendContent is not null)
-            ;
-    }
-
-    /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, "span", PrependContent, new { @class = "t-input-adornment__prepend" }, PrependContent is not null);
-
+        builder.Span("t-input-adornment__prepend",PrependContent is not null).Content(text => BuildText(text, PrependContent)).Close();
         builder.AddContent(sequence + 1, ChildContent);
+        builder.Span("t-input-adornment__append", AppendContent is not null).Content(text => BuildText(text, AppendContent)).Close();
 
-        builder.CreateElement(sequence+2, "span", AppendContent, new { @class = "t-input-adornment__append" },AppendContent is not null);
     }
+
+    void BuildText(RenderTreeBuilder builder, RenderFragment? fragment)
+        => builder.Span("t-input-adornment__text").Content(fragment).Close();
 }
