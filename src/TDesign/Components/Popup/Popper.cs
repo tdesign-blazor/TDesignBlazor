@@ -5,63 +5,44 @@ namespace TDesign;
 /// <summary>
 /// 表示 popper 对象。
 /// </summary>
-public class Popper : IAsyncDisposable
+public class Popper :DomNode, IAsyncDisposable
 {
-    private readonly IJSObjectReference _tdesignJsObj;
-    private readonly IJSObjectReference? _popper;
-    private readonly PopperOptions? _options;
-    
+    private readonly PopperOptions? _options;   
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Popper"/> class.
-    /// </summary>
-    internal Popper(IJSObjectReference tdesignJsObj, IJSObjectReference popper, PopperOptions options)
+    internal Popper(IJSObjectReference? customizeModule = null, IJSObjectReference? internalModule = null,PopperOptions? options=default) : base(customizeModule, internalModule)
     {
-        _tdesignJsObj = tdesignJsObj;
-        this._popper = popper;
         this._options = options;
     }
 
     /// <summary>
     /// 同步更新 popper 实例。 用于低频更新。
     /// </summary>
-    public ValueTask ForceUpdateAsync()
-    {
-        return _popper!.InvokeVoidAsync("forceUpdate");
-    }
+    public ValueTask ForceUpdateAsync() => InternalModule!.InvokeVoidAsync("forceUpdate");
 
     /// <summary>
     /// 异步更新 popper 实例，并返回一个 promise， 用于高频更新。
     /// </summary>
-    public ValueTask<PopperState?> UpdateAsync()
-    {
-        return _popper!.InvokeAsync<PopperState?>("update");
-    }
+    public ValueTask<PopperState?> UpdateAsync() => InternalModule!.InvokeAsync<PopperState?>("update");
 
     /// <summary>
     /// 更新实例的选项。
     /// </summary>
     /// <param name="options">要更新的实例。</param>
     /// <returns></returns>
-    public ValueTask<PopperState?> SetOptionsAsync(PopperOptions options)
-    {
-        return _popper!.InvokeAsync<PopperState?>("setOptons", options);
-    }
+    public ValueTask<PopperState?> SetOptionsAsync(PopperOptions options) => InternalModule!.InvokeAsync<PopperState?>("setOptons", options);
 
     /// <summary>
     /// 销毁实例。
     /// </summary>
-    public ValueTask HideAsync(ElementReference? popupElement)
-    {
-        return _tdesignJsObj!.InvokeVoidAsync("popup.hide", _popper,popupElement, _options);
-    }
+    public ValueTask HideAsync(ElementReference? popupElement) 
+        => CustomizeModule!.InvokeVoidAsync("popup.hide", InternalModule, popupElement, _options);
 
     /// <inheritdoc/>
     public async ValueTask DisposeAsync()
     {
-        if ( _popper is not null )
+        if ( InternalModule is not null )
         {
-            await _popper.DisposeAsync();
+            await InternalModule.DisposeAsync();
         }
     }
 }

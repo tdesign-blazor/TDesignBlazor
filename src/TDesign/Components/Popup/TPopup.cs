@@ -5,6 +5,24 @@
 [CssClass("t-popup")]
 public class TPopup : TDesignComponentBase, IHasChildContent
 {
+    const string ANIMATION_ENTER = "t-popup--animation-enter";
+    const string ANIMATION_ENTER_FROM = "t-popup--animation-enter-from";
+    const string ANIMATION_EXITING = "t-popup--animation-exiting";
+    const string ANIMATION_LEAVE_TO = "t-popup--animation-leave-to";
+
+    const string ANIMATION_ENTER_TO = "t-popup--animation-enter-to";
+    const string ANIMATION_ENTERING = "t-popup--animation-entering";
+    const string ANIMATION_LEAVE_FROM = "t-popup--animation-leave-from";
+    const string ANIMATION_LEAVE = "t-popup--animation-leave";
+
+    const string ANIMATION_ENTER_ACTIVE = "t-popup--animation-enter-active";
+    const string ANIMATION_LEAVE_ACTIVE = "t-popup--animation-leave-active";
+
+    /// <summary>
+    /// 初始化 <see cref="TPopup"/> 类的新实例。
+    /// </summary>
+    public TPopup() => CaptureReference = true;
+
     /// <inheritdoc/>
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -44,6 +62,9 @@ public class TPopup : TDesignComponentBase, IHasChildContent
 
     Popper? _instance;
 
+    private static bool IsVisible(string animation) 
+        => !new[] { ANIMATION_ENTER_TO, ANIMATION_ENTERING, ANIMATION_LEAVE_FROM }.Contains(animation);
+
     /// <inheritdoc/>
     protected override void OnParametersSet()
     {
@@ -63,37 +84,27 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     }
 
     /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "div", inner =>
-        {
-            inner.AddContent(0, PopupContent);
-
-            if (Arrow)
+    protected override void AddContent(RenderTreeBuilder builder, int sequence) 
+        => builder.Div("t-popup__content")
+            .Class("t-popup__content--arrow", Arrow)
+            .Content(inner =>
             {
-                inner.Fluent().Div().Class("t-popup__arrow").Close();
-            }
-        },
-        new
-        {
-            @class = HtmlHelper.Instance.Class().Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
-        });
-    }
+                inner.AddContent(0, PopupContent);
 
-    /// <inheritdoc/>
+                inner.Div("t-popup__arrow", Arrow).Close();
+            })
+            .Close();
+
+    protected override void BuildCssClass(ICssClassBuilder builder)
+    {
+        if ( !builder.Contains(ANIMATION_ENTER) )
+        {
+            builder.Append(ANIMATION_ENTER);
+        }
+    }
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append("display:none");
-    }
-
-    /// <summary>
-    /// 捕获 <see cref="TPopup"/> 的元素引用。
-    /// </summary>
-    /// <param name="builder"><inheritdoc/></param>
-    /// <param name="sequence"><inheritdoc/></param>
-    protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
-    {
-        builder.AddElementReferenceCapture(sequence, element => Reference = element);
     }
 
     /// <summary>
@@ -106,7 +117,9 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         {
             Timeout = Timeout ?? Options.Value.PopupTimeout ?? 400,
             Placement = Placement
-        });
+        }, Hide);
+        CssClassBuilder.Remove(ANIMATION_ENTER).Remove(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE);
+        StateHasChanged();
         Visible = _instance is not null;
     }
 
@@ -118,6 +131,8 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         if (_instance is not null)
         {
             await _instance.HideAsync(Reference);
+            CssClassBuilder.Remove(ANIMATION_LEAVE).Remove(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER);
+            StateHasChanged() ;
             Visible = false;
         }
     }
