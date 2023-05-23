@@ -3,17 +3,15 @@
 namespace TDesign;
 
 /// <summary>
-/// 固钉组件。
+/// 固钉。在指定的范围内，将元素固定不动。
 /// </summary>
-public class TAffix : TDesignComponentBase, IHasChildContent
+public class TAffix : TDesignAdditionParameterWithChildContentComponentBase
 {
     #region Parameters
-
     /// <summary>
-    /// <inheritdoc/>
+    /// 设置指定滚动的容器的元素 id。<c>null</c> 时，则使用 body 元素。
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-
+    [Parameter]public string? ContainerId { get; set; }
     /// <summary>
     /// 距离容器顶部达到指定距离后触发固定，默认值0 。
     /// </summary>
@@ -25,30 +23,13 @@ public class TAffix : TDesignComponentBase, IHasChildContent
     [Parameter] public int OffsetTop { get; set; }
 
     /// <summary>
-    /// 固钉定位层级，样式默认为 500 。
+    ///  设置一个回调方法，当固定状态发生变化时触发。
     /// </summary>
-    [Parameter] public int ZIndex { get; set; } = ZINDEX_DEFAULT;
-
-    /// <summary>
-    /// 指定滚动的容器。滚动容器不是body时，传入滚动容器的id。
-    /// </summary>
-    [Parameter] public string? Container { get; set; }
-
-    /// <summary>
-    ///  执行当 <see cref="TAffix"/> 的固定状态发生变化时的事件。
-    /// </summary>
-    [Parameter] public EventCallback<AffixedChangeEventArgs> FixedChange { get; set; }
+    [Parameter] public EventCallback<AffixedChangeEventArgs> OnFixedChange { get; set; }
 
     #endregion END Parameters
 
     #region Private Members
-
-    private readonly string _affixId = $"affix-{Guid.NewGuid()}";
-
-    /// <summary>
-    /// z-index 默认值。
-    /// </summary>
-    private const int ZINDEX_DEFAULT = 500;
 
     private bool _fixed = false;
 
@@ -59,19 +40,19 @@ public class TAffix : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 组件原始位置：组件初始化时，距离窗口顶端的高度值。
     /// </summary>
-    private int _affixYInit = 0;
+    private decimal _affixYInit = 0;
 
     /// <summary>
     /// 组件顶端固定时的高度值，top值。
     /// </summary>
-    private int _FixedTopValue = 0;
+    private decimal _FixedTopValue = 0;
 
     /// <summary>
     /// top 固定。
     /// </summary>
     /// <param name="isFixed"></param>
     /// <param name="top"></param>
-    private async Task ChangeFixState(bool isFixed, int top)
+    private async Task ChangeFixState(bool isFixed, decimal top)
     {
         var changed = isFixed != _fixed;
         _fixed = isFixed;
@@ -83,14 +64,14 @@ public class TAffix : TDesignComponentBase, IHasChildContent
         {
             _fixedStyle = string.Empty;
         }
-        StateHasChanged();
+        //StateHasChanged();
         if (changed)
         {
-            await FixedChange.InvokeAsync(new AffixedChangeEventArgs(_fixed, top));
+            await OnFixedChange.InvokeAsync(new(_fixed, top));
         }
     }
 
-    private bool TryFixedOffsetTop(int containerY, int containerScrollTop, out int value)
+    private bool TryFixedOffsetTop(decimal containerY, decimal containerScrollTop, out decimal value)
     {
         var top = _affixYInit - containerY - containerScrollTop;
         value = 0;
@@ -110,7 +91,7 @@ public class TAffix : TDesignComponentBase, IHasChildContent
         return isFixed;
     }
 
-    private bool TryFixedOffsetBottom(int containerY, int containerHeight, int containerScrollTop, out int value)
+    private bool TryFixedOffsetBottom(decimal containerY, decimal containerHeight, decimal containerScrollTop, out decimal value)
     {
         var top = _affixYInit - containerY - containerScrollTop;
         value = 0;
@@ -144,13 +125,10 @@ public class TAffix : TDesignComponentBase, IHasChildContent
     {
         if (firstRender)
         {
-            var objRef = DotNetObjectReference.Create(this);
-            var popperWrapper = await JS.InvokeAsync<IJSObjectReference>("import", "./_content/TDesign/tdesign-blazor.js");
-            await popperWrapper.InvokeVoidAsync("affix.init", Container, objRef);
-            var y = await popperWrapper.InvokeAsync<int>("affix.positionY", _affixId);
-            _affixYInit = y;
+            var module = await JS.ImportTDesignModuleAsync("affix");
+            await module.Module.InvokeVoidAsync("affix.init", ContainerId, JSInvokeMethodFactory.Create<decimal, decimal, decimal, Task>(OnScrollChanged));
+            _affixYInit = await module.Module.InvokeAsync<decimal>("affix.positionY", ContainerId);
         }
-        await base.OnAfterRenderAsync(firstRender);
     }
 
     /// <summary>
@@ -167,7 +145,6 @@ public class TAffix : TDesignComponentBase, IHasChildContent
         {
             builder.Append(CSS_NAME, _fixed);
         }
-        base.BuildCssClass(builder);
     }
 
     /// <summary>
@@ -177,21 +154,6 @@ public class TAffix : TDesignComponentBase, IHasChildContent
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append(_fixedStyle, _fixed);
-        builder.Append($"z-index: {ZIndex}", _fixed && ZIndex != ZINDEX_DEFAULT);
-        base.BuildStyle(builder);
-    }
-
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    /// <param name="attributes"></param>
-    protected override void BuildAttributes(IDictionary<string, object> attributes)
-    {
-        if (!attributes.ContainsKey("id"))
-        {
-            attributes.Add("id", _affixId);
-        }
-        base.BuildAttributes(attributes);
     }
 
     #endregion END Override Methods
@@ -202,8 +164,7 @@ public class TAffix : TDesignComponentBase, IHasChildContent
     /// <param name="containerScrollTop"></param>
     /// <param name="containerY">容器到窗口顶端的坐标值</param>
     /// <param name="containerHeight">容器的可见高度</param>
-    [JSInvokable]
-    public async Task OnScrollChanged(int containerScrollTop, int containerY, int containerHeight)
+    async Task OnScrollChanged(decimal containerScrollTop, decimal containerY, decimal containerHeight)
     {
         //距离当前容器顶部的高度，组件原始位置到窗口顶部的高度 - 容器到窗口顶部的高度 - 容器滚动条卷去的高度
         var topFixed = TryFixedOffsetTop(containerY, containerScrollTop, out var value);
@@ -233,21 +194,21 @@ public class AffixedChangeEventArgs
     /// <summary>
     /// 构建<see cref="AffixedChangeEventArgs"/>实例。
     /// </summary>
-    /// <param name="affixed"></param>
-    /// <param name="top"></param>
-    public AffixedChangeEventArgs(bool affixed, int top)
+    /// <param name="isFixed">是否已经被固定住。</param>
+    /// <param name="top">固定时距离顶部的距离。</param>
+    internal AffixedChangeEventArgs(bool isFixed, decimal top)
     {
-        Affixed = affixed;
-        Top = top;
+        Fixed = isFixed;
+        FixedTop = top;
     }
     /// <summary>
-    /// 是否固定。
+    /// 获取一个布尔值，表示容器已经被固定。
     /// </summary>
-    public bool Affixed { get; set; }
+    public bool Fixed { get; }
 
     /// <summary>
-    /// 固定时距离窗口顶端的距离。
+    /// 获取固定时距离窗口顶端的距离。
     /// </summary>
-    public int Top { get; set; }
+    public decimal FixedTop { get; }
 }
 
