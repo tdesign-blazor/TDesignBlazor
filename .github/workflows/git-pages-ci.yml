@@ -23,7 +23,7 @@ jobs:
 
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./ --nologo
+      run: dotnet publish ./doc/TDesign.Docs.WebAssembly/TDesign.Docs.WebAssembly.csproj -c Release -o ./ --nologo -f net7.0
     
     # changes the base-tag in index.html from '/' to 'WebAssembly' to match GitHub Pages repository subdirectory
     #- name: Change base-tag in index.html from / to WebAssembly

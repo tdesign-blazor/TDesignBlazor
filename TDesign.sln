@@ -25,9 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDesign.Test", "src\TDesign
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{FEABD8B3-4FD3-4159-8EC0-2050BF60CE41}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\auto-release.yml = .github\workflows\auto-release.yml
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\deploy-webassembl-artifact.yml = .github\workflows\deploy-webassembl-artifact.yml
+		.github\workflows\git-pages-ci.yml = .github\workflows\git-pages-ci.yml
 		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Global
