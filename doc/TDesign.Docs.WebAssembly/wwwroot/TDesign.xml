@@ -1965,11 +1965,6 @@
             表示 popper 对象。
             </summary>
         </member>
-        <member name="M:TDesign.Popper.#ctor(Microsoft.JSInterop.IJSObjectReference,Microsoft.JSInterop.IJSObjectReference,TDesign.PopperOptions)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TDesign.Popper"/> class.
-            </summary>
-        </member>
         <member name="M:TDesign.Popper.ForceUpdateAsync">
             <summary>
             同步更新 popper 实例。 用于低频更新。
@@ -2000,7 +1995,7 @@
             Popup 的 JS 扩展。
             </summary>
         </member>
-        <member name="M:TDesign.PopperExtensions.InvokePopupAsync(Microsoft.JSInterop.IJSRuntime,Microsoft.AspNetCore.Components.ElementReference,Microsoft.AspNetCore.Components.ElementReference,TDesign.PopperOptions)">
+        <member name="M:TDesign.PopperExtensions.InvokePopupAsync(Microsoft.JSInterop.IJSRuntime,Microsoft.AspNetCore.Components.ElementReference,Microsoft.AspNetCore.Components.ElementReference,TDesign.PopperOptions,System.Func{System.Threading.Tasks.Task})">
             <summary>
             调用 popup 组件
             </summary>
@@ -2022,11 +2017,6 @@
         <member name="P:TDesign.PopperOptions.Strategy">
             <summary>
             获取或设置要使用的定位策略。
-            </summary>
-        </member>
-        <member name="P:TDesign.PopperOptions.Timeout">
-            <summary>
-            获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 400 毫秒。
             </summary>
         </member>
         <member name="T:TDesign.PopperState">
@@ -2139,8 +2129,10 @@
             具备悬浮提示的弹出层。
             </summary>
         </member>
-        <member name="P:TDesign.TPopup.ChildContent">
-            <inheritdoc/>
+        <member name="M:TDesign.TPopup.#ctor">
+            <summary>
+            初始化 <see cref="T:TDesign.TPopup"/> 类的新实例。
+            </summary>
         </member>
         <member name="P:TDesign.TPopup.Placement">
             <summary>
@@ -2167,11 +2159,6 @@
             触发弹出的方式。
             </summary>
         </member>
-        <member name="P:TDesign.TPopup.Timeout">
-            <summary>
-            设置弹出延迟的时间，单位毫秒，默认400毫秒。
-            </summary>
-        </member>
         <member name="P:TDesign.TPopup.Visible">
             <summary>
             获取一个布尔值，表示弹出框是否显示。
@@ -2185,16 +2172,6 @@
         </member>
         <member name="M:TDesign.TPopup.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TPopup.BuildStyle(ComponentBuilder.IStyleBuilder)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TPopup.CaptureElementReference(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            捕获 <see cref="T:TDesign.TPopup"/> 的元素引用。
-            </summary>
-            <param name="builder"><inheritdoc/></param>
-            <param name="sequence"><inheritdoc/></param>
         </member>
         <member name="M:TDesign.TPopup.Show(ComponentBuilder.IBlazorComponent)">
             <summary>

@@ -2,7 +2,11 @@
 @using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
-<TTable TItem="Test.User" Data="Test.User.GetData()">
+<TPopup Content="弹出一个层">
+    <TButton>悬浮</TButton>
+</TPopup>
+
+@*<TTable TItem="Test.User" Data="Test.User.GetData()">
     <TTableExpandColumn>
         <h4>Name:@context.Name</h4>
     </TTableExpandColumn>
@@ -25,4 +29,4 @@
     {
 
     }
-}
+}*@

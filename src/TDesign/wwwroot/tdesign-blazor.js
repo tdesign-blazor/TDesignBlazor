@@ -1,4 +1,3 @@
-import { createPopper } from './js/popper/popper.js'
 
 let tdesign = {
     /**
@@ -57,41 +56,6 @@ let affix = {
     },
 }
 
-/**
- * 弹出层
- * */
-let popup = {
-    /**
-     * 创建一个新的弹出层引用
-     * @param objRef 触发对象的引用
-     * @param popupRef 弹出提示对象的引用
-     * @param options 弹出层配置
-     * @param optionDotNetHelper options 包装的 DotNetReference 对象
-     * @returns popper 对象
-     * */
-    show: function (trigerElement, popupElement, options, optionDotNetReference) {
-
-        options.onFirstUpdate = state => {
-            optionDotNetReference.invokeMethodAsync("InvokeOnFirstUpdate", { placement: state.placement });
-        }
-        let popper = createPopper(trigerElement, popupElement, options);;
-        
-        setTimeout(() => {
-            popupElement.style.display = "";
-            document.body.appendChild(popupElement);
-            popper.update();
-        }, options.timeout);
-        return popper;
-    },
-    hide: function (popper,popupElement, options) {
-        setTimeout(() => {
-            if (popupElement && popupElement.style.display == '') {
-                popupElement.style.display = 'none';
-            }
-            popper.destroy();
-        }, options.timeout);
-    }
-}
 /**
  * 锚点
  * */
@@ -208,4 +172,4 @@ let theme = {
     }
 }
 
-export { tdesign, affix, popup, anchor, theme, tagInput }
+export { tdesign, affix, anchor, theme, tagInput }

@@ -3,10 +3,25 @@
 /// 具备悬浮提示的弹出层。
 /// </summary>
 [CssClass("t-popup")]
-public class TPopup : TDesignComponentBase, IHasChildContent
+public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
 {
-    /// <inheritdoc/>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    const string ANIMATION_ENTER = "t-popup--animation-enter";
+    const string ANIMATION_ENTER_FROM = "t-popup--animation-enter-from";
+    const string ANIMATION_EXITING = "t-popup--animation-exiting";
+    const string ANIMATION_LEAVE_TO = "t-popup--animation-leave-to";
+
+    const string ANIMATION_ENTER_TO = "t-popup--animation-enter-to";
+    const string ANIMATION_ENTERING = "t-popup--animation-entering";
+    const string ANIMATION_LEAVE_FROM = "t-popup--animation-leave-from";
+    const string ANIMATION_LEAVE = "t-popup--animation-leave";
+
+    const string ANIMATION_ENTER_ACTIVE = "t-popup--animation-enter-active";
+    const string ANIMATION_LEAVE_ACTIVE = "t-popup--animation-leave-active";
+
+    /// <summary>
+    /// 初始化 <see cref="TPopup"/> 类的新实例。
+    /// </summary>
+    public TPopup() => CaptureReference = true;
 
     /// <summary>
     /// 设置弹出层的显示位置。
@@ -31,11 +46,6 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// 触发弹出的方式。
     /// </summary>
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
-
-    /// <summary>
-    /// 设置弹出延迟的时间，单位毫秒，默认400毫秒。
-    /// </summary>
-    [Parameter] public int? Timeout { get; set; } = 400;
 
     /// <summary>
     /// 获取一个布尔值，表示弹出框是否显示。
@@ -63,37 +73,27 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     }
 
     /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CreateElement(sequence, "div", inner =>
-        {
-            inner.AddContent(0, PopupContent);
-
-            if (Arrow)
+    protected override void AddContent(RenderTreeBuilder builder, int sequence) 
+        => builder.Div("t-popup__content")
+            .Class("t-popup__content--arrow", Arrow)
+            .Content(inner =>
             {
-                inner.Fluent().Div().Class("t-popup__arrow").Close();
-            }
-        },
-        new
-        {
-            @class = HtmlHelper.Instance.Class().Append("t-popup__content").Append("t-popup__content--arrow", Arrow)
-        });
-    }
+                inner.AddContent(0, PopupContent);
 
-    /// <inheritdoc/>
+                inner.Div("t-popup__arrow", Arrow).Close();
+            })
+            .Close();
+
+    protected override void BuildCssClass(ICssClassBuilder builder)
+    {
+        if ( !builder.Contains(ANIMATION_ENTER) )
+        {
+            builder.Append(ANIMATION_ENTER);
+        }
+    }
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append("display:none");
-    }
-
-    /// <summary>
-    /// 捕获 <see cref="TPopup"/> 的元素引用。
-    /// </summary>
-    /// <param name="builder"><inheritdoc/></param>
-    /// <param name="sequence"><inheritdoc/></param>
-    protected override void CaptureElementReference(RenderTreeBuilder builder, int sequence)
-    {
-        builder.AddElementReferenceCapture(sequence, element => Reference = element);
     }
 
     /// <summary>
@@ -104,10 +104,12 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     {
         _instance = await JS.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
-            Timeout = Timeout ?? Options.Value.PopupTimeout ?? 400,
             Placement = Placement
-        });
-        Visible = _instance is not null;
+        }, Hide);
+
+        CssClassBuilder.Remove(ANIMATION_ENTER).Remove(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE);
+        Visible = true;
+        StateHasChanged();
     }
 
     /// <summary>
@@ -118,7 +120,10 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         if (_instance is not null)
         {
             await _instance.HideAsync(Reference);
+
+            CssClassBuilder.Remove(ANIMATION_LEAVE).Remove(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER);
             Visible = false;
+            StateHasChanged();
         }
     }
 }

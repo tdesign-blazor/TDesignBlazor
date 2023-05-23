@@ -13,11 +13,12 @@ public static class PopperExtensions
     /// <param name="selectorRef">触发 popup 组件的元素引用。</param>
     /// <param name="popupRef">Popup组件元素的引用。</param>
     /// <param name="options">Popup的配置。</param>
-    public static async ValueTask<Popper> InvokePopupAsync(this IJSRuntime js, ElementReference selectorRef, ElementReference popupRef, PopperOptions options)
+    public static async ValueTask<Popper> InvokePopupAsync(this IJSRuntime js, ElementReference selectorRef, ElementReference popupRef, PopperOptions options,Func<Task> clickToHide)
     {
-        var tdesignJsObj = await js.ImportTDesignScriptAsync();
-        var popperObject = await tdesignJsObj.Module.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options));
+        var tdesignModule = await js.ImportAsync("./_content/TDesign/lib/tdesign-blazor-popup.js");
 
-        return new (tdesignJsObj.Module,popperObject, options);
+        var popperModule = await tdesignModule.Module.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options),JSInvokeMethodFactory.Create(clickToHide));
+
+        return new(tdesignModule.Module, popperModule, options);
     }
 }
