@@ -4925,13 +4925,6 @@
             <param name="mapping">状态和图标的映射关系。</param>
             <returns>图标枚举。</returns>
         </member>
-        <member name="M:TDesign.TDesignExtensions.ImportTDesignScriptAsync(Microsoft.JSInterop.IJSRuntime)">
-            <summary>
-            引入 tdesign-blazor.js 的 JS 对象。
-            </summary>
-            <param name="js"></param>
-            <returns></returns>
-        </member>
         <member name="M:TDesign.TDesignExtensions.ImportTDesignModuleAsync(Microsoft.JSInterop.IJSRuntime,System.String)">
             <summary>
             引入 tdesign blazor 相关的 JS 模块对象。
@@ -4942,13 +4935,6 @@
             <param name="js"></param>
             <param name="moduleJsFileName">模块的js文件名称，不要.js后缀。</param>
             <returns></returns>
-        </member>
-        <member name="M:TDesign.TDesignExtensions.ChangeThemeMode(Microsoft.JSInterop.IJSRuntime,System.Boolean)">
-            <summary>
-            执行切换暗黑和浅色模式切换
-            </summary>
-            <param name="js"></param>
-            <param name="isDark">是否为暗黑模式</param>
         </member>
         <member name="T:TDesign.TDesignOptions">
             <summary>
