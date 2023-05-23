@@ -1,0 +1,32 @@
+﻿@page "/test"
+@using Test=TDesign.Docs.WebAssembly.Pages.Components.Data.TablePage
+@layout EmptyLayout
+
+<TPopup Content="弹出一个层">
+    <TButton>悬浮</TButton>
+</TPopup>
+
+@*<TTable TItem="Test.User" Data="Test.User.GetData()">
+    <TTableExpandColumn>
+        <h4>Name:@context.Name</h4>
+    </TTableExpandColumn>
+    <TTableCheckboxColumn Field="f=>f.Id" />
+    <TTableFieldColumn Field="f=>f.Id" />
+    <TTableFieldColumn Field="f=>f.Name" />
+    <TTableFieldColumn Field="f=>f.Age" >
+        <FooterContent>
+            底部内容
+        </FooterContent>
+        </TTableFieldColumn>
+    <TTableFieldColumn Field="f=>f.Gender" />
+       
+</TTable>
+
+@code {
+    IEnumerable<string> Text { get; set; } = Enumerable.Empty<string>();
+
+    void HandleKey(KeyboardEventArgs e)
+    {
+
+    }
+}*@

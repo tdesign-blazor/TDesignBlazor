@@ -1,0 +1,255 @@
+﻿@page "/components/input"
+<LayoutContent AnchorItems="@(new[]{"基础输入框","组合输入框","密码输入框","不同尺寸的输入框","不同对齐方式的输入框","自适应宽度","输入框的状态","输入框的提示","API"})">
+<PageHeader Title="InputText 输入框">
+    用于承载用户信息录入的文本框，常用于表单、对话框等场景，对不同内容的信息录入，可拓展形成多种信息录入形式。
+</PageHeader>
+
+<Example Title="基础输入框">
+    <Description>
+        最基础的单行输入框，按状态可分为正常、禁用、错误、带额外提示。通常在需要输入少量内容（20个字以内）的场景下使用。</Description>
+    <RunContent>
+        <TInputText @bind-Value="BasicText" Placeholder="文本框"/>
+        @BasicText
+        <br />
+        <TInputText @bind-Value="DefaultText" Placeholder="默认值" />
+        @DefaultText
+        <br />
+        <TInputText @bind-Value="PrefixText" PrefixText="价格：" SuffixText="元" Type="InputType.Number" />
+        @PrefixText
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText @bind-Value=""BasicText"" Placeholder=""文本框""/>
+<TInputText @bind-Value=""DefaultText"" Placeholder=""默认值""/>
+<TInputText @bind-Value=""PrefixText"" PrefixText=""价格："" SuffixText=""元"" Type=""InputType.Number"" />
+```
+```cs
+string BasicText{ get; set; }
+string PrefixText{ get; set; }
+```
+")
+    </CodeContent>
+</Example>
+@code {
+    string BasicText { get; set; }
+    string DefaultText{ get; set; }="默认值";
+    string PrefixText { get; set; }
+}
+<Example Title="组合输入框">
+    <Description>多个输入框相组合，或与其他控件（如下拉）相组合，以方便识别。用于一些固定组合或者固定格式输入的场景，如输入电话号码。</Description>
+    <RunContent>
+        <TInputGroup Seperate>
+            <TInputText @bind-Value="InputGroup1" />
+            <TInputText @bind-Value="InputGroup2" />
+        </TInputGroup>
+        <br />
+        <br />
+        <TInputGroup>
+            <TInputText @bind-Value="InputGroup1" />
+            <TInputText @bind-Value="InputGroup2" />
+        </TInputGroup>
+        <br />
+        <br />
+        <TInputGroup Seperate>
+            <TInputText @bind-Value="InputGroup1" Placeholder="区号"/>
+            <span style="line-height:32px">-</span>
+            <TInputText @bind-Value="InputGroup2" Placeholder="电话"/>
+        </TInputGroup>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputGroup Seperate>
+    <TInputText @bind-Value=""InputGroup1"" />
+    <TInputText @bind-Value=""InputGroup2"" />
+</TInputGroup>
+
+<TInputGroup>
+    <TInputText @bind-Value=""InputGroup1"" />
+    <TInputText @bind-Value=""InputGroup2"" />
+</TInputGroup>
+
+<TInputGroup Seperate>
+    <TInputText @bind-Value=""InputGroup1"" Placeholder=""区号""/>
+    <span style=""line-height:32px"">-</span>
+    <TInputText @bind-Value=""InputGroup2"" Placeholder=""电话""/>
+</TInputGroup>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string InputGroup1{ get; set; }
+    string InputGroup2{ get; set; }
+}
+<Example Title="密码输入框">
+    <Description>由符号代替输入内容的输入框，并可通过操作展示原文信息。用于强安全信息输入的场景。</Description>
+    <RunContent>
+        <TInputText Type="InputType.Password" @bind-Value="InputPassword"/>
+        <br />
+        <br />
+        <TInputText Type="InputType.Password" @bind-Value="InputPassword" PrefixIcon="@IconName.LockOn"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText Type=""InputType.Password"" @bind-Value=""InputPassword""/>
+
+<TInputText Type=""InputType.Password"" @bind-Value=""InputPassword"" PrefixIcon=""IconName.LockOn""/>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string InputPassword { get; set; } = "123456";
+}
+<Example Title="不同尺寸的输入框">
+    <Description>有大中小三种不同高度、宽度的输入框，以适应不同尺寸布局。</Description>
+    <RunContent>
+        <TInputText @bind-Value="SizeText" Size="Size.Small"/>
+        <br /><br />
+        <TInputText @bind-Value="SizeText" Size="Size.Medium" /><br /><br />
+        <TInputText @bind-Value="SizeText" Size="Size.Large"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText @bind-Value=""SizeText"" Size=""Size.Small""/>
+<TInputText @bind-Value=""SizeText"" Size=""Size.Medium"" />
+<TInputText @bind-Value=""SizeText"" Size=""Size.Large""/>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string SizeText { get; set; } = "尺寸";
+}
+<Example Title="不同对齐方式的输入框">
+    <Description></Description>
+    <RunContent>
+        <TInputText @bind-Value="AlignmentText"/><br/><br />
+        <TInputText @bind-Value="AlignmentText" Alignment="HorizontalAlignment.Center" /><br /><br />
+        <TInputText @bind-Value="AlignmentText" Alignment="HorizontalAlignment.Right" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText @bind-Value=""AlignmentText""/>
+<TInputText @bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Center""/>
+<TInputText @bind-Value=""AlignmentText"" Alignment=""HorizontalAlignment.Right"" />
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string AlignmentText { get; set; } = "对齐方式";
+}
+<Example Title="自适应宽度">
+    <Description>宽度随着文本框内容的宽度而自适应</Description>
+    <RunContent>
+        <div style="width:300px;border:blue 1px solid;padding:10px">
+            <TInputText @bind-Value="AutoWidthText" AutoWidth/>
+        </div>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<div style=""width:300px"">
+    <TInputText @bind-Value=""AutoWidthText"" AutoWidth/>
+</div>
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string AutoWidthText { get; set; } = "这个宽度自适应文字的长度";
+}
+<Example Title="输入框的状态">
+    <Description></Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Disabled Placeholder="禁用"/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Readonly Placeholder="只读" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Default" Placeholder="默认" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Success" Placeholder="成功" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Warning" Placeholder="警告" />
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Error" Placeholder="错误" />
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText @bind-Value=""StatusText"" Disabled Placeholder=""禁用""/>
+<TInputText @bind-Value=""StatusText"" Readonly Placeholder=""只读"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"" />
+<TInputText @bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"" />
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    string StatusText{ get; set; }
+}
+
+<Example Title="输入框的提示">
+    <Description>设置 <code>TipContent</code> 作为输入框的提示</Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Default" Placeholder="默认">
+                    <TipContent>默认的提示</TipContent>
+                </TInputText>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Success" Placeholder="成功">
+                    <TipContent>成功的提示</TipContent>
+                </TInputText>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Warning" Placeholder="警告">
+                    <TipContent>警告的提示</TipContent>
+                </TInputText>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputText @bind-Value="StatusText" Status="Status.Error" Placeholder="错误">
+                    <TipContent>错误的提示</TipContent>
+                </TInputText>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputText @bind-Value=""StatusText"" Status=""Status.Default"" Placeholder=""默认"">
+    <TipContent>默认的提示</TipContent>
+</TInputText>
+<TInputText @bind-Value=""StatusText"" Status=""Status.Success"" Placeholder=""成功"">
+    <TipContent>成功的提示</TipContent>
+</TInputText>
+<TInputText @bind-Value=""StatusText"" Status=""Status.Warning"" Placeholder=""警告"">
+    <TipContent>警告的提示</TipContent>
+</TInputText>
+<TInputText @bind-Value=""StatusText"" Status=""Status.Error"" Placeholder=""错误"">
+    <TipContent>错误的提示</TipContent>
+</TInputText>
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TInputText<int>)"></ComponentAPI>
+</LayoutContent>

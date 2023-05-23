@@ -1,0 +1,173 @@
+﻿@page "/components/dialog"
+<LayoutContent AnchorItems="@(new[]{"基础对话框","对话框的位置","对话框模式","API"})">
+<PageHeader Title="Dialog 对话框">
+    对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
+</PageHeader>
+
+@using ComponentBuilder
+<Example Title="基础对话框">
+    <Description>
+        需要配合 <code>@@ref</code> 组件引用并调用 <code>Activate()</code> 方法进行显示，调用 <code>Activate(false)</code> 关闭对话框
+    </Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TButton OnClick="e=>refDialog?.Activate()">简单对话框</TButton>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TButton OnClick="e=>refCompleteDialog?.Activate()">完整对话框</TButton>
+            </TSpaceItem>
+        </TSpace>
+
+        <TDialog @ref="refDialog">
+            简单的对话框内容
+        </TDialog>
+
+        <TDialog @ref="refCompleteDialog">
+            <HeaderContent>对话框标题</HeaderContent>
+            <ChildContent>对话框的内容</ChildContent>
+            <FooterContent>
+                <TButton Theme="Theme.Primary">确认</TButton>
+                <TButton Type="ButtonVarient.Outline" OnClick="e=>refCompleteDialog?.Activate(false)">关闭</TButton>
+            </FooterContent>
+        </TDialog>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TSpace>
+    <TSpaceItem>
+        <TButton OnClick=""e=>refDialog?.Activate()"">简单对话框</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton OnClick=""e=>refCompleteDialog?.Activate()"">完整对话框</TButton>
+    </TSpaceItem>
+</TSpace>
+
+<TDialog ref=""refDialog"">
+    简单的对话框内容
+</TDialog>
+
+<TDialog ref=""refCompleteDialog"">
+    <HeaderContent>对话框标题</HeaderContent>
+    <ChildContent>对话框的内容</ChildContent>
+    <FooterContent>
+        <TButton Theme=""Theme.Primary"">确认</TButton>
+        <TButton Type=""ButtonType.Outline"" OnClick=""e=>refCompleteDialog?.Activate(false)"">关闭</TButton>
+    </FooterContent>
+</TDialog>
+```
+```cs
+@code{
+    TDialog? refDialog;
+    TDialog? refCompleteDialog;
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    TDialog? refDialog;
+    TDialog? refCompleteDialog;
+}
+
+<Example Title="对话框的位置">
+    <Description>设置 <code>Center</code> 将定位在屏幕正中间，默认是居顶部。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TButton Theme="Theme.Primary" OnClick="e=>refTopDialog.Activate()">顶部对话框</TButton>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TButton Theme="Theme.Danger" OnClick="e=>refCenterDialog.Activate()">中间对话框</TButton>
+            </TSpaceItem>
+        </TSpace>
+        <TDialog @ref="refTopDialog">
+            在顶部显示的对话框。
+        </TDialog>
+        <TDialog @ref="refCenterDialog" Center>
+            在居中显示的对话框
+        </TDialog>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TSpace>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"" OnClick=""e=>refTopDialog.Activate()"">顶部对话框</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Danger"" OnClick=""e=>refCenterDialog.Activate()"">中间对话框</TButton>
+    </TSpaceItem>
+</TSpace>
+<TDialog ref=""refTopDialog"">
+    在顶部显示的对话框。
+</TDialog>
+<TDialog ref=""refCenterDialog"" Center>
+    在居中显示的对话框
+</TDialog>
+```
+```cs
+@code{
+    TDialog? refTopDialog;
+    TDialog? refCenterDialog;
+}
+```
+")
+    </CodeContent>
+</Example>
+@code{
+    TDialog? refTopDialog;
+    TDialog? refCenterDialog;
+}
+<Example Title="对话框模式">
+    <Description>模态对话框会中断用户操作，必须处理当前对话框内容后才能进行其他操作。非模态框不中断用户操作。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TButton Theme="Theme.Primary" OnClick="e=>refFixedDialog.Activate()">模态对话框</TButton>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TButton OnClick="e=>refModelessDialog.Activate()">非模态对话框</TButton>
+            </TSpaceItem>
+        </TSpace>
+        <TDialog @ref="refModelessDialog" Modeless>
+            非模态对话框
+        </TDialog>
+        <TDialog @ref="refFixedDialog">
+            模态对话框
+        </TDialog>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TSpace>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"" OnClick=""e=>refFixedDialog.Activate()"">模态对话框</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton OnClick=""e=>refModelessDialog.Activate()"">非模态对话框</TButton>
+    </TSpaceItem>
+</TSpace>
+<TDialog ref=""refModelessDialog"" Modeless>
+    非模态对话框
+</TDialog>
+<TDialog ref=""refFixedDialog"">
+    模态对话框
+</TDialog>
+```
+```cs
+@code{
+    TDialog? refModelessDialog;
+    TDialog? refFixedDialog;
+}
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TDialog)"></ComponentAPI>
+@code{
+    TDialog? refModelessDialog;
+    TDialog? refFixedDialog;
+}
+</LayoutContent>

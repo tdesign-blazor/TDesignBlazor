@@ -1,0 +1,218 @@
+﻿@page "/components/popconfirm"
+
+<LayoutContent AnchorItems="@(new[]{"基础气泡确认框","不同图标的气泡确认框","带描述的气泡确认框","API"})">
+<PageHeader Title="Popconfirm 气泡确认框">
+    气泡确认框通常用于不会造成严重后果的二次确认场景，其会在点击元素上弹出浮层进行提示确认。气泡确认框没有蒙层，点击确认框以外的区域即可关闭。
+</PageHeader>
+<Example Title="基础气泡确认框">
+    <Description>使用说明文字及操作按钮对较简单的操作进行二次确认。</Description>
+    <RunContent>
+        <TPopConfirm Content="确认删除吗？">
+            <TButton Theme="Theme.Primary">删除订单</TButton>
+        </TPopConfirm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPopConfirm Content=""确认删除吗？"">
+    <TButton Theme=""Theme.Primary"">删除订单</TButton>
+</TPopConfirm>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="不同图标的气泡确认框">
+    <Description>在说明文字之前增加图标，如普通、警示及告警等图标，增强表达以更好的引起用户注意。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TPopConfirm Content="普通事件通知类型偏向于确认">
+                    <TButton Theme="Theme.Primary">默认</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Content="事件通知类型偏向于提示" Theme="Theme.Warning">
+                    <TButton Theme="Theme.Warning">警告</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Content="事件通知类型偏向于高危提醒" Theme="Theme.Danger">
+                    <TButton Theme="Theme.Danger">危险</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Content="基础气泡确认框文案示意文字按钮" Icon="IconName.MoneyCircle" Placement="PopupPlacement.Bottom">
+                    <TButton Theme="Theme.Default" Varient="ButtonVarient.Outline">自定义图标</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPopConfirm Content=""普通事件通知类型偏向于确认"">
+    <TButton Theme=""Theme.Primary"">默认</TButton>
+</TPopConfirm>
+
+<TPopConfirm Content=""事件通知类型偏向于提示"" Theme=""Theme.Warning"">
+    <TButton Theme=""Theme.Warning"">警告</TButton>
+</TPopConfirm>
+
+<TPopConfirm Content=""事件通知类型偏向于高危提醒"" Theme=""Theme.Danger"">
+    <TButton Theme=""Theme.Danger"">危险</TButton>
+</TPopConfirm>
+
+<TPopConfirm Content=""基础气泡确认框文案示意文字按钮"" Icon=""IconName.MoneyCircle"" Placement=""PopupPlacement.Bottom"">
+    <TButton Theme=""Theme.Default"" Varient=""ButtonVarient.Outline"">自定义图标</TButton>
+</TPopConfirm>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带描述的气泡确认框">
+    <Description>在主要说明文字之外增加了操作相关的详细描述，对较复杂的，可能造成疑惑的操作进行详细描述。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TPopConfirm>
+                    <ConfirmContent>
+                        <h3>自定义标题</h3>
+                        <p>带描述的气泡确认框在主要说明之外增加了操作相关的详细描述</p>
+                    </ConfirmContent>
+                    <ChildContent>
+                        <TButton Theme="Theme.Primary">自定义内容</TButton>
+                    </ChildContent>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Theme="Theme.Warning">
+                    <ConfirmContent>
+                        <h3>自定义标题</h3>
+                        <p>带描述的气泡确认框在主要说明之外增加了操作相关的详细描述</p>
+                    </ConfirmContent>
+                    <ChildContent>
+                        <TButton Theme="Theme.Warning">自定义内容</TButton>
+                    </ChildContent>
+                </TPopConfirm>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPopConfirm>
+    <ConfirmContent>
+        <h3>自定义标题</h3>
+        <p>带描述的气泡确认框在主要说明之外增加了操作相关的详细描述</p>
+    </ConfirmContent>
+    <ChildContent>
+        <TButton Theme=""Theme.Primary"">自定义内容</TButton>
+    </ChildContent>
+</TPopConfirm>
+
+<TPopConfirm Theme=""Theme.Warning"">
+    <ConfirmContent>
+        <h3>自定义标题</h3>
+        <p>带描述的气泡确认框在主要说明之外增加了操作相关的详细描述</p>
+    </ConfirmContent>
+    <ChildContent>
+        <TButton Theme=""Theme.Warning"">自定义内容</TButton>
+    </ChildContent>
+</TPopConfirm>
+```
+")
+    </CodeContent>
+</Example>
+    <Example Title="自定义气泡确认框按钮">
+    <Description></Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TPopConfirm Content="确认删除吗？" ConfirmBtnText="确认删除" CancelBtnText="返回">
+                    <TButton Theme="Theme.Danger">删除</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Content="确认删除吗？" ConfirmBtnVarient="ButtonVarient.Outline" ConfirmBtnTheme="Theme.Warning" CancelBtnVarient="ButtonVarient.Text">
+                    <TButton Theme="Theme.Default">变体</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TPopConfirm Content="确认删除吗？" BtnSize="Size.Large">
+                    <TButton Theme="Theme.Primary">大按钮</TButton>
+                </TPopConfirm>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPopConfirm Content=""确认删除吗？"" ConfirmBtnText=""确认删除"" CancelBtnText=""返回"">
+    <TButton Theme=""Theme.Danger"">删除</TButton>
+</TPopConfirm>
+
+<TPopConfirm Content=""确认删除吗？"" ConfirmBtnVarient=""ButtonVarient.Outline"" ConfirmBtnTheme=""Theme.Warning"" CancelBtnVarient=""ButtonVarient.Text"">
+    <TButton Theme=""Theme.Default"">变体</TButton>
+</TPopConfirm>
+
+<TPopConfirm Content=""确认删除吗？"" BtnSize=""Size.Large"">
+    <TButton Theme=""Theme.Primary"">大按钮</TButton>
+</TPopConfirm>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="回调事件">
+    <Description></Description>
+    <RunContent>
+            <TPopConfirm Content="确认删除吗？" OnCancel="Cancel" OnConfirm="Confirm">
+                <TButton Theme="Theme.Danger">删除</TButton>
+            </TPopConfirm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPopConfirm Content=""确认删除吗？"" OnCancel=""Cancel"" OnConfirm=""Confirm"">
+    <TButton Theme=""Theme.Danger"">删除</TButton>
+</TPopConfirm>
+```
+
+```cs
+inject IJSRuntime JS
+
+code{
+    async Task Cancel(PopConfirmEventArgs e)
+    {
+        await JS.InvokeVoidAsync(""alert"", ""点击了取消"");
+    }
+
+    Task Confirm(PopConfirmEventArgs e)
+    {
+        JS.InvokeVoidAsync(""alert"", ""点击了确定"");
+        e.Closed = false;//不关闭弹出层
+    }
+}
+```
+")
+    </CodeContent>
+</Example>
+<div id="API"></div>
+    <ComponentAPI Component="typeof(TPopConfirm)" />
+    <ComponentAPI Component="typeof(PopConfirmEventArgs)" />
+</LayoutContent>
+
+@inject IJSRuntime JS
+
+@code{
+    async Task Cancel(PopConfirmEventArgs e)
+    {
+        await JS.InvokeVoidAsync("alert", "点击了取消");
+    }
+
+    async Task Confirm(PopConfirmEventArgs e)
+    {
+        await JS.InvokeVoidAsync("alert", "点击了确定");
+        e.Closed = false;//不关闭弹出层
+    }
+}

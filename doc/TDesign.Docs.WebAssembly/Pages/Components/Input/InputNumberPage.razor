@@ -1,0 +1,227 @@
+﻿@page "/components/inputnumber"
+<LayoutContent AnchorItems="@(new[]{"基本使用","双侧调整的数字输入框","右侧调整数值的数字输入框","无按钮的数字输入框","不同尺寸的数字输入框","不同对齐方式的输入框","不同状态的数字输入框","API"})">
+<PageHeader Title="InputNumber 数字输入框">
+    数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
+</PageHeader>
+
+@code {
+    double Number { get; set; } = 1;
+
+    class FormData
+    {
+        public InputTipsAlign Align { get; set; }
+    }
+    enum InputTipsAlign
+    {
+        Hide,
+        AlignLeft,
+        AlignInput
+    }
+    FormData? TestData { get; set; } = new FormData();
+}
+
+
+<Example Title="基本使用">
+    <Description></Description>
+    <RunContent>
+        <TInputNumber @bind-Value="Number" Placeholder="请输入"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入""/>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="双侧调整的数字输入框">
+    <Description>已输入的值居中展示，用户可直接在输入框内修改数值，还可以使用输入框左右的箭头按钮增大或减小数值。</Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TInputNumber @bind-Value="Number" Placeholder="请输入"/>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TInputNumber @bind-Value="Number" Placeholder="请输入" Step="0.5"/>
+            </TSpaceItem>
+                <TSpaceItem>
+                <TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Min="-5" SuffixText="个"/>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""0.5""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5""  Min=""-5""  SuffixText=""个""/>
+
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="右侧调整数值的数字输入框">
+    <Description>已输入的值居左展示，用户可直接在输入框内修改数值，还可以使用输入框右侧的箭头按钮增大或减小数值。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Theme="InputNumberTheme.Column"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="数字" Theme="InputNumberTheme.Column" AdditionalStyle="width: 150px;" /></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Column""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Column"" PrefixText=""数字"" AdditionalStyle=""width: 150px;""/>
+```
+")
+    </CodeContent>
+</Example>
+
+
+<Example Title="无按钮的数字输入框">
+    <Description>仅有输入框，不能用按钮进行数值调整的数字输入框。</Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Left"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="金额" SuffixText="元" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right" /></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Step="1" Max="5" PrefixText="机器" SuffixText="台" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"/></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left"" />
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" PrefixText=""金额"" SuffixText=""元"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Step=""1"" Max=""5"" PrefixText=""机器"" SuffixText=""台"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right"" />
+
+```
+")
+    </CodeContent>
+</Example>
+
+
+
+<Example Title="不同尺寸的数字输入框">
+    <Description>提供 大、中（默认）、小 3 种数字输入框。</Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Size="Size.Small"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Size="Size.Medium"/></TSpaceItem>
+            <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Size="Size.Large"/></TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Size=""Size.Small""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Size=""Size.Medium""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Size=""Size.Large""/>        
+```
+")
+    </CodeContent>
+</Example>
+
+
+
+<Example Title="不同对齐方式的输入框">
+    <Description></Description>
+    <RunContent>
+        <TSpace>
+            <TSpaceItem>
+                <TSpace Vertical>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Left"/></TSpaceItem>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Center"/></TSpaceItem>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Row" Align="HorizontalAlignment.Right"/></TSpaceItem>
+                </TSpace>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TSpace Vertical>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Left"/></TSpaceItem>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Center"/></TSpaceItem>
+                    <TSpaceItem><TInputNumber @bind-Value="Number" Placeholder="请输入" Theme="InputNumberTheme.Normal" Align="HorizontalAlignment.Right"/></TSpaceItem>
+                </TSpace>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Left""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Center""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Row"" Align=""HorizontalAlignment.Right""/>
+
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Left""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Center""/>
+<TInputNumber @bind-Value=""Number"" Placeholder=""请输入"" Theme=""InputNumberTheme.Normal"" Align=""HorizontalAlignment.Right""/>
+```
+")
+    </CodeContent>
+</Example>
+
+
+<Example Title="不同状态的数字输入框">
+    <Description>除了禁用 disabled 和只读 readonly 状态之外，提供 正常（默认）、成功 success、警告 warning、错误 error 4 种状态的输入框设置。</Description>
+    <RunContent>
+        <TForm Model="@TestData">
+            <TInputRadioGroup @bind-Value="TestData.Align" ButtonStyle="RadioButtonStyle.Outline">
+                <TInputRadio Value="InputTipsAlign.Hide">隐藏文本提示</TInputRadio>
+                <TInputRadio Value="InputTipsAlign.AlignInput">文本提示左对齐</TInputRadio>
+                <TInputRadio Value="InputTipsAlign.AlignLeft">文本提示对齐输入框</TInputRadio>
+            </TInputRadioGroup>
+            <p>
+            </p>
+            @if (TestData.Align == InputTipsAlign.Hide)
+            {
+                <TFormItem Label="禁用"><TInputNumber @bind-Value="Number" Placeholder="请输入" Disabled/></TFormItem>
+                <TFormItem Label="只读">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Readonly /></TFormItem>
+                <TFormItem Label="正常"><TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Default"/></TFormItem>                                                                                                            
+                <TFormItem Label="成功"><TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Success"/></TFormItem>                                                                                                            
+                <TFormItem Label="告警"><TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Warning"/></TFormItem>                                                        
+                <TFormItem Label="错误"><TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Error"/></TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignInput)
+            {
+                <TFormItem Label="正常提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Default" Tip="这是普通文本提示" TipAlign="TipAlign.Left"/>
+                </TFormItem>
+                <TFormItem Label="成功提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Success" Tip="校验通过文本提示" TipAlign="TipAlign.Left"/>
+                </TFormItem>
+                <TFormItem Label="警告提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Warning" Tip="校验不通过文本提示" TipAlign="TipAlign.Left"/>
+                </TFormItem>
+                <TFormItem Label="错误提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Error" Tip="校验存在严重问题文本提示" TipAlign="TipAlign.Left"/>
+                </TFormItem>
+            }
+            else if (TestData.Align == InputTipsAlign.AlignLeft)
+            {
+                <TFormItem Label="正常提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Default" Tip="这是普通文本提示" TipAlign="TipAlign.Input"/>
+                </TFormItem>
+                <TFormItem Label="成功提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Success" Tip="校验通过文本提示" TipAlign="TipAlign.Input"/>
+                </TFormItem>
+                <TFormItem Label="警告提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Warning" Tip="校验不通过文本提示"  TipAlign="TipAlign.Input"/>
+                </TFormItem>
+                <TFormItem Label="错误提示">
+                    <TInputNumber @bind-Value="Number" Placeholder="请输入" Status="Status.Error" Tip="校验存在严重问题文本提示" TipAlign="TipAlign.Input"/>
+                </TFormItem>
+            }
+        </TForm>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputNumber @bind-Value=""Number"" Tip=""提示靠左"" TipAlign=""TipAlign.Left""/>
+<TInputNumber @bind-Value=""Number"" Tip=""提示对齐输入框"" TipAlign=""TipAlign.Input""/>
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TInputNumber<>)"></ComponentAPI></LayoutContent>

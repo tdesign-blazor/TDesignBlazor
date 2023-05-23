@@ -1,0 +1,33 @@
+﻿@page "/components/checkbox"
+<LayoutContent AnchorItems="@(new[]{"基本使用","API"})">
+<PageHeader Title="Checkbox 多选框">
+    多选框是一个选择控件，允许用户通过单击在选中和未选中之间切换。
+</PageHeader>
+
+<Example Title="基本使用">
+    <Description>最简单的多选框形式，常用于表单中数据多选的场景。</Description>
+    <RunContent>
+        <TInputCheckBox @bind-Value="DemoChecked">选择我</TInputCheckBox>
+        <TInputCheckBox @bind-Value="DemoChecked" Disabled>禁用选择</TInputCheckBox>
+        <TInputCheckBox @bind-Value="IndeterminateCheck" Indeterminate>半选择</TInputCheckBox>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputCheckBox @bind-Value=""DemoChecked"">选择我</TInputCheckBox>
+<TInputCheckBox @bind-Value=""DemoChecked"" Disabled>禁用选择</TInputCheckBox>
+```
+```cs
+@code{
+    bool? DemoChecked{ get; set; }
+}
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TInputCheckBox)"></ComponentAPI>
+</LayoutContent>
+@code{
+    bool? DemoChecked{ get; set; }
+    bool? IndeterminateCheck{ get; set; }
+}

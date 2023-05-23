@@ -1,0 +1,116 @@
+﻿@page "/components/inputtag"
+
+<LayoutContent AnchorItems="@(new[]{"基础标签输入框","限制标签的数量","不同尺寸的标签","不同的主题颜色","自适应宽度","API"})">
+    <PageHeader Title="TagInput 标签输入框">
+        用于输入文本标签。
+    </PageHeader>
+    <TAlert Theme="Theme.Warning">
+        字段的类型必须是 <code>IEumerable&lt;string></code> 类型。
+    </TAlert>
+    <Example Title="基础标签输入框">
+    <Description></Description>
+    <RunContent>
+            <TInputTag @bind-Value="BasicTags" />
+            <TInputTag @bind-Value="BasicTags" Prefix="标签" />
+            <TInputTag @bind-Value="BasicTags">
+                <PrefixContent>
+                    <TIcon Name="IconName.CheckRectangle" /> 标签
+                </PrefixContent>
+            </TInputTag>
+        @string.Join(",",BasicTags)
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputTag @bind-Value=""BasicTags"" />
+<TInputTag @bind-Value=""BasicTags"" Prefix=""标签"" />
+<TInputTag @bind-Value=""BasicTags"">
+    <PrefixContent>
+        <TIcon Name=""IconName.CheckRectangle"" /> 标签
+    <PrefixContent>
+</TInputTag>
+```
+```cs
+IEnumerable<string> BasicTags { get; set; } = Enumerable.Empty<string>();
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="限制标签的数量">
+    <Description>
+        使用 <code>Max</code> 限制数量。
+    </Description>
+    <RunContent>
+            <TInputTag @bind-Value="LimitTags" Placeholder="最多输入5个" Max="5" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputTag @bind-Value=""LimitTags"" Placeholder=""最多输入5个"" Max=""5"" />
+```
+```cs
+IEnumerable<string> LimitTags { get; set; } = Enumerable.Empty<string>();
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同尺寸的标签">
+    <Description></Description>
+    <RunContent>
+            <TInputTag @bind-Value="BasicTags" Size="Size.Small" />
+            <TInputTag @bind-Value="BasicTags" Size="Size.Medium" />
+            <TInputTag @bind-Value="BasicTags" Size="Size.Large" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputTag @bind-Value=""BasicTags"" Size=""Size.Small"" />
+<TInputTag @bind-Value=""BasicTags"" Size=""Size.Medium"" />
+<TInputTag @bind-Value=""BasicTags"" Size=""Size.Large"" />
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同的主题颜色">
+    <Description>
+        设置 <code>Theme</code> 设置不同主题。
+    </Description>
+        <RunContent>
+            <TInputTag @bind-Value="Tags" Theme="Theme.Primary" />
+            <TInputTag @bind-Value="Tags" Theme="Theme.Success" />
+            <TInputTag @bind-Value="Tags" Theme="Theme.Warning" />
+            <TInputTag @bind-Value="Tags" Theme="Theme.Danger" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputTag @bind-Value=""Tags"" Theme=""Theme.Primary"" />
+<TInputTag @bind-Value=""Tags"" Theme=""Theme.Success"" />
+<TInputTag @bind-Value=""Tags"" Theme=""Theme.Warning"" />
+<TInputTag @bind-Value=""Tags"" Theme=""Theme.Danger"" />
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自适应宽度">
+    <Description></Description>
+    <RunContent>
+            <TInputTag AutoWidth @bind-Value="Tags" Theme="Theme.Primary" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TInputTag AutoWidth @bind-Value=""Tags"" Theme=""Theme.Primary"" />
+```
+")
+    </CodeContent>
+</Example>
+<div id="API"></div>
+<ComponentAPI Component="typeof(TInputTag)"/>
+</LayoutContent>
+@code{
+    IEnumerable<string> BasicTags { get; set; } = Enumerable.Empty<string>();
+    IEnumerable<string> LimitTags { get; set; } = Enumerable.Empty<string>();
+    IEnumerable<string> Tags { get; set; } = new List<string> { "Blazor", "Vue", "Angular", "React" };
+    IEnumerable<string> RepeatTag { get; set; } = Enumerable.Empty<string>();
+}

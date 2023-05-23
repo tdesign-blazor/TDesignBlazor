@@ -1,0 +1,150 @@
+﻿@page "/components/notification"
+<LayoutContent AnchorItems="@(new[]{"基础的消息通知","自定义图标","带操作的消息通知","通过服务调用","API"})">
+<PageHeader Title="Notification 消息通知">
+    轻量级的全局消息提示和确认机制，出现和消失时需要有缓动动画。
+</PageHeader>
+
+<Example Title="基础的消息通知">
+    <RunContent>
+        <TNotification Title="默认消息">
+            这是一条默认的通知消息
+        </TNotification>
+        <br/>
+        <TNotification Title="普通消息" Theme="Theme.Primary">
+            这是一条普通的通知消息
+        </TNotification>
+        <br/>
+        <TNotification Title="警告消息" Theme="Theme.Warning">
+            这是一条警告的通知消息
+        </TNotification>
+        <br />
+        <TNotification Title="错误消息" Theme="Theme.Danger">
+            这是一条错误的通知消息
+        </TNotification>
+        <br />
+        <TNotification Title="成功消息" Theme="Theme.Success">
+            这是一条成功的通知消息
+        </TNotification>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TNotification Title=""默认消息"">
+    这是一条默认的通知消息
+</TNotification>
+
+<TNotification Title=""普通消息"" Theme=""Theme.Primary"">
+    这是一条普通的通知消息
+</TNotification>
+
+<TNotification Title=""警告消息"" Theme=""Theme.Warning"">
+    这是一条警告的通知消息
+</TNotification>
+
+<TNotification Title=""错误消息"" Theme=""Theme.Danger"">
+    这是一条错误的通知消息
+</TNotification>
+
+<TNotification Title=""成功消息"" Theme=""Theme.Success"">
+    这是一条成功的通知消息
+</TNotification>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义图标">
+    <Description>设置 <code>TIcon</code> 自定义图标</Description>
+    <RunContent>
+        <TNotification Title="确定消息" Theme="Theme.Primary" TIcon="IconName.Help">
+            这是一条需要确认的通知消息
+        </TNotification>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TNotification Title=""确定消息"" Theme=""Theme.Primary"" TIcon=""IconName.Help"">
+    这是一条需要确认的通知消息
+</TNotification>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带操作的消息通知">
+    <Description>带有操作的消息通知为用户提供下一步行动点，在消息提示框中进行简要快捷的交互。</Description>
+    <RunContent>
+        <TNotification Title="超长文本省略号显示" Theme="Theme.Primary">
+            <ChildContent>
+                文案不限长度，但在实际使用时建议文案显示内容不易过多，建议最大展示行数数量以三行为宜，最后一行折行末尾处超出文本建议会变为省略号显示，这样的话就需要使用详情。
+            </ChildContent>
+            <OperationContent>
+                <NotificationDetailItem>
+                    <TLink Theme="Theme.Primary">查看详情</TLink>
+                </NotificationDetailItem>
+            </OperationContent>
+        </TNotification>
+        <br/>
+        <TNotification Theme="Theme.Warning" Title="消息通知" SubTitle="这里是副标题">
+            <ChildContent>
+                1. 使用插槽自定义标题 2. 使用插槽自定义底部内容
+            </ChildContent>
+            <OperationContent>
+                <TButton Varient="ButtonVarient.Text">取消</TButton>
+                <TButton Theme="Theme.Primary" Varient="ButtonVarient.Text">稍后提醒我(10s)</TButton>
+            </OperationContent>
+        </TNotification>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TNotification Title=""超长文本省略号显示"" Theme=""Theme.Primary"">
+    <ChildContent>
+        文案不限长度，但在实际使用时建议文案显示内容不易过多，建议最大展示行数数量以三行为宜，最后一行折行末尾处超出文本建议会变为省略号显示，这样的话就需要使用详情。
+    </ChildContent>
+    <OperationContent>
+        <NotificationDetailItem>
+            <TLink Theme=""Theme.Primary"">查看详情</TLink>
+        </NotificationDetailItem>
+    </OperationContent>
+</TNotification>
+
+<TNotification Theme=""Theme.Warning"" Title=""消息通知"" SubTitle=""这里是副标题"">
+    <ChildContent>
+        1. 使用插槽自定义标题 2. 使用插槽自定义底部内容
+    </ChildContent>
+    <OperationContent>
+        <TButton Varient=""ButtonType.Text"">取消</TButton>
+        <TButton Theme=""Theme.Primary"" Varient=""ButtonType.Text"">稍后提醒我(10s)</TButton>
+    </OperationContent>
+</TNotification>
+```
+")
+    </CodeContent>
+</Example>
+
+
+<Example Title="通过服务调用">
+    <Description>注入 <code>INotificationService</code> 接口动态调用消息</Description>
+    <RunContent>
+        <TButton OnClick="@(e=>NotificationService.Show(new (){ Content="这是全局提示"}))">自定义提示</TButton>
+        <TButton Theme="Theme.Primary" OnClick="@(e=>NotificationService.Info("普通的提示","消息通知"))">普通</TButton>
+        <TButton Theme="Theme.Success" OnClick="@(e=>NotificationService.Success("成功的提示","消息通知"))">成功</TButton>
+        <TButton Theme="Theme.Warning" OnClick="@(e=>NotificationService.Warning("警告的提示","消息通知"))">警告</TButton>
+        <TButton Theme="Theme.Danger" OnClick="@(e=>NotificationService.Danger("失败的提示","消息通知"))">失败</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cs
+@inject INotificationService NotificationService
+
+NotificationService.Info(...)
+NotificationService.Success(...)
+NotificationService.Danger(...)
+NotificationService.Warning(...)
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TNotification)"></ComponentAPI>
+</LayoutContent>
+@inject INotificationService NotificationService

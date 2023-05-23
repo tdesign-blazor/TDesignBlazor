@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-	<Import Project="../../common.props" />
+	<PropertyGroup>
+		<LangVersion Condition="$(TargetFramework) == '.net6.0'">10</LangVersion>
+		<LangVersion Condition="$(TargetFramework) == '.net7.0'">11</LangVersion>
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+	</PropertyGroup>
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -7,7 +11,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TDesign.Docs.Shared\TDesign.Docs.Shared.csproj" />
+		<ProjectReference Include="..\TDesign.Docs.WebAssembly\TDesign.Docs.WebAssembly.csproj" />
+	</ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) == 'net7.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup Condition="$(TargetFramework) == 'net6.0'">
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+	</ItemGroup>
 </Project>

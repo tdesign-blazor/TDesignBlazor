@@ -1,0 +1,11 @@
+﻿<h1>@Title</h1>
+@if(ChildContent is not null)
+{
+    <p>@ChildContent</p>
+}
+<TDivider/>
+<PageTitle>@Title | TDesign for Blazor</PageTitle>
+@code {
+    [Parameter]public string Title{ get; set; }
+    [Parameter]public RenderFragment ChildContent{ get; set; }
+}

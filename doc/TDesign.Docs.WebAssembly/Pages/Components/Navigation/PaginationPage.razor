@@ -1,0 +1,148 @@
+﻿@page "/components/pagination"
+<LayoutContent AnchorItems="@(new[]{"少量页面","页数较多","带数据总量显示的分页","带快速跳转的分页","极简版分页","迷你版分页","极简迷你版分页","API"})">
+<PageHeader Title="Pagination 分页">
+    用于模块内切换内容的控件。
+</PageHeader>
+
+<h1>基础分页</h1>
+<Example Title="少量页面">
+    <Description>最基础的分页控件，仅展示页码。建议使用在内容少于10页的轻量化分页场景。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total"/>
+        <br />
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total" ShowFirstLastBtn/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total""/>
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowFirstLastBtn/>
+```
+```cs
+@code{
+    int Page { get; set; } = 1;
+    int PageSize { get; set; } = 10;
+    int Total { get; set; } = 100;
+}
+```
+")
+    </CodeContent>
+</Example>
+
+@code{
+    int Page { get; set; } = 1;
+    int PageSize { get; set; } = 10;
+    int Total { get; set; } = 100;
+}
+
+<Example Title="页数较多">
+    <Description>拥有大量数据需要展示，通过分页能够让用户快速定位当前页码。建议使用在内容超过10页以上的分页场景。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page1" @bind-PageSize="PageSize1" @bind-Total="Total1"/>
+        <br />
+        <TPagination @bind-PageIndex="Page1" @bind-PageSize="PageSize1" @bind-Total="Total1" EllipsisMode="PageEllipsisMode.BothEnds"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page1"" @bind-PageSize=""PageSize1"" @bind-PageSize=""Total1""/>
+<TPagination @bind-PageIndex=""Page1"" @bind-PageSize=""PageSize1"" @bind-PageSize=""Total1""  EllipsisMode=""PageEllipsisMode.BothEnds""/>
+```
+```cs
+@code{
+    int Page1 { get; set; } = 5;
+    int PageSize1 { get; set; } = 20;
+    int Total1 { get; set; } = 1000;
+}
+```
+")
+    </CodeContent>
+</Example>
+
+@code{
+    int Page1 { get; set; } = 5;
+    int PageSize1 { get; set; } = 20;
+    int Total1 { get; set; } = 1000;
+}
+
+<Example Title="带数据总量显示的分页">
+    <Description>关联模块内数据进行展示，以方便用户无需全部浏览即可快速了解数据量级。常用于表格内的数据统计。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page2" @bind-PageSize="PageSize2" @bind-Total="Total2">
+            <TotalContent>
+                目前展现了 @context 条数据
+            </TotalContent>
+        </TPagination>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page2"" @bind-PageSize=""PageSize2"" @bind-PageSize=""Total2"">
+    <TotalContent>
+        目前展现了 @context 条数据
+    </TotalContent>
+</TPagination>
+```
+")
+    </CodeContent>
+</Example>
+@code {
+    int Page2 { get; set; } = 5;
+    int PageSize2 { get; set; } = 20;
+    int Total2 { get; set; } = 1000;
+}
+
+<Example Title="带快速跳转的分页">
+    <Description>当数据有快速定位的需求时，通过选择显示快速跳转的分页。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total" ShowJumpPage/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowJumpPage/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="极简版分页">
+    <Description>极度简单的翻页控件，只展示当前页、总页数及上下翻页。模块内的横向空间较少，并且无需精准定位具体页面的场景。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total" ShowJumpPage Simple/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" ShowJumpPage Simple/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="迷你版分页">
+    <Description>去掉线框的翻页控件，并保留翻页的主要功能。模块内的空间较少，需要轻量化的翻页的场景，以增加页面利用率。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total" Size="Size.Small" ShowJumpPage/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" Size=""Size.Small"" ShowJumpPage/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="极简迷你版分页">
+    <Description>更小尺寸的迷你风格分页控件，适合内嵌在其他组件中分页导航使用。</Description>
+    <RunContent>
+        <TPagination @bind-PageIndex="Page" @bind-PageSize="PageSize" @bind-Total="Total" Size="Size.Small"  ShowJumpPage Simple/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TPagination @bind-PageIndex=""Page"" @bind-PageSize=""PageSize"" @bind-PageSize=""Total"" Size=""Size.Small"" ShowJumpPage Simple/>
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TPagination)"></ComponentAPI>
+</LayoutContent>

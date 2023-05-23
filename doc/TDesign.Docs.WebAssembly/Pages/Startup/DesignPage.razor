@@ -1,0 +1,14 @@
+﻿@page "/design"
+
+<PageHeader Title="设计与规范">
+    定义组件通用的命名规范
+</PageHeader>
+
+<h2>代码片段（RenderFragment）</h2>
+@Code.Create(@"
+所有能使用代码片段（即`RenderFragment`）类型的参数，一律使用 `Content` 后缀
+* `ChildContent` 可直接进行组件内容使用的代码片段
+* `HeaderContent` 用于组件头部或顶部任意代码片段的定义
+* `FooterContent` 用于组件底部或脚部任意代码片段的定义
+* `TitleContent` 用于组件标题的任意代码片段的定义
+")

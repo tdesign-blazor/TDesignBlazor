@@ -1,0 +1,132 @@
+﻿@page "/components/switch"
+<LayoutContent AnchorItems="@(new[]{"基础开关","带描述的开关","不同状态的开关","不同大小的开关","API"})">
+<PageHeader Title="Switch 开关">
+    用于两个互斥选项，用来打开或关闭选项的选择控件。
+</PageHeader>
+
+<Example Title="基础开关">
+    <Description>不带描述，最基础的开关。</Description>
+    <RunContent>
+        <TSwitch @bind-Value="BaseValue" />
+        <p>
+            您的选择：@BaseValue
+        </p>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+ ``` html
+ <TSwitch @bind-Value=""BaseValue"" />
+ <p>您的选择：BaseValue</p>
+ ```
+ ``` cs
+ bool BaseValue { get; set; } = true;
+ ```")
+    </CodeContent>
+</Example>
+@code {
+    bool BaseValue { get; set; } = true;
+}
+<Example Title="带描述的开关">
+    <Description>开关内部带有文字或图标等描述，含义对应开关当前状态，切换时文字同步切换。视觉上更加醒目，用于需要描述当前开关对应状态及含义，更直观且方便用户理解。</Description>
+    <RunContent>
+        <TSwitch @bind-Value="DescriptionValue1">
+            <TrueContent>@DescriptionOpened1</TrueContent>
+            <FalseContent>@DescriptionClosed1</FalseContent>
+        </TSwitch>
+        <TSwitch @bind-Value="DescriptionValue2">
+            <TrueContent>
+                <TIcon Name="IconName.Check" />
+            </TrueContent>
+            <FalseContent>
+                <TIcon Name="IconName.Close" />
+            </FalseContent>
+        </TSwitch>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+``` html
+<TSwitch @bind-Value=""DescriptionValue1"">
+    <TrueContent>DescriptionOpened1</TrueContent>
+    <FalseContent>DescriptionClosed1</FalseContent>
+</TSwitch>
+<TSwitch @bind-Value=""DescriptionValue2"">
+    <TrueContent>
+        <TIcon Name=""IconName.Check"" />
+    </TrueContent>
+    <TrueContent>
+        <TIcon Name=""IconName.Close"" />
+    </TrueContent>
+</TSwitch>
+```
+``` cs
+bool DescriptionValue1 { get; set; } = true;
+string DescriptionOpened1 = ""开"", DescriptionClosed1 = ""关"";
+bool DescriptionValue2 { get; set; }
+```")
+    </CodeContent>
+</Example>
+@code {
+    bool DescriptionValue1 { get; set; } = true;
+    string DescriptionOpened1 = "开", DescriptionClosed1 = "关";
+    bool DescriptionValue2 { get; set; }
+}
+<Example Title="不同状态的开关">
+    <Description>
+        @Code.Create("提供 `Normal`、`Loading` 和 `Disabled` 3种状态的开关。根据不同场景设置对应状态。")
+    </Description>
+    <RunContent>
+        <TSwitch @bind-Value="statusValue1" />
+        <TSwitch @bind-Value="statusValue2" Loading="statusLoading" />
+        <TSwitch @bind-Value="statusValue3" Disabled="statusDisabled" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+``` html
+<TSwitch @bind-Value=""statusValue1"" />
+<TSwitch @bind-Value=""statusValue2"" Loading=""statusLoading"" />
+<TSwitch @bind-Value=""statusValue3"" Disabled=""statusDisabled"" />
+```
+``` cs
+ bool statusValue1 { get; set; } = true;
+ bool statusValue2 { get; set; } = true;
+ bool statusValue3 { get; set; }
+ bool statusLoading = true;
+ bool statusDisabled = true;
+```")
+    </CodeContent>
+</Example>
+@code {
+    bool statusValue1 { get; set; } = true;
+    bool statusValue2 { get; set; } = true;
+    bool statusValue3 { get; set; }
+    bool statusLoading = true;
+    bool statusDisabled = true;
+}
+<Example Title="不同大小的开关">
+    <Description>提供 大、中（默认）、小 3种开关。</Description>
+    <RunContent>
+        <TSwitch @bind-Value="sizeValue1" Size="Size.Large" />
+        <TSwitch @bind-Value="sizeValue2" Size="Size.Medium" />
+        <TSwitch @bind-Value="sizeValue3" Size="Size.Small" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+``` html
+<TSwitch @bind-Value=""sizeValue1"" Size=""Size.Large"" />
+<TSwitch @bind-Value=""sizeValue2"" Size=""Size.Medium"" />
+<TSwitch @bind-Value=""sizeValue3"" Size=""Size.Small"" />
+```
+``` cs
+bool sizeValue1 { get; set; } = true;
+bool sizeValue2 { get; set; }
+bool sizeValue3 { get; set; }
+```")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TSwitch)"></ComponentAPI>
+</LayoutContent>
+@code {
+    bool sizeValue1 { get; set; } = true;
+    bool sizeValue2 { get; set; }
+    bool sizeValue3 { get; set; }
+}
