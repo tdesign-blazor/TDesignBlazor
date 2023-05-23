@@ -15,7 +15,7 @@ public static class PopperExtensions
     /// <param name="options">Popup的配置。</param>
     public static async ValueTask<Popper> InvokePopupAsync(this IJSRuntime js, ElementReference selectorRef, ElementReference popupRef, PopperOptions options,Func<Task> clickToHide)
     {
-        var tdesignModule = await js.ImportAsync("./_content/TDesign/lib/tdesign-blazor-popup.js");
+        var tdesignModule = await js.ImportTDesignModuleAsync("popup");
 
         var popperModule = await tdesignModule.Module.InvokeAsync<IJSObjectReference>("popup.show", selectorRef, popupRef, options, DotNetObjectReference.Create(options),JSInvokeMethodFactory.Create(clickToHide));
 

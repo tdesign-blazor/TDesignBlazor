@@ -37,6 +37,18 @@ public static class TDesignExtensions
         => js.ImportAsync("./_content/TDesign/tdesign-blazor.js");
 
     /// <summary>
+    /// 引入 tdesign blazor 相关的 JS 模块对象。
+    /// <para>
+    /// 所有的组件模块都要放到 wwwroot/lib 文件夹下，并以 <c>tdesign-blazor-{module}.js</c> 命名。
+    /// </para>
+    /// </summary>
+    /// <param name="js"></param>
+    /// <param name="moduleJsFileName">模块的js文件名称，不要.js后缀。</param>
+    /// <returns></returns>
+    public static ValueTask<IJSModule> ImportTDesignModuleAsync(this IJSRuntime js, string moduleJsFileName)
+        => js.ImportAsync($"./_content/TDesign/libs/tdesign-blazor-{moduleJsFileName}.js");
+
+    /// <summary>
     /// 执行切换暗黑和浅色模式切换
     /// </summary>
     /// <param name="js"></param>

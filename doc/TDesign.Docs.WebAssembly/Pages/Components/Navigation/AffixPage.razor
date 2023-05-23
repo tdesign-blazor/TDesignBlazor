@@ -24,8 +24,8 @@
             <p>11内容</p>
             <p>12内容</p>
             <p>13内容 begin</p>
-            <TAffix OffsetTop="50" ZIndex="1000" OffsetBottom="50" Container="div-box" FixedChange="OnFixedChange">
-                <TButton>按 钮 Fixed: @Affixed</TButton>
+            <TAffix OffsetTop="50" OffsetBottom="50" ContainerId="div-box" OnFixedChange="OnFixedChange">
+                <TButton Theme="Theme.Primary">按 钮 Fixed: @Affixed</TButton>
             </TAffix>
             <p>14内容 end</p>
             <p>15内容</p>
@@ -101,7 +101,7 @@
 @code {
     public void OnFixedChange(AffixedChangeEventArgs args)
     {
-        Affixed = args.Affixed;
+        Affixed = args.Fixed;
     }
     bool Affixed { get; set; }
 }

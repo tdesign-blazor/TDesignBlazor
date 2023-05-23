@@ -2915,12 +2915,12 @@
         </member>
         <member name="T:TDesign.TAffix">
             <summary>
-            固钉组件。
+            固钉。在指定的范围内，将元素固定不动。
             </summary>
         </member>
-        <member name="P:TDesign.TAffix.ChildContent">
+        <member name="P:TDesign.TAffix.ContainerId">
             <summary>
-            <inheritdoc/>
+            设置指定滚动的容器的元素 id。<c>null</c> 时，则使用 body 元素。
             </summary>
         </member>
         <member name="P:TDesign.TAffix.OffsetBottom">
@@ -2933,24 +2933,9 @@
             距离容器底部达到指定距离后触发固定，默认值0 。
             </summary>
         </member>
-        <member name="P:TDesign.TAffix.ZIndex">
+        <member name="P:TDesign.TAffix.OnFixedChange">
             <summary>
-            固钉定位层级，样式默认为 500 。
-            </summary>
-        </member>
-        <member name="P:TDesign.TAffix.Container">
-            <summary>
-            指定滚动的容器。滚动容器不是body时，传入滚动容器的id。
-            </summary>
-        </member>
-        <member name="P:TDesign.TAffix.FixedChange">
-            <summary>
-             执行当 <see cref="T:TDesign.TAffix"/> 的固定状态发生变化时的事件。
-            </summary>
-        </member>
-        <member name="F:TDesign.TAffix.ZINDEX_DEFAULT">
-            <summary>
-            z-index 默认值。
+             设置一个回调方法，当固定状态发生变化时触发。
             </summary>
         </member>
         <member name="F:TDesign.TAffix._affixYInit">
@@ -2963,7 +2948,7 @@
             组件顶端固定时的高度值，top值。
             </summary>
         </member>
-        <member name="M:TDesign.TAffix.ChangeFixState(System.Boolean,System.Int32)">
+        <member name="M:TDesign.TAffix.ChangeFixState(System.Boolean,System.Decimal)">
             <summary>
             top 固定。
             </summary>
@@ -2989,13 +2974,7 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="M:TDesign.TAffix.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
-            <summary>
-            <inheritdoc/>
-            </summary>
-            <param name="attributes"></param>
-        </member>
-        <member name="M:TDesign.TAffix.OnScrollChanged(System.Int32,System.Int32,System.Int32)">
+        <member name="M:TDesign.TAffix.OnScrollChanged(System.Decimal,System.Decimal,System.Decimal)">
             <summary>
             js 调用的方法，onscroll事件中调用并回传当前的top和bottom值。
             </summary>
@@ -3005,24 +2984,24 @@
         </member>
         <member name="T:TDesign.AffixedChangeEventArgs">
             <summary>
-            提供<see cref="P:TDesign.TAffix.FixedChange"/>事件的回调参数模型。
+            提供<see cref="!:TAffix.FixedChange"/>事件的回调参数模型。
             </summary>
         </member>
-        <member name="M:TDesign.AffixedChangeEventArgs.#ctor(System.Boolean,System.Int32)">
+        <member name="M:TDesign.AffixedChangeEventArgs.#ctor(System.Boolean,System.Decimal)">
             <summary>
             构建<see cref="T:TDesign.AffixedChangeEventArgs"/>实例。
             </summary>
-            <param name="affixed"></param>
-            <param name="top"></param>
+            <param name="isFixed">是否已经被固定住。</param>
+            <param name="top">固定时距离顶部的距离。</param>
         </member>
-        <member name="P:TDesign.AffixedChangeEventArgs.Affixed">
+        <member name="P:TDesign.AffixedChangeEventArgs.Fixed">
             <summary>
-            是否固定。
+            获取一个布尔值，表示容器已经被固定。
             </summary>
         </member>
-        <member name="P:TDesign.AffixedChangeEventArgs.Top">
+        <member name="P:TDesign.AffixedChangeEventArgs.FixedTop">
             <summary>
-            固定时距离窗口顶端的距离。
+            获取固定时距离窗口顶端的距离。
             </summary>
         </member>
         <member name="T:TDesign.TAlert">
@@ -4966,6 +4945,17 @@
             引入 tdesign-blazor.js 的 JS 对象。
             </summary>
             <param name="js"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TDesignExtensions.ImportTDesignModuleAsync(Microsoft.JSInterop.IJSRuntime,System.String)">
+            <summary>
+            引入 tdesign blazor 相关的 JS 模块对象。
+            <para>
+            所有的组件模块都要放到 wwwroot/lib 文件夹下，并以 <c>tdesign-blazor-{module}.js</c> 命名。
+            </para>
+            </summary>
+            <param name="js"></param>
+            <param name="moduleJsFileName">模块的js文件名称，不要.js后缀。</param>
             <returns></returns>
         </member>
         <member name="M:TDesign.TDesignExtensions.ChangeThemeMode(Microsoft.JSInterop.IJSRuntime,System.Boolean)">
