@@ -1,0 +1,26 @@
+﻿<div style="height:88vh;overflow-y:auto;overflow-x:hidden;scroll-behavior: smooth;" id="page">
+    <TLayout>
+        <RightSideContent>
+            @if (AnchorItems is not null && AnchorItems.Any())
+            {
+                <div style="width:20vw;padding:10px;">
+                    <TAnchor style="position: fixed;" Container="#page">
+                        @foreach (var item in AnchorItems)
+                        {
+                            <TAnchorItem Title="@item" Href="@("#"+item)"></TAnchorItem>
+                        }
+                    </TAnchor>
+                </div>
+            }
+
+        </RightSideContent>
+        <ChildContent>
+            @ChildContent
+        </ChildContent>
+    </TLayout>
+</div>
+
+@code {
+    [Parameter] public string[]? AnchorItems { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

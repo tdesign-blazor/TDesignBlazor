@@ -1,0 +1,155 @@
+﻿@page "/components/skeleton"
+<LayoutContent AnchorItems="@(new[]{"基础骨架屏","带动画效果的骨架屏","不同主题的骨架屏","自定义骨架屏内容","API"})">
+<PageHeader Title="Skeleton 骨架屏">
+    当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。
+</PageHeader>
+
+<Example Title="基础骨架屏">
+    <Description>最简单的骨架屏效果。</Description>
+    <RunContent>
+        <TSwitch @bind-Value="Loading" />
+        <br />
+        <TSkeleton Loading="Loading">
+            骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+        </TSkeleton>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TSkeleton Loading=""Loading"">
+骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+</TSkeleton>
+```
+")
+    </CodeContent>
+</Example>
+
+@code {
+    bool Loading { get; set; }
+}
+<Example Title="带动画效果的骨架屏">
+    <Description>提供渐变和闪烁两种动画效果。</Description>
+    <RunContent>
+                <TSkeleton Loading Animation="SkeletonAnimation.Gradient">
+
+                    骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+                    骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+                </TSkeleton>
+                <br/>
+                <TSkeleton Loading Animation="SkeletonAnimation.Flashed">
+
+                    骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+                    骨架屏组件，是指当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。 一方面让用户对页面有一定的心理预期，另一方面可以改善长期停留在空白屏给用户带来的枯燥和不适感。它可以为用户提供更好视觉效果和使用体验。
+                </TSkeleton>
+
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TSkeleton Animation=""SkeletonAnimation.Gradient""/>
+
+<TSkeleton Animation=""SkeletonAnimation.Flashed""/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同主题的骨架屏">
+    <Description>可以通过 <code>Theme</code> 参数快速定义不同主题风格的骨架屏。</Description>
+    <RunContent>
+        <p>文本</p>
+        <TSkeleton Loading Theme="SkeletonTheme.Text"/>
+        <br/>
+        <p>段落</p>
+        <TSkeleton Loading Theme="SkeletonTheme.Paragraph" />
+        <br />
+        <p>头像</p>
+        <TSkeleton Loading Theme="SkeletonTheme.Avatar"/>
+        <br/>
+        <p>头像描述</p>
+        <TSkeleton Loading Theme="SkeletonTheme.AvatarText"/>
+        <br/>
+        <p>选项卡</p>
+        <TSkeleton Loading Theme="SkeletonTheme.Tab"/>
+        <br/>
+        <p>文章</p>
+        <TSkeleton Loading Theme="SkeletonTheme.Article"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<p>文本</p>
+<TSkeleton Loading Theme=""SkeletonTheme.Text""/>
+
+<p>段落</p>
+<TSkeleton Loading Theme=""SkeletonTheme.Paragraph"" />
+
+<p>头像</p>
+<TSkeleton Loading Theme=""SkeletonTheme.Avatar""/>
+
+<p>头像描述</p>
+<TSkeleton Loading Theme=""SkeletonTheme.AvatarText""/>
+
+<p>选项卡</p>
+<TSkeleton Loading Theme=""SkeletonTheme.Tab""/>
+
+<p>文章</p>
+<TSkeleton Loading Theme=""SkeletonTheme.Article""/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义骨架屏内容">
+    <Description>显示地设置 <code>LoadingContent</code> 自己定义骨架屏的布局，并显示地设置 <code>ChildContent</code> 加载完后的内容。</Description>
+    <RunContent>
+        <TSwitch @bind-Value="Loading"/>
+        <br />
+        <TSkeleton Loading="Loading">
+            <LoadingContent>
+                <TSkeletonRow>
+                    <TSkeletonColumn/>
+                    <TSkeletonColumn Type="SkeletonColumnType.Circle"/>
+                </TSkeletonRow>
+                <TSkeletonRow>
+                    <TSkeletonColumn />
+                    <TSkeletonColumn Type="SkeletonColumnType.Circle" />
+                    <TSkeletonColumn />
+                </TSkeletonRow>
+                <TSkeletonRow>
+                    <TSkeletonColumn Type="SkeletonColumnType.Rectangle" style="width:100%"/>
+                </TSkeletonRow>
+            </LoadingContent>
+            <ChildContent>
+                这里是要显示的内容。
+            </ChildContent>
+        </TSkeleton>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TSkeleton Loading=""Loading"">
+    <LoadingContent>
+        <TSkeletonRow>
+            <TSkeletonColumn/>
+            <TSkeletonColumn Type=""SkeletonColumnType.Circle""/>
+        </TSkeletonRow>
+        <TSkeletonRow>
+            <TSkeletonColumn />
+            <TSkeletonColumn Type=""SkeletonColumnType.Circle"" />
+            <TSkeletonColumn />
+        </TSkeletonRow>
+        <TSkeletonRow>
+            <TSkeletonColumn Type=""SkeletonColumnType.Rectangle"" style=""width:100%""/>
+        </TSkeletonRow>
+    </LoadingContent>
+    <ChildContent>
+        这里是要显示的内容。
+    </ChildContent>
+</TSkeleton>
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TSkeleton)"></ComponentAPI>
+<ComponentAPI Component="typeof(TSkeletonRow)"></ComponentAPI>
+<ComponentAPI Component="typeof(TSkeletonColumn)"></ComponentAPI>
+</LayoutContent>

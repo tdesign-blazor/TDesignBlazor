@@ -7,16 +7,15 @@
     <title>TDsign for Blazor - 开源级企业级设计体系</title>
     <base href="/" />
     <link rel="stylesheet" href="_content/TDesign/tdesign-blazor.css" />
-    <link rel="stylesheet" href="_content/TDesign.Docs.Shared/app.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="_content/TDesign.Docs.Shared/styles-github.min.css">
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="lib/highlightjs/styles/vs2015.min.css"/>
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
 <body>
     <div id="app">
         <div>
-            <img src="tdesign-blazor-banner.png" style="display:flex;transform:scale(0.5);width:100%;" />
+            <img src="img/tdesign-blazor-banner.png" style="display:flex;transform:scale(0.5);width:100%;" />
             <div style="display:flex;justify-content:center">
                 <svg fill="none" viewBox="0 0 16 16" width="1em" height="1em" class="t-icon t-icon-loading" style="font-size:2rem;display:inline-block;">
                     <path fill="currentColor" d="M8 1.5a6.5 6.5 0 000 13v-1.63A4.87 4.87 0 1112.88 8h1.62A6.5 6.5 0 008 1.5z" fill-opacity="0.9"></path>
@@ -32,8 +31,8 @@
     </div>
     
     <script src="_framework/blazor.webassembly.js"></script>
-    <script src="https://lib.baomitu.com/highlight.js/10.7.3/highlight.min.js"></script>
-    <script src="_content/TDesign.Docs.Shared/cshtml-razor.min.js"></script>
+    <script src="lib/highlightjs/highlight.min.js"></script>
+    <script src="js/cshtml-razor.min.js"></script>
     <script>
         window.highlight = () => {
             hljs.highlightAll();

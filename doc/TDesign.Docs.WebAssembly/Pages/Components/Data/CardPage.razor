@@ -1,0 +1,184 @@
+﻿@page "/components/card"
+<LayoutContent AnchorItems="@(new[]{"极简卡片","悬停阴影","带顶部内容的卡片","带分割线的顶部","顶部副标题和描述","带底部的卡片","API"})">
+<PageHeader Title="Card 卡片">最基础的卡片容器，可承载文字、列表、图片、段落，常用于后台概览页面。</PageHeader>
+
+<Example Title="极简卡片">
+    <Description>仅有内容的卡片形式。</Description>
+    <RunContent>
+        <TCard>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+        <br />
+        <TCard Borderless>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCard>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+
+<TCard Borderless>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="悬停阴影">
+    <Description>@Code.Create("设置 `HoverShadow` 在鼠标悬停后将显示阴影效果")</Description>
+    <RunContent>
+        <TCard HoverShadow>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCard HoverShadow>仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。</TCard>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带顶部内容的卡片">
+    <Description>由极简卡片上方的标题栏组成，标题栏中可包含标题、图片、操作区、状态等内容。顶部栏可以定义所有的内容，以用户的自定义元素为准。</Description>
+    <RunContent>
+        <TCard>
+            <HeaderTitleContent>标题</HeaderTitleContent>
+            <HeaderActionContent><TLink Theme="Theme.Primary">操作</TLink></HeaderActionContent>
+            <ChildContent>
+                仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+            </ChildContent>
+        </TCard>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TCard>
+    <HeaderTitleContent>标题</HeaderTitleContent>
+    <HeaderActionContent>
+        <TLink Theme=""Theme.Primary"">操作</TLink>
+    </HeaderActionContent>
+    <ChildContent>
+    仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+    </ChildContent>
+</TCard>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带分割线的顶部">
+    <Description>@Code.Create("设置 `HeaderDivider` 使顶部与内容之间出现分割线")</Description>
+    <RunContent>
+        <TCard HeaderDivider>
+            <HeaderTitleContent>标题</HeaderTitleContent>
+            <HeaderActionContent><TLink Theme="Theme.Primary">操作</TLink></HeaderActionContent>
+            <ChildContent>
+                仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+            </ChildContent>
+        </TCard>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TCard HeaderDivider>
+    <HeaderTitleContent>标题</HeaderTitleContent>
+    <HeaderActionContent>
+        <TLink Theme=""Theme.Primary"">操作</TLink>
+    </HeaderActionContent>
+    <ChildContent>
+    仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+    </ChildContent>
+</TCard>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="顶部副标题和描述">
+    <Description>带有主标题、副标题、或标题描述的卡片。</Description>
+    <RunContent>
+        <TCard>
+            <HeaderTitleContent>标题</HeaderTitleContent>
+            <HeaderSubTitleContent>副标题</HeaderSubTitleContent>
+            <HeaderActionContent><TLink Theme="Theme.Primary">操作</TLink></HeaderActionContent>
+            <HeaderDescriptionContent>卡片的描述</HeaderDescriptionContent>
+            <ChildContent>
+                仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+            </ChildContent>
+        </TCard>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCard>
+    <HeaderTitleContent>标题</HeaderTitleContent>
+    <HeaderSubTitleContent>副标题</HeaderSubTitleContent>
+    <HeaderActionContent><TLink Theme=""Theme.Primary"">操作</TLink></HeaderActionContent>
+    <HeaderDescriptionContent>卡片的描述</HeaderDescriptionContent>
+    <ChildContent>
+        仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+    </ChildContent>
+</TCard>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带底部的卡片">
+    <Description>由极简卡片下方的底部栏组成，可包含标题、图片、操作区、状态等内容。</Description>
+    <RunContent>
+        <TCard HeaderDivider>
+            <HeaderTitleContent>标题</HeaderTitleContent>
+            <HeaderActionContent><TLink Theme="Theme.Primary">操作</TLink></HeaderActionContent>
+            <ChildContent>
+                仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+            </ChildContent>
+            <FooterContent>
+                <TRow HorizontalAlignment="JustifyContent.Center">
+                    <TColumn Span="ColumnSpan.Is4">
+                        <TButton Type="ButtonVarient.Text" Block Size="Size.Large">
+                            <TIcon Name="IconName.Add" />
+                        </TButton>
+                    </TColumn>
+                    <TColumn Span="ColumnSpan.Is4">
+                        <TButton Type="ButtonVarient.Text" Block Size="Size.Large">
+                            <TIcon Name="IconName.Share" />
+                        </TButton>
+                    </TColumn>
+                    <TColumn Span="ColumnSpan.Is4">
+                        <TButton Type="ButtonVarient.Text" Block Size="Size.Large">
+                            <TIcon Name="IconName.Search" />
+                        </TButton>
+                    </TColumn>
+                </TRow>
+            </FooterContent>
+        </TCard>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TCard HeaderDivider>
+    <HeaderTitleContent>标题</HeaderTitleContent>
+    <HeaderActionContent><TLink Theme=""Theme.Primary"">操作</TLink></HeaderActionContent>
+    <ChildContent>
+        仅有内容区域的卡片形式。卡片内容区域可以是文字、图片、表单、表格等形式信息内容。可使用大中小不同的卡片尺寸，按业务需求进行呈现。
+    </ChildContent>
+    <FooterContent>
+        <TRow HorizontalAlignment=""JustifyContent.Center"">
+            <TColumn Span=""ColumnSize.Is4"">
+                <TButton Type=""ButtonType.Text"" Block Size=""Size.Large"">
+                    <TIcon Name=""IconName.Add"" />
+                </TButton>
+            </TColumn>
+            <TColumn Span=""ColumnSize.Is4"">
+                <TButton Type=""ButtonType.Text"" Block Size=""Size.Large"">
+                    <TIcon Name=""IconName.Share"" />
+                </TButton>
+            </TColumn>
+            <TColumn Span=""ColumnSize.Is4"">
+                <TButton Type=""ButtonType.Text"" Block Size=""Size.Large"">
+                    <TIcon Name=""IconName.Search"" />
+                </TButton>
+            </TColumn>
+        </TRow>
+    </FooterContent>
+</TCard>
+```
+")
+    </CodeContent>
+</Example>
+    <div id="API"></div>
+<ComponentAPI Component="typeof(TCard)"></ComponentAPI>
+</LayoutContent>

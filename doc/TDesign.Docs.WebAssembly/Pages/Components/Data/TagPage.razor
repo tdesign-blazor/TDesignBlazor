@@ -1,0 +1,175 @@
+﻿@page "/components/tag"
+<LayoutContent AnchorItems="@(new[]{"基础标签","带图标的标签","带关闭的标签","可选择的标签","超长省略文本标签","不同尺寸的标签","不同形状的标签","API"})">
+<PageHeader Title="Tag 标签">标签常用于标记、分类和选择。</PageHeader>
+
+<Example Title="基础标签">
+    <Description>基础标签为默认的标签样式。适用于常规表单。</Description>
+    <RunContent>
+        <TSpace Vertical>
+            <TSpaceItem>
+                <TTag>默认</TTag><TTag><TLink Theme="Theme.Primary">超链接</TLink></TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary">标签1</TTag>
+                <TTag Theme="Theme.Success">标签2</TTag>
+                <TTag Theme="Theme.Warning">标签3</TTag>
+                <TTag Theme="Theme.Danger">标签4</TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary" Type="TagType.Light">标签1</TTag>
+                <TTag Theme="Theme.Success" Type="TagType.Light">标签2</TTag>
+                <TTag Theme="Theme.Warning" Type="TagType.Light">标签3</TTag>
+                <TTag Theme="Theme.Danger" Type="TagType.Light">标签4</TTag>
+            </TSpaceItem>
+            <TSpaceItem>
+                <TTag Theme="Theme.Primary" Type="TagType.Outline">标签1</TTag>
+                <TTag Theme="Theme.Success" Type="TagType.Outline">标签2</TTag>
+                <TTag Theme="Theme.Warning" Type="TagType.Outline">标签3</TTag>
+                <TTag Theme="Theme.Danger" Type="TagType.Outline">标签4</TTag>
+            </TSpaceItem>
+        </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TSpace Vertical>
+    <TSpaceItem>
+        <TTag>默认</TTag>
+        <TTag><TLink Theme=""Theme.Primary"">超链接</TLink></TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"">标签1</TTag>
+        <TTag Theme=""Theme.Success"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"">标签4</TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"" Type=""TagType.Light"">标签1</TTag>
+        <TTag Theme=""Theme.Success"" Type=""TagType.Light"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"" Type=""TagType.Light"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"" Type=""TagType.Light"">标签4</TTag>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TTag Theme=""Theme.Primary"" Type=""TagType.Outline"">标签1</TTag>
+        <TTag Theme=""Theme.Success"" Type=""TagType.Outline"">标签2</TTag>
+        <TTag Theme=""Theme.Warning"" Type=""TagType.Outline"">标签3</TTag>
+        <TTag Theme=""Theme.Danger"" Type=""TagType.Outline"">标签4</TTag>
+    </TSpaceItem>
+</TSpace>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带图标的标签">
+    <Description>设置 <code>TIcon</code> 图标名称会在前面加图标。</Description>
+    <RunContent>
+        <TTag TIcon="IconName.Discount">默认标签</TTag>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TTag TIcon=""IconName.Discount"">默认标签</TTag>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="带关闭的标签">
+    <Description>@Code.Create("设置 `Closable` 会自动添加可删除的图标，并且 `OnClosing` 事件会触发。")</Description>
+    <RunContent>
+        <TTag Closable>默认标签</TTag>
+
+        <TTag Closable OnClosing="@(closed=>JS.InvokeVoidAsync("alert",$"关闭：{closed}"))">点击关闭</TTag>
+    </RunContent>
+    <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TTag Closable>默认标签</TTag>
+
+<TTag Closable OnClosing=""@(closed=>JS.InvokeVoidAsync(""alert"",$""关闭：{closed}""))"">点击关闭</TTag>
+```
+")
+    </CodeContent>
+</Example>
+
+<Example Title="可选择的标签">
+    <Description>@Code.Create("设置 `Checkbox` 将开启复选框模式，支持双向绑定。")</Description>
+    <RunContent>
+        <TTag Checkbox @bind-Checked="Checked1">
+            <ChildContent>未选择</ChildContent>
+            <CheckedContent>已选择</CheckedContent>
+        </TTag>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TTag Checkbox @bind-Checked=""Checked1"">
+    <ChildContent>未选择</ChildContent>
+    <CheckedContent>已选择</CheckedContent>
+</TTag>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="超长省略文本标签">
+    <Description>@Code.Create("设置 `Width` 固定宽度，超出部分自动省略")</Description>
+    <RunContent>
+        <TTag Width="120" title="默认超过八个字符就省略显示">默认超过八个字符就省略显示</TTag>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TTag Width=""120"" title=""默认超过八个字符就省略显示"">默认超过八个字符就省略显示</TTag>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同尺寸的标签">
+    <Description>提供大、中（默认）、小三种尺寸。</Description>
+    <RunContent>
+        <TTag Size="Size.Small">小标签</TTag>
+        <TTag>中标签</TTag>
+        <TTag Size="Size.Large">大标签</TTag>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TTag Size=""Size.Small"">小标签</TTag>
+<TTag>中标签</TTag>
+<TTag Size=""Size.Large"">大标签</TTag>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="不同形状的标签">
+    <Description>提供方形、圆角方形、标记型三种形状。</Description>
+    <RunContent>
+        <TTag>方形</TTag><TTag Theme="Theme.Primary" Type="TagType.Dark">方形</TTag>
+        <br />
+        <br />
+        <TTag Shape="TagShape.Round">椭圆</TTag><TTag Theme="Theme.Primary" Shape="TagShape.Round">椭圆</TTag>
+        <br />
+        <br />
+        <TTag Shape="TagShape.Mark">半椭圆</TTag><TTag Theme="Theme.Primary" Shape="TagShape.Mark">半椭圆</TTag>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TTag>方形</TTag>
+<TTag Theme=""Theme.Primary"">方形</TTag>
+
+<TTag Shape=""TagShape.Round"">椭圆</TTag>
+<TTag Theme=""Theme.Primary"" Shape=""TagShape.Round"">椭圆</TTag>
+
+<TTag Shape=""TagShape.Mark"">半椭圆</TTag>
+<TTag Theme=""Theme.Primary"" Shape=""TagShape.Mark"">半椭圆</TTag>
+```
+")
+    </CodeContent>
+    </Example><div id="API"></div>
+<ComponentAPI Component="typeof(TTag)"></ComponentAPI>
+</LayoutContent>
+@inject IJSRuntime JS
+@code{
+    bool Checked1;
+}
