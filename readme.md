@@ -24,9 +24,8 @@
 * 在线演示
     * [http://tblazor.com](http://tblazor.com) 
 * 源码运行
-    * `TDesign.Docs.ServerSide` 是服务端
-    * `TDesign.Docs.WebAssembly` 是客户端
-    * `TDesign.Docs.Shared` 是两端共享组件和页面
+    * `TDesign.Docs.ServerSide` 是服务端托管
+    * `TDesign.Docs.WebAssembly` 是纯客户端托管
 
 ## 🖥 支持环境
 
@@ -57,8 +56,7 @@
 
 - 在 `wwwroot/index.html`(WebAssembly) 或 `Pages/_Host.cshtml`(Server) 中引入静态文件:
     ```html
-    <link rel=""stylesheet"" href="_content/TDesign/tdesign-blazor.css" />
-    <script src="_content/TDesign/tdesign-blazor.js"></script>
+    <link rel="stylesheet" href="_content/TDesign/tdesign-blazor.css" />
     ```
 - 在 `_Imports.razor` 中加入命名空间
     ```cs

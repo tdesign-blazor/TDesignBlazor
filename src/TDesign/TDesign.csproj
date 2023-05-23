@@ -38,12 +38,6 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net6.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net7.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ComponentBuilder" Version="4.0.0-beta-3" />
     <PackageReference Include="ComponentBuilder.Extensions" Version="4.0.0-beta-3" />
