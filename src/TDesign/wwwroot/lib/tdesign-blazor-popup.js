@@ -26,20 +26,12 @@ let popup = {
 
         document.body.appendChild(popupElement);
         popupElement.style.display = "";
-        //setTimeout(() => {
-        //    popupElement.style.display = "";
-        //    popper.update();
-        //}, options.timeout);
         return popper;
     },
     hide: function (popper, popupElement, options) {
-        //setTimeout(() => {
-        //    if (popupElement && popup.isActive(popupElement)) {
-        //        popupElement.style.display = 'none';
-        //    }
-        //    popper.destroy();
-        //}, options.timeout);
-        popper.destroy();
+        if (popper) {
+            popper.destroy();
+        }
     }
 }
 

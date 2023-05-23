@@ -2019,11 +2019,6 @@
             获取或设置要使用的定位策略。
             </summary>
         </member>
-        <member name="P:TDesign.PopperOptions.Timeout">
-            <summary>
-            获取或设置显示或隐藏弹出层的延迟时间，单位毫秒。默认 400 毫秒。
-            </summary>
-        </member>
         <member name="T:TDesign.PopperState">
             <summary>
             Popup 状态。
@@ -2139,9 +2134,6 @@
             初始化 <see cref="T:TDesign.TPopup"/> 类的新实例。
             </summary>
         </member>
-        <member name="P:TDesign.TPopup.ChildContent">
-            <inheritdoc/>
-        </member>
         <member name="P:TDesign.TPopup.Placement">
             <summary>
             设置弹出层的显示位置。
@@ -2165,11 +2157,6 @@
         <member name="P:TDesign.TPopup.Trigger">
             <summary>
             触发弹出的方式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TPopup.Timeout">
-            <summary>
-            设置弹出延迟的时间，单位毫秒，默认400毫秒。
             </summary>
         </member>
         <member name="P:TDesign.TPopup.Visible">

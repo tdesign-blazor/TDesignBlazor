@@ -3,7 +3,7 @@
 /// 具备悬浮提示的弹出层。
 /// </summary>
 [CssClass("t-popup")]
-public class TPopup : TDesignComponentBase, IHasChildContent
+public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
 {
     const string ANIMATION_ENTER = "t-popup--animation-enter";
     const string ANIMATION_ENTER_FROM = "t-popup--animation-enter-from";
@@ -22,9 +22,6 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     /// 初始化 <see cref="TPopup"/> 类的新实例。
     /// </summary>
     public TPopup() => CaptureReference = true;
-
-    /// <inheritdoc/>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 设置弹出层的显示位置。
@@ -51,19 +48,11 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
     /// <summary>
-    /// 设置弹出延迟的时间，单位毫秒，默认400毫秒。
-    /// </summary>
-    [Parameter] public int? Timeout { get; set; } = 400;
-
-    /// <summary>
     /// 获取一个布尔值，表示弹出框是否显示。
     /// </summary>
     public bool Visible { get; private set; }
 
     Popper? _instance;
-
-    private static bool IsVisible(string animation) 
-        => !new[] { ANIMATION_ENTER_TO, ANIMATION_ENTERING, ANIMATION_LEAVE_FROM }.Contains(animation);
 
     /// <inheritdoc/>
     protected override void OnParametersSet()
@@ -115,12 +104,12 @@ public class TPopup : TDesignComponentBase, IHasChildContent
     {
         _instance = await JS.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
         {
-            Timeout = Timeout ?? Options.Value.PopupTimeout ?? 400,
             Placement = Placement
         }, Hide);
+
         CssClassBuilder.Remove(ANIMATION_ENTER).Remove(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE);
+        Visible = true;
         StateHasChanged();
-        Visible = _instance is not null;
     }
 
     /// <summary>
@@ -131,9 +120,10 @@ public class TPopup : TDesignComponentBase, IHasChildContent
         if (_instance is not null)
         {
             await _instance.HideAsync(Reference);
+
             CssClassBuilder.Remove(ANIMATION_LEAVE).Remove(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER);
-            StateHasChanged() ;
             Visible = false;
+            StateHasChanged();
         }
     }
 }
