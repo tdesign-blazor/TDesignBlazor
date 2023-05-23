@@ -29,14 +29,6 @@ public static class TDesignExtensions
     }
 
     /// <summary>
-    /// 引入 tdesign-blazor.js 的 JS 对象。
-    /// </summary>
-    /// <param name="js"></param>
-    /// <returns></returns>
-    public static ValueTask<IJSModule> ImportTDesignScriptAsync(this IJSRuntime js)
-        => js.ImportAsync("./_content/TDesign/tdesign-blazor.js");
-
-    /// <summary>
     /// 引入 tdesign blazor 相关的 JS 模块对象。
     /// <para>
     /// 所有的组件模块都要放到 wwwroot/lib 文件夹下，并以 <c>tdesign-blazor-{module}.js</c> 命名。
@@ -47,26 +39,4 @@ public static class TDesignExtensions
     /// <returns></returns>
     public static ValueTask<IJSModule> ImportTDesignModuleAsync(this IJSRuntime js, string moduleJsFileName)
         => js.ImportAsync($"./_content/TDesign/libs/tdesign-blazor-{moduleJsFileName}.js");
-
-    /// <summary>
-    /// 执行切换暗黑和浅色模式切换
-    /// </summary>
-    /// <param name="js"></param>
-    /// <param name="isDark">是否为暗黑模式</param>
-    public static async Task ChangeThemeMode(this IJSRuntime js, bool isDark = true)
-    {
-        var jsObject = await js.ImportTDesignScriptAsync();
-        await jsObject.Module.InvokeVoidAsync(isDark ? "theme.dark" : "theme.light");
-    }
-
-    public static async ValueTask FocusAsync(this IJSRuntime js, ElementReference? inputElement,Action? focused = default)
-    {
-        if( inputElement is null )
-        {
-            return;
-        }
-
-        var tdesignScript = await js.ImportTDesignScriptAsync();
-        await tdesignScript.Module.InvokeVoidAsync("tdesign.focus", inputElement);
-    }
 }
