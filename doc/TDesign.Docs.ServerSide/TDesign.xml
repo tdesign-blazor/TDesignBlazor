@@ -67,11 +67,6 @@
             点击状态,防抖
             </summary>
         </member>
-        <member name="P:TDesign.TAnchor.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TAnchor.Container">
             <summary>
             获取或设置锚点关联滚动容器
@@ -85,11 +80,6 @@
         <member name="P:TDesign.TAnchor.SwitchIndex">
             <summary>
             获取或设置切换索引
-            </summary>
-        </member>
-        <member name="M:TDesign.TAnchor.Dispose">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="M:TDesign.TAnchor.OnScrollAnchorChangeAsync(System.Double)">
@@ -164,11 +154,6 @@
         <member name="P:TDesign.TAnchorItem.CascadingAnchor">
             <summary>
             用于自动化获取父组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TAnchorItem.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TAnchorItem.Href">

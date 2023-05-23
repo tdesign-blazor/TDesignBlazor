@@ -37,11 +37,6 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
     /// </summary>
     [Parameter] public Theme? Theme { get; set; }
 
-    protected override void AfterSetParameters(ParameterView parameters)
-    {
-        base.AfterSetParameters(parameters);
-
-    }
 
     protected override void OnParametersSet()
     {
@@ -103,24 +98,18 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //if ( firstRender )
-        //{
-            var tdesignJs = await JS.ImportTDesignScriptAsync();
+        if ( firstRender )
+        {
+            var tdesignJs = await JS.ImportTDesignModuleAsync("taginput");
             await tdesignJs.Module.InvokeVoidAsync("tagInput.pressKey", _inputRef, JSInvokeMethodFactory.Create<int, string>((keyCode, inputText) =>
             {
                 _inputText = inputText;
                 HandleKey(keyCode);
             }));
-            //await tdesignJs.InvokeVoidAsync("tagInput.remove", _inputRef, CallbackFactory.Create<int>(keyCode =>
-            //{
-            //    HandleKey(keyCode);
-            //}));
-        //}
+        }
     }
 
-    protected override void BuildEventAttribute(IDictionary<string, object> attributes)
-    {
-    }
+
 
     void HandleKey(int keyCode)
     {

@@ -25,133 +25,39 @@ let tdesign = {
         }
     }
 }
-/**
- * @description 组件 affix 用到的js对象。
- */
-let affix = {
-    /**
-     * 组件初始化方法，用于给指定的元素绑定onscroll事件。
-     * @function affix.init
-     * @param {String} container HTML元素id，如果为空则使用document.body 
-     * @param {DotNetObjectReference<TAffix>} dotnetRef
-     */
-    init: function (container, dotnetRef) {
-        let el = container ? document.getElementById(container) : document.body
-        let scroll = function () {
-            let boundingClientRect = el.getBoundingClientRect()
-            let containerScrollTop = el.scrollTop
-            let containerY = parseInt(boundingClientRect.y)
-            let containerHeight = el.clientHeight
-            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight)
-        }
-        tdesign.setEvent(el, "onscroll", scroll);
-    },
-    /**
-     * 获取组件当前位置距离窗口顶端的高度值，offsetTop
-     * @param {String} 组件的元素id
-     * @return {Number} offsetTop
-     * */
-    positionY: function (id) {
-        return parseInt(document.getElementById(id).getBoundingClientRect().y);
-    },
-}
-
-/**
- * 锚点
- * */
-let anchor = {
-
-    /**
-     * anchor垂直平滑滚动
-     * @param nodeId 元素id
-     * */
-    hash: function (nodeId, parentNodeId) {
-
-        let anchor = document.getElementById(nodeId);
-        let scrollContainer = document.getElementById(parentNodeId);
-        let top =0;
-        if(scrollContainer==null){
-          scrollContainer=anchor.offsetParent;
-          top=anchor.offsetTop;
-        }else{
-            let curr=anchor
-            while(scrollContainer!=curr && curr!=null){
-              top+=curr.offsetTop;
-              curr=curr.offsetParent;
-            }
-        }
-        top=top-scrollContainer.offsetTop;
-            //console.log(top);
-           // console.log(scrollContainer);
-        // let test = document.getElementById("layout-body");
-
-        scrollContainer.scrollTo({
-            top: top,
-            left: 0,
-            behavior: 'smooth'
-        })
-    },
-    /**
-    * anchor关联滚动容器滚动监听
-    * @param dotNetHelper anchor 实例
-    * @param id 元素id
-    * */
-    onAnchorScroll: function (dotNetHelper, id) {
-        let scroll = function (e) {
-            dotNetHelper.invokeMethodAsync('OnScrollAnchorChangeAsync', e.srcElement.scrollTop);
-        }
-        tdesign.setEvent(document.getElementById(id), "onscroll", scroll)
-    },
+///**
+// * @description 组件 affix 用到的js对象。
+// */
+//let affix = {
+//    /**
+//     * 组件初始化方法，用于给指定的元素绑定onscroll事件。
+//     * @function affix.init
+//     * @param {String} container HTML元素id，如果为空则使用document.body 
+//     * @param {DotNetObjectReference<TAffix>} dotnetRef
+//     */
+//    init: function (container, dotnetRef) {
+//        let el = container ? document.getElementById(container) : document.body
+//        let scroll = function () {
+//            let boundingClientRect = el.getBoundingClientRect()
+//            let containerScrollTop = el.scrollTop
+//            let containerY = parseInt(boundingClientRect.y)
+//            let containerHeight = el.clientHeight
+//            dotnetRef.invokeMethodAsync("OnScrollChanged", containerScrollTop, containerY, containerHeight)
+//        }
+//        tdesign.setEvent(el, "onscroll", scroll);
+//    },
+//    /**
+//     * 获取组件当前位置距离窗口顶端的高度值，offsetTop
+//     * @param {String} 组件的元素id
+//     * @return {Number} offsetTop
+//     * */
+//    positionY: function (id) {
+//        return parseInt(document.getElementById(id).getBoundingClientRect().y);
+//    },
+//}
 
 
-    /**
-    * 获取元素的顶部偏移量
-    * @param id 元素id
-    * */
-    getOffsetTop: function (id) {
-        let el = document.getElementById(id);
-        return el.offsetTop;
-    },
 
-
-    /**
-    * 获取元素的偏移高度
-    * @param id 元素id
-    * */
-    getOffsetHeight: function (id) {
-        let el = document.getElementById(id);
-        return el.offsetHeight;
-    },
-}
-
-let tagInput = {
-    pressKey: function (element, dotNetObject) {
-
-        let inputValue;
-        element.addEventListener('input', (e) => {
-            inputValue = e.target.value;
-        });
-
-        element.addEventListener('keyup', e => {
-            //13: 回车键(Enter)
-            if (e.keyCode == 13) {
-                dotNetObject.invokeMethodAsync("Invoke", e.keyCode, inputValue);
-                element.value = inputValue = '';
-                element.focus();
-            }
-        })
-    },
-    remove: function (element, dotNetObject) {
-
-        element.addEventListener('keyup', e => {
-            //8: 退格键(Backspace)
-            if (e.keyCode == 8) {
-                dotNetObject.invokeMethodAsync("Invoke", e.keyCode);
-                element.focus();
-            }
-        })
-    }
-}
 
 
 /**
