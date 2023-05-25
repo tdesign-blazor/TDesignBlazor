@@ -1,10 +1,10 @@
 ﻿@page "/test"
-@using Test=TDesign.Docs.Shared.Pages.Components.Data.TablePage
+@using Test = TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
-<TPopup Content="弹出一个层">
+@*<TPopup Content="弹出一个层">
     <TButton>悬浮</TButton>
-</TPopup>
+</TPopup>*@
 
 @*<TTable TItem="Test.User" Data="Test.User.GetData()">
     <TTableExpandColumn>
@@ -30,3 +30,25 @@
 
     }
 }*@
+@*<TButton OnClick="e=>_dialog.Open()">
+    弹框
+</TButton>
+<TDialog @ref="_dialog">
+    让弹出框
+</TDialog>
+
+@code{
+    TDialog? _dialog;
+}*@
+
+@inject IDialogService DialogService
+
+<TButton OnClick="@(e=>DialogService.Open(DialogContent))">
+    对话框
+</TButton>
+
+
+@code{
+    RenderFragment? DialogContent =>
+        @<h3>对话框的内容</h3>;
+}

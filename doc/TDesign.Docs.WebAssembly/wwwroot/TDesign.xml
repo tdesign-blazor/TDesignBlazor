@@ -380,6 +380,123 @@
             执行展开或折叠的操作。
             </summary>
         </member>
+        <member name="T:TDesign.DialogConfiguration">
+            <summary>
+            动态对话框的配置。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogConfiguration.Title">
+            <summary>
+            获取或设置对话框的标题文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogConfiguration.Centered">
+            <summary>
+            获取或设置对话框是否居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogConfiguration.Modeless">
+            <summary>
+            获取或设置是否为非模态对话框（可以点击背景）。
+            </summary>
+        </member>
+        <member name="T:TDesign.DialogContainer">
+            <summary>
+            用于动态渲染 <see cref="T:TDesign.TDialog"/> 组件的容器。
+            </summary>
+        </member>
+        <member name="T:TDesign.DialogService">
+            <summary>
+            对话框服务的默认实现。
+            </summary>
+        </member>
+        <member name="E:TDesign.DialogService.OnOpening">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.IDialogService">
+            <summary>
+            提供具备动态对话框功能的服务。
+            </summary>
+        </member>
+        <member name="M:TDesign.IDialogService.Open``1(TDesign.DialogConfiguration)">
+            <summary>
+            显示对话框。
+            </summary>
+        </member>
+        <member name="E:TDesign.IDialogService.OnOpening">
+            <summary>
+            当对话框打开时触发的事件。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDialog">
+            <summary>
+            对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Modeless">
+            <summary>
+            设置非模态对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Center">
+            <summary>
+            设置屏幕居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.OnOpened">
+            <summary>
+            设置当对话框显示时执行的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.OnClosed">
+            <summary>
+            设置当对话框关闭时执行的回调方法。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.HeaderContent">
+            <summary>
+            设置对话框顶部的代码片段。同时设置的 <see cref="P:TDesign.TDialog.HeaderText"/> 参数将被忽略。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.HeaderText">
+            <summary>
+            设置对话框的标题文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.FooterContent">
+            <summary>
+            设置对话框底部的内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDialog.OnAfterRenderAsync(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDialog.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDialog.BuildStyle(ComponentBuilder.IStyleBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TDialog.Open">
+            <summary>
+            显示对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDialog.Close">
+            <summary>
+            关闭对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDialog.JsInvokeDialogOpen">
+            <summary>
+            JS 执行的回调。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDialog.JsInvokeDialogClose">
+            <summary>
+            JS 执行的回调。
+            </summary>
+        </member>
         <member name="T:TDesign.TDesignInputComonentBase`1">
             <summary>
             输入控件的基类。
@@ -3342,41 +3459,6 @@
         <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <inheritdoc/>
         </member>
-        <member name="P:TDesign.TDialog.Modeless">
-            <summary>
-            设置非模态对话框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Center">
-            <summary>
-            设置屏幕居中显示。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.OnActive">
-            <summary>
-            设置一个当对话框显示或关闭时执行的回调方法。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Active">
-            <summary>
-            设置显示对话框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.HeaderContent">
-            <summary>
-            设置对话框顶部的内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.ChildContent">
-            <summary>
-            设置对话框消息的内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.FooterContent">
-            <summary>
-            设置对话框底部的内容。
-            </summary>
-        </member>
         <member name="T:TDesign.TDivider">
             <summary>
             分割线。
@@ -4821,6 +4903,71 @@
         <member name="F:TDesign.ThemeMode.Dark">
             <summary>
             暗色。
+            </summary>
+        </member>
+        <member name="T:TDesign.Interceptors.SpecificationInterceptor">
+            <summary>
+            定义对参数进行规范的拦截器。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasFooterText">
+            <summary>
+            定义具备底部文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasFooterText.FooterText">
+            <summary>
+            底部文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasFooterFragment">
+            <summary>
+            定义具备底部代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasFooterFragment.FooterContent">
+            <summary>
+            设置底部任意代码片段。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasHeaderText">
+            <summary>
+            定义具备头部文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasHeaderText.HeaderText">
+            <summary>
+            头部文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasHeaderFragment">
+            <summary>
+            定义具备头部代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasHeaderFragment.HeaderContent">
+            <summary>
+            设置头部任意代码片段。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasTitleText">
+            <summary>
+            定义具备标题文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasTitleText.TitleText">
+            <summary>
+            标题文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasTitleFragment">
+            <summary>
+            定义具备标题代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasTitleFragment.TitleContent">
+            <summary>
+            设置标题任意代码片段。
             </summary>
         </member>
         <member name="T:TDesign.TDesignComponentBase">

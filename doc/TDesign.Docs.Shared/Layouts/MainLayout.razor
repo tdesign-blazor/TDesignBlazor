@@ -12,13 +12,19 @@
             </LogoContent>
             <OperationContent>
                 <a href="https://tdesign.tencent.com/" title="官网" target="_blank" style="text-decoration:none">
-                    <img src="logo.png" class="t-menu__operations-icon" style="width: 40px;height: 40px;display: flex;align-content: center;justify-content: center;align-items: center;padding: 8px;flex-wrap: nowrap;" />
+                    <img src="img/logo.png" class="t-menu__operations-icon" style="width: 40px;height: 40px;display: flex;align-content: center;justify-content: center;align-items: center;padding: 8px;flex-wrap: nowrap;" />
                 </a>
-                <a href="https://github.com/AchievedOwner/TDesignBlazor" title="源码" target="_blank" style="text-decoration:none">
+                <a href="https://github.com/tdesign-blazor/TDesignBlazor" title="源码" target="_blank" style="text-decoration:none">
                     <TIcon Name="IconName.LogoGithubFilled" style="display: flex;align-content: center;justify-content: center;align-items: center;flex-wrap: nowrap;font-size: 30px;color: black;" />
                 </a>
                 <div class="TDesign-theme-tabs">
-                    <TInputRadioGroup @bind-Value="ThemeMode" OnValueSelected="@(e=>JS.ChangeThemeMode(e=="2"))" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Outline">
+                    <TInputRadioGroup @bind-Value="ThemeMode" OnValueSelected="@(e=>{
+if(e.ToString()=="2"){
+JS.InvokeVoidAsync("changeDark",true);
+}else{
+JS.InvokeVoidAsync("changeDark",false);
+}
+})" Size="Size.Medium" ButtonStyle="RadioButtonStyle.Outline">
                         <div class="item sun">
                             <TInputRadio Value="1">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
