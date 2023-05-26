@@ -28,6 +28,7 @@ internal class DialogInstance : IDialogInstance
         instance.DialogContent = builder =>
         {
             builder.OpenComponent(0,dialogTemplate);
+            
             builder.CloseComponent();
         };
 
