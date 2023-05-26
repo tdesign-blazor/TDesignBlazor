@@ -1,0 +1,19 @@
+﻿@namespace TDesign
+
+<TDialog AutoOpen @ref="DialogRef" HeaderText="确定">
+    <ChildContent>
+        @GetContent()
+    </ChildContent>
+    <FooterContent>
+        <TButton Theme="Theme.Primary" OnClick="DialogRef.Close">确定</TButton>
+    </FooterContent>
+</TDialog>
+
+@code{
+    TDialog? DialogRef;
+
+    [CascadingParameter(Name ="DialogData")]object? Data{ get; set; }
+
+
+    RenderFragment? GetContent() => Data as RenderFragment;
+}

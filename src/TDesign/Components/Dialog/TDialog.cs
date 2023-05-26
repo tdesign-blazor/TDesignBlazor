@@ -40,6 +40,8 @@ public class TDialog : TDesignChildContentComponentBase,IHasHeaderText,IHasHeade
     /// </summary>
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
+    [Parameter]public bool AutoOpen { get; set; }
+
     IJSModule _dialogModel;
 
     /// <inheritdoc/>
@@ -48,6 +50,10 @@ public class TDialog : TDesignChildContentComponentBase,IHasHeaderText,IHasHeade
         if ( firstRender )
         {
             _dialogModel = await JS.ImportTDesignModuleAsync("dialog");
+            if ( AutoOpen )
+            {
+                await Open();
+            }
         }
     }
 

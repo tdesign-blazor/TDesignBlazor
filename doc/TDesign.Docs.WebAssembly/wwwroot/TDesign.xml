@@ -418,7 +418,7 @@
             提供具备动态对话框功能的服务。
             </summary>
         </member>
-        <member name="M:TDesign.IDialogService.Open``1(TDesign.DialogConfiguration)">
+        <member name="M:TDesign.IDialogService.Open``1(System.Object,TDesign.DialogConfiguration)">
             <summary>
             显示对话框。
             </summary>

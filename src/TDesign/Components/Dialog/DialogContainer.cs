@@ -31,38 +31,64 @@ internal class DialogContainer:ComponentBase,IContainerComonent,IDisposable
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        if ( Configuration is not null && Active )
+        if ( Configuration is not null  )
         {
-            using var dialog = builder.Component<TDialog>();
-            var componentType = Configuration.ComponentType;
+            builder.CreateCascadingComponent(Configuration.Data, 0, content =>
+            {
+                content.OpenComponent(0, Configuration.ComponentType);
+                content.CloseComponent();
+            }, "DialogData");
 
-            dialog.Attribute(nameof(TDialog.HeaderText), Configuration.Title);
+            //using var dialog = builder.Component<TDialog>();
+            //var componentType = Configuration.ComponentType;
+            //var component= Activator.CreateInstance(componentType);
 
-            RenderFragmentConversion(dialog, componentType, "HeaderContent");
-            RenderFragmentConversion(dialog, componentType, "FooterContent");
+            //dialog.Attribute(nameof(TDialog.HeaderText), Configuration.Title);
 
-            dialog
-                .Attribute(nameof(TDialog.Modeless), Configuration.Modeless)
-                .Callback(nameof(TDialog.OnClosed), HtmlHelper.Instance.Callback().Create(this, Close))
-                .Ref<TDialog>(component => DialogRef = component)
-                .ChildContent(content =>
-                {
-                    content.CreateCascadingComponent(DialogRef, 0, body =>
-                    {
-                        body.OpenComponent(0,Configuration.ComponentType);
-                        body.CloseComponent();
+            //RenderFragmentConversion(dialog, component, "HeaderContent");
+            //RenderFragmentConversion(dialog, component, "FooterContent");
 
-                    }, isFixed: true);
-                });
+            //dialog
+            //    .Attribute(nameof(TDialog.Modeless), Configuration.Modeless)
+            //    .Callback(nameof(TDialog.OnClosed), HtmlHelper.Instance.Callback().Create(this, Close))
+            //    .Ref<TDialog>(component => DialogRef = component)
+            //    .ChildContent(content =>
+            //    {
+            //        content.CreateCascadingComponent(DialogRef, 0, body =>
+            //        {
+            //            body.CreateCascadingComponent(Configuration.Data, 0, content =>
+            //            {
+            //                body.OpenComponent(0, Configuration.ComponentType);
+            //                body.CloseComponent();
+            //            });
+
+            //        }, isFixed: true);
+            //    });
         }
     }
 
-    private static void RenderFragmentConversion(IFluentAttributeBuilder dialog, Type componentType,string parameterName)
+    private static void RenderFragmentConversion(IFluentAttributeBuilder dialog, object? component, string parameterName)
     {
-        var parameter = componentType.GetProperty(parameterName);
+        if ( dialog is null )
+        {
+            throw new ArgumentNullException(nameof(dialog));
+        }
+        if(component is null )
+        {
+            throw new ArgumentNullException(nameof(component));
+        }
+
+        if ( string.IsNullOrEmpty(parameterName) )
+        {
+            throw new ArgumentException($"'{nameof(parameterName)}' cannot be null or empty.", nameof(parameterName));
+        }
+
+        var type = component.GetType();
+
+        var parameter = type.GetProperty(parameterName);
         if ( parameter is not null && parameter.CanRead )
         {
-            var fragment = (RenderFragment?)parameter.GetValue(componentType);//TODO throw target not match
+            var fragment = (RenderFragment?)parameter.GetValue(component);//TODO throw target not match
             dialog.Attribute(parameterName, fragment);
         }
     }

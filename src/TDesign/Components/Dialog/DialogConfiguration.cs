@@ -21,5 +21,6 @@ public class DialogConfiguration
     #region 内部传值用
 
     internal Type ComponentType { get; set; }
+    internal object? Data { get; set; }
     #endregion
 }
