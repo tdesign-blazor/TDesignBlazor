@@ -8,7 +8,7 @@ public interface IDialogService
     /// <summary>
     /// 显示对话框。
     /// </summary>
-    Task Open<TDialogTemplate>(object? data=default, DialogConfiguration? configuration = default) where TDialogTemplate : IComponent;
+    Task Open<TDialogTemplate>( DialogParameter? parameters = default) where TDialogTemplate : IComponent;
 
     /// <summary>
     /// 当对话框打开时触发的事件。
