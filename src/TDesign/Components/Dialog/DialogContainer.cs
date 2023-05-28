@@ -10,106 +10,63 @@ internal class DialogContainer:ComponentBase,IContainerComonent,IDisposable
     [Parameter]public RenderFragment? ChildContent { get; set; }
     [Inject]IDialogService DialogService { get; set; }
 
-    DialogConfiguration Configuration { get; set; }
+    Dictionary<Guid,DialogParameters> DialogCollection = new();
 
-    bool Active { get; set; }
-
-    TDialog? DialogRef;
     protected override void OnInitialized()
     {
         base.OnInitialized();
         DialogService.OnOpening += DialogService_OnOpening;
+        DialogService.OnClosing += DialogService_OnClosing;
     }
 
-    private Task DialogService_OnOpening(DialogConfiguration arg)
+    private void DialogService_OnClosing(Guid id, DialogResult result)
     {
-        Configuration = arg;
-        Active = true;
-        StateHasChanged();
-        return Task.CompletedTask;
+        if (result.Closed)
+        {
+            Close(id);
+        }
     }
+
+    private void DialogService_OnOpening(Guid id, DialogParameters? parameters)
+    {
+        //Thread.Sleep(400);
+        DialogCollection.Add(id, parameters);
+        InvokeAsync(StateHasChanged);
+    }
+
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        if ( Configuration is not null  )
+        //if (!Open || Parameters is null)
+        //{
+        //    return;
+        //}
+
+        foreach (var item in DialogCollection)
         {
-            builder.CreateCascadingComponent(Configuration.Data, 0, content =>
+            builder.CreateCascadingComponent(this, 0, content =>
             {
-                content.OpenComponent(0, Configuration.ComponentType);
-                content.CloseComponent();
-            }, "DialogData");
+                content.CreateCascadingComponent(item.Value, 0, inner =>
+                {
+                    inner.CreateComponent<DialogWrapper>(0, attributes: new { Id = item.Key, Parameters = item.Value }, key: item.Key);
+                });
 
-            //using var dialog = builder.Component<TDialog>();
-            //var componentType = Configuration.ComponentType;
-            //var component= Activator.CreateInstance(componentType);
-
-            //dialog.Attribute(nameof(TDialog.HeaderText), Configuration.Title);
-
-            //RenderFragmentConversion(dialog, component, "HeaderContent");
-            //RenderFragmentConversion(dialog, component, "FooterContent");
-
-            //dialog
-            //    .Attribute(nameof(TDialog.Modeless), Configuration.Modeless)
-            //    .Callback(nameof(TDialog.OnClosed), HtmlHelper.Instance.Callback().Create(this, Close))
-            //    .Ref<TDialog>(component => DialogRef = component)
-            //    .ChildContent(content =>
-            //    {
-            //        content.CreateCascadingComponent(DialogRef, 0, body =>
-            //        {
-            //            body.CreateCascadingComponent(Configuration.Data, 0, content =>
-            //            {
-            //                body.OpenComponent(0, Configuration.ComponentType);
-            //                body.CloseComponent();
-            //            });
-
-            //        }, isFixed: true);
-            //    });
+            });
         }
     }
-
-    private static void RenderFragmentConversion(IFluentAttributeBuilder dialog, object? component, string parameterName)
+    
+    internal void Close(Guid id)
     {
-        if ( dialog is null )
+        Thread.Sleep(150);//延迟等动画效果完成
+        if (DialogCollection.Remove(id))
         {
-            throw new ArgumentNullException(nameof(dialog));
-        }
-        if(component is null )
-        {
-            throw new ArgumentNullException(nameof(component));
-        }
-
-        if ( string.IsNullOrEmpty(parameterName) )
-        {
-            throw new ArgumentException($"'{nameof(parameterName)}' cannot be null or empty.", nameof(parameterName));
-        }
-
-        var type = component.GetType();
-
-        var parameter = type.GetProperty(parameterName);
-        if ( parameter is not null && parameter.CanRead )
-        {
-            var fragment = (RenderFragment?)parameter.GetValue(component);//TODO throw target not match
-            dialog.Attribute(parameterName, fragment);
-        }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (DialogRef is not null )
-        {
-            await DialogRef.Open();
+            InvokeAsync(StateHasChanged);
         }
     }
 
     public void Dispose()
     {
         DialogService.OnOpening -= DialogService_OnOpening;
-    }
-
-    Task Close()
-    {
-        Active = false;
-        StateHasChanged();
-        return Task.CompletedTask;
+        DialogService.OnClosing -= DialogService_OnClosing;
     }
 }

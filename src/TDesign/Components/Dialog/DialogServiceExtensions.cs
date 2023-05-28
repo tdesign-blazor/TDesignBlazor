@@ -2,8 +2,16 @@
 
 public static class DialogServiceExtensions
 {
-    public static Task Open(this IDialogService dialogService, RenderFragment? fragment, DialogConfiguration? configuration = default)
+    public static Task<IDialogReference> Open(this IDialogService dialogService, RenderFragment? fragment, DialogParameters? parameters = default)
     {
-        return dialogService.Open<OKDialog>(fragment, configuration);
+        parameters ??= new DialogParameters();
+        parameters["Content"] = fragment;
+
+        return dialogService.Open<OKDialog>(parameters);
+    }
+
+    public static Task<IDialogReference> Open(this IDialogService dialogService,string? content=default,DialogParameters? parameters = default)
+    {
+        return Open(dialogService, builder => builder.AddContent(0, content), parameters);
     }
 }

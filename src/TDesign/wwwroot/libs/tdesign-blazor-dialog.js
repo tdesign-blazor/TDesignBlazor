@@ -11,45 +11,40 @@ const ANIMATION = {
 
 let dialog = {
     
-    open: function (elementRef,dotNetHelper) {
-        if (!elementRef) {
-            console.error('dialog is undifiend');
-            return;
-        }
+    open: function (dialogId) {
 
-        elementRef.style.display = '';
-        elementRef.classList.add(ANIMATION.ENTER, ANIMATION.ENTER_ACTIVE, ANIMATION.ENTER_TO);
+        let elementRef = dialog.element(dialogId);
+
+            elementRef.style.display = '';
+            elementRef.classList.add(ANIMATION.ENTER, ANIMATION.ENTER_ACTIVE, ANIMATION.ENTER_TO);
         setTimeout(() => {
             elementRef.classList.remove(ANIMATION.ENTER, ANIMATION.ENTER_ACTIVE, ANIMATION.ENTER_TO);
-
-            if (dotNetHelper) {
-                dotNetHelper.invokeMethodAsync("OnOpened");
-            }
-        }, 400);
+        }, 200);
 
         let keyupFuc = function (e) {
             if (e.code == 'Escape') {
-                dialog.close(elementRef, dotNetHelper);
+                dialog.close(elementRef);
                 this.window.removeEventListener('keyup', keyupFuc);
             }
         }
 
         window.addEventListener("keyup", keyupFuc);
     },
-    close: function (elementRef, dotNetHelper) {
-        if (!elementRef) {
-            console.error('dialog is undifiend');
-            return;
-        }
+    close: function (dialogId) {
 
+        let elementRef = dialog.element(dialogId);
         elementRef.classList.add(ANIMATION.LEAVE, ANIMATION.LEAVE_ACTIVE, ANIMATION.LEAVE_TO);
         setTimeout(() => {
             elementRef.classList.remove(ANIMATION.LEAVE, ANIMATION.LEAVE_ACTIVE, ANIMATION.LEAVE_TO);
-            elementRef.style.display = 'none';
-            if (dotNetHelper) {
-                dotNetHelper.invokeMethodAsync("OnClosed", true);
-            }
-        }, 400);
+            //elementRef.style.display = 'none';
+        }, 200);
+    },
+    element: function (id) {
+        var dialog = document.getElementById(id);
+        if (!dialog) {
+            throw 'dialog for id(' + id + ') cannot be not found';
+        }
+        return dialog;
     }
 }
 

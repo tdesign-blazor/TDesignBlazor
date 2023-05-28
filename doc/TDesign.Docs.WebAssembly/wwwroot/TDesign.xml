@@ -380,45 +380,97 @@
             执行展开或折叠的操作。
             </summary>
         </member>
-        <member name="T:TDesign.DialogConfiguration">
-            <summary>
-            动态对话框的配置。
-            </summary>
-        </member>
-        <member name="P:TDesign.DialogConfiguration.Title">
-            <summary>
-            获取或设置对话框的标题文本。
-            </summary>
-        </member>
-        <member name="P:TDesign.DialogConfiguration.Centered">
-            <summary>
-            获取或设置对话框是否居中显示。
-            </summary>
-        </member>
-        <member name="P:TDesign.DialogConfiguration.Modeless">
-            <summary>
-            获取或设置是否为非模态对话框（可以点击背景）。
-            </summary>
-        </member>
         <member name="T:TDesign.DialogContainer">
             <summary>
             用于动态渲染 <see cref="T:TDesign.TDialog"/> 组件的容器。
             </summary>
         </member>
-        <member name="T:TDesign.DialogService">
+        <member name="T:TDesign.DialogParameters">
             <summary>
-            对话框服务的默认实现。
+            表示对话框的参数。
             </summary>
         </member>
-        <member name="E:TDesign.DialogService.OnOpening">
+        <member name="P:TDesign.DialogParameters.Item(System.String)">
+            <summary>
+            获取或设置指定参数名称的值。
+            </summary>
+            <param name="name">参数名称。</param>
+            <returns>指定名称关联的值，如果名称不存在，则返回数据类型的默认值或 <c>null</c>。</returns>
+        </member>
+        <member name="M:TDesign.DialogParameters.Set(System.String,System.Object)">
+            <summary>
+            设置指定参数名称和关联值，如果参数名称重复，则覆盖已有值。
+            </summary>
+            <param name="name">参数的名称。</param>
+            <param name="value">关联的值。</param>
+            <returns>关联名称和值的 <see cref="T:TDesign.DialogParameters"/> 实例。</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="name"/> 是 null 或空白字符串。</exception>
+        </member>
+        <member name="M:TDesign.DialogParameters.Get(System.String)">
+            <summary>
+            获取指定参数名称的值。
+            </summary>
+            <param name="name">参数的名称。</param>
+            <returns>指定名称关联的值，如果名称不存在，则返回数据类型的默认值或 <c>null</c>。</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="name"/> 是 null 或空白字符串。</exception>
+        </member>
+        <member name="M:TDesign.DialogParameters.GetEnumerator">
+            <summary>
+            获取参数的迭代器。
+            </summary>
+            <returns>可迭代的键值对。</returns>
+        </member>
+        <member name="M:TDesign.DialogParameters.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            获取迭代器。
+            </summary>
+            <returns>一个迭代器。</returns>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Modeless">
+            <summary>
+            设置非模态对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Center">
+            <summary>
+            设置屏幕居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.HeaderContent">
+            <summary>
+            设置对话框顶部的代码片段。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.FooterContent">
+            <summary>
+            设置对话框底部的内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogWrapper.OnAfterRenderAsync(System.Boolean)">
             <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.BuildStyle(ComponentBuilder.IStyleBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.Open">
+            <summary>
+            显示对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogWrapper.Close(TDesign.DialogResult)">
+            <summary>
+            关闭对话框。
+            </summary>
         </member>
         <member name="T:TDesign.IDialogService">
             <summary>
             提供具备动态对话框功能的服务。
             </summary>
         </member>
-        <member name="M:TDesign.IDialogService.Open``1(System.Object,TDesign.DialogConfiguration)">
+        <member name="M:TDesign.IDialogService.Open``1(TDesign.DialogParameters)">
             <summary>
             显示对话框。
             </summary>
@@ -431,70 +483,6 @@
         <member name="T:TDesign.TDialog">
             <summary>
             对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Modeless">
-            <summary>
-            设置非模态对话框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Center">
-            <summary>
-            设置屏幕居中显示。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.OnOpened">
-            <summary>
-            设置当对话框显示时执行的回调方法。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.OnClosed">
-            <summary>
-            设置当对话框关闭时执行的回调方法。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.HeaderContent">
-            <summary>
-            设置对话框顶部的代码片段。同时设置的 <see cref="P:TDesign.TDialog.HeaderText"/> 参数将被忽略。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.HeaderText">
-            <summary>
-            设置对话框的标题文本。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.FooterContent">
-            <summary>
-            设置对话框底部的内容。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDialog.OnAfterRenderAsync(System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TDialog.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TDialog.BuildStyle(ComponentBuilder.IStyleBuilder)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TDesign.TDialog.Open">
-            <summary>
-            显示对话框。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDialog.Close">
-            <summary>
-            关闭对话框。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDialog.JsInvokeDialogOpen">
-            <summary>
-            JS 执行的回调。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDialog.JsInvokeDialogClose">
-            <summary>
-            JS 执行的回调。
             </summary>
         </member>
         <member name="T:TDesign.TDesignInputComonentBase`1">

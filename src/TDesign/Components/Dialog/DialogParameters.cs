@@ -5,7 +5,7 @@ namespace TDesign;
 /// <summary>
 /// 表示对话框的参数。
 /// </summary>
-public class DialogParameter : IEnumerable<KeyValuePair<string, object?>>
+public class DialogParameters : IEnumerable<KeyValuePair<string, object?>>
 {
     Dictionary<string, object?> _parametersStore = new();
 
@@ -25,9 +25,9 @@ public class DialogParameter : IEnumerable<KeyValuePair<string, object?>>
     /// </summary>
     /// <param name="name">参数的名称。</param>
     /// <param name="value">关联的值。</param>
-    /// <returns>关联名称和值的 <see cref="DialogParameter"/> 实例。</returns>
+    /// <returns>关联名称和值的 <see cref="DialogParameters"/> 实例。</returns>
     /// <exception cref="ArgumentException"><paramref name="name"/> 是 null 或空白字符串。</exception>
-    public DialogParameter Set(string name,object? value)
+    public DialogParameters Set(string name,object? value)
     {
         if ( string.IsNullOrWhiteSpace(name) )
         {
@@ -75,4 +75,12 @@ public class DialogParameter : IEnumerable<KeyValuePair<string, object?>>
     /// </summary>
     /// <returns>一个迭代器。</returns>
     IEnumerator IEnumerable.GetEnumerator() => _parametersStore.GetEnumerator();
+
+    internal void SetDialogTemplate<TTemplate>()
+    {
+        var type=typeof(TTemplate);
+        Set("DialogTemplate", type);
+    }
+
+    internal Type GetDialogTemplate() => Get("DialogTemplate") as Type ?? throw new InvalidCastException("DialogTemplate casting error");
 }
