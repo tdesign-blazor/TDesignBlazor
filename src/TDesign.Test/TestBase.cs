@@ -16,7 +16,7 @@ public class TestBase
     public TestBase()
     {
         _testContext = new TestContext();
-        _testContext.Services.AddTDesign().AddComponentBuilder();
+        _testContext.Services.AddTDesign();
         _provider = _testContext.Services.BuildServiceProvider();
     }
     /// <summary>

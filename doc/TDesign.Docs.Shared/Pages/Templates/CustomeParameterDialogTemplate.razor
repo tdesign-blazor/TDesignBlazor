@@ -1,0 +1,15 @@
+﻿<TDialog Center>
+    <HeaderContent>
+        提示消息
+    </HeaderContent>
+    <ChildContent>
+        你输入了一个 @Context.Parameters.Get("Name") 名字
+    </ChildContent>
+    <FooterContent>
+        <TButton OnClick="Context.Cancel">关闭对话框</TButton>
+    </FooterContent>
+</TDialog>
+
+@code {
+    [CascadingParameter]DialogContext Context{ get; set; } //获取对话框上下文对象
+}

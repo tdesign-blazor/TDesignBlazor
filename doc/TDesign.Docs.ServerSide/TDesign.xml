@@ -380,6 +380,411 @@
             执行展开或折叠的操作。
             </summary>
         </member>
+        <member name="T:TDesign.DialogContainer">
+            <summary>
+            用于动态渲染 <see cref="T:TDesign.TDialog"/> 组件的容器。
+            </summary>
+        </member>
+        <member name="T:TDesign.DialogContext">
+            <summary>
+            表示可以对话框上下文。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogContext.Parameters">
+            <summary>
+            对话框所需要的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogContext.ChildContent">
+            <summary>
+            对话框的内容。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogContext.Cancel">
+            <summary>
+            取消操作并关闭对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogContext.Confirm``1(``0)">
+            <summary>
+            确定操作并关闭对话框。
+            </summary>
+            <typeparam name="TResult">结果类型。</typeparam>
+            <param name="result">确定操作要返回的结果。</param>
+        </member>
+        <member name="M:TDesign.DialogContext.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.DialogParameters">
+            <summary>
+            表示对话框的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogParameters.Item(System.String)">
+            <summary>
+            获取或设置指定参数名称的值。
+            </summary>
+            <param name="name">参数名称。</param>
+            <returns>指定名称关联的值，如果名称不存在，则返回数据类型的默认值或 <c>null</c>。</returns>
+        </member>
+        <member name="M:TDesign.DialogParameters.Set(System.String,System.Object)">
+            <summary>
+            设置指定参数名称和关联值，如果参数名称重复，则覆盖已有值。
+            </summary>
+            <param name="name">参数的名称。</param>
+            <param name="value">关联的值。</param>
+            <returns>关联名称和值的 <see cref="T:TDesign.DialogParameters"/> 实例。</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="name"/> 是 null 或空白字符串。</exception>
+        </member>
+        <member name="M:TDesign.DialogParameters.Get(System.String)">
+            <summary>
+            获取指定参数名称的值。
+            </summary>
+            <param name="name">参数的名称。</param>
+            <returns>指定名称关联的值，如果名称不存在，则返回数据类型的默认值或 <c>null</c>。</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="name"/> 是 null 或空白字符串。</exception>
+        </member>
+        <member name="M:TDesign.DialogParameters.GetEnumerator">
+            <summary>
+            获取参数的迭代器。
+            </summary>
+            <returns>可迭代的键值对。</returns>
+        </member>
+        <member name="M:TDesign.DialogParameters.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            获取迭代器。
+            </summary>
+            <returns>一个迭代器。</returns>
+        </member>
+        <member name="T:TDesign.DialogReference">
+            <summary>
+            <see cref="T:TDesign.IDialogReference"/> 默认实现。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogReference.Result">
+            <inheritdoc/>
+        </member>
+        <member name="P:TDesign.DialogReference.Id">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogReference.SetResult(TDesign.DialogResult)">
+            <summary>
+            设置对话框结果。
+            </summary>
+            <param name="result">对话框的操作结果。</param>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.DialogResult">
+            <summary>
+            表示对话框的结果。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogResult.Closed">
+            <summary>
+            获取一个布尔值，表示对话框是否已经关闭。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogResult.Data">
+            <summary>
+            获取自定义数据。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogResult.Close">
+            <summary>
+            关闭对话框。
+            </summary>
+            <returns>对话框结果。</returns>
+        </member>
+        <member name="M:TDesign.DialogResult.Ok``1(``0)">
+            <summary>
+            确认对话框。
+            </summary>
+            <typeparam name="T">返回数据的类型。</typeparam>
+            <param name="result">要返回的结果。</param>
+            <returns>对话框结果。</returns>
+        </member>
+        <member name="T:TDesign.DialogService">
+            <summary>
+            对话框默认实现。
+            </summary>
+        </member>
+        <member name="E:TDesign.DialogService.OnOpening">
+            <inheritdoc/>
+        </member>
+        <member name="E:TDesign.DialogService.OnClosing">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogService.Close(System.Guid,TDesign.DialogResult)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogService.Open``1(TDesign.DialogParameters)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.DialogServiceExtensions">
+            <summary>
+            <see cref="T:TDesign.IDialogService"/> 的扩展。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.Open``1(TDesign.IDialogService,Microsoft.AspNetCore.Components.RenderFragment,Microsoft.AspNetCore.Components.RenderFragment,System.Nullable{TDesign.IconName},TDesign.Theme,TDesign.DialogParameters)">
+            <summary>
+            打开指定模板组件的对话框。
+            </summary>
+            <typeparam name="TDialogTemplate">对话框模板。</typeparam>
+            <param name="service"></param>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+            <param name="icon">显示的图标。</param>
+            <param name="iconTheme">图标主题颜色。</param>
+            <param name="parameters">自定义参数。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.Open``1(TDesign.IDialogService,System.String,System.String,System.Nullable{TDesign.IconName},TDesign.Theme,TDesign.DialogParameters)">
+            <summary>
+            打开指定模板组件的对话框。
+            </summary>
+            <typeparam name="TDialogTemplate">对话框模板。</typeparam>
+            <param name="service"></param>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+            <param name="icon">显示的图标。</param>
+            <param name="iconTheme">图标主题颜色。</param>
+            <param name="parameters">自定义参数。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenMessage(TDesign.IDialogService,System.String,System.String,System.Nullable{TDesign.IconName},TDesign.Theme)">
+            <summary>
+            打开显示消息的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+            <param name="icon">显示的图标。</param>
+            <param name="iconTheme">图标主题颜色。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenInfo(TDesign.IDialogService,System.String,System.String)">
+            <summary>
+            打开提示消息的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenWarning(TDesign.IDialogService,System.String,System.String)">
+            <summary>
+            打开警告消息的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenError(TDesign.IDialogService,System.String,System.String)">
+            <summary>
+            打开错误消息的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenSuccess(TDesign.IDialogService,System.String,System.String)">
+            <summary>
+            打开成功消息的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+        </member>
+        <member name="M:TDesign.DialogServiceExtensions.OpenConfirm(TDesign.IDialogService,System.String,System.String,System.Nullable{TDesign.IconName},TDesign.Theme)">
+            <summary>
+            打开具备确认和取消操作的对话框。
+            </summary>
+            <param name="content">内容。</param>
+            <param name="title">标题。</param>
+            <param name="icon">显示的图标。</param>
+            <param name="iconTheme">图标主题颜色。</param>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Modeless">
+            <summary>
+            设置非模态对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Center">
+            <summary>
+            设置屏幕居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.HeaderContent">
+            <summary>
+            设置对话框顶部的代码片段。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.FooterContent">
+            <summary>
+            设置对话框底部的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Icon">
+            <summary>
+            设置标题的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.IconTheme">
+            <summary>
+            设置图标的主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.Closable">
+            <summary>
+            是否显示 x 关闭图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogWrapper.PreventMaskToClose">
+            <summary>
+            阻止点击遮罩层关闭对话框功能。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogWrapper.OnAfterRenderAsync(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.BuildStyle(ComponentBuilder.IStyleBuilder)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.DialogWrapper.Open">
+            <summary>
+            显示对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogWrapper.Close(TDesign.DialogResult)">
+            <summary>
+            关闭对话框。
+            </summary>
+        </member>
+        <member name="T:TDesign.IDialogReference">
+            <summary>
+            对话框的引用。
+            </summary>
+        </member>
+        <member name="P:TDesign.IDialogReference.Result">
+            <summary>
+            获取对话框结果的异步任务。
+            </summary>
+        </member>
+        <member name="P:TDesign.IDialogReference.Id">
+            <summary>
+            对话框唯一标识。
+            </summary>
+        </member>
+        <member name="T:TDesign.IDialogService">
+            <summary>
+            提供具备动态对话框功能的服务。
+            </summary>
+        </member>
+        <member name="M:TDesign.IDialogService.Open``1(TDesign.DialogParameters)">
+            <summary>
+            显示指定对话框。
+            </summary>
+            <typeparam name="TDialogTemplate">对话框模板类型。</typeparam>
+        </member>
+        <member name="E:TDesign.IDialogService.OnOpening">
+            <summary>
+            当对话框打开时触发的事件。
+            </summary>
+        </member>
+        <member name="M:TDesign.IDialogService.Close(System.Guid,TDesign.DialogResult)">
+            <summary>
+            关闭指定 id 的对话框。
+            </summary>
+            <param name="id">要关闭的对话框 id。</param>
+            <param name="result">对话框的执行结果。</param>
+            <returns></returns>
+        </member>
+        <member name="E:TDesign.IDialogService.OnClosing">
+            <summary>
+            当对话框关闭时触发的事件。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDialog">
+            <summary>
+            对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Context">
+            <summary>
+            上下文。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.ChildContent">
+            <summary>
+            对话框消息的任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.HeaderContent">
+            <summary>
+            对话框标题的任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.FooterContent">
+            <summary>
+            对话框用于操作的任意内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Icon">
+            <summary>
+            设置标题的图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.IconTheme">
+            <summary>
+            设置图标的主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Closable">
+            <summary>
+            是否显示 x 关闭图标。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Modeless">
+            <summary>
+            设置非模态对话框。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.Center">
+            <summary>
+            设置屏幕居中显示。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDialog.PreventMaskToClose">
+            <summary>
+            阻止点击遮罩层关闭对话框功能。
+            </summary>
+        </member>
+        <member name="T:TDesign.Templates.ConfirmationDialogTemplate">
+            <summary>
+            拥有【确定】和【取消】按钮的确认对话框模板。
+            </summary>
+        </member>
+        <member name="M:TDesign.Templates.ConfirmationDialogTemplate.BuildFooter">
+            <inheritdoc/>
+        </member>
+        <member name="T:TDesign.Templates.DialogTemplateBase">
+            <summary>
+            表示对话框模板的基类。
+            </summary>
+        </member>
+        <member name="P:TDesign.Templates.DialogTemplateBase.Context">
+            <summary>
+            用于操作的对话框上下文。
+            </summary>
+        </member>
+        <member name="M:TDesign.Templates.DialogTemplateBase.BuildFooter">
+            <summary>
+            构建对话框的底部。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.Templates.MessageDialogTemplate">
+            <summary>
+            只有一个【确定】按钮的消息提示对话框。
+            </summary>
+        </member>
+        <member name="M:TDesign.Templates.MessageDialogTemplate.BuildFooter">
+            <inheritdoc/>
+        </member>
         <member name="T:TDesign.TDesignInputComonentBase`1">
             <summary>
             输入控件的基类。
@@ -3342,41 +3747,6 @@
         <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <inheritdoc/>
         </member>
-        <member name="P:TDesign.TDialog.Modeless">
-            <summary>
-            设置非模态对话框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Center">
-            <summary>
-            设置屏幕居中显示。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.OnActive">
-            <summary>
-            设置一个当对话框显示或关闭时执行的回调方法。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.Active">
-            <summary>
-            设置显示对话框。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.HeaderContent">
-            <summary>
-            设置对话框顶部的内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.ChildContent">
-            <summary>
-            设置对话框消息的内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TDialog.FooterContent">
-            <summary>
-            设置对话框底部的内容。
-            </summary>
-        </member>
         <member name="T:TDesign.TDivider">
             <summary>
             分割线。
@@ -4823,6 +5193,71 @@
             暗色。
             </summary>
         </member>
+        <member name="T:TDesign.Interceptors.SpecificationInterceptor">
+            <summary>
+            定义对参数进行规范的拦截器。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasFooterText">
+            <summary>
+            定义具备底部文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasFooterText.FooterText">
+            <summary>
+            底部文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasFooterFragment">
+            <summary>
+            定义具备底部代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasFooterFragment.FooterContent">
+            <summary>
+            设置底部任意代码片段。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasHeaderText">
+            <summary>
+            定义具备头部文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasHeaderText.HeaderText">
+            <summary>
+            头部文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasHeaderFragment">
+            <summary>
+            定义具备头部代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasHeaderFragment.HeaderContent">
+            <summary>
+            设置头部任意代码片段。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasTitleText">
+            <summary>
+            定义具备标题文本的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasTitleText.TitleText">
+            <summary>
+            标题文本。
+            </summary>
+        </member>
+        <member name="T:TDesign.Specifications.IHasTitleFragment">
+            <summary>
+            定义具备标题代码片段的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.Specifications.IHasTitleFragment.TitleContent">
+            <summary>
+            设置标题任意代码片段。
+            </summary>
+        </member>
         <member name="T:TDesign.TDesignComponentBase">
             <summary>
             表示 TDesign 组件的基类。
@@ -4924,6 +5359,14 @@
             <param name="status">The status.</param>
             <param name="mapping">状态和图标的映射关系。</param>
             <returns>图标枚举。</returns>
+        </member>
+        <member name="M:TDesign.TDesignExtensions.ToThemeMappingClassName(TDesign.Theme,System.String)">
+            <summary>
+            获取 <see cref="T:TDesign.Theme"/> 映射的名称。
+            </summary>
+            <param name="theme"></param>
+            <param name="prefix">前缀。</param>
+            <returns>链接 <paramref name="prefix"/> 的 class 名称。</returns>
         </member>
         <member name="M:TDesign.TDesignExtensions.ImportTDesignModuleAsync(Microsoft.JSInterop.IJSRuntime,System.String)">
             <summary>

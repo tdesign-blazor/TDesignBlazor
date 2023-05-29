@@ -1,6 +1,6 @@
 ﻿@page "/"
 <LayoutContent>
-<img src="tdesign-blazor-banner.png"/>
+<img src="img\tdesign-blazor-banner.png"/>
 
 <h2>环境</h2>
 @Code.Create(@"
@@ -11,7 +11,7 @@
 <h2>安装</h2>
 <h3>Nuget 管理</h3>
 @Code.Create(@"
-```ps
+```
 > Install-Package TDesign
 ```
 ")
@@ -25,12 +25,6 @@
     <link rel=""stylesheet"" href=""_content/TDesign/tdesign-blazor.css"" /> <!--必要样式-->
     ...
 </head>
-
-<body>
-    ...
-    <script src=""_framework/blazor.{webassembly}|{server}.js""></script>
-    <script src=""_content/TDesign/tdesign-blazor.js""></script><!--必要的 JS-->
-</body>
 ```
 ")
 
@@ -65,8 +59,7 @@ builder.Services.AddTDesign();
     </NotFound>
 </Router>
 
-<!--增加组件-->
-<TDesignContainer/>
+<TDesignContainer/><!--增加组件-->
 ```
 ")
 </LayoutContent>

@@ -1,4 +1,5 @@
 ﻿using TDesign;
+using TDesign.Interceptors;
 
 namespace Microsoft.Extensions.DependencyInjection;
 /// <summary>
@@ -21,10 +22,15 @@ public static class DependencyInjectionExtensions
     internal static IServiceCollection AddTDesign(this IServiceCollection services, Action<TDesignOptions> configure)
     {
         services.Configure(configure);
-        services.AddComponentBuilder();
+        services.AddComponentBuilder(cfg =>
+        {
+            cfg.AddDefaultConfigurations().AddInterceptor<SpecificationInterceptor>();
+        });
 
         services.AddScoped<IMessageService, MessageService>()
-            .AddScoped<INotificationService, NotificationService>();
+            .AddScoped<INotificationService, NotificationService>()
+            .AddScoped<IDialogService, DialogService>()
+            ;
         return services;
     }
 }

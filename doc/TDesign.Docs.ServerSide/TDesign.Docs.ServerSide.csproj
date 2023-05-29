@@ -11,13 +11,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\TDesign.Docs.WebAssembly\TDesign.Docs.WebAssembly.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition="$(TargetFramework) == 'net7.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="$(TargetFramework) == 'net6.0'">
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+		<ProjectReference Include="..\TDesign.Docs.Shared\TDesign.Docs.Shared.csproj" />
 	</ItemGroup>
 </Project>

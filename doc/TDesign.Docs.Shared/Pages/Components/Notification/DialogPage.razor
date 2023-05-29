@@ -1,173 +1,229 @@
 ﻿@page "/components/dialog"
-<LayoutContent AnchorItems="@(new[]{"基础对话框","对话框的位置","对话框模式","API"})">
+<LayoutContent AnchorItems="@(new[]{"反馈类对话框","确认类对话框","自定义对话框模板","自定义参数","API"})">
 <PageHeader Title="Dialog 对话框">
     对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
 </PageHeader>
+<TAlert>
+    <code>IDialogService</code> 唤醒出对话框，并支持自定义对话框模板
+</TAlert>
 
-@using ComponentBuilder
-<Example Title="基础对话框">
-    <Description>
-        需要配合 <code>@@ref</code> 组件引用并调用 <code>Activate()</code> 方法进行显示，调用 <code>Activate(false)</code> 关闭对话框
-    </Description>
-    <RunContent>
-        <TSpace>
-            <TSpaceItem>
-                <TButton OnClick="e=>refDialog?.Activate()">简单对话框</TButton>
-            </TSpaceItem>
-            <TSpaceItem>
-                <TButton OnClick="e=>refCompleteDialog?.Activate()">完整对话框</TButton>
-            </TSpaceItem>
-        </TSpace>
-
-        <TDialog @ref="refDialog">
-            简单的对话框内容
-        </TDialog>
-
-        <TDialog @ref="refCompleteDialog">
-            <HeaderContent>对话框标题</HeaderContent>
-            <ChildContent>对话框的内容</ChildContent>
-            <FooterContent>
-                <TButton Theme="Theme.Primary">确认</TButton>
-                <TButton Type="ButtonVarient.Outline" OnClick="e=>refCompleteDialog?.Activate(false)">关闭</TButton>
-            </FooterContent>
-        </TDialog>
+    <Example Title="反馈类对话框">
+        <Description>指显示某操作结果的对话框，标题区域有图标，仅有一个确认按钮。常用于操作后结果的展示，或危险、警告等信息的展示。</Description>
+        <RunContent>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Primary" OnClick="@(e=>DialogService.OpenInfo("提示消息的内容"))">提示</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Warning" OnClick="@(e=>DialogService.OpenWarning("警告消息的内容"))">警告</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Success" OnClick="@(e=>DialogService.OpenSuccess("成功消息的内容"))">成功</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Danger" OnClick="@(e=>DialogService.OpenError("错误消息的内容"))">错误</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton OnClick="@(e=>DialogService.OpenMessage("自定义图标的提示",icon:IconName.BacktopRectangle))">自定义图标</TButton>
+                </TSpaceItem>
+            </TSpace>
+        
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
+@inject IDialogService DialogService
+
 <TSpace>
     <TSpaceItem>
-        <TButton OnClick=""e=>refDialog?.Activate()"">简单对话框</TButton>
+        <TButton OnClick=""@(e=>DialogService.OpenInfo(""提示消息的内容""))"">提示</TButton>
     </TSpaceItem>
     <TSpaceItem>
-        <TButton OnClick=""e=>refCompleteDialog?.Activate()"">完整对话框</TButton>
+        <TButton OnClick=""@(e=>DialogService.OpenWarning(""警告消息的内容""))"">警告</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton OnClick=""@(e=>DialogService.OpenSuccess(""成功消息的内容""))"">成功</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton OnClick=""@(e=>DialogService.OpenError(""错误消息的内容""))"">错误</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton OnClick=""@(e=>DialogService.OpenMessage(""自定义图标的提示"",icon:IconName.BacktopRectangle))"">自定义图标</TButton>
     </TSpaceItem>
 </TSpace>
+```
+")
+    </CodeContent>
+</Example>
+    <Example Title="确认类对话框">
+        <Description>指带有取消及主要操作，指导用户进行二次确认的对话框。常用于反馈或容错的场景。</Description>
+        <RunContent>
+            <TButton Theme="Theme.Primary" OnClick="@(Confirm)">确认对话框</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TButton Theme=""Theme.Primary"" OnClick=""@(Confirm)"">确认对话框</TButton>
 
-<TDialog ref=""refDialog"">
-    简单的对话框内容
-</TDialog>
+@code{
+    async Task Confirm()
+    {
+        var dialog = await DialogService.OpenConfirm(""确定要这样做吗"");
+        var result = await dialog.Result; //获取操作的结果
+        if(result.Data is bool value && value)
+        {
+            await DialogService.OpenInfo(""确认被点击"");
+        }
+    }
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义对话框模板">
+    <Description>
+        支持自定义的模板组件
+    </Description>
+        <RunContent>
+            <TButton Theme="Theme.Primary" OnClick="@(e=>DialogService.Open<Templates.CustomDialogTemplate>())">自定义对话框</TButton>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TButton Theme=""Theme.Primary"" OnClick=""@(e => DialogService.Open<CustomDialogTemplate>())"">自定义对话框</TButton>
 
-<TDialog ref=""refCompleteDialog"">
-    <HeaderContent>对话框标题</HeaderContent>
-    <ChildContent>对话框的内容</ChildContent>
+
+@* CustomeDialogTemplate.razor *@
+<TDialog>
+    <HeaderContent>自定义标题</HeaderContent>
+    <ChildContent>自定义的消息和内容</ChildContent>
     <FooterContent>
-        <TButton Theme=""Theme.Primary"">确认</TButton>
-        <TButton Type=""ButtonType.Outline"" OnClick=""e=>refCompleteDialog?.Activate(false)"">关闭</TButton>
+        <TButton Varient=""ButtonVarient.Dashed"" OnClick=""Context.Cancel"">关闭这个对话框</TButton>
     </FooterContent>
 </TDialog>
-```
-```cs
-@code{
-    TDialog? refDialog;
-    TDialog? refCompleteDialog;
-}
-```
-")
-    </CodeContent>
-</Example>
-@code{
-    TDialog? refDialog;
-    TDialog? refCompleteDialog;
+
+@code {
+    [CascadingParameter]DialogContext Context{ get; set; }
 }
 
-<Example Title="对话框的位置">
-    <Description>设置 <code>Center</code> 将定位在屏幕正中间，默认是居顶部。</Description>
-    <RunContent>
-        <TSpace>
-            <TSpaceItem>
-                <TButton Theme="Theme.Primary" OnClick="e=>refTopDialog.Activate()">顶部对话框</TButton>
-            </TSpaceItem>
-            <TSpaceItem>
-                <TButton Theme="Theme.Danger" OnClick="e=>refCenterDialog.Activate()">中间对话框</TButton>
-            </TSpaceItem>
-        </TSpace>
-        <TDialog @ref="refTopDialog">
-            在顶部显示的对话框。
-        </TDialog>
-        <TDialog @ref="refCenterDialog" Center>
-            在居中显示的对话框
-        </TDialog>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义参数">
+    <Description>
+        <code>DialogParameters</code> 支持在模板中使用自定义参数
+    </Description>
+        <RunContent>
+            <TButton OnClick="@(CustomParameter)">带参数的对话框</TButton>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSpace>
-    <TSpaceItem>
-        <TButton Theme=""Theme.Primary"" OnClick=""e=>refTopDialog.Activate()"">顶部对话框</TButton>
-    </TSpaceItem>
-    <TSpaceItem>
-        <TButton Theme=""Theme.Danger"" OnClick=""e=>refCenterDialog.Activate()"">中间对话框</TButton>
-    </TSpaceItem>
-</TSpace>
-<TDialog ref=""refTopDialog"">
-    在顶部显示的对话框。
-</TDialog>
-<TDialog ref=""refCenterDialog"" Center>
-    在居中显示的对话框
-</TDialog>
-```
-```cs
+<TButton OnClick=""@(CustomParameter)"">带参数的对话框</TButton>
+
 @code{
-    TDialog? refTopDialog;
-    TDialog? refCenterDialog;
+    async Task CustomParameter()
+    {
+        var parameters = new DialogParameters();
+        parameters[""Name""] = ""张三"";
+
+        await DialogService.Open<CustomeParameterDialogTemplate>(parameters);
+    }
+}
+
+
+@* CustomeParameterDialogTemplate.razor *@
+<TDialog Center>
+    <HeaderContent>
+        提示消息
+    </HeaderContent>
+    <ChildContent>
+        你输入了一个 @Context.Parameters.Get(""Name"") 名字
+    </ChildContent>
+    <FooterContent>
+        <TButton OnClick=""Context.Cancel"">关闭对话框</TButton>
+    </FooterContent>
+</TDialog>
+
+@code {
+    [CascadingParameter]DialogContext Context{ get; set; } //获取对话框上下文对象
 }
 ```
 ")
     </CodeContent>
 </Example>
-@code{
-    TDialog? refTopDialog;
-    TDialog? refCenterDialog;
-}
-<Example Title="对话框模式">
-    <Description>模态对话框会中断用户操作，必须处理当前对话框内容后才能进行其他操作。非模态框不中断用户操作。</Description>
-    <RunContent>
-        <TSpace>
-            <TSpaceItem>
-                <TButton Theme="Theme.Primary" OnClick="e=>refFixedDialog.Activate()">模态对话框</TButton>
-            </TSpaceItem>
-            <TSpaceItem>
-                <TButton OnClick="e=>refModelessDialog.Activate()">非模态对话框</TButton>
-            </TSpaceItem>
-        </TSpace>
-        <TDialog @ref="refModelessDialog" Modeless>
-            非模态对话框
-        </TDialog>
-        <TDialog @ref="refFixedDialog">
-            模态对话框
-        </TDialog>
+<Example Title="获取对话框操作的返回值">
+    <Description>
+        
+    </Description>
+        <RunContent>
+            <TButton Theme="Theme.Primary" OnClick="@(GetResult)">带结果的对话框</TButton>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TSpace>
-    <TSpaceItem>
-        <TButton Theme=""Theme.Primary"" OnClick=""e=>refFixedDialog.Activate()"">模态对话框</TButton>
-    </TSpaceItem>
-    <TSpaceItem>
-        <TButton OnClick=""e=>refModelessDialog.Activate()"">非模态对话框</TButton>
-    </TSpaceItem>
-</TSpace>
-<TDialog ref=""refModelessDialog"" Modeless>
-    非模态对话框
-</TDialog>
-<TDialog ref=""refFixedDialog"">
-    模态对话框
-</TDialog>
-```
-```cs
+<TButton Theme=""Theme.Primary"" OnClick=""@(GetResult)"">带结果的对话框</TButton>
+
 @code{
-    TDialog? refModelessDialog;
-    TDialog? refFixedDialog;
+async Task GetResult()
+    {
+        var dialog = await DialogService.Open<Templates.ReturnDataDialogTemplate>();
+        var result = await dialog.Result;//对话框操作过后才有值
+        if ( result.Closed )//表示对话框已经关闭
+        {
+            await DialogService.OpenInfo(result.Data?.ToString());
+        }
+    }
+ }
+
+@* ReturnDataDialogTemplate.razor *@
+<TDialog>
+    <ChildContent>这里是提示</ChildContent>
+    <FooterContent>
+        <TButton Varient=""ButtonVarient.Dashed"" OnClick=""@(e => Context.Confirm(""对话框已经关闭""))"">关闭这个对话框</TButton>
+    </FooterContent>
+</TDialog>
+
+@code {
+    [CascadingParameter] DialogContext Context { get; set; }
 }
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
+</Example>
+    <div id="API"></div>
 <ComponentAPI Component="typeof(TDialog)"></ComponentAPI>
-@code{
-    TDialog? refModelessDialog;
-    TDialog? refFixedDialog;
-}
 </LayoutContent>
+
+    @inject IDialogService DialogService
+
+@code{
+    async Task Confirm()
+    {
+        var dialog= await DialogService.OpenConfirm("确定要这样做吗");
+        var result = await dialog.Result;
+        if(result.Data is bool value && value)
+        {
+            await DialogService.OpenInfo("确认被点击");
+        }
+    }
+
+    async Task CustomParameter()
+    {
+        var parameters = new DialogParameters();
+        parameters["Name"] = "张三";
+
+        await DialogService.Open<Templates.CustomeParameterDialogTemplate>(parameters);
+    }
+
+    async Task GetResult()
+    {
+        var dialog = await DialogService.Open<Templates.ReturnDataDialogTemplate>();
+        var result = await dialog.Result;//对话框操作过后才有值
+        if ( result.Closed )//表示对话框已经关闭
+        {
+            await DialogService.OpenInfo(result.Data?.ToString());
+        }
+    }
+}

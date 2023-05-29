@@ -10,19 +10,20 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// <inheritdoc/>
     protected override void AfterSetParameters(ParameterView parameters)
     {
-        if (Data is null)
-        {
-            throw new InvalidOperationException($"必须提供 {nameof(Data)} 参数");
-        }
         EmptyContent ??= builder => builder.AddContent(0, "暂无数据");
     }
+
 
     /// <inheritdoc/>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await QueryData(PageIndex, PageSize);
+            if ( Data is not null )
+            {
+                //throw new InvalidOperationException($"必须提供 {nameof(Data)} 参数");
+                await QueryData(PageIndex, PageSize);
+            }
         }
     }
 

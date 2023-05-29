@@ -1,0 +1,11 @@
+﻿<TDialog>
+    <HeaderContent>自定义标题</HeaderContent>
+    <ChildContent>自定义的消息和内容</ChildContent>
+    <FooterContent>
+        <TButton Varient="ButtonVarient.Dashed" OnClick="Context.Cancel">关闭这个对话框</TButton>
+    </FooterContent>
+</TDialog>
+
+@code {
+    [CascadingParameter]DialogContext Context{ get; set; }
+}

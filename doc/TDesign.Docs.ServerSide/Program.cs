@@ -4,26 +4,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddTDesign();
+builder.Services.AddScoped<HttpClient>(hc => new() { BaseAddress = new("http://localhost:5067") });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if ( app.Environment.IsDevelopment() )
 {
-    app.UseWebAssemblyDebugging();
+    app.UseDeveloperExceptionPage();
 }
 else
 {
     app.UseExceptionHandler("/Error");
 }
 
-
-app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.MapRazorPages();
-app.MapFallbackToFile("index.html");
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();

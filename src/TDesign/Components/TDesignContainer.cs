@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-using TDesign.Abstractions;
+﻿using TDesign.Abstractions;
 
 namespace TDesign;
 
 /// <summary>
 /// 用于动态渲染组件的容器。
 /// </summary>
-public class TDesignContainer : BlazorComponentBase
+public class TDesignContainer : ComponentBase
 {
     /// <inheritdoc/>
     protected override void BuildRenderTree(RenderTreeBuilder builder)

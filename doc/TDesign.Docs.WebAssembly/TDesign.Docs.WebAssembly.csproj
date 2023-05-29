@@ -31,6 +31,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\TDesign\TDesign.csproj" />
+	  <ProjectReference Include="..\TDesign.Docs.Shared\TDesign.Docs.Shared.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
