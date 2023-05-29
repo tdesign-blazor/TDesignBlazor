@@ -6,51 +6,27 @@
 public interface IDialogService
 {
     /// <summary>
-    /// 显示对话框。
+    /// 显示指定对话框。
     /// </summary>
-    Task<IDialogReference> Open<TDialogTemplate>( DialogParameters? parameters = default) where TDialogTemplate : IComponent;
+    /// <typeparam name="TDialogTemplate">对话框模板类型。</typeparam>
+    Task<IDialogReference> Open<TDialogTemplate>(DialogParameters? parameters = default) where TDialogTemplate : IComponent;
 
     /// <summary>
     /// 当对话框打开时触发的事件。
     /// </summary>
-    event Action<Guid, DialogParameters?> OnOpening;
+    event Action<Guid, DialogParameters> OnOpening;
 
+    /// <summary>
+    /// 关闭指定 id 的对话框。
+    /// </summary>
+    /// <param name="id">要关闭的对话框 id。</param>
+    /// <param name="result">对话框的执行结果。</param>
+    /// <returns></returns>
     Task Close(Guid id, DialogResult result);
 
+    /// <summary>
+    /// 当对话框关闭时触发的事件。
+    /// </summary>
     event Action<Guid , DialogResult> OnClosing;
 }
 
-
-class DialogService : IDialogService
-{
-    public event Action<Guid, DialogParameters?> OnOpening;
-    public event Action<Guid, DialogResult> OnClosing;
-
-    DialogReference _reference;
-    public Task Close(Guid id, DialogResult result)
-    {
-        _reference.SetResult(result);
-        OnClosing?.Invoke(id, result);
-        return Task.CompletedTask;
-    }
-
-    public Task<IDialogReference> Open<TDialogTemplate>(DialogParameters? parameters = null) where TDialogTemplate : IComponent
-    {
-        parameters ??= new();
-        parameters.SetDialogTemplate<TDialogTemplate>();
-        return Open(parameters);
-    }
-
-    Task<IDialogReference> Open(DialogParameters parameters)
-    {
-        if (parameters is null)
-        {
-            throw new ArgumentNullException(nameof(parameters));
-        }
-
-        var reference = new DialogReference();
-        _reference = reference;
-        OnOpening?.Invoke(_reference.Id, parameters);
-        return Task.FromResult((IDialogReference)reference);
-    }
-}

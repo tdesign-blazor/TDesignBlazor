@@ -29,6 +29,35 @@ public static class TDesignExtensions
     }
 
     /// <summary>
+    /// 获取 <see cref="Theme"/> 映射的名称。
+    /// </summary>
+    /// <param name="theme"></param>
+    /// <param name="prefix">前缀。</param>
+    /// <returns>链接 <paramref name="prefix"/> 的 class 名称。</returns>
+    public static string? ToThemeMappingClassName(this Theme? theme, string prefix)
+    {
+        if ( theme is null )
+        {
+            return string.Empty;
+        }
+
+        string? value;
+        if ( theme == Theme.Primary )
+        {
+            value = "info";
+        }
+        else if ( theme == Theme.Danger )
+        {
+            value = "error";
+        }
+        else
+        {
+            value = theme.Value;
+        }
+        return $"{prefix}{value}";
+    }
+
+    /// <summary>
     /// 引入 tdesign blazor 相关的 JS 模块对象。
     /// <para>
     /// 所有的组件模块都要放到 wwwroot/lib 文件夹下，并以 <c>tdesign-blazor-{module}.js</c> 命名。

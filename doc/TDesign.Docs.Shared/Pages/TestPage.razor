@@ -49,21 +49,9 @@
 
 
 @code{
-    RenderFragment? DialogContent =>
-        @<h3>对话框的内容</h3>;
-
-
     async Task Open()
     {
-        var dialog = await DialogService.Open("第一个提示");
-
-         await dialog.Result.ContinueWith((result) =>
-       {
-          if (result.Result.Closed)
-          {
-              DialogService.Open("提示一个而已");
-          }
-        });
+        var dialog = await DialogService.OpenInfo("第一个提示");
     }
 }
 @inject IJSRuntime JS

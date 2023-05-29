@@ -1,33 +1,22 @@
 ﻿namespace TDesign;
-public record struct DialogResult
-{
-    public bool Closed { get; internal set; }
-    public object? Data { get; internal set; }
 
-    public static DialogResult Close() => new() { Closed = true };    
-    public static DialogResult Ok<T>(T result) => new() { Data = result };
-}
-
-public interface IDialogReference
-{
-    Task<DialogResult> Result { get; }
-    Guid Id { get; }
-}
-
+/// <summary>
+/// <see cref="IDialogReference"/> 默认实现。
+/// </summary>
 internal class DialogReference : IDialogReference
 {
-    TaskCompletionSource<DialogResult> _result = new();
-    public DialogReference()
-    {
-        
-    }
+    readonly TaskCompletionSource<DialogResult> _result = new();
 
+    /// <inheritdoc/>
     public Task<DialogResult> Result => _result.Task;
 
+    /// <inheritdoc/>
     public Guid Id => Guid.NewGuid();
 
-    public bool SetResult(DialogResult result)
-    {
-        return _result.TrySetResult(result);
-    }
+    /// <summary>
+    /// 设置对话框结果。
+    /// </summary>
+    /// <param name="result">对话框的操作结果。</param>
+    /// <returns></returns>
+    public bool SetResult(DialogResult result) => _result.TrySetResult(result);
 }

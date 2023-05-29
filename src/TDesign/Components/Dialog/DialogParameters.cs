@@ -7,7 +7,7 @@ namespace TDesign;
 /// </summary>
 public class DialogParameters : IEnumerable<KeyValuePair<string, object?>>
 {
-    Dictionary<string, object?> _parametersStore = new();
+    readonly Dictionary<string, object?> _parametersStore = new();
 
     /// <summary>
     /// 获取或设置指定参数名称的值。
@@ -64,6 +64,8 @@ public class DialogParameters : IEnumerable<KeyValuePair<string, object?>>
         return default;
     }
 
+    public T Get<T>(string name) => (T)Get(name);
+
     /// <summary>
     /// 获取参数的迭代器。
     /// </summary>
@@ -76,11 +78,4 @@ public class DialogParameters : IEnumerable<KeyValuePair<string, object?>>
     /// <returns>一个迭代器。</returns>
     IEnumerator IEnumerable.GetEnumerator() => _parametersStore.GetEnumerator();
 
-    internal void SetDialogTemplate<TTemplate>()
-    {
-        var type=typeof(TTemplate);
-        Set("DialogTemplate", type);
-    }
-
-    internal Type GetDialogTemplate() => Get("DialogTemplate") as Type ?? throw new InvalidCastException("DialogTemplate casting error");
 }

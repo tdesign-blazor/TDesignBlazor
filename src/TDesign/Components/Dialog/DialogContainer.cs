@@ -21,10 +21,7 @@ internal class DialogContainer:ComponentBase,IContainerComonent,IDisposable
 
     private void DialogService_OnClosing(Guid id, DialogResult result)
     {
-        if (result.Closed)
-        {
-            Close(id);
-        }
+        Close(id);
     }
 
     private void DialogService_OnOpening(Guid id, DialogParameters? parameters)
@@ -60,7 +57,7 @@ internal class DialogContainer:ComponentBase,IContainerComonent,IDisposable
         Thread.Sleep(150);//延迟等动画效果完成
         if (DialogCollection.Remove(id))
         {
-            InvokeAsync(StateHasChanged);
+            StateHasChanged();
         }
     }
 

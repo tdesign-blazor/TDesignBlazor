@@ -29,6 +29,23 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
     /// </summary>
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
+    /// <summary>
+    /// 设置标题的图标。
+    /// </summary>
+    [Parameter] public object? Icon { get; set; }
+    /// <summary>
+    /// 设置图标的主题。
+    /// </summary>
+    [Parameter] public Theme? IconTheme { get; set; }
+    /// <summary>
+    /// 是否显示 x 关闭图标。
+    /// </summary>
+    [Parameter] public bool Closable { get; set; }
+    /// <summary>
+    /// 阻止点击遮罩层关闭对话框功能。
+    /// </summary>
+    [Parameter] public bool PreventMaskToClose { get; set; }
+
     IJSModule _dialogModel;
 
     /// <inheritdoc/>
@@ -51,7 +68,9 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
     {
         builder.CreateCascadingComponent(this, 0, content =>
         {
-            content.CreateElement(sequence, "div", attributes: new { @class = "t-dialog__mask" }, condition: !Modeless);
+            content.Div("t-dialog__mask", !Modeless)
+                    .Callback("onclick",this,Close,!PreventMaskToClose)
+                .Close();
 
             content.Div("t-dialog__wrap")
                     .Content(wrap =>
@@ -61,7 +80,7 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
                             .Class("t-dialog--top", !Center)
                             .Content(position =>
                             {
-                                content.CreateComponent<DialogContext>(0, BuildDialog, new { Parameters = Parameters });
+                                content.CreateComponent<DialogContext>(0, BuildDialog, new { Parameters });
                             })
                             .Close();
                     })
@@ -74,12 +93,21 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
                 .Class("t-dialog--default")
                 .Content(dialog =>
                 {
-
                     dialog.Div("t-dialog__header")
                         .Content(header =>
                         {
-                            header.Div("t-dialog__header-content").Content(HeaderContent).Close();
-                            header.Span("t-dialog__close")
+                            header.Div("t-dialog__header-content").Content(content =>
+                            {
+                                content.Component<TIcon>(Icon is not null)
+                                    .Attribute(nameof(TIcon.AdditionalClass), IconTheme?.ToThemeMappingClassName("t-is-"),IconTheme is not null)
+                                    .Attribute(nameof(TIcon.Name),Icon)
+                                    .Close();
+
+                                content.AddContent(0, HeaderContent);
+
+                            }).Close();
+
+                            header.Span("t-dialog__close", Closable)
                                 .Callback("onclick", HtmlHelper.Instance.Callback().Create(this, Close))
                                 .Content(close =>
                                 {
@@ -123,14 +151,19 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
 
 
     bool _parameterSet;
-    internal void Set(RenderFragment? header,RenderFragment? content,RenderFragment? footer)
+    internal void Set(TDialog dialog)
     {
         if (!_parameterSet)
         {
-            //Thread.Sleep(100);
-            HeaderContent = header;
-            FooterContent = footer;
-            ChildContent = content;
+            HeaderContent = dialog.HeaderContent;
+            FooterContent = dialog.FooterContent;
+            ChildContent = dialog.ChildContent;
+            Icon = dialog.Icon;
+            IconTheme = dialog.IconTheme;
+            Modeless = dialog.Modeless;
+            Center = dialog.Center;
+            Closable = dialog.Closable;
+            PreventMaskToClose = dialog.PreventMaskToClose;
             _parameterSet = true;
             StateHasChanged();
         }
