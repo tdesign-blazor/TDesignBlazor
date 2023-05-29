@@ -6,8 +6,8 @@
     <PackageId>TDesign</PackageId>
     <Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
     <Authors>William Zhou and Contributors</Authors>
-	  <VersionPrefix>0.5</VersionPrefix>
-	  <VersionSuffix>beta</VersionSuffix>
+	  <VersionPrefix>0.6</VersionPrefix>
+	  <VersionSuffix>beta-0529</VersionSuffix>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <OutputPath>.\bin\$(Configuration)</OutputPath>
