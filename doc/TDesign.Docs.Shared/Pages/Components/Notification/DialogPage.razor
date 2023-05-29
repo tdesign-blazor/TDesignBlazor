@@ -163,6 +163,31 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
+<TButton Theme=""Theme.Primary"" OnClick=""@(GetResult)"">带结果的对话框</TButton>
+
+@code{
+async Task GetResult()
+    {
+        var dialog = await DialogService.Open<Templates.ReturnDataDialogTemplate>();
+        var result = await dialog.Result;//对话框操作过后才有值
+        if ( result.Closed )//表示对话框已经关闭
+        {
+            await DialogService.OpenInfo(result.Data?.ToString());
+        }
+    }
+ }
+
+@* ReturnDataDialogTemplate.razor *@
+<TDialog>
+    <ChildContent>这里是提示</ChildContent>
+    <FooterContent>
+        <TButton Varient=""ButtonVarient.Dashed"" OnClick=""@(e => Context.Confirm(""对话框已经关闭""))"">关闭这个对话框</TButton>
+    </FooterContent>
+</TDialog>
+
+@code {
+    [CascadingParameter] DialogContext Context { get; set; }
+}
 ```
 ")
     </CodeContent>

@@ -474,6 +474,35 @@
             <param name="result">对话框的操作结果。</param>
             <returns></returns>
         </member>
+        <member name="T:TDesign.DialogResult">
+            <summary>
+            表示对话框的结果。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogResult.Closed">
+            <summary>
+            获取一个布尔值，表示对话框是否已经关闭。
+            </summary>
+        </member>
+        <member name="P:TDesign.DialogResult.Data">
+            <summary>
+            获取自定义数据。
+            </summary>
+        </member>
+        <member name="M:TDesign.DialogResult.Close">
+            <summary>
+            关闭对话框。
+            </summary>
+            <returns>对话框结果。</returns>
+        </member>
+        <member name="M:TDesign.DialogResult.Ok``1(``0)">
+            <summary>
+            确认对话框。
+            </summary>
+            <typeparam name="T">返回数据的类型。</typeparam>
+            <param name="result">要返回的结果。</param>
+            <returns>对话框结果。</returns>
+        </member>
         <member name="T:TDesign.DialogService">
             <summary>
             对话框默认实现。
