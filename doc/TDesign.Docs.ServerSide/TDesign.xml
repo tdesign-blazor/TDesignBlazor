@@ -1749,11 +1749,6 @@
             显示程序正在处理的加载提示。
             </summary>
         </member>
-        <member name="P:TDesign.TLoading.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TLoading.Center">
             <summary>
             位置是否处于容器的正中间。
@@ -1782,16 +1777,6 @@
         <member name="P:TDesign.TLoading.Visible">
             <summary>
             获取或设置是否可见。
-            </summary>
-        </member>
-        <member name="P:TDesign.TLoading.VisibleExpression">
-            <summary>
-            获取或设置可行性的表达式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TLoading.VisibleChanged">
-            <summary>
-            获取或设置一个具备可见性的回调函数。
             </summary>
         </member>
         <member name="T:TDesign.LoadingContainer">
