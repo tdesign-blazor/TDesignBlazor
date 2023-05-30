@@ -1,6 +1,5 @@
-﻿using System.Linq.Expressions;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Linq.Expressions;
 
 namespace TDesign;
 
@@ -8,12 +7,8 @@ namespace TDesign;
 /// 显示程序正在处理的加载提示。
 /// </summary>
 [CssClass("t-loading")]
-public class TLoading : TDesignComponentBase, IHasChildContent
+public class TLoading : TDesignAdditionParameterWithChildContentComponentBase
 {
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 位置是否处于容器的正中间。
     /// </summary>
@@ -41,14 +36,6 @@ public class TLoading : TDesignComponentBase, IHasChildContent
     /// 获取或设置是否可见。
     /// </summary>
     [Parameter] public bool Visible { get; set; } = true;
-    /// <summary>
-    /// 获取或设置可行性的表达式。
-    /// </summary>
-    [Parameter] public Expression<Func<bool>>? VisibleExpression { get; set; }
-    /// <summary>
-    /// 获取或设置一个具备可见性的回调函数。
-    /// </summary>
-    [Parameter] public EventCallback<bool> VisibleChanged { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {

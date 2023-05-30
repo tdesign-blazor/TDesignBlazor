@@ -106,12 +106,30 @@
     <RunContent>
         <TButton Theme="Theme.Primary" OnClick="ShowFullScreen">点击加载全屏</TButton>
         
-        <TLoading FullScreen Overlay @bind-Visible="IsLoading">加载中</TLoading>
+        <TLoading FullScreen Overlay Visible="IsLoading">加载中</TLoading>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TLoading FullScreen Overlay @bind-Visible=""IsLoading"">加载中</TLoading>
+<TLoading FullScreen Overlay Visible=""IsLoading"">加载中</TLoading>
+
+@code{
+    bool IsLoading{ get; set; }
+
+    Timer? timer;
+
+    void ShowFullScreen()
+    {
+        IsLoading = true;
+        timer = new(async state =>
+        {
+            IsLoading = false;
+            await InvokeAsync(StateHasChanged);
+            timer?.Change(Timeout.Infinite, Timeout.Infinite);
+        }, null,5000, 5000);
+        
+    }
+}
 ```
 ")
     </CodeContent>
@@ -121,7 +139,7 @@
 @code{
     bool IsLoading{ get; set; }
 
-    Timer timer;
+    Timer? timer;
 
     void ShowFullScreen()
     {
@@ -130,6 +148,7 @@
         {
             IsLoading = false;
             await InvokeAsync(StateHasChanged);
+            timer?.Change(Timeout.Infinite, Timeout.Infinite);
         }, null,5000, 5000);
         
     }
