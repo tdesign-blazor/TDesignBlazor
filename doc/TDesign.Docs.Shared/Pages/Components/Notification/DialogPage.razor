@@ -170,7 +170,7 @@ async Task GetResult()
     {
         var dialog = await DialogService.Open<Templates.ReturnDataDialogTemplate>();
         var result = await dialog.Result;//对话框操作过后才有值
-        if ( result.Closed )//表示对话框已经关闭
+        if ( !result.Cancelled )//点击的是确认操作
         {
             await DialogService.OpenInfo(result.Data?.ToString());
         }
@@ -221,7 +221,7 @@ async Task GetResult()
     {
         var dialog = await DialogService.Open<Templates.ReturnDataDialogTemplate>();
         var result = await dialog.Result;//对话框操作过后才有值
-        if ( result.Closed )//表示对话框已经关闭
+        if ( !result.Cancelled )//点击的是确认操作
         {
             await DialogService.OpenInfo(result.Data?.ToString());
         }

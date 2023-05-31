@@ -6,24 +6,24 @@
 public record struct DialogResult
 {
     /// <summary>
-    /// 获取一个布尔值，表示对话框是否已经关闭。
+    /// 获取一个布尔值，表示对话框的结果是点击了取消操作。
     /// </summary>
-    public bool Closed { get; private set; }
+    public bool Cancelled { get; private set; }
 
     /// <summary>
     /// 获取自定义数据。
     /// </summary>
     public object? Data { get; private set; }
     /// <summary>
-    /// 关闭对话框。
+    /// 设置对话框的结果是取消的，并设置 <see cref="Cancelled"/> 为 <c>true</c>。
     /// </summary>
     /// <returns>对话框结果。</returns>
-    public static DialogResult Close() => new() { Closed = true };
+    public static DialogResult Cancel() => new() { Cancelled = true };
     /// <summary>
-    /// 确认对话框。
+    /// 设置对话框的结果是确认的，并可以返回一个结果。
     /// </summary>
     /// <typeparam name="T">返回数据的类型。</typeparam>
     /// <param name="result">要返回的结果。</param>
     /// <returns>对话框结果。</returns>
-    public static DialogResult Ok<T>(T? result=default) => new() { Data = result, Closed = true };
+    public static DialogResult Confirm<T>(T? result = default) => new() { Data = result };
 }

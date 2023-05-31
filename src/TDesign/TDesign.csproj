@@ -39,10 +39,10 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="4.0.0-beta-3" />
-    <PackageReference Include="ComponentBuilder.Extensions" Version="4.0.0-beta-3" />
-    <PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.0.0-beta-3" />
-    <PackageReference Include="ComponentBuilder.JSInterop" Version="4.0.0-beta-3" />
+    <PackageReference Include="ComponentBuilder" Version="4.0.0" />
+    <PackageReference Include="ComponentBuilder.Extensions" Version="4.0.0" />
+    <PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.0.0" />
+    <PackageReference Include="ComponentBuilder.JSInterop" Version="4.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageReference Include="OneOf" Version="3.0.243" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">

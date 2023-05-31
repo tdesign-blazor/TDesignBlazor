@@ -18,14 +18,14 @@ public class DialogContext : ComponentBase
     /// <summary>
     /// 取消操作并关闭对话框。
     /// </summary>
-    public Task Cancel() => Wrapper.Close(DialogResult.Close());
+    public Task Cancel() => Wrapper.Close(DialogResult.Cancel());
 
     /// <summary>
     /// 确定操作并关闭对话框。
     /// </summary>
     /// <typeparam name="TResult">结果类型。</typeparam>
     /// <param name="result">确定操作要返回的结果。</param>
-    public Task Confirm<TResult>(TResult? result = default) => Wrapper.Close(DialogResult.Ok(result));
+    public Task Confirm<TResult>(TResult? result = default) => Wrapper.Close(DialogResult.Confirm(result));
 
     /// <inheritdoc/>
     protected override void BuildRenderTree(RenderTreeBuilder builder)

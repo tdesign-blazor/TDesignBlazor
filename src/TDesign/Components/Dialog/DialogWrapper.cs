@@ -147,7 +147,7 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
         Reset();
     }
 
-    public Task Close() => Close(DialogResult.Close());
+    public Task Close() => Close(DialogResult.Cancel());
 
 
     bool _parameterSet;

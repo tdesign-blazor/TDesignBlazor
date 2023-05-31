@@ -479,9 +479,9 @@
             表示对话框的结果。
             </summary>
         </member>
-        <member name="P:TDesign.DialogResult.Closed">
+        <member name="P:TDesign.DialogResult.Cancelled">
             <summary>
-            获取一个布尔值，表示对话框是否已经关闭。
+            获取一个布尔值，表示对话框的结果是点击了取消操作。
             </summary>
         </member>
         <member name="P:TDesign.DialogResult.Data">
@@ -489,15 +489,15 @@
             获取自定义数据。
             </summary>
         </member>
-        <member name="M:TDesign.DialogResult.Close">
+        <member name="M:TDesign.DialogResult.Cancel">
             <summary>
-            关闭对话框。
+            设置对话框的结果是取消的，并设置 <see cref="P:TDesign.DialogResult.Cancelled"/> 为 <c>true</c>。
             </summary>
             <returns>对话框结果。</returns>
         </member>
-        <member name="M:TDesign.DialogResult.Ok``1(``0)">
+        <member name="M:TDesign.DialogResult.Confirm``1(``0)">
             <summary>
-            确认对话框。
+            设置对话框的结果是确认的，并可以返回一个结果。
             </summary>
             <typeparam name="T">返回数据的类型。</typeparam>
             <param name="result">要返回的结果。</param>
