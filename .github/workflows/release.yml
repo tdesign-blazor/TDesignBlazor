@@ -1,4 +1,4 @@
-name: Release
+name: Pack nuget by tag
 
 on:
   push:

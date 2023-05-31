@@ -22,18 +22,10 @@ jobs:
           dotnet-version: |
             6.0.x
             7.0.x
-      - name: Set TDesign.csproj version
-        id: update
-        uses: Thundernerd/dotnet-project-version-updater@v1.2
-        with:
-            file: "src/TDesign/TDesign.csproj"
-            version: ${{ github.event.inputs.version }}
       - name: 发布 nuget 包
         run: |
-          VERSION=`git describe --tags`
-          echo "Publishing Version: ${VERSION}"
           dotnet build
-          dotnet pack ./src/TDesign/TDesign.csproj -c release -o ./pack
-          dotnet nuget push './pack/TDesign.${{ github.event.inputs.version }}.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet pack ./src/TDesign/TDesign.csproj -c release -o ./pack -p:PackageVersion=${{ github.event.inputs.version }}
+          dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
     
