@@ -1,0 +1,37 @@
+name: Manual pack to nuget
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package Version"
+        required: true 
+        type: string
+
+jobs:
+  pack-push-nuget-package:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'AchievedOwner'
+    steps:
+      - name: 迁出代码
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Environment
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+      - name: Set TDesign.csproj version
+        id: update
+        uses: Thundernerd/dotnet-project-version-updater@v1.2
+        with:
+            file: "src/TDesign/TDesign.csproj"
+            version: ${{ github.event.inputs.version }}
+      - name: 发布 nuget 包
+        run: |
+          dotnet build
+          dotnet pack ./src/TDesign/TDesign.csproj -c release -o ./pack
+          dotnet nuget push './pack/TDesign.${{ github.event.inputs.version }}.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+
+    
