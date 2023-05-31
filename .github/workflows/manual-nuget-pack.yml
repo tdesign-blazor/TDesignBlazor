@@ -24,7 +24,7 @@ jobs:
             7.0.x
       - name: 发布 nuget 包
         run: |
-          dotnet build
+          dotnet build ./src/TDesign/TDesign.csproj -c release
           dotnet pack ./src/TDesign/TDesign.csproj -c release -o ./pack -p:PackageVersion=${{ github.event.inputs.version }}
           dotnet nuget push './pack/*.nupkg' -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
