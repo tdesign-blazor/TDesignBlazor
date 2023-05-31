@@ -26,6 +26,6 @@ jobs:
         run: |
           dotnet build
           dotnet pack ./src/TDesign/TDesign.csproj -c release -o ./pack -p:PackageVersion=${{ github.event.inputs.version }}
-          dotnet nuget push './pack/*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet nuget push './pack/*.nupkg' -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
     
