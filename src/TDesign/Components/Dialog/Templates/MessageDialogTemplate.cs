@@ -10,6 +10,6 @@ public class MessageDialogTemplate : DialogTemplateBase
         => builder => builder.Component<TButton>()
                             .Attribute(nameof(TButton.Theme), Theme.Primary)
                             .Attribute(nameof(TButton.OnClick), HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, Context.Confirm))
-                            .ChildContent("确定")
+                            .Content("确定")
                             .Close();
 }

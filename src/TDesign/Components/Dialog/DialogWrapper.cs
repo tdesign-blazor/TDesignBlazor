@@ -69,7 +69,7 @@ internal class DialogWrapper : TDesignChildContentComponentBase,  IHasHeaderFrag
         builder.CreateCascadingComponent(this, 0, content =>
         {
             content.Div("t-dialog__mask", !Modeless)
-                    .Callback("onclick",this,Close,!PreventMaskToClose)
+                    .Callback("onclick",HtmlHelper.Instance.Callback().Create( this,Close),!PreventMaskToClose)
                 .Close();
 
             content.Div("t-dialog__wrap")

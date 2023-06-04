@@ -1,133 +1,133 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 	<Import Project="../../common.props" />
-  <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>TDesign</RootNamespace>
-    <PackageId>TDesign</PackageId>
-    <Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
-    <Authors>William Zhou and Contributors</Authors>
-	  <VersionPrefix>0.6</VersionPrefix>
-	  <VersionSuffix>beta-0529</VersionSuffix>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-    <FileVersion>$(Version)</FileVersion>
-    <OutputPath>.\bin\$(Configuration)</OutputPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
-    <Copyright>TDesignBlazor © William 2022</Copyright>
-	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>TDesign</RootNamespace>
+		<PackageId>TDesign</PackageId>
+		<Description>基于腾讯 TDesign 的 Blazor 企业级组件库。腾讯 TDesign 官方地址：https://tdesign.tencent.com/</Description>
+		<Authors>William Zhou and Contributors</Authors>
+		<VersionPrefix>0.6</VersionPrefix>
+		<VersionSuffix>beta-0529</VersionSuffix>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
+		<OutputPath>.\bin\$(Configuration)</OutputPath>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<RepositoryUrl>https://github.com/AchievedOwner/TDesignBlazor</RepositoryUrl>
+		<RepositoryType>Github</RepositoryType>
+		<PackageProjectUrl>https://github.com/AchievedOwner/TDesignBlazor</PackageProjectUrl>
+		<Copyright>TDesignBlazor © William 2022</Copyright>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <LangVersion>10.0</LangVersion>
-    <FileAlignment>1024</FileAlignment>
-    <Title>TDesign For Blazor</Title>
-    <PackageIcon>logo.png</PackageIcon>
-    <PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Parameters\**" />
-    <Content Remove="Parameters\**" />
-    <EmbeddedResource Remove="Parameters\**" />
-    <None Remove="Parameters\**" />
-  </ItemGroup>
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>10.0</LangVersion>
+		<FileAlignment>1024</FileAlignment>
+		<Title>TDesign For Blazor</Title>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageTags>组件 TDesign Blazor Component WebAssembly</PackageTags>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Parameters\**" />
+		<Content Remove="Parameters\**" />
+		<EmbeddedResource Remove="Parameters\**" />
+		<None Remove="Parameters\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ComponentBuilder" Version="4.0.0" />
-    <PackageReference Include="ComponentBuilder.Extensions" Version="4.0.0" />
-    <PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.0.0" />
-    <PackageReference Include="ComponentBuilder.JSInterop" Version="4.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
-    <PackageReference Include="OneOf" Version="3.0.243" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ComponentBuilder" Version="4.1.0" />
+		<PackageReference Include="ComponentBuilder.Extensions" Version="4.1.0" />
+		<PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.1.0" />
+		<PackageReference Include="ComponentBuilder.JSInterop" Version="4.1.0" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+		<PackageReference Include="OneOf" Version="3.0.243" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\asset\logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="wwwroot\libs\popper\createPopper.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\contains.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getBoundingClientRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getClippingRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getCompositeRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getComputedStyle.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getDocumentElement.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getDocumentRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getHTMLElementScroll.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getLayoutRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getNodeName.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getNodeScroll.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getOffsetParent.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getParentNode.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getScrollParent.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getViewportRect.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getWindow.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getWindowScroll.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\getWindowScrollBarX.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\instanceOf.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\isLayoutViewport.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\isScrollParent.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\isTableElement.js" />
-    <None Include="wwwroot\libs\popper\dom-utils\listScrollParents.js" />
-    <None Include="wwwroot\libs\popper\enums.js" />
-    <None Include="wwwroot\libs\popper\index.js" />
-    <None Include="wwwroot\libs\popper\modifiers\applyStyles.js" />
-    <None Include="wwwroot\libs\popper\modifiers\arrow.js" />
-    <None Include="wwwroot\libs\popper\modifiers\computeStyles.js" />
-    <None Include="wwwroot\libs\popper\modifiers\eventListeners.js" />
-    <None Include="wwwroot\libs\popper\modifiers\flip.js" />
-    <None Include="wwwroot\libs\popper\modifiers\hide.js" />
-    <None Include="wwwroot\libs\popper\modifiers\index.js" />
-    <None Include="wwwroot\libs\popper\modifiers\offset.js" />
-    <None Include="wwwroot\libs\popper\modifiers\popperOffsets.js" />
-    <None Include="wwwroot\libs\popper\modifiers\preventOverflow.js" />
-    <None Include="wwwroot\libs\popper\popper-base.js" />
-    <None Include="wwwroot\libs\popper\popper-lite.js" />
-    <None Include="wwwroot\libs\popper\popper.js" />
-    <None Include="wwwroot\libs\popper\types.js" />
-    <None Include="wwwroot\libs\popper\utils\computeAutoPlacement.js" />
-    <None Include="wwwroot\libs\popper\utils\computeOffsets.js" />
-    <None Include="wwwroot\libs\popper\utils\debounce.js" />
-    <None Include="wwwroot\libs\popper\utils\detectOverflow.js" />
-    <None Include="wwwroot\libs\popper\utils\expandToHashMap.js" />
-    <None Include="wwwroot\libs\popper\utils\format.js" />
-    <None Include="wwwroot\libs\popper\utils\getAltAxis.js" />
-    <None Include="wwwroot\libs\popper\utils\getAltLen.js" />
-    <None Include="wwwroot\libs\popper\utils\getBasePlacement.js" />
-    <None Include="wwwroot\libs\popper\utils\getFreshSideObject.js" />
-    <None Include="wwwroot\libs\popper\utils\getMainAxisFromPlacement.js" />
-    <None Include="wwwroot\libs\popper\utils\getOppositePlacement.js" />
-    <None Include="wwwroot\libs\popper\utils\getOppositeVariationPlacement.js" />
-    <None Include="wwwroot\libs\popper\utils\getVariation.js" />
-    <None Include="wwwroot\libs\popper\utils\math.js" />
-    <None Include="wwwroot\libs\popper\utils\mergeByName.js" />
-    <None Include="wwwroot\libs\popper\utils\mergePaddingObject.js" />
-    <None Include="wwwroot\libs\popper\utils\orderModifiers.js" />
-    <None Include="wwwroot\libs\popper\utils\rectToClientRect.js" />
-    <None Include="wwwroot\libs\popper\utils\uniqueBy.js" />
-    <None Include="wwwroot\libs\popper\utils\userAgent.js" />
-    <None Include="wwwroot\libs\popper\utils\validateModifiers.js" />
-    <None Include="wwwroot\libs\popper\utils\within.js" />
-    <None Include="wwwroot\libs\tdesign-blazor-popup.js" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\asset\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="wwwroot\libs\popper\createPopper.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\contains.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getBoundingClientRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getClippingRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getCompositeRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getComputedStyle.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getDocumentElement.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getDocumentRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getHTMLElementScroll.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getLayoutRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getNodeName.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getNodeScroll.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getOffsetParent.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getParentNode.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getScrollParent.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getViewportRect.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getWindow.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getWindowScroll.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\getWindowScrollBarX.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\instanceOf.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\isLayoutViewport.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\isScrollParent.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\isTableElement.js" />
+		<None Include="wwwroot\libs\popper\dom-utils\listScrollParents.js" />
+		<None Include="wwwroot\libs\popper\enums.js" />
+		<None Include="wwwroot\libs\popper\index.js" />
+		<None Include="wwwroot\libs\popper\modifiers\applyStyles.js" />
+		<None Include="wwwroot\libs\popper\modifiers\arrow.js" />
+		<None Include="wwwroot\libs\popper\modifiers\computeStyles.js" />
+		<None Include="wwwroot\libs\popper\modifiers\eventListeners.js" />
+		<None Include="wwwroot\libs\popper\modifiers\flip.js" />
+		<None Include="wwwroot\libs\popper\modifiers\hide.js" />
+		<None Include="wwwroot\libs\popper\modifiers\index.js" />
+		<None Include="wwwroot\libs\popper\modifiers\offset.js" />
+		<None Include="wwwroot\libs\popper\modifiers\popperOffsets.js" />
+		<None Include="wwwroot\libs\popper\modifiers\preventOverflow.js" />
+		<None Include="wwwroot\libs\popper\popper-base.js" />
+		<None Include="wwwroot\libs\popper\popper-lite.js" />
+		<None Include="wwwroot\libs\popper\popper.js" />
+		<None Include="wwwroot\libs\popper\types.js" />
+		<None Include="wwwroot\libs\popper\utils\computeAutoPlacement.js" />
+		<None Include="wwwroot\libs\popper\utils\computeOffsets.js" />
+		<None Include="wwwroot\libs\popper\utils\debounce.js" />
+		<None Include="wwwroot\libs\popper\utils\detectOverflow.js" />
+		<None Include="wwwroot\libs\popper\utils\expandToHashMap.js" />
+		<None Include="wwwroot\libs\popper\utils\format.js" />
+		<None Include="wwwroot\libs\popper\utils\getAltAxis.js" />
+		<None Include="wwwroot\libs\popper\utils\getAltLen.js" />
+		<None Include="wwwroot\libs\popper\utils\getBasePlacement.js" />
+		<None Include="wwwroot\libs\popper\utils\getFreshSideObject.js" />
+		<None Include="wwwroot\libs\popper\utils\getMainAxisFromPlacement.js" />
+		<None Include="wwwroot\libs\popper\utils\getOppositePlacement.js" />
+		<None Include="wwwroot\libs\popper\utils\getOppositeVariationPlacement.js" />
+		<None Include="wwwroot\libs\popper\utils\getVariation.js" />
+		<None Include="wwwroot\libs\popper\utils\math.js" />
+		<None Include="wwwroot\libs\popper\utils\mergeByName.js" />
+		<None Include="wwwroot\libs\popper\utils\mergePaddingObject.js" />
+		<None Include="wwwroot\libs\popper\utils\orderModifiers.js" />
+		<None Include="wwwroot\libs\popper\utils\rectToClientRect.js" />
+		<None Include="wwwroot\libs\popper\utils\uniqueBy.js" />
+		<None Include="wwwroot\libs\popper\utils\userAgent.js" />
+		<None Include="wwwroot\libs\popper\utils\validateModifiers.js" />
+		<None Include="wwwroot\libs\popper\utils\within.js" />
+		<None Include="wwwroot\libs\tdesign-blazor-popup.js" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="JSInterop\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="JSInterop\" />
+	</ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="rem(){ :;};rem '&#xD;&#xA;@goto b&#xD;&#xA;';&#xD;&#xA;echo sh;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot;&#xD;&#xA;exit&#xD;&#xA;&#xD;&#xA;:b&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="rem(){ :;};rem '&#xD;&#xA;@goto b&#xD;&#xA;';&#xD;&#xA;echo sh;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot;&#xD;&#xA;exit&#xD;&#xA;&#xD;&#xA;:b&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot" />
+	</Target>
 
 </Project>

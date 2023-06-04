@@ -47,7 +47,7 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.Fluent().Div()
+        builder.Div()
                 .Class("t-timeline-item__wrapper")
                 .Content(content =>
                 {
@@ -57,11 +57,11 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
                         .Class( "t-timeline-item__dot--custom", IconName is not null)
                         .Content(icon =>
                         {
-                            icon.Fluent().Div().Class("t-timeline-item__dot-content").Content(dot =>
+                            icon.Div().Class("t-timeline-item__dot-content").Content(dot =>
                             {
                                 if (IconName is not null)
                                 {
-                                    dot.Fluent().Component<TIcon>().Attribute("Name", IconName).Close();
+                                    dot.Component<TIcon>().Attribute("Name", IconName).Close();
                                 }
                             })
                             .Close();
@@ -74,7 +74,7 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
         .Close()
         .Div("t-timeline-item__content")
                 .Content(content =>
-                    content.Fluent().Content(ChildContent).Div("t-timeline-item__label", !string.IsNullOrEmpty(Label))
+                    content.Content(ChildContent).Div("t-timeline-item__label", !string.IsNullOrEmpty(Label))
                     .Class($"t-timeline-item__label--{(CascadingTimeline.Alternate ? "alternate" : "same")}")
                     .Content(Label)
                     .Close())

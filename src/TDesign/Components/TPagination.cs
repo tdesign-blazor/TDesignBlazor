@@ -193,21 +193,21 @@ public partial class TPagination : TDesignComponentBase
     /// 构建总数据量的元素。
     /// </summary>
     void BuildTotal(RenderTreeBuilder builder)
-        => builder.Fluent().Div("t-pagination__total", ShowTotal).Content(TotalContent?.Invoke(Total)).Close();
+        => builder.Div("t-pagination__total", ShowTotal).Content(TotalContent?.Invoke(Total)).Close();
 
     /// <summary>
     /// 构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
     /// </summary>
     /// <param name="builder"></param>
     void BuildPageSizeSelect(RenderTreeBuilder builder)
-        => builder.Fluent().Div("t-select__wrap t-pagination__select").Content(HtmlHelper.Instance.CreateContent($"{PageSize} 条/页")).Close();
+        => builder.Div("t-select__wrap t-pagination__select").Content(HtmlHelper.Instance.CreateContent($"{PageSize} 条/页")).Close();
 
     /// <summary>
     /// 构建上一页或下一页按钮。
     /// <param name="prevOrNext"><c>true</c> 表示上一页，否则是下一页。</param>
     /// <param name="disabled">是否被禁用。</param>
     void BuildPageBehaviorBtn(RenderTreeBuilder builder, PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default)
-        => builder.Fluent()
+        => builder
             .Div("t-pagination__btn", show)
                 .Class("t-pagination__btn-prev", behavior is PageButtonBehavior.First or PageButtonBehavior.Previous)
                 .Class("t-pagination__btn-next", behavior is PageButtonBehavior.Next or PageButtonBehavior.Last)
@@ -226,7 +226,7 @@ public partial class TPagination : TDesignComponentBase
                         _ => NavigateToNext()
                     };
                 })
-                .Content(icon => icon.Fluent().Component<TIcon>().Attribute(new { Name = iconName }).Close())
+                .Content(icon => icon.Component<TIcon>().Attribute(new { Name = iconName }).Close())
             .Close()
             ;
 
@@ -240,12 +240,12 @@ public partial class TPagination : TDesignComponentBase
     /// <param name="disabled">是否禁用。</param>
     /// <param name="additionalClass">附加的 class 样式。</param>
     void BuildPageItem(RenderTreeBuilder builder, int sequence, RenderFragment content, Func<Task>? callback = default, bool disabled = default, string? additionalClass = default)
-        => builder.Fluent().Li().Class("t-pagination__number")
+        => builder.Element("li","t-pagination__number")
                              .Class("t-is-disabled", disabled)
                              .Class(additionalClass, !string.IsNullOrEmpty(additionalClass))
                              .Callback("onclick", this, () =>
                              {
-                                 callback();
+                                 callback?.Invoke();
                              }, callback is not null && !disabled)
                             .Content(content)
                             .Close();
@@ -269,7 +269,7 @@ public partial class TPagination : TDesignComponentBase
     /// 构建分页条。
     /// </summary>
     void BuildPageNumbers(RenderTreeBuilder builder)
-        => builder.Fluent().Ul("t-pagination__pager", ShowPageNumber)
+        => builder.Element("ul","t-pagination__pager", ShowPageNumber)
                         .Content(content =>
                         {
                             if (EllipsisMode == PageEllipsisMode.Middle)
@@ -374,15 +374,15 @@ public partial class TPagination : TDesignComponentBase
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
     void BuildJumper(RenderTreeBuilder builder)
-        => builder.Fluent().Div("t-pagination__jump", ShowJumpPage)
+        => builder.Div("t-pagination__jump", ShowJumpPage)
                             .Content(content =>
                             {
                                 content.AddContent(0, "跳至");
 
-                                content.Fluent()
+                                content
                                         .Component<TInputAdornment>()
-                                        .Attribute(nameof(TInputAdornment.Append), $"/{TotalPages} 页")
-                                        .ChildContent(input => input.CreateComponent<TInputNumber<int>>(0, attributes: new
+                                        .Attribute(m=>m.Append, $"/{TotalPages} 页")
+                                        .Content(input => input.CreateComponent<TInputNumber<int>>(0, attributes: new
                                         {
                                             AdditionalClass = "t-pagination__input",
                                             Theme = InputNumberTheme.Normal,

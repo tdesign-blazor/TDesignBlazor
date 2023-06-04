@@ -64,10 +64,31 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
                     .Content(tag =>
                     {
                         tag.Div("t-tag-input__prefix", PrefixContent is not null).Content(PrefixContent).Close();
+                        
+                        //if(Value is not null)
+                        //{
+                        //    foreach (var item in Value)
+                        //    {
+                        //        tag.Component<TTag>()
+                        //            .Attribute(m=>m.Closable,true)
+                        //            .Attribute(m=>m.Size,Size)
+                        //            .Attribute(m=>m.Theme, Theme)
+                        //            .Callback<TTag,bool>(m=>m.OnClosing, this, closed =>
+                        //            {
+                        //                if (!closed)
+                        //                {
+                        //                    return;
+                        //                }
+                        //                Remove(loop.index);
+                        //            })
+                        //            .Content(item)
+                        //            .Close();
+                        //    }
+                        //}
 
                         tag.ForEach<TTag, string>(Value, loop =>
                         {
-                            loop.attribute.ChildContent(loop.item)
+                            loop.attribute.Content(loop.item)
                                         .Attribute(nameof(TTag.Closable), true)
                                         .Attribute(nameof(TTag.Size),Size)
                                         .Attribute(nameof(TTag.Theme),Theme)
