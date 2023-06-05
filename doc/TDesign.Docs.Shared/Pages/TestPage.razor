@@ -2,6 +2,14 @@
 @using Test = TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
+<TPagination @bind-PageIndex="Page" @bind-PageSize=Size @bind-Total=Total/>
+
+@code{
+    int Page { get; set; } = 1;
+    int Size { get; set; } = 3;
+    int Total { get; set; } = 12;
+}
+
 @*<TPopup Content="弹出一个层">
     <TButton>悬浮</TButton>
 </TPopup>*@
@@ -40,7 +48,7 @@
 @code{
     TDialog? _dialog;
 }*@
-
+@*
 @inject IDialogService DialogService
 
 <TButton OnClick="Open">
@@ -54,4 +62,4 @@
         var dialog = await DialogService.OpenInfo("第一个提示");
     }
 }
-@inject IJSRuntime JS
+@inject IJSRuntime JS*@

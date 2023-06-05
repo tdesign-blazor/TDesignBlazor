@@ -196,7 +196,8 @@ public partial class TPagination : TDesignComponentBase
         => builder.Div("t-pagination__total", ShowTotal).Content(TotalContent?.Invoke(Total)).Close();
 
     /// <summary>
-    /// 构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
+    /// 构建每页数据量的下拉菜单。
+    /// TODO，等待 Select 组件完成
     /// </summary>
     /// <param name="builder"></param>
     void BuildPageSizeSelect(RenderTreeBuilder builder)
@@ -272,61 +273,69 @@ public partial class TPagination : TDesignComponentBase
         => builder.Element("ul","t-pagination__pager", ShowPageNumber)
                         .Content(content =>
                         {
-                            if (EllipsisMode == PageEllipsisMode.Middle)
+                            //总页数不足2页，就显示1页的分页条
+                            if ( TotalPages < 2 )
                             {
-                                #region 第一页
-
-                                //第一页永远显示
-                                BuildPageNumerItem(content, 0, 1);
-
-                                #endregion
-
-                                #region 前5页
-                                if (PageIndex > PageNumber / 2)
+                                BuildPageNumerItem(content, 100, 1);
+                            }
+                            else
+                            {
+                                if ( EllipsisMode == PageEllipsisMode.Middle )
                                 {
-                                    var backTo = PageNumber - 5;
-                                    if (backTo <= 1)
+                                    #region 第一页
+
+                                    //第一页永远显示
+                                    BuildPageNumerItem(content, 0, 1);
+
+                                    #endregion
+
+                                    #region 前5页
+                                    if ( PageIndex > PageNumber / 2 )
                                     {
-                                        backTo = 1;
+                                        var backTo = PageNumber - 5;
+                                        if ( backTo <= 1 )
+                                        {
+                                            backTo = 1;
+                                        }
+                                        BuildPageItem(content, 1, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(backTo));
                                     }
-                                    BuildPageItem(content, 1, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(backTo));
+                                    #endregion
                                 }
-                                #endregion
-                            }
 
-                            #region 页码条
+                                #region 页码条
 
-                            var (start, end) = ComputePageNumber();
+                                var (start, end) = ComputePageNumber();
 
-                            //页码1 永远显示，所有从2开始
-                            //最后一页永远显示，所以结束要少一个索引
-                            var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
-                            for (var i = start + offset; i <= end - offset; i++)
-                            {
-                                var current = i;
-                                var contentSequence = (int)i + 30;
-
-                                BuildPageNumerItem(content, contentSequence, current);
-                            }
-                            #endregion
-
-                            if (EllipsisMode == PageEllipsisMode.Middle)
-                            {
-                                #region 后5页
-                                if (PageIndex < TotalPages - PageNumber / 2)
+                                //页码1 永远显示，所有从2开始
+                                //最后一页永远显示，所以结束要少一个索引
+                                var offset = (EllipsisMode == PageEllipsisMode.Middle ? 1 : 0);
+                                for ( var i = start + offset; i <= end - offset; i++ )
                                 {
-                                    var nextTo = PageIndex + 5;
-                                    if (nextTo >= TotalPages)
-                                    {
-                                        nextTo = TotalPages;
-                                    }
-                                    BuildPageItem(content, 90, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(nextTo));
+                                    var current = i;
+                                    var contentSequence = (int)i + 30;
+
+                                    BuildPageNumerItem(content, contentSequence, current);
                                 }
                                 #endregion
 
-                                #region 末页
-                                BuildPageNumerItem(content, 100, TotalPages);
-                                #endregion
+                                if ( EllipsisMode == PageEllipsisMode.Middle )
+                                {
+                                    #region 后5页
+                                    if ( PageIndex < TotalPages - PageNumber / 2 )
+                                    {
+                                        var nextTo = PageIndex + 5;
+                                        if ( nextTo >= TotalPages )
+                                        {
+                                            nextTo = TotalPages;
+                                        }
+                                        BuildPageItem(content, 90, text => text.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Ellipsis }), () => NavigateToPage(nextTo));
+                                    }
+                                    #endregion
+
+                                    #region 末页
+                                    BuildPageNumerItem(content, 100, TotalPages);
+                                    #endregion
+                                }
                             }
                         })
                         .Close();
