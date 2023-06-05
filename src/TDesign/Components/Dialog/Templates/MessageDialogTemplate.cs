@@ -8,8 +8,8 @@ public class MessageDialogTemplate : DialogTemplateBase
    /// <inheritdoc/>
    protected override RenderFragment? BuildFooter()
         => builder => builder.Component<TButton>()
-                            .Attribute(nameof(TButton.Theme), Theme.Primary)
-                            .Attribute(nameof(TButton.OnClick), HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, Context.Confirm))
-                            .ChildContent("确定")
+                            .Attribute(m=>m.Theme, Theme.Primary)
+                            .Attribute(m=>m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs?>(this, Context.Confirm))
+                            .Content("确定")
                             .Close();
 }

@@ -155,7 +155,7 @@ partial class TTable<TItem>
                                 {
                                     tr.ForEach("td", ChildComponents.Count, e =>
                                     {
-                                        e.builder.Content(((TTableColumnBase<TItem>)ChildComponents[e.index]).FooterContent);
+                                        e.attribute.Content(((TTableColumnBase<TItem>)ChildComponents[e.index]).FooterContent);
                                     });
                                 })
                             .Close();

@@ -19,11 +19,11 @@ public class TTableCheckboxColumn<TItem,TField> : TTableRadioColumn<TItem,TField
     {
         var value = CellTextFunc!(item);
 
-        return builder => builder.Fluent().Element("label", "t-checkbox")
+        return builder => builder.Element("label", "t-checkbox")
                                          .Class("t-is-checked", IsChecked(value))
                                          .Content(checkbox =>
                                          {
-                                             checkbox.Fluent().Element("input", "t-checkbox__former")
+                                             checkbox.Element("input", "t-checkbox__former")
                                                              .Attribute("value", value)
                                                              .Attribute("type", "checkbox")
                                                              .Callback<ChangeEventArgs>("onchange", this, e =>
@@ -31,8 +31,8 @@ public class TTableCheckboxColumn<TItem,TField> : TTableRadioColumn<TItem,TField
                                                                  Table.SelectRow(rowIndex);
                                                              })
                                                          .Close();
-                                             checkbox.Fluent().Span("t-checkbox__input").Close();
-                                             checkbox.Fluent().Span("t-checkbox__label").Close();
+                                             checkbox.Span("t-checkbox__input").Close();
+                                             checkbox.Span("t-checkbox__label").Close();
                                          })
                                        .Close();
     }

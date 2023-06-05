@@ -82,11 +82,11 @@ public class TPopConfirm:TPopup
     /// </summary>
     /// <param name="builder"></param>
     void BuildPopConfirmContent(RenderTreeBuilder builder)
-    => builder.Fluent()
+    => builder
             .Div("t-popconfirm__content")
-                .Content(content => content.Fluent()
+                .Content(content => content
                             .Div("t-popconfirm__body")
-                                .Content(icon => icon.Fluent()
+                                .Content(icon => icon
                                                     .Component<TIcon>()
                                                         .Attribute(new
                                                         {
