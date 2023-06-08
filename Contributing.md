@@ -76,7 +76,7 @@
 > 一个分支只做一件事情，请不要将多件事情同时在一个分支里做。
 
 ### 实时看板
-我们采用[实时看板](https://github.com/users/AchievedOwner/projects/4/)展示最直观的进度和工作量，并公开给所有用户。
+我们采用[实时看板](https://github.com/users/tdesign-blazor/projects/2/)展示最直观的进度和工作量，并公开给所有用户。
 
 当贡献者领取了 Issue 后，请在适当的时候更新任务的实施状态：
 
@@ -97,7 +97,7 @@
 
 ### 合并请求（Pull Request）
 当你分支开发完成后，推送到服务器上，然后请提交【合并请求（Pull Request）】，简称 **PR(日后将使用简称代替）**。但是在提交之前，请先到遵守以下规范：
-* 在 [Github](https://github.com/AchievedOwner/TDesignBlazor/pulls) 上先搜索是否出现过重复或类似的合并请求，即使已经被关闭了，以避免重复性工作；
+* 在 [Github](https://github.com/tdesign-blazor/TDesignBlazor/pulls) 上先搜索是否出现过重复或类似的合并请求，即使已经被关闭了，以避免重复性工作；
 * 符合[代码规范](#代码规范)的定义；
 * 要合并的分支符合[分支命名约定](#分支管理)；
 * 使用遵循[提交消息约定](#提交记录)的描述性提交消息提交更改。遵守这些约定是必要的，因为发布说明是根据这些消息自动生成的；
