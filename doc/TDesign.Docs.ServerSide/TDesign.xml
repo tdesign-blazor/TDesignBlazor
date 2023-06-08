@@ -1966,17 +1966,12 @@
             消息组件的基类。
             </summary>
         </member>
-        <member name="P:TDesign.Notification.NotifyComponentBase.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.Notification.NotifyComponentBase.Theme">
             <summary>
             提醒主题。
             </summary>
         </member>
-        <member name="P:TDesign.Notification.NotifyComponentBase.TIcon">
+        <member name="P:TDesign.Notification.NotifyComponentBase.Icon">
             <summary>
             图标。
             </summary>
@@ -3384,10 +3379,8 @@
             警告提醒。
             </summary>
         </member>
-        <member name="P:TDesign.TAlert.Title">
-            <summary>
-            显示的标题。
-            </summary>
+        <member name="P:TDesign.TAlert.TitleText">
+            <inheritdoc/>
         </member>
         <member name="P:TDesign.TAlert.TitleContent">
             <summary>
@@ -3399,9 +3392,24 @@
             具备操作部分的 UI 内容。
             </summary>
         </member>
+        <member name="P:TDesign.TAlert.Theme">
+            <summary>
+            主题颜色，默认是 <see cref="F:TDesign.Theme.Primary"/>。
+            </summary>
+        </member>
+        <member name="P:TDesign.TAlert.Icon">
+            <summary>
+            显示的警告图标。
+            </summary>
+        </member>
         <member name="P:TDesign.TAlert.Closable">
             <summary>
             是否可以关闭。
+            </summary>
+        </member>
+        <member name="M:TDesign.TAlert.Close">
+            <summary>
+            关闭消息警告。
             </summary>
         </member>
         <member name="T:TDesign.TBadge">
@@ -4268,7 +4276,8 @@
         </member>
         <member name="M:TDesign.TPagination.BuildPageSizeSelect(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
-            构建每页数据量的下拉菜单。//TODO，等待 Select 组件完成
+            构建每页数据量的下拉菜单。
+            TODO，等待 Select 组件完成
             </summary>
             <param name="builder"></param>
         </member>
