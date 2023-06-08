@@ -10,7 +10,7 @@ public class AlertTest:TestBase<TAlert>
         {
             builder.Div("t-alert t-alert--info")
             .Content(b => {
-                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircle).Close())
+                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircleFilled).Close())
                             .Close();
 
                 b.Div("t-alert__content")
@@ -33,7 +33,7 @@ public class AlertTest:TestBase<TAlert>
         {
             builder.Div("t-alert t-alert--info")
             .Content(b => {
-                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircle).Close())
+                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircleFilled).Close())
                             .Close();
 
                 b.Div("t-alert__content")
@@ -60,7 +60,7 @@ public class AlertTest:TestBase<TAlert>
         {
             builder.Div("t-alert t-alert--info")
             .Content(b => {
-                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircle).Close())
+                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircleFilled).Close())
                             .Close();
 
                 b.Div("t-alert__content")
@@ -88,7 +88,7 @@ public class AlertTest:TestBase<TAlert>
         {
             builder.Div("t-alert t-alert--info")
             .Content(b => {
-                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircle).Close())
+                b.Div("t-alert__icon").Content(i => i.Component<TIcon>().Attribute(m => m.Name, IconName.InfoCircleFilled).Close())
                             .Close();
 
                 b.Div("t-alert__content")
@@ -101,7 +101,7 @@ public class AlertTest:TestBase<TAlert>
                     .Close();
 
 
-                b.Div("t-alert__close").Content(icon => icon.Component<TIcon>().Attribute(m => m.Name, IconName.Close)).Close();
+                b.Div("t-alert__close").Content(icon => icon.Component<TIcon>().Attribute(m => m.Name, IconName.Close).Close()).Close();
             })
             .Close();
         });
