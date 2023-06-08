@@ -53,7 +53,7 @@ public class TMessage : NotifyComponentBase
         }
         else
         {
-            builder.CreateComponent<TIcon>(sequence, attributes: new { Name = GetTIconByTheme }, condition: TIcon is not null);
+            builder.CreateComponent<TIcon>(sequence, attributes: new { Name = GetTIconByTheme }, condition: Icon is not null);
         }
         builder.AddContent(sequence + 1, ChildContent);
 
@@ -92,6 +92,6 @@ public class TMessage : NotifyComponentBase
     {
         base.OnParametersSet();
 
-        TIcon ??= GetTIconByTheme;
+        Icon ??= GetTIconByTheme;
     }
 }

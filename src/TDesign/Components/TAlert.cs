@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-
 using TDesign.Notification;
+using TDesign.Specifications;
 
 namespace TDesign;
 
@@ -8,13 +8,10 @@ namespace TDesign;
 /// 警告提醒。
 /// </summary>
 [CssClass("t-alert")]
-public class TAlert : NotifyComponentBase
+public class TAlert : NotifyComponentBase,IHasTitleFragment,IHasTitleText
 {
-
-    /// <summary>
-    /// 显示的标题。
-    /// </summary>
-    [Parameter] public string? Title { get; set; }
+    /// <inheritdoc/>
+    [Parameter]public string? TitleText { get; set; }
     /// <summary>
     /// 具备标题的 UI 内容。
     /// </summary>
@@ -23,58 +20,73 @@ public class TAlert : NotifyComponentBase
     /// 具备操作部分的 UI 内容。
     /// </summary>
     [Parameter] public RenderFragment? OperationContent { get; set; }
+
+    /// <summary>
+    /// 主题颜色，默认是 <see cref="Theme.Primary"/>。
+    /// </summary>
+    [Parameter]public override Theme? Theme { get; set; } = Theme.Primary;
+    /// <summary>
+    /// 显示的警告图标。
+    /// </summary>
+    [Parameter]public override object? Icon { get; set; } = IconName.InfoCircleFilled;
     /// <summary>
     /// 是否可以关闭。
     /// </summary>
     [Parameter] public bool Closable { get; set; }
 
+    /// <summary>
+    /// 当警告消息被关闭后触发的回调方法。
+    /// </summary>
+    [Parameter]public EventCallback<bool> OnClosed { get; set; }
+
     bool Closed { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
-        if (Closed)
+        if ( Closed )
         {
             return;
         }
+
         base.BuildRenderTree(builder);
     }
 
+
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, "div", icon =>
-        {
-            icon.CreateComponent<TIcon>(0, attributes: new { Name = TIcon });
-        }, new { @class = "t-alert__icon" }, TIcon is not null);
+        builder.Div("t-alert__icon", Icon is not null)
+                .Content(icon => icon.Component<TIcon>().Attribute(m => m.Name, Icon).Close())
+                .Close();
 
-        builder.CreateElement(sequence + 1, "div",
-            content =>
-            {
-
-                content.CreateElement(0, "div", TitleContent, new { @class = "t-alert__title" }, TitleContent is not null);
-
-                content.CreateElement(0, "div", Title!, new { @class = "t-alert__title" }, Title is not null);
-
-
-                content.CreateElement(1, "div", message =>
+        builder.Div("t-alert__content")
+                .Content(content =>
                 {
-                    message.CreateElement(0, "div", ChildContent, new { @class = "t-alert__description" });
-                    message.CreateElement(1, "div", OperationContent, new { @class = "t-alert__operation" }, OperationContent is not null);
-                }, new { @class = "t-alert__message" });
-            }, new { @class = "t-alert__content" });
+                    content.Div("t-alert__title", TitleContent is not null).Content(TitleContent).Close();
 
-        builder.CreateElement(sequence + 2, "div", icon => icon.CreateComponent<TIcon>(0, attributes: new { Name = IconName.Close }), new
-        {
-            @class = "t-alert__close",
-            onclick = HtmlHelper.Instance.Callback().Create(this, () =>
-            {
-                Closed = !Closable;
-                StateHasChanged();
-            })
-        }, Closable);
+                    content.Div("t-alert__message")
+                            .Content(message =>
+                            {
+                                message.Div("t-alert__description").Content(ChildContent).Close();
+                                message.Div("t-alert__operation", OperationContent is not null).Content(OperationContent).Close();
+                            })
+                            .Close();
+                })
+                .Close();
+
+        builder.Div("t-alert__close",Closable).Content(icon=>icon.Component<TIcon>().Attribute(m=>m.Name,IconName.Close).Callback("onclick",this,Close).Close()).Close();   
     }
 
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append($"t-alert--{GetThemeClass}");
+    }
+    /// <summary>
+    /// 关闭消息警告。
+    /// </summary>
+    public async Task Close()
+    {
+        Closed = true;
+        await OnClosed.InvokeAsync(true);
+        await this.Refresh();
     }
 }
