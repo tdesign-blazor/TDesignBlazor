@@ -12,3 +12,12 @@
 * `FooterContent` 用于组件底部或脚部任意代码片段的定义
 * `TitleContent` 用于组件标题的任意代码片段的定义
 ")
+
+<h2>普通文本和代码片段</h2>
+@Code.Create(@"
+如果出现功能一样的文本和代码片段，则使用 `Text` 后缀作为 `string?` 类型的文本，如：
+* `TitleText` 和 `TitleContent`
+* `HeaderText` 和 `HeaderContent`
+
+开发组件时，可继承 `IHasXXXXText` 和 `IHasXXXXContent`，内部会自动适应 `Text`=>`Content` 的值，无需使用代码 `Content??=builder=>builder.AddContent(0, Text)`
+")

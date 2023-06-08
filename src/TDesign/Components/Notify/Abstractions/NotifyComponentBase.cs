@@ -2,20 +2,16 @@
 /// <summary>
 /// 消息组件的基类。
 /// </summary>
-public abstract class NotifyComponentBase : TDesignComponentBase, IHasChildContent
+public abstract class NotifyComponentBase : TDesignAdditionParameterWithChildContentComponentBase
 {
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 提醒主题。
     /// </summary>
-    [Parameter] public Theme? Theme { get; set; }
+    [Parameter] public virtual Theme? Theme { get; set; }
     /// <summary>
     /// 图标。
     /// </summary>
-    [Parameter] public object? TIcon { get; set; }
+    [Parameter] public virtual object? Icon { get; set; }
 
     /// <summary>
     /// 获取对应的主题样式。
@@ -47,7 +43,7 @@ public abstract class NotifyComponentBase : TDesignComponentBase, IHasChildConte
     {
         base.OnParametersSet();
 
-        TIcon ??= GetTIconByTheme;
+        Icon ??= GetTIconByTheme;
     }
 
     /// <summary>
