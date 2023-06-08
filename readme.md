@@ -4,10 +4,10 @@
 **基于腾讯 [TDesign](https://tdesign.tencent.com/) 的 Blazor 企业级组件库**
 
 
-[![CodeQL](https://github.com/AchievedOwner/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/AchievedOwner/TDesign/actions/workflows/codeql-analysis.yml)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AchievedOwner/TDesignBlazor&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/AchievedOwner/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=AchievedOwner/TDesignBlazor&utm_campaign=Badge_Coverage)
-![Version](https://img.shields.io/github/v/release/AchievedOwner/TDesignBlazor)
+[![CodeQL](https://github.com/tdesign-blazor/TDesignBlazor/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/tdesign-blazor/TDesign/actions/workflows/codeql-analysis.yml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/tdesign-blazor/TDesignBlazor/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tdesign-blazor/TDesignBlazor&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/b63260c20d2546f296045d746833e7e4)](https://www.codacy.com/gh/tdesign-blazor/TDesignBlazor/dashboard?utm_source=github.com&utm_medium=referral&utm_content=tdesign-blazor/TDesignBlazor&utm_campaign=Badge_Coverage)
+![Version](https://img.shields.io/github/v/release/tdesign-blazor/TDesignBlazor)
 
 ## ✨ 特性
 
@@ -83,15 +83,15 @@
 
 ## :pencil: 参与贡献
 * 如果你有意向参与贡献，请先阅读[贡献指南](./Contributing.md)
-* 有任何问题，欢迎通过 [Github issues](https://github.com/AchievedOwner/TDesignBlazor/issues) 反馈
-* 提供目前进度的实时[看板](https://github.com/users/AchievedOwner/projects/4)
+* 有任何问题，欢迎通过 [Github issues](https://github.com/tdesign-blazor/TDesignBlazor/issues) 反馈
+* 提供目前进度的实时[看板](https://github.com/orgs/tdesign-blazor/projects/2)
 
 **我们的贡献者**
 非常感谢每一个项目贡献者的辛勤付出
 
 <div>
-    <a href="https://github.com/AchievedOwner/TDesignBlazor/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=AchievedOwner/TDesignBlazor" />
+    <a href="https://github.com/tdesign-blazor/TDesignBlazor/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=tdesign-blazor/TDesignBlazor" />
     </a>
 </div>
 
@@ -100,7 +100,7 @@
 * 作者邮箱：[william-zzh@outlook.com]
 * 作者微信：playermaker（请注明来源）
 * 官方微信：TDesignBlazor 官方群
-* 交流论坛：[https://github.com/AchievedOwner/TDesignBlazor/discussions](https://github.com/AchievedOwner/TDesignBlazor/discussions)
+* 交流论坛：[https://github.com/tdesign-blazor/TDesignBlazor/discussions](https://github.com/tdesign-blazor/TDesignBlazor/discussions)
 
 > 我们鼓励有经验的用户帮助新手，并会授予勋章。
 
@@ -108,9 +108,9 @@
 本项目采用了贡献者契约定义的行为准则，以澄清我们社区的预期行为。请仔细阅读[行为准则](./CodeOfConduct.md)。
 
 ## :newspaper: 许可证（License）
-[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/AchievedOwner/TDesignBlazor/blob/master/LICENSE.md)
+[![TDesign](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/tdesign-blazor/TDesignBlazor/blob/master/LICENSE.md)
 
 ## 🔗 相关链接
 - [Blazor 官方文档](https://docs.microsoft.com/zh-cn/aspnet/core/blazor/?WT.mc_id=DT-MVP-5003987)
 - [MS Learn 平台 Blazor 教程](https://docs.microsoft.com/zh-cn/learn/modules/build-blazor-webassembly-visual-studio-code/?WT.mc_id=DT-MVP-5003987)
-- [ComponentBuilder 自动化组件框架](https://github.com/AchievedOwner/ComponentBuilder)
+- [ComponentBuilder 自动化组件框架](https://github.com/tdesign-blazor/ComponentBuilder)

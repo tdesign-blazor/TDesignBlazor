@@ -1859,6 +1859,11 @@
             导航菜单的项。
             </summary>
         </member>
+        <member name="P:TDesign.TMenuItem.Match">
+            <summary>
+            菜单高亮的匹配方式。
+            </summary>
+        </member>
         <member name="P:TDesign.TMenuItem.Disabled">
             <summary>
             禁用状态。
@@ -1884,9 +1889,6 @@
             选中状态。若为 <c>false</c> 则根据导航自动判断。
             </summary>
         </member>
-        <member name="P:TDesign.TMenuItem.ChildContent">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TMenuItem.OnAfterRenderAsync(System.Boolean)">
             <inheritdoc/>
         </member>
@@ -1897,6 +1899,9 @@
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TMenuItem.BuildAttributes(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TDesign.TMenuItem.DisposeComponentResources">
             <inheritdoc/>
         </member>
         <member name="M:TDesign.TMenuItem.NavigateTo">
