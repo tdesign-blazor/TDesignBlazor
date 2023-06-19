@@ -127,10 +127,10 @@
     "@babel/runtime" "^7.16.3"
     "classnames" "^2.2.6"
 
-"tdesign-vue@^1.0.8":
-  "integrity" "sha512-7LnOwa7K5KXwMBYCl12o77X5vxp/s2gucs+Z28y1nxsAUxv1ph3CKng92p1CpRjOhcatLtkr9M/WK5pCih673A=="
-  "resolved" "https://registry.npmjs.org/tdesign-vue/-/tdesign-vue-1.0.8.tgz"
-  "version" "1.0.8"
+"tdesign-vue@^1.4.0":
+  "integrity" "sha512-OHQb3Pq58POBZZcRqKFmMbZvWMGFyQvfqn1L5RgJNblUcThiQJjEhJrLehMSJnDm14gl65WdIx8DWXFiU9X0Aw=="
+  "resolved" "https://registry.npmjs.org/tdesign-vue/-/tdesign-vue-1.4.0.tgz"
+  "version" "1.4.0"
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@popperjs/core" "^2.4.0"
