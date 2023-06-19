@@ -58,16 +58,18 @@ public class TButton : TDesignComponentBase, IHasChildContent
     [Parameter][CssClass("t-is-loading")] public bool Loading { get; set; }
 
     /// <summary>
+    /// 图标的名称。
+    /// </summary>
+    [Parameter]public object? Icon { get; set; }
+    /// <summary>
     /// <inheritdoc/>
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="sequence"></param>
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, "span", content =>
-        {
-            base.AddContent(content, sequence);
-        }, new { @class = "t-button__text" });
+        builder.Component<TIcon>(Icon is not null).Attribute(m => m.Name, Icon).Close();
+        builder.Span("t-button__text",ChildContent is not null).Content(ChildContent).Close();
     }
 }
 

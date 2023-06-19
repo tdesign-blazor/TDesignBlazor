@@ -3545,6 +3545,11 @@
             加载状态。
             </summary>
         </member>
+        <member name="P:TDesign.TButton.Icon">
+            <summary>
+            图标的名称。
+            </summary>
+        </member>
         <member name="M:TDesign.TButton.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             <inheritdoc/>

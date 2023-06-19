@@ -1,5 +1,5 @@
 ﻿@page "/components/button"
-<LayoutContent AnchorItems="@(new[]{"示例","幽灵按钮","Block 按钮","不同颜色主题按钮","不同状态的按钮","不同尺寸的按钮","不同形状的按钮","OnClick 点击事件","API"})">
+<LayoutContent AnchorItems="@(new[]{"示例","幽灵按钮","图标按钮","Block 按钮","不同颜色主题按钮","不同状态的按钮","不同尺寸的按钮","不同形状的按钮","OnClick 点击事件","API"})">
 <PageHeader Title="Button 按钮">
     按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。
 </PageHeader>
@@ -88,6 +88,37 @@
 <TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Outline"">边框按钮</TButton>
 <TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
 <TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Text"">文本按钮</TButton>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="图标按钮">
+    <Description>
+            图标按钮由图标+文字或图标构成。通过图标可增强识别性，以便直观理解。
+    </Description>
+        <RunContent>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Icon="IconName.Add" Theme="Theme.Primary">新建</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Icon="IconName.CloudUpload" Varient="ButtonVarient.Outline">上传</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Icon="IconName.Add" Theme="Theme.Primary"></TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Icon="IconName.Tools"></TButton>
+                </TSpaceItem>
+            </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TButton Icon=""IconName.Add"" Theme=""Theme.Primary"">新建</TButton>
+<TButton Icon=""IconName.CloudUpload"" Varient=""ButtonVarient.Outline"">上传</TButton>
+<TButton Icon=""IconName.Add"" Theme=""Theme.Primary""></TButton>
+<TButton Icon=""IconName.Tools""></TButton>
 ```
 ")
     </CodeContent>
@@ -183,19 +214,18 @@
 ")
     </CodeContent>
 </Example>
-
 <Example Title="不同状态的按钮">
     <Description>
         提供加载、禁用两种状态。
     </Description>
     <RunContent>
-        <TButton TLoading>加载中...</TButton>
+        <TButton Loading>加载中...</TButton>
         <TButton Disabled>禁止状态</TButton>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TButton TLoading>加载中...</TButton>
+<TButton Loading>加载中...</TButton>
 <TButton Disabled>禁止状态</TButton>
 ``` 
 ")
@@ -222,18 +252,124 @@
 <Example Title="不同形状的按钮">
     <Description>提供长方形、正方形、圆角长方形、圆形四种形状。</Description>
     <RunContent>
-        <TButton>长方形</TButton>
-        <TButton Shape="ButtonShape.Square">方形</TButton>
-        <TButton Shape="ButtonShape.Circle">圆形</TButton>
-        <TButton Shape="ButtonShape.Round">圆角长方形</TButton>
+        <TSpace Vertical>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Primary">填充按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Primary" Icon="IconName.Calendar" Shape="ButtonShape.Square" />
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Primary" Shape="ButtonShape.Round">填充按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Theme="Theme.Primary" Icon="IconName.Calendar" Shape="ButtonShape.Circle" />
+                </TSpaceItem>
+            </TSpace>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Outline">描边按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Outline" Icon="IconName.Calendar" Shape="ButtonShape.Square" />
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Outline" Shape="ButtonShape.Round">描边按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Outline" Icon="IconName.Calendar" Shape="ButtonShape.Circle" />
+                </TSpaceItem>
+            </TSpace>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Dashed">虚框按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Dashed" Icon="IconName.Calendar" Shape="ButtonShape.Square" />
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Dashed" Shape="ButtonShape.Round">虚框按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Dashed" Icon="IconName.Calendar" Shape="ButtonShape.Circle" />
+                </TSpaceItem>
+            </TSpace>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Text">文字按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Text" Icon="IconName.Calendar" Shape="ButtonShape.Square" />
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Text" Shape="ButtonShape.Round">文字按钮</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton Varient="ButtonVarient.Text" Icon="IconName.Calendar" Shape="ButtonShape.Circle" />
+                </TSpaceItem>
+                </TSpace>
+            </TSpace>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TButton>长方形</TButton>
-<TButton Shape=""ButtonShape.Square"">方形</TButton>
-<TButton Shape=""ButtonShape.Circle"">圆形</TButton>
-<TButton Shape=""ButtonShape.Round"">圆角长方形</TButton>
+<TSpace>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"">填充按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Square"" />
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"" Shape=""ButtonShape.Round"">填充按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Theme=""Theme.Primary"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Circle"" />
+    </TSpaceItem>
+</TSpace>
+<TSpace>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Outline"">描边按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Outline"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Square"" />
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Outline"" Shape=""ButtonShape.Round"">描边按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Outline"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Circle"" />
+    </TSpaceItem>
+</TSpace>
+<TSpace>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Dashed"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Square"" />
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Dashed"" Shape=""ButtonShape.Round"">虚框按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Dashed"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Circle"" />
+    </TSpaceItem>
+</TSpace>
+<TSpace>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Text"">文字按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Text"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Square"" />
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Text"" Shape=""ButtonShape.Round"">文字按钮</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton Varient=""ButtonVarient.Text"" Icon=""IconName.Calendar"" Shape=""ButtonShape.Circle"" />
+    </TSpaceItem>
+</TSpace>
 ```
 ")
     </CodeContent>
