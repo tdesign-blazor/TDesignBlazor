@@ -41,42 +41,28 @@
 
 **如果你还没有成为贡献者，需要通过联系方式通知仓库所有者将你添加到贡献者名单中**
 
+项目采用采用 `dev/main` 的形式进行分支开发：
 
-项目采用【主干发布，分支开发】的方式，即 **master** 作为主干分支，并且每个版本以 **tag** 的形式打在该分支上。
+- `dev/version`：作为正在开发的版本
+- `main`：最新的稳定版本，并且历史版本将用 `tag` 作为标记
+
+分支开发时，以 issue 号作为命名：
+- `feature/{任务号}`：新功能
+- `bugfix/{任务号}`：修复的bug
+- `hotfix/{任务号}`：紧急修复的问题
+
 
 **分支开发流程**
-1. 拉取 master 分支获取最新代码
-2. 基于 master 分支创建开发分支
-3. 提交 Pull Request 到 master 分支
+1. 拉取指定分支获取最新代码
+2. 基于指定的分支创建开发分支
+3. 提交 Pull Request 到指定分支
 4. 等待代码评审或修改提出的评审
 5. 达到完工标准（DoD)后合并到主分支
-
-**开发分支命名**
-开发分支将采用二级域格式，即 `[type]/[scope]/[分支名称]` 的格式：
-
-* type 分支类型：
-  * feature 功能分支：新功能、更新、优化等
-  * bugfix 缺陷分支：仅适用于修复 BUG
-* scope 范围：
-  * component：组件
-  * doc：文档
-  * test：测试
-  * refactor：重构
-  * ci：持续集成
-  * extension：扩展
-  * other：其他
-* 分支名称：使用简短且和本次提交的内容相关的短语，多个单词使用下划线，例如 `update_button_theme`
-
-举例：
-* 和组件相关的功能分支：`feature/component/update_progress_namespacing`
-* 重构文档：`feature/doc/add_button_doc`
-* 某个组件的 bug 修复：`bugfix/component/fix_menu_dropdown_has_empty`
-* 新增单元测试：`feature/test/add_button_ut`
 
 > 一个分支只做一件事情，请不要将多件事情同时在一个分支里做。
 
 ### 实时看板
-我们采用[实时看板](https://github.com/users/tdesign-blazor/projects/2/)展示最直观的进度和工作量，并公开给所有用户。
+我们采用[实时看板](https://github.com/users/tdesign-blazor/projects/4/)展示最直观的进度和工作量，并公开给所有用户。
 
 当贡献者领取了 Issue 后，请在适当的时候更新任务的实施状态：
 
