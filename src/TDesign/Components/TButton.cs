@@ -5,18 +5,13 @@ namespace TDesign;
 /// <summary>
 /// 表示用于开启一个闭环的操作任务的按钮。
 /// </summary>
-[HtmlTag("button")]
 [CssClass("t-button")]
-public class TButton : TDesignComponentBase, IHasChildContent
+public class TButton : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
     [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 设置按钮的 HTML 类型。默认时 <see cref="ButtonHtmlType.Button"/> 类型。
@@ -58,9 +53,18 @@ public class TButton : TDesignComponentBase, IHasChildContent
     [Parameter][CssClass("t-is-loading")] public bool Loading { get; set; }
 
     /// <summary>
+    /// 设置按钮风格的 HTML 元素名称。默认是 button。
+    /// </summary>
+    [Parameter] public string? TagName { get; set; } = "button";
+
+    /// <summary>
     /// 图标的名称。
     /// </summary>
     [Parameter]public object? Icon { get; set; }
+
+    /// <inheritdoc/>
+    public override string GetTagName() => TagName;
+
     /// <summary>
     /// <inheritdoc/>
     /// </summary>

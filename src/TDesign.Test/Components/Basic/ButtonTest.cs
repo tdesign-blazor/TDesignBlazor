@@ -88,9 +88,16 @@ public class ButtonTest : TestBase<TButton>
     [Fact(DisplayName ="按钮 - 有图标和文字一起适配")]
     public void Test_Icon_With_Text()
     {
-        RenderComponent(m => m.Add(p => p.Icon, IconName.Add)).MarkupMatches(builder =>
-        {
-            builder.Component<TButton>().Content(content => content.Component<TIcon>().Attribute(m => m.Name, IconName.Add).Close()).Close();
-        });
+        var button= RenderComponent(m => m.Add(p => p.Icon, IconName.Add));
+        button.FindComponent<TIcon>().MarkupMatches(b => b.Component<TIcon>().Attribute(m => m.Name, IconName.Add).Close());
+    }
+
+    [Theory(DisplayName ="按钮 - 不同的 HTML 标记渲染按钮")]
+    [InlineData(new object[] { "div"})]
+    [InlineData(new object[] { "a" })]
+    [InlineData(new object[] { "span" })]
+    public void Test_Button_With_TagName(string tag)
+    {
+        RenderComponent(m => m.Add(p => p.TagName, tag)).Should().HaveTag(tag);
     }
 }
