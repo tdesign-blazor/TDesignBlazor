@@ -1,5 +1,5 @@
 ﻿@page "/components/button"
-<LayoutContent AnchorItems="@(new[]{"示例","幽灵按钮","图标按钮","Block 按钮","不同颜色主题按钮","不同状态的按钮","不同尺寸的按钮","不同形状的按钮","OnClick 点击事件","API"})">
+<LayoutContent AnchorItems="@(new[]{"示例","幽灵按钮","图标按钮","Block 按钮","不同颜色主题按钮","不同状态的按钮","不同尺寸的按钮","不同形状的按钮","OnClick 点击事件","自定义渲染元素","API"})">
 <PageHeader Title="Button 按钮">
     按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。
 </PageHeader>
@@ -15,9 +15,9 @@
         @Code.Create(@"
  ```cshtml-razor
 <TButton>普通按钮</TButton>
-<TButton Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Varient=""ButtonVarient.Text"">文本按钮</TButton>
 ```
 ")
     </CodeContent>
@@ -65,29 +65,29 @@
         @Code.Create(@"
 ```cshtml-razor
 <TButton Ghost>普通按钮</TButton>
-<TButton Ghost Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Ghost Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Ghost Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Ghost Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Ghost Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Ghost Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Ghost Theme=""Theme.Primary"">普通按钮</TButton>
-<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Primary"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Ghost Theme=""Theme.Success"">普通按钮</TButton>
-<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Success"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Ghost Theme=""Theme.Warning"">普通按钮</TButton>
-<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Warning"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Ghost Theme=""Theme.Danger"">普通按钮</TButton>
-<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Ghost Theme=""Theme.Danger"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 ```
 ")
     </CodeContent>
@@ -142,9 +142,9 @@
         @Code.Create(@"
 ```cshtml-razor
 <TButton Block>普通按钮</TButton>
-<TButton Varient=""ButtonType.Outline"" Block>边框按钮</TButton>
-<TButton Varient=""ButtonType.Dashed"" Block>虚框按钮</TButton>
-<TButton Varient=""ButtonType.Text"" Block>文本按钮</TButton>
+<TButton Varient=""ButtonVarient.Outline"" Block>边框按钮</TButton>
+<TButton Varient=""ButtonVarient.Dashed"" Block>虚框按钮</TButton>
+<TButton Varient=""ButtonVarient.Text"" Block>文本按钮</TButton>
 ```
 ")
     </CodeContent>
@@ -187,29 +187,29 @@
         @Code.Create(@"
 ```cshtml-razor
 <TButton>普通按钮</TButton>
-<TButton Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Theme=""Theme.Primary"">普通按钮</TButton>
-<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Theme=""Theme.Primary"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Primary"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Theme=""Theme.Success"">普通按钮</TButton>
-<TButton Theme=""Theme.Success"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Theme=""Theme.Success"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Theme=""Theme.Success"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Success"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Theme=""Theme.Warning"">普通按钮</TButton>
-<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Theme=""Theme.Warning"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Warning"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 
 <TButton Theme=""Theme.Danger"">普通按钮</TButton>
-<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Outline"">边框按钮</TButton>
-<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Dashed"">虚框按钮</TButton>
-<TButton Theme=""Theme.Danger"" Varient=""ButtonType.Text"">文本按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonVarient.Outline"">边框按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonVarient.Dashed"">虚框按钮</TButton>
+<TButton Theme=""Theme.Danger"" Varient=""ButtonVarient.Text"">文本按钮</TButton>
 ```
 ")
     </CodeContent>
@@ -383,6 +383,39 @@
         @Code.Create(@"
 ```cshtml-razor
 <TButton OnClick=""@(e=>JS.InvokeVoidAsync(""alert"",""按钮被点击""))"">点击我</TButton>
+```
+")
+    </CodeContent>
+</Example>
+    <Example Title="自定义渲染元素">
+        <Description>支持自定义渲染元素</Description>
+        <RunContent>
+            <TSpace>
+                <TSpaceItem>
+                    <TButton TagName="div" Theme="Theme.Primary">div</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton TagName="a" Theme="Theme.Primary">a</TButton>
+                </TSpaceItem>
+                <TSpaceItem>
+                    <TButton TagName="span" Theme="Theme.Primary">span</TButton>
+                </TSpaceItem>
+            </TSpace>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TSpace>
+    <TSpaceItem>
+        <TButton TagName=""div"" Theme=""Theme.Primary"">div</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton TagName=""a"" Theme=""Theme.Primary"">a</TButton>
+    </TSpaceItem>
+    <TSpaceItem>
+        <TButton TagName=""span"" Theme=""Theme.Primary"">span</TButton>
+    </TSpaceItem>
+</TSpace>
 ```
 ")
     </CodeContent>

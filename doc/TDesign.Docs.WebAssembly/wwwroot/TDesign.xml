@@ -3495,11 +3495,6 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:TDesign.TButton.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TButton.HtmlType">
             <summary>
             设置按钮的 HTML 类型。默认时 <see cref="F:TDesign.ButtonHtmlType.Button"/> 类型。
@@ -3545,10 +3540,18 @@
             加载状态。
             </summary>
         </member>
+        <member name="P:TDesign.TButton.TagName">
+            <summary>
+            设置按钮风格的 HTML 元素名称。默认是 button。
+            </summary>
+        </member>
         <member name="P:TDesign.TButton.Icon">
             <summary>
             图标的名称。
             </summary>
+        </member>
+        <member name="M:TDesign.TButton.GetTagName">
+            <inheritdoc/>
         </member>
         <member name="M:TDesign.TButton.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
