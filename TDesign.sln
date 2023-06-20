@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		common.props = common.props
 		Contributing.md = Contributing.md
 		readme.md = readme.md
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDesign.Test", "src\TDesign.Test\TDesign.Test.csproj", "{231C5268-E45C-4465-81A4-7A84B1DAC589}"
@@ -28,8 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{FE
 		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 		.github\workflows\deploy-webassembl-artifact.yml = .github\workflows\deploy-webassembl-artifact.yml
 		.github\workflows\git-pages-ci.yml = .github\workflows\git-pages-ci.yml
+		.github\workflows\manual-nuget-pack.yml = .github\workflows\manual-nuget-pack.yml
 		.github\workflows\pull-request.yml = .github\workflows\pull-request.yml
-		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDesign.Docs.Shared", "doc\TDesign.Docs.Shared\TDesign.Docs.Shared.csproj", "{69648E0A-6AC9-41D7-A05D-B5F23834DF74}"
