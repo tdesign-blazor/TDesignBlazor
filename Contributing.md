@@ -41,15 +41,17 @@
 
 **如果你还没有成为贡献者，需要通过联系方式通知仓库所有者将你添加到贡献者名单中**
 
-项目采用采用 `dev/main` 的形式进行分支开发：
+项目采用采用【分支开发，主干发布】的模式进行开发：
 
-- `dev/version`：作为正在开发的版本
 - `main`：最新的稳定版本，并且历史版本将用 `tag` 作为标记
+- `release/version`：作为发布后的稳定版本
 
 分支开发时，以 issue 号作为命名：
 - `feature/{任务号}`：新功能
 - `bugfix/{任务号}`：修复的bug
 - `hotfix/{任务号}`：紧急修复的问题
+
+> 没有 Issue 号的，请使用合适的分支名称，参照动宾短语的语法
 
 
 **分支开发流程**
@@ -110,7 +112,7 @@
 
 ## 组件开发规范
 * 组件名称要以 **“T”** 字母作为开头，例如 `TButton`、`TTable`、`TTab`、`TInputText` 等，以最大限度避免与其他组件的命名出现冲突（项目中可能会有多个组件框架出现）
-  > 如何判断是组件类？组件类必须继承 `TDesignComponentBase` 以及会以 `TDesignComponentBase` 结尾的组件基类。
+  > 如何判断是组件类？组件类必须继承 `TDesignComponentBase` 或以 `TDesign...ComponentBase` 命名的组件基类。
 * 可输入组件要以 `Input` 开头，例如 `TInputText`、`TInputCheckBox`
 * 分组或容器组件以 `Group` 或 `Container` 作为后缀命名，如 `TAvatarGroup`、`TInputGroup`
 * 组件的参数名称，不用与官方保持一致，命名规范参照开发语言规范即可
