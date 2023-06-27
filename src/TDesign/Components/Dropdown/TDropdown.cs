@@ -1,20 +1,21 @@
-﻿using TDesign.Abstractions;
-
-namespace TDesign;
+﻿namespace TDesign;
 
 /// <summary>
 /// 下拉菜单。用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
 /// </summary>
-[ParentComponent]
-public class Dropdown : TDesignChildContentComponentBase
+public class TDropdown : TDesignChildContentComponentBase
 {
+    /// <summary>
+    /// 设置下拉菜单的选项集合。
+    /// </summary>
+    [Parameter][EditorRequired] public IEnumerable<DropdownOption> Options { get; set; } = Enumerable.Empty<DropdownOption>();
     /// <summary>
     /// 触发下拉菜单的模式。默认是 <see cref="PopupTrigger.Click"/> 模式。
     /// </summary>
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Click;
 
     /// <summary>
-    /// 文字对齐方向。
+    /// 下拉菜单选项中文字的对齐方向。
     /// </summary>
     [Parameter] public DropdownDirection Direction { get; set; } = DropdownDirection.Right;
 
@@ -23,10 +24,6 @@ public class Dropdown : TDesignChildContentComponentBase
     /// </summary>
     [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Bottom;
 
-    /// <summary>
-    /// 设置下拉菜单的选项集合。
-    /// </summary>
-    [Parameter][EditorRequired] public IEnumerable<DropdownOption> Options { get; set; } = Enumerable.Empty<DropdownOption>();
 
     /// <summary>
     /// 下拉菜单项的最大高度。单位 px，默认 300。

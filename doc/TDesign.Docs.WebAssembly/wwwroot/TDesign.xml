@@ -785,69 +785,6 @@
         <member name="M:TDesign.Templates.MessageDialogTemplate.BuildFooter">
             <inheritdoc/>
         </member>
-        <member name="T:TDesign.Dropdown">
-            <summary>
-            下拉菜单。用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.Trigger">
-            <summary>
-            触发下拉菜单的模式。默认是 <see cref="F:TDesign.PopupTrigger.Click"/> 模式。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.Direction">
-            <summary>
-            文字对齐方向。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.Placement">
-            <summary>
-            下拉菜单层展开的方向。默认是 <see cref="F:TDesign.PopupPlacement.Bottom"/>。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.Options">
-            <summary>
-            设置下拉菜单的选项集合。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.Height">
-            <summary>
-            下拉菜单项的最大高度。单位 px，默认 300。
-            </summary>
-        </member>
-        <member name="P:TDesign.Dropdown.OnOptionSelected">
-            <summary>
-            设置当菜单选项被点击选中后的回调方法。
-            </summary>
-        </member>
-        <member name="M:TDesign.Dropdown.SelectOption(TDesign.DropdownOption)">
-            <summary>
-            选中指定的菜单选项。
-            </summary>
-            <param name="option">要选中的选项。</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="option"/> 是 null。</exception>
-        </member>
-        <member name="M:TDesign.Dropdown.ResetSelectedOptions(System.Collections.Generic.IEnumerable{TDesign.DropdownOption})">
-            <summary>
-            重置所有的选中项。
-            </summary>
-            <param name="options"></param>
-        </member>
-        <member name="T:TDesign.DropdownDirection">
-            <summary>
-            下拉菜单项的文字方向。
-            </summary>
-        </member>
-        <member name="F:TDesign.DropdownDirection.Left">
-            <summary>
-            偏左。
-            </summary>
-        </member>
-        <member name="F:TDesign.DropdownDirection.Right">
-            <summary>
-            偏右。
-            </summary>
-        </member>
         <member name="T:TDesign.DropdownOption">
             <summary>
             定义下拉菜单的选项
@@ -891,6 +828,69 @@
         <member name="P:TDesign.DropdownOption.Options">
             <summary>
             子选项的集合。
+            </summary>
+        </member>
+        <member name="T:TDesign.TDropdown">
+            <summary>
+            下拉菜单。用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.Options">
+            <summary>
+            设置下拉菜单的选项集合。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.Trigger">
+            <summary>
+            触发下拉菜单的模式。默认是 <see cref="F:TDesign.PopupTrigger.Click"/> 模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.Direction">
+            <summary>
+            下拉菜单选项中文字的对齐方向。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.Placement">
+            <summary>
+            下拉菜单层展开的方向。默认是 <see cref="F:TDesign.PopupPlacement.Bottom"/>。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.Height">
+            <summary>
+            下拉菜单项的最大高度。单位 px，默认 300。
+            </summary>
+        </member>
+        <member name="P:TDesign.TDropdown.OnOptionSelected">
+            <summary>
+            设置当菜单选项被点击选中后的回调方法。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDropdown.SelectOption(TDesign.DropdownOption)">
+            <summary>
+            选中指定的菜单选项。
+            </summary>
+            <param name="option">要选中的选项。</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="option"/> 是 null。</exception>
+        </member>
+        <member name="M:TDesign.TDropdown.ResetSelectedOptions(System.Collections.Generic.IEnumerable{TDesign.DropdownOption})">
+            <summary>
+            重置所有的选中项。
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="T:TDesign.DropdownDirection">
+            <summary>
+            下拉菜单项的文字方向。
+            </summary>
+        </member>
+        <member name="F:TDesign.DropdownDirection.Left">
+            <summary>
+            偏左。
+            </summary>
+        </member>
+        <member name="F:TDesign.DropdownDirection.Right">
+            <summary>
+            偏右。
             </summary>
         </member>
         <member name="T:TDesign.TDesignInputComonentBase`1">

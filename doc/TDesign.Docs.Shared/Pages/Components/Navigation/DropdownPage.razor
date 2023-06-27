@@ -1,26 +1,26 @@
 ﻿@page "/components/dropdown"
 
-<PageHeader Title="Dropdown 下拉菜单">
+<PageHeader Title="TDropdown 下拉菜单">
     用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
 </PageHeader>
 
 <LayoutContent AnchorItems="@(new[]{"示例","文字下拉菜单","带分割线下拉菜单","带禁用操作项的下拉菜单","自定义主题的下拉菜单",
-"带图标的下拉菜单","多层下拉菜单","OnOptionSelected 事件"})">
+"带图标的下拉菜单","多层下拉菜单","OnOptionSelected 事件","API"})">
     <Example Title="示例">
     <Description>
             使用 <code>DropdownOption</code> 定义菜单的项。
     </Description>
         <RunContent>
-            <Dropdown Options="DemoOptions">
+            <TDropdown Options="DemoOptions">
                 <TButton Theme="Theme.Primary">更多...</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""DemoOptions"">
+<TDropdown Options=""DemoOptions"">
     <TButton Theme=""Theme.Primary"">更多...</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
@@ -39,16 +39,16 @@
             文字按钮触发下拉菜单。常用于空间极度受限的收纳操作场景，一般用于表格内详情操作的收纳。
     </Description>
         <RunContent>
-            <Dropdown Options="DemoOptions">
+            <TDropdown Options="DemoOptions">
                 <TButton Varient="ButtonVarient.Text">更多...</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""DemoOptions"">
+<TDropdown Options=""DemoOptions"">
     <TButton Varient=""ButtonVarient.Text"">更多...</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
@@ -67,16 +67,16 @@
             通过分割线区分不同的下拉菜单操作。常用于需要区分不同操作结果的场景。
     </Description>
         <RunContent>
-            <Dropdown Options="DividerOptions">
+            <TDropdown Options="DividerOptions">
                 <TButton Theme="Theme.Primary">下拉菜单</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""DividerOptions"">
+<TDropdown Options=""DividerOptions"">
     <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> DividerOptions = new List<DropdownOption>
@@ -96,16 +96,16 @@
             下拉菜单的操作项可以设置禁用。常用于禁用部分操作项的场景。
     </Description>
         <RunContent>
-            <Dropdown Options="DisabledOptions">
+            <TDropdown Options="DisabledOptions">
                 <TButton Theme="Theme.Primary">下拉菜单</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""DisabledOptions"">
+<TDropdown Options=""DisabledOptions"">
     <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> DisabledOptions = new List<DropdownOption>
@@ -125,16 +125,16 @@
             下拉菜单的菜单项都支持自定义主题，根据具体场景使用。
     </Description>
         <RunContent>
-            <Dropdown Options="ThemeOptions">
+            <TDropdown Options="ThemeOptions">
                 <TButton Theme="Theme.Primary">下拉菜单</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""ColorOptions"">
+<TDropdown Options=""ColorOptions"">
     <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> ColorOptions = new List<DropdownOption>
@@ -154,16 +154,16 @@
             下拉菜单支持配置菜单项的前置图标。
     </Description>
         <RunContent>
-            <Dropdown Options="IconOptions">
+            <TDropdown Options="IconOptions">
                 <TButton Theme="Theme.Primary">下拉菜单</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""IconOptions"">
+<TDropdown Options=""IconOptions"">
     <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
-</Dropdown>
+</TDropdown>
 
 @code {
     IEnumerable<DropdownOption> IconOptions = new List<DropdownOption>
@@ -180,16 +180,16 @@
 <Example Title="多层下拉菜单">
         <Description>带逻辑层级关系的操作下拉菜单。常用于需要收纳多层逻辑的操作场景。</Description>
     <RunContent>
-            <Dropdown Options="SubOptions">
+            <TDropdown Options="SubOptions">
                 <TButton Theme="Theme.Primary">下拉菜单</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""SubOptions"">
+<TDropdown Options=""SubOptions"">
     <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
-</Dropdown>
+</TDropdown>
 @code{
     IEnumerable<DropdownOption> SubOptions = new List<DropdownOption>
     {
@@ -263,16 +263,16 @@
             当菜单的项被选中后将触发 <code>OnOptionSelected</code> 事件，用户可以根据需要自行处理。
     </Description>
     <RunContent>
-            <Dropdown Options="DemoOptions" OnOptionSelected="SelectOption">
+            <TDropdown Options="DemoOptions" OnOptionSelected="SelectOption">
                 <TButton Theme="Theme.Primary">更多...</TButton>
-            </Dropdown>
+            </TDropdown>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<Dropdown Options=""DemoOptions"" OnOptionSelected=""SelectOption"">
+<TDropdown Options=""DemoOptions"" OnOptionSelected=""SelectOption"">
     <TButton Theme=""Theme.Primary"">更多...</TButton>
-</Dropdown>
+</TDropdown>
 @inject IJSRuntime JS
 @code{
     async void SelectOption(DropdownOption option)
@@ -292,7 +292,7 @@
 </Example>
 
 <div id="API"></div>
-<ComponentAPI Component="typeof(Dropdown)"></ComponentAPI>
+<ComponentAPI Component="typeof(TDropdown)"></ComponentAPI>
 </LayoutContent>
 @code {
     IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
