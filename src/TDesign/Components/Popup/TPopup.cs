@@ -48,6 +48,11 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
     /// <summary>
+    /// 设置弹出层内部的 CSS 类名称。
+    /// </summary>
+    [Parameter]public string? PopupContentCssClass { get; set; }
+
+    /// <summary>
     /// 获取一个布尔值，表示弹出框是否显示。
     /// </summary>
     public bool Visible { get; private set; }
@@ -74,7 +79,7 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
 
     /// <inheritdoc/>
     protected override void AddContent(RenderTreeBuilder builder, int sequence) 
-        => builder.Div("t-popup__content")
+        => builder.Div(HtmlHelper.Instance.Class().Append("t-popup__content").Append(PopupContentCssClass!,!string.IsNullOrEmpty(PopupContentCssClass)).ToString())
             .Class("t-popup__content--arrow", Arrow)
             .Content(inner =>
             {

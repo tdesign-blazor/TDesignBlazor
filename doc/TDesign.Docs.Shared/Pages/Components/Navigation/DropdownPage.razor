@@ -1,0 +1,405 @@
+﻿@page "/components/dropdown"
+
+<PageHeader Title="Dropdown 下拉菜单">
+    用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
+</PageHeader>
+
+<LayoutContent AnchorItems="@(new[]{"示例","文字下拉菜单","带分割线下拉菜单","带禁用操作项的下拉菜单","自定义主题的下拉菜单",
+"带图标的下拉菜单","多层下拉菜单","OnOptionSelected 事件"})">
+    <Example Title="示例">
+    <Description>
+            使用 <code>DropdownOption</code> 定义菜单的项。
+    </Description>
+        <RunContent>
+            <Dropdown Options="DemoOptions">
+                <TButton Theme="Theme.Primary">更多...</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""DemoOptions"">
+    <TButton Theme=""Theme.Primary"">更多...</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3 }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+    <Example Title="文字下拉菜单">
+    <Description>
+            文字按钮触发下拉菜单。常用于空间极度受限的收纳操作场景，一般用于表格内详情操作的收纳。
+    </Description>
+        <RunContent>
+            <Dropdown Options="DemoOptions">
+                <TButton Varient="ButtonVarient.Text">更多...</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""DemoOptions"">
+    <TButton Varient=""ButtonVarient.Text"">更多...</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3 }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带分割线下拉菜单">
+    <Description>
+            通过分割线区分不同的下拉菜单操作。常用于需要区分不同操作结果的场景。
+    </Description>
+        <RunContent>
+            <Dropdown Options="DividerOptions">
+                <TButton Theme="Theme.Primary">下拉菜单</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""DividerOptions"">
+    <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> DividerOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3, Divider = true },
+        new(){ Content = ""菜单4"", Value = 4 },
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带禁用操作项的下拉菜单">
+    <Description>
+            下拉菜单的操作项可以设置禁用。常用于禁用部分操作项的场景。
+    </Description>
+        <RunContent>
+            <Dropdown Options="DisabledOptions">
+                <TButton Theme="Theme.Primary">下拉菜单</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""DisabledOptions"">
+    <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> DisabledOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3, Disabled = true },
+        new(){ Content = ""菜单4"", Value = 4 },
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义主题的下拉菜单">
+    <Description>
+            下拉菜单的菜单项都支持自定义主题，根据具体场景使用。
+    </Description>
+        <RunContent>
+            <Dropdown Options="ThemeOptions">
+                <TButton Theme="Theme.Primary">下拉菜单</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""ColorOptions"">
+    <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> ColorOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3, Color = Color.Success },
+        new(){ Content = ""菜单4"", Value = 4, Color = Color.Error }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="带图标的下拉菜单">
+    <Description>
+            下拉菜单支持配置菜单项的前置图标。
+    </Description>
+        <RunContent>
+            <Dropdown Options="IconOptions">
+                <TButton Theme="Theme.Primary">下拉菜单</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""IconOptions"">
+    <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
+</Dropdown>
+
+@code {
+    IEnumerable<DropdownOption> IconOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1, PrefixIcon = IconName.Star },
+        new(){ Content = ""菜单2"", Value = 2, PrefixIcon = IconName.Attach },
+        new(){ Content = ""菜单3"", Value = 3, PrefixIcon = IconName.FilePdf }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="多层下拉菜单">
+        <Description>带逻辑层级关系的操作下拉菜单。常用于需要收纳多层逻辑的操作场景。</Description>
+    <RunContent>
+            <Dropdown Options="SubOptions">
+                <TButton Theme="Theme.Primary">下拉菜单</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""SubOptions"">
+    <TButton Theme=""Theme.Primary"">下拉菜单</TButton>
+</Dropdown>
+@code{
+    IEnumerable<DropdownOption> SubOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new()
+        { 
+            Content = ""菜单2"", 
+            Value = 2,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = ""子菜单2-1"", Value = ""2-1"" },
+                new() { Content = ""子菜单2-2"", Value = ""2-2"" },
+                new() { Content = ""子菜单2-3"", Value = ""2-3"" },
+            }
+        },
+        new(){ Content = ""菜单3"", Value = 3 },
+        new()
+        {
+            Content = ""菜单4"",
+            Value = 4,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = ""子菜单4-1"", Value = ""4-1"" },
+                new() { Content = ""子菜单4-2"", Value = ""4-2"" },
+                new() { Content = ""子菜单4-3"", Value = ""4-3"" },
+                new() { Content = ""子菜单4-4"", Value = ""4-4"" },
+                new() { Content = ""子菜单4-5"", Value = ""4-5"" },
+            }
+        },
+        new()
+        {
+            Content = ""菜单5"",
+            Value = 5,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = ""子菜单5-1"", Value = ""5-1"" },
+                new() { Content = ""子菜单5-2"", Value = ""5-2"" },
+            }
+        },
+        new(){ Content = ""菜单6"", Value = 6 },
+        new(){ Content = ""菜单7"", Value = 7 },
+        new()
+        {
+            Content = ""菜单8"",
+            Value = 8,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = ""子菜单8-1"", Value = ""8-1"" },
+                new() { Content = ""子菜单8-2"", Value = ""8-2"" },
+                new() { Content = ""子菜单8-3"", Value = ""8-3"" },
+                new() 
+                { 
+                    Content = ""子菜单8-4"", 
+                    Value = ""8-8"",
+                    Options = new List<DropdownOption>
+                    {
+                        new() { Content = ""子菜单8-8-1"", Value = ""8-8-1"" },
+                        new() { Content = ""子菜单8-8-2"", Value = ""8-8-2"" },
+                    }
+                },
+            }
+        }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="OnOptionSelected 选中事件">
+    <Description>
+            当菜单的项被选中后将触发 <code>OnOptionSelected</code> 事件，用户可以根据需要自行处理。
+    </Description>
+    <RunContent>
+            <Dropdown Options="DemoOptions" OnOptionSelected="SelectOption">
+                <TButton Theme="Theme.Primary">更多...</TButton>
+            </Dropdown>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<Dropdown Options=""DemoOptions"" OnOptionSelected=""SelectOption"">
+    <TButton Theme=""Theme.Primary"">更多...</TButton>
+</Dropdown>
+@inject IJSRuntime JS
+@code{
+    async void SelectOption(DropdownOption option)
+    {
+        await JS.InvokeVoidAsync(""alert"", $""选中了【{option.Content}(value:{option.Value})】"");
+    }
+    IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
+    {
+        new(){ Content = ""菜单1"", Value = 1 },
+        new(){ Content = ""菜单2"", Value = 2 },
+        new(){ Content = ""菜单3"", Value = 3 }
+    };
+}
+```
+")
+    </CodeContent>
+</Example>
+
+<div id="API"></div>
+<ComponentAPI Component="typeof(Dropdown)"></ComponentAPI>
+</LayoutContent>
+@code {
+    IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1 },
+        new(){ Content = "菜单2", Value = 2 },
+        new(){ Content = "菜单3", Value = 3 }
+    };
+
+
+    IEnumerable<DropdownOption> DividerOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1 },
+        new(){ Content = "菜单2", Value = 2 },
+        new(){ Content = "菜单3", Value = 3, Divider = true },
+        new(){ Content = "菜单4", Value = 4 },
+    };
+
+    IEnumerable<DropdownOption> DisabledOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1 },
+        new(){ Content = "菜单2", Value = 2 },
+        new(){ Content = "菜单3", Value = 3, Disabled = true },
+        new(){ Content = "菜单4", Value = 4 },
+    };
+
+    IEnumerable<DropdownOption> ThemeOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1 },
+        new(){ Content = "菜单2", Value = 2 },
+        new(){ Content = "菜单3", Value = 3, Color = Color.Success },
+        new(){ Content = "菜单4", Value = 4, Color = Color.Error }
+    };
+    IEnumerable<DropdownOption> IconOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1, PrefixIcon = IconName.Star },
+        new(){ Content = "菜单2", Value = 2, PrefixIcon = IconName.Attach },
+        new(){ Content = "菜单3", Value = 3, PrefixIcon = IconName.FilePdf }
+    };
+
+    IEnumerable<DropdownOption> SubOptions = new List<DropdownOption>
+    {
+        new(){ Content = "菜单1", Value = 1 },
+        new()
+        { 
+            Content = "菜单2", 
+            Value = 2,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = "子菜单2-1", Value = "2-1" },
+                new() { Content = "子菜单2-2", Value = "2-2" },
+                new() { Content = "子菜单2-3", Value = "2-3" },
+            }
+        },
+        new(){ Content = "菜单3", Value = 3 },
+        new()
+        {
+            Content = "菜单4",
+            Value = 4,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = "子菜单4-1", Value = "4-1" },
+                new() { Content = "子菜单4-2", Value = "4-2" },
+                new() { Content = "子菜单4-3", Value = "4-3" },
+                new() { Content = "子菜单4-4", Value = "4-4" },
+                new() { Content = "子菜单4-5", Value = "4-5" },
+            }
+        },
+        new()
+        {
+            Content = "菜单5",
+            Value = 5,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = "子菜单5-1", Value = "5-1" },
+                new() { Content = "子菜单5-2", Value = "5-2" },
+            }
+        },
+        new(){ Content = "菜单6", Value = 6 },
+        new(){ Content = "菜单7", Value = 7 },
+        new()
+        {
+            Content = "菜单8",
+            Value = 8,
+            Options = new List<DropdownOption>
+            {
+                new() { Content = "子菜单8-1", Value = "8-1" },
+                new() { Content = "子菜单8-2", Value = "8-2" },
+                new() { Content = "子菜单8-3", Value = "8-3" },
+                new() 
+                { 
+                    Content = "子菜单8-4", 
+                    Value = "8-8",
+                    Options = new List<DropdownOption>
+                    {
+                        new() { Content = "子菜单8-8-1", Value = "8-8-1" },
+                        new() { Content = "子菜单8-8-2", Value = "8-8-2" },
+                    }
+                },
+            }
+        }
+    };
+}
+@inject IJSRuntime JS
+@code{
+    async void SelectOption(DropdownOption option)
+    {
+        await JS.InvokeVoidAsync("alert", $"选中了【{option.Content}(value:{option.Value})】");
+    }
+}
