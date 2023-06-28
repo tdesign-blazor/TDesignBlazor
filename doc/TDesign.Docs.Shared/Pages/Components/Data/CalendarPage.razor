@@ -1,0 +1,20 @@
+﻿@page "/components/calendar"
+
+<PageHeader Title="Calendar 日历">
+    按照日历形式展示数据或日期的容器。
+</PageHeader>
+
+<LayoutContent AnchorItems="@(new[]{"示例"})">
+    <Example Title="事项日历面板">
+        <Description>在日期中可显示事项的日期显示容器。常用于有足够空间，且需要承载或显示事项信息时使用。</Description>
+    <RunContent>
+        <TCalendar Card/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+```
+")
+    </CodeContent>
+</Example>
+</LayoutContent>

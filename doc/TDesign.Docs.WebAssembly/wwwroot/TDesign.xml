@@ -3743,6 +3743,94 @@
             表示为 reset 重置按钮，可触发 form 的重置功能。
             </summary>
         </member>
+        <member name="T:TDesign.TCalendar">
+            <summary>
+            按照日历形式展示数据或日期的容器。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.Card">
+            <summary>
+            使用卡片模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.Mode">
+            <summary>
+            日历的模式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.ShowWeekend">
+            <summary>
+            是否显示周末。<see cref="F:TDesign.CalendarMode.Mounth"/> 有效。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.Year">
+            <summary>
+            日历呈现的年份。默认是当前年份。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.Month">
+            <summary>
+            日历呈现的月份。默认是当前月份。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.FiilWithZero">
+            <summary>
+            小于 10 的日期，是否使用 '0' 填充。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.FirstDayOfWeek">
+            <summary>
+            周几算第一天。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.DayOfWeekTextMapper">
+            <summary>
+            星期对应的文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.CurrentYear">
+            <summary>
+            当前年。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.CurrentMonth">
+            <summary>
+            当前月。
+            </summary>
+        </member>
+        <member name="M:TDesign.TCalendar.BuildCalendarHeader(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构建日历的头部。
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TCalendar.BuildCalendarBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构建日历的主体。
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TCalendar.BuildYearBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构建年的单元格和行
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:TDesign.CalendarMode">
+            <summary>
+            日历模式。
+            </summary>
+        </member>
+        <member name="F:TDesign.CalendarMode.Mounth">
+            <summary>
+            按月显示。
+            </summary>
+        </member>
+        <member name="F:TDesign.CalendarMode.Year">
+            <summary>
+            按年显示。
+            </summary>
+        </member>
         <member name="T:TDesign.TCard">
             <summary>
             卡片组件。
