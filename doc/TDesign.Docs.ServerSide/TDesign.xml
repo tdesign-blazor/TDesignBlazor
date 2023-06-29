@@ -3804,6 +3804,13 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="M:TDesign.TCalendar.IsSkipWeekend(System.DayOfWeek)">
+            <summary>
+            是否跳过周末
+            </summary>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
         <member name="M:TDesign.TCalendar.BuildCalendarBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建日历的主体。
@@ -3815,6 +3822,31 @@
             构建年的单元格和行
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TCalendar.BuildMonthBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <summary>
+            构建月视图。
+            </summary>
+            <remarks>
+            要计算日期。
+            </remarks>
+            <param name="builder"></param>
+        </member>
+        <member name="M:TDesign.TCalendar.ClosePrevRowAndBuildNewRow(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            关闭上一个 tr 并开始新的 tr。用于动态换行。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
+        <member name="M:TDesign.TCalendar.BuildBodyCell(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            构建单元格。
+            </summary>
+            <param name="builder"></param>
+            <param name="content"></param>
+            <param name="disabled"></param>
+            <param name="now"></param>
         </member>
         <member name="T:TDesign.CalendarMode">
             <summary>

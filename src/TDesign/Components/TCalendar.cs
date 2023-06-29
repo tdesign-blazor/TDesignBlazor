@@ -14,7 +14,7 @@ public class TCalendar : TDesignComponentBase
     /// <summary>
     /// 日历的模式。
     /// </summary>
-    [Parameter] public CalendarMode Mode { get; set; } = CalendarMode.Year;
+    [Parameter] public CalendarMode Mode { get; set; } = CalendarMode.Mounth;
 
     /// <summary>
     /// 是否显示周末。<see cref="CalendarMode.Mounth"/> 有效。
@@ -128,7 +128,7 @@ public class TCalendar : TDesignComponentBase
                         foreach ( var item in DayOfWeekList )
                         {
                             //不显示周末
-                            if ( !ShowWeekend && new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(item) )
+                            if ( IsSkipWeekend(item) )
                             {
                                 continue;
                             }
@@ -146,6 +146,13 @@ public class TCalendar : TDesignComponentBase
     }
 
     /// <summary>
+    /// 是否跳过周末
+    /// </summary>
+    /// <param name="day"></param>
+    /// <returns></returns>
+    bool IsSkipWeekend(DayOfWeek day) => !ShowWeekend && new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(day);
+
+    /// <summary>
     /// 构建日历的主体。
     /// </summary>
     /// <param name="builder"></param>
@@ -156,7 +163,7 @@ public class TCalendar : TDesignComponentBase
             {
                 if(Mode== CalendarMode.Mounth )
                 {
-
+                    BuildMonthBody(body);
                 }
                 else
                 {
@@ -179,16 +186,95 @@ public class TCalendar : TDesignComponentBase
         var sequence = 0;
         for ( int i = 1; i <= 12; i++ )
         {
-            builder.AddContent(sequence + 2, cell =>
-            {
-                BuildBodyCell(cell, $"{i} 月", now: CurrentYear == Year && CurrentMonth == i);
-            });
+            BuildBodyCell(builder, $"{i} 月", now: CurrentYear == Year && CurrentMonth == i);
             if ( i % 4 == 0 )
             {
                 sequence += 4 * i;
                 ClosePrevRowAndBuildNewRow(builder, sequence);
             }
         }
+        builder.CloseElement();
+    }
+
+    /// <summary>
+    /// 构建月视图。
+    /// </summary>
+    /// <remarks>
+    /// 要计算日期。
+    /// </remarks>
+    /// <param name="builder"></param>
+    void BuildMonthBody(RenderTreeBuilder builder)
+    {
+        builder.OpenElement(0, "tr");
+        builder.AddAttribute(1, "class", "t-calendar__table-body-row");
+
+        #region 构建上个月剩余的几天在当前这个月的日历
+        //当前年月的第一天
+        var firstDay = new DateTime(CurrentYear, CurrentMonth, 1);
+
+        var firstDayOfWeek = firstDay.DayOfWeek; //第一天所在周几
+        var firstDayOfWeekIndex = (int)firstDayOfWeek;
+
+        var findLastMonthDayIndex = DayOfWeekList.FindIndex(m => m == firstDayOfWeek);
+
+        var lastDays = firstDay.AddDays(-findLastMonthDayIndex);
+        for ( int i = 0; i < findLastMonthDayIndex; i++ )
+        {
+            var day = i + lastDays.Day;
+
+            var lastMonthDateTime = new DateTime(lastDays.Year, lastDays.Month, day);
+
+            if( IsSkipWeekend(lastMonthDateTime.DayOfWeek) )
+            {
+                continue;
+            }
+
+            BuildBodyCell(builder, day.ToString(), true);
+        }
+        #endregion
+
+        #region 构建这个月的日历
+        var daysOfThisMonth = DateTime.DaysInMonth(CurrentYear, CurrentMonth);//这个月有多少天
+        for ( int i = 0; i < daysOfThisMonth; i++ )
+        {
+            var day = i + 1;
+            var currentDateTime = new DateTime(CurrentYear, CurrentMonth, day);
+            if(IsSkipWeekend(currentDateTime.DayOfWeek) )
+            {
+                ClosePrevRowAndBuildNewRow(builder, i + 10);//跳过周末要换行
+                continue;
+            }
+
+            var today = DateTime.Today;
+            BuildBodyCell(builder, day.ToString(), false, today == currentDateTime);
+
+            if ( (i + firstDayOfWeekIndex)  % 7 == 0 )
+            {
+                ClosePrevRowAndBuildNewRow(builder, i + 10);
+            }
+        }
+        #endregion
+
+        #region 构建下个月的头几天到当前日历
+        var lastDateTime = new DateTime(CurrentYear, CurrentMonth, daysOfThisMonth);//本月最后一天
+        var lastDayOfWeek = lastDateTime.DayOfWeek;//最后一天是周几
+
+        var lastDayOfWeekIndex = DayOfWeekList.FindIndex(m => m == lastDayOfWeek);
+
+        var nextMonth = lastDateTime.AddDays(1);
+        for ( int i = 0; i <= (5 - lastDayOfWeekIndex); i++ )
+        {
+           var day=i + 1;
+            var nextMonthDateTime = new DateTime(nextMonth.Year, nextMonth.Month, day);
+            if ( IsSkipWeekend(nextMonthDateTime.DayOfWeek) )
+            {
+                continue;
+            }
+
+            BuildBodyCell(builder, day.ToString(), true);
+        }
+        #endregion
+
         builder.CloseElement();
     }
 
@@ -213,22 +299,25 @@ public class TCalendar : TDesignComponentBase
     /// <param name="now"></param>
     static void BuildBodyCell(RenderTreeBuilder builder,string content,bool disabled = false,bool now=default)
     {
-        builder.Div("t-calendar__table-body-cell")
-            .Class("t-is-disabled", disabled)
-            .Class("t-calendar__table-body-cell--now", now)
-            .Class("t-is-checked",now)
-            .Content(cell =>
-            {
-                cell.Div()
-                    .Style("display: flex; flex-direction: column; align-items: flex-end;")
-                    .Content(inner =>
-                    {
-                        inner.Div("t-calendar__table-body-cell-display").Content(content).Close();
-                        inner.Div("t-calendar__table-body-cell-content").Close();
-                    })
-                    .Close();
-            })
-            .Close();
+        builder.AddContent(0, tr =>
+        {
+            tr.Div("t-calendar__table-body-cell")
+                .Class("t-is-disabled", disabled)
+                .Class("t-calendar__table-body-cell--now", now)
+                .Class("t-is-checked", now)
+                .Content(cell =>
+                {
+                    cell.Div()
+                        .Style("display: flex; flex-direction: column; align-items: flex-end;")
+                        .Content(inner =>
+                        {
+                            inner.Div("t-calendar__table-body-cell-display").Content(content).Close();
+                            inner.Div("t-calendar__table-body-cell-content").Close();
+                        })
+                        .Close();
+                })
+                .Close();
+        });
     }
 }
 
