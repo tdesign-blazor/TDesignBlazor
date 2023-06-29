@@ -1,12 +1,18 @@
-﻿namespace TDesign;
+﻿using TDesign.Specifications;
+
+namespace TDesign;
 
 /// <summary>
 /// 按照日历形式展示数据或日期的容器。
 /// </summary>
 [CssClass("t-calendar")]
-public class TCalendar : TDesignComponentBase
+public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
 {
     #region Parameters
+    /// <summary>
+    /// 是否隐藏控制面板。
+    /// </summary>
+    [Parameter] public bool HideController { get; set; }
     /// <summary>
     /// 使用卡片模式。
     /// </summary>
@@ -14,7 +20,7 @@ public class TCalendar : TDesignComponentBase
     /// <summary>
     /// 日历的模式。
     /// </summary>
-    [Parameter] public CalendarMode Mode { get; set; } = CalendarMode.Mounth;
+    [Parameter] public CalendarMode Mode { get; set; } = CalendarMode.Month;
 
     /// <summary>
     /// 是否显示周末。<see cref="CalendarMode.Mounth"/> 有效。
@@ -36,6 +42,23 @@ public class TCalendar : TDesignComponentBase
     /// 周几算第一天。
     /// </summary>
     [Parameter] public DayOfWeek FirstDayOfWeek { get; set; } = DayOfWeek.Monday;
+    /// <summary>
+    /// 年月的开始范围。
+    /// </summary>
+    [Parameter]public DateTime? Start { get; set; }
+    /// <summary>
+    /// 年月的结束范围。
+    /// </summary>
+    [Parameter] public DateTime? End { get; set; }
+    /// <summary>
+    /// 设置标题。
+    /// </summary>
+    [Parameter] public string? TitleText { get; set; }
+    /// <summary>
+    /// 设置标题的任意代码片段。
+    /// </summary>
+    [Parameter] public RenderFragment? TitleContent { get; set; }
+
     #endregion
 
     #region Internal
@@ -73,6 +96,37 @@ public class TCalendar : TDesignComponentBase
     /// 当前月。
     /// </summary>
     int CurrentMonth { get; set; }
+
+    #endregion
+
+    #region Callback Function
+    /// <summary>
+    /// 切换月年模式。
+    /// </summary>
+    Task SwitchCalendarMode(CalendarMode mode)
+    {
+        Mode = mode;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// 切换周末是否显示。
+    /// </summary>
+    Task SwitchWeekend()
+    {
+        ShowWeekend = !ShowWeekend;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    Task ChangeDate(int year, int month)
+    {
+        CurrentYear = Year = year;
+        CurrentMonth = Month = month;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
     #endregion
 
     protected override void OnParametersSet()
@@ -81,6 +135,14 @@ public class TCalendar : TDesignComponentBase
 
         CurrentYear = Year;
         CurrentMonth = Month;
+
+        Start ??= new DateTime(CurrentYear - 10, 1, 1);
+        End ??= new DateTime(CurrentYear + 10, 12, 1);
+
+        if ( Start >= End )
+        {
+            throw new InvalidOperationException($"{nameof(Start)} 不能大于 {nameof(End)}");
+        }
 
         #region 调整第一天是周几的顺序
         var theFirstDayIndex = DayOfWeekList.FindIndex(m => m == FirstDayOfWeek);
@@ -92,6 +154,8 @@ public class TCalendar : TDesignComponentBase
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
+        BuildControl(builder);
+
         builder.Div("t-calendar__panel")
             .Class(Mode.GetCssClass("t-calendar__panel--"))
             .Content(BuildCalendarTable)
@@ -115,7 +179,7 @@ public class TCalendar : TDesignComponentBase
     /// <param name="builder"></param>
     void BuildCalendarHeader(RenderTreeBuilder builder)
     {
-        if(Mode!= CalendarMode.Mounth )
+        if(Mode!= CalendarMode.Month )
         {
             return;
         }
@@ -146,13 +210,6 @@ public class TCalendar : TDesignComponentBase
     }
 
     /// <summary>
-    /// 是否跳过周末
-    /// </summary>
-    /// <param name="day"></param>
-    /// <returns></returns>
-    bool IsSkipWeekend(DayOfWeek day) => !ShowWeekend && new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(day);
-
-    /// <summary>
     /// 构建日历的主体。
     /// </summary>
     /// <param name="builder"></param>
@@ -161,7 +218,7 @@ public class TCalendar : TDesignComponentBase
         builder.Element("tbody", "t-calendar__table-body")
             .Content(body =>
             {
-                if(Mode== CalendarMode.Mounth )
+                if(Mode== CalendarMode.Month )
                 {
                     BuildMonthBody(body);
                 }
@@ -246,7 +303,10 @@ public class TCalendar : TDesignComponentBase
             }
 
             var today = DateTime.Today;
-            BuildBodyCell(builder, day.ToString(), false, today == currentDateTime);
+
+            var completeDayString = FiilWithZero && day < 10 ? day.ToString().PadLeft(2, '0') : day.ToString();
+
+            BuildBodyCell(builder, completeDayString, false, today == currentDateTime);
 
             if ( (i + firstDayOfWeekIndex)  % 7 == 0 )
             {
@@ -278,16 +338,115 @@ public class TCalendar : TDesignComponentBase
         builder.CloseElement();
     }
 
-    /// <summary>
-    /// 关闭上一个 tr 并开始新的 tr。用于动态换行。
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="sequence"></param>
-    private static void ClosePrevRowAndBuildNewRow(RenderTreeBuilder builder, int sequence)
+    void BuildControl(RenderTreeBuilder builder)
     {
-        builder.CloseElement();
-        builder.OpenElement(sequence, "tr");
-        builder.AddAttribute(sequence + 1, "class", "t-calendar__table-body-row");
+        builder.Div("t-calendar__control", !HideController)
+            .Content(control =>
+            {
+                control.Div("t-calendar__title").Content(TitleContent).Close();
+                control.Div("t-calendar__control-section")
+                        .Content(selection =>
+                        {
+                            //年 下拉菜单
+                            BuildSelectionCell(selection, year =>
+                            {
+                                year.Component<TSelect<int>>()
+                                    .Attribute(m => m.Value, Year)
+                                    .Attribute(m => m.ValueExpression, () => Year)
+                                    .Attribute(m => m.ValueChanged, HtmlHelper.Instance.Callback().Create<int>(this, value => ChangeDate(value, Month)))
+                                    .Content(options =>
+                                    {
+                                        for ( int i = Start!.Value.Year; i <= End!.Value.Year; i++ )
+                                        {
+                                            options.Component<TSelectOption<int>>()
+                                                    .Attribute(m => m.Value, i)
+                                                    .Attribute(m => m.Label, $"{i}年")
+                                                    .Close();
+                                        }
+                                    })
+                                    .Close();
+                            });
+                            //月 下拉菜单
+                            BuildSelectionCell(selection, month =>
+                            {
+                                month.Component<TSelect<int>>()
+                                    .Attribute(m => m.Value, Month)
+                                    .Attribute(m => m.ValueExpression, () => Month)
+                                    .Attribute(m => m.ValueChanged, HtmlHelper.Instance.Callback().Create<int>(this, value => ChangeDate(Year, value)))
+                                    .Content(options =>
+                                    {
+                                        for ( int i = 1; i <= 12; i++ )
+                                        {
+                                            options.Component<TSelectOption<int>>()
+                                                    .Attribute(m => m.Value, i)
+                                                    .Attribute(m => m.Label, $"{i}月")
+                                                    .Attribute(m => m.Disabled, i <= 6 && i < Start!.Value.Month)
+                                                    .Attribute(m => m.Disabled, i > 6 && i > End!.Value.Month)
+                                                    .Close();
+                                        }
+                                    })
+                                    .Close();
+                            }, Mode == CalendarMode.Month);
+                            //年月切换
+                            BuildSelectionCell(selection, mode =>
+                            {
+                                mode.Component<TInputRadioGroup<CalendarMode>>()
+                                    .Attribute(m=>m.Value,Mode)
+                                    .Attribute(m=>m.ValueExpression,()=>Mode)
+                                    .Attribute(m=>m.ValueChanged,HtmlHelper.Instance.Callback().Create<CalendarMode>(this,SwitchCalendarMode))
+                                    .Attribute(m=>m.ButtonStyle, RadioButtonStyle.Filled)
+                                    .Content(radio =>
+                                    {
+                                        radio.Component<TInputRadio<CalendarMode>>()
+                                        .Attribute(m=>m.Value,CalendarMode.Month)
+                                        .Content("月")
+                                        .Close();
+
+                                        radio.Component<TInputRadio<CalendarMode>>()
+                                        .Attribute(m => m.Value, CalendarMode.Year)
+                                        .Content("年")
+                                        .Close();
+                                    })
+                                    .Close();
+                            });
+                            //切换周末显示
+                            BuildSelectionCell(selection, weekend =>
+                            {
+                                var theme = Theme.Primary;
+                                var text = "显示周末";
+
+                                if ( !ShowWeekend )
+                                {
+                                    theme = Theme.Default;
+                                    text = "隐藏周末";
+                                }
+                                weekend.Component<TButton>()
+                                        .Attribute(m => m.Theme, theme)
+                                        .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs?>(this, SwitchWeekend))
+                                        .Content(text)
+                                        .Close();
+                            }, Mode == CalendarMode.Month);
+
+                            //回到今天/本月
+                            BuildSelectionCell(selection, now =>
+                            {
+                                var today = DateTime.Now;
+
+                                now.Component<TButton>()
+                                    .Attribute(m => m.Theme, Theme.Primary)
+                                    .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs?>(this, () => ChangeDate(today.Year, today.Month)))
+                                    .Content(Mode == CalendarMode.Year ? "本月" : "今天")
+                                    .Close();
+                            });
+                        })
+                        .Close();
+            })
+            .Close();
+
+        void BuildSelectionCell(RenderTreeBuilder selection,RenderFragment content,Condition? condition=default)
+        {
+            selection.Div("t-calendar__control-section-cell", condition).Content(content).Close();
+        }
     }
 
     /// <summary>
@@ -319,6 +478,24 @@ public class TCalendar : TDesignComponentBase
                 .Close();
         });
     }
+
+    /// <summary>
+    /// 是否跳过周末
+    /// </summary>
+    /// <param name="day"></param>
+    /// <returns></returns>
+    bool IsSkipWeekend(DayOfWeek day) => !ShowWeekend && new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(day);
+    /// <summary>
+    /// 关闭上一个 tr 并开始新的 tr。用于动态换行。
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="sequence"></param>
+    private static void ClosePrevRowAndBuildNewRow(RenderTreeBuilder builder, int sequence)
+    {
+        builder.CloseElement();
+        builder.OpenElement(sequence, "tr");
+        builder.AddAttribute(sequence + 1, "class", "t-calendar__table-body-row");
+    }
 }
 
 /// <summary>
@@ -329,7 +506,7 @@ public enum CalendarMode
     /// <summary>
     /// 按月显示。
     /// </summary>
-    Mounth,
+    Month,
     /// <summary>
     /// 按年显示。
     /// </summary>

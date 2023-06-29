@@ -3748,6 +3748,11 @@
             按照日历形式展示数据或日期的容器。
             </summary>
         </member>
+        <member name="P:TDesign.TCalendar.HideController">
+            <summary>
+            是否隐藏控制面板。
+            </summary>
+        </member>
         <member name="P:TDesign.TCalendar.Card">
             <summary>
             使用卡片模式。
@@ -3760,7 +3765,7 @@
         </member>
         <member name="P:TDesign.TCalendar.ShowWeekend">
             <summary>
-            是否显示周末。<see cref="F:TDesign.CalendarMode.Mounth"/> 有效。
+            是否显示周末。<see cref="!:CalendarMode.Mounth"/> 有效。
             </summary>
         </member>
         <member name="P:TDesign.TCalendar.Year">
@@ -3783,6 +3788,26 @@
             周几算第一天。
             </summary>
         </member>
+        <member name="P:TDesign.TCalendar.Start">
+            <summary>
+            年月的开始范围。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.End">
+            <summary>
+            年月的结束范围。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.TitleText">
+            <summary>
+            设置标题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TCalendar.TitleContent">
+            <summary>
+            设置标题的任意代码片段。
+            </summary>
+        </member>
         <member name="P:TDesign.TCalendar.DayOfWeekTextMapper">
             <summary>
             星期对应的文本。
@@ -3798,18 +3823,21 @@
             当前月。
             </summary>
         </member>
+        <member name="M:TDesign.TCalendar.SwitchCalendarMode(TDesign.CalendarMode)">
+            <summary>
+            切换月年模式。
+            </summary>
+        </member>
+        <member name="M:TDesign.TCalendar.SwitchWeekend">
+            <summary>
+            切换周末是否显示。
+            </summary>
+        </member>
         <member name="M:TDesign.TCalendar.BuildCalendarHeader(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
             构建日历的头部。
             </summary>
             <param name="builder"></param>
-        </member>
-        <member name="M:TDesign.TCalendar.IsSkipWeekend(System.DayOfWeek)">
-            <summary>
-            是否跳过周末
-            </summary>
-            <param name="day"></param>
-            <returns></returns>
         </member>
         <member name="M:TDesign.TCalendar.BuildCalendarBody(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
             <summary>
@@ -3832,13 +3860,6 @@
             </remarks>
             <param name="builder"></param>
         </member>
-        <member name="M:TDesign.TCalendar.ClosePrevRowAndBuildNewRow(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
-            <summary>
-            关闭上一个 tr 并开始新的 tr。用于动态换行。
-            </summary>
-            <param name="builder"></param>
-            <param name="sequence"></param>
-        </member>
         <member name="M:TDesign.TCalendar.BuildBodyCell(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.String,System.Boolean,System.Boolean)">
             <summary>
             构建单元格。
@@ -3848,12 +3869,26 @@
             <param name="disabled"></param>
             <param name="now"></param>
         </member>
+        <member name="M:TDesign.TCalendar.IsSkipWeekend(System.DayOfWeek)">
+            <summary>
+            是否跳过周末
+            </summary>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TCalendar.ClosePrevRowAndBuildNewRow(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
+            <summary>
+            关闭上一个 tr 并开始新的 tr。用于动态换行。
+            </summary>
+            <param name="builder"></param>
+            <param name="sequence"></param>
+        </member>
         <member name="T:TDesign.CalendarMode">
             <summary>
             日历模式。
             </summary>
         </member>
-        <member name="F:TDesign.CalendarMode.Mounth">
+        <member name="F:TDesign.CalendarMode.Month">
             <summary>
             按月显示。
             </summary>
