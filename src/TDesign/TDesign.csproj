@@ -39,10 +39,10 @@
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="ComponentBuilder" Version="4.1.0" />
-		<PackageReference Include="ComponentBuilder.Extensions" Version="4.1.0" />
-		<PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.1.0" />
-		<PackageReference Include="ComponentBuilder.JSInterop" Version="4.1.0" />
+		<PackageReference Include="ComponentBuilder" Version="4.1.2" />
+		<PackageReference Include="ComponentBuilder.Extensions" Version="4.1.2" />
+		<PackageReference Include="ComponentBuilder.FluentRenderTree" Version="4.1.2" />
+		<PackageReference Include="ComponentBuilder.JSInterop" Version="4.1.2" />
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
 		<PackageReference Include="OneOf" Version="3.0.243" />
 		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.51.0.59060">
@@ -125,6 +125,7 @@
 	<ItemGroup>
 		<Folder Include="JSInterop\" />
 	</ItemGroup>
+
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="rem(){ :;};rem '&#xD;&#xA;@goto b&#xD;&#xA;';&#xD;&#xA;echo sh;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide;&#xD;&#xA;cp $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot;&#xD;&#xA;exit&#xD;&#xA;&#xD;&#xA;:b&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.ServerSide&#xD;&#xA;copy $(OutDir)TDesign.xml ..\..\doc\TDesign.Docs.WebAssembly\wwwroot" />

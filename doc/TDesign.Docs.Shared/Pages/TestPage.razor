@@ -2,68 +2,13 @@
 @using Test = TDesign.Docs.Shared.Pages.Components.Data.TablePage
 @layout EmptyLayout
 
-<TMenu>
-    <TMenuItem Link="/test">测试</TMenuItem>
-</TMenu>
-
-@*<TPagination @bind-PageIndex="Page" @bind-PageSize=Size @bind-Total=Total/>
+<div style="width:180px">
+<TSelect @bind-Value="Value">
+    <TSelectOption Value="1" Label="选项1">选项1</TSelectOption>
+        <TSelectOption Value="2" Label="选项2">选项2</TSelectOption>
+</TSelect>
+</div>
 
 @code{
-    int Page { get; set; } = 1;
-    int Size { get; set; } = 3;
-    int Total { get; set; } = 12;
+    int Value { get; set; } = 1;
 }
-*@
-@*<TPopup Content="弹出一个层">
-    <TButton>悬浮</TButton>
-</TPopup>*@
-
-@*<TTable TItem="Test.User" Data="Test.User.GetData()">
-    <TTableExpandColumn>
-        <h4>Name:@context.Name</h4>
-    </TTableExpandColumn>
-    <TTableCheckboxColumn Field="f=>f.Id" />
-    <TTableFieldColumn Field="f=>f.Id" />
-    <TTableFieldColumn Field="f=>f.Name" />
-    <TTableFieldColumn Field="f=>f.Age" >
-        <FooterContent>
-            底部内容
-        </FooterContent>
-        </TTableFieldColumn>
-    <TTableFieldColumn Field="f=>f.Gender" />
-       
-</TTable>
-
-@code {
-    IEnumerable<string> Text { get; set; } = Enumerable.Empty<string>();
-
-    void HandleKey(KeyboardEventArgs e)
-    {
-
-    }
-}*@
-@*<TButton OnClick="e=>_dialog.Open()">
-    弹框
-</TButton>
-<TDialog @ref="_dialog">
-    让弹出框
-</TDialog>
-
-@code{
-    TDialog? _dialog;
-}*@
-@*
-@inject IDialogService DialogService
-
-<TButton OnClick="Open">
-    对话框
-</TButton>
-
-
-@code{
-    async Task Open()
-    {
-        var dialog = await DialogService.OpenInfo("第一个提示");
-    }
-}
-@inject IJSRuntime JS*@
