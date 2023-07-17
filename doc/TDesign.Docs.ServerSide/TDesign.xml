@@ -5133,6 +5133,79 @@
             设置主题颜色。
             </summary>
         </member>
+        <member name="T:TDesign.TUpload">
+            <summary>
+            上传组件允许用户传输文件或提交自己的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Multiple">
+            <summary>
+            批量上传
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.AutoUpload">
+            <summary>
+            是否在选择文件后自动发起请求上传文件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Theme">
+            <summary>
+            上传的风格样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.MaxCount">
+            <summary>
+            当前最大上传文件数量。默认 100。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Accept">
+            <summary>
+            接受上传的文件类型。
+            <para>
+            参考：https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input/file#accept
+            </para>
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Action">
+            <summary>
+            服务端上传的接口地址。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadTheme">
+            <summary>
+            上传组件显示的风格样式。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.File">
+            <summary>
+            默认的文件上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.FileInput">
+            <summary>
+            输入框形式的文件上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.FileFlow">
+            <summary>
+            文件批量上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.Image">
+            <summary>
+            默认图片上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.ImageFlow">
+            <summary>
+            图片批量上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.Custom">
+            <summary>
+            完全自定义风格。
+            </summary>
+        </member>
         <member name="T:TDesign.HorizontalAlignment">
             <summary>
             水平对齐方式。
