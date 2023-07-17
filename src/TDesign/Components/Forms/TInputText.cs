@@ -67,6 +67,8 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
         }, !string.IsNullOrEmpty(text) || icon is not null);
     }
 
+    protected override string EventName => "onchange";
+
     protected override void BuildAttributes(IDictionary<string, object> attributes)
     {
         base.BuildAttributes(attributes);
