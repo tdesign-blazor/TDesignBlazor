@@ -1,6 +1,8 @@
 ﻿using ComponentBuilder.FluentRenderTree;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace TDesign;
 
@@ -22,12 +24,15 @@ public class TUpload:TDesignComponentBase
     /// 上传的风格样式。
     /// </summary>
     [Parameter] public UploadTheme Theme { get; set; } = UploadTheme.File;
+    /// <summary>
+    /// 上传的显示文本。
+    /// </summary>
     [Parameter] public string Text { get; set; } = "选择文件";
 
     /// <summary>
     /// 当前最大上传文件数量。默认 100。
     /// </summary>
-    [Parameter]public int MaxCount { get; set;} = 100;
+    [Parameter]public int Max { get; set;} = 100;
     /// <summary>
     /// 接受上传的文件类型。
     /// <para>
@@ -35,13 +40,26 @@ public class TUpload:TDesignComponentBase
     /// </para>
     /// </summary>
     [Parameter]public string? Accept { get; set; }
-
-    [Parameter][EditorRequired]public Func<InputFileChangeEventArgs,UploadedResult> UploadHandler { get; set; }
+    /// <summary>
+    /// 设置服务端上传的 API 路径。
+    /// </summary>
+    [Parameter][EditorRequired]public string Action { get; set; }
+    /// <summary>
+    /// 单个上传的文件限制大小，单位 B。默认 512KB。
+    /// </summary>
+    [Parameter] public long Size { get; set; } = 512000;
 
     [Parameter] public Theme ButtonTheme { get; set; } = TDesign.Theme.Primary;
     [Parameter] public object? ButtonIcon { get; set; } = IconName.Upload;
 
+    private List<UploadResult> _results = new();
+    /// <summary>
+    /// 获取上传结果。
+    /// </summary>
+    public IReadOnlyList<UploadResult> UploadResults => _results;
+
     [Inject]IJSRuntime JS { get; set; }
+    [Inject]HttpClient Client { get; set; }
 
     InputFile? RefInputFile;
     private IJSModule _uploadJSModule;
@@ -58,7 +76,13 @@ public class TUpload:TDesignComponentBase
     {
         builder.Component<InputFile>()
             .Ref(e => RefInputFile = e)
-            .Attribute(m => m.OnChange, HtmlHelper.Instance.Callback().Create<InputFileChangeEventArgs>(this, InputFileChange))
+            .Attribute(m => m.OnChange, HtmlHelper.Instance.Callback().Create<InputFileChangeEventArgs>(this,async e=>
+            {
+                if ( AutoUpload )
+                {
+                   await Upload(e);
+                }
+            }))
             .Attribute("multiple", "multiple", Multiple)
             .Attribute("hidden", "hidden")
             .Close();
@@ -69,18 +93,6 @@ public class TUpload:TDesignComponentBase
     protected override void BuildCssClass(ICssClassBuilder builder)
     {
         builder.Append("t-upload--theme-file-input", Theme == UploadTheme.FileInput);
-    }
-
-    Task InputFileChange(InputFileChangeEventArgs e)
-    {
-        if ( e.FileCount > MaxCount )
-        {
-            Console.WriteLine("文件数量超出了最大上限");
-            return Task.CompletedTask;
-        }
-
-
-        return Task.CompletedTask;
     }
 
     void BuildFile(RenderTreeBuilder builder)
@@ -122,6 +134,90 @@ public class TUpload:TDesignComponentBase
             })
             .Close();
     }
+
+    void BuildDisplayText(RenderTreeBuilder builder)
+    {
+        builder.Div("t-upload__single-display-text t-upload__display-text--margin")
+            .Close();
+    }
+
+    private bool shouldRender;
+
+    protected override bool ShouldRender() => shouldRender;
+    
+    /// <summary>
+    /// 执行上传的操作。
+    /// </summary>
+    /// <param name="e"></param>
+    public async Task Upload(InputFileChangeEventArgs e)
+    {
+        var browserFiles = new List<IBrowserFile>(Max);
+
+        try
+        {
+            browserFiles.AddRange(e.GetMultipleFiles(Max));
+        }
+        catch(InvalidOperationException ex )
+        {
+            //超过设定的文件数量如何处理
+            return;
+        }
+
+        shouldRender = false;
+        var readyToUpload = false;
+
+        using var content = new MultipartFormDataContent();
+
+        foreach ( var file in browserFiles )
+        {
+            var result = new UploadResult
+            {
+                FileName = file.Name,
+                FileSize = file.Size
+            };
+            try
+            {
+                var fileContent = new StreamContent(file.OpenReadStream(Size));
+
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                content.Add(fileContent, "\"files\"", file.Name);
+
+                readyToUpload = true;
+            }
+            catch ( IOException ex )
+            {
+                result.Status = Status.Default;
+                result.Tip = ex.Message;
+            }
+            finally
+            {
+                _results.Add(result);
+            }
+        }
+
+        if ( readyToUpload )//可以上传到服务器
+        {
+            var response = await Client.PostAsync(Action, content);
+            if ( response.IsSuccessStatusCode )
+            {
+                using var readStream = await response.Content.ReadAsStreamAsync();
+
+                var serverUploadResults = await JsonSerializer.DeserializeAsync<IList<UploadResult>>(readStream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                if(serverUploadResults is not null )
+                {
+                    _results.AddRange(serverUploadResults);
+                }
+            }
+        }
+
+        shouldRender = true;
+    }
+
+    protected override void DisposeComponentResources()
+    {
+        Client.Dispose();
+    }
 }
 /// <summary>
 /// 上传组件显示的风格样式。
@@ -157,7 +253,7 @@ public enum UploadTheme
 /// <summary>
 /// 表示文件上传后的结果。
 /// </summary>
-public class UploadedResult
+public class UploadResult
 {
     /// <summary>
     /// 获取或设置上传后的文件名。
