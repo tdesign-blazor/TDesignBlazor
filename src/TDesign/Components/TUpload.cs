@@ -1,5 +1,6 @@
 ﻿using ComponentBuilder.FluentRenderTree;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 
 namespace TDesign;
 
@@ -34,22 +35,32 @@ public class TUpload:TDesignComponentBase
     /// </para>
     /// </summary>
     [Parameter]public string? Accept { get; set; }
-    /// <summary>
-    /// 服务端上传的接口地址。
-    /// </summary>
-    [Parameter][EditorRequired]public string Action { get; set; }
 
-    [Parameter]public EventCallback<InputFileChangeEventArgs> OnChange { get; set; }
+    [Parameter][EditorRequired]public Func<InputFileChangeEventArgs,UploadedResult> UploadHandler { get; set; }
 
     [Parameter] public Theme ButtonTheme { get; set; } = TDesign.Theme.Primary;
     [Parameter] public object? ButtonIcon { get; set; } = IconName.Upload;
 
+    [Inject]IJSRuntime JS { get; set; }
+
+    InputFile? RefInputFile;
+    private IJSModule _uploadJSModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if ( firstRender )
+        {
+            _uploadJSModule = await JS.ImportTDesignModuleAsync("upload");
+        }
+    }
+
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
         builder.Component<InputFile>()
+            .Ref(e => RefInputFile = e)
             .Attribute(m => m.OnChange, HtmlHelper.Instance.Callback().Create<InputFileChangeEventArgs>(this, InputFileChange))
             .Attribute("multiple", "multiple", Multiple)
-            .Attribute("hidden","hidden")
+            .Attribute("hidden", "hidden")
             .Close();
 
         BuildFile(builder);
@@ -64,8 +75,11 @@ public class TUpload:TDesignComponentBase
     {
         if ( e.FileCount > MaxCount )
         {
-
+            Console.WriteLine("文件数量超出了最大上限");
+            return Task.CompletedTask;
         }
+
+
         return Task.CompletedTask;
     }
 
@@ -99,6 +113,10 @@ public class TUpload:TDesignComponentBase
                 button.Component<TButton>()
                         .Attribute(m=>m.Theme,ButtonTheme)
                         .Attribute(m=>m.Icon,ButtonIcon)
+                        .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, async e =>
+                        {
+                            await _uploadJSModule.Module.InvokeVoidAsync("upload.openDialog", RefInputFile?.Element);
+                        }))
                         .Content(Text)
                         .Close();
             })
@@ -134,4 +152,37 @@ public enum UploadTheme
     /// 完全自定义风格。
     /// </summary>
     Custom,
+}
+
+/// <summary>
+/// 表示文件上传后的结果。
+/// </summary>
+public class UploadedResult
+{
+    /// <summary>
+    /// 获取或设置上传后的文件名。
+    /// </summary>
+    public string? FileName { get; set; }    
+    /// <summary>
+    /// 获取或设置上传后的文件大小。
+    /// </summary>
+    public long? FileSize { get; set; }
+    /// <summary>
+    /// 获取或设置上传后的时间。
+    /// </summary>
+    public DateTime? UploadedTime { get; set; }
+
+    /// <summary>
+    /// 获取或设置上传后的结果状态。
+    /// </summary>
+    public Status Status { get; set; } = Status.Default;
+    /// <summary>
+    /// 获取或设置上传后的提示
+    /// </summary>
+    public string? Tip { get; set; }
+
+    /// <summary>
+    /// 获取
+    /// </summary>
+    public Dictionary<string, string> Data { get; set; } = new();
 }

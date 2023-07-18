@@ -5166,11 +5166,6 @@
             </para>
             </summary>
         </member>
-        <member name="P:TDesign.TUpload.Action">
-            <summary>
-            服务端上传的接口地址。
-            </summary>
-        </member>
         <member name="T:TDesign.UploadTheme">
             <summary>
             上传组件显示的风格样式。
@@ -5204,6 +5199,41 @@
         <member name="F:TDesign.UploadTheme.Custom">
             <summary>
             完全自定义风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadedResult">
+            <summary>
+            表示文件上传后的结果。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.FileName">
+            <summary>
+            获取或设置上传后的文件名。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.FileSize">
+            <summary>
+            获取或设置上传后的文件大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.UploadedTime">
+            <summary>
+            获取或设置上传后的时间。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.Status">
+            <summary>
+            获取或设置上传后的结果状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.Tip">
+            <summary>
+            获取或设置上传后的提示
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadedResult.Data">
+            <summary>
+            获取
             </summary>
         </member>
         <member name="T:TDesign.HorizontalAlignment">
