@@ -187,7 +187,7 @@ public class TUpload:TDesignComponentBase
             catch ( IOException ex )
             {
                 result.Status = Status.Default;
-                result.Tip = ex.Message;
+                result.Message = ex.Message;
             }
             finally
             {
@@ -202,11 +202,14 @@ public class TUpload:TDesignComponentBase
             {
                 using var readStream = await response.Content.ReadAsStreamAsync();
 
-                var serverUploadResults = await JsonSerializer.DeserializeAsync<IList<UploadResult>>(readStream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-                if(serverUploadResults is not null )
+                if ( readStream is not null )
                 {
-                    _results.AddRange(serverUploadResults);
+                    var serverUploadResults = await JsonSerializer.DeserializeAsync<IList<UploadResult>>(readStream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    if ( serverUploadResults is not null )
+                    {
+                        _results.AddRange(serverUploadResults);
+                    }
                 }
             }
         }
@@ -232,22 +235,22 @@ public enum UploadTheme
     /// 输入框形式的文件上传风格。
     /// </summary>
     [CssClass("single-file-input")]FileInput,
-    /// <summary>
-    /// 文件批量上传。
-    /// </summary>
-    [CssClass("flow-file-flow")]FileFlow,
-    /// <summary>
-    /// 默认图片上传风格。
-    /// </summary>
-    Image,
-    /// <summary>
-    /// 图片批量上传风格。
-    /// </summary>
-    [CssClass("flow-image-flow")]ImageFlow,
-    /// <summary>
-    /// 完全自定义风格。
-    /// </summary>
-    Custom,
+    ///// <summary>
+    ///// 文件批量上传。
+    ///// </summary>
+    //[CssClass("flow-file-flow")]FileFlow,
+    ///// <summary>
+    ///// 默认图片上传风格。
+    ///// </summary>
+    //Image,
+    ///// <summary>
+    ///// 图片批量上传风格。
+    ///// </summary>
+    //[CssClass("flow-image-flow")]ImageFlow,
+    ///// <summary>
+    ///// 完全自定义风格。
+    ///// </summary>
+    //Custom,
 }
 
 /// <summary>
@@ -275,10 +278,5 @@ public class UploadResult
     /// <summary>
     /// 获取或设置上传后的提示
     /// </summary>
-    public string? Tip { get; set; }
-
-    /// <summary>
-    /// 获取
-    /// </summary>
-    public Dictionary<string, string> Data { get; set; } = new();
+    public string? Message { get; set; }
 }
