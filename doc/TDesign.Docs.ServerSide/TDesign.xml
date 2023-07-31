@@ -1747,6 +1747,210 @@
             </summary>
             <param name="builder"></param>
         </member>
+        <member name="T:TDesign.TUpload">
+            <summary>
+            上传组件允许用户传输文件或提交自己的内容。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Name">
+            <summary>
+            上传文件在表单中的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Multiple">
+            <summary>
+            批量上传
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.AutoUpload">
+            <summary>
+            是否在选择文件后自动发起请求上传文件。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Theme">
+            <summary>
+            上传的风格样式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Text">
+            <summary>
+            上传的显示文本。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Max">
+            <summary>
+            当前最大上传文件数量。默认 100。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Accept">
+            <summary>
+            接受上传的文件类型。
+            <para>
+            参考：https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input/file#accept
+            </para>
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Action">
+            <summary>
+            设置服务端上传的 API 地址。要求 API 可以通过 POST 方式接收请求，并支持 FORM DATA 数据传输方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.Size">
+            <summary>
+            单个上传的文件限制大小，单位 B。默认 512KB。
+            </summary>
+        </member>
+        <member name="F:TDesign.TUpload._isUploading">
+            <summary>
+            正在上传
+            </summary>
+        </member>
+        <member name="M:TDesign.TUpload.BuildUploadingDisplayContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,TDesign.UploadFileInfo)">
+            <summary>
+            上传中的显示
+            </summary>
+            <param name="builder"></param>
+            <param name="fileInfo">文件信息。</param>
+        </member>
+        <member name="M:TDesign.TUpload.BuildUploadedDisplayContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,TDesign.UploadFileInfo)">
+            <summary>
+            上传后的显示
+            </summary>
+            <param name="builder"></param>
+            <param name="fileInfo">文件信息。</param>
+        </member>
+        <member name="M:TDesign.TUpload.HandleUploadingFiles(System.Collections.Generic.IReadOnlyList{TDesign.UploadFileInfo})">
+            <summary>
+            处理要上传的文件。
+            </summary>
+            <param name="files">要上传的文件列表。</param>
+            <returns></returns>
+        </member>
+        <member name="T:TDesign.UploadTheme">
+            <summary>
+            上传组件显示的风格样式。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.File">
+            <summary>
+            默认的文件上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.FileInput">
+            <summary>
+            输入框形式的文件上传风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadFileInfo">
+            <summary>
+            要上传的文件信息。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Id">
+            <summary>
+            获取文件的编号。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Name">
+            <summary>
+            获取只包含文件名，不包含任何路径信息的文件名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Size">
+            <summary>
+            获取字节数为单位的文件大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.ContentType">
+            <summary>
+            获取文件的 MIME 类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.ObjectUrl">
+            <summary>
+            获取文件对象的 URL 地址。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.UploadedFilePath">
+            <summary>
+            获取或设置上传以后的文件完整路径。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Status">
+            <summary>
+            获取或设置上传后的结果状态。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadFileResult">
+            <summary>
+            表示文件上传后的结果。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileResult.OriginalFileName">
+            <summary>
+            获取或设置上传的文件名。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileResult.UploadedFilePath">
+            <summary>
+            获取或设置上传以后的文件完整路径。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileResult.FileSize">
+            <summary>
+            获取或设置上传后的文件大小。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileResult.Status">
+            <summary>
+            获取或设置上传后的结果状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileResult.Message">
+            <summary>
+            获取或设置上传后的提示
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadParameter">
+            <summary>
+            上传用的参数。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.Index">
+            <summary>
+            文件索引编号。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.ActionUrl">
+            <summary>
+            后端上传地址。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.Name">
+            <summary>
+            form/data 文件的名称。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.FileId">
+            <summary>
+            文件的Id。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.Method">
+            <summary>
+            获取或设置 HTTP 提交方式。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.Headers">
+            <summary>
+            附带的 Header
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadParameter.Data">
+            <summary>
+            附带的 form/data 字段。
+            </summary>
+        </member>
         <member name="T:TDesign.TColumn">
             <summary>
             表示栅格的列。
@@ -5131,109 +5335,6 @@
         <member name="P:TDesign.TTooltip.Theme">
             <summary>
             设置主题颜色。
-            </summary>
-        </member>
-        <member name="T:TDesign.TUpload">
-            <summary>
-            上传组件允许用户传输文件或提交自己的内容。
-            </summary>
-        </member>
-        <member name="P:TDesign.TUpload.Multiple">
-            <summary>
-            批量上传
-            </summary>
-        </member>
-        <member name="P:TDesign.TUpload.AutoUpload">
-            <summary>
-            是否在选择文件后自动发起请求上传文件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TUpload.Theme">
-            <summary>
-            上传的风格样式。
-            </summary>
-        </member>
-        <member name="P:TDesign.TUpload.MaxCount">
-            <summary>
-            当前最大上传文件数量。默认 100。
-            </summary>
-        </member>
-        <member name="P:TDesign.TUpload.Accept">
-            <summary>
-            接受上传的文件类型。
-            <para>
-            参考：https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input/file#accept
-            </para>
-            </summary>
-        </member>
-        <member name="T:TDesign.UploadTheme">
-            <summary>
-            上传组件显示的风格样式。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.File">
-            <summary>
-            默认的文件上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.FileInput">
-            <summary>
-            输入框形式的文件上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.FileFlow">
-            <summary>
-            文件批量上传。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.Image">
-            <summary>
-            默认图片上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.ImageFlow">
-            <summary>
-            图片批量上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.Custom">
-            <summary>
-            完全自定义风格。
-            </summary>
-        </member>
-        <member name="T:TDesign.UploadedResult">
-            <summary>
-            表示文件上传后的结果。
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.FileName">
-            <summary>
-            获取或设置上传后的文件名。
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.FileSize">
-            <summary>
-            获取或设置上传后的文件大小。
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.UploadedTime">
-            <summary>
-            获取或设置上传后的时间。
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.Status">
-            <summary>
-            获取或设置上传后的结果状态。
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.Tip">
-            <summary>
-            获取或设置上传后的提示
-            </summary>
-        </member>
-        <member name="P:TDesign.UploadedResult.Data">
-            <summary>
-            获取
             </summary>
         </member>
         <member name="T:TDesign.HorizontalAlignment">
