@@ -1,0 +1,136 @@
+﻿@page "/components/upload"
+
+
+<LayoutContent AnchorItems="@(new[]{"基础文件上传","禁用上传","按钮的风格","批量上传","提示文字","处理结果","API"})">
+    <PageHeader Title="Upload 上传">
+        上传组件允许用户传输文件或提交自己的内容。
+    </PageHeader>
+    <TAlert Theme="Theme.Warning">
+        文件上传需要服务端的配合，文档仅提供了 WEB API 的部分代码示例。
+    </TAlert>
+    @Code.Create(@"
+```cs
+[ApiController]
+[Route(""api/[controller]"")]
+public class UploadController : ControllerBase
+{
+    [HttpPost(""file"")]
+    public async Task<IActionResult> PostAsync([FromForm] IFormCollection form)
+    {
+        var savedPath = Path.Combine(Directory.GetCurrentDirectory(), ""upload"");
+
+        if ( !Directory.Exists(savedPath) )
+        {
+            Directory.CreateDirectory(savedPath);
+        }
+
+        foreach ( var file in form.Files )
+        {
+            var generateFileName = string.Concat(DateTimeOffset.Now.ToString(""yyyyMMddHHmmssfff""), Path.GetExtension(file.FileName));
+            var serverFilePath = Path.Combine(savedPath, generateFileName);
+
+            using var fileStream = new FileStream(serverFilePath, FileMode.CreateNew);
+            await file.OpenReadStream().CopyToAsync(fileStream);
+        }
+
+        return Ok();
+    }
+}
+```
+")
+    <Example Title="基础文件上传">
+    <Description>
+        必须提供 <code>Action</code> 参数用于上传到服务端的 api 地址
+    </Description>
+    <RunContent>
+        <TUpload Action="api/upload/file"/>        
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file""/>   
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="禁用上传">
+    <Description></Description>
+        <RunContent>
+            <TUpload Action="api/upload/file" Disabled />
+        </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file"" Disabled/>   
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="按钮的风格">
+    <Description></Description>
+        <RunContent>
+            <TUpload Action="api/upload/file" ButtonTheme="Theme.Warning" ButtonIcon="IconName.Cloud" Text="上传" />
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file"" ButtonTheme=""Theme.Warning"" ButtonIcon=""IconName.Cloud"" Text=""上传"" />
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="批量上传">
+    <Description></Description>
+    <RunContent>
+        <TUpload Action="api/upload/file" Multiple/>     
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file"" Multiple/>   
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="提示文字">
+    <Description></Description>
+    <RunContent>
+        <TUpload Action="api/upload/file" Tip="单个文件不能超过 512KB"/>    
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file"" Tip=""单个文件不能超过 512KB""/>   
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="处理结果">
+    <Description></Description>
+    <RunContent>
+            <TUpload Action="api/upload/file" Tip="单个文件不能超过 512KB" OnSuccess="HandleSuccess" />
+        </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TUpload Action=""api/upload/file"" Tip=""单个文件不能超过 512KB"" OnSuccess=""HandleSuccess"" />
+
+@code{
+    void HandleSuccess(UploadFileInfo file)
+    {
+        var message = file.GetResponseValue<string?>();
+    }
+}
+```
+")
+    </CodeContent>
+</Example>
+<div id="API"></div>
+<ComponentAPI Component="typeof(TUpload)"/>
+</LayoutContent>
+@code{
+    void HandleSuccess(UploadFileInfo file)
+    {
+        var message = file.GetResponseValue<string?>();
+    }
+}

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddTDesign();
+builder.Services.AddControllers();
 builder.Services.AddScoped<HttpClient>(hc => new() { BaseAddress = new("http://localhost:5067") });
 var app = builder.Build();
 
@@ -26,5 +27,5 @@ app.UseRouting();
 app.MapRazorPages();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
-
+app.MapControllers();
 app.Run();

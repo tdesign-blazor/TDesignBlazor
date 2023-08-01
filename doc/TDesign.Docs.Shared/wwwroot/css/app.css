@@ -219,9 +219,9 @@ code {
 :root[theme-mode=dark] .t-layout__header .t-head-menu {
     box-shadow: inset 0 -1px 0 var(--td-gray-color-11);
 }
-.t-layout__content > div {
+/*.t-layout__content > div {
     background-color: var(--td-bg-color-container)
-}
+}*/
 
 
 .t-layout {
