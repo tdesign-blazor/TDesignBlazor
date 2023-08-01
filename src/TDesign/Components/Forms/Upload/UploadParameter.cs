@@ -27,7 +27,7 @@ internal class UploadParameter
     /// <summary>
     /// 获取或设置 HTTP 提交方式。
     /// </summary>
-    public string Method => "POST";
+    public string Method { get; init; } = "POST";
     /// <summary>
     /// 附带的 Header
     /// </summary>

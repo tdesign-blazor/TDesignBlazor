@@ -24,11 +24,15 @@
             dotNetHelper.invokeMethodAsync("Invoke", fileInfoList);
         })
     },
-    uploadFile: function (inputElement, parameters, dotNetHelper) {
-        let formData = new FormData();
-
+    uploadFile: function (parameters, dotNetHelper) {
         let file = this._files[parameters.index];
+        if (!file) {
+            throw 'The file from "_files" variable with index' + parameters.index + ' was not found';
+        }
+
         let size = file.size;
+
+        let formData = new FormData();
         formData.append(parameters.name, file);
 
         if (parameters.data) {
@@ -59,7 +63,7 @@
             parameters.method = "POST";
         }
         if (!parameters.actionUrl) {
-            throw '必须提供上传的后端 URL';
+            throw '必须提供上传服务端的 URL 地址';
         }
 
         xhr.open(parameters.method, parameters.actionUrl, true);//异步上传

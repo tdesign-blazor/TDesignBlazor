@@ -10,12 +10,17 @@ partial class TUpload
     /// <returns></returns>
     public async Task SelectFiles(IReadOnlyList<UploadFileInfo> files)
     {
-        _fileList.Clear();
+        _fileList.Clear();       
         await this.Refresh();
 
         int index = 0;
         foreach ( var file in files.Where(f=>f is not null) )
         {
+            if ( _fileList.Count >= Max )
+            {
+                throw new InvalidOperationException($"最大文件数量不能超过{Max}个");
+            }
+
             file.Status = UploadStatus.Pending;
             file.Parameter = new UploadParameter
             {
@@ -23,6 +28,9 @@ partial class TUpload
                 ActionUrl = Action,
                 Name = Name,
                 FileId = file.Id,
+                Data = Data,
+                Headers = Headers,
+                Method = Method
             };
 
             _fileList.Add(file);
@@ -33,6 +41,7 @@ partial class TUpload
         {
            await OnSelected.InvokeAsync(_fileList);
         }
+
         if ( AutoUpload )
         {
             await Upload();
@@ -44,9 +53,25 @@ partial class TUpload
     /// </summary>
     public async Task Upload()
     {
+        var valid = await ValidationHandler!.Invoke(_fileList);
+        if ( !valid )
+        {
+            return;
+        }
+
+        if ( OnBeforeUpload.HasDelegate )
+        {
+            await OnBeforeUpload.InvokeAsync(_fileList);
+        }
+
         foreach ( var file in _fileList )
         {
-            await _uploadJSModule.Module.InvokeVoidAsync("upload.uploadFile", RefInputFile, file.Parameter, DotNetObjectReference.Create(this));
+            await _uploadJSModule.Module.InvokeVoidAsync("upload.uploadFile", file.Parameter, DotNetObjectReference.Create(this));
+        }
+
+        if ( OnFinished.HasDelegate )
+        {
+           await OnFinished.InvokeAsync(_fileList);
         }
     }
 
@@ -94,7 +119,6 @@ partial class TUpload
         }
         await this.Refresh();
     }
-
     /// <summary>
     /// 文件上传中的 JS 回调。
     /// </summary>
@@ -109,6 +133,7 @@ partial class TUpload
         fileInfo.Percent = percent;
         await this.Refresh();
     }
+
 
     UploadFileInfo GetFileInfo(Guid id)
     {

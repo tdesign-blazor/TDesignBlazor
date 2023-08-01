@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace TDesign.Docs.ServerSide.Controllers;
 [ApiController]
 [Route("api/[controller]")]
-public class UploadController:ControllerBase
+public class UploadController : ControllerBase
 {
     [HttpPost("file")]
-    public async Task<IActionResult> PostAsync([FromForm]IFormCollection form)
+    public async Task<IActionResult> PostAsync([FromForm] IFormCollection form)
     {
         var savedPath = Path.Combine(Directory.GetCurrentDirectory(), "upload");
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.JSInterop;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json;
 
 namespace TDesign;
 
@@ -71,36 +69,17 @@ public class UploadFileInfo
     /// <typeparam name="TValue">反序列化的值。</typeparam>
     /// <param name="jsonSerializerOptions">JSON 序列号配置。</param>
     /// <returns>反序列化后的值或 null。</returns>
-    public TValue? GetDeserializeValueFromResponseText<TValue>(JsonSerializerOptions? jsonSerializerOptions=default)
+    public TValue? GetResponseValue<TValue>(JsonSerializerOptions? jsonSerializerOptions=default)
     {
         jsonSerializerOptions ??= new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         };
 
+        if (ResponseText == null )
+        {
+            return default;
+        }
         return JsonSerializer.Deserialize<TValue>(ResponseText, jsonSerializerOptions);
     }
-}
-
-/// <summary>
-/// 上传状态。
-/// </summary>
-public enum UploadStatus
-{
-    /// <summary>
-    /// 未开始。
-    /// </summary>
-    NotStart,
-    /// <summary>
-    /// 等待上传。
-    /// </summary>
-    Pending,
-    /// <summary>
-    /// 正在上传。
-    /// </summary>
-    InProgress,
-    /// <summary>
-    /// 上传结束。
-    /// </summary>
-    Finished
 }
