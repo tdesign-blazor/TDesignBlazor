@@ -2,7 +2,7 @@ name: PR conventional labeled
 
 on:
   pull_request:
-    branches: [master]
+    branches: [master,"main"]
     types:
       [opened, reopened, labeled, unlabeled]
 

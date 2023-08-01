@@ -6,9 +6,9 @@ env:
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master","main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master","main" ]
 jobs:
    Codacy:
     runs-on: ubuntu-latest

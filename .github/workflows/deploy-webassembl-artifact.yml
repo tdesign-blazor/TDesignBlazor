@@ -3,7 +3,7 @@ name: Deploy to Artifact
 # Run workflow on every push to the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ master,"main" ]
 
 jobs:
   Deploy-Artifact:    
