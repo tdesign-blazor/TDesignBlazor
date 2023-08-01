@@ -1800,9 +1800,34 @@
             单个上传的文件限制大小，单位 B。默认 512KB。
             </summary>
         </member>
-        <member name="F:TDesign.TUpload._isUploading">
+        <member name="P:TDesign.TUpload.ButtonTheme">
             <summary>
-            正在上传
+            按钮的主题。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.ButtonIcon">
+            <summary>
+            按钮图标，默认 IconName.Upload
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.OnSelected">
+            <summary>
+            在文件选择之后，上传请求发起之前触发。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.OnSuccess">
+            <summary>
+            当上传成功后触发的回调。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.OnFailure">
+            <summary>
+            当上传失败后触发的回调。
+            </summary>
+        </member>
+        <member name="P:TDesign.TUpload.OnRemoved">
+            <summary>
+            当移除文件后触发的回调。
             </summary>
         </member>
         <member name="M:TDesign.TUpload.BuildUploadingDisplayContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,TDesign.UploadFileInfo)">
@@ -1819,12 +1844,74 @@
             <param name="builder"></param>
             <param name="fileInfo">文件信息。</param>
         </member>
-        <member name="M:TDesign.TUpload.HandleUploadingFiles(System.Collections.Generic.IReadOnlyList{TDesign.UploadFileInfo})">
+        <member name="M:TDesign.TUpload.DisposeComponentResources">
+            <inheritdoc/>
+        </member>
+        <member name="F:TDesign.TUpload.ICON_SUCCESS">
             <summary>
-            处理要上传的文件。
+            上传成功图标的颜色。
             </summary>
-            <param name="files">要上传的文件列表。</param>
+        </member>
+        <member name="F:TDesign.TUpload.ICON_FAILED">
+            <summary>
+            上传失败图标的颜色。
+            </summary>
+        </member>
+        <member name="F:TDesign.TUpload.ICON_LOADING">
+            <summary>
+            上传中的图标颜色。
+            </summary>
+        </member>
+        <member name="F:TDesign.TUpload.ICON_WAITING">
+            <summary>
+            等待上传的图标颜色。
+            </summary>
+        </member>
+        <member name="F:TDesign.TUpload.ICON_ADD">
+            <summary>
+            添加图标的颜色。
+            </summary>
+        </member>
+        <member name="M:TDesign.TUpload.SelectFiles(System.Collections.Generic.IReadOnlyList{TDesign.UploadFileInfo})">
+            <summary>
+            当已经选择了上传的文件。
+            </summary>
+            <param name="files">选择的文件列表。</param>
             <returns></returns>
+        </member>
+        <member name="M:TDesign.TUpload.Upload">
+            <summary>
+            执行上传操作。
+            </summary>
+        </member>
+        <member name="M:TDesign.TUpload.OnSuccessAsync(System.Guid,System.String)">
+            <summary>
+            服务端上传成功后的 JS 回调。
+            </summary>
+            <param name="fileId">文件id。</param>
+            <param name="responseText">服务端响应文本。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TUpload.OnFailureAsync(System.Guid,System.String)">
+            <summary>
+            服务端上传失败后的 JS 回调。
+            </summary>
+            <param name="fileId">文件id。</param>
+            <param name="responseText">服务端响应文本。</param>
+        </member>
+        <member name="M:TDesign.TUpload.OnProgressAsync(System.Guid,System.Int32)">
+            <summary>
+            文件上传中的 JS 回调。
+            </summary>
+            <param name="fileId">文件id。</param>
+            <param name="percent">当前进度。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TDesign.TUpload.RemoveFile(System.Guid)">
+            <summary>
+            移除指定文件。
+            </summary>
+            <param name="id">文件id。</param>
         </member>
         <member name="T:TDesign.UploadTheme">
             <summary>
@@ -1866,19 +1953,67 @@
             获取文件的 MIME 类型。
             </summary>
         </member>
-        <member name="P:TDesign.UploadFileInfo.ObjectUrl">
+        <member name="P:TDesign.UploadFileInfo.Url">
             <summary>
             获取文件对象的 URL 地址。
             </summary>
         </member>
         <member name="P:TDesign.UploadFileInfo.UploadedFilePath">
             <summary>
-            获取或设置上传以后的文件完整路径。
+            获取上传以后的文件完整路径。
             </summary>
         </member>
         <member name="P:TDesign.UploadFileInfo.Status">
             <summary>
-            获取或设置上传后的结果状态。
+            获取文件当前的上传状态。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Percent">
+            <summary>
+            获取文件上传的进度百分比。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.IsSucceed">
+            <summary>
+            获取一个布尔值，表示上传是否成功。
+            </summary>
+        </member>
+        <member name="P:TDesign.UploadFileInfo.Parameter">
+            <summary>
+            内部使用。
+            </summary>
+        </member>
+        <member name="M:TDesign.UploadFileInfo.GetDeserializeValueFromResponseText``1(System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            获取上传到服务器后的 HTTP 响应结果并反序列化成指定对象。
+            </summary>
+            <typeparam name="TValue">反序列化的值。</typeparam>
+            <param name="jsonSerializerOptions">JSON 序列号配置。</param>
+            <returns>反序列化后的值或 null。</returns>
+        </member>
+        <member name="T:TDesign.UploadStatus">
+            <summary>
+            上传状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.NotStart">
+            <summary>
+            未开始。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Pending">
+            <summary>
+            等待上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.InProgress">
+            <summary>
+            正在上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Finished">
+            <summary>
+            上传结束。
             </summary>
         </member>
         <member name="T:TDesign.UploadFileResult">
@@ -4620,11 +4755,6 @@
         <member name="T:TDesign.TLink">
             <summary>
             超链接文本。
-            </summary>
-        </member>
-        <member name="P:TDesign.TLink.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TLink.Size">

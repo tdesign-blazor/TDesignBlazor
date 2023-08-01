@@ -44,7 +44,7 @@
                 if (xhr.status == 200) {
                     dotNetHelper.invokeMethodAsync("onSuccess", parameters.fileId, xhr.responseText);
                 } else {
-                    dotNetHelper.invokeMethodAsync("onError", parameters.fileId, xhr.responseText);
+                    dotNetHelper.invokeMethodAsync("onFailure", parameters.fileId, xhr.responseText);
                 }
             }
         };
@@ -53,7 +53,7 @@
             dotNetHelper.invokeMethodAsync("onProgress", parameters.fileId, percent);
         };
         xhr.onerror = e => {
-            dotNetHelper.invokeMethodAsync("onError", parameters.fileId, xhr.responseText);
+            dotNetHelper.invokeMethodAsync("onFailure", parameters.fileId, xhr.responseText);
         }
         if (!parameters.method) {
             parameters.method = "POST";

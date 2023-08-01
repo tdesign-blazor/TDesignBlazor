@@ -4,12 +4,8 @@
 /// </summary>
 [CssClass("t-link")]
 [HtmlTag("a")]
-public class TLink : TDesignComponentBase, IHasChildContent, IHasDisabled
+public class TLink : TDesignAdditionParameterWithChildContentComponentBase, IHasDisabled
 {
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 尺寸。
     /// </summary>

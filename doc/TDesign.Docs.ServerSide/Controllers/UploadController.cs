@@ -7,17 +7,18 @@ namespace TDesign.Docs.ServerSide.Controllers;
 public class UploadController:ControllerBase
 {
     [HttpPost("file")]
-    public async Task<IActionResult> PostAsync([FromForm]List<IFormFile> files)
+    public async Task<IActionResult> PostAsync([FromForm]IFormCollection form)
     {
-        var savedPath = "/upload";
+        var savedPath = Path.Combine(Directory.GetCurrentDirectory(), "upload");
 
         if ( !Directory.Exists(savedPath) )
         {
             Directory.CreateDirectory(savedPath);
         }
-        foreach ( var file in files )
+
+        foreach ( var file in form.Files )
         {
-            var generateFileName = Path.Combine(DateTimeOffset.UnixEpoch.ToString(), Path.GetExtension(file.FileName));
+            var generateFileName = string.Concat(DateTimeOffset.Now.ToString("yyyyMMddHHmmssfff"), Path.GetExtension(file.FileName));
             var serverFilePath = Path.Combine(savedPath, generateFileName);
 
             using var fileStream = new FileStream(serverFilePath, FileMode.CreateNew);

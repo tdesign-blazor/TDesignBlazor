@@ -52,23 +52,41 @@ public partial class TUpload : TDesignComponentBase
     /// </summary>
     [Parameter] public long Size { get; set; } = 512000;
 
+    /// <summary>
+    /// 按钮的主题。
+    /// </summary>
     [Parameter] public Theme ButtonTheme { get; set; } = TDesign.Theme.Primary;
+    /// <summary>
+    /// 按钮图标，默认 IconName.Upload
+    /// </summary>
     [Parameter] public object? ButtonIcon { get; set; } = IconName.Upload;
 
-    
+    /// <summary>
+    /// 在文件选择之后，上传请求发起之前触发。
+    /// </summary>
+    [Parameter]public EventCallback<IReadOnlyList<UploadFileInfo>> OnSelected { get; set; }
+
+    /// <summary>
+    /// 当上传成功后触发的回调。
+    /// </summary>
+    [Parameter]public EventCallback<UploadFileInfo> OnSuccess { get; set; }
+
+    /// <summary>
+    /// 当上传失败后触发的回调。
+    /// </summary>
+    [Parameter]public EventCallback<UploadFileInfo> OnFailure { get; set; }
+
+    /// <summary>
+    /// 当移除文件后触发的回调。
+    /// </summary>
+    [Parameter]public EventCallback<UploadFileInfo> OnRemoved { get; set; }
 
     private List<UploadFileInfo> _fileList = new();
 
     [Inject] IJSRuntime JS { get; set; }
-    [Inject] HttpClient Client { get; set; }
 
     ElementReference? RefInputFile;
     private IJSModule _uploadJSModule;
-
-    /// <summary>
-    /// 正在上传
-    /// </summary>
-    private bool _isUploading;
 
     protected override void OnParametersSet()
     {
@@ -139,7 +157,7 @@ public partial class TUpload : TDesignComponentBase
                         .Attribute(m => m.Icon, ButtonIcon)
                         .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs>(this, async e =>
                         {
-                            await _uploadJSModule.Module.InvokeVoidAsync("upload.showDialog", RefInputFile, JSInvokeMethodFactory.Create<IReadOnlyList<UploadFileInfo>,Task>(HandleUploadingFiles));
+                            await _uploadJSModule.Module.InvokeVoidAsync("upload.showDialog", RefInputFile, JSInvokeMethodFactory.Create<IReadOnlyList<UploadFileInfo>,Task>(SelectFiles));
                         }))
                         .Content(Text)
                         .Close();
@@ -151,11 +169,10 @@ public partial class TUpload : TDesignComponentBase
     {
         foreach (var item in _fileList)
         {
-
             builder.Div("t-upload__single-display-text t-upload__display-text--margin")
             .Content(content =>
             {
-                if ( item.Percent < 100 )//上传中
+                if ( item.Status == UploadStatus.InProgress )//上传中
                 {
                     BuildUploadingDisplayContent(content, item);
                 }
@@ -196,16 +213,36 @@ public partial class TUpload : TDesignComponentBase
         builder.Component<TLink>()
                 .Attribute(m => m.Size, TDesign.Size.Small)
                 .Attribute(m => m.Hover, LinkHover.Color)
+                .Attribute(m=>m.AdditionalClass, "t-upload__single-name")
                 .Content(fileInfo.Name)
             .Close();
 
-        builder.Component<TIcon>().Attribute(m => m.Name, IconName.Close).Close();
+        //状态图标
+        builder.Div("t-upload__flow-status").Content(status =>
+        {
+            builder.Component<TIcon>(fileInfo.IsSucceed)
+                .Attribute(m => m.Name, IconName.CheckCircleFilled)
+                .Attribute(m => m.AdditionalClass, ICON_SUCCESS)
+                .Close();
+
+            builder.Component<TIcon>(!fileInfo.IsSucceed)
+                .Attribute(m => m.Name, IconName.InfoCircleFilled)
+                .Attribute(m => m.AdditionalClass, ICON_FAILED)
+                .Close();
+        }).Close();
+
+        builder.Component<TIcon>()
+            .Attribute(m => m.Name, IconName.Close)
+            .Attribute(m=>m.AdditionalClass, "t-upload__icon-delete")
+            .Callback("onclick", this, () => RemoveFile(fileInfo.Id))
+            .Close();
     }
 
 
+    /// <inheritdoc/>
     protected override void DisposeComponentResources()
     {
-        Client.Dispose();
+        _fileList.Clear();
     }
 }
 /// <summary>
