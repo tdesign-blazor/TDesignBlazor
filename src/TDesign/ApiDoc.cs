@@ -74,11 +74,15 @@ public class ApiDoc
             var type = attr.Type ?? parameter.PropertyType.Name;
             var required = parameter.GetCustomAttribute<EditorRequiredAttribute>() is not null || attr.Required;
             var value = attr.Value;
-            if ( type == typeof(Boolean).Name )
+            if ( attr.Value is null )
             {
-                value = value is null ? "false" : (bool?)value;
+                if ( type == typeof(Boolean).Name )
+                {
+                    value = value is null ? "false" : (bool?)value;
+                }
             }
-            else if ( Nullable.GetUnderlyingType(parameter.PropertyType) is not null )
+
+            if ( Nullable.GetUnderlyingType(parameter.PropertyType) is not null )
             {
                 type = $"Nullable<{Nullable.GetUnderlyingType(parameter.PropertyType).Name}>";
             }

@@ -1,8 +1,8 @@
 ﻿@page "/components/list"
-<LayoutContent AnchorItems="@(new[]{"示例","基础文字列表","多行文字列表","多行文字列表","带分隔线的列表","带间隔色的列表","基础图文列表","带头部及尾部的列表","带滚动事件的列表","具备加载行为的内容","API"})">
-<PageHeader Title="List 列表">
-    列表用一个连续的列来显示多行元素，常用于具有相同构成及内容的模块批量展示，可承载多样化的信息内容，从纯文字到复杂的图文组合。
-</PageHeader>
+<PageLayout Title="List 列表" Description="列表用一个连续的列来显示多行元素，常用于具有相同构成及内容的模块批量展示，可承载多样化的信息内容，从纯文字到复杂的图文组合。"
+    Anchors="@(new[]{"示例","基础文字列表","多行文字列表","多行文字列表","带分隔线的列表","带间隔色的列表","基础图文列表","带头部及尾部的列表","带滚动事件的列表","具备加载行为的内容"})">
+    <ChildContent>
+
 <Example Title="示例" RunStyle="@Code.BgRun">
     <Description></Description>
     <RunContent>
@@ -188,21 +188,21 @@
         <TList>
             <TListItem>
                 <AvatarContent>
-                    <img src="avatar.jpg"/>
+                    <img src="/img/avatar.jpg"/>
                 </AvatarContent>
                 <TitleContent>这里是标题</TitleContent>
                 <ChildContent>这里是文字描述</ChildContent>
             </TListItem>
             <TListItem>
                 <AvatarContent>
-                    <img src="avatar.jpg" />
+                    <img src="/img/avatar.jpg" />
                 </AvatarContent>
                 <TitleContent>这里是标题</TitleContent>
                 <ChildContent>这里是文字描述</ChildContent>
             </TListItem>
             <TListItem>
                 <AvatarContent>
-                    <img src="avatar.jpg" />
+                    <img src="/img/avatar.jpg" />
                 </AvatarContent>
                 <TitleContent>这里是标题</TitleContent>
                 <ChildContent>这里是文字描述</ChildContent>
@@ -214,17 +214,17 @@
 ```cshtml-razor
 <TList>
     <TListItem>
-        <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+        <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
         <TitleContent>这里是标题</TitleContent>
         <ChildContent>这里是文字描述</ChildContent>
     </TListItem>
     <TListItem>
-        <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+        <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
         <TitleContent>这里是标题</TitleContent>
         <ChildContent>这里是文字描述</ChildContent>
     </TListItem>
     <TListItem>
-        <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+        <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
         <TitleContent>这里是标题</TitleContent>
         <ChildContent>这里是文字描述</ChildContent>
     </TListItem>
@@ -242,21 +242,21 @@
             <ChildContent>
                 <TListItem>
                     <AvatarContent>
-                        <img src="avatar.jpg" />
+                        <img src="/img/avatar.jpg" />
                     </AvatarContent>
                     <TitleContent>这里是标题</TitleContent>
                     <ChildContent>这里是文字描述</ChildContent>
                 </TListItem>
                 <TListItem>
                     <AvatarContent>
-                        <img src="avatar.jpg" />
+                        <img src="/img/avatar.jpg" />
                     </AvatarContent>
                     <TitleContent>这里是标题</TitleContent>
                     <ChildContent>这里是文字描述</ChildContent>
                 </TListItem>
                 <TListItem>
                     <AvatarContent>
-                        <img src="avatar.jpg" />
+                        <img src="/img/avatar.jpg" />
                     </AvatarContent>
                     <TitleContent>这里是标题</TitleContent>
                     <ChildContent>这里是文字描述</ChildContent>
@@ -272,17 +272,17 @@
     <FooterContent>这里是底部内容</FooterContent>
     <ChildContent>
         <TListItem>
-            <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+            <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
             <TitleContent>这里是标题</TitleContent>
             <ChildContent>这里是文字描述</ChildContent>
         </TListItem>
         <TListItem>
-            <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+            <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
             <TitleContent>这里是标题</TitleContent>
             <ChildContent>这里是文字描述</ChildContent>
         </TListItem>
         <TListItem>
-            <AvatarContent><img src=""avatar.jpg""/></AvatarContent>
+            <AvatarContent><img src=""/img/avatar.jpg""/></AvatarContent>
             <TitleContent>这里是标题</TitleContent>
             <ChildContent>这里是文字描述</ChildContent>
         </TListItem>
@@ -364,6 +364,10 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI  Component="typeof(TListItem)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TList)" />
+        <ApiDocument ComponentType="typeof(TListItem)" />
+    </ApiContent>
+</PageLayout>

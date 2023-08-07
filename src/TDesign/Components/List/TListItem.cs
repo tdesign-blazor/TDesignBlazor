@@ -6,23 +6,27 @@ namespace TDesign;
 /// </summary>
 [ChildComponent(typeof(TList))]
 [CssClass("t-list-item")]
-public class TListItem : TDesignComponentBase, IHasChildContent
+public class TListItem : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 列表项正文部分的内容。
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [ParameterApiDoc("列表项正文部分的内容")]
+    [Parameter] public override RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 列表项标题部分的内容。
     /// </summary>
+    [ParameterApiDoc("列表项标题部分的内容")]
     [Parameter] public RenderFragment? TitleContent { get; set; }
     /// <summary>
     /// 列表项头像部分的内容。
     /// </summary>
+    [ParameterApiDoc("列表项头像部分的内容")]
     [Parameter] public RenderFragment? AvatarContent { get; set; }
     /// <summary>
     /// 列表项操作部分的内容。
     /// </summary>
+    [ParameterApiDoc("列表项操作部分的内容")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

@@ -2247,11 +2247,6 @@
             表示一个列表容器。配合 <see cref="T:TDesign.TListItem"/> 组件使用。
             </summary>
         </member>
-        <member name="P:TDesign.TList.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TList.Size">
             <summary>
             列表的尺寸。默认是 <see cref="F:TDesign.Size.Medium"/> 。
@@ -4453,14 +4448,6 @@
             <param name="builder"></param>
             <param name="sequence"></param>
         </member>
-        <member name="T:TDesign.TDesignContainer">
-            <summary>
-            用于动态渲染组件的容器。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
-            <inheritdoc/>
-        </member>
         <member name="T:TDesign.TDivider">
             <summary>
             分割线。
@@ -4585,16 +4572,6 @@
         <member name="P:TDesign.TImage.Src">
             <summary>
             图片链接
-            </summary>
-        </member>
-        <member name="P:TDesign.TImage.OnError">
-            <summary>
-            当图片加载失败时触发的方法。
-            </summary>
-        </member>
-        <member name="P:TDesign.TImage.OnLoad">
-            <summary>
-            当图片加载完成时触发的方法。
             </summary>
         </member>
         <member name="T:TDesign.ImageFitType">
@@ -6056,6 +6033,14 @@
             </summary>
             <param name="info">The info.</param>
             <param name="context">The context.</param>
+        </member>
+        <member name="T:TDesign.TDesignContainer">
+            <summary>
+            用于动态渲染组件的容器。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.TDesignExtensions">
             <summary>
