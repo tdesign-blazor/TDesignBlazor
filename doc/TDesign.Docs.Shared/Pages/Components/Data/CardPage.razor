@@ -1,6 +1,6 @@
 ﻿@page "/components/card"
-<LayoutContent AnchorItems="@(new[]{"极简卡片","悬停阴影","带顶部内容的卡片","带分割线的顶部","顶部副标题和描述","带底部的卡片","API"})">
-<PageHeader Title="Card 卡片">最基础的卡片容器，可承载文字、列表、图片、段落，常用于后台概览页面。</PageHeader>
+<PageLayout Title="Card 卡片" Description="最基础的卡片容器，可承载文字、列表、图片、段落，常用于后台概览页面。" ComponentType="typeof(TCard)"
+Anchors="@(new[]{"极简卡片","悬停阴影","带顶部内容的卡片","带分割线的顶部","顶部副标题和描述","带底部的卡片"})">
 
 <Example Title="极简卡片">
     <Description>仅有内容的卡片形式。</Description>
@@ -181,4 +181,4 @@
 </Example>
     <div id="API"></div>
 <ComponentAPI Component="typeof(TCard)"></ComponentAPI>
-</LayoutContent>
+</PageLayout>

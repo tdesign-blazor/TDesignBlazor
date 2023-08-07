@@ -35,7 +35,11 @@
                         <td>
                             @if ( param.requried )
                             {
-                                <TTag Theme="Theme.Danger">Y</TTag>
+                                <TTag Type="TagType.Outline" Theme="Theme.Danger">Y</TTag>
+                            }
+                            else
+                            {
+                                <TTag Type="TagType.Outline">N</TTag>
                             }
                         </td>
                     </tr>

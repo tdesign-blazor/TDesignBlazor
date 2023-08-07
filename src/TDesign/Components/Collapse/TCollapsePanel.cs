@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
+using TDesign.Specifications;
 
 namespace TDesign;
 /// <summary>
@@ -6,42 +7,36 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-collapse-panel")]
 [ChildComponent(typeof(TCollapse))]
-public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive, IHasDisabled
+public class TCollapsePanel : TDesignAdditionParameterWithChildContentComponentBase, IHasDisabled,IHasTitleFragment,IHasTitleText
 {
-    /// <summary>
-    /// 初始化 <see cref="TCollapsePanel"/> 类的新实例。
-    /// </summary>
-    public TCollapsePanel()
-    {
-        TitleContent ??= new(builder => builder.AddContent(0, Title));
-    }
     /// <summary>
     /// 级联 <see cref="TCollapse"/> 组件。
     /// </summary>
     [CascadingParameter] public TCollapse CascadingCollaspe { get; set; }
     /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-    /// <summary>
     /// 设置标题部分的内容。
     /// </summary>
+    [ParameterApiDoc("标题部分的内容")]
     [Parameter] public RenderFragment? TitleContent { get; set; }
     /// <summary>
     /// 设置标题字符串。若设置了 <see cref="TitleContent"/> 属性的值，则该属性无效。
     /// </summary>
-    [Parameter] public string? Title { get; set; }
+    [ParameterApiDoc("标题字符串，若设置 TitleContent，则该值无效")]
+    [Parameter] public string? TitleText { get; set; }
     /// <summary>
     /// 右侧操作的内容。
     /// </summary>
+    [ParameterApiDoc("右侧操作的内容")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
     /// <summary>
     /// <c>true</c> 表示面板是展开状态，否则为折叠状态。
     /// </summary>
-    [Parameter] public bool Active { get; set; }
+    [ParameterApiDoc("是否为展开状态")]
+    [Parameter] public bool Expaned { get; set; }
     /// <summary>
     /// <c>true</c> 表示禁用面板，否则为 <c>false</c>。
     /// </summary>
+    [ParameterApiDoc("禁用状态")]
     [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -51,7 +46,7 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
             #region Header
             builder.CreateElement(0, "div", title =>
             {
-                if (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon == false)
+                if (CascadingCollaspe.RightIcon.HasValue && CascadingCollaspe.RightIcon == false)
                 {
                     BuildTIcon(title, 0);
                 }
@@ -60,7 +55,7 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
 
                 builder.CreateElement(2, "div", attributes: new { @class = "t-collapse-panel__header--blank" });
 
-                if (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value)
+                if (CascadingCollaspe.RightIcon.HasValue && CascadingCollaspe.RightIcon.Value)
                 {
                     BuildTIcon(title, 3);
                 }
@@ -93,11 +88,11 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
     {
         builder.CreateComponent<TIcon>(sequence, attributes: new
         {
-            Name = !Active ? (CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value ? IconName.ChevronLeft : IconName.ChevronRight) : IconName.ChevronDown,
+            Name = !Expaned ? (CascadingCollaspe.RightIcon.HasValue && CascadingCollaspe.RightIcon.Value ? IconName.ChevronLeft : IconName.ChevronRight) : IconName.ChevronDown,
             AdditionalClass = HtmlHelper.Instance.Class()
                                     .Append("t-collapse-panel__icon")
-                                    .Append("t-collapse-panel__icon--left", CascadingCollaspe.RightTIcon.HasValue && !CascadingCollaspe.RightTIcon.Value)
-                                    .Append("t-collapse-panel__icon--right", CascadingCollaspe.RightTIcon.HasValue && CascadingCollaspe.RightTIcon.Value).ToString(),
+                                    .Append("t-collapse-panel__icon--left", CascadingCollaspe.RightIcon.HasValue && !CascadingCollaspe.RightIcon.Value)
+                                    .Append("t-collapse-panel__icon--right", CascadingCollaspe.RightIcon.HasValue && CascadingCollaspe.RightIcon.Value).ToString(),
             onclick = HtmlHelper.Instance.Callback().Create(this, () =>
                 {
                     if (CascadingCollaspe.IconToggle)
@@ -119,7 +114,7 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
             @class = HtmlHelper.Instance.Class()
             .Append("t-collapse-panel__body"),
             style = HtmlHelper.Instance.Style()
-            .Append("display:none", !Active)
+            .Append("display:none", !Expaned)
             .Append("")
         });
     }
@@ -127,6 +122,7 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
     /// <summary>
     /// 执行展开或折叠的操作。
     /// </summary>
+    [MethodApiDoc("执行展开或折叠的操作")]
     public async Task Toggle()
     {
         if (Disabled)
@@ -141,12 +137,12 @@ public class TCollapsePanel : TDesignComponentBase, IHasChildContent, IHasActive
                 var child = CascadingCollaspe.ChildComponents[i];
                 if (child is TCollapsePanel panel)
                 {
-                    panel.Active = false;
+                    panel.Expaned = false;
                     await panel.Refresh();
                 }
             }
         }
-        Active = !Active;
+        Expaned = !Expaned;
         await this.Refresh();
     }
 }

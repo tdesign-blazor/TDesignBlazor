@@ -1,7 +1,6 @@
 ﻿@page "/components/icon"
 
-<PageLayout Title="TIcon 图标" Description="Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。">
-    <Demo>
+<PageLayout Title="Icon 图标" Description="Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。" ComponentType="typeof(TIcon)">
 <TAlert Theme="Theme.Primary">
     使用枚举 <code>IconName</code> 可以获取目前已有的图标名称，或使用字符串自定义图标名称。图标预览看这里 <TLink Hover="LinkHover.Underline" Theme="Theme.Primary" Href="https://tdesign.tencent.com/vue/components/icon" target="_blank">https://tdesign.tencent.com/vue/components/icon</TLink>
 </TAlert>
@@ -47,11 +46,6 @@
                 </li>
         }
     </ul>
-
-    </Demo>
-    <API>
-        <ApiDocument ComponentType="typeof(TIcon)"/>
-    </API>
 </PageLayout>
 @using System.Reflection
 

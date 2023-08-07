@@ -1,7 +1,7 @@
 ﻿
 <div style="margin-50px;">
-    <h1 style="font-size:36px;margin-bottom:10px; margin-top:20px; display:block;">@Title</h1>
-    <p style="color:#666">
+    <h1 style="font-size:36px;margin-bottom:20px; margin-top:40px; display:block;">@Title</h1>
+    <p style="color:gray">
         @Description
     </p>
     <TTab>
@@ -21,13 +21,18 @@
                     }
                 </RightSideContent>
                 <ChildContent>
-                    @Demo
+                    @ChildContent
                 </ChildContent>
             </TLayout>
         </TTabItem>
         <TTabItem Title="API">
             <div style="height:75vh;overflow-y:auto">
-                @API
+                @if(ComponentType is not null)
+                {
+                    <ApiDocument ComponentType="@ComponentType"/>
+                }else{
+                    @ApiContent
+                }
             </div>
         </TTabItem>
     </TTab>
@@ -36,7 +41,8 @@
 @code {
     [Parameter] public string? Title { get; set; }
     [Parameter] public string? Description { get; set; }
-    [Parameter] public RenderFragment? Demo { get; set; }
-    [Parameter] public RenderFragment? API { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? ApiContent { get; set; }
     [Parameter] public string[]? Anchors { get; set; }
+    [Parameter]public Type? ComponentType{ get; set; }
 }

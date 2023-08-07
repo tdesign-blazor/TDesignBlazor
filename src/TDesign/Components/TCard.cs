@@ -6,49 +6,54 @@ namespace TDesign;
 /// 卡片组件。
 /// </summary>
 [CssClass("t-card")]
-public class TCard : TDesignComponentBase, IHasChildContent
+public class TCard : TDesignAdditionParameterWithChildContentComponentBase
 {
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 设置不显示边框。
     /// </summary>
+    [ParameterApiDoc("不显示边框")]
     [Parameter][BooleanCssClass("", "t-card--bordered")] public bool Borderless { get; set; }
     /// <summary>
     /// 鼠标悬停显示阴影。
     /// </summary>
+    [ParameterApiDoc("鼠标悬停显示阴影")]
     [Parameter][CssClass("t-card--shadow-hover")] public bool HoverShadow { get; set; }
 
     /// <summary>
     /// 设置是否显示头部内容分割线。
     /// </summary>
+    [ParameterApiDoc("显示头部内容分割线")]
     [Parameter] public bool HeaderDivider { get; set; }
     /// <summary>
     /// 设置头部内容的标题部分的内容。
     /// </summary>
+    [ParameterApiDoc("头部内容的标题部分的内容")]
     [Parameter] public RenderFragment? HeaderTitleContent { get; set; }
     /// <summary>
     /// 设置头部内容的副标题部分的内容。
     /// </summary>
+    [ParameterApiDoc("头部内容的副标题部分的内容")]
     [Parameter] public RenderFragment? HeaderSubTitleContent { get; set; }
     /// <summary>
     /// 设置头部内容的描述部分的内容。
     /// </summary>
+    [ParameterApiDoc("头部内容的描述部分的内容")]
     [Parameter] public RenderFragment? HeaderDescriptionContent { get; set; }
     /// <summary>
     /// 设置头部内容的操作部分的内容。
     /// </summary>
+    [ParameterApiDoc("头部内容的操作部分的内容")]
     [Parameter] public RenderFragment? HeaderActionContent { get; set; }
     /// <summary>
     /// 设置卡片的底部内容。
     /// </summary>
+    [ParameterApiDoc("卡片的底部内容")]
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
     /// <summary>
     /// 宽度，默认400px.
     /// </summary>
+    [ParameterApiDoc("宽度，单位px", Value ="400")]
     [Parameter] public int Width { get; set; } = 400;
 
     /// <summary>

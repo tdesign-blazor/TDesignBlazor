@@ -283,11 +283,6 @@
             头像的尺寸。
             </summary>
         </member>
-        <member name="P:TDesign.TAvatar.ChildContent">
-            <summary>
-            头像显示的自定义内容。
-            </summary>
-        </member>
         <member name="T:TDesign.TAvatarGroup">
             <summary>
             表示头像组的容器。
@@ -353,17 +348,12 @@
             表示具备折叠面板的组容器，并使用 <see cref="T:TDesign.TCollapsePanel"/> 展现折叠面板的项。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapse.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TCollapse.IconToggle">
             <summary>
             仅点击图标才可以触发展开或折叠的响应。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapse.RightTIcon">
+        <member name="P:TDesign.TCollapse.RightIcon">
             <summary>
             设置 <c>true</c> 图标处于标题的右边，<c>null</c> 不用图标，<c>false</c> 图标处于标题左边。
             </summary>
@@ -383,19 +373,9 @@
             表示作为折叠面板的内容。必须放在 <see cref="T:TDesign.TCollapse"/> 组件中。
             </summary>
         </member>
-        <member name="M:TDesign.TCollapsePanel.#ctor">
-            <summary>
-            初始化 <see cref="T:TDesign.TCollapsePanel"/> 类的新实例。
-            </summary>
-        </member>
         <member name="P:TDesign.TCollapsePanel.CascadingCollaspe">
             <summary>
             级联 <see cref="T:TDesign.TCollapse"/> 组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TCollapsePanel.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TCollapsePanel.TitleContent">
@@ -403,7 +383,7 @@
             设置标题部分的内容。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapsePanel.Title">
+        <member name="P:TDesign.TCollapsePanel.TitleText">
             <summary>
             设置标题字符串。若设置了 <see cref="P:TDesign.TCollapsePanel.TitleContent"/> 属性的值，则该属性无效。
             </summary>
@@ -413,7 +393,7 @@
             右侧操作的内容。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapsePanel.Active">
+        <member name="P:TDesign.TCollapsePanel.Expaned">
             <summary>
             <c>true</c> 表示面板是展开状态，否则为折叠状态。
             </summary>
@@ -4010,11 +3990,6 @@
             徽章组件，出现在图标或文字右上角的徽标标识。
             </summary>
         </member>
-        <member name="P:TDesign.TBadge.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TBadge.Text">
             <summary>
             徽章显示的文本。
@@ -4371,11 +4346,6 @@
         <member name="T:TDesign.TCard">
             <summary>
             卡片组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TCard.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TCard.Borderless">
@@ -4855,12 +4825,12 @@
         </member>
         <member name="P:TDesign.TLink.Size">
             <summary>
-            尺寸。
+            文字尺寸。
             </summary>
         </member>
         <member name="P:TDesign.TLink.Theme">
             <summary>
-            颜色。
+            文字颜色。
             </summary>
         </member>
         <member name="P:TDesign.TLink.Underline">
