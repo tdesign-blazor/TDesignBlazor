@@ -7,16 +7,12 @@ namespace TDesign;
 /// </summary>
 [ParentComponent]
 [CssClass("t-tabs")]
-public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
+public class TTab : TDesignAdditionParameterWithChildContentComponentBase, IHasOnSwitch
 {
     public TTab()
     {
         SwitchIndex = 0;
     }
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 选项卡标题呈现的位置。
     /// </summary>
@@ -125,7 +121,7 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                 {
                     wrapper.CreateElement(0, "span", title =>
                     {
-                        title.CreateComponent<TIcon>(0, attributes: new { Name = tabItem.TIcon, style = "margin-right:4px" }, condition: tabItem!.TIcon is not null);
+                        title.CreateComponent<TIcon>(0, attributes: new { Name = tabItem.Icon, style = "margin-right:4px" }, condition: tabItem!.Icon is not null);
                         title.AddContent(0, tabItem!.Title);
                     }, new { @class = "t-tabs__nav-item-text-wrapper" });
                 }, new

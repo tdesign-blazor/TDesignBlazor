@@ -1,0 +1,78 @@
+﻿@{
+    var parameters = ApiDoc.GetParameterApiDoc(ComponentType);
+    if ( parameters.Any() )
+    {
+        <h2>@(ComponentType.Name) 的参数</h2>
+        <table class="t-table">
+            <thead>
+                <tr>
+                    <th width="10%">名称</th>
+                    <th width="10%">数据类型</th>
+                    <th width="5%">默认值</th>
+                    <th>说明</th>
+                    <th width="100px">是否必填</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( var param in parameters )
+                {
+                    <tr>
+                        <td style="font-weight:bolder;font-size:16px;">@param.name</td>
+                        <td>
+                            @if ( string.IsNullOrEmpty(param.type) )
+                            {
+                                <TTag Theme="Theme.Danger">Unkonw</TTag>
+                            }
+                            else
+                            {
+                                <code>@param.type</code>
+                            }
+                        </td>
+                        <td>
+                            @param.defaultValue
+                        </td>
+                        <td>@param.comment</td>
+                        <td>
+                            @if ( param.requried )
+                            {
+                                <TTag Theme="Theme.Danger">Y</TTag>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    var methods = ApiDoc.GetMethodApiDoc(ComponentType);
+    if ( methods.Any() )
+    {
+        <h2 style="margin-top:40px">@(ComponentType.Name) 的方法</h2>
+        <table class="t-table">
+            <thead>
+                <tr>
+                    <th width="20%">方法</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( var item in methods )
+                {
+                    <tr>
+                        <td style="font-weight:bolder;font-size:16px;">
+                        @($"{item.returnType} {item.name}({item.parameters})")
+                        </td>
+                        <td>@item.comment</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+
+
+@code {
+    [EditorRequired][Parameter] public Type ComponentType { get; set; }
+
+
+}

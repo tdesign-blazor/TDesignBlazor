@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace TDesign;
+﻿namespace TDesign;
 /// <summary>
 /// 选项卡的项。
 /// </summary>
 [ChildComponent(typeof(TTab))]
 [CssClass("t-tab-panel")]
-public class TTabItem : TDesignComponentBase, IHasChildContent
+public class TTabItem : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 用于自动化获取父组件。
@@ -16,10 +14,6 @@ public class TTabItem : TDesignComponentBase, IHasChildContent
     /// 选项卡标题。
     /// </summary>
     [EditorRequired][Parameter] public string Title { get; set; }
-    /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     ///// <summary>
     ///// 选项卡宽度，单位时 px。
     ///// </summary>
@@ -35,7 +29,7 @@ public class TTabItem : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 选项卡标题的图标。
     /// </summary>
-    [Parameter] public object? TIcon { get; set; }
+    [Parameter] public object? Icon { get; set; }
 
     internal int Index { get; private set; }
 

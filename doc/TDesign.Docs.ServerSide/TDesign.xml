@@ -57,6 +57,54 @@
             表示实现该接口的组件会被自动作为容器加入。该接口用于动态服务调用时组件所需要的容器组件。
             </summary>
         </member>
+        <member name="T:TDesign.ParameterApiDocAttribute">
+            <summary>
+            应用于参数，用于自动生成 API 文档。
+            </summary>
+        </member>
+        <member name="M:TDesign.ParameterApiDocAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="comment">描述。</param>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Type">
+            <summary>
+            参数的数据类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Comment">
+            <summary>
+            注释。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Required">
+            <summary>
+            必填项。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Value">
+            <summary>
+            默认值。
+            </summary>
+        </member>
+        <member name="T:TDesign.MethodApiDocAttribute">
+            <summary>
+            方法可被 api 文档识别。
+            </summary>
+        </member>
+        <member name="T:TDesign.ApiDoc">
+            <summary>
+            For document only.
+            </summary>
+        </member>
+        <member name="M:TDesign.ApiDoc.GetParameterApiDoc(System.Type)">
+            <summary>
+            获取指定组件的 api 文档。
+            </summary>
+            <param name="componentType">组件。</param>
+            <returns></returns>
+        </member>
         <member name="T:TDesign.TAnchor">
             <summary>
             锚点
@@ -1747,46 +1795,6 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="T:TDesign.UploadTheme">
-            <summary>
-            上传组件显示的风格样式。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.File">
-            <summary>
-            默认的文件上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.FileInput">
-            <summary>
-            输入框形式的文件上传风格。
-            </summary>
-        </member>
-        <member name="T:TDesign.UploadStatus">
-            <summary>
-            上传状态。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.NotStart">
-            <summary>
-            未开始。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.Pending">
-            <summary>
-            等待上传。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.InProgress">
-            <summary>
-            正在上传。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.Finished">
-            <summary>
-            上传结束。
-            </summary>
-        </member>
         <member name="T:TDesign.TUpload">
             <summary>
             上传组件允许用户传输文件或提交自己的内容。
@@ -2010,6 +2018,46 @@
             移除指定文件。
             </summary>
             <param name="id">文件id。</param>
+        </member>
+        <member name="T:TDesign.UploadTheme">
+            <summary>
+            上传组件显示的风格样式。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.File">
+            <summary>
+            默认的文件上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.FileInput">
+            <summary>
+            输入框形式的文件上传风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadStatus">
+            <summary>
+            上传状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.NotStart">
+            <summary>
+            未开始。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Pending">
+            <summary>
+            等待上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.InProgress">
+            <summary>
+            正在上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Finished">
+            <summary>
+            上传结束。
+            </summary>
         </member>
         <member name="T:TDesign.UploadFileInfo">
             <summary>
@@ -3744,11 +3792,6 @@
             选项卡
             </summary>
         </member>
-        <member name="P:TDesign.TTab.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTab.Position">
             <summary>
             选项卡标题呈现的位置。
@@ -3813,11 +3856,6 @@
             选项卡标题。
             </summary>
         </member>
-        <member name="P:TDesign.TTabItem.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTabItem.Padding">
             <summary>
             选项卡内容的内边距，默认时 25px。
@@ -3828,7 +3866,7 @@
             禁用选项卡。
             </summary>
         </member>
-        <member name="P:TDesign.TTabItem.TIcon">
+        <member name="P:TDesign.TTabItem.Icon">
             <summary>
             选项卡标题的图标。
             </summary>

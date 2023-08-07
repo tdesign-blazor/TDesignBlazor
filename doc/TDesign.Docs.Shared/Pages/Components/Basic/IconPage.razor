@@ -1,8 +1,7 @@
 ﻿@page "/components/icon"
-<LayoutContent AnchorItems="@(new[]{"使用图标","API"})">
-<PageHeader Title="Icon 图标">
-    Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。
-</PageHeader>
+
+<PageLayout Title="TIcon 图标" Description="Icon 作为UI构成中重要的元素，一定程度上影响UI界面整体呈现出的风格。">
+    <Demo>
 <TAlert Theme="Theme.Primary">
     使用枚举 <code>IconName</code> 可以获取目前已有的图标名称，或使用字符串自定义图标名称。图标预览看这里 <TLink Hover="LinkHover.Underline" Theme="Theme.Primary" Href="https://tdesign.tencent.com/vue/components/icon" target="_blank">https://tdesign.tencent.com/vue/components/icon</TLink>
 </TAlert>
@@ -31,6 +30,34 @@
 ")
     </CodeContent>
     
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TIcon)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+
+    <h3>图标枚举</h3>
+
+    <ul style="">
+            @foreach ( var item in typeof(IconName).GetFields().Skip(1) )
+            {
+                <li style="list-style-type:none; float:left;text-align:center;width:200px;margin-bottom:30px">
+                    <TIcon Name="@(GetIcon(item))" Size="36px"/>
+                    <br />
+                    <br>
+                    <small>
+                        @item.Name
+                    </small>
+                </li>
+        }
+    </ul>
+
+    </Demo>
+    <API>
+        <ApiDocument ComponentType="typeof(TIcon)"/>
+    </API>
+</PageLayout>
+@using System.Reflection
+
+@code{
+    string GetIcon(FieldInfo item)
+    {
+        return $"t-icon-{item.GetCustomAttribute<ComponentBuilder.CssClassAttribute>()?.CSS ?? item.Name.ToLower()}";
+    }
+}

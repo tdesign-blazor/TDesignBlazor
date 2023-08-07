@@ -11,55 +11,67 @@ public class TButton : TDesignAdditionParameterWithChildContentComponentBase
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+    [ParameterApiDoc("当按钮被点击时触发的回调方法",Type = "EventCallback<MouseEventArgs>")]
+    [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// <summary>
     /// 设置按钮的 HTML 类型。默认时 <see cref="ButtonHtmlType.Button"/> 类型。
     /// </summary>
+    [ParameterApiDoc("按钮的 HTML 类型",Value =$"{nameof(ButtonHtmlType.Button)}")]
     [Parameter][HtmlAttribute("type")] public ButtonHtmlType HtmlType { get; set; } = ButtonHtmlType.Button;
     /// <summary>
     /// 按钮类型的风格。
     /// </summary>
+    [ParameterApiDoc("按钮的 HTML 类型", Value = $"{nameof(ButtonVarient.Base)}")]
     [Parameter][CssClass("t-button--variant-")] public ButtonVarient Varient { get; set; } = ButtonVarient.Base;
 
     /// <summary>
     /// 主题颜色。
     /// </summary>
+    [ParameterApiDoc("按钮的主题颜色", Value = $"{nameof(Theme.Default)}")]
     [Parameter][CssClass("t-button--theme-")] public Theme Theme { get; set; } = Theme.Default;
     /// <summary>
     /// 幽灵按钮。内容反色，背景变为透明，一般是底色透明
     /// </summary>
+    [ParameterApiDoc("幽灵按钮。内容反色，背景变为透明，一般是底色透明")]
     [Parameter][CssClass("t-button--ghost")] public bool Ghost { get; set; }
     /// <summary>
     /// 提供大、中（默认）、小三种尺寸。
     /// </summary>
+    [ParameterApiDoc("提供大、中（默认）、小三种尺寸",Value =$"{nameof(Size.Medium)}")]
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
     /// <summary>
     /// 宽度上充满其所在的父容器。
     /// </summary>
+    [ParameterApiDoc("宽度上充满其所在的父容器")]
     [Parameter][CssClass("t-size-full-width")] public bool Block { get; set; }
 
     /// <summary>
     /// 按钮形状。
     /// </summary>
+    [ParameterApiDoc("按钮形状", Value = $"{nameof(ButtonShape.Rectangle)}")]
     [Parameter][CssClass("t-button--shape-")] public ButtonShape Shape { get; set; } = ButtonShape.Rectangle;
     /// <summary>
     /// 禁用状态。
     /// </summary>
+    [ParameterApiDoc("禁用状态")]
     [Parameter][CssClass("t-is-disabled")][HtmlAttribute] public bool Disabled { get; set; }
     /// <summary>
     /// 加载状态。
     /// </summary>
+    [ParameterApiDoc("加载状态")]
     [Parameter][CssClass("t-is-loading")] public bool Loading { get; set; }
 
     /// <summary>
     /// 设置按钮风格的 HTML 元素名称。默认是 button。
     /// </summary>
-    [Parameter] public string? TagName { get; set; } = "button";
+    [ParameterApiDoc("按钮风格的 HTML 元素名称", Value ="button")]
+    [Parameter] public string TagName { get; set; } = "button";
 
     /// <summary>
     /// 图标的名称。
     /// </summary>
+    [ParameterApiDoc("在按钮前缀的图标的名称")]
     [Parameter]public object? Icon { get; set; }
 
     /// <inheritdoc/>
