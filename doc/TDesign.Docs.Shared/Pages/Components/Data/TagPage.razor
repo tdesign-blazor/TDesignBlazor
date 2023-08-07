@@ -1,5 +1,8 @@
 ﻿@page "/components/tag"
-<LayoutContent AnchorItems="@(new[]{"基础标签","带图标的标签","带关闭的标签","可选择的标签","超长省略文本标签","不同尺寸的标签","不同形状的标签","API"})">
+<PageLayout Title="Tag 标签"
+            Description="标签常用于标记、分类和选择。"
+            ComponentType="typeof(TTag)"
+    Anchors="@(new[]{"基础标签","带图标的标签","带关闭的标签","可选择的标签","超长省略文本标签","不同尺寸的标签","不同形状的标签"})">
 <PageHeader Title="Tag 标签">标签常用于标记、分类和选择。</PageHeader>
 
 <Example Title="基础标签">
@@ -63,12 +66,12 @@
 <Example Title="带图标的标签">
     <Description>设置 <code>TIcon</code> 图标名称会在前面加图标。</Description>
     <RunContent>
-        <TTag TIcon="IconName.Discount">默认标签</TTag>
+        <TTag Icon="IconName.Discount">默认标签</TTag>
     </RunContent>
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TTag TIcon=""IconName.Discount"">默认标签</TTag>
+<TTag Icon=""IconName.Discount"">默认标签</TTag>
 ```
 ")
     </CodeContent>
@@ -166,9 +169,8 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TTag)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @inject IJSRuntime JS
 @code{
     bool Checked1;

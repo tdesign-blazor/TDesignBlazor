@@ -3089,7 +3089,7 @@
         </member>
         <member name="P:TDesign.TPopup.Arrow">
             <summary>
-            设置弹出层是否具备箭头指向。
+            设置是否具备箭头指向。
             </summary>
         </member>
         <member name="P:TDesign.TPopup.Trigger">
@@ -3454,7 +3454,7 @@
         </member>
         <member name="P:TDesign.TTable`1.ChildContent">
             <summary>
-            <inheritdoc/>
+            表格的内容。
             </summary>
         </member>
         <member name="P:TDesign.TTable`1.Loading">
@@ -3731,9 +3731,6 @@
             <summary>
             设置字段输出的格式。要符合 <see cref="T:System.IFormattable"/> 的定义。
             </summary>
-        </member>
-        <member name="P:TDesign.TTableFieldColumn`2.ChildContent">
-            <inheritdoc/>
         </member>
         <member name="M:TDesign.TTableFieldColumn`2.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
@@ -4644,9 +4641,6 @@
             时间轴组件的容器，用于时间轴展示。配合 <see cref="T:TDesign.TTimelineItem"/> 组件使用。
             </summary>
         </member>
-        <member name="P:TDesign.TTimeline.ChildContent">
-            <inheritdoc/>
-        </member>
         <member name="P:TDesign.TTimeline.Horizontal">
             <summary>
             设置水平显示。
@@ -4745,9 +4739,6 @@
             <summary>
             自定义图标的名称。
             </summary>
-        </member>
-        <member name="P:TDesign.TTimelineItem.AdditionalClass">
-            <inheritdoc/>
         </member>
         <member name="M:TDesign.TTimelineItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <inheritdoc/>
@@ -5394,11 +5385,6 @@
             标签。
             </summary>
         </member>
-        <member name="P:TDesign.TTag.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTag.Theme">
             <summary>
             主题颜色。
@@ -5419,7 +5405,7 @@
             形状。
             </summary>
         </member>
-        <member name="P:TDesign.TTag.TIcon">
+        <member name="P:TDesign.TTag.Icon">
             <summary>
             图标的名称。
             </summary>
@@ -5431,7 +5417,7 @@
         </member>
         <member name="P:TDesign.TTag.Disabled">
             <summary>
-            设置组件处于禁用状态。
+            禁用状态。
             </summary>
         </member>
         <member name="P:TDesign.TTag.OnClosing">

@@ -14,24 +14,29 @@ public abstract class TTableColumnBase<TItem> : BlazorComponentBase
     /// <summary>
     /// 设置列标题。若设置了 <see cref="HeaderContent"/> 参数，则该参数无效。
     /// </summary>
+    [ParameterApiDoc("列标题")]
     [Parameter] public string? Header { get; set; }
     /// <summary>
     /// 设置列标题部分的任意 UI 片段。
     /// </summary>
+    [ParameterApiDoc("列标题部分的任意 UI 片段")]
     [Parameter] public RenderFragment? HeaderContent { get; set; }
     /// <summary>
     /// 设置标题部分的额外 CSS 类字符串。
     /// </summary>
+    [ParameterApiDoc("标题部分的额外 CSS 类字符串")]
     [Parameter]public string? HeaderClass { get; set; }
 
     /// <summary>
     /// 设置每一列的额外 CSS 类的字符串。
     /// </summary>
+    [ParameterApiDoc("每一列的额外 CSS 类的字符串")]
     [Parameter] public string? ColumnClass { get; set; }
 
     /// <summary>
     /// 设置底部的任意 UI 片段。
     /// </summary>
+    [ParameterApiDoc("底部的任意 UI 片段")]
     [Parameter] public RenderFragment? FooterContent { get; set; }
 
     /// <inheritdoc/>

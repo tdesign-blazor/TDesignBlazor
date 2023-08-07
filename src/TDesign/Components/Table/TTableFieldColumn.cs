@@ -14,13 +14,15 @@ public class TTableFieldColumn<TItem,TField> : TTableColumnBase<TItem>,IHasChild
     /// <summary>
     /// 设置数据源的字段名称。
     /// </summary>
+    [ParameterApiDoc("数据源的字段名称", Type = "Expression<Func<TItem, TField>>")]
     [Parameter, EditorRequired] public Expression<Func<TItem, TField>> Field { get; set; } = default;
 
     /// <summary>
     /// 设置字段输出的格式。要符合 <see cref="IFormattable"/> 的定义。
     /// </summary>
+    [ParameterApiDoc("字段输出的格式")]
     [Parameter] public string? Format { get; set; }
-    /// <inheritdoc/>
+    [ParameterApiDoc("自定义显示模板", Type = "RenderFragment<TItem>")]
     [Parameter]public RenderFragment<TItem>? ChildContent { get; set; }
 
     protected Func<TItem, string?>? CellTextFunc { get; private set; }

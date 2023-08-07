@@ -33,6 +33,7 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// </summary>
     /// <param name="page">页码。</param>
     /// <param name="size">数据量。</param>
+    [MethodApiDoc("查询数据")]
     public async Task QueryData(int page = 1, int size = 10)
     {
         if (page < 1)
@@ -71,6 +72,7 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// </summary>
     /// <param name="count">总记录数。</param>
     /// <exception cref="InvalidOperationException"><paramref name="count"/> 小于0。</exception>
+    [MethodApiDoc("变更总记录数")]
     public Task ChangeTotalCount(int count)
     {
         if (count < 0)
@@ -88,6 +90,7 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// </summary>
     /// <param name="rowIndex">要选择的行索引。</param>
     /// <exception cref="TDesignComponentException">无法找到指定行索引的数据。</exception>
+    [MethodApiDoc("选中指定索引的行，如果该行被选中，则会取消选中。")]
     public Task SelectRow(int rowIndex)
     {
         if (rowIndex < 0)
@@ -129,6 +132,7 @@ public partial class TTable<TItem>:TDesignComponentBase
     /// 展开/收缩指定索引的行。
     /// </summary>
     /// <param name="rowIndex">行索引。</param>
+    [MethodApiDoc("展开/收缩指定索引的行。")]
     public Task ExpandRow(int rowIndex)
     {
         var expandColumn = GetColumns<TTableExpandColumn<TItem>>().FirstOrDefault();

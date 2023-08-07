@@ -8,5 +8,6 @@ public class TTooltip : TPopup
     /// <summary>
     /// 设置主题颜色。
     /// </summary>
+    [ParameterApiDoc("主题颜色",Value ="Default")]
     [Parameter][CssClass("t-tooltip--")] public Theme Theme { get; set; } = Theme.Default;
 }

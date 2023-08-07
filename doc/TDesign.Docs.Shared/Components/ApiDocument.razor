@@ -1,9 +1,9 @@
 ﻿@{
     var parameters = ApiDoc.GetParameterApiDoc(ComponentType);
     if ( parameters.Any() )
-    {
-        <h2>@(ComponentType.Name) 的参数</h2>
-        <table class="t-table">
+    {        
+        <h2>@(Name) 的参数</h2>
+        <table class="t-table" style="margin-bottom:40px">
             <thead>
                 <tr>
                     <th width="10%">名称</th>
@@ -35,7 +35,7 @@
                         <td>
                             @if ( param.requried )
                             {
-                                <TTag Type="TagType.Outline" Theme="Theme.Danger">Y</TTag>
+                                <TTag Theme="Theme.Danger">Y</TTag>
                             }
                             else
                             {
@@ -51,11 +51,11 @@
     var methods = ApiDoc.GetMethodApiDoc(ComponentType);
     if ( methods.Any() )
     {
-        <h2 style="margin-top:40px">@(ComponentType.Name) 的方法</h2>
+        <h2 style="margin-top:40px">@(Name) 的方法</h2>
         <table class="t-table">
             <thead>
                 <tr>
-                    <th width="20%">方法</th>
+                    <th width="40%">方法</th>
                     <th>说明</th>
                 </tr>
             </thead>
@@ -63,7 +63,7 @@
                 @foreach ( var item in methods )
                 {
                     <tr>
-                        <td style="font-weight:bolder;font-size:16px;">
+                        <td style="font-weight:bolder;">
                         @($"{item.returnType} {item.name}({item.parameters})")
                         </td>
                         <td>@item.comment</td>
@@ -78,5 +78,7 @@
 @code {
     [EditorRequired][Parameter] public Type ComponentType { get; set; }
 
+    [Parameter]public string? Title{ get; set; }
 
+    string Name => Title ?? ComponentType.Name;
 }
