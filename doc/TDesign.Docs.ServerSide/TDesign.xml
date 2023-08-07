@@ -4424,11 +4424,6 @@
             设置显示的日期时间字符串。
             </summary>
         </member>
-        <member name="P:TDesign.TComment.ChildContent">
-            <summary>
-            设置评论的任意内容。
-            </summary>
-        </member>
         <member name="P:TDesign.TComment.OperationContent">
             <summary>
             设置评论的操作内容。每一个操作需要用 li 标记进行渲染。
@@ -4529,27 +4524,27 @@
         </member>
         <member name="P:TDesign.TImage.Alt">
             <summary>
-            图片描述
+            图片描述。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Disabled">
             <summary>
-            禁用状态
+            禁用状态。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Error">
             <summary>
-            错误内容
+            自定义图片加载失败状态下的显示内容。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Fit">
             <summary>
-            填充模式
+            图片填充模式。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Gallery">
             <summary>
-            是否展示为图集样式
+            是否展示为图集样式。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Lazy">
@@ -4574,17 +4569,17 @@
         </member>
         <member name="P:TDesign.TImage.Placeholder">
             <summary>
-            占位元素
+            占位元素。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Position">
             <summary>
-            定位
+            定位。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Shape">
             <summary>
-            图片圆角类型
+            图片圆角类型。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Src">
@@ -4594,12 +4589,12 @@
         </member>
         <member name="P:TDesign.TImage.OnError">
             <summary>
-            加载失败
+            当图片加载失败时触发的方法。
             </summary>
         </member>
         <member name="P:TDesign.TImage.OnLoad">
             <summary>
-            加载完成
+            当图片加载完成时触发的方法。
             </summary>
         </member>
         <member name="T:TDesign.ImageFitType">

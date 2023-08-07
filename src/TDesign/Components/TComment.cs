@@ -1,41 +1,40 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
-
-namespace TDesign;
+﻿namespace TDesign;
 
 /// <summary>
 /// 评论用于对页面内容的反馈、评价、讨论等，如对文章的评价，对话题的讨论。
 /// </summary>
 [CssClass("t-comment")]
-public class TComment : TDesignComponentBase, IHasChildContent
+public class TComment : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 设置头像的 uri 地址。
     /// </summary>
+    [ParameterApiDoc("头像的 uri 地址")]
     [Parameter] public string? Avatar { get; set; }
     /// <summary>
     /// 设置作者的名称。
     /// </summary>
+    [ParameterApiDoc("作者的名称")]
     [Parameter] public string? Author { get; set; }
     /// <summary>
     /// 设置显示的日期时间字符串。
     /// </summary>
+    [ParameterApiDoc("显示的日期时间字符串")]
     [Parameter] public string? DateTime { get; set; }
-
-    /// <summary>
-    /// 设置评论的任意内容。
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 设置评论的操作内容。每一个操作需要用 li 标记进行渲染。
     /// </summary>
+    [ParameterApiDoc("评论的操作内容。每一个操作需要用 li 标记进行渲染")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
     /// <summary>
     /// 设置当前评论的回复内容。
     /// </summary>
+    [ParameterApiDoc("当前评论的回复内容")]
     [Parameter] public RenderFragment? ReplyContent { get; set; }
     /// <summary>
     /// 设置评论内容的引用内容。
     /// </summary>
+    [ParameterApiDoc("评论内容的引用内容")]
     [Parameter] public RenderFragment? QuateContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

@@ -6,7 +6,7 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
     <RunContent>
         <TSpace Gap="24px">
             <TSpaceItem>
-                <TAvatar Url="avatar.jpg"/>
+                <TAvatar Url="/img/avatar.jpg"/>
             </TSpaceItem>
             <TSpaceItem>
                 <TAvatar Icon="@IconName.User"/>
@@ -19,7 +19,7 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
-<TAvatar Url=""avatar.jpg""/>
+<TAvatar Url=""/img/avatar.jpg""/>
 
 <TAvatar Icon=""@IconName.User""/>
 
@@ -72,14 +72,14 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
     <Description>使用 <code>TAvatarGroup</code> 来组合内部的 <code>TAvatar</code> 组件。</Description>
     <RunContent>
         <TAvatarGroup>
-            <TAvatar Url="avatar.jpg"/>
+            <TAvatar Url="/img/avatar.jpg"/>
             <TAvatar Icon="IconName.User"/>
             <TAvatar>W</TAvatar>
         </TAvatarGroup>
         <br/>
 
         <TAvatarGroup Size="Size.Large">
-            <TAvatar Url="avatar.jpg" />
+            <TAvatar Url="/img/avatar.jpg" />
             <TAvatar Icon="IconName.User" />
             <TAvatar>W</TAvatar>
         </TAvatarGroup>
@@ -88,13 +88,13 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
         @Code.Create(@"
 ```cshtml-razor
 <TAvatarGroup>
-    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar Url=""/img/avatar.jpg""/>
     <TAvatar Icon=""IconName.User""/>
     <TAvatar>W</TAvatar>
 </TAvatarGroup>
 
 <TAvatarGroup Size=""Size.Large"">
-    <TAvatar Url=""avatar.jpg"" />
+    <TAvatar Url=""/img/avatar.jpg"" />
     <TAvatar Icon=""IconName.User"" />
     <TAvatar>W</TAvatar>
 </TAvatarGroup>
@@ -106,13 +106,13 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
     <Description>设置 <code>Left</code> 则改变头像组的偏移方向</Description>
     <RunContent>
         <TAvatarGroup>
-            <TAvatar Url="avatar.jpg" />
+            <TAvatar Url="/img/avatar.jpg" />
             <TAvatar Icon="IconName.User" />
             <TAvatar>W</TAvatar>
         </TAvatarGroup>
         <br />
         <TAvatarGroup Left>
-            <TAvatar Url="avatar.jpg" />
+            <TAvatar Url="/img/avatar.jpg" />
             <TAvatar Icon="IconName.User" />
             <TAvatar>W</TAvatar>
         </TAvatarGroup>
@@ -121,13 +121,13 @@ Anchors="@(new[]{"头像类型","头像形状","头像尺寸","组合头像","�
         @Code.Create(@"
 ```cshtml-razor
 <TAvatarGroup>
-    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar Url=""/img/avatar.jpg""/>
     <TAvatar Icon=""IconName.User""/>
     <TAvatar>W</TAvatar>
 </TAvatarGroup>
 
 <TAvatarGroup Left>
-    <TAvatar Url=""avatar.jpg""/>
+    <TAvatar Url=""/img/avatar.jpg""/>
     <TAvatar Icon=""IconName.User""/>
     <TAvatar>W</TAvatar>
 </TAvatarGroup>
