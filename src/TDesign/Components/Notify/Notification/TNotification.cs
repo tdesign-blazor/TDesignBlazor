@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
-
 using TDesign.Notification;
 
 namespace TDesign;
@@ -14,14 +13,17 @@ public class TNotification : NotifyComponentBase
     /// <summary>
     /// 显示的标题。
     /// </summary>
+    [ParameterApiDoc("显示的标题")]
     [Parameter][EditorRequired] public string? Title { get; set; }
     /// <summary>
     /// 显示的副标题。
     /// </summary>
+    [ParameterApiDoc("显示的副标题")]
     [Parameter] public string? SubTitle { get; set; }
     /// <summary>
     /// 具备操作部分的 UI 内容。
     /// </summary>
+    [ParameterApiDoc("操作部分的 UI 内容")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

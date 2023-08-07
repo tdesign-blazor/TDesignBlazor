@@ -20,52 +20,64 @@ public class TPopConfirm:TPopup
     /// <summary>
     /// 设置主题颜色。
     /// </summary>
+    [ParameterApiDoc("主题颜色", Value ="Default")]
     [Parameter][CssClass("t-popconfirm__popup--")] public Theme Theme { get; set; } = Theme.Default;
 
     /// <summary>
     /// 设置当点击【确认】按钮时的回调。
     /// </summary>
+    [ParameterApiDoc("当点击【确认】按钮时的回调", Type = "EventCallback<PopConfirmEventArgs>")]
     [Parameter]public EventCallback<PopConfirmEventArgs> OnConfirm { get; set; }
     /// <summary>
     /// 设置确认按钮的文本。
     /// </summary>
+    [ParameterApiDoc("确认按钮的文本", Value = "确定")]
     [Parameter] public string? ConfirmBtnText { get; set; } = "确定";
     /// <summary>
     /// 设置确认按钮的变体样式。
     /// </summary>
+    [ParameterApiDoc("确认按钮的变体样式", Value = "Base")]
     [Parameter] public ButtonVarient ConfirmBtnVarient { get; set; } = ButtonVarient.Base;
     /// <summary>
     /// 设置确认按钮的主题。
     /// </summary>
+    [ParameterApiDoc("确认按钮的主题", Value = "Primary")]
     [Parameter] public Theme ConfirmBtnTheme { get; set; } = Theme.Primary;
 
     /// <summary>
     /// 设置取消按钮的文本。
     /// </summary>
+    [ParameterApiDoc("取消按钮的文本", Value = "取消")]
     [Parameter] public string? CancelBtnText { get; set; } = "取消";
     /// <summary>
     /// 设置点击【取消】按钮时的回调。
     /// </summary>
+    [ParameterApiDoc("当点击【取消】按钮时的回调", Type = "EventCallback<PopConfirmEventArgs>")]
     [Parameter] public EventCallback<PopConfirmEventArgs> OnCancel { get; set; }
     /// <summary>
     /// 设置取消按钮的变体样式。
     /// </summary>
+    [ParameterApiDoc("取消按钮的变体样式", Value = "Outline")]
     [Parameter] public ButtonVarient CancelBtnVarient { get; set; } = ButtonVarient.Outline;
     /// <summary>
     /// 设置取消按钮的主题。
     /// </summary>
+    [ParameterApiDoc("取消按钮的主题", Value = "Default")]
     [Parameter] public Theme CancelBtnTheme { get; set; } = Theme.Default;
     /// <summary>
     /// 设置确认和取消按钮的尺寸。
     /// </summary>
+    [ParameterApiDoc("确认和取消按钮的尺寸", Value = "Small")]
     [Parameter] public Size BtnSize { get; set; } = Size.Small;
     /// <summary>
     /// 设置确认框的内容。
     /// </summary>
+    [ParameterApiDoc("确认框的内容")]
     [Parameter]public RenderFragment? ConfirmContent { get; set; }
     /// <summary>
     /// 设置自定义图标。
     /// </summary>
+    [ParameterApiDoc("自定义图标", Value = "InfoCircleFilled")]
     [Parameter] public object? Icon { get; set; } = IconName.InfoCircleFilled;
 
     /// <inheritdoc/>

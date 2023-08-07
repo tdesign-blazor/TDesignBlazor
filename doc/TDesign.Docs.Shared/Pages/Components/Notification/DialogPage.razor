@@ -1,10 +1,10 @@
 ﻿@page "/components/dialog"
-<LayoutContent AnchorItems="@(new[]{"反馈类对话框","确认类对话框","自定义对话框模板","自定义参数","API"})">
-<PageHeader Title="Dialog 对话框">
-    对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。
-</PageHeader>
+<PageLayout Title="Dialog 对话框" Description="对话框是一种临时窗口，通常在不想中断整体任务流程，但又需要为用户展示信息或获得用户响应时，在页面中打开一个对话框承载相应的信息及操作。"
+ ComponentType="typeof(TDialog)"
+    Anchors="@(new[]{"反馈类对话框","确认类对话框","自定义对话框模板","自定义参数"})">
+
 <TAlert>
-    <code>IDialogService</code> 唤醒出对话框，并支持自定义对话框模板
+   注入 <code>IDialogService</code> 唤醒出对话框，并支持自定义对话框模板
 </TAlert>
 
     <Example Title="反馈类对话框">
@@ -192,9 +192,7 @@ async Task GetResult()
 ")
     </CodeContent>
 </Example>
-    <div id="API"></div>
-<ComponentAPI Component="typeof(TDialog)"></ComponentAPI>
-</LayoutContent>
+</PageLayout>
 
     @inject IDialogService DialogService
 
