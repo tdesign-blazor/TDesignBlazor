@@ -7,26 +7,30 @@ namespace TDesign;
 /// 分割线。
 /// </summary>
 [CssClass("t-divider")]
-public class TDivider : TDesignComponentBase, IHasChildContent
+public class TDivider : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// 分割线的文本。
     /// </summary>
+    [ParameterApiDoc("分割线的任意内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
-    /// 垂直分割线。
+    /// 是否垂直分割线。
     /// </summary>
+    [ParameterApiDoc("是否为垂直分割线")]
     [Parameter][CssClass("t-divider--vertical")] public bool Vertical { get; set; }
 
     /// <summary>
     /// 是否为虚线。
     /// </summary>
+    [ParameterApiDoc("是否为虚线")]
     [Parameter][CssClass("t-divider--dashed")] public bool Dashed { get; set; }
 
     /// <summary>
     /// 文字对齐方式。
     /// </summary>
+    [ParameterApiDoc("文字对齐方式", Value = "Center")]
     [Parameter][CssClass("t-divider--with-text-")] public HorizontalAlignment Alignment { get; set; } = HorizontalAlignment.Center;
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

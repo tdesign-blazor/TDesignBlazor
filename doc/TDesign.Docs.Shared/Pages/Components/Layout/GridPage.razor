@@ -1,8 +1,7 @@
 ﻿@page "/components/grid"
-<LayoutContent AnchorItems="@(new[]{"基本使用","区块间隔","左右偏移","排序","次序","水平对齐","垂直对齐","API"})">
-<PageHeader Title="Grid 栅格">
-    栅格是以规则的网格阵列来指导和规范网页中的版面布局以及信息分布，提高界面内布局的一致性，节约成本。
-</PageHeader>
+<PageLayout Title="Grid 栅格" Description="栅格是以规则的网格阵列来指导和规范网页中的版面布局以及信息分布，提高界面内布局的一致性，节约成本。"
+    Anchors="@(new[]{"基本使用","区块间隔","左右偏移","排序","次序","水平对齐","垂直对齐"})">
+    <ChildContent>
 
 <Example Title="基本使用">
     <Description>
@@ -423,7 +422,11 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TRow)"></ComponentAPI>
-<ComponentAPI Component="typeof(TColumn)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TRow)"/>
+        <ApiDocument ComponentType="typeof(TColumn)"/>
+    </ApiContent>
+</PageLayout>
