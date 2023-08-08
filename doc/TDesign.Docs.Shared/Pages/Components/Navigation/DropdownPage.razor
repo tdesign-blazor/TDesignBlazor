@@ -1,11 +1,10 @@
 ﻿@page "/components/dropdown"
 
-<PageHeader Title="TDropdown 下拉菜单">
-    用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。
-</PageHeader>
+<PageLayout Title="Dropdown 下拉菜单" Description="用于承载过多的操作集合，通过下拉拓展的形式，收纳更多的操作。" ComponentType="typeof(TDropdown)"
+    Anchors="@(new[]{"示例","文字下拉菜单","带分割线下拉菜单","带禁用操作项的下拉菜单","自定义主题的下拉菜单",
+"带图标的下拉菜单","多层下拉菜单","OnOptionSelected 事件"})">
 
-<LayoutContent AnchorItems="@(new[]{"示例","文字下拉菜单","带分割线下拉菜单","带禁用操作项的下拉菜单","自定义主题的下拉菜单",
-"带图标的下拉菜单","多层下拉菜单","OnOptionSelected 事件","API"})">
+
     <Example Title="示例">
     <Description>
             使用 <code>DropdownOption</code> 定义菜单的项。
@@ -290,10 +289,7 @@
 ")
     </CodeContent>
 </Example>
-
-<div id="API"></div>
-<ComponentAPI Component="typeof(TDropdown)"></ComponentAPI>
-</LayoutContent>
+</PageLayout>
 @code {
     IEnumerable<DropdownOption> DemoOptions = new List<DropdownOption>
     {

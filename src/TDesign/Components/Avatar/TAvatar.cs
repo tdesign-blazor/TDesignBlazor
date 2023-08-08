@@ -6,29 +6,29 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-avatar")]
 [ChildComponent(typeof(TAvatarGroup), Optional = true)]
-public class TAvatar : TDesignComponentBase, IHasChildContent
+public class TAvatar : TDesignAdditionParameterWithChildContentComponentBase
 {
     [CascadingParameter] public TAvatarGroup? CascadingAvatarGroup { get; set; }
     /// <summary>
     /// 头像形状。
     /// </summary>
+    [ParameterApiDoc("头像形状", Value =$"{nameof(Shape.Circle)}")]
     [Parameter][CssClass("t-avatar--")] public Shape? Shape { get; set; } = Shape.Circle;
     /// <summary>
     /// 设置头像的图片地址。
     /// </summary>
+    [ParameterApiDoc("头像的图片地址")]
     [Parameter] public string? Url { get; set; }
     /// <summary>
     /// 设置头像的字体名称。
     /// </summary>
+    [ParameterApiDoc("头像的字体名称")]
     [Parameter] public object? Icon { get; set; }
     /// <summary>
     /// 头像的尺寸。
     /// </summary>
+    [ParameterApiDoc("头像的尺寸")]
     [Parameter][CssClass] public Size? Size { get; set; }
-    /// <summary>
-    /// 头像显示的自定义内容。
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {

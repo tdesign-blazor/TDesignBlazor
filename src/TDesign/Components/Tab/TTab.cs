@@ -7,31 +7,31 @@ namespace TDesign;
 /// </summary>
 [ParentComponent]
 [CssClass("t-tabs")]
-public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
+public class TTab : TDesignAdditionParameterWithChildContentComponentBase, IHasOnSwitch
 {
     public TTab()
     {
         SwitchIndex = 0;
     }
     /// <summary>
-    /// <inheritdoc/>
-    /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-    /// <summary>
     /// 选项卡标题呈现的位置。
     /// </summary>
+    [ParameterApiDoc("选项卡标题呈现的位置", Value ="Top")]
     [Parameter] public Position Position { get; set; } = Position.Top;
     /// <summary>
     /// 卡片模式。
     /// </summary>
+    [ParameterApiDoc("卡片模式")]
     [Parameter] public bool Card { get; set; }
     /// <summary>
     /// 选项卡的尺寸。
     /// </summary>
+    [ParameterApiDoc("选项卡的尺寸", Value = "Medium")]
     [Parameter] public TabSize Size { get; set; } = TabSize.Medium;
     /// <summary>
-    /// <inheritdoc/>
+    /// 当选项卡切换时触发的回调。
     /// </summary>
+    [ParameterApiDoc("当选项卡切换时触发的回调", Type= "EventCallback<int?>")]
     [Parameter] public EventCallback<int?> OnSwitch { get; set; }
     public int? SwitchIndex { get; set; }
 
@@ -125,7 +125,7 @@ public class TTab : TDesignComponentBase, IHasChildContent, IHasOnSwitch
                 {
                     wrapper.CreateElement(0, "span", title =>
                     {
-                        title.CreateComponent<TIcon>(0, attributes: new { Name = tabItem.TIcon, style = "margin-right:4px" }, condition: tabItem!.TIcon is not null);
+                        title.CreateComponent<TIcon>(0, attributes: new { Name = tabItem.Icon, style = "margin-right:4px" }, condition: tabItem!.Icon is not null);
                         title.AddContent(0, tabItem!.Title);
                     }, new { @class = "t-tabs__nav-item-text-wrapper" });
                 }, new

@@ -1,6 +1,6 @@
 ﻿@page "/components/layout"
-<LayoutContent AnchorItems="@(new[]{"基本用法","API"})">
-<PageHeader Title="Layout 布局">用于组织网页的框架结构。</PageHeader>
+<PageLayout Title="Layout 布局" Description="用于组织网页的框架结构。" ComponentType="typeof(TLayout)"
+    Anchors="@(new[]{"基本用法"})">
 
 <Example Title="基本用法">
     <Description>
@@ -59,6 +59,4 @@
 ")
     </CodeContent>
 </Example>
-    <div id="API"></div>
-<ComponentAPI Component="typeof(TLayout)"></ComponentAPI>
-</LayoutContent>
+</PageLayout>

@@ -4,6 +4,11 @@
     定义组件通用的命名规范
 </PageHeader>
 
+<h2>组件规范</h2>
+@Code.Create(@"
+为了防止用户在项目中与其他组件库重名（虽然可能性很小），我们的所有组件都会有一个“T”前缀，例如按钮是 `<Button>`，则 TDesign 的按钮就是 `<TButton>`
+")
+
 <h2>代码片段（RenderFragment）</h2>
 @Code.Create(@"
 所有能使用代码片段（即`RenderFragment`）类型的参数，一律使用 `Content` 后缀

@@ -1,5 +1,5 @@
 ﻿@page "/components/checkbox"
-<LayoutContent AnchorItems="@(new[]{"基本使用","API"})">
+<PageLayout Title="Checkbox 多选框" Description="多选框是一个选择控件，允许用户通过单击在选中和未选中之间切换。" Anchors="@(new[]{"基本使用"})" ComponentType="typeof(TInputCheckBox)">
 <PageHeader Title="Checkbox 多选框">
     多选框是一个选择控件，允许用户通过单击在选中和未选中之间切换。
 </PageHeader>
@@ -24,9 +24,8 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TInputCheckBox)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @code{
     bool? DemoChecked{ get; set; }
     bool? IndeterminateCheck{ get; set; }

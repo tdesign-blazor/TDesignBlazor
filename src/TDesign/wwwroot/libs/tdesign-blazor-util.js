@@ -7,6 +7,9 @@
      * @param {Boolean} replace 是否覆盖原有事件，默认为false，需要覆盖时传入true
      */
     setEvent: function (element, name, handler, replace = false) {
+        if (!element) {
+            return;
+        }
         let functionStored = element[name];
         element[name] = function (e) {
             if (!replace && functionStored) {

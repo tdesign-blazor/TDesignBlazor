@@ -57,6 +57,54 @@
             表示实现该接口的组件会被自动作为容器加入。该接口用于动态服务调用时组件所需要的容器组件。
             </summary>
         </member>
+        <member name="T:TDesign.ParameterApiDocAttribute">
+            <summary>
+            应用于参数，用于自动生成 API 文档。
+            </summary>
+        </member>
+        <member name="M:TDesign.ParameterApiDocAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="comment">描述。</param>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Type">
+            <summary>
+            参数的数据类型。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Comment">
+            <summary>
+            注释。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Required">
+            <summary>
+            必填项。
+            </summary>
+        </member>
+        <member name="P:TDesign.ParameterApiDocAttribute.Value">
+            <summary>
+            默认值。
+            </summary>
+        </member>
+        <member name="T:TDesign.MethodApiDocAttribute">
+            <summary>
+            方法可被 api 文档识别。
+            </summary>
+        </member>
+        <member name="T:TDesign.ApiDoc">
+            <summary>
+            For document only.
+            </summary>
+        </member>
+        <member name="M:TDesign.ApiDoc.GetParameterApiDoc(System.Type)">
+            <summary>
+            获取指定组件的 api 文档。
+            </summary>
+            <param name="componentType">组件。</param>
+            <returns></returns>
+        </member>
         <member name="T:TDesign.TAnchor">
             <summary>
             锚点
@@ -173,7 +221,7 @@
         </member>
         <member name="P:TDesign.TAnchorItem.OnClick">
             <summary>
-            点击事件
+            点击锚点的回调方法
             </summary>
         </member>
         <member name="P:TDesign.TAnchorItem.Target">
@@ -233,11 +281,6 @@
         <member name="P:TDesign.TAvatar.Size">
             <summary>
             头像的尺寸。
-            </summary>
-        </member>
-        <member name="P:TDesign.TAvatar.ChildContent">
-            <summary>
-            头像显示的自定义内容。
             </summary>
         </member>
         <member name="T:TDesign.TAvatarGroup">
@@ -305,17 +348,12 @@
             表示具备折叠面板的组容器，并使用 <see cref="T:TDesign.TCollapsePanel"/> 展现折叠面板的项。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapse.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TCollapse.IconToggle">
             <summary>
             仅点击图标才可以触发展开或折叠的响应。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapse.RightTIcon">
+        <member name="P:TDesign.TCollapse.RightIcon">
             <summary>
             设置 <c>true</c> 图标处于标题的右边，<c>null</c> 不用图标，<c>false</c> 图标处于标题左边。
             </summary>
@@ -335,19 +373,9 @@
             表示作为折叠面板的内容。必须放在 <see cref="T:TDesign.TCollapse"/> 组件中。
             </summary>
         </member>
-        <member name="M:TDesign.TCollapsePanel.#ctor">
-            <summary>
-            初始化 <see cref="T:TDesign.TCollapsePanel"/> 类的新实例。
-            </summary>
-        </member>
         <member name="P:TDesign.TCollapsePanel.CascadingCollaspe">
             <summary>
             级联 <see cref="T:TDesign.TCollapse"/> 组件。
-            </summary>
-        </member>
-        <member name="P:TDesign.TCollapsePanel.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TCollapsePanel.TitleContent">
@@ -355,7 +383,7 @@
             设置标题部分的内容。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapsePanel.Title">
+        <member name="P:TDesign.TCollapsePanel.TitleText">
             <summary>
             设置标题字符串。若设置了 <see cref="P:TDesign.TCollapsePanel.TitleContent"/> 属性的值，则该属性无效。
             </summary>
@@ -365,7 +393,7 @@
             右侧操作的内容。
             </summary>
         </member>
-        <member name="P:TDesign.TCollapsePanel.Active">
+        <member name="P:TDesign.TCollapsePanel.Expaned">
             <summary>
             <c>true</c> 表示面板是展开状态，否则为折叠状态。
             </summary>
@@ -974,9 +1002,6 @@
             对齐方式。
             </summary>
         </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.AdditionalClass">
-            <inheritdoc/>    
-        </member>
         <member name="P:TDesign.TDesignInputComonentBase`1.Value">
             <inheritdoc/>
         </member>
@@ -1270,6 +1295,11 @@
             表示提示的对齐方式。
             </summary>
         </member>
+        <member name="P:TDesign.TInputNumber`1.Placeholder">
+            <summary>
+            占位字符串。
+            </summary>
+        </member>
         <member name="M:TDesign.TInputNumber`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             重写以构建组件的内容。
@@ -1518,7 +1548,7 @@
         </member>
         <member name="P:TDesign.TInputRange`1.Size">
             <summary>
-            设置大小。
+            尺寸。
             </summary>
         </member>
         <member name="P:TDesign.TInputRange`1.Seperator">
@@ -1747,46 +1777,6 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="T:TDesign.UploadTheme">
-            <summary>
-            上传组件显示的风格样式。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.File">
-            <summary>
-            默认的文件上传风格。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadTheme.FileInput">
-            <summary>
-            输入框形式的文件上传风格。
-            </summary>
-        </member>
-        <member name="T:TDesign.UploadStatus">
-            <summary>
-            上传状态。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.NotStart">
-            <summary>
-            未开始。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.Pending">
-            <summary>
-            等待上传。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.InProgress">
-            <summary>
-            正在上传。
-            </summary>
-        </member>
-        <member name="F:TDesign.UploadStatus.Finished">
-            <summary>
-            上传结束。
-            </summary>
-        </member>
         <member name="T:TDesign.TUpload">
             <summary>
             上传组件允许用户传输文件或提交自己的内容。
@@ -1821,7 +1811,7 @@
         </member>
         <member name="P:TDesign.TUpload.Action">
             <summary>
-            设置服务端上传的 API 地址。要求 API 可以通过 POST 方式接收请求，并支持 FORM DATA 数据传输方式。
+            设置服务端上传的 API 地址。要求 API 支持 FORM DATA 数据传输方式。
             </summary>
         </member>
         <member name="P:TDesign.TUpload.Method">
@@ -1899,7 +1889,7 @@
         </member>
         <member name="P:TDesign.TUpload.Headers">
             <summary>
-            附带的 Header
+            附带的 Header 字典
             </summary>
         </member>
         <member name="P:TDesign.TUpload.Data">
@@ -1972,7 +1962,7 @@
         </member>
         <member name="M:TDesign.TUpload.SelectFiles(System.Collections.Generic.IReadOnlyList{TDesign.UploadFileInfo})">
             <summary>
-            当已经选择了上传的文件。
+            选择上传的文件。
             </summary>
             <param name="files">选择的文件列表。</param>
             <returns></returns>
@@ -2010,6 +2000,46 @@
             移除指定文件。
             </summary>
             <param name="id">文件id。</param>
+        </member>
+        <member name="T:TDesign.UploadTheme">
+            <summary>
+            上传组件显示的风格样式。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.File">
+            <summary>
+            默认的文件上传风格。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadTheme.FileInput">
+            <summary>
+            输入框形式的文件上传风格。
+            </summary>
+        </member>
+        <member name="T:TDesign.UploadStatus">
+            <summary>
+            上传状态。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.NotStart">
+            <summary>
+            未开始。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Pending">
+            <summary>
+            等待上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.InProgress">
+            <summary>
+            正在上传。
+            </summary>
+        </member>
+        <member name="F:TDesign.UploadStatus.Finished">
+            <summary>
+            上传结束。
+            </summary>
         </member>
         <member name="T:TDesign.UploadFileInfo">
             <summary>
@@ -2217,11 +2247,6 @@
         <member name="T:TDesign.TList">
             <summary>
             表示一个列表容器。配合 <see cref="T:TDesign.TListItem"/> 组件使用。
-            </summary>
-        </member>
-        <member name="P:TDesign.TList.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TList.Size">
@@ -2479,7 +2504,7 @@
             显示下级菜单的当前菜单标题。
             </summary>
         </member>
-        <member name="P:TDesign.TSubMenu.TIcon">
+        <member name="P:TDesign.TSubMenu.Icon">
             <summary>
             图标名称。
             </summary>
@@ -3066,7 +3091,7 @@
         </member>
         <member name="P:TDesign.TPopup.Arrow">
             <summary>
-            设置弹出层是否具备箭头指向。
+            设置是否具备箭头指向。
             </summary>
         </member>
         <member name="P:TDesign.TPopup.Trigger">
@@ -3181,7 +3206,7 @@
         </member>
         <member name="P:TDesign.TStepGroup.Vertical">
             <summary>
-            设置为垂直排列。
+            是否为垂直排列。
             </summary>
         </member>
         <member name="P:TDesign.TStepGroup.Reserve">
@@ -3244,7 +3269,7 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:TDesign.TStepItem.TIcon">
+        <member name="P:TDesign.TStepItem.Icon">
             <summary>
             设置图标名称。默认自动计算当前步骤所在的数字。
             <para>
@@ -3431,7 +3456,7 @@
         </member>
         <member name="P:TDesign.TTable`1.ChildContent">
             <summary>
-            <inheritdoc/>
+            表格的内容。
             </summary>
         </member>
         <member name="P:TDesign.TTable`1.Loading">
@@ -3709,9 +3734,6 @@
             设置字段输出的格式。要符合 <see cref="T:System.IFormattable"/> 的定义。
             </summary>
         </member>
-        <member name="P:TDesign.TTableFieldColumn`2.ChildContent">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TTableFieldColumn`2.AfterSetParameters(Microsoft.AspNetCore.Components.ParameterView)">
             <inheritdoc/>
         </member>
@@ -3744,11 +3766,6 @@
             选项卡
             </summary>
         </member>
-        <member name="P:TDesign.TTab.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTab.Position">
             <summary>
             选项卡标题呈现的位置。
@@ -3766,7 +3783,7 @@
         </member>
         <member name="P:TDesign.TTab.OnSwitch">
             <summary>
-            <inheritdoc/>
+            当选项卡切换时触发的回调。
             </summary>
         </member>
         <member name="M:TDesign.TTab.BuildTabContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
@@ -3813,14 +3830,9 @@
             选项卡标题。
             </summary>
         </member>
-        <member name="P:TDesign.TTabItem.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTabItem.Padding">
             <summary>
-            选项卡内容的内边距，默认时 25px。
+            选项卡内容的内边距，默认 25px。
             </summary>
         </member>
         <member name="P:TDesign.TTabItem.Disabled">
@@ -3828,7 +3840,7 @@
             禁用选项卡。
             </summary>
         </member>
-        <member name="P:TDesign.TTabItem.TIcon">
+        <member name="P:TDesign.TTabItem.Icon">
             <summary>
             选项卡标题的图标。
             </summary>
@@ -3970,11 +3982,6 @@
         <member name="T:TDesign.TBadge">
             <summary>
             徽章组件，出现在图标或文字右上角的徽标标识。
-            </summary>
-        </member>
-        <member name="P:TDesign.TBadge.ChildContent">
-            <summary>
-            <inheritdoc/>
             </summary>
         </member>
         <member name="P:TDesign.TBadge.Text">
@@ -4335,11 +4342,6 @@
             卡片组件。
             </summary>
         </member>
-        <member name="P:TDesign.TCard.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TCard.Borderless">
             <summary>
             设置不显示边框。
@@ -4416,11 +4418,6 @@
             设置显示的日期时间字符串。
             </summary>
         </member>
-        <member name="P:TDesign.TComment.ChildContent">
-            <summary>
-            设置评论的任意内容。
-            </summary>
-        </member>
         <member name="P:TDesign.TComment.OperationContent">
             <summary>
             设置评论的操作内容。每一个操作需要用 li 标记进行渲染。
@@ -4450,14 +4447,6 @@
             <param name="builder"></param>
             <param name="sequence"></param>
         </member>
-        <member name="T:TDesign.TDesignContainer">
-            <summary>
-            用于动态渲染组件的容器。
-            </summary>
-        </member>
-        <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
-            <inheritdoc/>
-        </member>
         <member name="T:TDesign.TDivider">
             <summary>
             分割线。
@@ -4470,7 +4459,7 @@
         </member>
         <member name="P:TDesign.TDivider.Vertical">
             <summary>
-            垂直分割线。
+            是否垂直分割线。
             </summary>
         </member>
         <member name="P:TDesign.TDivider.Dashed">
@@ -4521,27 +4510,27 @@
         </member>
         <member name="P:TDesign.TImage.Alt">
             <summary>
-            图片描述
+            图片描述。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Disabled">
             <summary>
-            禁用状态
+            禁用状态。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Error">
             <summary>
-            错误内容
+            自定义图片加载失败状态下的显示内容。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Fit">
             <summary>
-            填充模式
+            图片填充模式。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Gallery">
             <summary>
-            是否展示为图集样式
+            是否展示为图集样式。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Lazy">
@@ -4566,32 +4555,22 @@
         </member>
         <member name="P:TDesign.TImage.Placeholder">
             <summary>
-            占位元素
+            占位元素。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Position">
             <summary>
-            定位
+            定位。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Shape">
             <summary>
-            图片圆角类型
+            图片圆角类型。
             </summary>
         </member>
         <member name="P:TDesign.TImage.Src">
             <summary>
             图片链接
-            </summary>
-        </member>
-        <member name="P:TDesign.TImage.OnError">
-            <summary>
-            加载失败
-            </summary>
-        </member>
-        <member name="P:TDesign.TImage.OnLoad">
-            <summary>
-            加载完成
             </summary>
         </member>
         <member name="T:TDesign.ImageFitType">
@@ -4663,9 +4642,6 @@
             <summary>
             时间轴组件的容器，用于时间轴展示。配合 <see cref="T:TDesign.TTimelineItem"/> 组件使用。
             </summary>
-        </member>
-        <member name="P:TDesign.TTimeline.ChildContent">
-            <inheritdoc/>
         </member>
         <member name="P:TDesign.TTimeline.Horizontal">
             <summary>
@@ -4766,9 +4742,6 @@
             自定义图标的名称。
             </summary>
         </member>
-        <member name="P:TDesign.TTimelineItem.AdditionalClass">
-            <inheritdoc/>
-        </member>
         <member name="M:TDesign.TTimelineItem.BuildCssClass(ComponentBuilder.ICssClassBuilder)">
             <inheritdoc/>
         </member>
@@ -4817,12 +4790,12 @@
         </member>
         <member name="P:TDesign.TLink.Size">
             <summary>
-            尺寸。
+            文字尺寸。
             </summary>
         </member>
         <member name="P:TDesign.TLink.Theme">
             <summary>
-            颜色。
+            文字颜色。
             </summary>
         </member>
         <member name="P:TDesign.TLink.Underline">
@@ -4927,12 +4900,12 @@
         </member>
         <member name="P:TDesign.TPagination.EllipsisMode">
             <summary>
-            设置当页码数量超出时，前后省略模式。
+            设置当页码数量超出时，页码条前后省略模式。
             </summary>
         </member>
         <member name="P:TDesign.TPagination.ShowJumpPage">
             <summary>
-            设置是否显示跳转到文本框。
+            设置是否显示【跳转到】文本框。
             </summary>
         </member>
         <member name="P:TDesign.TPagination.Simple">
@@ -5028,7 +5001,6 @@
             构建 跳转到 文本框。
             </summary>
             <param name="builder"></param>
-            <param name="sequence"></param>
         </member>
         <member name="T:TDesign.TPagination.PageButtonBehavior">
             <summary>
@@ -5414,11 +5386,6 @@
             标签。
             </summary>
         </member>
-        <member name="P:TDesign.TTag.ChildContent">
-            <summary>
-            <inheritdoc/>
-            </summary>
-        </member>
         <member name="P:TDesign.TTag.Theme">
             <summary>
             主题颜色。
@@ -5439,7 +5406,7 @@
             形状。
             </summary>
         </member>
-        <member name="P:TDesign.TTag.TIcon">
+        <member name="P:TDesign.TTag.Icon">
             <summary>
             图标的名称。
             </summary>
@@ -5451,7 +5418,7 @@
         </member>
         <member name="P:TDesign.TTag.Disabled">
             <summary>
-            设置组件处于禁用状态。
+            禁用状态。
             </summary>
         </member>
         <member name="P:TDesign.TTag.OnClosing">
@@ -6053,6 +6020,14 @@
             </summary>
             <param name="info">The info.</param>
             <param name="context">The context.</param>
+        </member>
+        <member name="T:TDesign.TDesignContainer">
+            <summary>
+            用于动态渲染组件的容器。
+            </summary>
+        </member>
+        <member name="M:TDesign.TDesignContainer.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+            <inheritdoc/>
         </member>
         <member name="T:TDesign.TDesignExtensions">
             <summary>

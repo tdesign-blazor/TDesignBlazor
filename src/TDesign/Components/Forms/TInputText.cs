@@ -14,22 +14,27 @@ public class TInputText<TValue> : TDesignInputComonentBase<TValue>
     /// <summary>
     /// 输入框的类型。
     /// </summary>
+    [ParameterApiDoc("输入框的类型", Value= "Text")]
     [Parameter][HtmlAttribute] public InputType Type { get; set; } = InputType.Text;
     /// <summary>
     /// 输入框前缀显示的文本。
     /// </summary>
+    [ParameterApiDoc("输入框前缀显示的文本")]
     [Parameter] public string? PrefixText { get; set; }
     /// <summary>
     /// 输入框前缀显示的图标名称。
     /// </summary>
+    [ParameterApiDoc("输入框前缀显示的图标名称")]
     [Parameter] public object? PrefixIcon { get; set; }
     /// <summary>
     /// 输入框后缀显示的文本。
     /// </summary>
+    [ParameterApiDoc("输入框后缀显示的文本")]
     [Parameter] public string? SuffixText { get; set; }
     /// <summary>
     /// 输入框后缀显示的图标名称。
     /// </summary>
+    [ParameterApiDoc("输入框后缀显示的图标名称")]
     [Parameter] public object? SuffixIcon { get; set; }
 
     bool HasPrefix => !string.IsNullOrEmpty(PrefixText) || PrefixIcon is not null;

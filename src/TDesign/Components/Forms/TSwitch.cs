@@ -13,21 +13,25 @@ public class TSwitch : TDesignInputComonentBase<bool>
     /// <summary>
     /// 是否加载中
     /// </summary>
+    [ParameterApiDoc("是否加载中")]
     [Parameter] public bool Loading { get; set; }
 
     /// <summary>
     ///  执行当 <see cref="TSwitch"/> 的值发生改变时的事件。
     /// </summary>
+    [ParameterApiDoc("值发生改变时触发的回调", Type= "EventCallback<bool>")]
     [Parameter] public EventCallback<bool> OnChange { get; set; }
 
     /// <summary>
     /// 开关打开时，需要显示的自定义内容。
     /// </summary>
+    [ParameterApiDoc("开关打开时，需要显示的自定义内容")]
     [Parameter] public RenderFragment? TrueContent { get; set; }
 
     /// <summary>
     /// 开关关闭时，显示的自定义内容。
     /// </summary>
+    [ParameterApiDoc("开关关闭时，显示的自定义内容")]
     [Parameter] public RenderFragment? FalseContent { get; set; }
     
     /// <summary>

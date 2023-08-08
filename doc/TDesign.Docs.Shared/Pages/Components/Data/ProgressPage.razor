@@ -1,7 +1,5 @@
 ﻿@page "/components/progress"
-<LayoutContent AnchorItems="@(new[]{"线形进度条","环形进度条","API"})">
-<PageHeader Title="Progress 进度条">展示操作的当前进度。</PageHeader>
-
+<PageLayout Title="Progress 进度条" Description="展示操作的当前进度。" ComponentType="typeof(TProgress)" Anchors="@(new[]{"线形进度条","环形进度条"})">
 
 <Example Title="线形进度条">
     <Description>以线形表示进度的组件，可以选择性地配有文字或图标补充显示进度和状态。多用于信息量较为丰富的情况。</Description>
@@ -151,6 +149,6 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TProgress)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+
+</PageLayout>

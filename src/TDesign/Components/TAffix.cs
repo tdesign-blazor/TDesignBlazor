@@ -11,20 +11,24 @@ public class TAffix : TDesignAdditionParameterWithChildContentComponentBase
     /// <summary>
     /// 设置指定滚动的容器的元素 id。<c>null</c> 时，则使用 body 元素。
     /// </summary>
+    [ParameterApiDoc("指定滚动的容器的元素 id，默认使用 body 元素")]
     [Parameter]public string? ContainerId { get; set; }
     /// <summary>
     /// 距离容器顶部达到指定距离后触发固定，默认值0 。
     /// </summary>
+    [ParameterApiDoc("距离容器顶部达到指定距离后触发固定", Value =0)]
     [Parameter] public int OffsetBottom { get; set; }
 
     /// <summary>
     /// 距离容器底部达到指定距离后触发固定，默认值0 。
     /// </summary>
+    [ParameterApiDoc("距离容器底部达到指定距离后触发固定", Value = 0)]
     [Parameter] public int OffsetTop { get; set; }
 
     /// <summary>
     ///  设置一个回调方法，当固定状态发生变化时触发。
     /// </summary>
+    [ParameterApiDoc("一个回调方法，当固定状态发生变化时触发", Type = "EventCallback<AffixedChangeEventArgs>")]
     [Parameter] public EventCallback<AffixedChangeEventArgs> OnFixedChange { get; set; }
 
     #endregion END Parameters

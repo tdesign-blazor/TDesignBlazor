@@ -46,6 +46,7 @@ public class TAnchorItem :TDesignAdditionParameterWithChildContentComponentBase,
     /// <summary>
     /// 获取或设置选中状态
     /// </summary>
+    [ParameterApiDoc("选中状态")]
     [Parameter] public bool Active { get; set; }
 
     /// <summary>
@@ -57,6 +58,7 @@ public class TAnchorItem :TDesignAdditionParameterWithChildContentComponentBase,
     /// 锚点
     /// </summary>
     [Parameter]
+    [ParameterApiDoc("锚点")]
     public string? Href
     {
         get
@@ -80,26 +82,31 @@ public class TAnchorItem :TDesignAdditionParameterWithChildContentComponentBase,
     /// <summary>
     /// 获取或设置偏移的高度
     /// </summary>
-    public int OffsetHeight { get; set; }
+    [ParameterApiDoc("偏移的高度")]
+    [Parameter]public int OffsetHeight { get; set; }
 
     /// <summary>
     /// 获取或设置顶部偏移
     /// </summary>
-    public int OffsetTop { get; set; }
+    [ParameterApiDoc("距离顶部的偏移像素")]
+    [Parameter] public int OffsetTop { get; set; }
 
     /// <summary>
-    /// 点击事件
+    /// 点击锚点的回调方法
     /// </summary>
-    [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs?> OnClick { get; set; }
+    [ParameterApiDoc("点击锚点的回调方法")]
+    [Parameter][HtmlAttribute("onclick")] public EventCallback<MouseEventArgs> OnClick { get; set; }
 
     /// <summary>
     /// 锚点文字
     /// </summary>
+    [ParameterApiDoc("锚点文字")]
     [Parameter] public AnchorItemTarget? Target { get; set; } = AnchorItemTarget.Self;
 
     /// <summary>
     /// 标题
     /// </summary>
+    [ParameterApiDoc("标题")]
     [Parameter] public string? Title { get; set; }
 
     internal int Index { get; private set; }

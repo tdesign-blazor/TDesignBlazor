@@ -6,43 +6,51 @@ namespace TDesign;
 /// 展示操作的当前进度的进度条。
 /// </summary>
 [CssClass("t-progress")]
-public class TProgress : TDesignComponentBase, IHasActive
+public class TProgress : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 设置是否显示进度条的百分比。<c>true</c> 则显示 <see cref="Value"/> 的百分比，否则，根据状态显示对应的图标。
     /// </summary>
+    [ParameterApiDoc("是否显示进度条的百分比。true 则显示 Value 的百分比，否则，根据状态显示对应的图标。")]
     [Parameter] public bool ShowLabel { get; set; }
 
     /// <summary>
     /// 设置是否隐藏进度条的百分比。
     /// <c>true</c> 则不显示百分比和状态图标，即使 <see cref="ShowLabel"/> 已设置。
     /// </summary>
+    [ParameterApiDoc("是否隐藏进度条的百分比。true 则不显示百分比和状态图标，即使 ShowLabel 已设置。")]
     [Parameter] public bool HideLabel { get; set; }
     /// <summary>
     /// 设置进度条的风格。
     /// </summary>
+    [ParameterApiDoc("进度条的风格",Value=$"{nameof(ProgressTheme.Line)}")]
     [Parameter] public ProgressTheme Theme { get; set; } = ProgressTheme.Line;
 
     /// <summary>
     /// 设置进度条的状态。
     /// </summary>
+    [ParameterApiDoc("进度条的状态")]
     [Parameter] public Status? Status { get; set; }
     /// <summary>
     /// 设置进度条长度的百分比。
     /// </summary>
+    [ParameterApiDoc("进度条长度的百分比")]
     [Parameter] public double Value { get; set; }
     /// <summary>
     /// 自定义显示标签的内容。否则显示 <see cref="Value"/> 的百分比。
     /// </summary>
+    [ParameterApiDoc("自定义显示标签的内容，否则显示 Value 的百分比")]
     [Parameter] public string? Label { get; set; }
     /// <summary>
     /// 设置进度条具备渐变效果。
     /// </summary>
+    [ParameterApiDoc("进度条具备渐变效果")]
     [Parameter] public bool Active { get; set; }
 
     /// <summary>
     /// 进度条的大小。
     /// </summary>
+    [ParameterApiDoc("进度条的大小", Value = $"{nameof(Size.Medium)}")]
     [Parameter] public Size Size { get; set; } = Size.Medium;
 
     /// <inheritdoc/>

@@ -1,6 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TDesign;
 
@@ -9,15 +8,17 @@ namespace TDesign;
 /// </summary>
 [ChildComponent(typeof(TMenu))]
 [CssClass("t-menu-group")]
-public class TMenuItemGroup : TDesignComponentBase, IHasChildContent
+public class TMenuItemGroup : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
+    [ParameterApiDoc("当前分组的菜单项容器")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 分组标题。
     /// </summary>
+    [ParameterApiDoc("分组标题")]
     [EditorRequired][Parameter][NotNull] public string Title { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

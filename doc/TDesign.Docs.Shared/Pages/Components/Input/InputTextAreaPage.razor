@@ -1,9 +1,7 @@
 ﻿@page "/components/textarea"
-<LayoutContent AnchorItems="@(new[]{"基本多行文本框","不同状态的多行文本框","API"})">
-<PageHeader Title="Textarea 多行文本框">
-    用于承载用户多行信息录入的组件，常用于描述信息、反馈表单中意见等需要一段相当长文本的场景。可以设置最大文案长度。
-</PageHeader>
-
+<PageLayout Title="Textarea 多行文本框" Description="用于承载用户多行信息录入的组件，常用于描述信息、反馈表单中意见等需要一段相当长文本的场景。可以设置最大文案长度。"
+ComponentType="typeof(TInputTextArea)"
+    Anchors="@(new[]{"基本多行文本框","不同状态的多行文本框"})">
 <Example Title="基本多行文本框">
     <Description></Description>
     <RunContent>
@@ -49,7 +47,7 @@
     </CodeContent>
     </Example><div id="API"></div>
 <ComponentAPI Component="typeof(TInputTextArea)"></ComponentAPI>
-</LayoutContent>
+</PageLayout>
 @code{
     string ReadonlyText{ get; set; }
     string DisabledText{ get; set; }

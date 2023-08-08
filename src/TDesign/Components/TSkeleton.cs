@@ -6,30 +6,35 @@ namespace TDesign;
 /// </summary>
 [ParentComponent]
 [CssClass("t-skeleton")]
-public class TSkeleton : TDesignComponentBase, IHasChildContent
+public class TSkeleton : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 设置是否显示骨架屏。
     /// </summary>
+    [ParameterApiDoc("是否显示骨架屏")]
     [Parameter][EditorRequired] public bool Loading { get; set; }
     /// <summary>
     /// 当 <see cref="Loading"/> 是 <c>false</c> 时显示的内容。
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [ParameterApiDoc("当 Loading 是 false 时显示的内容。")]
+    [Parameter] public override RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 当 <see cref="Loading"/> 是 <c>true</c> 时显示的内容。
     /// </summary>
+    [ParameterApiDoc("当 Loading 是 true 时显示的内容。")]
     [Parameter] public RenderFragment? LoadingContent { get; set; }
 
     /// <summary>
     /// 设置动画效果。
     /// </summary>
+    [ParameterApiDoc("动画效果。")]
     [Parameter] public SkeletonAnimation? Animation { get; set; }
 
 
     /// <summary>
     /// 设置骨架屏的模式。可以快速设置骨架屏显示的模式。
     /// </summary>
+    [ParameterApiDoc("骨架屏的模式。可以快速设置骨架屏显示的模式。", Value =$"{nameof(SkeletonTheme.Paragraph)}")]
     [Parameter] public SkeletonTheme? Theme { get; set; } = SkeletonTheme.Paragraph;
 
     /// <inheritdoc/>
@@ -124,8 +129,8 @@ public class TSkeleton : TDesignComponentBase, IHasChildContent
 [CssClass("t-skeleton__row")]
 public class TSkeletonRow : TDesignComponentBase, IHasChildContent
 {
-
     /// <inheritdoc/>
+    [ParameterApiDoc("需要 TSkeletonColumn 组件的内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
 }
@@ -147,6 +152,7 @@ public class TSkeletonColumn : TDesignComponentBase
     /// <summary>
     /// 设置列的类型。
     /// </summary>
+    [ParameterApiDoc("列的类型", Value =$"{nameof(SkeletonColumnType.Text)}")]
     [Parameter][CssClass("t-skeleton--type-")] public SkeletonColumnType Type { get; set; } = SkeletonColumnType.Text;
 
     /// <inheritdoc/>

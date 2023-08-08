@@ -10,10 +10,12 @@ public class TTableExpandColumn<TItem> : TTableColumnBase<TItem>, IHasChildConte
     /// <summary>
     /// 设置要展开的图标。
     /// </summary>
+    [ParameterApiDoc("展开的图标")]
     [Parameter] public object? Icon { get; set; } = IconName.ChevronRightCircle;
     /// <summary>
     /// 设置展开的 UI 内容。
     /// </summary>
+    [ParameterApiDoc("自定义显示模板", Type = "RenderFragment<TItem>")]
     [Parameter] public RenderFragment<TItem>? ChildContent { get; set; }
 
 

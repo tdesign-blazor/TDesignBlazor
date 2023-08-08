@@ -1,8 +1,9 @@
 ﻿@page "/components/timeline"
-<LayoutContent AnchorItems="@(new[]{"基础时间轴","点状时间轴","自定义节点图标","主题色","API"})">
-<PageHeader Title="Timeline 时间轴">
-    用于时间轴展示
-</PageHeader>
+<PageLayout Title="Timeline 时间轴"
+            Description="用于时间轴展示"
+    Anchors="@(new[]{"基础时间轴","点状时间轴","自定义节点图标","主题色"})">
+<ChildContent>
+
 
 <Example Title="基础时间轴">
     <Description>
@@ -142,7 +143,10 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TTimeline)"/>
-<ComponentAPI Component="typeof(TTimelineItem)"/>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TTimeline)"/>
+        <ApiDocument ComponentType="typeof(TTimelineItem)" />
+    </ApiContent>
+</PageLayout>

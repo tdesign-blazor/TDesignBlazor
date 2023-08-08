@@ -2,7 +2,9 @@
 <PageHeader Title="Select 选择器">用于收纳大量选项的信息录入类组件。</PageHeader>
 
 
-<LayoutContent AnchorItems="@(new[]{"示例","禁用状态","不同尺寸的选择器","自定义下拉选项的选择器","API"})">
+<PageLayout Title="Select 选择器" Description="用于收纳大量选项的信息录入类组件。"
+    Anchors="@(new[]{"示例","禁用状态","不同尺寸的选择器","自定义下拉选项的选择器"})">
+    <ChildContent>
 
 <Example Title="示例">
     <Description></Description>
@@ -168,9 +170,11 @@
 ```
 ")
     </CodeContent>
-</Example>
-<div id="API"></div>
-    <ComponentAPI  Component="typeof(TSelect<>)" />
-    <ComponentAPI  Component="typeof(TSelectOption<>)" />
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TSelect<>)" Title="TSelect"/>
+        <ApiDocument ComponentType="typeof(TSelectOption<>)" Title="TSelectOption" />
+    </ApiContent>
 
-</LayoutContent>
+</PageLayout>

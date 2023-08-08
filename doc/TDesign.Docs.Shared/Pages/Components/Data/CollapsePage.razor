@@ -1,18 +1,19 @@
 ﻿@page "/components/collapse"
-<LayoutContent AnchorItems="@(new[]{"基础折叠面板","手风琴模式","图标的显示位置","点击图标才响应折叠","禁用状态","无边框","右侧操作的折叠面板","自定义标题","API"})">
-<PageHeader Title="Collapse 折叠面板">可以将较多或较复杂的内容进行分组，分组内容区可以折叠展开或隐藏。</PageHeader>
+<PageLayout Title="Collapse 折叠面板" Description="可以将较多或较复杂的内容进行分组，分组内容区可以折叠展开或隐藏。"
+Anchors="@(new[]{"基础折叠面板","手风琴模式","图标的显示位置","点击图标才响应折叠","禁用状态","无边框","右侧操作的折叠面板","自定义标题"})">
+<ChildContent>
 
-<Example Title="基础折叠面板">
+        <Example Title="基础折叠面板">
     <Description>基础折叠面板，可自定义面板内容。</Description>
     <RunContent>
         <TCollapse>
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态" Active>
+            <TCollapsePanel TitleText="默认展开状态" Expaned>
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -23,13 +24,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse>
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"" Active>
+    <TCollapsePanel TitleText=""默认展开状态"" Expaned>
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -43,13 +44,13 @@
     <Description>手风琴模式折叠面板，一次只能打开一个面板。</Description>
     <RunContent>
         <TCollapse Mutex>
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态" Active>
+            <TCollapsePanel TitleText="默认展开状态" Expaned>
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -60,13 +61,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse Mutex>
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"" Active>
+    <TCollapsePanel TitleText=""默认展开状态"" Expaned>
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -81,13 +82,13 @@
     <Description>@Code.Create("设置 `RightIcon=\"true\"` 使图标显示在右边，设置 `RightIcon=\"default\"` 隐藏图标")</Description>
     <RunContent>
         <TCollapse RightIcon="true">
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态">
+            <TCollapsePanel TitleText="默认展开状态">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -97,13 +98,13 @@
         <br />
         <br />
         <TCollapse RightIcon="default">
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态">
+            <TCollapsePanel TitleText="默认展开状态">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -114,13 +115,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse RightIcon=""true"">
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"">
+    <TCollapsePanel TitleText=""默认展开状态"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -129,13 +130,13 @@
 
 
 <TCollapse RightIcon=""default"">
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"">
+    <TCollapsePanel TitleText=""默认展开状态"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -150,13 +151,13 @@
     <Description>@Code.Create("设置 `IconToggle` 则只能点击图标才会响应折叠或展开")</Description>
     <RunContent>
         <TCollapse IconToggle>
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态" Active>
+            <TCollapsePanel TitleText="默认展开状态" Expaned>
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -167,13 +168,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse IconToggle>
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"" Active>
+    <TCollapsePanel TitleText=""默认展开状态"" Expaned>
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -188,13 +189,13 @@
     <Description>@Code.Create("设置 `Disabled` 禁用某个折叠面板")</Description>
     <RunContent>
         <TCollapse>
-            <TCollapsePanel Title="这是一个折叠标题" Disabled>
+            <TCollapsePanel TitleText="这是一个折叠标题" Disabled>
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态">
+            <TCollapsePanel TitleText="默认展开状态">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容" Disabled>
+            <TCollapsePanel TitleText="自定义折叠面板的内容" Disabled>
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -205,13 +206,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse>
-    <TCollapsePanel Title=""这是一个折叠标题"" Disabled>
+    <TCollapsePanel TitleText=""这是一个折叠标题"" Disabled>
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"">
+    <TCollapsePanel TitleText=""默认展开状态"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"" Disabled>
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"" Disabled>
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -227,13 +228,13 @@
     <Description>@Code.Create("设置 `Borderless` 清除边框")</Description>
     <RunContent>
         <TCollapse Borderless>
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态">
+            <TCollapsePanel TitleText="默认展开状态">
                 这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <TAlert Theme="Theme.Danger">
                     这里是一个错误的内容！
                 </TAlert>
@@ -244,13 +245,13 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse Borderless>
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"">
+    <TCollapsePanel TitleText=""默认展开状态"">
         这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <TAlert Theme=""Theme.Danger"">
             这里是一个错误的内容！
         </TAlert>
@@ -266,7 +267,7 @@
     <Description>@Code.Create("设置 `OperationContent` 自定义右侧的操作内容，但是要显示地设置 `ChildContent` 设置显示的面板内容")</Description>
     <RunContent>
         <TCollapse>
-            <TCollapsePanel Title="这是一个折叠标题">
+            <TCollapsePanel TitleText="这是一个折叠标题">
                 <ChildContent>
                     这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
                 </ChildContent>
@@ -274,7 +275,7 @@
                     <TButton Theme="Theme.Primary">操作</TButton>
                 </OperationContent>
                 </TCollapsePanel>
-            <TCollapsePanel Title="默认展开状态" Active>
+            <TCollapsePanel TitleText="默认展开状态" Expaned>
 
                 <ChildContent>
                     这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
@@ -283,7 +284,7 @@
                     <TButton Theme="Theme.Primary">操作</TButton>
                 </OperationContent>
             </TCollapsePanel>
-            <TCollapsePanel Title="自定义折叠面板的内容">
+            <TCollapsePanel TitleText="自定义折叠面板的内容">
                 <ChildContent>
                     <TAlert Theme="Theme.Danger">
                         这里是一个错误的内容！
@@ -299,7 +300,7 @@
         @Code.Create(@"
 ```cshtml-razor
 <TCollapse>
-    <TCollapsePanel Title=""这是一个折叠标题"">
+    <TCollapsePanel TitleText=""这是一个折叠标题"">
         <ChildContent>
             这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </ChildContent>
@@ -307,7 +308,7 @@
             <TButton Theme=""Theme.Primary"">操作</TButton>
         </OperationContent>
     </TCollapsePanel>
-    <TCollapsePanel Title=""默认展开状态"" Active>
+    <TCollapsePanel TitleText=""默认展开状态"" Expaned>
         <ChildContent>
             这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
         </ChildContent>
@@ -315,7 +316,7 @@
             <TButton Theme=""Theme.Primary"">操作</TButton>
         </OperationContent>
     </TCollapsePanel>
-    <TCollapsePanel Title=""自定义折叠面板的内容"">
+    <TCollapsePanel TitleText=""自定义折叠面板的内容"">
         <ChildContent>
             <TAlert Theme=""Theme.Danger"">
                 这里是一个错误的内容！
@@ -377,13 +378,12 @@
         </ChildContent>
         </TCollapsePanel>
     <TCollapsePanel>
-
-        <ChildContent>
-            这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
-        </ChildContent>
         <TitleContent>
             <h2>请注意这个折叠面板</h2>
         </TitleContent>
+        <ChildContent>
+            这部分是每个折叠面板折叠或展开的内容，可根据不同业务或用户的使用诉求，进行自定义填充。可以是纯文本、图文、子列表等内容形式。
+        </ChildContent>
     </TCollapsePanel>
     <TCollapsePanel>
         <ChildContent>
@@ -399,8 +399,10 @@
 ```
 ")
     </CodeContent>
-</Example>
-    <div id="API"></div>
-<ComponentAPI  Component="typeof(TCollapse)"></ComponentAPI>
-<ComponentAPI  Component="typeof(TCollapsePanel)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TCollapse)"/>
+        <ApiDocument ComponentType="typeof(TCollapsePanel)" />
+    </ApiContent>
+</PageLayout>

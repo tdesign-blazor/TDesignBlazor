@@ -1,9 +1,5 @@
 ﻿@page "/components/badge"
-<LayoutContent AnchorItems="@(new[]{"示例","不同形状","不同尺寸","自定义颜色","偏移量位置","API"})">
-<PageHeader Title="Badge 徽标">
-    出现在图标或文字右上角的徽标标识。
-</PageHeader>
-
+<PageLayout Title="Badge 徽标" Description="出现在图标或文字右上角的徽标标识。" ComponentType="typeof(TBadge)" Anchors="@(new[]{"示例","不同形状","不同尺寸","自定义颜色","偏移量位置"})">
 <Example Title="示例">
     <Description></Description>
     <RunContent>
@@ -164,6 +160,5 @@
 ")
     </CodeContent>
 </Example>
-    <div id="API"></div>
-<ComponentAPI Component="typeof(TBadge)"></ComponentAPI>
-</LayoutContent>
+
+</PageLayout>

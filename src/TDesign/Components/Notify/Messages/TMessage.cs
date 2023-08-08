@@ -13,10 +13,12 @@ public class TMessage : NotifyComponentBase
     /// <summary>
     /// 加载中的状态。
     /// </summary>
+    [ParameterApiDoc("加载中的状态")]
     [Parameter][CssClass("t-is-loading")] public bool Loading { get; set; }
     /// <summary>
     /// 可关闭的功能。
     /// </summary>
+    [ParameterApiDoc("可关闭的功能")]
     [Parameter][CssClass("t-is-closable")] public bool Closable { get; set; }
 
     /// <summary>

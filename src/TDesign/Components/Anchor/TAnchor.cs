@@ -19,6 +19,7 @@ public class TAnchor : TDesignAdditionParameterWithChildContentComponentBase, IH
     /// <summary>
     /// 获取或设置锚点关联滚动容器
     /// </summary>
+    [ParameterApiDoc("锚点关联滚动容器 id")]
     [Parameter][HtmlAttribute] public string? Container { get; set; }
 
     /// <summary>

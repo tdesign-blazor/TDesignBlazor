@@ -11,16 +11,19 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置分页组件的大小。
     /// </summary>
+    [ParameterApiDoc("分页组件的大小", Value = "Medium")]
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
 
     #region Current
     /// <summary>
     /// 设置当前页码。
     /// </summary>
+    [ParameterApiDoc("当前页码", Value = "1")]
     [Parameter] public int PageIndex { get; set; } = 1;
     /// <summary>
     /// 设置当页码改变时的回调，通常这是双向绑定语法。
     /// </summary>
+    [ParameterApiDoc("当页码改变时的回调，通常这是双向绑定语法")]
     [Parameter] public EventCallback<int> PageIndexChanged { get; set; }
     #endregion
 
@@ -28,10 +31,12 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置每一页的数据量。默认是 10。
     /// </summary>
+    [ParameterApiDoc("每一页的数据量。默认是 10", Value = "10")]
     [Parameter]public int PageSize { get; set; } = 10;
     /// <summary>
     /// 设置一个当每页数据量变更时的回调方法。
     /// </summary>
+    [ParameterApiDoc("当每页数据量变更时的回调方法，通常这是双向绑定语法")]
     [Parameter] public EventCallback<int> PageSizeChanged { get; set; }
     #endregion
 
@@ -39,18 +44,22 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置分页的总数据量。必须要大于 0。
     /// </summary>
-    [Parameter] public int Total { get; set; }
+    [ParameterApiDoc("分页的总数据量。必须要大于 0")]
+    [Parameter][EditorRequired] public int Total { get; set; }
     /// <summary>
     /// 设置一个当总数据量变化时的回调方法。
     /// </summary>
+    [ParameterApiDoc("当总数据量变化时的回调方法。通常这是双向绑定语法", Type = "EventCallback<int>")]
     [Parameter] public EventCallback<int> TotalChanged { get; set; }
     /// <summary>
     /// 设置显示总数据量的任意内容。
     /// </summary>
+    [ParameterApiDoc("显示总数据量的任意内容", Type = "RenderFragment<int>")]
     [Parameter] public RenderFragment<int>? TotalContent { get; set; }
     /// <summary>
     /// 设置一个布尔值，表示是否显示总数据量的内容。
     /// </summary>
+    [ParameterApiDoc("是否显示总数据量的内容", Value ="true")]
     [Parameter] public bool ShowTotal { get; set; } = true;
     #endregion
 
@@ -58,31 +67,37 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 设置分页页码条的显示数量。建议范围在 5-21 之间，默认是 7。
     /// </summary>
+    [ParameterApiDoc("分页页码条的显示数量。建议范围在 5-21 之间，建议单数", Value = "7")]
     [Parameter] public int PageNumber { get; set; } = 7;
     /// <summary>
     /// 设置是否显示页码条。
     /// </summary>
+    [ParameterApiDoc("是否显示页码条", Value = "true")]
     [Parameter] public bool ShowPageNumber { get; set; } = true;
     #endregion
 
     /// <summary>
     /// 是否显示首页和末页按钮。
     /// </summary>
+    [ParameterApiDoc("显示首页和末页按钮")]
     [Parameter] public bool ShowFirstLastBtn { get; set; }
 
     /// <summary>
-    /// 设置当页码数量超出时，前后省略模式。
+    /// 设置当页码数量超出时，页码条前后省略模式。
     /// </summary>
+    [ParameterApiDoc("当页码数量超出时，页码条前后省略模式", Value = "Middle")]
     [Parameter] public PageEllipsisMode EllipsisMode { get; set; } = PageEllipsisMode.Middle;
 
     #region JumpPage
     /// <summary>
-    /// 设置是否显示跳转到文本框。
+    /// 设置是否显示【跳转到】文本框。
     /// </summary>
+    [ParameterApiDoc("是否显示【跳转到】文本框")]
     [Parameter] public bool ShowJumpPage { get; set; }
     /// <summary>
     /// 设置为极简版的分页。
     /// </summary>
+    [ParameterApiDoc("是否使用极简版的分页")]
     [Parameter] public bool Simple { get; set; }
     #endregion
     #endregion
@@ -124,6 +139,7 @@ public partial class TPagination : TDesignComponentBase
     /// 跳转到指定页。
     /// </summary>
     /// <param name="page">要跳转的页码。</param>
+    [MethodApiDoc("跳转到指定页")]
     public async Task NavigateToPage(int page)
     {
         page = page < 1 ? 1 : page;
@@ -137,18 +153,22 @@ public partial class TPagination : TDesignComponentBase
     /// <summary>
     /// 跳转到首页。
     /// </summary>
+    [MethodApiDoc("跳转到首页")]
     public Task NavigateToFirst() => NavigateToPage(1);
     /// <summary>
     /// 跳转到末页。
     /// </summary>
+    [MethodApiDoc("跳转到末页")]
     public Task NavigateToLast() => NavigateToPage(TotalPages);
     /// <summary>
     /// 跳转到上一页。
     /// </summary>
+    [MethodApiDoc("跳转到上一页")]
     public Task NavigateToPrevious() => NavigateToPage(--PageIndex);
     /// <summary>
     /// 跳转到下一页。
     /// </summary>
+    [MethodApiDoc("跳转到下一页")]
     public Task NavigateToNext() => NavigateToPage(++PageIndex);
     #endregion
 
@@ -381,7 +401,6 @@ public partial class TPagination : TDesignComponentBase
     /// 构建 跳转到 文本框。
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="sequence"></param>
     void BuildJumper(RenderTreeBuilder builder)
         => builder.Div("t-pagination__jump", ShowJumpPage)
                             .Content(content =>

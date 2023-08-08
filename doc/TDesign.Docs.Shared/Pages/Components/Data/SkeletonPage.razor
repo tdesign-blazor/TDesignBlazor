@@ -1,9 +1,8 @@
 ﻿@page "/components/skeleton"
-<LayoutContent AnchorItems="@(new[]{"基础骨架屏","带动画效果的骨架屏","不同主题的骨架屏","自定义骨架屏内容","API"})">
-<PageHeader Title="Skeleton 骨架屏">
-    当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。
-</PageHeader>
-
+<PageLayout Title="Skeleton 骨架屏"
+            Description="当网络较慢时，在页面真实数据加载之前，给用户展示出页面的大致结构。"            
+            Anchors="@(new[]{"基础骨架屏","带动画效果的骨架屏","不同主题的骨架屏","自定义骨架屏内容"})">
+            <ChildContent>
 <Example Title="基础骨架屏">
     <Description>最简单的骨架屏效果。</Description>
     <RunContent>
@@ -148,8 +147,11 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TSkeleton)"></ComponentAPI>
-<ComponentAPI Component="typeof(TSkeletonRow)"></ComponentAPI>
-<ComponentAPI Component="typeof(TSkeletonColumn)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TSkeleton)" />
+        <ApiDocument ComponentType="typeof(TSkeletonRow)" />
+        <ApiDocument ComponentType="typeof(TSkeletonColumn)" />
+    </ApiContent>
+</PageLayout>

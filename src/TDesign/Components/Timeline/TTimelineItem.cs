@@ -8,7 +8,7 @@ namespace TDesign;
 [ChildComponent(typeof(TTimeline))]
 [CssClass("t-timeline-item")]
 [HtmlTag("li")]
-public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAdditionalClass
+public class TTimelineItem : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// <see cref="TTimeline"/> 父组件。
@@ -18,25 +18,26 @@ public class TTimelineItem : TDesignComponentBase, IHasChildContent,IHasAddition
 #pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
 
     /// <inheritdoc/>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [ParameterApiDoc("时间轴上的任意内容")]
+    [Parameter] public override RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 标签文本内容。
     /// </summary>
+    [ParameterApiDoc("标签文本内容")]
     [Parameter] public string? Label { get; set; }
 
     /// <summary>
     /// 设置节点的颜色。
     /// </summary>
+    [ParameterApiDoc("节点的颜色", Value = "Primary")]
     [Parameter] public Color Color { get; set; } = TDesign.Color.Primary;
 
     /// <summary>
     /// 自定义图标的名称。
     /// </summary>
+    [ParameterApiDoc("自定义图标的名称")]
     [Parameter] public object? IconName { get; set; }
-    /// <inheritdoc/>
-    [Parameter]public string? AdditionalClass { get; set; }
-
 
     /// <inheritdoc/>
     protected override void BuildCssClass(ICssClassBuilder builder)

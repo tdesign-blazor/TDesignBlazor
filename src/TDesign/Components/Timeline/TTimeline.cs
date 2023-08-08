@@ -6,29 +6,30 @@
 [ParentComponent]
 [CssClass("t-timeline")]
 [HtmlTag("ul")]
-public class TTimeline : TDesignComponentBase, IHasChildContent
+public class TTimeline : TDesignAdditionParameterWithChildContentComponentBase
 {
-    /// <inheritdoc/>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 设置水平显示。
     /// </summary>
+    [ParameterApiDoc("true 为水平显示")]
     [Parameter][BooleanCssClass("t-timeline-horizontal", "t-timeline-vertical")] public bool Horizontal { get; set; }
     /// <summary>
     /// 设置标签展示在轴两侧。
     /// </summary>
+    [ParameterApiDoc("标签展示在轴两侧")]
     [Parameter][BooleanCssClass("t-timeline-label--alternate", "t-timeline-label--same")] public bool Alternate { get; set; }
-
 
     /// <summary>
     /// 设置时间轴的主题，默认是 <see cref="TimelineTheme.Default"/> 。
     /// </summary>
+    [ParameterApiDoc("时间轴的主题", Value ="Default")]
     [Parameter] public TimelineTheme Theme { get; set; } = TimelineTheme.Default;
 
     /// <summary>
     /// 设置标签信息放在时间轴的位置，当 <see cref="Alternate"/> 是 <c>true</c> 时有效。
     /// </summary>
+    [ParameterApiDoc("标签信息放在时间轴的位置，当 Alternate 是 true 有效", Value = "Left")]
     [Parameter][CssClass("t-timeline-")] public TimelineLabelAlignment LabelAlignment { get; set; } = TimelineLabelAlignment.Left;
 
     /// <inheritdoc/>

@@ -11,32 +11,39 @@ namespace TDesign;
 public class TAlert : NotifyComponentBase,IHasTitleFragment,IHasTitleText
 {
     /// <inheritdoc/>
+    [ParameterApiDoc("标题文本")]
     [Parameter]public string? TitleText { get; set; }
     /// <summary>
     /// 具备标题的 UI 内容。
     /// </summary>
+    [ParameterApiDoc("标题的 UI 内容")]
     [Parameter] public RenderFragment? TitleContent { get; set; }
     /// <summary>
     /// 具备操作部分的 UI 内容。
     /// </summary>
+    [ParameterApiDoc("操作部分的 UI 内容")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
 
     /// <summary>
     /// 主题颜色，默认是 <see cref="Theme.Primary"/>。
     /// </summary>
+    [ParameterApiDoc("主题颜色", Value ="Primary")]
     [Parameter]public override Theme? Theme { get; set; } = Theme.Primary;
     /// <summary>
     /// 显示的警告图标。
     /// </summary>
+    [ParameterApiDoc("显示的警告图标", Value = "InfoCircleFilled")]
     [Parameter]public override object? Icon { get; set; } = IconName.InfoCircleFilled;
     /// <summary>
     /// 是否可以关闭。
     /// </summary>
+    [ParameterApiDoc("是否可以关闭")]
     [Parameter] public bool Closable { get; set; }
 
     /// <summary>
     /// 当警告消息被关闭后触发的回调方法。
     /// </summary>
+    [ParameterApiDoc("当警告消息被关闭后触发的回调方法", Type = "EventCallback<bool>")]
     [Parameter]public EventCallback<bool> OnClosed { get; set; }
 
     bool Closed { get; set; }

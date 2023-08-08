@@ -1,0 +1,48 @@
+﻿
+<div style="margin-50px;">
+    <h1 style="font-size:36px;margin-bottom:20px; margin-top:40px; display:block;">@Title</h1>
+    <p style="color:gray">
+        @Description
+    </p>
+    <TTab>
+        <TTabItem Title="示例">
+            <TLayout style="height:75vh;overflow-y:auto">
+                <RightSideContent>
+                    @if ( Anchors is not null )
+                    {
+                        <div style="width:20vw;padding:10px;">
+                            <TAnchor style="position: fixed;" Container="#page">
+                                @foreach ( var item in Anchors )
+                                {
+                                    <TAnchorItem Title="@item" Href="@("#"+item)"></TAnchorItem>
+                                }
+                            </TAnchor>
+                        </div>
+                    }
+                </RightSideContent>
+                <ChildContent>
+                    @ChildContent
+                </ChildContent>
+            </TLayout>
+        </TTabItem>
+        <TTabItem Title="API">
+            <div style="height:75vh;overflow-y:auto">
+                @if(ComponentType is not null)
+                {
+                    <ApiDocument ComponentType="@ComponentType"/>
+                }else{
+                    @ApiContent
+                }
+            </div>
+        </TTabItem>
+    </TTab>
+</div>
+
+@code {
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Description { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? ApiContent { get; set; }
+    [Parameter] public string[]? Anchors { get; set; }
+    [Parameter]public Type? ComponentType{ get; set; }
+}

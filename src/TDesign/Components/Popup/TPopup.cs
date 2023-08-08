@@ -26,30 +26,36 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     /// <summary>
     /// 设置弹出层的显示位置。
     /// </summary>
+    [ParameterApiDoc("弹出层的显示位置", Value = "Top")]
     [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Top;
 
     /// <summary>
     /// 设置弹出层的内容。
     /// </summary>
+    [ParameterApiDoc("弹出层的内容")]
     [Parameter] public string? Content { get; set; }
     /// <summary>
     /// 设置弹出层内容的模板。
     /// </summary>
+    [ParameterApiDoc("弹出层内容的模板")]
     [Parameter] public RenderFragment? PopupContent { get; set; }
 
     /// <summary>
-    /// 设置弹出层是否具备箭头指向。
+    /// 设置是否具备箭头指向。
     /// </summary>
+    [ParameterApiDoc("是否具备箭头指向")]
     [Parameter] public bool Arrow { get; set; }
 
     /// <summary>
     /// 触发弹出的方式。
     /// </summary>
+    [ParameterApiDoc("触发弹出的方式", Value = "Hover")]
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Hover;
 
     /// <summary>
     /// 设置弹出层内部的 CSS 类名称。
     /// </summary>
+    [ParameterApiDoc("弹出层内部的 CSS 类名称")]
     [Parameter]public string? PopupContentCssClass { get; set; }
 
     /// <summary>

@@ -20,26 +20,32 @@ public class TMenuItem : TDesignAdditionParameterWithChildContentComponentBase, 
     /// <summary>
     /// 菜单高亮的匹配方式。
     /// </summary>
+    [ParameterApiDoc("菜单高亮的匹配方式")]
     [Parameter] public NavLinkMatch Match { get; set; } = NavLinkMatch.All;
     /// <summary>
     /// 禁用状态。
     /// </summary>
+    [ParameterApiDoc("禁用状态")]
     [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
     /// <summary>
     /// 导航的超链接。
     /// </summary>
+    [ParameterApiDoc("导航的超链接")]
     [Parameter] public string? Link { get; set; }
     /// <summary>
     /// 前缀图标的名称。
     /// </summary>
+    [ParameterApiDoc("前缀图标的名称")]
     [Parameter] public object? IconPrefix { get; set; }
     /// <summary>
     /// 后缀图标的名称。
     /// </summary>
+    [ParameterApiDoc("后缀图标的名称")]
     [Parameter] public object? IconSuffix { get; set; }
     /// <summary>
     /// 选中状态。若为 <c>false</c> 则根据导航自动判断。
     /// </summary>
+    [ParameterApiDoc("选中状态，若为 false 则根据导航自动判断。")]
     [Parameter] public bool Active { get; set; }
 
     public override string? GetTagName() => CascadingSubMenu is not null ? "div" : "li";

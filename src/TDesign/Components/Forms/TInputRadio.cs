@@ -22,14 +22,17 @@ public class TInputRadio<TValue> : TDesignComponentBase
     /// <summary>
     /// 获取或设置单选按钮的值。
     /// </summary>
+    [ParameterApiDoc("单选按钮的值")]
     [Parameter] public TValue? Value { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
+    [ParameterApiDoc("单选按钮的任意内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 禁用状态。
     /// </summary>
+    [ParameterApiDoc("禁用状态")]
     [Parameter][HtmlAttribute] public bool Disabled { get; set; }
 
     /// <inheritdoc/>

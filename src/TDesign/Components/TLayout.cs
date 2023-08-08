@@ -8,27 +8,32 @@ namespace TDesign;
 [CssClass("t-layout")]
 [HtmlTag("section")]
 [ParentComponent]
-public class TLayout : TDesignComponentBase, IHasChildContent
+public class TLayout : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// 布局的顶部内容。
     /// </summary>
+    [ParameterApiDoc("布局的顶部内容")]
     [Parameter] public RenderFragment? HeaderContent { get; set; }
     /// <summary>
     /// 布局的右侧内容。
     /// </summary>
+    [ParameterApiDoc("布局的右侧内容")]
     [Parameter] public RenderFragment? LeftSideContent { get; set; }
     /// <summary>
     /// 布局的左侧部分。
     /// </summary>
+    [ParameterApiDoc("布局的左侧部分")]
     [Parameter] public RenderFragment? RightSideContent { get; set; }
     /// <summary>
     /// 布局的底部部分。
     /// </summary>
+    [ParameterApiDoc("布局的底部部分")]
     [Parameter] public RenderFragment? FooterContent { get; set; }
     /// <summary>
     /// 布局的主体部分。
     /// </summary>
+    [ParameterApiDoc("布局的主体部分")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)

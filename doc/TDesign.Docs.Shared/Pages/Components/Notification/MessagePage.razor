@@ -1,8 +1,6 @@
 ﻿@page "/components/message"
-<LayoutContent AnchorItems="@(new[]{"全局提示","加载中信息提示","可关闭的信息提示","通过服务调用","API"})">
-<PageHeader Title="Message 全局提示">
-    对用户的操作作出轻量的全局反馈。
-</PageHeader>
+<PageLayout Title="Message 全局提示" Description="对用户的操作作出轻量的全局反馈。" ComponentType="typeof(TMessage)"
+Anchors="@(new[]{"全局提示","加载中信息提示","可关闭的信息提示","通过服务调用"})">
 
 <Example Title="全局提示">
     <Description>使用简洁文字描述操作反馈。常规全局提示包含：普通信息、成功信息、警示信息、错误信息、帮助信息和加载中。</Description>
@@ -83,7 +81,6 @@ MessageService.Question(...)
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TMessage)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @inject IMessageService MessageService

@@ -1,6 +1,7 @@
 ﻿@page "/components/loading"
-<LayoutContent AnchorItems="@(new[]{"图标加载","文字加载","文字和图标共同显示加载","不同尺寸的加载","有包裹的加载","全屏加载","API"})">
-<PageHeader Title="Loading 加载中">在网络较慢或数据较多时，表示数据正在加载的状态。</PageHeader>
+<PageLayout Title="Loading 加载中" Description="在网络较慢或数据较多时，表示数据正在加载的状态。" ComponentType="typeof(TLoading)"
+            Anchors="@(new[]{"图标加载","文字加载","文字和图标共同显示加载","不同尺寸的加载","有包裹的加载","全屏加载","API"})">
+
 <TAlert Theme="Theme.Warning">支持双向绑定</TAlert>
 <Example Title="图标加载">
     <Description>加载过程中只有图标显示。适用于打开页面或操作完成后模块内等待刷新的加载场景。</Description>
@@ -133,9 +134,8 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TLoading)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @code{
     bool IsLoading{ get; set; }
 

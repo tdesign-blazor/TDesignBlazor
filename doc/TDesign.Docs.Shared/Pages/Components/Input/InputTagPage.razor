@@ -1,6 +1,7 @@
 ﻿@page "/components/inputtag"
 
-<LayoutContent AnchorItems="@(new[]{"基础标签输入框","限制标签的数量","不同尺寸的标签","不同的主题颜色","自适应宽度","API"})">
+<PageLayout Title="TagInput 标签输入框" Description="用于输入文本标签。" ComponentType="typeof(TInputTag)"
+    Anchors="@(new[]{"基础标签输入框","限制标签的数量","不同尺寸的标签","不同的主题颜色","自适应宽度"})">
     <PageHeader Title="TagInput 标签输入框">
         用于输入文本标签。
     </PageHeader>
@@ -105,9 +106,7 @@ IEnumerable<string> LimitTags { get; set; } = Enumerable.Empty<string>();
 ")
     </CodeContent>
 </Example>
-<div id="API"></div>
-<ComponentAPI Component="typeof(TInputTag)"/>
-</LayoutContent>
+</PageLayout>
 @code{
     IEnumerable<string> BasicTags { get; set; } = Enumerable.Empty<string>();
     IEnumerable<string> LimitTags { get; set; } = Enumerable.Empty<string>();

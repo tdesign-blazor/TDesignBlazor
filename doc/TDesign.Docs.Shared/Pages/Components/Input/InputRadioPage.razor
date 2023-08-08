@@ -1,8 +1,8 @@
 ﻿@page "/components/radio"
-<LayoutContent AnchorItems="@(new[]{"基本单选框","单选框按钮的不同样式","不同尺寸","API"})">
-<PageHeader Title="InputRadio 单选框">
-    单选框代表从一组互斥的选项中仅选择一个选项。
-</PageHeader>
+<PageLayout Title="InputRadio 单选框" Description="单选框代表从一组互斥的选项中仅选择一个选项。"
+    Anchors="@(new[]{"基本单选框","单选框按钮的不同样式","不同尺寸"})">
+<ChildContent>
+
 
 <Example Title="基本单选框">
     <Description></Description>
@@ -258,7 +258,10 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TInputRadioGroup<>)"></ComponentAPI>
-<ComponentAPI Component="typeof(TInputRadio<>)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TInputRadioGroup<>)" Title="TInputRadioGroup"/>
+        <ApiDocument ComponentType="typeof(TInputRadio<>)" Title="TInputRadio" />
+    </ApiContent>
+</PageLayout>

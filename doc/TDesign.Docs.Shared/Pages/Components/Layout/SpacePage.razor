@@ -1,8 +1,7 @@
 ﻿@page "/components/space"
-<LayoutContent AnchorItems="@(new[]{"基本用法","垂直间距","间距大小","自动换行","API"})">
-<PageHeader Title="Space 间距">
-    控制组件之间的间距。
-</PageHeader>
+<PageLayout Title="Space 间距" Description="控制组件之间的间距。"
+Anchors="@(new[]{"基本用法","垂直间距","间距大小","自动换行"})">
+<ChildContent>
 
 <Example Title="基本用法">
     <Description>默认为横向排列，控制相邻组件水平间距</Description>
@@ -182,7 +181,10 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TSpace)"></ComponentAPI>
-<ComponentAPI Component="typeof(TSpaceItem)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TSpace)"/>
+        <ApiDocument ComponentType="typeof(TSpaceItem)"/>
+    </ApiContent>
+</PageLayout>

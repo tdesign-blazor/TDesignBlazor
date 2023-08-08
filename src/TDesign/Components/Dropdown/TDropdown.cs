@@ -8,31 +8,37 @@ public class TDropdown : TDesignChildContentComponentBase
     /// <summary>
     /// 设置下拉菜单的选项集合。
     /// </summary>
+    [ParameterApiDoc("下拉菜单的选项集合")]
     [Parameter][EditorRequired] public IEnumerable<DropdownOption> Options { get; set; } = Enumerable.Empty<DropdownOption>();
     /// <summary>
     /// 触发下拉菜单的模式。默认是 <see cref="PopupTrigger.Click"/> 模式。
     /// </summary>
+    [ParameterApiDoc("触发下拉菜单的模式", Value ="Click")]
     [Parameter] public PopupTrigger Trigger { get; set; } = PopupTrigger.Click;
 
     /// <summary>
     /// 下拉菜单选项中文字的对齐方向。
     /// </summary>
+    [ParameterApiDoc("下拉菜单选项中文字的对齐方向", Value = "Right")]
     [Parameter] public DropdownDirection Direction { get; set; } = DropdownDirection.Right;
 
     /// <summary>
     /// 下拉菜单层展开的方向。默认是 <see cref="PopupPlacement.Bottom"/>。
     /// </summary>
+    [ParameterApiDoc("下拉菜单层展开的方向", Value = "Bottom")]
     [Parameter] public PopupPlacement Placement { get; set; } = PopupPlacement.Bottom;
 
 
     /// <summary>
     /// 下拉菜单项的最大高度。单位 px，默认 300。
     /// </summary>
+    [ParameterApiDoc("下拉菜单项的最大高度。单位 px，默认 300", Value = "300")]
     [Parameter] public int Height { get; set; } = 300;
 
     /// <summary>
     /// 设置当菜单选项被点击选中后的回调方法。
     /// </summary>
+    [ParameterApiDoc("当菜单选项被点击选中后的回调方法")]
     [Parameter]public EventCallback<DropdownOption> OnOptionSelected { get; set; }    
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -104,6 +110,7 @@ public class TDropdown : TDesignChildContentComponentBase
     /// </summary>
     /// <param name="option">要选中的选项。</param>
     /// <exception cref="ArgumentNullException"><paramref name="option"/> 是 null。</exception>
+    [MethodApiDoc("选中指定的菜单选项")]
     public Task SelectOption(DropdownOption option)
     {
         if ( option is null )

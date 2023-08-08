@@ -11,10 +11,12 @@ public class TInputTextArea : TDesignInputComonentBase<string>
     /// <summary>
     /// 文本域的最大行数。
     /// </summary>
+    [ParameterApiDoc("文本域的最大行数")]
     [Parameter] public int? Rows { get; set; }
     /// <summary>
     /// 禁用重新绘制尺寸的功能。
     /// </summary>
+    [ParameterApiDoc("禁用重新绘制尺寸的功能")]
     [Parameter][CssClass("t-resize-none")] public bool DisableResize { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)

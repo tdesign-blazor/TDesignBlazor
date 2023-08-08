@@ -129,7 +129,7 @@ public abstract class TDesignComponentBase : BlazorComponentBase
 public abstract class TDesignChildContentComponentBase : TDesignComponentBase, IHasChildContent
 {
     /// <inheritdoc/>
-    [Parameter]public RenderFragment? ChildContent { get; set; }
+    [Parameter]public virtual RenderFragment? ChildContent { get; set; }
 }
 
 /// <summary>

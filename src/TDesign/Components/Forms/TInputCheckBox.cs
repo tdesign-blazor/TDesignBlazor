@@ -12,10 +12,12 @@ public class TInputCheckBox : TDesignInputComonentBase<bool?>, IHasChildContent
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
+    [ParameterApiDoc("复选框之后的任意内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 支持未确定状态。
     /// </summary>
+    [ParameterApiDoc("是否支持未确定状态")]
     [Parameter] public bool Indeterminate { get; set; }
 
 

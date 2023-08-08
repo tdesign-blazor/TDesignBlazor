@@ -1,8 +1,6 @@
 ﻿@page "/components/notification"
-<LayoutContent AnchorItems="@(new[]{"基础的消息通知","自定义图标","带操作的消息通知","通过服务调用","API"})">
-<PageHeader Title="Notification 消息通知">
-    轻量级的全局消息提示和确认机制，出现和消失时需要有缓动动画。
-</PageHeader>
+<PageLayout Title="Notification 消息通知" Description="轻量级的全局消息提示和确认机制，出现和消失时需要有缓动动画。" ComponentType="typeof(TNotification)"
+    Anchors="@(new[]{"基础的消息通知","自定义图标","带操作的消息通知","通过服务调用"})">
 
 <Example Title="基础的消息通知">
     <RunContent>
@@ -144,7 +142,6 @@ NotificationService.Warning(...)
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TNotification)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @inject INotificationService NotificationService

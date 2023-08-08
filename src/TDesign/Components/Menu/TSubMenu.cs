@@ -9,21 +9,24 @@ namespace TDesign;
 [HtmlTag("li")]
 [ParentComponent]
 [ChildComponent(typeof(TMenu))]
-public class TSubMenu : TDesignComponentBase, IHasChildContent
+public class TSubMenu : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     [CascadingParameter] public TMenu CascadingMenu { get; set; }
     /// <summary>
     /// 菜单内容。
     /// </summary>
+    [ParameterApiDoc("二级菜单的内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 显示下级菜单的当前菜单标题。
     /// </summary>
+    [ParameterApiDoc("显示下级菜单的当前菜单标题")]
     [Parameter] public string? Title { get; set; }
     /// <summary>
     /// 图标名称。
     /// </summary>
-    [Parameter] public object? TIcon { get; set; }
+    [ParameterApiDoc("图标名称")]
+    [Parameter] public object? Icon { get; set; }
 
     internal bool IsOpened { get; set; }
 
@@ -70,7 +73,7 @@ public class TSubMenu : TDesignComponentBase, IHasChildContent
         {
             content.CreateComponent<TMenuItem>(0, Title, new
             {
-                TIconPrefix = TIcon,
+                TIconPrefix = Icon,
                 TIconSuffix = IsOpened ? IconName.ChevronUp : IconName.ChevronDown,
             });
 

@@ -1,9 +1,6 @@
 ﻿@page "/components/image"
-<LayoutContent AnchorItems="@(new[]{"示例","基础图片","填充","不同形状的图片","图集样式的图片","API"})">
-<PageHeader Title="Image 图片">
-    用于展示图片素材。
-</PageHeader>
-
+<PageLayout Title="Image 图片" Description="用于展示图片素材。" ComponentType="typeof(TImage)"
+    Anchors="@(new[]{"示例","基础图片","填充","不同形状的图片","图集样式的图片"})">
 <Example Title="示例">
     <Description></Description>
     <RunContent>
@@ -367,7 +364,6 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TImage)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>
 @inject IJSRuntime JS

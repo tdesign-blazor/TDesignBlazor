@@ -28,14 +28,17 @@ public class TIcon : TDesignAdditionParameterComponentBase
     /// 图标名称。参见 https://tdesign.tencent.com/vue/components/icon 。
     /// <para>可使用 <see cref="IconName"/> 枚举。</para>
     /// </summary>
+    [ParameterApiDoc("图标名称。参见 https://tdesign.tencent.com/vue/components/icon。或者使用 IconName 枚举")]
     [Parameter] public object? Name { get; set; }
     /// <summary>
     /// 图标的颜色。自由填写支持 color 的字符串，例如颜色名称或16进制表达式（#xxxxxx）。
     /// </summary>
+    [ParameterApiDoc("图标的颜色。自由填写支持 color 的字符串，例如颜色名称或16进制表达式（#xxxxxx）。")]
     [Parameter] public string? Color { get; set; }
     /// <summary>
     /// 图标的大小。自由填写支持 font-size 的字符串，例如 32px 或 2rem 等。
     /// </summary>
+    [ParameterApiDoc("图标的大小。自由填写支持 font-size 的字符串，例如 32px 或 2rem 等。")]
     [Parameter] public string? Size { get; set; }
 
     protected override void BuildCssClass(ICssClassBuilder builder)
