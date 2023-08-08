@@ -9,47 +9,54 @@ namespace TDesign;
 [CssClass("t-range-input")]
 public class TInputRange<TValue> : BlazorComponentBase
 {
-
     /// <summary>
     /// 设置开始值。
     /// </summary>
+    [ParameterApiDoc("开始值")]
     [Parameter] public TValue? StartValue { get; set; }
 
     /// <summary>
     /// 设置开始值的表达式。
     /// </summary>
+    [ParameterApiDoc("开始值的表达式")]
     [Parameter] public Expression<Func<TValue?>>? StartValueExpression { get; set; }
 
     /// <summary>
     /// 设置开始值变化触发的回调。
     /// </summary>
+    [ParameterApiDoc("开始值变化触发的回调")]
     [Parameter] public EventCallback<TValue?> StartValueChanged { get; set; }
 
 
     /// <summary>
     /// 设置结束值。
     /// </summary>
+    [ParameterApiDoc("结束值")]
     [Parameter] public TValue? EndValue { get; set; }
 
     /// <summary>
     /// 设置结束值的表达式。
     /// </summary>
+    [ParameterApiDoc("结束值的表达式")]
     [Parameter] public Expression<Func<TValue?>>? EndValueExpression { get; set; }
 
     /// <summary>
     /// 设置结束值变化触发的回调。
     /// </summary>
+    [ParameterApiDoc("结束值变化触发的回调")]
     [Parameter] public EventCallback<TValue?> EndValueChanged { get; set; }
 
     /// <summary>
-    /// 设置大小。
+    /// 尺寸。
     /// </summary>
+    [ParameterApiDoc("尺寸", Value = "Medium")]
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
 
 
     /// <summary>
     /// 设置分隔符文本。
     /// </summary>
+    [ParameterApiDoc("分隔符文本", Value = "-")]
     [Parameter] public string Seperator { get; set; } = "-";
 
 

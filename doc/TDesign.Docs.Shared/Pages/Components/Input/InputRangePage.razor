@@ -1,8 +1,6 @@
 ﻿@page "/components/inputrange"
-<LayoutContent AnchorItems="@(new[]{"基础范围输入框","不同尺寸的标签输入框","API"})">
-<PageHeader Title="InputRange 范围输入框">
-    用于输入范围文本。
-</PageHeader>
+<PageLayout Title="InputRange 范围输入框" Description="用于输入范围文本。" ComponentType="typeof(TInputRange<>)"
+    Anchors="@(new[]{"基础范围输入框","不同尺寸的标签输入框"})">
 
 <TAlert Theme="Theme.Primary">
     为了使组件命名标准化，输入组件以 <code>Input</code> 开头，因此该组件的命名规范将与官方不同。
@@ -61,6 +59,5 @@ string End{ get;set; }
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TInputRange<>)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+</PageLayout>

@@ -1,9 +1,4 @@
-﻿using ComponentBuilder;
-using Microsoft.AspNetCore.Components.Rendering;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-
-namespace TDesign;
+﻿namespace TDesign;
 /// <summary>
 /// 数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
 /// <para>
@@ -37,41 +32,54 @@ public class TInputNumber<TValue> : TDesignInputComonentBase<TValue?>
     /// <summary>
     /// 设置输入框的文本对齐方式。
     /// </summary>
+    [ParameterApiDoc("输入框的文本对齐方式",Value="Center")]
     [Parameter] public HorizontalAlignment Align { get; set; } = HorizontalAlignment.Center;
     /// <summary>
     /// 设置每一次增减的跨度值。
     /// </summary>
+    [ParameterApiDoc("每一次增减的跨度值",Value=1)]
     [Parameter] public TValue? Step { get; set; } = (TValue)Convert.ChangeType(1, typeof(TValue));
     /// <summary>
     /// 设置输入的最大值限制。
     /// </summary>
+    [ParameterApiDoc("输入的最大值限制", Value = int.MaxValue)]
     [Parameter] public TValue? Max { get; set; } = (TValue)Convert.ChangeType(int.MaxValue, typeof(TValue));
     /// <summary>
     /// 设置输入的最小值限制。
     /// </summary>
+    [ParameterApiDoc("输入的最小值限制", Value = int.MinValue)]
     [Parameter] public TValue? Min { get; set; } = (TValue)Convert.ChangeType(int.MinValue, typeof(TValue));
     /// <summary>
     /// 设置排列形式和模式。
     /// </summary>
+    [ParameterApiDoc("排列形式和模式", Value = "Row")]
     [Parameter][CssClass("t-input-number--")] public InputNumberTheme Theme { get; set; } = InputNumberTheme.Row;
     /// <summary>
     /// 设置输入框后缀显示的文本。
     /// </summary>
+    [ParameterApiDoc("输入框后缀显示的文本")]
     [Parameter] public string? SuffixText { get; set; }
     /// <summary>
     /// 设置输入框前面显示的文本。
     /// </summary>
+    [ParameterApiDoc("输入框前面显示的文本")]
     [Parameter] public string? PrefixText { get; set; }
 
     /// <summary>
     /// 设置输入框出现的提示的文本。
     /// </summary>
+    [ParameterApiDoc("输入框出现的提示的文本")]
     [Parameter] public string? Tip { get; set; }
     /// <summary>
     /// 表示提示的对齐方式。
     /// </summary>
+    [ParameterApiDoc("提示的对齐方式",Value= "Input")]
     [Parameter] public TipAlign? TipAlign { get; set; } = TDesign.TipAlign.Input;
 
+    /// <summary>
+    /// 占位字符串。
+    /// </summary>
+    [ParameterApiDoc("占位字符串")]
     [Parameter] public string? Placeholder { get; set; }
 
     /// <summary>

@@ -1,5 +1,7 @@
 ﻿@page "/components/inputnumber"
-<LayoutContent AnchorItems="@(new[]{"基本使用","双侧调整的数字输入框","右侧调整数值的数字输入框","无按钮的数字输入框","不同尺寸的数字输入框","不同对齐方式的输入框","不同状态的数字输入框","API"})">
+<PageLayout Title="InputNumber 数字输入框" Description="数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。"
+ComponentType="typeof(TInputNumber<>)"
+Anchors="@(new[]{"基本使用","双侧调整的数字输入框","右侧调整数值的数字输入框","无按钮的数字输入框","不同尺寸的数字输入框","不同对齐方式的输入框","不同状态的数字输入框"})" >
 <PageHeader Title="InputNumber 数字输入框">
     数字输入框由增加、减少按钮、数值输入组成。每次点击增加按钮（或减少按钮），数字增长（或减少）的量是恒定的。
 </PageHeader>
@@ -223,5 +225,5 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TInputNumber<>)"></ComponentAPI></LayoutContent>
+    </Example>
+</PageLayout>

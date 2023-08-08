@@ -10,16 +10,20 @@ public partial class TSelect<TValue>
     /// <summary>
     /// 自定义选项内容。
     /// </summary>
+    [ParameterApiDoc("自定义选项内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 设置当选项被选中后的回调。
     /// </summary>
+    [ParameterApiDoc("当选项被选中后的回调", Type= "EventCallback<TValue>")]
     [Parameter] public EventCallback<TValue> OnValueSelected { get; set; }
     /// <summary>
     /// 无边框样式。
     /// </summary>
+    [ParameterApiDoc("无边框样式")]
     [Parameter][CssClass("t-select-input--borderless")] public bool Borderless { get; set; }
 
+    [ParameterApiDoc("占位符")]
     [Parameter] public string? Placeholder { get; set; }
     /// <summary>
     /// Popup 组件的引用。
@@ -87,19 +91,23 @@ public class TSelectOption<TValue> : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 选项的值。
     /// </summary>
+    [ParameterApiDoc("选项的值")]
     [Parameter] public TValue? Value { get; set; }
     /// <summary>
     /// 选项的文本。
     /// </summary>
+    [ParameterApiDoc("选项的文本")]
     [Parameter] public string? Label { get; set; }
 
     /// <summary>
     /// 禁用选项。
     /// </summary>
+    [ParameterApiDoc("禁用选项")]
     [Parameter][CssClass("t-is-disabled")] public bool Disabled { get; set; }
     /// <summary>
     /// 自定义选项的内容。
     /// </summary>
+    [ParameterApiDoc("自定义选项的内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }    
 
     /// <inheritdoc/>

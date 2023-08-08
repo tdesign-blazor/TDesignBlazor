@@ -10,25 +10,30 @@ namespace TDesign;
 /// 用于装饰输入类组件的装饰器
 /// </summary>
 [CssClass("t-input-adornment")]
-public class TInputAdornment : BlazorComponentBase, IHasChildContent
+public class TInputAdornment : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <inheritdoc/>
+    [ParameterApiDoc("装饰器任意内容")]
     [Parameter]public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 设置前面追加的文本。若设置了 <see cref="PrependContent"/> 参数，则该参数将被忽略。
     /// </summary>
+    [ParameterApiDoc("前面追加的文本，若 PrependContent 则该参数将忽略")]
     [Parameter]public string? Prepend { get; set; }
     /// <summary>
     /// 设置前面追加的任意 UI 内容。
     /// </summary>
+    [ParameterApiDoc("前面追加的任意 UI 内容")]
     [Parameter]public RenderFragment? PrependContent { get; set; }
     /// <summary>
     /// 设置后面追加的文本。若设置了 <see cref="AppendContent"/> 参数，则该参数将被忽略。
     /// </summary>
+    [ParameterApiDoc("后面追加的文本，若 AppendContent 则该参数将忽略")]
     [Parameter]public string? Append { get; set; }
     /// <summary>
     /// 设置后面追加的任意 UI 内容。
     /// </summary>
+    [ParameterApiDoc("后面追加的任意 UI 内容")]
     [Parameter]public RenderFragment? AppendContent { get; set; }
 
     /// <inheritdoc/>

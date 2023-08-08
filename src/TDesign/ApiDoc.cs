@@ -86,6 +86,7 @@ public class ApiDoc
             {
                 type = $"Nullable<{Nullable.GetUnderlyingType(parameter.PropertyType).Name}>";
             }
+
             var comment = attr.Comment;
             list.Add((name, type, required, value, comment));
         }

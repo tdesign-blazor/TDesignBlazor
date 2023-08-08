@@ -1002,9 +1002,6 @@
             对齐方式。
             </summary>
         </member>
-        <member name="P:TDesign.TDesignInputComonentBase`1.AdditionalClass">
-            <inheritdoc/>    
-        </member>
         <member name="P:TDesign.TDesignInputComonentBase`1.Value">
             <inheritdoc/>
         </member>
@@ -1298,6 +1295,11 @@
             表示提示的对齐方式。
             </summary>
         </member>
+        <member name="P:TDesign.TInputNumber`1.Placeholder">
+            <summary>
+            占位字符串。
+            </summary>
+        </member>
         <member name="M:TDesign.TInputNumber`1.AddContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
             <summary>
             重写以构建组件的内容。
@@ -1546,7 +1548,7 @@
         </member>
         <member name="P:TDesign.TInputRange`1.Size">
             <summary>
-            设置大小。
+            尺寸。
             </summary>
         </member>
         <member name="P:TDesign.TInputRange`1.Seperator">
@@ -1809,7 +1811,7 @@
         </member>
         <member name="P:TDesign.TUpload.Action">
             <summary>
-            设置服务端上传的 API 地址。要求 API 可以通过 POST 方式接收请求，并支持 FORM DATA 数据传输方式。
+            设置服务端上传的 API 地址。要求 API 支持 FORM DATA 数据传输方式。
             </summary>
         </member>
         <member name="P:TDesign.TUpload.Method">
@@ -1887,7 +1889,7 @@
         </member>
         <member name="P:TDesign.TUpload.Headers">
             <summary>
-            附带的 Header
+            附带的 Header 字典
             </summary>
         </member>
         <member name="P:TDesign.TUpload.Data">
@@ -1960,7 +1962,7 @@
         </member>
         <member name="M:TDesign.TUpload.SelectFiles(System.Collections.Generic.IReadOnlyList{TDesign.UploadFileInfo})">
             <summary>
-            当已经选择了上传的文件。
+            选择上传的文件。
             </summary>
             <param name="files">选择的文件列表。</param>
             <returns></returns>
@@ -4457,7 +4459,7 @@
         </member>
         <member name="P:TDesign.TDivider.Vertical">
             <summary>
-            垂直分割线。
+            是否垂直分割线。
             </summary>
         </member>
         <member name="P:TDesign.TDivider.Dashed">

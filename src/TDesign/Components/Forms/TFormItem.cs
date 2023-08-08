@@ -11,7 +11,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-form__item")]
 [ChildComponent(typeof(TForm))]
-public class TFormItem : TDesignComponentBase, IHasChildContent
+public class TFormItem : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联 <see cref="TForm"/> 组件的实例。
@@ -24,31 +24,38 @@ public class TFormItem : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
+    [ParameterApiDoc("表单行的内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     /// <summary>
     /// 设置表单项显示的标签文本。
     /// </summary>
+    [ParameterApiDoc("表单项显示的标签文本")]
     [Parameter] public string? Label { get; set; }
     /// <summary>
     /// 设置表单项文本的宽度，默认是 60px 。
     /// </summary>
+    [ParameterApiDoc("表单项文本的宽度，默认是 60px", Value ="60px")]
     [Parameter] public string? LabelWidth { get; set; } = "60px";
     /// <summary>
     /// 设置文本自动加上冒号。
     /// </summary>
+    [ParameterApiDoc("标签文本自动加上冒号")]
     [Parameter] public bool LabelColon { get; set; }
     /// <summary>
     /// 设置必填时自动加上红色的 “*” 符号。
     /// </summary>
+    [ParameterApiDoc("必填时自动加上红色的 “*” 符号，如果设置了 For 字段，则会自动检测该字段是否标记了 RequiredAttribute 并设置为 true")]
     [Parameter] public bool Required { get; set; }
     /// <summary>
     /// 帮助的提示文字。
     /// </summary>
+    [ParameterApiDoc("帮助的提示文字")]
     [Parameter] public string? HelpText { get; set; }
     /// <summary>
     /// 设置一个委托，表示具备表单验证的字段。
     /// </summary>
+    [ParameterApiDoc("具备表单验证的字段")]
     [Parameter] public Expression<Func<dynamic>>? For { get; set; }
 
     /// <summary>

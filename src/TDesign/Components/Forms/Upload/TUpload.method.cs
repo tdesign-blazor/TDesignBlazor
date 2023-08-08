@@ -4,11 +4,11 @@ namespace TDesign;
 partial class TUpload
 {
     /// <summary>
-    /// 当已经选择了上传的文件。
+    /// 选择上传的文件。
     /// </summary>
     /// <param name="files">选择的文件列表。</param>
     /// <returns></returns>
-    public async Task SelectFiles(IReadOnlyList<UploadFileInfo> files)
+    async Task SelectFiles(IReadOnlyList<UploadFileInfo> files)
     {
         _fileList.Clear();       
         await this.Refresh();
@@ -51,6 +51,7 @@ partial class TUpload
     /// <summary>
     /// 执行上传操作。
     /// </summary>
+    [MethodApiDoc("执行上传操作")]
     public async Task Upload()
     {
         var valid = await ValidationHandler!.Invoke(_fileList);

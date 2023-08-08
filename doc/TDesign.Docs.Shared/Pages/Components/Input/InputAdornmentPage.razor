@@ -1,9 +1,6 @@
 ﻿@page "/components/inputadornment"
-<LayoutContent AnchorItems="@(new[]{"文本装饰","任意装饰","API"})">
-<PageHeader Title="InputAdornment 输入装饰器">
-    用于装饰输入类组件的装饰器
-</PageHeader>
-
+<PageLayout Title="InputAdornment 输入装饰器" Description="用于装饰输入类组件的装饰器" ComponentType="typeof(TInputAdornment)"
+            Anchors="@(new[]{"文本装饰","任意装饰"})">
 <Example Title="文本装饰">
     <Description>在输入框前后加入一些特定的纯展示标签，通常在需要提高辨识效率时使用。</Description>
     <RunContent>
@@ -121,9 +118,8 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TInputAdornment)"></ComponentAPI>
+    </Example>
 @code{
     string Text{ get; set; }
 }
-</LayoutContent>
+</PageLayout>

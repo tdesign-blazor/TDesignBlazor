@@ -11,14 +11,17 @@ public class TInputRadioGroup<TValue> : TInputRadioContainer<TValue>,IHasDisable
     /// <summary>
     /// 设置单选框的按钮风格。
     /// </summary>
+    [ParameterApiDoc("单选框的按钮风格")]
     [Parameter][CssClass] public RadioButtonStyle? ButtonStyle { get; set; }
     /// <summary>
     /// 设置禁用状态。
     /// </summary>
+    [ParameterApiDoc("禁用状态")]
     [Parameter] public bool Disabled { get; set; }
     /// <summary>
     /// 设置按钮的同一尺寸。
     /// </summary>
+    [ParameterApiDoc("按钮的同一尺寸", Value = "Medium")]
     [Parameter][CssClass] public Size Size { get; set; } = Size.Medium;
 }
 

@@ -14,27 +14,33 @@ public class TInputTag : TDesignInputComonentBase<IEnumerable<string>>
     /// <summary>
     /// 设置标签的前缀文本。
     /// </summary>
+    [ParameterApiDoc("标签的前缀文本")]
     [Parameter] public string? Prefix { get; set; }
     /// <summary>
     /// 设置标签的前缀任意内容。
     /// </summary>
+    [ParameterApiDoc("标签的前缀任意内容")]
     [Parameter] public RenderFragment? PrefixContent { get; set; }
     /// <summary>
     /// 最多容纳的标签数量。
     /// </summary>
+    [ParameterApiDoc("最多容纳的标签数量")]
     [Parameter] public int? Max { get; set; }
     /// <summary>
     /// 设置一个当按下回车键后的回调方法。
     /// </summary>
+    [ParameterApiDoc("当按下回车键后的回调方法", Type = "EventCallback<string?>")]
     [Parameter] public EventCallback<string?> OnEnterPressed { get; set; }
 
     /// <summary>
     /// 设置文本框的水印占位字符串。
     /// </summary>
+    [ParameterApiDoc("文本框的水印占位字符串")]
     [Parameter] public string? Placeholder { get; set; }
     /// <summary>
     /// 设置标签的主题颜色。
     /// </summary>
+    [ParameterApiDoc("标签的主题颜色")]
     [Parameter] public Theme? Theme { get; set; }
 
 

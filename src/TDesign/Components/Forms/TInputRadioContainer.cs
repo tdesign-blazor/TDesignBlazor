@@ -19,6 +19,7 @@ public class TInputRadioContainer<TValue> : BlazorComponentBase, IHasChildConten
     /// <summary>
     ///  执行当 <see cref="TInputRadio{TValue}"/> 触发的事件。
     /// </summary>
+    [ParameterApiDoc("当单选按钮的值变化后触发的回调", Value = "EventCallback<string>")]
     [Parameter] public EventCallback<string> OnValueSelected { get; set; }
 
     /// <summary>
@@ -35,10 +36,13 @@ public class TInputRadioContainer<TValue> : BlazorComponentBase, IHasChildConten
     [CascadingParameter]public EditContext? CascadedEditContext { get; set; }
 
     /// <inheritdoc/>
+    [ParameterApiDoc("绑定的值")]
     [Parameter]public TValue? Value { get; set; }
     /// <inheritdoc/>
+    [ParameterApiDoc("绑定值的表达式", Value = "Expression<Func<TValue?>>?")]
     [Parameter] public Expression<Func<TValue?>>? ValueExpression { get; set; }
     /// <inheritdoc/>
+    [ParameterApiDoc("更新值的回调")]
     [Parameter] public EventCallback<TValue?> ValueChanged { get; set; }
 
     /// <summary>

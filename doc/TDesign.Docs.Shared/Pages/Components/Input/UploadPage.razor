@@ -1,10 +1,9 @@
 ﻿@page "/components/upload"
 
 
-<LayoutContent AnchorItems="@(new[]{"基础文件上传","禁用上传","按钮的风格","批量上传","提示文字","处理结果","API"})">
-    <PageHeader Title="Upload 上传">
-        上传组件允许用户传输文件或提交自己的内容。
-    </PageHeader>
+<PageLayout Title="Upload 上传" Description="上传组件允许用户传输文件或提交自己的内容。" ComponentType="typeof(TUpload)"
+    Anchors="@(new[]{"基础文件上传","禁用上传","按钮的风格","批量上传","提示文字","处理结果"})">
+
     <TAlert Theme="Theme.Warning">
         文件上传需要服务端的配合，文档仅提供了 WEB API 的部分代码示例。
     </TAlert>
@@ -125,9 +124,7 @@ public class UploadController : ControllerBase
 ")
     </CodeContent>
 </Example>
-<div id="API"></div>
-<ComponentAPI Component="typeof(TUpload)"/>
-</LayoutContent>
+</PageLayout>
 @code{
     void HandleSuccess(UploadFileInfo file)
     {
