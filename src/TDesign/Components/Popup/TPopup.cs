@@ -1,23 +1,13 @@
-﻿namespace TDesign;
+﻿using Microsoft.JSInterop;
+using System.Text.Json.Serialization;
+
+namespace TDesign;
 /// <summary>
 /// 具备悬浮提示的弹出层。
 /// </summary>
 [CssClass("t-popup")]
 public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
 {
-    const string ANIMATION_ENTER = "t-popup--animation-enter";
-    const string ANIMATION_ENTER_FROM = "t-popup--animation-enter-from";
-    const string ANIMATION_EXITING = "t-popup--animation-exiting";
-    const string ANIMATION_LEAVE_TO = "t-popup--animation-leave-to";
-
-    const string ANIMATION_ENTER_TO = "t-popup--animation-enter-to";
-    const string ANIMATION_ENTERING = "t-popup--animation-entering";
-    const string ANIMATION_LEAVE_FROM = "t-popup--animation-leave-from";
-    const string ANIMATION_LEAVE = "t-popup--animation-leave";
-
-    const string ANIMATION_ENTER_ACTIVE = "t-popup--animation-enter-active";
-    const string ANIMATION_LEAVE_ACTIVE = "t-popup--animation-leave-active";
-
     /// <summary>
     /// 初始化 <see cref="TPopup"/> 类的新实例。
     /// </summary>
@@ -63,7 +53,17 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     /// </summary>
     public bool Visible { get; private set; }
 
-    Popper? _instance;
+    Popper? _popper;
+
+    IJSModule _popupModule;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if ( firstRender )
+        {
+            _popupModule = await JS.ImportTDesignModuleAsync("popup");
+        }
+    }
 
     /// <inheritdoc/>
     protected override void OnParametersSet()
@@ -94,14 +94,6 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
                 inner.Div("t-popup__arrow", Arrow).Close();
             })
             .Close();
-
-    protected override void BuildCssClass(ICssClassBuilder builder)
-    {
-        if ( !builder.Contains(ANIMATION_ENTER) )
-        {
-            builder.Append(ANIMATION_ENTER);
-        }
-    }
     protected override void BuildStyle(IStyleBuilder builder)
     {
         builder.Append("display:none");
@@ -111,16 +103,13 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     /// 触发指定元素引用并显示弹出层。
     /// </summary>
     /// <param name="selector">被触发弹出层的元素引用。</param>
-    public async Task Show(IBlazorComponent selector)
+    public async Task Show(TDesignComponentBase selector)
     {
-        _instance = await JS.InvokePopupAsync(selector.Reference!.Value, Reference!.Value, new()
+        var options = new PopperOptions
         {
             Placement = Placement
-        }, Hide);
-
-        CssClassBuilder.Remove(ANIMATION_ENTER).Remove(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE);
-        Visible = true;
-        StateHasChanged();
+        };
+        await _popupModule.Module.InvokeVoidAsync("popup.show", selector.Reference, Reference, options, DotNetObjectReference.Create(this));
     }
 
     /// <summary>
@@ -128,15 +117,23 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     /// </summary>
     public async Task Hide()
     {
-        if (_instance is not null)
-        {
-            await _instance.HideAsync(Reference);
-
-            CssClassBuilder.Remove(ANIMATION_LEAVE).Remove(ANIMATION_ENTER_ACTIVE).Append(ANIMATION_LEAVE_ACTIVE).Append(ANIMATION_ENTER);
-            Visible = false;
-            StateHasChanged();
-        }
+        await _popupModule.Module.InvokeVoidAsync("popup.hide", Reference, DotNetObjectReference.Create(this));
     }
+
+    [JSInvokable("onHidden")]
+    public void InvokeOnHidden()
+    {
+        Visible = false;
+    }
+
+    [JSInvokable("onShown")]
+    public void InvokeOnShown()
+    {
+        Visible = true;
+        //_popper = new(_popupModule.Module, popper, new());
+    }
+
+
 }
 
 /// <summary>
