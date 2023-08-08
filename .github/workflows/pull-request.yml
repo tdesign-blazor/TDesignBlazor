@@ -60,7 +60,7 @@ jobs:
 
       - name: Dotnet Test Reporter
         uses: bibipkins/dotnet-test-reporter@v1.0.0-beta.4
-        if: github.repository_owner == 'AchievedOwner'
+        if: github.repository_owner == 'tdesign-blazor'
         with:
           github-token: ${{ env.GITHUB_TOKEN }}
           test-results: ./src/TDesign.Test/TestResults/
