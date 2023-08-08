@@ -8,23 +8,27 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-breadcrumb__item")]
 [ChildComponent(typeof(TBreadcrumb))]
-public class TBreadcrumbItem : TDesignComponentBase, IHasChildContent
+public class TBreadcrumbItem : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// 分隔符内容。
     /// </summary>
+    [ParameterApiDoc("分隔符内容")]
     [Parameter] public RenderFragment? SeperatorContent { get; set; }
     /// <summary>
     /// 导航的超链接。
     /// </summary>
+    [ParameterApiDoc("导航的超链接")]
     [Parameter][HtmlAttribute("href")] public string? Link { get; set; }
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [ParameterApiDoc("导航的任意内容")]
+    [Parameter] public override RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 禁用导航。
     /// </summary>
+    [ParameterApiDoc("禁用导航")]
     [Parameter] public bool Disabled { get; set; }
 
     /// <summary>

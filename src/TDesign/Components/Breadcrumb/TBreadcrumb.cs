@@ -5,10 +5,11 @@
 /// </summary>
 [ParentComponent]
 [CssClass("t-breadcrumb")]
-public class TBreadcrumb : TDesignComponentBase, IHasChildContent
+public class TBreadcrumb : TDesignAdditionParameterWithChildContentComponentBase
 {
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [ParameterApiDoc("装载 TBreadcrumbItem 组件")]
+    [Parameter] public override RenderFragment? ChildContent { get; set; }
 }

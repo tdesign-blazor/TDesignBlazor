@@ -5,40 +5,48 @@ namespace TDesign;
 /// 导航菜单。
 /// </summary>
 [ParentComponent]
-public class TMenu : TDesignComponentBase, IHasChildContent
+public class TMenu : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// 设置 <c>true</c> 表示侧边菜单栏。
     /// </summary>
+    [ParameterApiDoc("是否为侧边菜单栏")]
     [Parameter] public bool Aside { get; set; }
 
     /// <summary>
     /// 是否暗色主题。
     /// </summary>
+    [ParameterApiDoc("是否暗色主题")]
     [Parameter][BooleanCssClass("t-menu--dark", "t-menu--light")] public bool Dark { get; set; }
     /// <summary>
     /// 设置 <c>true</c> 表示下级菜单的展开模式为【弹出】方式，即鼠标悬停后展开下级菜单。否则是【鼠标点击】后展开下级菜单。
     /// </summary>
+    [ParameterApiDoc("是否设置下级菜单的展开模式为【弹出】方式，即鼠标悬停后展开下级菜单。否则是【鼠标点击】后展开下级菜单")]
     [Parameter][BooleanCssClass("popup", "sub")] public bool Popup { get; set; }
     /// <summary>
     /// Logo 部分的内容。
     /// </summary>
+    [ParameterApiDoc("Logo 部分的内容")]
     [Parameter] public RenderFragment? LogoContent { get; set; }
     /// <summary>
     /// 主体部分的内容。
     /// </summary>
+    [ParameterApiDoc("菜单主体部分的内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 右侧操作部分的内容。
     /// </summary>
+    [ParameterApiDoc("右侧操作部分的内容")]
     [Parameter] public RenderFragment? OperationContent { get; set; }
     /// <summary>
     /// 折叠菜单，侧边菜单有效。
     /// </summary>
+    [ParameterApiDoc("折叠菜单，侧边菜单有效")]
     [Parameter][CssClass("t-is-collapsed")] public bool Collapse { get; set; }
     /// <summary>
     /// 侧边菜单的宽度。
     /// </summary>
+    [ParameterApiDoc("侧边菜单的宽度")]
     [Parameter] public int? Width { get; set; }
 
     protected override void OnParametersSet()

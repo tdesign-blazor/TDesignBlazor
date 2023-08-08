@@ -1,6 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components.Rendering;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TDesign;
 
@@ -9,7 +8,7 @@ namespace TDesign;
 /// </summary>
 [CssClass("t-steps-item")]
 [ChildComponent(typeof(TStepGroup))]
-public class TStepItem : TDesignComponentBase, IHasChildContent
+public class TStepItem : TDesignAdditionParameterComponentBase, IHasChildContent
 {
     /// <summary>
     /// 级联参数。
@@ -18,15 +17,18 @@ public class TStepItem : TDesignComponentBase, IHasChildContent
     /// <summary>
     /// 步骤的状态。
     /// </summary>
+    [ParameterApiDoc("步骤的状态", Value = "NotStart")]
     [Parameter][CssClass("t-steps-item--")] public StepStatus Status { get; set; } = StepStatus.NotStart;
     /// <summary>
     /// 设置可点击的样式。
     /// </summary>
+    [ParameterApiDoc("是否使用可点击的样式")]
     [Parameter][CssClass("t-steps-item--clickable")] public bool Clickable { get; set; }
 
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
+    [ParameterApiDoc("步骤条的任意内容")]
     [Parameter] public RenderFragment? ChildContent { get; set; }
     /// <summary>
     /// 设置图标名称。默认自动计算当前步骤所在的数字。
@@ -34,14 +36,17 @@ public class TStepItem : TDesignComponentBase, IHasChildContent
     /// 当 <see cref="TStepGroup.Dot"/> 是 <c>true</c> 时无效。
     /// </para>
     /// </summary>
-    [Parameter] public object? TIcon { get; set; }
+    [ParameterApiDoc("图标名称。默认自动计算当前步骤所在的数字，当 TStepGroup.Dot 为 true 时无效")]
+    [Parameter] public object? Icon { get; set; }
     /// <summary>
     /// 设置描述内容。
     /// </summary>
+    [ParameterApiDoc("描述部分的内容")]
     [Parameter] public RenderFragment? DescriptionContent { get; set; }
     /// <summary>
     /// 设置附加内容。
     /// </summary>
+    [ParameterApiDoc("其余附加部分的内容")]
     [Parameter] public RenderFragment? ExtraContent { get; set; }
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
@@ -84,9 +89,9 @@ public class TStepItem : TDesignComponentBase, IHasChildContent
                 return;
             }
 
-            if (TIcon is not null)
+            if (Icon is not null)
             {
-                icon.CreateComponent<TIcon>(0, attributes: new { Name = TIcon });
+                icon.CreateComponent<TIcon>(0, attributes: new { Name = Icon });
                 return;
             }
 

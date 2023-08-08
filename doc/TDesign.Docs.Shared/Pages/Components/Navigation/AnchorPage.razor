@@ -2,10 +2,9 @@
 @inject NavigationManager navigationManager
 
 
-<LayoutContent AnchorItems="@(new[]{"示例","指定容器锚点","API"})">
-            <PageHeader Title="Anchor 锚点">
-                页面内的超级链接，用于跳转到页面内指定位置。
-            </PageHeader>
+<PageLayout Title="Anchor 锚点" Description="页面内的超级链接，用于跳转到页面内指定位置。"
+    Anchors="@(new[]{"示例","指定容器锚点"})">
+    <ChildContent>
             <Example Title="示例">
                 <Description></Description>
                 <RunContent>
@@ -88,8 +87,10 @@
 ```
 ")
                 </CodeContent>
-            </Example>
-        <div id="API"></div>
-        <ComponentAPI Component="typeof(TAnchor)"></ComponentAPI>
-        <ComponentAPI Component="typeof(TAnchorItem)"></ComponentAPI>
-</LayoutContent>
+        </Example>
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TAnchor)"/>
+        <ApiDocument ComponentType="typeof(TAnchorItem)" />
+    </ApiContent>
+</PageLayout>

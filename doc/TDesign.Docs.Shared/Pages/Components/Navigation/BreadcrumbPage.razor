@@ -1,8 +1,9 @@
 ﻿@page "/components/breadcrumb"
-<LayoutContent AnchorItems="@(new[]{"基础面包屑","带图标的面包屑","自定义分隔符","带跳转/点击的面包屑","API"})">
-<PageHeader Title="Breadcrumb 面包屑">
-    显示当前页面在系统层级结构的位置，并能返回之前任意层级的页面。
-</PageHeader>
+<PageLayout Title="Breadcrumb 面包屑"
+            Description="显示当前页面在系统层级结构的位置，并能返回之前任意层级的页面。"
+    Anchors="@(new[]{"基础面包屑","带图标的面包屑","自定义分隔符","带跳转/点击的面包屑"})">
+
+<ChildContent>
 
 <Example Title="基础面包屑">
     <Description>适用于广泛的基础用法，系统拥有超过两级以上的层级结构，用于切换向上任意层级的内容。</Description>
@@ -119,8 +120,12 @@
 ```
 ")
     </CodeContent>
-    </Example><div id="API"></div>
-<ComponentAPI Component="typeof(TBreadcrumb)"></ComponentAPI>
-<ComponentAPI Component="typeof(TBreadcrumbItem)"></ComponentAPI>
-</LayoutContent>
+    </Example>
+
+    </ChildContent>
+    <ApiContent>
+        <ApiDocument ComponentType="typeof(TBreadcrumb)"></ApiDocument>
+        <ApiDocument ComponentType="typeof(TBreadcrumbItem)"></ApiDocument>
+    </ApiContent>
+</PageLayout>
 @inject IJSRuntime JS

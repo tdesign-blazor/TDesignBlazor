@@ -16,18 +16,22 @@ public class TTab : TDesignAdditionParameterWithChildContentComponentBase, IHasO
     /// <summary>
     /// 选项卡标题呈现的位置。
     /// </summary>
+    [ParameterApiDoc("选项卡标题呈现的位置", Value ="Top")]
     [Parameter] public Position Position { get; set; } = Position.Top;
     /// <summary>
     /// 卡片模式。
     /// </summary>
+    [ParameterApiDoc("卡片模式")]
     [Parameter] public bool Card { get; set; }
     /// <summary>
     /// 选项卡的尺寸。
     /// </summary>
+    [ParameterApiDoc("选项卡的尺寸", Value = "Medium")]
     [Parameter] public TabSize Size { get; set; } = TabSize.Medium;
     /// <summary>
-    /// <inheritdoc/>
+    /// 当选项卡切换时触发的回调。
     /// </summary>
+    [ParameterApiDoc("当选项卡切换时触发的回调", Type= "EventCallback<int?>")]
     [Parameter] public EventCallback<int?> OnSwitch { get; set; }
     public int? SwitchIndex { get; set; }
 

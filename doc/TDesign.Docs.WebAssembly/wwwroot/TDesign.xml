@@ -221,7 +221,7 @@
         </member>
         <member name="P:TDesign.TAnchorItem.OnClick">
             <summary>
-            点击事件
+            点击锚点的回调方法
             </summary>
         </member>
         <member name="P:TDesign.TAnchorItem.Target">
@@ -2502,7 +2502,7 @@
             显示下级菜单的当前菜单标题。
             </summary>
         </member>
-        <member name="P:TDesign.TSubMenu.TIcon">
+        <member name="P:TDesign.TSubMenu.Icon">
             <summary>
             图标名称。
             </summary>
@@ -3204,7 +3204,7 @@
         </member>
         <member name="P:TDesign.TStepGroup.Vertical">
             <summary>
-            设置为垂直排列。
+            是否为垂直排列。
             </summary>
         </member>
         <member name="P:TDesign.TStepGroup.Reserve">
@@ -3267,7 +3267,7 @@
             <inheritdoc/>
             </summary>
         </member>
-        <member name="P:TDesign.TStepItem.TIcon">
+        <member name="P:TDesign.TStepItem.Icon">
             <summary>
             设置图标名称。默认自动计算当前步骤所在的数字。
             <para>
@@ -3781,7 +3781,7 @@
         </member>
         <member name="P:TDesign.TTab.OnSwitch">
             <summary>
-            <inheritdoc/>
+            当选项卡切换时触发的回调。
             </summary>
         </member>
         <member name="M:TDesign.TTab.BuildTabContent(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,System.Int32)">
@@ -3830,7 +3830,7 @@
         </member>
         <member name="P:TDesign.TTabItem.Padding">
             <summary>
-            选项卡内容的内边距，默认时 25px。
+            选项卡内容的内边距，默认 25px。
             </summary>
         </member>
         <member name="P:TDesign.TTabItem.Disabled">
@@ -4898,12 +4898,12 @@
         </member>
         <member name="P:TDesign.TPagination.EllipsisMode">
             <summary>
-            设置当页码数量超出时，前后省略模式。
+            设置当页码数量超出时，页码条前后省略模式。
             </summary>
         </member>
         <member name="P:TDesign.TPagination.ShowJumpPage">
             <summary>
-            设置是否显示跳转到文本框。
+            设置是否显示【跳转到】文本框。
             </summary>
         </member>
         <member name="P:TDesign.TPagination.Simple">
@@ -4999,7 +4999,6 @@
             构建 跳转到 文本框。
             </summary>
             <param name="builder"></param>
-            <param name="sequence"></param>
         </member>
         <member name="T:TDesign.TPagination.PageButtonBehavior">
             <summary>
