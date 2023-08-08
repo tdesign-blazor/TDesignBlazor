@@ -17,7 +17,7 @@
                 @foreach ( var param in parameters )
                 {
                     <tr>
-                        <td style="font-weight:bolder;font-size:16px;">@param.name</td>
+                        <td style="font-weight:bolder;">@param.name</td>
                         <td>
                             @if ( string.IsNullOrEmpty(param.type) )
                             {
@@ -25,7 +25,7 @@
                             }
                             else
                             {
-                                <code>@param.type</code>
+                                <code style="color:darkred">@param.type</code>
                             }
                         </td>
                         <td>
