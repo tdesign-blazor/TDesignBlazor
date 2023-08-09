@@ -1,10 +1,8 @@
 ﻿@page "/components/calendar"
 
-<PageHeader Title="Calendar 日历">
-    按照日历形式展示数据或日期的容器。
-</PageHeader>
-
-<LayoutContent AnchorItems="@(new[]{"示例"})">
+<PageLayout Title="Calendar 日历" Description="按照日历形式展示数据或日期的容器。"
+            Anchors="@(new[]{"事项日历面板","卡片日历","自定义高亮显示的日期","自定义日期的范围","更改每周的第一天","设置周的文本","自定义标题","自定义单元格的内容"})"
+            ComponentType="typeof(TCalendar)">
     <Example Title="事项日历面板">
         <Description>在日期中可显示事项的日期显示容器。常用于有足够空间，且需要承载或显示事项信息时使用。</Description>
     <RunContent>
@@ -13,8 +11,162 @@
     <CodeContent>
         @Code.Create(@"
 ```cshtml-razor
+<TCalendar />
 ```
 ")
     </CodeContent>
 </Example>
-</LayoutContent>
+<Example Title="卡片日历">
+    <Description></Description>
+        <RunContent>
+            <TCalendar Card/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar Card/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义高亮显示的日期">
+        <Description>组件默认高亮“今天”或“当前月份”</Description>
+    <RunContent>
+        <TCalendar Multiple SelectedDates="new(){ new(2023,8,7), new(2023,9,6), new(2023,7,14) }"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar Multiple SelectedDates=""new(){ new(2023,8,7), new(2023,9,6), new(2023,7,14) }""/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义日期的范围">
+    <Description>
+            <code>StartDate</code> 开始日期，<code>EndDate</code> 结束日期，超出范围的日期将不可选中
+    </Description>
+    <RunContent>
+        <TCalendar StartDate="new(2023,7,1)" EndDate="new(2024,5,18)"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar StartDate=""new(2023,7,1)"" EndDate=""new(2024,5,18)""/>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="更改每周的第一天">
+    <Description></Description>
+    <RunContent>
+        <TCalendar FirstDayOfWeek="DayOfWeek.Wednesday"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar FirstDayOfWeek=""DayOfWeek.Wednesday""/>
+```
+")
+    </CodeContent>
+</Example>
+    <Example Title="设置周的文本">
+        <Description></Description>
+        <RunContent>
+            <TCalendar>
+                <WeekContent>
+                    @if ( context == DayOfWeek.Sunday )
+                    {
+                        <text>
+                            <span style="color:red">星期天</span>
+                        </text>
+                    }
+                    else
+                    {
+                        @($"星期{(int)context}")
+                    }
+                </WeekContent>
+            </TCalendar>
+        </RunContent>
+        <CodeContent>
+@Code.Create(@"
+```cshtml-razor
+<TCalendar>
+    <WeekContent>
+        @if ( context == DayOfWeek.Sunday )
+        {
+            <text>
+                <span style=""color:red"">星期天</span>
+            </text>
+        }
+        else
+        {
+            @($""星期{(int)context}"")
+        }
+    </WeekContent>
+</TCalendar>
+```
+")
+        </CodeContent>
+    </Example>
+    <Example Title="自定义标题">
+    <Description></Description>
+    <RunContent>
+        <TCalendar TitleText="TDesignBlazor 开发计划" />
+
+        <TCalendar>
+            <TitleContent>
+                <TIcon Name="IconName.Calendar"/> 2.0发布计划
+            </TitleContent>
+        </TCalendar>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar TitleText=""TDesignBlazor 开发计划"" />
+
+<TCalendar>
+    <TitleContent>
+        <TIcon Name=""IconName.Calendar""/> 2.0发布计划
+    </TitleContent>
+</TCalendar>
+```
+")
+    </CodeContent>
+</Example>
+<Example Title="自定义单元格的内容">
+    <Description></Description>
+    <RunContent>
+            <TCalendar>
+                <CellContent>
+                    @if ( context.date.Day == 9 && context.date.Month == 8 && context.mode == CalendarMode.Month )
+                    {
+                        <TTag Theme="Theme.Primary">立秋</TTag>
+                    }
+                    @if ( context.date.Month == 8 && context.mode == CalendarMode.Year )
+                    {
+                        <TTag Theme="Theme.Danger">父亲的生日</TTag>
+                    }
+                </CellContent>
+            </TCalendar>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TCalendar>
+    <CellContent>
+        @if ( context.date.Day == 9 && context.date.Month == 8 && context.mode == CalendarMode.Month )
+        {
+            <TTag Theme=""Theme.Primary"">立秋</TTag>
+        }
+        @if ( context.date.Month == 8 && context.mode == CalendarMode.Year )
+        {
+            <TTag Theme=""Theme.Danger"">父亲的生日</TTag>
+        }
+    </CellContent>
+</TCalendar>
+```
+")
+    </CodeContent>
+</Example>
+</PageLayout>
