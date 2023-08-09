@@ -72,3 +72,4 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.t-input__tips{position:inherit!important;}
