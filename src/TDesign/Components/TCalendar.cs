@@ -1,4 +1,6 @@
-﻿using TDesign.Specifications;
+﻿using ComponentBuilder.FluentRenderTree;
+using System;
+using TDesign.Specifications;
 
 namespace TDesign;
 
@@ -6,59 +8,106 @@ namespace TDesign;
 /// 按照日历形式展示数据或日期的容器。
 /// </summary>
 [CssClass("t-calendar")]
-public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
+public partial class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
 {
+    /// <summary>
+    /// 今天的日期
+    /// </summary>
+    readonly DateOnly Today = DateOnly.FromDateTime(DateTime.Today);
+
     #region Parameters
     /// <summary>
     /// 是否隐藏控制面板。
     /// </summary>
+    [ParameterApiDoc("是否隐藏控制面板")]
     [Parameter] public bool HideController { get; set; }
     /// <summary>
     /// 使用卡片模式。
     /// </summary>
+    [ParameterApiDoc("使用卡片模式")]
     [Parameter][BooleanCssClass("t-calendar--card","t-calendar--full")]public bool Card { get; set; }
     /// <summary>
     /// 日历的模式。
     /// </summary>
+    [ParameterApiDoc("日历的模式",Value = "Month")]
     [Parameter] public CalendarMode Mode { get; set; } = CalendarMode.Month;
 
     /// <summary>
     /// 是否显示周末。<see cref="CalendarMode.Mounth"/> 有效。
     /// </summary>
-    [Parameter]public bool ShowWeekend { get; set; }
+    [ParameterApiDoc("是否显示周末",Value ="true")]
+    [Parameter] public bool ShowWeekend { get; set; } = true;
     /// <summary>
     /// 日历呈现的年份。默认是当前年份。
     /// </summary>
+    [ParameterApiDoc("日历呈现的年份，默认是当前年份",Value = "DateTime.Now.Year")]
     [Parameter] public int Year { get; set; } = DateTime.Now.Year;
     /// <summary>
     /// 日历呈现的月份。默认是当前月份。
     /// </summary>
+    [ParameterApiDoc("日历呈现的月份。默认是当前月份", Value = "DateTime.Now.Month")]
     [Parameter] public int Month { get; set; } = DateTime.Now.Month;
     /// <summary>
     /// 小于 10 的日期，是否使用 '0' 填充。
     /// </summary>
+    [ParameterApiDoc("小于 10 的日期，是否使用 '0' 填充")]
     [Parameter]public bool FiilWithZero { get; set; }
     /// <summary>
     /// 周几算第一天。
     /// </summary>
+    [ParameterApiDoc("周几算第一天", Value ="Monday")]
     [Parameter] public DayOfWeek FirstDayOfWeek { get; set; } = DayOfWeek.Monday;
+
+    /// <summary>
+    /// 设置周的自定义内容。
+    /// </summary>
+    [ParameterApiDoc("周的自定义内容", Type = "RenderFragment<DayOfWeek>?")]
+    [Parameter]public RenderFragment<DayOfWeek>? WeekContent { get; set; }
+
     /// <summary>
     /// 年月的开始范围。
     /// </summary>
-    [Parameter]public DateTime? Start { get; set; }
+    [ParameterApiDoc("年月的开始范围")]
+    [Parameter]public DateOnly? StartDate { get; set; }
     /// <summary>
     /// 年月的结束范围。
     /// </summary>
-    [Parameter] public DateTime? End { get; set; }
+    [ParameterApiDoc("年月的结束范围")]
+    [Parameter] public DateOnly? EndDate { get; set; }
     /// <summary>
     /// 设置标题。
     /// </summary>
+    [ParameterApiDoc("日历的标题")]
     [Parameter] public string? TitleText { get; set; }
     /// <summary>
     /// 设置标题的任意代码片段。
     /// </summary>
+    [ParameterApiDoc("标题的任意代码片段")]
     [Parameter] public RenderFragment? TitleContent { get; set; }
+    /// <summary>
+    /// 自定义日历单元格的内容。
+    /// </summary>
+    [ParameterApiDoc("自定义日历单元格的内容")]
+    [Parameter]public RenderFragment<(DateOnly date,CalendarMode mode)>? CellContent { get; set; }
+    /// <summary>
+    /// 是否允许多个日期被选中。
+    /// </summary>
+    [ParameterApiDoc("是否允许多个日期被选中")]
+    [Parameter]public bool Multiple { get; set; }
 
+    /// <summary>
+    /// 高亮显示的日期，默认时当天或当月。
+    /// </summary>
+    [ParameterApiDoc("高亮显示的日期，默认时当天或当月")]
+    [Parameter]public List<DateOnly> SelectedDates { get; set; } = new()
+    {
+        DateOnly.FromDateTime(DateTime.Today)
+    };
+    /// <summary>
+    /// 当日期改变时触发的回调。
+    /// </summary>
+    [ParameterApiDoc("当日期被选中时触发的回调", Type= "EventCallback<IReadOnlyList<DateOnly>>")]
+    [Parameter]public EventCallback<IReadOnlyList<DateOnly>> OnDateSelected { get; set; }
     #endregion
 
     #region Internal
@@ -89,13 +138,14 @@ public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
 
 
     /// <summary>
-    /// 当前年。
+    /// 当前查看的年份。
     /// </summary>
-    int CurrentYear { get; set; }
+    int CurrentViewYear { get; set; }
     /// <summary>
-    /// 当前月。
+    /// 当前查看的月份。
     /// </summary>
-    int CurrentMonth { get; set; }
+    int CurrentViewMonth { get; set; }
+
 
     #endregion
 
@@ -103,29 +153,36 @@ public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
     /// <summary>
     /// 切换月年模式。
     /// </summary>
-    Task SwitchCalendarMode(CalendarMode mode)
+    void SwitchCalendarMode(CalendarMode mode)
     {
         Mode = mode;
         StateHasChanged();
-        return Task.CompletedTask;
     }
 
     /// <summary>
     /// 切换周末是否显示。
     /// </summary>
-    Task SwitchWeekend()
+    void SwitchWeekend()
     {
+        if ( Mode != CalendarMode.Month )
+        {
+            return;
+        }
+
         ShowWeekend = !ShowWeekend;
         StateHasChanged();
-        return Task.CompletedTask;
     }
 
-    Task ChangeDate(int year, int month)
+    void ChangeDate(int year, int month)
     {
-        CurrentYear = Year = year;
-        CurrentMonth = Month = month;
+        if ( CurrentViewYear == year && CurrentViewMonth == month )
+        {
+            return;
+        }
+
+        CurrentViewYear = Year = year;
+        CurrentViewMonth = Month = month;
         StateHasChanged();
-        return Task.CompletedTask;
     }
     #endregion
 
@@ -133,15 +190,15 @@ public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
     {
         base.OnParametersSet();
 
-        CurrentYear = Year;
-        CurrentMonth = Month;
+        CurrentViewYear = Year;
+        CurrentViewMonth = Month;
 
-        Start ??= new DateTime(CurrentYear - 10, 1, 1);
-        End ??= new DateTime(CurrentYear + 10, 12, 1);
+        StartDate ??= new DateOnly(CurrentViewYear - 10, 1, 1);
+        EndDate ??= new DateOnly(CurrentViewYear + 10, 12, 1);
 
-        if ( Start >= End )
+        if ( StartDate >= EndDate )
         {
-            throw new InvalidOperationException($"{nameof(Start)} 不能大于 {nameof(End)}");
+            throw new InvalidOperationException($"{nameof(StartDate)} 不能大于 {nameof(EndDate)}");
         }
 
         #region 调整第一天是周几的顺序
@@ -162,340 +219,19 @@ public class TCalendar : TDesignComponentBase,IHasTitleText,IHasTitleFragment
             .Close();
     }
 
-    void BuildCalendarTable(RenderTreeBuilder builder)
-    {
-        builder.Element("table", "t-calendar__table")
-            .Content(table =>
-            {
-                BuildCalendarHeader(table);
-                BuildCalendarBody(table);
-            })
-            .Close();
-    }
-
-    /// <summary>
-    /// 构建日历的头部。
-    /// </summary>
-    /// <param name="builder"></param>
-    void BuildCalendarHeader(RenderTreeBuilder builder)
-    {
-        if(Mode!= CalendarMode.Month )
-        {
-            return;
-        }
-        builder.Element("thead")
-            .Content(head =>
-            {
-                head.Element("tr", "t-calendar__table-head-row")
-                    .Content(tr =>
-                    {
-                        foreach ( var item in DayOfWeekList )
-                        {
-                            //不显示周末
-                            if ( IsSkipWeekend(item) )
-                            {
-                                continue;
-                            }
-
-                            var mapperText = DayOfWeekTextMapper[item];
-
-                            tr.Element("th", "t-calendar__table-head-cell")
-                                    .Content(cell => cell.Span().Content(mapperText).Close())
-                                    .Close();
-                        }
-                    })
-                    .Close();
-            })
-            .Close();
-    }
-
-    /// <summary>
-    /// 构建日历的主体。
-    /// </summary>
-    /// <param name="builder"></param>
-    void BuildCalendarBody(RenderTreeBuilder builder)
-    {
-        builder.Element("tbody", "t-calendar__table-body")
-            .Content(body =>
-            {
-                if(Mode== CalendarMode.Month )
-                {
-                    BuildMonthBody(body);
-                }
-                else
-                {
-                    BuildYearBody(body);
-                }
-            })
-            .Close();
-    }
-
-    /// <summary>
-    /// 构建年的单元格和行
-    /// </summary>
-    /// <param name="builder"></param>
-    void BuildYearBody(RenderTreeBuilder builder)
-    {
-        //1年12个月，4列3行
-
-        builder.OpenElement(0, "tr");
-        builder.AddAttribute(1, "class", "t-calendar__table-body-row");
-        var sequence = 0;
-        for ( int i = 1; i <= 12; i++ )
-        {
-            BuildBodyCell(builder, $"{i} 月", now: CurrentYear == Year && CurrentMonth == i);
-            if ( i % 4 == 0 )
-            {
-                sequence += 4 * i;
-                ClosePrevRowAndBuildNewRow(builder, sequence);
-            }
-        }
-        builder.CloseElement();
-    }
-
-    /// <summary>
-    /// 构建月视图。
-    /// </summary>
-    /// <remarks>
-    /// 要计算日期。
-    /// </remarks>
-    /// <param name="builder"></param>
-    void BuildMonthBody(RenderTreeBuilder builder)
-    {
-        builder.OpenElement(0, "tr");
-        builder.AddAttribute(1, "class", "t-calendar__table-body-row");
-
-        #region 构建上个月剩余的几天在当前这个月的日历
-        //当前年月的第一天
-        var firstDay = new DateTime(CurrentYear, CurrentMonth, 1);
-
-        var firstDayOfWeek = firstDay.DayOfWeek; //第一天所在周几
-        var firstDayOfWeekIndex = (int)firstDayOfWeek;
-
-        var findLastMonthDayIndex = DayOfWeekList.FindIndex(m => m == firstDayOfWeek);
-
-        var lastDays = firstDay.AddDays(-findLastMonthDayIndex);
-        for ( int i = 0; i < findLastMonthDayIndex; i++ )
-        {
-            var day = i + lastDays.Day;
-
-            var lastMonthDateTime = new DateTime(lastDays.Year, lastDays.Month, day);
-
-            if( IsSkipWeekend(lastMonthDateTime.DayOfWeek) )
-            {
-                continue;
-            }
-
-            BuildBodyCell(builder, day.ToString(), true);
-        }
-        #endregion
-
-        #region 构建这个月的日历
-        var daysOfThisMonth = DateTime.DaysInMonth(CurrentYear, CurrentMonth);//这个月有多少天
-        for ( int i = 0; i < daysOfThisMonth; i++ )
-        {
-            var day = i + 1;
-            var currentDateTime = new DateTime(CurrentYear, CurrentMonth, day);
-            if(IsSkipWeekend(currentDateTime.DayOfWeek) )
-            {
-                ClosePrevRowAndBuildNewRow(builder, i + 10);//跳过周末要换行
-                continue;
-            }
-
-            var today = DateTime.Today;
-
-            var completeDayString = FiilWithZero && day < 10 ? day.ToString().PadLeft(2, '0') : day.ToString();
-
-            BuildBodyCell(builder, completeDayString, false, today == currentDateTime);
-
-            if ( (i + firstDayOfWeekIndex)  % 7 == 0 )
-            {
-                ClosePrevRowAndBuildNewRow(builder, i + 10);
-            }
-        }
-        #endregion
-
-        #region 构建下个月的头几天到当前日历
-        var lastDateTime = new DateTime(CurrentYear, CurrentMonth, daysOfThisMonth);//本月最后一天
-        var lastDayOfWeek = lastDateTime.DayOfWeek;//最后一天是周几
-
-        var lastDayOfWeekIndex = DayOfWeekList.FindIndex(m => m == lastDayOfWeek);
-
-        var nextMonth = lastDateTime.AddDays(1);
-        for ( int i = 0; i <= (5 - lastDayOfWeekIndex); i++ )
-        {
-           var day=i + 1;
-            var nextMonthDateTime = new DateTime(nextMonth.Year, nextMonth.Month, day);
-            if ( IsSkipWeekend(nextMonthDateTime.DayOfWeek) )
-            {
-                continue;
-            }
-
-            BuildBodyCell(builder, day.ToString(), true);
-        }
-        #endregion
-
-        builder.CloseElement();
-    }
-
-    void BuildControl(RenderTreeBuilder builder)
-    {
-        builder.Div("t-calendar__control", !HideController)
-            .Content(control =>
-            {
-                control.Div("t-calendar__title").Content(TitleContent).Close();
-                control.Div("t-calendar__control-section")
-                        .Content(selection =>
-                        {
-                            //年 下拉菜单
-                            BuildSelectionCell(selection, year =>
-                            {
-                                year.Component<TSelect<int>>()
-                                    .Attribute(m => m.Value, Year)
-                                    .Attribute(m => m.ValueExpression, () => Year)
-                                    .Attribute(m => m.ValueChanged, HtmlHelper.Instance.Callback().Create<int>(this, value => ChangeDate(value, Month)))
-                                    .Content(options =>
-                                    {
-                                        for ( int i = Start!.Value.Year; i <= End!.Value.Year; i++ )
-                                        {
-                                            options.Component<TSelectOption<int>>()
-                                                    .Attribute(m => m.Value, i)
-                                                    .Attribute(m => m.Label, $"{i}年")
-                                                    .Close();
-                                        }
-                                    })
-                                    .Close();
-                            });
-                            //月 下拉菜单
-                            BuildSelectionCell(selection, month =>
-                            {
-                                month.Component<TSelect<int>>()
-                                    .Attribute(m => m.Value, Month)
-                                    .Attribute(m => m.ValueExpression, () => Month)
-                                    .Attribute(m => m.ValueChanged, HtmlHelper.Instance.Callback().Create<int>(this, value => ChangeDate(Year, value)))
-                                    .Content(options =>
-                                    {
-                                        for ( int i = 1; i <= 12; i++ )
-                                        {
-                                            options.Component<TSelectOption<int>>()
-                                                    .Attribute(m => m.Value, i)
-                                                    .Attribute(m => m.Label, $"{i}月")
-                                                    .Attribute(m => m.Disabled, i <= 6 && i < Start!.Value.Month)
-                                                    .Attribute(m => m.Disabled, i > 6 && i > End!.Value.Month)
-                                                    .Close();
-                                        }
-                                    })
-                                    .Close();
-                            }, Mode == CalendarMode.Month);
-                            //年月切换
-                            BuildSelectionCell(selection, mode =>
-                            {
-                                mode.Component<TInputRadioGroup<CalendarMode>>()
-                                    .Attribute(m=>m.Value,Mode)
-                                    .Attribute(m=>m.ValueExpression,()=>Mode)
-                                    .Attribute(m=>m.ValueChanged,HtmlHelper.Instance.Callback().Create<CalendarMode>(this,SwitchCalendarMode))
-                                    .Attribute(m=>m.ButtonStyle, RadioButtonStyle.Filled)
-                                    .Content(radio =>
-                                    {
-                                        radio.Component<TInputRadio<CalendarMode>>()
-                                        .Attribute(m=>m.Value,CalendarMode.Month)
-                                        .Content("月")
-                                        .Close();
-
-                                        radio.Component<TInputRadio<CalendarMode>>()
-                                        .Attribute(m => m.Value, CalendarMode.Year)
-                                        .Content("年")
-                                        .Close();
-                                    })
-                                    .Close();
-                            });
-                            //切换周末显示
-                            BuildSelectionCell(selection, weekend =>
-                            {
-                                var theme = Theme.Primary;
-                                var text = "显示周末";
-
-                                if ( !ShowWeekend )
-                                {
-                                    theme = Theme.Default;
-                                    text = "隐藏周末";
-                                }
-                                weekend.Component<TButton>()
-                                        .Attribute(m => m.Theme, theme)
-                                        .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs?>(this, SwitchWeekend))
-                                        .Content(text)
-                                        .Close();
-                            }, Mode == CalendarMode.Month);
-
-                            //回到今天/本月
-                            BuildSelectionCell(selection, now =>
-                            {
-                                var today = DateTime.Now;
-
-                                now.Component<TButton>()
-                                    .Attribute(m => m.Theme, Theme.Primary)
-                                    .Attribute(m => m.OnClick, HtmlHelper.Instance.Callback().Create<MouseEventArgs?>(this, () => ChangeDate(today.Year, today.Month)))
-                                    .Content(Mode == CalendarMode.Year ? "本月" : "今天")
-                                    .Close();
-                            });
-                        })
-                        .Close();
-            })
-            .Close();
-
-        void BuildSelectionCell(RenderTreeBuilder selection,RenderFragment content,Condition? condition=default)
-        {
-            selection.Div("t-calendar__control-section-cell", condition).Content(content).Close();
-        }
-    }
-
-    /// <summary>
-    /// 构建单元格。
-    /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="content"></param>
-    /// <param name="disabled"></param>
-    /// <param name="now"></param>
-    static void BuildBodyCell(RenderTreeBuilder builder,string content,bool disabled = false,bool now=default)
-    {
-        builder.AddContent(0, tr =>
-        {
-            tr.Div("t-calendar__table-body-cell")
-                .Class("t-is-disabled", disabled)
-                .Class("t-calendar__table-body-cell--now", now)
-                .Class("t-is-checked", now)
-                .Content(cell =>
-                {
-                    cell.Div()
-                        .Style("display: flex; flex-direction: column; align-items: flex-end;")
-                        .Content(inner =>
-                        {
-                            inner.Div("t-calendar__table-body-cell-display").Content(content).Close();
-                            inner.Div("t-calendar__table-body-cell-content").Close();
-                        })
-                        .Close();
-                })
-                .Close();
-        });
-    }
-
-    /// <summary>
+        /// <summary>
     /// 是否跳过周末
     /// </summary>
     /// <param name="day"></param>
     /// <returns></returns>
     bool IsSkipWeekend(DayOfWeek day) => !ShowWeekend && new[] { DayOfWeek.Saturday, DayOfWeek.Sunday }.Contains(day);
+
     /// <summary>
-    /// 关闭上一个 tr 并开始新的 tr。用于动态换行。
+    /// 判断一个日期是否超出了定义的日期范围
     /// </summary>
-    /// <param name="builder"></param>
-    /// <param name="sequence"></param>
-    private static void ClosePrevRowAndBuildNewRow(RenderTreeBuilder builder, int sequence)
-    {
-        builder.CloseElement();
-        builder.OpenElement(sequence, "tr");
-        builder.AddAttribute(sequence + 1, "class", "t-calendar__table-body-row");
-    }
+    /// <param name="currentDate">要判断的日期。</param>
+    /// <returns></returns>
+    private bool IsOutOfRange(DateOnly currentDate) => StartDate.HasValue && currentDate < StartDate || EndDate.HasValue && currentDate > EndDate;
 }
 
 /// <summary>
