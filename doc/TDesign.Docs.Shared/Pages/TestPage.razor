@@ -3,12 +3,23 @@
 @layout EmptyLayout
 
 @*<div style="width:180px">
-<TSelect @bind-Value="Value">
-    <TSelectOption Value="1" Label="选项1">选项1</TSelectOption>
-        <TSelectOption Value="2" Label="选项2">选项2</TSelectOption>
-</TSelect>
+    <TSelect @bind-Value="Value">
+        @for ( var i = 1; i < 11; i++ )
+        {
+            int index = i;
+            <TSelectOption @key="i" Value="@index" Label="@($"选项{index}")"/>
+        }
+    </TSelect>
 </div>
-
-@code{
+Choose: @Value
+@code {
     int Value { get; set; } = 1;
 }*@
+
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Sunday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Monday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Tuesday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Wednesday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Thursday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Friday" />
+<TCalendar Card FirstDayOfWeek="DayOfWeek.Saturday" />

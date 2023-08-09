@@ -23,8 +23,22 @@ public partial class TSelect<TValue>
     [ParameterApiDoc("无边框样式")]
     [Parameter][CssClass("t-select-input--borderless")] public bool Borderless { get; set; }
 
-    [ParameterApiDoc("占位符")]
-    [Parameter] public string? Placeholder { get; set; }
+    /// <summary>
+    /// 文本框占位字符串。
+    /// </summary>
+    [ParameterApiDoc("占位符",Value="请选择")]
+    [Parameter] public string? Placeholder { get; set; } = "请选择";
+
+    /// <summary>
+    /// 文本框的额外 class。
+    /// </summary>
+    [ParameterApiDoc("文本框的额外 class")]
+    [Parameter]public string? InputClass { get; set; }
+    /// <summary>
+    /// 文本框的额外 style。
+    /// </summary>
+    [ParameterApiDoc("文本框的额外 style")]
+    [Parameter] public string? InputStyle { get; set; }
     /// <summary>
     /// Popup 组件的引用。
     /// </summary>
@@ -35,22 +49,30 @@ public partial class TSelect<TValue>
     /// </summary>
     internal string? SelectedLabel { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    bool _initValue;
+
+    protected override void OnAfterRender(bool firstRender)
     {
-        await base.OnAfterRenderAsync(firstRender);
         if ( firstRender )
         {
-            if ( Value is not null )
+            if ( Value is not null && !_initValue )
             {
                 var initialSelectedOption = ChildComponents.OfType<TSelectOption<TValue>>().FirstOrDefault(m => Value.Equals(m.Value));
 
                 if ( initialSelectedOption != null )
                 {
-                    await SelectValue(initialSelectedOption.Value, initialSelectedOption.Label);
-                    await this.Refresh();
+                    Value = initialSelectedOption.Value;
+                    SelectedLabel = initialSelectedOption.Label;
+                    _initValue = true;
+                    StateHasChanged();
                 }
             }
         }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
     }
 
 
@@ -65,6 +87,7 @@ public partial class TSelect<TValue>
         await ValueChanged.InvokeAsync(value);
         await OnValueSelected.InvokeAsync(value);
         SelectedLabel = label;
+        StateHasChanged();
     }
 
     protected override void BuildCssClass(ICssClassBuilder builder)
