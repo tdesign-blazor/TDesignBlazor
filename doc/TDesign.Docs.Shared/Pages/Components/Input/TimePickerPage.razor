@@ -1,0 +1,24 @@
+﻿@page "/components/timepicker"
+
+<PageLayout Title="TimePicker 时间选择器" Description="用于选择某一具体时间点或某一时间段。"
+ Anchors="@(new[]{"单独使用时间选择器面板"})">
+ <ChildContent>
+        <Example Title="单独使用时间选择器面板">
+    <Description></Description>
+    <RunContent>
+                <TTimePickerPanel @bind-Value="TimePanel" />                
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+```
+")
+    </CodeContent>
+</Example>
+ </ChildContent>
+ <ApiContent>
+ </ApiContent>
+</PageLayout>
+@code{
+    TimeSpan TimePanel{ get; set; }
+}
