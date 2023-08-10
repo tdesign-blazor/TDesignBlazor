@@ -40,12 +40,12 @@ partial class TCalendar
 
                             var mapperText = DayOfWeekTextMapper[item];
 
-                            WeekContent ??= value =>builder=> builder.AddContent(0, mapperText);
+                            WeekContent = value => builder => builder.AddContent(0, mapperText);
 
                             tr.Element("th", "t-calendar__table-head-cell")
                                     .Content(cell => cell.Span().Content(week =>
                                     {
-                                        week.Content(WeekContent?.Invoke(item));
+                                        week.Content(WeekContent, item);
                                     }).Close())
                                     .Close();
                         }

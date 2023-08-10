@@ -1,0 +1,25 @@
+﻿@page "/components/datepicker"
+
+<PageLayout Title="DatePicker 日期选择器" Description="用于选择某一具体日期或某一段日期区间。" ComponentType="typeof(TDatePicker<>)">
+   <TAlert Theme="Theme.Primary">
+       仅支持 <code>DateOnly</code><code>DateTime</code> 或 <code>DateTimeOffset</code> 数据类型。
+   </TAlert>
+
+   <Example Title="示例">
+    <Description></Description>
+    <RunContent>
+        <TDatePicker @bind-Value="TestDate"/>
+    </RunContent>
+    <CodeContent>
+        @Code.Create(@"
+```cshtml-razor
+<TDatePicker @bind-Value=""TestDate""/>
+```
+")
+    </CodeContent>
+</Example>
+</PageLayout>
+
+@code{
+    DateOnly? TestDate{ get; set; }
+}
