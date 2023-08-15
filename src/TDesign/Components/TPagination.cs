@@ -227,6 +227,7 @@ public partial class TPagination : TDesignComponentBase
     /// 构建上一页或下一页按钮。
     /// <param name="prevOrNext"><c>true</c> 表示上一页，否则是下一页。</param>
     /// <param name="disabled">是否被禁用。</param>
+    /// </summary>
     void BuildPageBehaviorBtn(RenderTreeBuilder builder, PageButtonBehavior behavior, object iconName, bool show = true, bool disabled = default)
         => builder
             .Div("t-pagination__btn", show)

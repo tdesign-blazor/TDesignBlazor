@@ -70,11 +70,6 @@ public partial class TSelect<TValue>
         }
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-
-    }
-
 
     /// <summary>
     /// 选择指定的值。
