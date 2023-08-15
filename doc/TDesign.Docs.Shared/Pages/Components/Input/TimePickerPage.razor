@@ -6,7 +6,10 @@
         <Example Title="单独使用时间选择器面板">
     <Description></Description>
     <RunContent>
-                <TTimePickerPanel @bind-Value="TimePanel" />                
+                <TTimePickerPanel @bind-Value="TimePanel"  ShowFooter/>        
+                <p>
+                选择的时间: @TimePanel
+                </p>
     </RunContent>
     <CodeContent>
         @Code.Create(@"

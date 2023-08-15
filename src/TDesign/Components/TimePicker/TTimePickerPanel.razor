@@ -13,9 +13,8 @@
                 @for (int i = 0; i < 24; i++)
                 {
                     var value = i;
-
                     <li @key="i" @ref="@(_hourStores[value])" class="t-time-picker__panel-body-scroll-item @(CurrentHours==value?"t-is-current":"")"
-                    @onclick="@(e=> ScrollTo(_hourStores[value],()=>CurrentHours=value))">
+                    @onclick="@(e=> ClickToScroll(_hourStores[value],()=>CurrentHours=value))" @onwheel="@(e=>WheelToScroll(e,_hourStores[value]))">
                         @(value.ToString().PadLeft(2, '0'))
                     </li>
                 }
@@ -27,7 +26,7 @@
                     var value = i;
 
                     <li @key="i" @ref="@(_minuteStores[value])" class="t-time-picker__panel-body-scroll-item @(CurrentMinutes==value?"t-is-current":"")"
-                    @onclick="@(e=> ScrollTo(_minuteStores[value],()=>CurrentMinutes=value))">
+                    @onclick="@(e=> ClickToScroll(_minuteStores[value],()=>CurrentMinutes=value))">
                         @(value.ToString().PadLeft(2, '0'))
                     </li>
                 }
@@ -38,11 +37,23 @@
                     var value = i;
 
                     <li @key="i" @ref="@(_secondStores[value])" class="t-time-picker__panel-body-scroll-item @(CurrentSeconds==value?"t-is-current":"")"
-                    @onclick="@(e=> ScrollTo(_secondStores[value],()=>CurrentSeconds=value))">
+                    @onclick="@(e=> ClickToScroll(_secondStores[value],()=>CurrentSeconds=value))">
                         @(value.ToString().PadLeft(2, '0'))
                     </li>
                 }
             </ul>
         </div>
     </div>
+
+    @if (ShowFooter)
+    {
+        <div class="t-time-picker__panel-section-footer">
+            <TButton Theme="Theme.Primary" Size="Size.Small" Varient="ButtonVarient.Base">确定</TButton>
+            <div>
+                <TButton Theme="Theme.Primary" Varient="ButtonVarient.Text" Size="Size.Small" OnClick="Now">
+                    此刻
+                </TButton>
+            </div>
+        </div>
+    }
 </div>

@@ -19,6 +19,9 @@
             top: top,
             behavior:'smooth'
         })
+    },
+    wheelToScroll: function (e, element) {
+        this.clickToScroll(element);
     }
 }
 
