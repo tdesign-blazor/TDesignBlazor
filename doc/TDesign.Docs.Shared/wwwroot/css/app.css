@@ -248,3 +248,18 @@ code {
     background: var(--td-bg-color-page);
     opacity: 0.5;
 }
+
+main > div > h2 {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    margin: 48px 0 8px;
+    display: flex;
+    align-items: center;
+}
+
+main > div > p {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 16px 0 8px;
+}
