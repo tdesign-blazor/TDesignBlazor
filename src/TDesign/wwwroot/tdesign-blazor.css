@@ -73,3 +73,8 @@
     transform: translate(-50%, -50%);
 }
 .t-input__tips{position:inherit!important;}
+
+
+.t-breadcrumb--text-overflow .t-breadcrumb__inner {
+    display:none!important
+}

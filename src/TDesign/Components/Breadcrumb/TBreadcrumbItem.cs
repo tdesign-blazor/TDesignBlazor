@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TDesign;
 
@@ -43,16 +44,16 @@ public class TBreadcrumbItem : TDesignAdditionParameterWithChildContentComponent
 
     protected override void AddContent(RenderTreeBuilder builder, int sequence)
     {
-        builder.CreateElement(sequence, !string.IsNullOrEmpty(Link) ? "a" : "span", overflow =>
+        builder.CreateElement(sequence, !string.IsNullOrEmpty(Link) ? "a" : "p", overflow =>
         {
-            overflow.CreateElement(0, "span", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:120px" });
+            overflow.CreateElement(0, "p", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;", });
         }, new
         {
             @class = HtmlHelper.Instance.Class().Append("t-breadcrumb--text-overflow")
             .Append("t-link", HasLink).Append("t-is-disabled", Disabled)
         });
 
-        builder.CreateElement(sequence + 1, "span", SeperatorContent, new { @class = "t-breadcrumb__separator" });
+        builder.CreateElement(sequence + 1, "p", SeperatorContent, new { @class = "t-breadcrumb__separator" });
     }
     protected override void OnParametersSet()
     {
@@ -62,6 +63,11 @@ public class TBreadcrumbItem : TDesignAdditionParameterWithChildContentComponent
         {
             this.SeperatorContent = builder => builder.CreateComponent<TIcon>(0, attributes: new { Name = IconName.ChevronRight });
         }
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
     }
 
 }
