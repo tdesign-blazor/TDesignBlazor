@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TDesign;
 
@@ -45,7 +46,7 @@ public class TBreadcrumbItem : TDesignAdditionParameterWithChildContentComponent
     {
         builder.CreateElement(sequence, !string.IsNullOrEmpty(Link) ? "a" : "span", overflow =>
         {
-            overflow.CreateElement(0, "span", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:120px" });
+            overflow.CreateElement(0, "span", ChildContent, new { @class = "t-breadcrumb__inner", style = "max-width:150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;", });
         }, new
         {
             @class = HtmlHelper.Instance.Class().Append("t-breadcrumb--text-overflow")
@@ -62,6 +63,11 @@ public class TBreadcrumbItem : TDesignAdditionParameterWithChildContentComponent
         {
             this.SeperatorContent = builder => builder.CreateComponent<TIcon>(0, attributes: new { Name = IconName.ChevronRight });
         }
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
     }
 
 }

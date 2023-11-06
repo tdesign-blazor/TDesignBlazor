@@ -2,18 +2,22 @@
 @import 'tdesign.min.css';
 @import 'tdesign-icons.css';
 
-.visibility-hidden{
-    visibility:hidden
+.visibility-hidden {
+    visibility: hidden
 }
+
 .visibility-visibile {
     visibility: visible
 }
-.hide{
-    display:none;
+
+.hide {
+    display: none;
 }
-.show{
-    display:block;
+
+.show {
+    display: block;
 }
+
 .placement-top-center {
     position: absolute;
     top: 32px;
@@ -72,4 +76,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.t-input__tips{position:inherit!important;}
+
+.t-input__tips {
+    position: inherit !important;
+}
+
+
+.t-breadcrumb--text-overflow .t-breadcrumb__inner {
+    display: initial !important
+}
