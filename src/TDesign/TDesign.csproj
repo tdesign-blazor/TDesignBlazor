@@ -123,6 +123,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Components\Forms\DataPicker\" />
+		<Folder Include="Internal\" />
 		<Folder Include="JSInterop\" />
 	</ItemGroup>
 

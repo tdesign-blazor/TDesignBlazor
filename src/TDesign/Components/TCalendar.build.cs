@@ -122,7 +122,7 @@ partial class TCalendar
         var firstDay = new DateTime(CurrentViewYear, CurrentViewMonth, 1);
 
         var firstDayOfWeek = firstDay.DayOfWeek; //第一天所在周几
-        var firstDayOfWeekIndex = (int)firstDayOfWeek;
+        
 
         var findLastMonthDayIndex = DayOfWeekList.FindIndex(m => m == firstDayOfWeek);
 

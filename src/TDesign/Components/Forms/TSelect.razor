@@ -4,10 +4,8 @@
 
 <TPopup @ref="RefPopup" Trigger="PopupTrigger.Click" Placement="PopupPlacement.Bottom">
     <ChildContent>
-        <div class="t-select__wrap">
-            <div class="@GetCssClassString()">
-                <TInputText @bind-Value="SelectedLabel" Readonly SuffixIcon="@(RefPopup.Visible?IconName.ChevronUp:IconName.ChevronDown)" AutoWidth="AutoWidth" placeholder="@Placeholder" Disabled="Disabled" Size="Size" AdditionalClass="@InputClass" AdditionalStyle="@InputStyle" />
-            </div>
+        <div class="@(AdditionalClass)">
+                <TInputText @bind-Value="SelectedLabel" Readonly SuffixIcon="@(RefPopup.Visible?IconName.ChevronUp:IconName.ChevronDown)" AutoWidth="AutoWidth" placeholder="@Placeholder" Disabled="Disabled" Size="Size" AdditionalClass="@InputClass" AdditionalStyle="@InputStyle" />            
         </div>
     </ChildContent>
     <PopupContent>
