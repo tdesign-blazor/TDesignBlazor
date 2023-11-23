@@ -23,8 +23,29 @@
 ")
     </CodeContent>
 </Example>
+    <Example Title="年份选择器">
+        <Description>
+            用于年份的选择。用户仅需输入年份信息时使用，常用于如年账单等按年记录数据的查询场景。
+        </Description>
+        <RunContent>
+            <TDatePicker @bind-Value="@Year" ViewMode="DatePickerViewMode.Year"/>
+        </RunContent>
+        <CodeContent>
+            @Code.Create(@"
+```cshtml-razor
+<TDatePicker @bind-Value=""@Year"" ViewMode=""DatePickerViewMode.Year""/>
+@code{
+      DateOnly? Year { get; set; }
+}
+```
+")
+        </CodeContent>
+</Example>
 </PageLayout>
 
 @code{
     DateTime? TestDate{ get; set; }
+
+    DateOnly? Year{get;set;}
 }
+

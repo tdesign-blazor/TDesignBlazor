@@ -5,7 +5,10 @@
 /// </summary>
 public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
 {
-    readonly Type[] Support_Types = new[] { typeof(DateOnly), typeof(DateTime), typeof(DateTimeOffset?), typeof(DateOnly?), typeof(DateTime?), typeof(DateTimeOffset?) };
+    readonly static Type[] Support_Types = new[] { typeof(DateOnly), typeof(DateTime), typeof(DateTimeOffset?), typeof(DateOnly?), typeof(DateTime?), typeof(DateTimeOffset?) };
+
+    readonly static DateTime TODAY = DateTime.Now;
+
     /// <summary>
     /// 前缀图标，默认是 <see cref="IconName.Calendar"/> 。
     /// </summary>
@@ -52,10 +55,7 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     /// </summary>
     [ParameterApiDoc("高亮显示的日期，默认时当天或当月")]
     [Parameter]
-    public List<DateTime> SelectedDates { get; set; } = new()
-    {
-        DateTime.Today
-    };
+    public List<DateTime> SelectedDates { get; set; } = new() { TODAY };
     /// <summary>
     /// 当日期改变时触发的回调。
     /// </summary>
@@ -63,7 +63,9 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     [Parameter] public EventCallback<IReadOnlyList<DateTime>> OnSelected { get; set; }
     #region Internal
 
-    DateTime CurrentValue { get; set; } = DateTime.Today;
+
+
+    DateTime CurrentValueAsDateTime { get; set; } = TODAY;
 
     /// <summary>
     /// 文本框的输入值
@@ -103,16 +105,16 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     /// </summary>
     int CurrentYear
     {
-        get => CurrentValue.Year;
-        set => CurrentValue = new(value, CurrentMonth, CurrentDay);
+        get => CurrentValueAsDateTime.Year;
+        set => CurrentValueAsDateTime = new(value, CurrentMonth, CurrentDay);
     }
     /// <summary>
     /// 当前查看的月份。
     /// </summary>
     int CurrentMonth
     {
-        get => CurrentValue.Month;
-        set => CurrentValue = new(CurrentYear, value, CurrentDay);
+        get => CurrentValueAsDateTime.Month;
+        set => CurrentValueAsDateTime = new(CurrentYear, value, CurrentDay);
     }
 
     /// <summary>
@@ -120,8 +122,7 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     /// </summary>
     int CurrentDay
     {
-        get => CurrentValue.Day;
-        set => CurrentValue = new(CurrentYear, CurrentMonth, value);
+        get => CurrentValueAsDateTime.Day;
     }
 
 
@@ -139,13 +140,13 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
         switch (Value)
         {
             case DateOnly date:
-                CurrentValue = date.ToDateTime(new());
+                CurrentValueAsDateTime = date.ToDateTime(new());
                 break;
             case DateTime dateTime:
-                CurrentValue = dateTime;
+                CurrentValueAsDateTime = dateTime;
                 break;
             case DateTimeOffset offset:
-                CurrentValue = offset.DateTime;
+                CurrentValueAsDateTime = offset.DateTime;
                 break;
         }
     }
@@ -153,10 +154,6 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-        CurrentMonth = CurrentValue.Month;
-        CurrentYear = CurrentValue.Year;
-
 
         #region 调整第一天是周几的顺序
         var theFirstDayIndex = DayOfWeekList.FindIndex(m => m == FirstDayOfWeek);
@@ -195,7 +192,7 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
             {
                 input.Component<TInputText<string>>()
                     .Attribute(m => m.Value, InputValue)
-                    .Attribute(m => m.ValueExpression,()=>Value.ToString())
+                    .Attribute(m => m.ValueExpression,()=>InputValue)
                     .Attribute(m => m.ValueChanged, InputValueChanged)
                     .Attribute(m => m.AutoWidth, AutoWidth)
                     .Attribute(m => m.Alignment, Alignment)
@@ -229,31 +226,12 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
         }
 
         var value = selectedItems[0];
-        CurrentValue = value;
-
-        //Value = CurrentValue.To(value =>
-        //{
-        //    value = value switch
-        //    {
-        //        DateOnly => DateOnly.FromDateTime(CurrentValue),
-        //        DateTimeOffset => new DateTimeOffset(CurrentValue),
-        //        _ => CurrentValue,
-        //    };
-
-        //    var nullableValueType = Nullable.GetUnderlyingType(typeof(TValue));
-        //    if (nullableValueType is not null)
-        //    {
-        //        return (TValue?)Convert.ChangeType(value, nullableValueType);
-        //    }
-
-        //    return (TValue?)Convert.ChangeType(value, typeof(TValue));
-        //});
-
+        CurrentValueAsDateTime = value;
 
         SelectedDates.Clear();
-        SelectedDates.Add(CurrentValue);
+        SelectedDates.Add(value);
 
-        InputValue = CurrentValue.ToString(Format);
+        InputValue = CurrentValueAsDateTime.ToString(Format);
         await InputValueChanged.InvokeAsync(InputValue);
 
 
@@ -261,9 +239,9 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
         {
             value = value switch
             {
-                DateOnly => DateOnly.FromDateTime(CurrentValue),
-                DateTimeOffset => new DateTimeOffset(CurrentValue),
-                _ => CurrentValue,
+                DateOnly => DateOnly.FromDateTime(CurrentValueAsDateTime),
+                DateTimeOffset => new DateTimeOffset(CurrentValueAsDateTime),
+                _ => CurrentValueAsDateTime,
             };
 
             var nullableValueType = Nullable.GetUnderlyingType(typeof(TValue));
@@ -272,11 +250,11 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
 
                 if (nullableValueType == typeof(DateOnly))
                 {
-                    return (TValue?)typeof(DateOnly)?.GetMethod(nameof(DateOnly.FromDateTime))?.Invoke(value, new object?[] { CurrentValue });
+                    return (TValue?)typeof(DateOnly)?.GetMethod(nameof(DateOnly.FromDateTime))?.Invoke(value, new object?[] { CurrentValueAsDateTime });
                 }
                 else if (nullableValueType == typeof(DateTimeOffset))
                 {
-                    return (TValue?)typeof(DateTimeOffset)?.GetMethod(nameof(DateTimeOffset.FromFileTime))?.Invoke(value, new object?[] { CurrentValue.ToFileTime() });
+                    return (TValue?)typeof(DateTimeOffset)?.GetMethod(nameof(DateTimeOffset.FromFileTime))?.Invoke(value, new object?[] { CurrentValueAsDateTime.ToFileTime() });
                 }
             }
             return (TValue)value;
@@ -292,7 +270,7 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     }
 
     bool IsToday(int day) => DateOnly.FromDateTime(DateTime.Today) == new DateOnly(CurrentYear, CurrentMonth, day);
-    bool IsToday(DateOnly date) => DateOnly.FromDateTime(DateTime.Today) == date;
+    bool IsToday(DateTime date) => DateTime.Today == date;
 }
 
 /// <summary>

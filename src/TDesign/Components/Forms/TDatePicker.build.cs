@@ -95,12 +95,12 @@ partial class TDatePicker<TValue>
         builder.OpenElement(0, "tr");
         builder.AddAttribute(1, "class", "t-date-picker__table-month-row");
         var sequence = 0;
-        for (int i = CurrentYear-5; i <= CurrentYear+5; i++)
+        for (int i = CurrentYear - 5; i <= CurrentYear + 5; i++)
         {
-            var currentDate = new DateOnly(CurrentYear, 1, 1);
+            var currentDate = new DateTime(CurrentYear, 1, 1);
             var year = i;
 
-            BuildBodyCell(builder, $"{year}", isNow: IsToday(currentDate), value: year);
+            BuildBodyCell(builder, $"{year}", currentDate, isNow: IsToday(currentDate));
 
             if (i % 4 == 0)
             {
@@ -125,9 +125,9 @@ partial class TDatePicker<TValue>
         {
             var month = i;
 
-            var currentDate = new DateOnly(CurrentYear, month, 1);
+            var currentDate = new DateTime(CurrentYear, month, 1);
 
-            BuildBodyCell(builder, $"{i} 月", isNow: IsToday(currentDate), value: month);
+            BuildBodyCell(builder, $"{i} 月", value: currentDate, isNow: IsToday(currentDate));
 
             if (i % 4 == 0)
             {
@@ -164,9 +164,7 @@ partial class TDatePicker<TValue>
         {
             var day = i + lastDays.Day;
 
-            //var lastMonthDateTime = new DateTime(lastDays.Year, lastDays.Month, day);
-
-            BuildBodyCell(builder, day.ToString(), true);
+            BuildBodyCell(builder, day.ToString(),new(lastDays.Year, lastDays.Month, day), true);
         }
         #endregion
 
@@ -176,7 +174,7 @@ partial class TDatePicker<TValue>
         {
             var day = i + 1;
 
-            BuildBodyCell(builder, day.ToString(), isNow: IsToday(day), value: day);
+            BuildBodyCell(builder, day.ToString(), isNow: IsToday(day), value: new(CurrentYear, CurrentMonth, day));
 
             if ((day + findLastMonthDayIndex) % 7 == 0)
             {
@@ -195,7 +193,7 @@ partial class TDatePicker<TValue>
         {
             var day = i + 1;
 
-            BuildBodyCell(builder, day.ToString(), true);
+            BuildBodyCell(builder, day.ToString(), new(CurrentYear, CurrentMonth, day), true);
         }
         #endregion
 
@@ -258,12 +256,12 @@ partial class TDatePicker<TValue>
             {
                 case DatePickerViewMode.Year:
                 case DatePickerViewMode.Month:
-                    CurrentValue.AddYears(-1);
+                    CurrentValueAsDateTime.AddYears(-1);
                     break;
                 case DatePickerViewMode.Date:
                 case DatePickerViewMode.Week:
                 case DatePickerViewMode.Quater:
-                    CurrentValue.AddMonths(-1);
+                    CurrentValueAsDateTime.AddMonths(-1);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ViewMode), $"不在可选的视图范围");
@@ -276,12 +274,12 @@ partial class TDatePicker<TValue>
             {
                 case DatePickerViewMode.Year:
                 case DatePickerViewMode.Month:
-                    CurrentValue.AddYears(1);
+                    CurrentValueAsDateTime.AddYears(1);
                     break;
                 case DatePickerViewMode.Date:
                 case DatePickerViewMode.Week:
                 case DatePickerViewMode.Quater:
-                    CurrentValue.AddMonths(1);
+                    CurrentValueAsDateTime.AddMonths(1);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ViewMode), $"不在可选的视图范围");
@@ -290,7 +288,7 @@ partial class TDatePicker<TValue>
         }
         Task Current(MouseEventArgs e)
         {
-            CurrentValue = DateTime.Now;
+            CurrentValueAsDateTime = DateTime.Now;
             return this.Refresh();
         }
 
@@ -308,7 +306,7 @@ partial class TDatePicker<TValue>
                 .Attribute(m => m.ValueChanged, HtmlHelper.Instance.Callback().Create<int>(this, value => ChangeYearMonth(value, CurrentMonth)))
                 .Content(options =>
                 {
-                    for (int i = CurrentValue.AddYears(-5).Year; i <= CurrentValue.AddYears(5).Year; i++)
+                    for (int i = CurrentValueAsDateTime.AddYears(-5).Year; i <= CurrentValueAsDateTime.AddYears(5).Year; i++)
                     {
                         var index = i;
                         options.Component<TSelectOption<int>>(sequence: 100)
@@ -337,8 +335,6 @@ partial class TDatePicker<TValue>
                         {
                             var index = i;
 
-                            //var currentMonth = new DateOnly(CurrentYear, index, 1);
-
                             options.Component<TSelectOption<int>>(sequence: i)
                                     .Attribute(m => m.Value, index)
                                     .Attribute(m => m.Label, $"{index}月")
@@ -360,16 +356,15 @@ partial class TDatePicker<TValue>
     /// <param name="disabled"></param>
     /// <param name="isNow"></param>
     /// <param name="value">取决于视图模式的值。</param>
-    void BuildBodyCell(RenderTreeBuilder builder, string content, bool disabled = false, bool isNow = default, int value = 1)
+    void BuildBodyCell(RenderTreeBuilder builder, string content, DateTime value, bool disabled = false, bool isNow = default)
     {
-        var selectedDate = new DateTime(CurrentYear, CurrentMonth, value);
 
         builder.AddContent(0, tr =>
         {
             tr.Element("td", "t-date-picker__cell")
                         .Class("t-date-picker__cell--now", isNow)
-                        .Class("t-date-picker__cell--active", !disabled && SelectedDates.Contains(selectedDate))
-                        .Callback<MouseEventArgs>("onclick", this, e => SelectItems(new List<DateTime>() { selectedDate }))
+                        .Class("t-date-picker__cell--active", !disabled && SelectedDates.Contains(value))
+                        .Callback<MouseEventArgs>("onclick", this, e => SelectItems(new List<DateTime>() { value }))
                         .Content(inner =>
                         {
                             inner.Div("t-date-picker__cell-inner").Content(content).Close();
