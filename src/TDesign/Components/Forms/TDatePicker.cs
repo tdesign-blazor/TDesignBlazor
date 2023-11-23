@@ -103,16 +103,16 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     /// </summary>
     int CurrentYear
     {
-        get => CurrentValue.Month;
-        set => CurrentValue = new(value, CurrentMonth, CurrentValue.Day);
+        get => CurrentValue.Year;
+        set => CurrentValue = new(value, CurrentMonth, CurrentDay);
     }
     /// <summary>
     /// 当前查看的月份。
     /// </summary>
     int CurrentMonth
     {
-        get => CurrentValue.Year;
-        set => CurrentValue = new(CurrentYear, value, CurrentValue.Day);
+        get => CurrentValue.Month;
+        set => CurrentValue = new(CurrentYear, value, CurrentDay);
     }
 
     /// <summary>
@@ -218,12 +218,12 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
     /// <exception cref="ArgumentNullException"></exception>
     async Task SelectItems(IReadOnlyList<DateTime> selectedItems)
     {
-        if ( selectedItems is null )
+        if (selectedItems is null)
         {
             throw new ArgumentNullException(nameof(selectedItems));
         }
 
-        if ( !selectedItems.Any() )
+        if (!selectedItems.Any())
         {
             return;
         }
@@ -231,25 +231,57 @@ public partial class TDatePicker<TValue> : TDesignInputComonentBase<TValue>
         var value = selectedItems[0];
         CurrentValue = value;
 
+        //Value = CurrentValue.To(value =>
+        //{
+        //    value = value switch
+        //    {
+        //        DateOnly => DateOnly.FromDateTime(CurrentValue),
+        //        DateTimeOffset => new DateTimeOffset(CurrentValue),
+        //        _ => CurrentValue,
+        //    };
+
+        //    var nullableValueType = Nullable.GetUnderlyingType(typeof(TValue));
+        //    if (nullableValueType is not null)
+        //    {
+        //        return (TValue?)Convert.ChangeType(value, nullableValueType);
+        //    }
+
+        //    return (TValue?)Convert.ChangeType(value, typeof(TValue));
+        //});
 
 
-        Value = CurrentValue.To(value =>
+        SelectedDates.Clear();
+        SelectedDates.Add(CurrentValue);
+
+        InputValue = CurrentValue.ToString(Format);
+        await InputValueChanged.InvokeAsync(InputValue);
+
+
+        Value = InputValue.To(value =>
         {
-
-
             value = value switch
             {
                 DateOnly => DateOnly.FromDateTime(CurrentValue),
                 DateTimeOffset => new DateTimeOffset(CurrentValue),
                 _ => CurrentValue,
             };
-            return (TValue?)value;
+
+            var nullableValueType = Nullable.GetUnderlyingType(typeof(TValue));
+            if (nullableValueType is not null)
+            {
+
+                if (nullableValueType == typeof(DateOnly))
+                {
+                    return (TValue?)typeof(DateOnly)?.GetMethod(nameof(DateOnly.FromDateTime))?.Invoke(value, new object?[] { CurrentValue });
+                }
+                else if (nullableValueType == typeof(DateTimeOffset))
+                {
+                    return (TValue?)typeof(DateTimeOffset)?.GetMethod(nameof(DateTimeOffset.FromFileTime))?.Invoke(value, new object?[] { CurrentValue.ToFileTime() });
+                }
+            }
+            return (TValue)value;
         });
-
         await ValueChanged.InvokeAsync(Value);
-
-        InputValue = CurrentValue.ToString(Format);
-        await InputValueChanged.InvokeAsync(InputValue);
     }
 
     Task ChangeYearMonth(int year,int month)

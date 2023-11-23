@@ -368,7 +368,7 @@ partial class TDatePicker<TValue>
         {
             tr.Element("td", "t-date-picker__cell")
                         .Class("t-date-picker__cell--now", isNow)
-                        .Class("t-is-checked", !disabled && SelectedDates.Contains(selectedDate))
+                        .Class("t-date-picker__cell--active", !disabled && SelectedDates.Contains(selectedDate))
                         .Callback<MouseEventArgs>("onclick", this, e => SelectItems(new List<DateTime>() { selectedDate }))
                         .Content(inner =>
                         {

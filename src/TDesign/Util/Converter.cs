@@ -20,9 +20,8 @@ public static class ValueConverter
         return convension(value);
 
 
-        TTarget? DefaultConvension(object? value)
+        static TTarget? DefaultConvension(object? value)
         {
-
             var targetType = typeof(TTarget);
 
             var nullValueType = Nullable.GetUnderlyingType(targetType);
@@ -31,7 +30,7 @@ public static class ValueConverter
                 return (TTarget?)Convert.ChangeType(value, nullValueType);
             }
 
-            return (TTarget)Convert.ChangeType(value, targetType);
+            return (TTarget?)Convert.ChangeType(value, targetType);
         }
     }
 }
