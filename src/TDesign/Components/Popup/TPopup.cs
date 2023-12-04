@@ -46,7 +46,13 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     /// 设置弹出层内部的 CSS 类名称。
     /// </summary>
     [ParameterApiDoc("弹出层内部的 CSS 类名称")]
-    [Parameter]public string? PopupContentCssClass { get; set; }
+    [Parameter] public string? PopupContentCssClass { get; set; }
+
+    /// <summary>
+    /// 设置弹出层内部的 Style 。
+    /// </summary>
+    [ParameterApiDoc("弹出层内部的 CSS 样式")]
+    [Parameter] public string? PopupContentCssStyle { get; set; }
 
     /// <summary>
     /// 获取一个布尔值，表示弹出框是否显示。
@@ -59,7 +65,7 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if ( firstRender )
+        if (firstRender)
         {
             _popupModule = await JS.ImportTDesignModuleAsync("popup");
         }
@@ -84,9 +90,10 @@ public class TPopup : TDesignAdditionParameterWithChildContentComponentBase
     }
 
     /// <inheritdoc/>
-    protected override void AddContent(RenderTreeBuilder builder, int sequence) 
-        => builder.Div(HtmlHelper.Instance.Class().Append("t-popup__content").Append(PopupContentCssClass!,!string.IsNullOrEmpty(PopupContentCssClass)).ToString())
+    protected override void AddContent(RenderTreeBuilder builder, int sequence)
+        => builder.Div(HtmlHelper.Instance.Class().Append("t-popup__content").Append(PopupContentCssClass!, !string.IsNullOrEmpty(PopupContentCssClass)).ToString())
             .Class("t-popup__content--arrow", Arrow)
+            .Style(PopupContentCssStyle, !string.IsNullOrWhiteSpace(PopupContentCssStyle))
             .Content(inner =>
             {
                 inner.AddContent(0, PopupContent);
